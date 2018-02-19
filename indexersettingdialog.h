@@ -2,21 +2,32 @@
 #define INDEXERSETTINGDIALOG_H
 
 #include <QWidget>
+#include <QEvent>
+
+#include "headsetting.h"
 
 namespace Ui {
-class indexerSettingDialog;
+class IndexerSettingDialog;
 }
 
-class indexerSettingDialog : public QWidget
+class IndexerSettingDialog : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit indexerSettingDialog(QWidget *parent = 0);
-    ~indexerSettingDialog();
+    explicit IndexerSettingDialog(QWidget *parent = 0);
+    ~IndexerSettingDialog();
+    void setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam);
+    void setLiftSetting(IndexerLiftSettings::LiftParameters liftParam);
+
 
 private:
-    Ui::indexerSettingDialog *ui;
+    Ui::IndexerSettingDialog *ui;
+
+    void accepted();
+
+protected:
+    bool event(QEvent *e);
 };
 
 #endif // INDEXERSETTINGDIALOG_H

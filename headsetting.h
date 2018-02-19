@@ -48,38 +48,50 @@ public:
 
     HeadParameters operator =(HeadParameters hParam);
 
-    HeadParameters headParameters;
+    HeadParameters headParam;
 
     HeadSetting(HeadParameters hParam);
     HeadSetting();
     ~HeadSetting();
+};
 
+class IndexerLiftSettings
+{
+public:
     typedef struct LiftParameters_{
-        uint16_t distance;
-        int16_t homeOffcet;
-        uint16_t speed;
-        uint16_t acceleration;
-        uint16_t delayDown;
-        uint16_t delayUp;
+        uint16_t distance = 0;
+        int16_t homeOffcet = 0;
+        uint16_t speed = 0;
+        uint16_t acceleration = 0;
+        uint16_t delayDown = 0;
+        uint16_t delayUp = 0;
 
         QByteArray toByteArray();
     }LiftParameters;
 
     typedef struct IndexParameters_{
-        uint16_t distance;
-        int16_t homeOffcet;
-        int16_t distOffcet;
-        uint16_t speed;
-        uint16_t acceleration;
-        uint16_t speedRet;
-        uint16_t accelerationRet;
+        uint16_t distance = 0;
+        int16_t homeOffset = 0;
+        int16_t distOffcet = 0;
+        uint16_t speed = 0;
+        uint16_t acceleration = 0;
+        uint16_t speedRet = 0;
+        uint16_t accelerationRet = 0;
 
         QByteArray toByteArray();
     }IndexParameters;
 
+    IndexParameters indexerParam;
+    LiftParameters liftParam;
+
+    IndexerLiftSettings(IndexParameters indParam, LiftParameters lifParam);
+    IndexerLiftSettings();
+
+    void fromByteArray(QByteArray indParamArr, QByteArray lifParamArr);
+
+
+
 };
-
-
 
 
 #endif // HEADSETTING_H

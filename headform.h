@@ -33,7 +33,7 @@ private:
     int index;
 
 private slots:
-    void settingPButtonCliced();
+    void settingPButtonClicedSlot();
 };
 
 

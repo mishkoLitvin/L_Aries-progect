@@ -16,7 +16,7 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
     pButtonSets->resize(30,30);
     pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
-//    connect()
+    connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicSlot()));
 
     pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
 }
@@ -59,6 +59,11 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
 void IndexerWidget::on_pButtonRight_clicked()
 {
 
+}
+
+void IndexerWidget::settingPButtonClicSlot()
+{
+    emit this->settingButtonCliced();
 }
 
 void IndexerWidget::resizeEvent(QResizeEvent *e)

@@ -18,6 +18,9 @@ public:
     explicit IndexerWidget(QWidget *parent = 0);
     ~IndexerWidget();
 
+signals:
+    void settingButtonCliced();
+
 private slots:
 
     void on_pButtonLock_clicked();
@@ -27,6 +30,7 @@ private slots:
     void on_pButtonMoveLeft_clicked();
     void on_pButtonMoveUp_clicked();
     void on_pButtonRight_clicked();
+    void settingPButtonClicSlot();
 
 private:
     Ui::IndexerWidget *ui;

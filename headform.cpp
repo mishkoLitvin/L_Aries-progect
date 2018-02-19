@@ -29,7 +29,7 @@ HeadForm::HeadForm(QWidget *parent) :
     labelIndex->move(this->width()-labelIndex->width(),this->height()-labelIndex->height());
 
 
-    connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonCliced()));
+    connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicedSlot()));
 }
 
 HeadForm::~HeadForm()
@@ -57,7 +57,7 @@ QSize HeadForm::getLabelSize()
     return ui->label->size();
 }
 
-void HeadForm::settingPButtonCliced()
+void HeadForm::settingPButtonClicedSlot()
 {
     emit this->settingButtonCliced(this->index);
 }

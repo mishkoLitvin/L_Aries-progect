@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
                               "selection-background-color: blue;"
                               )));
 
-    pix.load("/home/mishko/Dropbox/SharedProgects/NewProjects/buildsLin/build-iconsManager_Release/tt.png");
+    pix.load(":/new/icons/icons/tt.png");
 
     settings = new QSettings("settings.ini", QSettings::IniFormat);
 //    QByteArray passwordBArr;
@@ -32,12 +32,15 @@ MainWindow::MainWindow(QWidget *parent) :
 //    settings->setValue("password", temp);
 //    qDebug() << temp;
 
-    dial = new SettingDialog(hStt);
-    connect(dial, SIGNAL(accept(int,QByteArray)), this, SLOT(headParamGet(int,QByteArray)));
-    connect(dial, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
-    connect(dial, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(allHeadParamGet(int,QByteArray)));
+    headSettingDialog = new SettingDialog(headSettings);
+    connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(headParamGet(int,QByteArray)));
+    connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
+    connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(allHeadParamGet(int,QByteArray)));
 
     indexer = new IndexerWidget(this);
+    connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequst()));
+
+    indexerLiftSetDialog = new IndexerSettingDialog();
 
     ui->layoutIndexer->addWidget(indexer);
 
@@ -66,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
         else
             headButton[i]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
 
-        connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(someButtonClck(int)));
+        connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
     ui->widgetHeads->resize(750, 570);
 
@@ -79,18 +82,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::someButtonClck(int index)
+void MainWindow::headSettingRequest(int index)
 {
 
     QByteArray passwordBArr;
     passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
     if(CalculateCRC16(0xFFFF, passwordBArr) == settings->value("password")){
-        hStt.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
+        headSettings.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
 
-        dial->setHeadParams(hStt, index);
-        dial->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
+        headSettingDialog->setHeadParams(headSettings, index);
+        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
     //    dial->move(this->pos().x()+this->size().width()*0.8,this->pos().y()+(this->size().height()-dial->size().width())*0.5);
-        dial->show();
+        headSettingDialog->show();
     }
     else{
         QMessageBox msgBox;
@@ -103,6 +106,15 @@ void MainWindow::someButtonClck(int index)
 
 }
 
+void MainWindow::indexerLiftSettingRequst()
+{
+    indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
+                                      settings->value("LIFT_PARAMS").value<QByteArray>());
+    indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam);
+    indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam);
+    indexerLiftSetDialog->show();
+}
+
 void MainWindow::changeHeadNo(int index)
 {
     if(index<0)
@@ -110,7 +122,7 @@ void MainWindow::changeHeadNo(int index)
     else
         if(index == HEAD_COUNT)
             index = 0;
-    this->someButtonClck(index);
+    this->headSettingRequest(index);
 }
 
 void MainWindow::headParamGet(int index, QByteArray hParamArr)
@@ -138,6 +150,7 @@ void MainWindow::headParamGet(int index, QByteArray hParamArr)
 void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
 {
     int cnt;
+    index++;
     for(cnt = 0; cnt<HEAD_COUNT; cnt++)
     {
         settings->setValue(QString("HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);

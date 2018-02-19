@@ -7,31 +7,31 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
     {
     case 0:
     {
-        this->headParameters.headType = PrintHead;
-        this->headParameters.powerOn = (bool)(hParamArr[1]&0x01);
-        this->headParameters.speedRear = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
-        this->headParameters.speedFront = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
-        this->headParameters.limitFront = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
-        this->headParameters.limitRear = ((0x00FF&((uint16_t)hParamArr[9]))<<8)|(0x00FF&((uint16_t)hParamArr[8]));
-        this->headParameters.stroksCount = ((0x00FF&((uint16_t)hParamArr[11]))<<8)|(0x00FF&((uint16_t)hParamArr[10]));
+        this->headParam.headType = PrintHead;
+        this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
+        this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
+        this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
+        this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
+        this->headParam.limitRear = ((0x00FF&((uint16_t)hParamArr[9]))<<8)|(0x00FF&((uint16_t)hParamArr[8]));
+        this->headParam.stroksCount = ((0x00FF&((uint16_t)hParamArr[11]))<<8)|(0x00FF&((uint16_t)hParamArr[10]));
         break;
     }
     case 1:
     {
-        this->headParameters.headType = QuartzHead;
-        this->headParameters.powerOn = (bool)(hParamArr[1]&0x01);
-        this->headParameters.heatTime1 = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
-        this->headParameters.heatTime2 = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
-        this->headParameters.heatPower = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
+        this->headParam.headType = QuartzHead;
+        this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
+        this->headParam.heatTime1 = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
+        this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
+        this->headParam.heatPower = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
         break;
     }
     case 2:
     {
-        this->headParameters.headType = InfraRedHead;
-        this->headParameters.powerOn = (bool)(hParamArr[1]&0x01);
-        this->headParameters.heatTime1 = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
-        this->headParameters.heatTime2 = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
-        this->headParameters.limitFront = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
+        this->headParam.headType = InfraRedHead;
+        this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
+        this->headParam.heatTime1 = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
+        this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
+        this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
         break;
     }
     }
@@ -112,33 +112,31 @@ QByteArray HeadSetting::HeadParameters_::toByteArray()
 HeadSetting::HeadSetting(HeadParameters hParam)
 {
 
-    this->headParameters.headType = hParam.headType;
-    this->headParameters.powerOn = hParam.powerOn;
-    this->headParameters.speedRear = hParam.speedRear;
-    this->headParameters.speedFront = hParam.speedFront;
-    this->headParameters.heatPower = hParam.heatPower;
-    this->headParameters.heatTime1 = hParam.heatTime1;
-    this->headParameters.heatTime2 = hParam.heatTime2;
-    this->headParameters.limitFront = hParam.limitFront;
-    this->headParameters.limitRear = hParam.limitRear;
-    this->headParameters.stroksCount = hParam.stroksCount;
+    this->headParam.headType = hParam.headType;
+    this->headParam.powerOn = hParam.powerOn;
+    this->headParam.speedRear = hParam.speedRear;
+    this->headParam.speedFront = hParam.speedFront;
+    this->headParam.heatPower = hParam.heatPower;
+    this->headParam.heatTime1 = hParam.heatTime1;
+    this->headParam.heatTime2 = hParam.heatTime2;
+    this->headParam.limitFront = hParam.limitFront;
+    this->headParam.limitRear = hParam.limitRear;
+    this->headParam.stroksCount = hParam.stroksCount;
 }
 
 HeadSetting::HeadSetting()
 {
-
-
     HeadParameters hParam;
-    this->headParameters.headType = hParam.headType;
-    this->headParameters.powerOn = hParam.powerOn;
-    this->headParameters.speedRear = hParam.speedRear;
-    this->headParameters.speedFront = hParam.speedFront;
-    this->headParameters.heatPower = hParam.heatPower;
-    this->headParameters.heatTime1 = hParam.heatTime1;
-    this->headParameters.heatTime2 = hParam.heatTime2;
-    this->headParameters.limitFront = hParam.limitFront;
-    this->headParameters.limitRear = hParam.limitRear;
-    this->headParameters.stroksCount = hParam.stroksCount;
+    this->headParam.headType = hParam.headType;
+    this->headParam.powerOn = hParam.powerOn;
+    this->headParam.speedRear = hParam.speedRear;
+    this->headParam.speedFront = hParam.speedFront;
+    this->headParam.heatPower = hParam.heatPower;
+    this->headParam.heatTime1 = hParam.heatTime1;
+    this->headParam.heatTime2 = hParam.heatTime2;
+    this->headParam.limitFront = hParam.limitFront;
+    this->headParam.limitRear = hParam.limitRear;
+    this->headParam.stroksCount = hParam.stroksCount;
 }
 
 HeadSetting::~HeadSetting()
@@ -146,7 +144,7 @@ HeadSetting::~HeadSetting()
 
 }
 
-QByteArray HeadSetting::LiftParameters_::toByteArray()
+QByteArray IndexerLiftSettings::LiftParameters_::toByteArray()
 {
     QByteArray bArr;
     bArr.resize(12);
@@ -166,14 +164,14 @@ QByteArray HeadSetting::LiftParameters_::toByteArray()
     return bArr;
 }
 
-QByteArray HeadSetting::IndexParameters_::toByteArray()
+QByteArray IndexerLiftSettings::IndexParameters_::toByteArray()
 {
     QByteArray bArr;
     bArr.resize(14);
     bArr[0] = (char)(this->distance&0x00FF);
     bArr[1] = (char)(((this->distance&0xFF00)>>8)&0x00FF);
-    bArr[2] = (char)(this->homeOffcet&0x00FF);
-    bArr[3] = (char)(((this->homeOffcet&0xFF00)>>8)&0x00FF);
+    bArr[2] = (char)(this->homeOffset&0x00FF);
+    bArr[3] = (char)(((this->homeOffset&0xFF00)>>8)&0x00FF);
     bArr[4] = (char)(this->distOffcet&0x00FF);
     bArr[5] = (char)(((this->distOffcet&0xFF00)>>8)&0x00FF);
     bArr[6] = (char)(this->speed&0x00FF);
@@ -186,4 +184,61 @@ QByteArray HeadSetting::IndexParameters_::toByteArray()
     bArr[13] = (char)(((this->accelerationRet&0xFF00)>>8)&0x00FF);
 
     return bArr;
+}
+
+IndexerLiftSettings::IndexerLiftSettings(IndexerLiftSettings::IndexParameters indParam, IndexerLiftSettings::LiftParameters lifParam)
+{
+    this->indexerParam.acceleration = indParam.acceleration;
+    this->indexerParam.accelerationRet = indParam.accelerationRet;
+    this->indexerParam.distance = indParam.distance;
+    this->indexerParam.distOffcet = indParam.distOffcet;
+    this->indexerParam.homeOffset = indParam.homeOffset;
+    this->indexerParam.speed = indParam.speed;
+    this->indexerParam.speedRet = indParam.speedRet;
+
+    this->liftParam.acceleration = lifParam.acceleration;
+    this->liftParam.delayDown = lifParam.delayDown;
+    this->liftParam.delayUp = lifParam.delayUp;
+    this->liftParam.distance = lifParam.distance;
+    this->liftParam.homeOffcet = lifParam.homeOffcet;
+    this->liftParam.speed = lifParam.speed;
+
+}
+
+IndexerLiftSettings::IndexerLiftSettings()
+{
+    IndexParameters indParam;
+    this->indexerParam.acceleration = indParam.acceleration;
+    this->indexerParam.accelerationRet = indParam.accelerationRet;
+    this->indexerParam.distance = indParam.distance;
+    this->indexerParam.distOffcet = indParam.distOffcet;
+    this->indexerParam.homeOffset = indParam.homeOffset;
+    this->indexerParam.speed = indParam.speed;
+    this->indexerParam.speedRet = indParam.speedRet;
+
+    LiftParameters lifParam;
+    this->liftParam.acceleration = lifParam.acceleration;
+    this->liftParam.delayDown = lifParam.delayDown;
+    this->liftParam.delayUp = lifParam.delayUp;
+    this->liftParam.distance = lifParam.distance;
+    this->liftParam.homeOffcet = lifParam.homeOffcet;
+    this->liftParam.speed = lifParam.speed;
+}
+
+void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifParamArr)
+{
+    this->indexerParam.distance = ((0x00FF&((uint16_t)indParamArr[1]))<<8)|(0x00FF&((uint16_t)indParamArr[0]));
+    this->indexerParam.homeOffset = ((0x00FF&((uint16_t)indParamArr[3]))<<8)|(0x00FF&((uint16_t)indParamArr[2]));
+    this->indexerParam.distOffcet = ((0x00FF&((uint16_t)indParamArr[5]))<<8)|(0x00FF&((uint16_t)indParamArr[4]));
+    this->indexerParam.speed = ((0x00FF&((uint16_t)indParamArr[7]))<<8)|(0x00FF&((uint16_t)indParamArr[6]));
+    this->indexerParam.acceleration = ((0x00FF&((uint16_t)indParamArr[9]))<<8)|(0x00FF&((uint16_t)indParamArr[8]));
+    this->indexerParam.speedRet = ((0x00FF&((uint16_t)indParamArr[11]))<<8)|(0x00FF&((uint16_t)indParamArr[10]));
+    this->indexerParam.accelerationRet = ((0x00FF&((uint16_t)indParamArr[13]))<<8)|(0x00FF&((uint16_t)indParamArr[12]));
+
+    this->liftParam.distance = ((0x00FF&((uint16_t)lifParamArr[1]))<<8)|(0x00FF&((uint16_t)lifParamArr[0]));
+    this->liftParam.homeOffcet = ((0x00FF&((uint16_t)lifParamArr[3]))<<8)|(0x00FF&((uint16_t)lifParamArr[2]));
+    this->liftParam.speed = ((0x00FF&((uint16_t)lifParamArr[5]))<<8)|(0x00FF&((uint16_t)lifParamArr[4]));
+    this->liftParam.acceleration = ((0x00FF&((uint16_t)lifParamArr[7]))<<8)|(0x00FF&((uint16_t)lifParamArr[6]));
+    this->liftParam.delayDown = ((0x00FF&((uint16_t)lifParamArr[9]))<<8)|(0x00FF&((uint16_t)lifParamArr[8]));
+    this->liftParam.delayUp = ((0x00FF&((uint16_t)lifParamArr[11]))<<8)|(0x00FF&((uint16_t)lifParamArr[10]));
 }

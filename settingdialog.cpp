@@ -18,34 +18,34 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
 
     this->index = index;
 
-    ui->tabWidget->setCurrentIndex(hSttg.headParameters.headType);
+    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
     ui->lcdNumberHeadNo->display(index);
 
-    ui->pButtonHeadOnOff->setChecked(hSttg.headParameters.powerOn&0x01);
+    ui->pButtonHeadOnOff->setChecked(hSttg.headParam.powerOn&0x01);
 
     switch(ui->tabWidget->currentIndex())
     {
     case 0:
     {
-        ui->spinBoxRearSpeed->setValue(hSttg.headParameters.speedRear);
-        ui->spinBoxFrontSpeed->setValue(hSttg.headParameters.speedFront);
-        ui->dSpinBoxFrontRange->setValue(hSttg.headParameters.limitFront/10.);
-        ui->dSpinBoxRearRange->setValue(hSttg.headParameters.limitRear/10.);
-        ui->spinBoxStrokCount->setValue(hSttg.headParameters.stroksCount);
+        ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
+        ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
+        ui->dSpinBoxFrontRange->setValue(hSttg.headParam.limitFront/10.);
+        ui->dSpinBoxRearRange->setValue(hSttg.headParam.limitRear/10.);
+        ui->spinBoxStrokCount->setValue(hSttg.headParam.stroksCount);
         break;
     }
     case 1:
     {
-        ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParameters.heatTime1/10.);
-        ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParameters.heatTime2/10.);
-        ui->spinBoxDryPowerQ->setValue(hSttg.headParameters.heatPower);
+        ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1/10.);
+        ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2/10.);
+        ui->spinBoxDryPowerQ->setValue(hSttg.headParam.heatPower);
         break;
     }
     case 2:
     {
-        ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParameters.heatTime1/10.);
-        ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParameters.heatTime2/10.);
-        ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParameters.limitFront/10.);
+        ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
+        ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
+        ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.limitFront/10.);
         break;
     }
     }
@@ -79,34 +79,34 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
 {
     this->index = index;
 
-    ui->tabWidget->setCurrentIndex(hSttg.headParameters.headType);
+    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
     ui->lcdNumberHeadNo->display(index);
 
-    ui->pButtonHeadOnOff->setChecked(hSttg.headParameters.powerOn&0x01);
+    ui->pButtonHeadOnOff->setChecked(hSttg.headParam.powerOn&0x01);
 
     switch(ui->tabWidget->currentIndex())
     {
     case 0:
     {
-        ui->spinBoxRearSpeed->setValue(hSttg.headParameters.speedRear);
-        ui->spinBoxFrontSpeed->setValue(hSttg.headParameters.speedFront);
-        ui->dSpinBoxFrontRange->setValue(hSttg.headParameters.limitFront/10.);
-        ui->dSpinBoxRearRange->setValue(hSttg.headParameters.limitRear/10.);
-        ui->spinBoxStrokCount->setValue(hSttg.headParameters.stroksCount);
+        ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
+        ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
+        ui->dSpinBoxFrontRange->setValue(hSttg.headParam.limitFront/10.);
+        ui->dSpinBoxRearRange->setValue(hSttg.headParam.limitRear/10.);
+        ui->spinBoxStrokCount->setValue(hSttg.headParam.stroksCount);
         break;
     }
     case 1:
     {
-        ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParameters.heatTime1/10.);
-        ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParameters.heatTime2/10.);
-        ui->spinBoxDryPowerQ->setValue(hSttg.headParameters.heatPower);
+        ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1/10.);
+        ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2/10.);
+        ui->spinBoxDryPowerQ->setValue(hSttg.headParam.heatPower);
         break;
     }
     case 2:
     {
-        ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParameters.heatTime1/10.);
-        ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParameters.heatTime2/10.);
-        ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParameters.limitFront/10.);
+        ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
+        ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
+        ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.limitFront/10.);
         break;
     }
     }
@@ -116,37 +116,37 @@ void SettingDialog::accepted()
 {
     HeadSetting hSttg;
 
-    hSttg.headParameters.powerOn = ui->pButtonHeadOnOff->isChecked();
+    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
     switch(ui->tabWidget->currentIndex())
     {
     case 0:
     {
-        hSttg.headParameters.headType = HeadSetting::PrintHead;
-        hSttg.headParameters.speedRear = ui->spinBoxRearSpeed->value();
-        hSttg.headParameters.speedFront = ui->spinBoxFrontSpeed->value();
-        hSttg.headParameters.limitFront = ui->dSpinBoxFrontRange->value()*10;
-        hSttg.headParameters.limitRear = ui->dSpinBoxRearRange->value()*10;
-        hSttg.headParameters.stroksCount = ui->spinBoxStrokCount->value();
+        hSttg.headParam.headType = HeadSetting::PrintHead;
+        hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
+        hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
+        hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
+        hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
+        hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
         break;
     }
     case 1:
     {
-        hSttg.headParameters.headType = HeadSetting::QuartzHead;
-        hSttg.headParameters.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
-        hSttg.headParameters.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
-        hSttg.headParameters.heatPower = ui->spinBoxDryPowerQ->value();
+        hSttg.headParam.headType = HeadSetting::QuartzHead;
+        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
+        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
+        hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
         break;
     }
     case 2:
     {
-        hSttg.headParameters.headType = HeadSetting::InfraRedHead;
-        hSttg.headParameters.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
-        hSttg.headParameters.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-        hSttg.headParameters.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
+        hSttg.headParam.headType = HeadSetting::InfraRedHead;
+        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
+        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
+        hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
         break;
     }
     }
-    emit this->accept(this->index, hSttg.headParameters.toByteArray());
+    emit this->accept(this->index, hSttg.headParam.toByteArray());
     this->hide();
 
 }
@@ -229,36 +229,36 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 {
     HeadSetting hSttg;
 
-    hSttg.headParameters.powerOn = ui->pButtonHeadOnOff->isChecked();
+    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
     switch(ui->tabWidget->currentIndex())
     {
     case 0:
     {
-        hSttg.headParameters.headType = HeadSetting::PrintHead;
-        hSttg.headParameters.speedRear = ui->spinBoxRearSpeed->value();
-        hSttg.headParameters.speedFront = ui->spinBoxFrontSpeed->value();
-        hSttg.headParameters.limitFront = ui->dSpinBoxFrontRange->value()*10;
-        hSttg.headParameters.limitRear = ui->dSpinBoxRearRange->value()*10;
-        hSttg.headParameters.stroksCount = ui->spinBoxStrokCount->value();
+        hSttg.headParam.headType = HeadSetting::PrintHead;
+        hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
+        hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
+        hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
+        hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
+        hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
         break;
     }
     case 1:
     {
-        hSttg.headParameters.headType = HeadSetting::QuartzHead;
-        hSttg.headParameters.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
-        hSttg.headParameters.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
-        hSttg.headParameters.heatPower = ui->spinBoxDryPowerQ->value();
+        hSttg.headParam.headType = HeadSetting::QuartzHead;
+        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
+        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
+        hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
         break;
     }
     case 2:
     {
-        hSttg.headParameters.headType = HeadSetting::InfraRedHead;
-        hSttg.headParameters.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
-        hSttg.headParameters.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-        hSttg.headParameters.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
+        hSttg.headParam.headType = HeadSetting::InfraRedHead;
+        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
+        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
+        hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
         break;
     }
     }
-    emit this->setParamsToAll(this->index, hSttg.headParameters.toByteArray());
+    emit this->setParamsToAll(this->index, hSttg.headParam.toByteArray());
     this->hide();
 }

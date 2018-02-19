@@ -17,6 +17,7 @@
 #include "headform.h"
 #include "settingdialog.h"
 #include "indexerwidget.h"
+#include "indexersettingdialog.h"
 
 #include "headsetting.h"
 
@@ -40,17 +41,21 @@ private:
     HeadForm *headButton[HEAD_COUNT];
     QImage pix;
     QSettings *settings;
-    HeadSetting hStt;
-    SettingDialog *dial;
+    HeadSetting headSettings;
+    IndexerLiftSettings indexerLiftSettings;
+    SettingDialog *headSettingDialog;
+    IndexerSettingDialog *indexerLiftSetDialog;
     IndexerWidget *indexer;
     QString truePassword = "qwerty";
 
 
 private slots:
-    void someButtonClck(int index);
+    void headSettingRequest(int index);
+    void indexerLiftSettingRequst();
     void changeHeadNo(int index);
     void headParamGet(int index, QByteArray hParamArr);
     void allHeadParamGet(int index, QByteArray hParamArr);
+
 
 protected:
    virtual void resizeEvent(QResizeEvent *e);
