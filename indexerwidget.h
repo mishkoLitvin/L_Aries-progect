@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#include <QResizeEvent>
+#include <QPushButton>
+
 namespace Ui {
 class IndexerWidget;
 }
@@ -27,6 +30,12 @@ private slots:
 
 private:
     Ui::IndexerWidget *ui;
+
+    QPushButton *pButtonSets;
+
+protected:
+   virtual void resizeEvent(QResizeEvent *e);
+
 };
 
 #endif // INDEXERWIDGET_H

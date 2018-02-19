@@ -17,19 +17,22 @@ SOURCES += main.cpp\
     headform.cpp \
     settingdialog.cpp \
     headsetting.cpp \
-    indexerwidget.cpp
+    indexerwidget.cpp \
+    indexersettingdialog.cpp
 
 HEADERS  += mainwindow.h \
     headform.h \
     settingdialog.h \
     headsetting.h \
     indexerwidget.h \
-    crc16.h
+    crc16.h \
+    indexersettingdialog.h
 
 FORMS    += mainwindow.ui \
     headform.ui \
     settingdialog.ui \
-    indexerwidget.ui
+    indexerwidget.ui \
+    indexersettingdialog.ui
 
 RESOURCES += \
     icons.qrc

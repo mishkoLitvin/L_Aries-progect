@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(dial, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(allHeadParamGet(int,QByteArray)));
 
     indexer = new IndexerWidget(this);
+
     ui->layoutIndexer->addWidget(indexer);
 
     int i;

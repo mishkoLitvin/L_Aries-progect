@@ -150,6 +150,14 @@ QByteArray HeadSetting::IndexerParameters_::toByteArray()
 {
     QByteArray bArr;
     bArr.resize(8);
+    bArr[0] = (char)(this->distance&0x00FF);
+    bArr[1] = (char)(((this->distance&0xFF00)>>8)&0x00FF);
+    bArr[2] = (char)(this->homeOffcet&0x00FF);
+    bArr[3] = (char)(((this->homeOffcet&0xFF00)>>8)&0x00FF);
+    bArr[4] = (char)(this->speed&0x00FF);
+    bArr[5] = (char)(((this->speed&0xFF00)>>8)&0x00FF);
+    bArr[6] = (char)(this->acceleration&0x00FF);
+    bArr[7] = (char)(((this->acceleration&0xFF00)>>8)&0x00FF);
 
     return bArr;
 }
