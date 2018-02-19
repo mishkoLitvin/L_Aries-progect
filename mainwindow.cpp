@@ -9,17 +9,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setStyleSheet(QString((
-                              "color: #ABEFF6;"
-                              "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
-//                              "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop: 0 #80D0F0, stop: 1.0 #003070)"
-                              "selection-color: yellow;"
-                              "border-radius: 10px;"
-                              "border-width: 2px;"
-                              "border-style: outset;"
-                              "border-color: #003070;"
-                              "selection-background-color: blue;"
-                              )));
+//    setStyleSheet(QString((
+//                              "color: #ABEFF6;"
+//                              "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
+////                              "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop: 0 #80D0F0, stop: 1.0 #003070)"
+//                              "selection-color: yellow;"
+//                              "border-radius: 10px;"
+//                              "border-width: 2px;"
+//                              "border-style: outset;"
+//                              "border-color: #003070;"
+//                              "selection-background-color: blue;"
+//                              )));
 
     pix.load("/home/mishko/Dropbox/SharedProgects/NewProjects/buildsLin/build-iconsManager_Release/tt.png");
 
