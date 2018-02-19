@@ -11,6 +11,7 @@
 #include <QPalette>
 #include <QGradient>
 #include <QStyle>
+#include <QInputDialog>
 
 #include "headform.h"
 #include "settingdialog.h"
@@ -41,6 +42,7 @@ private:
     HeadSetting hStt;
     SettingDialog *dial;
     IndexerWidget *indexer;
+    QString truePassword = "qwerty";
 
 
 private slots:

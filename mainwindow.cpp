@@ -75,14 +75,21 @@ MainWindow::~MainWindow()
 void MainWindow::someButtonClck(int index)
 {
 
+    QString password = QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal);
+    if(password == truePassword){
+        hStt.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
 
+        dial->setHeadParams(hStt, index);
+        dial->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
+    //    dial->move(this->pos().x()+this->size().width()*0.8,this->pos().y()+(this->size().height()-dial->size().width())*0.5);
+        dial->show();
+    }
+    else{
+        QMessageBox msgBox;
+        msgBox.setText("Wrong password!");
+        msgBox.exec();
+    }
 
-    hStt.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
-
-    dial->setHeadParams(hStt, index);
-    dial->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
-//    dial->move(this->pos().x()+this->size().width()*0.8,this->pos().y()+(this->size().height()-dial->size().width())*0.5);
-    dial->show();
 
 }
 
