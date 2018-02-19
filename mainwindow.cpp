@@ -73,6 +73,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::someButtonClck(int index)
 {
+
+
+
     hStt.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
 
     dial->setHeadParams(hStt, index);

@@ -23,7 +23,8 @@ HEADERS  += mainwindow.h \
     headform.h \
     settingdialog.h \
     headsetting.h \
-    indexerwidget.h
+    indexerwidget.h \
+    crc16.h
 
 FORMS    += mainwindow.ui \
     headform.ui \

@@ -145,3 +145,11 @@ HeadSetting::~HeadSetting()
 {
 
 }
+
+QByteArray HeadSetting::IndexerParameters_::toByteArray()
+{
+    QByteArray bArr;
+    bArr.resize(8);
+
+    return bArr;
+}
