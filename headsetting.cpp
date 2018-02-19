@@ -146,10 +146,10 @@ HeadSetting::~HeadSetting()
 
 }
 
-QByteArray HeadSetting::IndexerParameters_::toByteArray()
+QByteArray HeadSetting::LiftParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(8);
+    bArr.resize(12);
     bArr[0] = (char)(this->distance&0x00FF);
     bArr[1] = (char)(((this->distance&0xFF00)>>8)&0x00FF);
     bArr[2] = (char)(this->homeOffcet&0x00FF);
@@ -158,6 +158,32 @@ QByteArray HeadSetting::IndexerParameters_::toByteArray()
     bArr[5] = (char)(((this->speed&0xFF00)>>8)&0x00FF);
     bArr[6] = (char)(this->acceleration&0x00FF);
     bArr[7] = (char)(((this->acceleration&0xFF00)>>8)&0x00FF);
+    bArr[8] = (char)(this->delayDown&0x00FF);
+    bArr[9] = (char)(((this->delayDown&0xFF00)>>8)&0x00FF);
+    bArr[10] = (char)(this->delayUp&0x00FF);
+    bArr[11] = (char)(((this->delayUp&0xFF00)>>8)&0x00FF);
+
+    return bArr;
+}
+
+QByteArray HeadSetting::IndexParameters_::toByteArray()
+{
+    QByteArray bArr;
+    bArr.resize(14);
+    bArr[0] = (char)(this->distance&0x00FF);
+    bArr[1] = (char)(((this->distance&0xFF00)>>8)&0x00FF);
+    bArr[2] = (char)(this->homeOffcet&0x00FF);
+    bArr[3] = (char)(((this->homeOffcet&0xFF00)>>8)&0x00FF);
+    bArr[4] = (char)(this->distOffcet&0x00FF);
+    bArr[5] = (char)(((this->distOffcet&0xFF00)>>8)&0x00FF);
+    bArr[6] = (char)(this->speed&0x00FF);
+    bArr[7] = (char)(((this->speed&0xFF00)>>8)&0x00FF);
+    bArr[8] = (char)(this->acceleration&0x00FF);
+    bArr[9] = (char)(((this->acceleration&0xFF00)>>8)&0x00FF);
+    bArr[10] = (char)(this->speedRet&0x00FF);
+    bArr[11] = (char)(((this->speedRet&0xFF00)>>8)&0x00FF);
+    bArr[12] = (char)(this->accelerationRet&0x00FF);
+    bArr[13] = (char)(((this->accelerationRet&0xFF00)>>8)&0x00FF);
 
     return bArr;
 }

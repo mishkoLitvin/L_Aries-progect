@@ -54,16 +54,32 @@ public:
     HeadSetting();
     ~HeadSetting();
 
-    typedef struct IndexerParameters_{
+    typedef struct LiftParameters_{
         uint16_t distance;
         int16_t homeOffcet;
         uint16_t speed;
         uint16_t acceleration;
+        uint16_t delayDown;
+        uint16_t delayUp;
 
         QByteArray toByteArray();
-    }IndexerParameters;
+    }LiftParameters;
+
+    typedef struct IndexParameters_{
+        uint16_t distance;
+        int16_t homeOffcet;
+        int16_t distOffcet;
+        uint16_t speed;
+        uint16_t acceleration;
+        uint16_t speedRet;
+        uint16_t accelerationRet;
+
+        QByteArray toByteArray();
+    }IndexParameters;
 
 };
+
+
 
 
 #endif // HEADSETTING_H
