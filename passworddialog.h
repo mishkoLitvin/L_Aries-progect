@@ -14,6 +14,10 @@ class PasswordDialog : public QDialog
 public:
     explicit PasswordDialog(QWidget *parent = 0);
     ~PasswordDialog();
+signals:
+    void passwordCorrect(int index){
+
+    }
 
 private:
     Ui::PasswordDialog *ui;
