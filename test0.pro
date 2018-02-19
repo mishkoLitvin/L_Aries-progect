@@ -18,6 +18,7 @@ SOURCES += main.cpp\
     settingdialog.cpp \
     headsetting.cpp \
     indexerwidget.cpp \
+    passworddialog.cpp
     indexersettingdialog.cpp
 
 HEADERS  += mainwindow.h \
@@ -26,12 +27,14 @@ HEADERS  += mainwindow.h \
     headsetting.h \
     indexerwidget.h \
     crc16.h \
+    passworddialog.h
     indexersettingdialog.h
 
 FORMS    += mainwindow.ui \
     headform.ui \
     settingdialog.ui \
     indexerwidget.ui \
+    passworddialog.ui
     indexersettingdialog.ui
 
 RESOURCES += \
