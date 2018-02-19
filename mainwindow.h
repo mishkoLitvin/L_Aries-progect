@@ -12,6 +12,7 @@
 #include <QGradient>
 #include <QStyle>
 #include <QInputDialog>
+#include <QByteArray>
 
 #include "headform.h"
 #include "settingdialog.h"

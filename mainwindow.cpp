@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include "math.h"
+#include "crc16.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,21 +11,26 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    setStyleSheet(QString((
-//                              "color: #ABEFF6;"
-//                              "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
-////                              "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop: 0 #80D0F0, stop: 1.0 #003070)"
-//                              "selection-color: yellow;"
-//                              "border-radius: 10px;"
-//                              "border-width: 2px;"
-//                              "border-style: outset;"
-//                              "border-color: #003070;"
-//                              "selection-background-color: blue;"
-//                              )));
+    setStyleSheet(QString((
+                              "color: #ABEFF6;"
+                              "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
+//                              "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop: 0 #80D0F0, stop: 1.0 #003070)"
+                              "selection-color: yellow;"
+                              "border-radius: 10px;"
+                              "border-width: 2px;"
+                              "border-style: outset;"
+                              "border-color: #003070;"
+                              "selection-background-color: blue;"
+                              )));
 
     pix.load("/home/mishko/Dropbox/SharedProgects/NewProjects/buildsLin/build-iconsManager_Release/tt.png");
 
     settings = new QSettings("settings.ini", QSettings::IniFormat);
+//    QByteArray passwordBArr;
+//    passwordBArr.append("1");
+//    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
+//    settings->setValue("password", temp);
+//    qDebug() << temp;
 
     dial = new SettingDialog(hStt);
     connect(dial, SIGNAL(accept(int,QByteArray)), this, SLOT(headParamGet(int,QByteArray)));
@@ -75,8 +82,9 @@ MainWindow::~MainWindow()
 void MainWindow::someButtonClck(int index)
 {
 
-    QString password = QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal);
-    if(password == truePassword){
+    QByteArray passwordBArr;
+    passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+    if(CalculateCRC16(0xFFFF, passwordBArr) == settings->value("password")){
         hStt.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
 
         dial->setHeadParams(hStt, index);
@@ -86,7 +94,9 @@ void MainWindow::someButtonClck(int index)
     }
     else{
         QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet());
         msgBox.setText("Wrong password!");
+        msgBox.setWindowTitle("Password");
         msgBox.exec();
     }
 
