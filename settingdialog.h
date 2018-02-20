@@ -39,6 +39,7 @@ private:
     Ui::SettingDialog *ui;
 
     int index;
+    bool acceptOnDeactilationEn;
 
 private slots:
     void accepted();

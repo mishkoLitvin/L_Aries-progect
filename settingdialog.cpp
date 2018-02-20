@@ -118,6 +118,7 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
         break;
     }
     }
+    acceptOnDeactilationEn = true;
 }
 
 void SettingDialog::accepted()
@@ -271,8 +272,8 @@ bool SettingDialog::event(QEvent *e)
 {
     if(e->type()==QEvent::WindowDeactivate)
     {
-        44;
-        //        this->accepted();
+        if(acceptOnDeactilationEn)
+            this->accepted();
     }
     return QWidget::event(e);
 }
@@ -281,7 +282,9 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
 {
     if(event->type() == QEvent::MouseButtonDblClick)
     {
+        acceptOnDeactilationEn = false;
         qobject_cast<QLineEdit*>(watched)->setText(NumpadDialog::getValue());
+        acceptOnDeactilationEn = true;
     }
     return false;
 }

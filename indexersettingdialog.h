@@ -4,8 +4,10 @@
 #include <QWidget>
 #include <QByteArray>
 #include <QEvent>
+#include <QLineEdit>
 
 #include "headsetting.h"
+#include "numpaddialog.h"
 
 namespace Ui {
 class IndexerSettingDialog;
@@ -31,8 +33,14 @@ private:
     void accepted();
     void rejected();
 
+    void eventFilterSetup();
+
+    bool acceptOnDeactilationEn;
+
 protected:
     bool event(QEvent *e);
+    bool eventFilter(QObject *watched, QEvent *event);
+
 };
 
 #endif // INDEXERSETTINGDIALOG_H
