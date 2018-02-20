@@ -14,13 +14,13 @@ MainWindow::MainWindow(QWidget *parent) :
     setStyleSheet(QString((
                               "color: #ABEFF6;"
                               "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
-//                              "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop: 0 #80D0F0, stop: 1.0 #003070)"
                               "selection-color: yellow;"
                               "border-radius: 10px;"
                               "border-width: 2px;"
                               "border-style: outset;"
                               "border-color: #003070;"
                               "selection-background-color: blue;"
+                              "font: 14px bold italic large \"Times New Roman\""
                               )));
 
     pix.load(":/new/icons/icons/tt.png");
@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
+//    headSettingDialog->setStyleSheet(this->styleSheet());
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(headParamGet(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(allHeadParamGet(int,QByteArray)));
@@ -41,6 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequst()));
 
     indexerLiftSetDialog = new IndexerSettingDialog();
+//    indexerLiftSetDialog->setStyleSheet(this->styleSheet());
+    connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(indexerParamGet(QByteArray)));
+    connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(liftParamGet(QByteArray)));
 
     ui->layoutIndexer->addWidget(indexer);
 
@@ -121,6 +125,8 @@ void MainWindow::indexerLiftSettingRequst()
         indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam);
         indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam);
         indexerLiftSetDialog->show();
+        indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
+                                   this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
     }
     else{
         QMessageBox msgBox;
@@ -144,7 +150,6 @@ void MainWindow::changeHeadNo(int index)
 void MainWindow::headParamGet(int index, QByteArray hParamArr)
 {
     settings->setValue(QString("HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
-//qDebug()<<headButton[index]->getLabelSize();
     if(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
 
         switch (settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[0]) {
@@ -185,6 +190,18 @@ void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
         else
             headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: rgb(100,100,100);");
     }
+}
+
+void MainWindow::indexerParamGet(QByteArray indexerParamArr)
+{
+    settings->setValue(QString("INDEXER_PARAMS"), indexerParamArr);
+
+}
+
+void MainWindow::liftParamGet(QByteArray liftParamArr)
+{
+    settings->setValue(QString("LIFT_PARAMS"), liftParamArr);
+
 }
 
 

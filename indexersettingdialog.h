@@ -2,6 +2,7 @@
 #define INDEXERSETTINGDIALOG_H
 
 #include <QWidget>
+#include <QByteArray>
 #include <QEvent>
 
 #include "headsetting.h"
@@ -20,11 +21,15 @@ public:
     void setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam);
     void setLiftSetting(IndexerLiftSettings::LiftParameters liftParam);
 
+signals:
+    void indexerParamChanged(QByteArray indexParamArr);
+    void liftParamChanged(QByteArray liftParamArr);
 
 private:
     Ui::IndexerSettingDialog *ui;
 
     void accepted();
+    void rejected();
 
 protected:
     bool event(QEvent *e);

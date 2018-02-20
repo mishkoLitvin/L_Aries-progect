@@ -57,6 +57,9 @@ private slots:
     void changeHeadNo(int index);
     void headParamGet(int index, QByteArray hParamArr);
     void allHeadParamGet(int index, QByteArray hParamArr);
+    void indexerParamGet(QByteArray indexerParamArr);
+    void liftParamGet(QByteArray liftParamArr);
+
 
 
 protected:
