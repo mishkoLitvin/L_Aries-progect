@@ -74,18 +74,7 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     connect(ui->pushButtonHoldOn, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonHoldOn_clicked()));
 
 
-    numpad = new NumpadDialog();
-
-    ui->dSpinBoxFrontRange->installEventFilter(this);
-    ui->dSpinBoxFrontRange->objectName();
-    QObjectList o_list = ui->dSpinBoxFrontRange->children();
-    qDebug()<<o_list;
-    for(int i = 0; i < o_list.length(); i++)
-    {
-        QLineEdit *cast = qobject_cast<QLineEdit*>(o_list[i]);
-        if(cast)
-            cast->installEventFilter(this);
-    }
+    this->eventFilterSetup();
 
 }
 
@@ -129,6 +118,7 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
         break;
     }
     }
+    acceptOnDeactilationEn = true;
 }
 
 void SettingDialog::accepted()
@@ -184,12 +174,106 @@ void SettingDialog::pButtonDecClkd()
     emit this->changeNumber(this->index-1);
 }
 
+void SettingDialog::eventFilterSetup()
+{
+    ui->dSpinBoxDryingRangeIR->installEventFilter(this);
+    QObjectList objList = ui->dSpinBoxDryingRangeIR->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    ui->dSpinBoxFrontRange->installEventFilter(this);
+    objList = ui->dSpinBoxFrontRange->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->dSpinBoxHeatTime1IR->installEventFilter(this);
+    objList = ui->dSpinBoxHeatTime1IR->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->dSpinBoxHeatTime1Q->installEventFilter(this);
+    objList = ui->dSpinBoxHeatTime1Q->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->dSpinBoxHeatTime2IR->installEventFilter(this);
+    objList = ui->dSpinBoxHeatTime2IR->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->dSpinBoxHeatTime2Q->installEventFilter(this);
+    objList = ui->dSpinBoxHeatTime2Q->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->dSpinBoxRearRange->installEventFilter(this);
+    objList = ui->dSpinBoxRearRange->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->spinBoxDryPowerQ->installEventFilter(this);
+    objList = ui->spinBoxDryPowerQ->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->spinBoxFrontSpeed->installEventFilter(this);
+    objList = ui->spinBoxFrontSpeed->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->spinBoxRearSpeed->installEventFilter(this);
+    objList = ui->spinBoxRearSpeed->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    ui->spinBoxStrokCount->installEventFilter(this);
+    objList = ui->spinBoxStrokCount->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+}
+
 bool SettingDialog::event(QEvent *e)
 {
     if(e->type()==QEvent::WindowDeactivate)
     {
-        44;
-//        this->accepted();
+        if(acceptOnDeactilationEn)
+            this->accepted();
     }
     return QWidget::event(e);
 }
@@ -198,7 +282,9 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
 {
     if(event->type() == QEvent::MouseButtonDblClick)
     {
+        acceptOnDeactilationEn = false;
         qobject_cast<QLineEdit*>(watched)->setText(NumpadDialog::getValue());
+        acceptOnDeactilationEn = true;
     }
     return false;
 }
