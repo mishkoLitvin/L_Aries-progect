@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    NumpadDialog *numpad = new NumpadDialog();
-    numpad->show();
+//    NumpadDialog *numpad = new NumpadDialog();
+//    numpad->show();
 
     setStyleSheet(QString((
                               "color: #ABEFF6;"

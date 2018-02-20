@@ -198,10 +198,7 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
 {
     if(event->type() == QEvent::MouseButtonDblClick)
     {
-        qDebug()<<"REQ"<<watched->objectName();
-        numpad->show();
-        connect(numpad, SIGNAL(valueSubmited(QString)), qobject_cast<QLineEdit*>(watched), SLOT(setText(QString)));
-//        showNumpadDialog();
+        qobject_cast<QLineEdit*>(watched)->setText(NumpadDialog::getValue());
     }
     return false;
 }

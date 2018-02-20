@@ -36,6 +36,13 @@ NumpadDialog::~NumpadDialog()
     delete ui;
 }
 
+QString NumpadDialog::getValue()
+{
+    NumpadDialog numpad;
+    numpad.exec();
+    return numpad.value;
+}
+
 void NumpadDialog::appendToLineEdit(int number)
 {
     ui->lineValue->insert(QString::number(number));
@@ -43,10 +50,9 @@ void NumpadDialog::appendToLineEdit(int number)
 
 void NumpadDialog::submitValue()
 {
-    QString value = ui->lineValue->text();
+    this->value = ui->lineValue->text();
     ui->lineValue->clear();
-    emit this->valueSubmited(value);
-    this->hide();
+    this->accept();
 }
 
 NumpadButton::NumpadButton(unsigned int inputNumber, QString name)

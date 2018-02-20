@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QPushButton>
+#include <QDebug>
 
 class NumpadButton : public QPushButton{
     Q_OBJECT
@@ -34,6 +35,8 @@ public:
     explicit NumpadDialog(QWidget *parent = 0);
     ~NumpadDialog();
 
+    static QString getValue();
+
 private slots:
     void appendToLineEdit(int number);
     void submitValue();
@@ -41,6 +44,8 @@ private slots:
 private:
     Ui::NumpadDialog *ui;
     NumpadButton *buttons[12];
+
+    QString value;
 };
 
 #endif // NUMPADDIALOG_H
