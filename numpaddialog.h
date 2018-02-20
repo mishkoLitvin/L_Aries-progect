@@ -40,10 +40,12 @@ public:
 private slots:
     void appendToLineEdit(int number);
     void submitValue();
+    void changeSign();
+    void addDot();
 
 private:
     Ui::NumpadDialog *ui;
-    NumpadButton *buttons[12];
+    NumpadButton *buttons[10];
 
     QString value;
 };

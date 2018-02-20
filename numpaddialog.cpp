@@ -19,16 +19,21 @@ NumpadDialog::NumpadDialog(QWidget *parent) :
     int k;
     buttons[0] = new NumpadButton(0, QString::number(0));
     ui->layoutButtons->addWidget(buttons[0],3,0);
+    connect(buttons[0], SIGNAL(clicked(int)), this, SLOT(appendToLineEdit(int)));
     for(k = 1; k<10; k++){
         buttons[k] = new NumpadButton(k, QString::number(k));
         ui->layoutButtons->addWidget(buttons[k], 2-(k-1)/3, (k-1)%3);
         connect(buttons[k], SIGNAL(clicked(int)), this, SLOT(appendToLineEdit(int)));
     }
-    buttons[10] = new NumpadButton(10, "+/-");
-    ui->layoutButtons->addWidget(buttons[10],3,1);
-    buttons[11] = new NumpadButton(11, "Enter");
-    ui->layoutButtons->addWidget(buttons[11],3,2);
-    connect(buttons[11], SIGNAL(clicked(bool)), this, SLOT(submitValue()));
+    QPushButton *comaButton = new QPushButton(".");
+    ui->layoutButtons->addWidget(comaButton, 3, 1);
+    connect(comaButton, SIGNAL(clicked(bool)), this, SLOT(addDot()));
+    QPushButton *signButton = new QPushButton("+/-");
+    ui->layoutButtons->addWidget(signButton, 3, 2);
+    connect(signButton, SIGNAL(clicked(bool)), this, SLOT(changeSign()));
+    QPushButton *enterButton = new QPushButton("Enter");
+    ui->layoutButtons->addWidget(enterButton, 3, 3);
+    connect(enterButton, SIGNAL(clicked(bool)), this, SLOT(submitValue()));
 }
 
 NumpadDialog::~NumpadDialog()
@@ -53,6 +58,18 @@ void NumpadDialog::submitValue()
     this->value = ui->lineValue->text();
     ui->lineValue->clear();
     this->accept();
+}
+
+void NumpadDialog::changeSign()
+{
+    ui->lineValue->setText(QString::number((ui->lineValue->text().toDouble())*(-1)));
+}
+
+void NumpadDialog::addDot()
+{
+    if(!ui->lineValue->text().isEmpty() && !ui->lineValue->text().contains('.')){
+        ui->lineValue->insert(".");
+    }
 }
 
 NumpadButton::NumpadButton(unsigned int inputNumber, QString name)
