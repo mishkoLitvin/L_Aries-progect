@@ -22,16 +22,31 @@ NumpadDialog::NumpadDialog(QWidget *parent) :
     for(k = 1; k<10; k++){
         buttons[k] = new NumpadButton(k, QString::number(k));
         ui->layoutButtons->addWidget(buttons[k], 2-(k-1)/3, (k-1)%3);
+        connect(buttons[k], SIGNAL(clicked(int)), this, SLOT(appendToLineEdit(int)));
     }
     buttons[10] = new NumpadButton(10, "+/-");
     ui->layoutButtons->addWidget(buttons[10],3,1);
     buttons[11] = new NumpadButton(11, "Enter");
     ui->layoutButtons->addWidget(buttons[11],3,2);
+    connect(buttons[11], SIGNAL(clicked(bool)), this, SLOT(submitValue()));
 }
 
 NumpadDialog::~NumpadDialog()
 {
     delete ui;
+}
+
+void NumpadDialog::appendToLineEdit(int number)
+{
+    ui->lineValue->insert(QString::number(number));
+}
+
+void NumpadDialog::submitValue()
+{
+    int value = ui->lineValue->text().toInt();
+    ui->lineValue->clear();
+    emit this->valueSubmited(value);
+    this->hide();
 }
 
 NumpadButton::NumpadButton(unsigned int inputNumber, QString name)

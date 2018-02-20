@@ -27,9 +27,16 @@ class NumpadDialog : public QDialog
 {
     Q_OBJECT
 
+signals:
+    void valueSubmited(int value);
+
 public:
     explicit NumpadDialog(QWidget *parent = 0);
     ~NumpadDialog();
+
+private slots:
+    void appendToLineEdit(int number);
+    void submitValue();
 
 private:
     Ui::NumpadDialog *ui;
