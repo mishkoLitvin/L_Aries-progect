@@ -35,19 +35,21 @@ public:
     explicit NumpadDialog(QWidget *parent = 0);
     ~NumpadDialog();
 
-    static QString getValue();
+    static double getValue();
 
 private slots:
     void appendToLineEdit(int number);
     void submitValue();
     void changeSign();
+    void appendZero();
     void addDot();
+    void backspace();
 
 private:
     Ui::NumpadDialog *ui;
     NumpadButton *buttons[10];
 
-    QString value;
+    double value;
 };
 
 #endif // NUMPADDIALOG_H

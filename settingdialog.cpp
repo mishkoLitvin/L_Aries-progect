@@ -283,7 +283,7 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
     if(event->type() == QEvent::MouseButtonDblClick)
     {
         acceptOnDeactilationEn = false;
-        qobject_cast<QLineEdit*>(watched)->setText(NumpadDialog::getValue());
+        qobject_cast<QLineEdit*>(watched)->setText(QString::number(NumpadDialog::getValue()));
         acceptOnDeactilationEn = true;
     }
     return false;
