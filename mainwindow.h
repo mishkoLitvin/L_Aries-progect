@@ -18,6 +18,7 @@
 #include "settingdialog.h"
 #include "indexerwidget.h"
 #include "indexersettingdialog.h"
+#include "numpaddialog.h"
 
 #include "headsetting.h"
 

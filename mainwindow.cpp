@@ -11,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    NumpadDialog *numpad = new NumpadDialog();
+    numpad->show();
+
     setStyleSheet(QString((
                               "color: #ABEFF6;"
                               "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
