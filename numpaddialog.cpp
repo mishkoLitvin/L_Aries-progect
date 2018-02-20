@@ -43,7 +43,7 @@ void NumpadDialog::appendToLineEdit(int number)
 
 void NumpadDialog::submitValue()
 {
-    int value = ui->lineValue->text().toInt();
+    QString value = ui->lineValue->text();
     ui->lineValue->clear();
     emit this->valueSubmited(value);
     this->hide();

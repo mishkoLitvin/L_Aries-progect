@@ -73,6 +73,20 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     connect(ui->pushButtonPressure, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonPressure_clicked()));
     connect(ui->pushButtonHoldOn, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonHoldOn_clicked()));
 
+
+    numpad = new NumpadDialog();
+
+    ui->dSpinBoxFrontRange->installEventFilter(this);
+    ui->dSpinBoxFrontRange->objectName();
+    QObjectList o_list = ui->dSpinBoxFrontRange->children();
+    qDebug()<<o_list;
+    for(int i = 0; i < o_list.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(o_list[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
 }
 
 SettingDialog::~SettingDialog()
@@ -174,9 +188,22 @@ bool SettingDialog::event(QEvent *e)
 {
     if(e->type()==QEvent::WindowDeactivate)
     {
-        this->accepted();
+        44;
+//        this->accepted();
     }
     return QWidget::event(e);
+}
+
+bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
+{
+    if(event->type() == QEvent::MouseButtonDblClick)
+    {
+        qDebug()<<"REQ"<<watched->objectName();
+        numpad->show();
+        connect(numpad, SIGNAL(valueSubmited(QString)), qobject_cast<QLineEdit*>(watched), SLOT(setText(QString)));
+//        showNumpadDialog();
+    }
+    return false;
 }
 
 

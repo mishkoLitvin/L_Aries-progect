@@ -18,6 +18,8 @@ IndexerSettingDialog::IndexerSettingDialog(QWidget *parent) :
                                  );
 
 
+
+
 }
 
 IndexerSettingDialog::~IndexerSettingDialog()

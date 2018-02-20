@@ -28,7 +28,7 @@ class NumpadDialog : public QDialog
     Q_OBJECT
 
 signals:
-    void valueSubmited(int value);
+    void valueSubmited(QString value);
 
 public:
     explicit NumpadDialog(QWidget *parent = 0);

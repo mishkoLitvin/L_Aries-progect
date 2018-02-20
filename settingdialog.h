@@ -9,8 +9,10 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QByteArray>
+#include <QLineEdit>
 
 #include "headsetting.h"
+#include "numpaddialog.h"
 
 namespace Ui {
 class SettingDialog;
@@ -26,7 +28,6 @@ public:
 
     void setHeadParams(HeadSetting hSttg, int index = 0);
 
-
 signals:
     void accept(int index, QByteArray hParamArr);
     void changeNumber(int newIndex);
@@ -38,6 +39,7 @@ private:
     Ui::SettingDialog *ui;
 
     int index;
+    NumpadDialog *numpad;
 
 private slots:
     void accepted();
@@ -58,6 +60,7 @@ private slots:
 
 protected:
     bool event(QEvent *e);
+    bool eventFilter(QObject *watched, QEvent *event);
 };
 
 
