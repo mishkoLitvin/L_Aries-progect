@@ -39,12 +39,13 @@ private:
     Ui::SettingDialog *ui;
 
     int index;
-    NumpadDialog *numpad;
 
 private slots:
     void accepted();
     void pButtonIncClkd();
     void pButtonDecClkd();
+
+    void eventFilterSetup();
 
     void on_pushButtonPlast_clicked();
     void on_pushButtonFL_clicked();
