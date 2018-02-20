@@ -47,6 +47,8 @@ private:
     IndexerSettingDialog *indexerLiftSetDialog;
     IndexerWidget *indexer;
     QString truePassword = "qwerty";
+    bool logedInHeadSettings = false;
+    bool logedInIndexer = false;
 
 
 private slots:
