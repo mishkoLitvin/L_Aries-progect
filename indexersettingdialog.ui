@@ -20,7 +20,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="IndexerTab">
       <attribute name="title">
@@ -38,21 +38,21 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxHeadsCount">
+          <widget class="QDoubleSpinBox" name="spinBoxHeadsCount">
            <property name="font">
             <font>
              <pointsize>16</pointsize>
              <italic>true</italic>
             </font>
            </property>
+           <property name="decimals">
+            <number>0</number>
+           </property>
            <property name="minimum">
-            <number>2</number>
+            <double>2.000000000000000</double>
            </property>
            <property name="maximum">
-            <number>18</number>
-           </property>
-           <property name="singleStep">
-            <number>1</number>
+            <double>18.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -170,21 +170,24 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxIndexHomeOffset">
+          <widget class="QDoubleSpinBox" name="spinBoxIndexHomeOffset">
            <property name="font">
             <font>
              <pointsize>16</pointsize>
              <italic>true</italic>
             </font>
            </property>
+           <property name="decimals">
+            <number>0</number>
+           </property>
            <property name="minimum">
-            <number>-10000</number>
+            <double>-10000.000000000000000</double>
            </property>
            <property name="maximum">
-            <number>10000</number>
+            <double>10000.000000000000000</double>
            </property>
            <property name="singleStep">
-            <number>100</number>
+            <double>100.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -201,21 +204,21 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxIndexDistanceOffcet">
+          <widget class="QDoubleSpinBox" name="spinBoxIndexDistanceOffcet">
            <property name="font">
             <font>
              <pointsize>16</pointsize>
              <italic>true</italic>
             </font>
            </property>
-           <property name="minimum">
-            <number>-10000</number>
+           <property name="decimals">
+            <number>0</number>
            </property>
-           <property name="maximum">
-            <number>10000</number>
+           <property name="minimum">
+            <double>-10000.000000000000000</double>
            </property>
            <property name="singleStep">
-            <number>100</number>
+            <double>100.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -232,21 +235,24 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxIndexSpeed">
+          <widget class="QDoubleSpinBox" name="spinBoxIndexSpeed">
            <property name="font">
             <font>
              <pointsize>16</pointsize>
              <italic>true</italic>
             </font>
            </property>
+           <property name="decimals">
+            <number>0</number>
+           </property>
            <property name="minimum">
-            <number>500</number>
+            <double>500.000000000000000</double>
            </property>
            <property name="maximum">
-            <number>2500</number>
+            <double>2500.000000000000000</double>
            </property>
            <property name="singleStep">
-            <number>50</number>
+            <double>50.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -300,21 +306,24 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxindexSpeedRet">
+          <widget class="QDoubleSpinBox" name="spinBoxindexSpeedRet">
            <property name="font">
             <font>
              <pointsize>16</pointsize>
              <italic>true</italic>
             </font>
            </property>
+           <property name="decimals">
+            <number>0</number>
+           </property>
            <property name="minimum">
-            <number>500</number>
+            <double>500.000000000000000</double>
            </property>
            <property name="maximum">
-            <number>3000</number>
+            <double>3000.000000000000000</double>
            </property>
            <property name="singleStep">
-            <number>50</number>
+            <double>50.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -508,7 +517,7 @@
           </layout>
          </item>
          <item row="1" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,10">
+          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0">
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
@@ -518,7 +527,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBoxLiftHomeOffset">
+            <widget class="QDoubleSpinBox" name="spinBoxLiftHomeOffset">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -531,14 +540,17 @@
                <italic>true</italic>
               </font>
              </property>
+             <property name="decimals">
+              <number>0</number>
+             </property>
              <property name="minimum">
-              <number>-2000</number>
+              <double>-2000.000000000000000</double>
              </property>
              <property name="maximum">
-              <number>2000</number>
+              <double>2000.000000000000000</double>
              </property>
              <property name="singleStep">
-              <number>100</number>
+              <double>100.000000000000000</double>
              </property>
             </widget>
            </item>
@@ -568,7 +580,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBoxLiftSpeed">
+            <widget class="QDoubleSpinBox" name="spinBoxLiftSpeed">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -581,14 +593,20 @@
                <italic>true</italic>
               </font>
              </property>
+             <property name="decimals">
+              <number>0</number>
+             </property>
              <property name="minimum">
-              <number>500</number>
+              <double>500.000000000000000</double>
              </property>
              <property name="maximum">
-              <number>3000</number>
+              <double>3000.000000000000000</double>
              </property>
              <property name="singleStep">
-              <number>50</number>
+              <double>50.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>500.000000000000000</double>
              </property>
             </widget>
            </item>

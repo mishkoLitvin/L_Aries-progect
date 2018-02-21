@@ -218,8 +218,8 @@ bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
     if(event->type() == QEvent::MouseButtonDblClick)
     {
         acceptOnDeactilationEn = false;
-        qobject_cast<QLineEdit*>(watched)->setText(QString::number(NumpadDialog::getValue()));
-        qobject_cast<QLineEdit*>(watched)->clearFocus();
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue());
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();
         acceptOnDeactilationEn = true;
     }
     return false;
