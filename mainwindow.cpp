@@ -33,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
 //    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
-//    headSettingDialog->setStyleSheet(this->styleSheet());
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(headParamGet(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(allHeadParamGet(int,QByteArray)));
@@ -42,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequst()));
 
     indexerLiftSetDialog = new IndexerSettingDialog();
-//    indexerLiftSetDialog->setStyleSheet(this->styleSheet());
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(indexerParamGet(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(liftParamGet(QByteArray)));
 
@@ -57,7 +55,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
         headButton[i]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio)));
 
-//        qDebug()<<headButton[i]->getLabelSize();
         if(settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
             switch (settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
             case 0:
@@ -75,7 +72,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
         connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
-    ui->widgetHeads->resize(750, 570);
+
+    this->resize(QSize(903, 729));
+    ui->widgetHeads->resize(QSize(881, 546));
+
+    comPort = new SerialPort(this);
 
 
 
@@ -180,6 +181,7 @@ void MainWindow::headParamGet(int index, QByteArray hParamArr)
         }
     else
         headButton[index]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[index]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+    comPort->sendData(hParamArr);
 
 }
 
@@ -189,6 +191,7 @@ void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
     index++;
     for(cnt = 0; cnt<HEAD_COUNT; cnt++)
     {
+        comPort->sendData(hParamArr);
         settings->setValue(QString("HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
         if(hParamArr[1]&0x01)
             switch (hParamArr[0]) {
@@ -210,12 +213,14 @@ void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
 void MainWindow::indexerParamGet(QByteArray indexerParamArr)
 {
     settings->setValue(QString("INDEXER_PARAMS"), indexerParamArr);
+    comPort->sendData(indexerParamArr);
 
 }
 
 void MainWindow::liftParamGet(QByteArray liftParamArr)
 {
     settings->setValue(QString("LIFT_PARAMS"), liftParamArr);
+    comPort->sendData(liftParamArr);
 
 }
 
@@ -226,6 +231,8 @@ void MainWindow::resizeEvent(QResizeEvent *e)
     int areaW, areaH;
     areaH = ui->widgetHeads->height();
     areaW = ui->widgetHeads->width();
+
+//    qDebug()<<this->size()<<ui->widgetHeads->size();
 
     int i;
     for(i = 0; i<HEAD_COUNT; i++)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
-    <height>655</height>
+    <width>355</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="IndexerTab">
       <attribute name="title">
@@ -28,7 +28,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_17">
+        <layout class="QVBoxLayout" name="verticalLayout_17" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_14">
            <property name="text">
@@ -59,7 +59,7 @@
         </layout>
        </item>
        <item row="0" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_16">
+        <layout class="QVBoxLayout" name="verticalLayout_16" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_13">
            <property name="text">
@@ -96,7 +96,7 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_18">
+        <layout class="QVBoxLayout" name="verticalLayout_18" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_15">
            <property name="text">
@@ -160,7 +160,7 @@
         </layout>
        </item>
        <item row="2" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_8">
+        <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_5">
            <property name="text">
@@ -194,7 +194,7 @@
         </layout>
        </item>
        <item row="2" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_9">
+        <layout class="QVBoxLayout" name="verticalLayout_9" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
@@ -225,7 +225,7 @@
         </layout>
        </item>
        <item row="3" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_10">
+        <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_7">
            <property name="text">
@@ -259,7 +259,7 @@
         </layout>
        </item>
        <item row="3" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_12">
+        <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_9">
            <property name="text">
@@ -296,7 +296,7 @@
         </layout>
        </item>
        <item row="4" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_11">
+        <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_8">
            <property name="text">
@@ -330,7 +330,7 @@
         </layout>
        </item>
        <item row="4" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_13">
+        <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_10">
            <property name="text">
@@ -367,7 +367,7 @@
         </layout>
        </item>
        <item row="5" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_14">
+        <layout class="QVBoxLayout" name="verticalLayout_14" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_11">
            <property name="text">
@@ -404,7 +404,7 @@
         </layout>
        </item>
        <item row="5" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_15">
+        <layout class="QVBoxLayout" name="verticalLayout_15" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_12">
            <property name="text">
@@ -450,7 +450,7 @@
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout">
+          <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10">
            <item>
             <widget class="QLabel" name="label">
              <property name="text">
@@ -517,7 +517,7 @@
           </layout>
          </item>
          <item row="1" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0">
+          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,10">
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
@@ -570,7 +570,7 @@
           </spacer>
          </item>
          <item row="2" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,10">
            <item>
             <widget class="QLabel" name="label_3">
              <property name="text">
@@ -613,7 +613,7 @@
           </layout>
          </item>
          <item row="2" column="1">
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,10">
            <item>
             <widget class="QLabel" name="label_4">
              <property name="text">
