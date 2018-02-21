@@ -177,7 +177,6 @@ void SettingDialog::pButtonDecClkd()
 
 void SettingDialog::eventFilterSetup()
 {
-    ui->dSpinBoxDryingRangeIR->installEventFilter(this);
     QObjectList objList = ui->dSpinBoxDryingRangeIR->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -186,7 +185,6 @@ void SettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->dSpinBoxFrontRange->installEventFilter(this);
     objList = ui->dSpinBoxFrontRange->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -194,7 +192,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxHeatTime1IR->installEventFilter(this);
     objList = ui->dSpinBoxHeatTime1IR->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -202,7 +199,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxHeatTime1Q->installEventFilter(this);
     objList = ui->dSpinBoxHeatTime1Q->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -210,7 +206,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxHeatTime2IR->installEventFilter(this);
     objList = ui->dSpinBoxHeatTime2IR->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -218,7 +213,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxHeatTime2Q->installEventFilter(this);
     objList = ui->dSpinBoxHeatTime2Q->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -226,7 +220,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxRearRange->installEventFilter(this);
     objList = ui->dSpinBoxRearRange->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -234,7 +227,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->spinBoxDryPowerQ->installEventFilter(this);
     objList = ui->spinBoxDryPowerQ->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -242,7 +234,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->spinBoxFrontSpeed->installEventFilter(this);
     objList = ui->spinBoxFrontSpeed->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -250,7 +241,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->spinBoxRearSpeed->installEventFilter(this);
     objList = ui->spinBoxRearSpeed->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -258,7 +248,6 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->spinBoxStrokCount->installEventFilter(this);
     objList = ui->spinBoxStrokCount->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -284,7 +273,8 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
     if(event->type() == QEvent::MouseButtonDblClick)
     {
         acceptOnDeactilationEn = false;
-        qobject_cast<QLineEdit*>(watched)->setText(QString::number(NumpadDialog::getValue()));
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue());
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();
         acceptOnDeactilationEn = true;
     }
     return false;
