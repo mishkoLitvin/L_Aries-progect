@@ -30,12 +30,13 @@ signals:
 private:
     Ui::IndexerSettingDialog *ui;
 
-    void accepted();
-    void rejected();
+    bool acceptOnDeactilationEn;
 
+private slots:
+    void accept();
+    void reject();
     void eventFilterSetup();
 
-    bool acceptOnDeactilationEn;
 
 protected:
     bool event(QEvent *e);

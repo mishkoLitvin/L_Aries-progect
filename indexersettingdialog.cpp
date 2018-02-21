@@ -14,10 +14,13 @@ IndexerSettingDialog::IndexerSettingDialog(QWidget *parent) :
                            "font: 14px bold italic large \"Times New Roman\"")));
 
     ui->tabWidget->setStyleSheet("QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);}"
-                                 "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #2050A0, stop: 0.8 #203070,stop: 1.0 #202030);}"
+                                 "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8080A0, stop: 0.8 #606070,stop: 1.0 #202030);}"
                                  );
 
     this->eventFilterSetup();
+
+    connect(ui->pButtonOK, SIGNAL(clicked(bool)), this, SLOT(accept()));
+    connect(ui->pButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
 
 
 }
@@ -48,7 +51,7 @@ void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters li
     ui->spinBoxLiftSpeed->setValue(liftParam.speed);
 }
 
-void IndexerSettingDialog::accepted()
+void IndexerSettingDialog::accept()
 {
     IndexerLiftSettings::IndexParameters indexParam;
     indexParam.acceleration = ui->dSpinBoxIndexAccel->value()*10.;
@@ -73,7 +76,7 @@ void IndexerSettingDialog::accepted()
     this->hide();
 }
 
-void IndexerSettingDialog::rejected()
+void IndexerSettingDialog::reject()
 {
     this->hide();
 }
@@ -215,7 +218,8 @@ bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
     if(event->type() == QEvent::MouseButtonDblClick)
     {
         acceptOnDeactilationEn = false;
-        qobject_cast<QLineEdit*>(watched)->setText(NumpadDialog::getValue());
+        qobject_cast<QLineEdit*>(watched)->setText(QString::number(NumpadDialog::getValue()));
+        qobject_cast<QLineEdit*>(watched)->clearFocus();
         acceptOnDeactilationEn = true;
     }
     return false;
@@ -226,7 +230,7 @@ bool IndexerSettingDialog::event(QEvent *e)
     if(e->type()==QEvent::WindowDeactivate)
     {
         if(acceptOnDeactilationEn)
-        this->accepted();
+        this->accept();
     }
     return QWidget::event(e);
 }

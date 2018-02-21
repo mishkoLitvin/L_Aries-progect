@@ -21,6 +21,7 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
                                     "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #962AAD, stop: 0.8 #8C04A8,stop: 1.0 #6C0382);}"
                                     "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #77168B, stop: 0.8 #610A73,stop: 1.0 #4F025F);}"
                                  );
+    ui->pButtonHeadOnOff->setStyleSheet("QPushButton:checked: {qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #20A0F0, stop: 0.8 #2070A0,stop: 1.0 #104080}");
     this->index = index;
 
     ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);

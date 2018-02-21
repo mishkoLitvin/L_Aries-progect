@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_21">
    <item>
     <widget class="QTabWidget" name="tabWidget">
@@ -468,7 +471,7 @@
               <double>1.180000000000000</double>
              </property>
              <property name="singleStep">
-              <double>0.100000000000000</double>
+              <double>0.000000000000000</double>
              </property>
             </widget>
            </item>
