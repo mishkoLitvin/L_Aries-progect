@@ -83,7 +83,6 @@ void IndexerSettingDialog::reject()
 
 void IndexerSettingDialog::eventFilterSetup()
 {
-    ui->dSpinBoxIndexAccel->installEventFilter(this);
     QObjectList objList = ui->dSpinBoxIndexAccel->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -91,7 +90,6 @@ void IndexerSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxIndexAccelRet->installEventFilter(this);
     objList = ui->dSpinBoxIndexAccelRet->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -99,7 +97,6 @@ void IndexerSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxIndexDistance->installEventFilter(this);
     objList = ui->dSpinBoxIndexDistance->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -107,7 +104,6 @@ void IndexerSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxLiftAccel->installEventFilter(this);
     objList = ui->dSpinBoxLiftAccel->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -116,7 +112,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->dSpinBoxLiftDistance->installEventFilter(this);
     objList = ui->dSpinBoxLiftDistance->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -125,7 +120,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->dSpinBoxLiftDownDelay->installEventFilter(this);
     objList = ui->dSpinBoxLiftDownDelay->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -133,7 +127,6 @@ void IndexerSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->dSpinBoxLiftUpDelay->installEventFilter(this);
     objList = ui->dSpinBoxLiftUpDelay->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -142,7 +135,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->dSpinBoxWarningTime->installEventFilter(this);
     objList = ui->dSpinBoxWarningTime->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -151,7 +143,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->spinBoxHeadsCount->installEventFilter(this);
     objList = ui->spinBoxHeadsCount->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -160,7 +151,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->spinBoxIndexDistanceOffcet->installEventFilter(this);
     objList = ui->spinBoxIndexDistanceOffcet->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -169,7 +159,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->spinBoxIndexHomeOffset->installEventFilter(this);
     objList = ui->spinBoxIndexHomeOffset->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -177,7 +166,6 @@ void IndexerSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->spinBoxIndexSpeed->installEventFilter(this);
     objList = ui->spinBoxIndexSpeed->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -186,7 +174,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->spinBoxindexSpeedRet->installEventFilter(this);
     objList = ui->spinBoxindexSpeedRet->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -195,7 +182,6 @@ void IndexerSettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
-    ui->spinBoxLiftHomeOffset->installEventFilter(this);
     objList = ui->spinBoxLiftHomeOffset->children();
     for(int i = 0; i < objList.length(); i++)
     {
@@ -203,7 +189,6 @@ void IndexerSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
-    ui->spinBoxLiftSpeed->installEventFilter(this);
     objList = ui->spinBoxLiftSpeed->children();
     for(int i = 0; i < objList.length(); i++)
     {
