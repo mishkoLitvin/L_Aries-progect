@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     indexerwidget.cpp \
     indexersettingdialog.cpp \
     numpaddialog.cpp \
-    serialport.cpp
+    serialport.cpp \
+    serialsettingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     headform.h \
@@ -30,14 +31,16 @@ HEADERS  += mainwindow.h \
     crc16.h \
     indexersettingdialog.h \
     numpaddialog.h \
-    serialport.h
+    serialport.h \
+    serialsettingsdialog.h
 
 FORMS    += mainwindow.ui \
     headform.ui \
     settingdialog.ui \
     indexerwidget.ui \
     indexersettingdialog.ui \
-    numpaddialog.ui
+    numpaddialog.ui \
+    serialsettingsdialog.ui
 
 RESOURCES += \
     icons.qrc

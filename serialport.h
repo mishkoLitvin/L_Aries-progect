@@ -4,6 +4,11 @@
 #include <QObject>
 #include <QByteArray>
 #include <QDebug>
+#include <QtSerialPort/QSerialPort>
+#include <QMessageBox>
+
+#include "serialsettingsdialog.h"
+
 
 class SerialPort : public QObject
 {
@@ -12,9 +17,24 @@ class SerialPort : public QObject
 public:
     explicit SerialPort(QObject *parent = 0);
 
+private:
+    SettingsDialog *settingsComDialog;
+    QSerialPort *serial;
+
+
+
 public slots:
-    void connectToPort();
+    void openSerialPort();
+    void closeSerialPort();
+
     void sendData(QByteArray data);
+
+private slots:
+    void readData();
+    void handleError(QSerialPort::SerialPortError error);
+    void showStatusMessage(const QString &message);
+
+
 
 signals:
     void dataReady(QByteArray data);
