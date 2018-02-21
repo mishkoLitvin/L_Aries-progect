@@ -55,6 +55,26 @@ public:
     ~HeadSetting();
 };
 
+class MachineSettings
+{
+public:
+    typedef struct MachineParameters_{
+        uint16_t HeadCount = 0;
+        uint16_t WarningTime = 0;
+
+        QByteArray toByteArray();
+    }MachineParameters;
+
+    MachineParameters machineParam;
+
+    MachineSettings(MachineParameters mParam);
+    MachineSettings();
+
+    void fromByteArray(QByteArray headParamArray);
+
+    ~MachineSettings();
+};
+
 class IndexerLiftSettings
 {
 public:
@@ -68,6 +88,7 @@ public:
 
         QByteArray toByteArray();
     }LiftParameters;
+
 
     typedef struct IndexParameters_{
         uint16_t distance = 0;
@@ -88,9 +109,6 @@ public:
     IndexerLiftSettings();
 
     void fromByteArray(QByteArray indParamArr, QByteArray lifParamArr);
-
-
-
 };
 
 

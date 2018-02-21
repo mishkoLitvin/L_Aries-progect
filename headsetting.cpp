@@ -202,7 +202,6 @@ IndexerLiftSettings::IndexerLiftSettings(IndexerLiftSettings::IndexParameters in
     this->liftParam.distance = lifParam.distance;
     this->liftParam.homeOffcet = lifParam.homeOffcet;
     this->liftParam.speed = lifParam.speed;
-
 }
 
 IndexerLiftSettings::IndexerLiftSettings()
@@ -241,4 +240,28 @@ void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifPa
     this->liftParam.acceleration = ((0x00FF&((uint16_t)lifParamArr[7]))<<8)|(0x00FF&((uint16_t)lifParamArr[6]));
     this->liftParam.delayDown = ((0x00FF&((uint16_t)lifParamArr[9]))<<8)|(0x00FF&((uint16_t)lifParamArr[8]));
     this->liftParam.delayUp = ((0x00FF&((uint16_t)lifParamArr[11]))<<8)|(0x00FF&((uint16_t)lifParamArr[10]));
+}
+
+QByteArray MachineSettings::MachineParameters_::toByteArray()
+{
+    QByteArray bArr;
+    bArr.resize(4);
+    bArr[0] = (char)(this->HeadCount&0x00FF);
+    bArr[1] = (char)(((this->HeadCount&0xFF00)>>8)&0x00FF);
+    bArr[2] = (char)(this->WarningTime&0x00FF);
+    bArr[3] = (char)(((this->WarningTime&0xFF00)>>8)&0x00FF);
+
+    return bArr;
+}
+
+MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
+{
+    this->machineParam.HeadCount = mParam.HeadCount;
+    this->machineParam.WarningTime = mParam.HeadCount;
+}
+
+void MachineSettings::fromByteArray(QByteArray headParamArray)
+{
+    this->machineParam.HeadCount = ((0x00FF&((uint16_t)headParamArray[1]))<<8)|(0x00FF&((uint16_t)headParamArray[0]));
+    this->machineParam.WarningTime = ((0x00FF&((uint16_t)headParamArray[3]))<<8)|(0x00FF&((uint16_t)headParamArray[2]));
 }
