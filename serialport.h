@@ -28,6 +28,8 @@ public slots:
     void closeSerialPort();
 
     void sendData(QByteArray data);
+    void setupPort();
+
 
 private slots:
     void readData();

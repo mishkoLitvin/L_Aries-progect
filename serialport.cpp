@@ -66,3 +66,8 @@ void SerialPort::sendData(QByteArray data)
     serial->write(data);
     qDebug()<<"console: "<<data.toHex();
 }
+
+void SerialPort::setupPort()
+{
+
+}
