@@ -90,24 +90,32 @@ void MainWindow::headSettingRequest(int index)
 {
 
     QByteArray passwordBArr;
-    if(!logedInHeadSettings){
+#ifndef DEBUG_BUILD
+    if(!logedInHeadSettings)
+    {
         passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
     }
-    if(logedInHeadSettings || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_HEAD_SETTING"))){
+    if(logedInHeadSettings || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_HEAD_SETTING")))
+#endif
+    {
         logedInHeadSettings = true;
         headSettings.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
         headSettingDialog->setHeadParams(headSettings, index);
-        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
-    //    dial->move(this->pos().x()+this->size().width()*0.8,this->pos().y()+(this->size().height()-dial->size().width())*0.5);
+//        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
+        indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
+                                   this->pos().y());
         headSettingDialog->show();
     }
-    else{
+#ifndef DEBUG_BUILD
+    else
+    {
         QMessageBox msgBox;
         msgBox.setStyleSheet(this->styleSheet());
         msgBox.setText("Wrong password!");
         msgBox.setWindowTitle("Password");
         msgBox.exec();
     }
+#endif
 
 
 }
@@ -115,10 +123,14 @@ void MainWindow::headSettingRequest(int index)
 void MainWindow::indexerLiftSettingRequst()
 {
     QByteArray passwordBArr;
+#ifndef DEBUG_BUILD
+
     if(!logedInIndexer){
         passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
     }
-    if(logedInIndexer || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_INDEXER"))){
+    if(logedInIndexer || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_INDEXER")))
+#endif
+    {
         logedInIndexer = true;
         indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
                                           settings->value("LIFT_PARAMS").value<QByteArray>());
@@ -128,13 +140,16 @@ void MainWindow::indexerLiftSettingRequst()
         indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
                                    this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
     }
-    else{
+#ifndef DEBUG_BUILD
+    else
+    {
         QMessageBox msgBox;
         msgBox.setStyleSheet(this->styleSheet());
         msgBox.setText("Wrong password!");
         msgBox.setWindowTitle("Password");
         msgBox.exec();
     }
+#endif
 }
 
 void MainWindow::changeHeadNo(int index)

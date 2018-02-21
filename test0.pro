@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     headsetting.cpp \
     indexerwidget.cpp \
     indexersettingdialog.cpp \
-    numpaddialog.cpp
+    numpaddialog.cpp \
+    serialport.cpp
 
 HEADERS  += mainwindow.h \
     headform.h \
@@ -28,7 +29,8 @@ HEADERS  += mainwindow.h \
     indexerwidget.h \
     crc16.h \
     indexersettingdialog.h \
-    numpaddialog.h
+    numpaddialog.h \
+    serialport.h
 
 FORMS    += mainwindow.ui \
     headform.ui \

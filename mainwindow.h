@@ -23,6 +23,7 @@
 #include "headsetting.h"
 
 #define HEAD_COUNT 10
+#define DEBUG_BUILD
 
 namespace Ui {
 class MainWindow;
