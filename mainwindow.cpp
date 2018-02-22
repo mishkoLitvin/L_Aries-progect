@@ -85,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     comPort = new SerialPort(this);
 
+    mailSender = new MailSender(this);
+
 }
 
 MainWindow::~MainWindow()
@@ -239,8 +241,12 @@ void MainWindow::machineParamGet(QByteArray machineParamArr)
 
 void MainWindow::exitProgram()
 {
+#ifndef DEBUG_BUILD
+    mailSender->sendMessage();
+#endif
     settings->sync();
     comPort->closeSerialPort();
+
     this->close();
 }
 

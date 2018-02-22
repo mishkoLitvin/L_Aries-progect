@@ -21,11 +21,12 @@
 #include "indexersettingdialog.h"
 #include "numpaddialog.h"
 #include "serialport.h"
+#include "mailsender.h"
 
 #include "headsetting.h"
 
 #define HEAD_COUNT 10
-#define DEBUG_BUILD
+//#define DEBUG_BUILD
 
 namespace Ui {
 class MainWindow;
@@ -50,6 +51,7 @@ private:
     SettingDialog *headSettingDialog;
     IndexerSettingDialog *indexerLiftSetDialog;
     IndexerWidget *indexer;
+    MailSender *mailSender;
 
     QString truePassword = "qwerty";
     bool logedInHeadSettings = false;
