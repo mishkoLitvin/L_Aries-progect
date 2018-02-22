@@ -20,6 +20,7 @@
 
 #include <QFileInfo>
 #include <QByteArray>
+#include <QDebug>
 
 
 /* [1] Constructors and destructors */
@@ -92,6 +93,7 @@ void SmtpClient::setConnectionType(ConnectionType ct)
     case TcpConnection:
         socket = new QTcpSocket(this);
         break;
+
     case SslConnection:
     case TlsConnection:
         socket = new QSslSocket(this);

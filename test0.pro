@@ -12,8 +12,8 @@ TARGET = test0
 TEMPLATE = app
 
 
-SMTP_LIBRARY_LOCATION = ./Libs
-LIBS += -L$$SMTP_LIBRARY_LOCATION -lSMTPEmail
+#SMTP_LIBRARY_LOCATION = .
+#LIBS += -L$$SMTP_LIBRARY_LOCATION -lSMTPEmail
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -25,7 +25,19 @@ SOURCES += main.cpp\
     numpaddialog.cpp \
     serialport.cpp \
     serialsettingsdialog.cpp \
-    mailsender.cpp
+    mailsender.cpp \
+    mailSrc/emailaddress.cpp \
+    mailSrc/mimeattachment.cpp \
+    mailSrc/mimecontentformatter.cpp \
+    mailSrc/mimefile.cpp \
+    mailSrc/mimehtml.cpp \
+    mailSrc/mimeinlinefile.cpp \
+    mailSrc/mimemessage.cpp \
+    mailSrc/mimemultipart.cpp \
+    mailSrc/mimepart.cpp \
+    mailSrc/mimetext.cpp \
+    mailSrc/quotedprintable.cpp \
+    mailSrc/smtpclient.cpp
 
 HEADERS  += mainwindow.h \
     headform.h \
@@ -37,7 +49,21 @@ HEADERS  += mainwindow.h \
     numpaddialog.h \
     serialport.h \
     serialsettingsdialog.h \
-    mailsender.h
+    mailsender.h \
+    mailSrc/emailaddress.h \
+    mailSrc/mimeattachment.h \
+    mailSrc/mimecontentformatter.h \
+    mailSrc/mimefile.h \
+    mailSrc/mimehtml.h \
+    mailSrc/mimeinlinefile.h \
+    mailSrc/mimemessage.h \
+    mailSrc/mimemultipart.h \
+    mailSrc/mimepart.h \
+    mailSrc/mimetext.h \
+    mailSrc/quotedprintable.h \
+    mailSrc/smtpclient.h \
+    mailSrc/smtpexports.h \
+    mailSrc/SmtpMime
 
 FORMS    += mainwindow.ui \
     headform.ui \

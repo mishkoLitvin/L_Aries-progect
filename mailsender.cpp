@@ -3,8 +3,9 @@
 MailSender::MailSender(QObject *parent) : QObject(parent)
 {
     smtp = new SmtpClient("smtp.gmail.com", 587, SmtpClient::TlsConnection);
-    senderAddr = new EmailAddress("","");
-    recipientAddr = new EmailAddress("","");
+    qDebug()<<"ssl";
+    senderAddr = new EmailAddress();
+    recipientAddr = new EmailAddress();
     this->message.setSender(this->senderAddr);
     this->message.addRecipient(this->recipientAddr);
 
