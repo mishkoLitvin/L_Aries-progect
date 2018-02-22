@@ -1,8 +1,14 @@
 #include "mailsender.h"
+#include <QDebug>
 
 MailSender::MailSender(QObject *parent) : QObject(parent)
 {
-    smtp = new SmtpClient("smtp.gmail.com", 587, SmtpClient::TlsConnection);
+//    smtp = new SmtpClient("smtp.gmail.com", 587, SmtpClient::TlsConnection);
+//    while (!QSslSocket::supportsSsl()) {
+//        delete smtp;
+        smtp = new SmtpClient("smtp.gmail.com", 587, SmtpClient::TlsConnection);
+//    }
+
     qDebug()<<"ssl";
     senderAddr = new EmailAddress();
     recipientAddr = new EmailAddress();

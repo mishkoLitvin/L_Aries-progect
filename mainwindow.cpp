@@ -85,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     comPort = new SerialPort(this);
 
+    qDebug()<<"SSSSSSSSSSSSSSSSSSSs"<<QSslSocket::supportsSsl()<<QSslSocket::sslLibraryBuildVersionString(); ;
+
     mailSender = new MailSender(this);
 
 }
