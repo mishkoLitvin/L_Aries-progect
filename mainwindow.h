@@ -13,6 +13,7 @@
 #include <QStyle>
 #include <QInputDialog>
 #include <QByteArray>
+#include <QFileDialog>
 
 #include "headform.h"
 #include "settingdialog.h"
@@ -67,6 +68,10 @@ private slots:
     void indexerParamGet(QByteArray indexerParamArr);
     void liftParamGet(QByteArray liftParamArr);
     void machineParamGet(QByteArray machineParamArr);
+    void exitProgram();
+    void saveJob();
+    void loadJob();
+    void machineSettingDialogCall();
 
 
 

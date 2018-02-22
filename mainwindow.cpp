@@ -12,15 +12,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     setStyleSheet(QString((
-                              "color: #ABEFF6;"
+                              "*{color: #ABEFF6;"
                               "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
                               "selection-color: yellow;"
                               "border-radius: 10px;"
-                              "border-width: 2px;"
+                              "border-width: 0px;"
                               "border-style: outset;"
                               "border-color: #003070;"
                               "selection-background-color: blue;"
-                              "font: 14px bold italic large \"Times New Roman\""
+                              "font: 14px bold italic large \"Times New Roman\"}"
+                              "QPushButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)};"
                               )));
 
     pix.load(":/new/icons/icons/tt.png");
@@ -39,13 +40,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     indexer = new IndexerWidget(this);
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequst()));
+    ui->layoutIndexer->addWidget(indexer);
+
 
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(indexerParamGet(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(liftParamGet(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(machineParamGet(QByteArray)));
 
-    ui->layoutIndexer->addWidget(indexer);
+    connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
+    connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
+    connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
+    connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this, SLOT(machineSettingDialogCall()));
 
     int i;
 
@@ -229,6 +235,51 @@ void MainWindow::machineParamGet(QByteArray machineParamArr)
 {
     settings->setValue("MACHINE_PARAMS", machineParamArr);
     comPort->sendData(machineParamArr);
+}
+
+void MainWindow::exitProgram()
+{
+    settings->sync();
+    comPort->closeSerialPort();
+    this->close();
+}
+
+void MainWindow::saveJob()
+{
+    QString saveFileName = QFileDialog::getSaveFileName(this, "Save job...",".","Setting file(*.ini)");
+    QFile::copy("./settings.ini", saveFileName);
+    qDebug()<<saveFileName;
+}
+
+void MainWindow::loadJob()
+{
+    delete settings;
+    QString openFileName = QFileDialog::getOpenFileName(this, "Open job...",".","Setting file(*.ini)");
+    settings = new QSettings(openFileName, QSettings::IniFormat);
+    int i;
+    for(i = 0; i<HEAD_COUNT; i++)
+        {
+            if(settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
+                switch (settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
+                case 0:
+                    headButton[i]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                    break;
+                case 1:
+                    headButton[i]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                    break;
+                case 2:
+                    headButton[i]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                    break;
+                }
+            else
+                headButton[i]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+        }
+
+}
+
+void MainWindow::machineSettingDialogCall()
+{
+
 }
 
 
