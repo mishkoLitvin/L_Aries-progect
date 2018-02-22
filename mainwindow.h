@@ -43,7 +43,6 @@ private:
     Ui::MainWindow *ui;
 
     HeadForm *headButton[HEAD_COUNT];
-    QImage pix;
     QSettings *settings;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;

@@ -11,8 +11,11 @@ HeadForm::HeadForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QBitmap bitmap;
-    bitmap.load("/home/mishko/Dropbox/SharedProgects/NewProjects/buildsLin/build-iconsManager_Release/fff.png");
+    pixShirtShow.load(":/new/icons/icons/tt.png");
+    pixShirtHide.load(":/new/icons/icons/blank.png");
+    pixShirtAnimate.load(":/new/icons/icons/tt3.png");
+
+
     pButtonSets = new QPushButton("S", this);
 
     pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
@@ -44,12 +47,23 @@ void HeadForm::setIndex(int i)
 
 }
 
-void HeadForm::setPixmap(QPixmap pix, QString stStr)
+void HeadForm::setPixmap(PixmapState state, QString stStr)
 {
-    ui->label->setPixmap(pix);
-    ui->label->setStyleSheet(stStr);
-
-
+    switch(state){
+    case pixmapHide:
+        ui->label->setPixmap(QPixmap::fromImage(pixShirtHide.scaled(ui->label->size(), Qt::KeepAspectRatio)));
+        ui->label->setStyleSheet(stStr);
+        break;
+    case pixmapShow:
+        ui->label->setPixmap(QPixmap::fromImage(pixShirtShow.scaled(ui->label->size(), Qt::KeepAspectRatio)));
+        ui->label->setStyleSheet(stStr);
+        break;
+    case pixmapAnimate:
+//        QPixmap::fromImage(pixShirtShow.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio);
+        ui->label->setPixmap(QPixmap::fromImage(pixShirtAnimate.scaled(ui->label->size(), Qt::KeepAspectRatio)));
+        ui->label->setStyleSheet(stStr);
+        break;
+    }
 }
 
 QSize HeadForm::getLabelSize()

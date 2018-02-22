@@ -17,8 +17,11 @@ class HeadForm : public QWidget
 public:
     HeadForm(QWidget *parent = 0);
     ~HeadForm();
+
+    typedef enum PixmapState_ {pixmapShow, pixmapHide, pixmapAnimate} PixmapState;
+
     void setIndex(int i);
-    void setPixmap(QPixmap pix, QString stStr = "background-color: rgb(0,255,150);");
+    void setPixmap(PixmapState state, QString stStr = "background-color: rgb(0,255,150);");
 
     QSize getLabelSize();
 
@@ -29,6 +32,7 @@ private:
     Ui::HeadForm *ui;
     QPushButton *pButtonSets;
     QLabel *labelIndex;
+    QImage pixShirtShow, pixShirtHide, pixShirtAnimate;
 
     int index;
 
