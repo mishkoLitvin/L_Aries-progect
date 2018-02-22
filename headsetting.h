@@ -70,9 +70,7 @@ public:
     MachineSettings(MachineParameters mParam);
     MachineSettings();
 
-    void fromByteArray(QByteArray headParamArray);
-
-    ~MachineSettings();
+    void fromByteArray(QByteArray machineParamArray);
 };
 
 class IndexerLiftSettings
