@@ -12,6 +12,9 @@ TARGET = test0
 TEMPLATE = app
 
 
+SMTP_LIBRARY_LOCATION = ./Libs
+LIBS += -L$$SMTP_LIBRARY_LOCATION -lSMTPEmail
+
 SOURCES += main.cpp\
         mainwindow.cpp \
     headform.cpp \
@@ -21,7 +24,8 @@ SOURCES += main.cpp\
     indexersettingdialog.cpp \
     numpaddialog.cpp \
     serialport.cpp \
-    serialsettingsdialog.cpp
+    serialsettingsdialog.cpp \
+    mailsender.cpp
 
 HEADERS  += mainwindow.h \
     headform.h \
@@ -32,7 +36,8 @@ HEADERS  += mainwindow.h \
     indexersettingdialog.h \
     numpaddialog.h \
     serialport.h \
-    serialsettingsdialog.h
+    serialsettingsdialog.h \
+    mailsender.h
 
 FORMS    += mainwindow.ui \
     headform.ui \

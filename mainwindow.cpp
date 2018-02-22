@@ -247,8 +247,7 @@ void MainWindow::exitProgram()
 void MainWindow::saveJob()
 {
     QString saveFileName = QFileDialog::getSaveFileName(this, "Save job...",".","Setting file(*.ini)");
-    QFile::copy("./settings.ini", saveFileName);
-    qDebug()<<saveFileName;
+    QFile::copy(settings->fileName(), saveFileName);
 }
 
 void MainWindow::loadJob()
