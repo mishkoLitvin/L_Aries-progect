@@ -199,17 +199,17 @@ void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
         if(hParamArr[1]&0x01)
             switch (hParamArr[0]) {
             case 0:
-                headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: rgb(0,255,0);");
+                headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                 break;
             case 1:
-                headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: rgb(100,0,255);");
+                headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
                 break;
             case 2:
-                headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: rgb(255,0,0);");
+                headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
                 break;
             }
         else
-            headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: rgb(100,100,100);");
+            headButton[cnt]->setPixmap(QPixmap::fromImage(pix.scaled(headButton[cnt]->getLabelSize(),Qt::KeepAspectRatio)),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
     }
 }
 

@@ -22,6 +22,7 @@ IndexerSettingDialog::IndexerSettingDialog(QWidget *parent) :
     connect(ui->pButtonOK, SIGNAL(clicked(bool)), this, SLOT(accept()));
     connect(ui->pButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
 
+    acceptOnDeactilationEn = true;
 
 }
 
@@ -226,7 +227,7 @@ bool IndexerSettingDialog::event(QEvent *e)
     if(e->type()==QEvent::WindowDeactivate)
     {
         if(acceptOnDeactilationEn)
-        this->accept();
+            this->accept();
     }
     return QWidget::event(e);
 }
