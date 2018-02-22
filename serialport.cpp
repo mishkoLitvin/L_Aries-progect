@@ -69,5 +69,8 @@ void SerialPort::sendData(QByteArray data)
 
 void SerialPort::setupPort()
 {
-
+    this->closeSerialPort();
+    settingsComDialog->exec();
+    qDebug()<<settingsComDialog->settings().baudRate;
+    this->openSerialPort();
 }
