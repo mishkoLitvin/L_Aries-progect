@@ -46,6 +46,7 @@ private:
     QSettings *settings;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;
+    MachineSettings machineSettings;
     SettingDialog *headSettingDialog;
     IndexerSettingDialog *indexerLiftSetDialog;
     IndexerWidget *indexer;
@@ -65,6 +66,7 @@ private slots:
     void allHeadParamGet(int index, QByteArray hParamArr);
     void indexerParamGet(QByteArray indexerParamArr);
     void liftParamGet(QByteArray liftParamArr);
+    void machineParamGet(QByteArray machineParamArr);
 
 
 

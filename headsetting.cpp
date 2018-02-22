@@ -260,8 +260,15 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
     this->machineParam.WarningTime = mParam.HeadCount;
 }
 
-void MachineSettings::fromByteArray(QByteArray headParamArray)
+MachineSettings::MachineSettings()
 {
-    this->machineParam.HeadCount = ((0x00FF&((uint16_t)headParamArray[1]))<<8)|(0x00FF&((uint16_t)headParamArray[0]));
-    this->machineParam.WarningTime = ((0x00FF&((uint16_t)headParamArray[3]))<<8)|(0x00FF&((uint16_t)headParamArray[2]));
+    MachineParameters mParam;
+    this->machineParam.HeadCount = mParam.HeadCount;
+    this->machineParam.WarningTime = mParam.HeadCount;
+}
+
+void MachineSettings::fromByteArray(QByteArray machineParamArray)
+{
+    this->machineParam.HeadCount = ((0x00FF&((uint16_t)machineParamArray[1]))<<8)|(0x00FF&((uint16_t)machineParamArray[0]));
+    this->machineParam.WarningTime = ((0x00FF&((uint16_t)machineParamArray[3]))<<8)|(0x00FF&((uint16_t)machineParamArray[2]));
 }

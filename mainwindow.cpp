@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(indexerParamGet(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(liftParamGet(QByteArray)));
+    connect(indexerLiftSetDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(machineParamGet(QByteArray)));
 
     ui->layoutIndexer->addWidget(indexer);
 
@@ -135,8 +136,10 @@ void MainWindow::indexerLiftSettingRequst()
         logedInIndexer = true;
         indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
                                           settings->value("LIFT_PARAMS").value<QByteArray>());
+        machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
         indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam);
         indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam);
+        indexerLiftSetDialog->setMachineSetting(machineSettings.machineParam);
         indexerLiftSetDialog->show();
         indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
                                    this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
@@ -222,6 +225,12 @@ void MainWindow::liftParamGet(QByteArray liftParamArr)
     settings->setValue(QString("LIFT_PARAMS"), liftParamArr);
     comPort->sendData(liftParamArr);
 
+}
+
+void MainWindow::machineParamGet(QByteArray machineParamArr)
+{
+    settings->setValue("MACHINE_PARAMS", machineParamArr);
+    comPort->sendData(machineParamArr);
 }
 
 

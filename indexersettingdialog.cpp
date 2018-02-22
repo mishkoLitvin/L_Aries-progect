@@ -51,6 +51,12 @@ void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters li
     ui->spinBoxLiftSpeed->setValue(liftParam.speed);
 }
 
+void IndexerSettingDialog::setMachineSetting(MachineSettings::MachineParameters machineParam)
+{
+    ui->spinBoxHeadsCount->setValue(machineParam.HeadCount);
+    ui->dSpinBoxWarningTime->setValue(machineParam.WarningTime/10.);
+}
+
 void IndexerSettingDialog::accept()
 {
     IndexerLiftSettings::IndexParameters indexParam;
@@ -70,6 +76,11 @@ void IndexerSettingDialog::accept()
     liftParams.homeOffcet = ui->spinBoxLiftHomeOffset->value();
     liftParams.speed = ui->spinBoxLiftSpeed->value();
 
+    MachineSettings::MachineParameters machineParams;
+    machineParams.HeadCount = ui->spinBoxHeadsCount->value();
+    machineParams.WarningTime = ui->dSpinBoxWarningTime->value()*10;
+
+    emit this->machineParamChanged(machineParams.toByteArray());
     emit this->indexerParamChanged(indexParam.toByteArray());
     emit this->liftParamChanged(liftParams.toByteArray());
 

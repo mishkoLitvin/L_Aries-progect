@@ -22,10 +22,12 @@ public:
     ~IndexerSettingDialog();
     void setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam);
     void setLiftSetting(IndexerLiftSettings::LiftParameters liftParam);
+    void setMachineSetting(MachineSettings::MachineParameters machineParam);
 
 signals:
     void indexerParamChanged(QByteArray indexParamArr);
     void liftParamChanged(QByteArray liftParamArr);
+    void machineParamChanged(QByteArray machinePararmArr);
 
 private:
     Ui::IndexerSettingDialog *ui;
