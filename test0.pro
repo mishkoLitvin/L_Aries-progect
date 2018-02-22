@@ -21,8 +21,7 @@ SOURCES += main.cpp\
     indexersettingdialog.cpp \
     numpaddialog.cpp \
     serialport.cpp \
-    serialsettingsdialog.cpp \
-    mailsender.cpp
+    serialsettingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     headform.h \
@@ -33,8 +32,7 @@ HEADERS  += mainwindow.h \
     indexersettingdialog.h \
     numpaddialog.h \
     serialport.h \
-    serialsettingsdialog.h \
-    mailsender.h
+    serialsettingsdialog.h
 
 FORMS    += mainwindow.ui \
     headform.ui \
