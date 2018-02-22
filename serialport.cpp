@@ -28,7 +28,7 @@ void SerialPort::openSerialPort()
                           .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
                           .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
     } else {
-        QMessageBox::critical(0, tr("Error"), serial->errorString());
+        QMessageBox::critical(0, tr("Error"), "Could not connect to serial port"/*serial->errorString()*/);
 
         showStatusMessage(tr("Open error"));
     }

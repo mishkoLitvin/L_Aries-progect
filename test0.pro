@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     indexersettingdialog.cpp \
     numpaddialog.cpp \
     serialport.cpp \
-    serialsettingsdialog.cpp
+    serialsettingsdialog.cpp \
+    mailsender.cpp
 
 HEADERS  += mainwindow.h \
     headform.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     indexersettingdialog.h \
     numpaddialog.h \
     serialport.h \
-    serialsettingsdialog.h
+    serialsettingsdialog.h \
+    mailsender.h
 
 FORMS    += mainwindow.ui \
     headform.ui \
