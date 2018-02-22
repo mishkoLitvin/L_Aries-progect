@@ -79,8 +79,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     comPort = new SerialPort(this);
 
-
-
 }
 
 MainWindow::~MainWindow()

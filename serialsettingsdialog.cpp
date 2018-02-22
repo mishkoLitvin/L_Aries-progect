@@ -113,6 +113,7 @@ void SettingsDialog::showPortInfo(int idx)
 void SettingsDialog::apply()
 {
     updateSettings();
+    accept();
 }
 
 void SettingsDialog::checkCustomBaudRatePolicy(int idx)
