@@ -16,7 +16,7 @@ class SerialPort : public QObject
 
 public:
     explicit SerialPort(QObject *parent = 0);
-    explicit SerialPort(SerialSettingsDialog::Settings settings, QObject *parent = 0);
+    explicit SerialPort(ComSettings settings, QObject *parent = 0);
 
 private:
     SerialSettingsDialog *settingsComDialog;
@@ -36,13 +36,13 @@ private slots:
     void readData();
     void handleError(QSerialPort::SerialPortError error);
     void showStatusMessage(const QString &message);
-    void getSerialSetting(SerialSettingsDialog::Settings setting);
+    void getSerialSetting(ComSettings setting);
 
 
 
 signals:
     void dataReady(QByteArray data);
-    void serialSettingAccepted(SerialSettingsDialog::Settings seittngs);
+    void serialSettingAccepted(ComSettings seittngs);
 };
 
 #endif // SERIALPORT_H

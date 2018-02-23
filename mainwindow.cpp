@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->widgetHeads->resize(QSize(881, 546));
 
     comPort = new SerialPort(this);
+    connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
     mailSender = new MailSender(this);
 }
@@ -106,7 +107,7 @@ void MainWindow::headSettingRequest(int index)
 #endif
     {
         logedInHeadSettings = true;
-        headSettings.fromByteArray(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
+        headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
         headSettingDialog->setHeadParams(headSettings, index);
 //        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
         indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
@@ -178,10 +179,10 @@ void MainWindow::changeHeadNo(int index)
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
-    settings->setValue(QString("HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
-    if(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
+    settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
+    if(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
 
-        switch (settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[0]) {
+        switch (settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[0]) {
         case 0:
             headButton[index]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
             break;
@@ -243,9 +244,10 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
     comPort->sendData(machineParamArr);
 }
 
-void MainWindow::getSerialSetting(SerialSettingsDialog::Settings comSett)
+void MainWindow::getSerialSetting(ComSettings comSett)
 {
-//    settings->setValue("COM_SETTING", QVariant(comSett));
+    settings->setValue("COM_SETTING", QVariant::fromValue(comSett));
+
 }
 
 void MainWindow::exitProgram()
@@ -273,8 +275,8 @@ void MainWindow::loadJob()
     int i;
     for(i = 0; i<HEAD_COUNT; i++)
         {
-            if(settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
-                switch (settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
+            if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
+                switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
                 case 0:
                     headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                     break;
