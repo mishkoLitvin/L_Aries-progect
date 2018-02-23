@@ -4,16 +4,16 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport network
+QT       += core network gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = test0
 TEMPLATE = app
 
+#OPENSSL_LIBS='-L/usr/bin -lssl -lcrypto'
 
-#SMTP_LIBRARY_LOCATION = .
-#LIBS += -L$$SMTP_LIBRARY_LOCATION -lSMTPEmail
+#PKGCONFIG += openssl
 
 SOURCES += main.cpp\
         mainwindow.cpp \

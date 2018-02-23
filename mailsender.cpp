@@ -6,7 +6,7 @@ MailSender::MailSender(QObject *parent) : QObject(parent)
 //    smtp = new SmtpClient("smtp.gmail.com", 587, SmtpClient::TlsConnection);
 //    while (!QSslSocket::supportsSsl()) {
 //        delete smtp;
-        smtp = new SmtpClient("smtp.gmail.com", 587, SmtpClient::TlsConnection);
+        smtp = new SmtpClient("smtp.gmail.com", 465, SmtpClient::SslConnection);
 //    }
 
     qDebug()<<"ssl";
