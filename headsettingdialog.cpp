@@ -1,5 +1,5 @@
-#include "settingdialog.h"
-#include "ui_settingdialog.h"
+#include "headsettingdialog.h"
+#include "ui_headsettingdialog.h"
 
 SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     QWidget(parent),

@@ -16,14 +16,14 @@
 #include <QFileDialog>
 
 #include "headform.h"
-#include "settingdialog.h"
+#include "headsettingdialog.h"
 #include "indexerwidget.h"
 #include "indexersettingdialog.h"
 #include "numpaddialog.h"
 #include "serialport.h"
 #include "mailsender.h"
 
-#include "headsetting.h"
+#include "settings.h"
 
 #define HEAD_COUNT 10
 //#define DEBUG_BUILD

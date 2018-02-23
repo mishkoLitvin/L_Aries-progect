@@ -6,7 +6,7 @@
 #include <QEvent>
 #include <QLineEdit>
 
-#include "headsetting.h"
+#include "settings.h"
 #include "numpaddialog.h"
 
 namespace Ui {

@@ -1,4 +1,4 @@
-#include "headsetting.h"
+#include "settings.h"
 #include <QDebug>
 
 void HeadSetting::fromByteArray(QByteArray hParamArr)
