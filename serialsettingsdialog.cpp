@@ -60,9 +60,9 @@ QT_USE_NAMESPACE
 
 static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
 
-SettingsDialog::SettingsDialog(QWidget *parent) :
+SerialSettingsDialog::SerialSettingsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SettingsDialog)
+    ui(new Ui::SerialSettingsDialog)
 {
     ui->setupUi(this);
 
@@ -71,13 +71,13 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
 
     connect(ui->applyButton, &QPushButton::clicked,
-            this, &SettingsDialog::apply);
+            this, &SerialSettingsDialog::apply);
     connect(ui->serialPortInfoListBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &SettingsDialog::showPortInfo);
+            this, &SerialSettingsDialog::showPortInfo);
     connect(ui->baudRateBox,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &SettingsDialog::checkCustomBaudRatePolicy);
+            this, &SerialSettingsDialog::checkCustomBaudRatePolicy);
     connect(ui->serialPortInfoListBox,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &SettingsDialog::checkCustomDevicePathPolicy);
+            this, &SerialSettingsDialog::checkCustomDevicePathPolicy);
     connect(ui->pButtonRescanPorts, SIGNAL(clicked(bool)), this, SLOT(fillPortsInfo()));
 
     fillPortsParameters();
@@ -86,17 +86,45 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     updateSettings();
 }
 
-SettingsDialog::~SettingsDialog()
+SerialSettingsDialog::SerialSettingsDialog(SerialSettingsDialog::Settings nSett, QWidget *parent):
+    QDialog(parent),
+    ui(new Ui::SerialSettingsDialog)
+{
+    ui->setupUi(this);
+
+    intValidator = new QIntValidator(0, 4000000, this);
+
+    ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
+    this->settings() = nSett;
+
+
+    connect(ui->applyButton, &QPushButton::clicked,
+            this, &SerialSettingsDialog::apply);
+    connect(ui->serialPortInfoListBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &SerialSettingsDialog::showPortInfo);
+    connect(ui->baudRateBox,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &SerialSettingsDialog::checkCustomBaudRatePolicy);
+    connect(ui->serialPortInfoListBox,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &SerialSettingsDialog::checkCustomDevicePathPolicy);
+    connect(ui->pButtonRescanPorts, SIGNAL(clicked(bool)), this, SLOT(fillPortsInfo()));
+
+    fillPortsParameters();
+    fillPortsInfo();
+
+    updateSettings();
+}
+
+SerialSettingsDialog::~SerialSettingsDialog()
 {
     delete ui;
 }
 
-SettingsDialog::Settings SettingsDialog::settings() const
+SerialSettingsDialog::Settings SerialSettingsDialog::settings() const
 {
     return currentSettings;
 }
 
-void SettingsDialog::showPortInfo(int idx)
+void SerialSettingsDialog::showPortInfo(int idx)
 {
     if (idx == -1)
         return;
@@ -110,13 +138,14 @@ void SettingsDialog::showPortInfo(int idx)
     ui->pidLabel->setText(tr("Product Identifier: %1").arg(list.count() > 6 ? list.at(6) : tr(blankString)));
 }
 
-void SettingsDialog::apply()
+void SerialSettingsDialog::apply()
 {
     updateSettings();
+    emit this->serialSettingAccepted(this->settings());
     accept();
 }
 
-void SettingsDialog::checkCustomBaudRatePolicy(int idx)
+void SerialSettingsDialog::checkCustomBaudRatePolicy(int idx)
 {
     bool isCustomBaudRate = !ui->baudRateBox->itemData(idx).isValid();
     ui->baudRateBox->setEditable(isCustomBaudRate);
@@ -127,7 +156,7 @@ void SettingsDialog::checkCustomBaudRatePolicy(int idx)
     }
 }
 
-void SettingsDialog::checkCustomDevicePathPolicy(int idx)
+void SerialSettingsDialog::checkCustomDevicePathPolicy(int idx)
 {
     bool isCustomPath = !ui->serialPortInfoListBox->itemData(idx).isValid();
     ui->serialPortInfoListBox->setEditable(isCustomPath);
@@ -135,7 +164,7 @@ void SettingsDialog::checkCustomDevicePathPolicy(int idx)
         ui->serialPortInfoListBox->clearEditText();
 }
 
-void SettingsDialog::fillPortsParameters()
+void SerialSettingsDialog::fillPortsParameters()
 {
     ui->baudRateBox->addItem(QStringLiteral("9600"), QSerialPort::Baud9600);
     ui->baudRateBox->addItem(QStringLiteral("19200"), QSerialPort::Baud19200);
@@ -166,7 +195,7 @@ void SettingsDialog::fillPortsParameters()
     ui->flowControlBox->addItem(tr("XON/XOFF"), QSerialPort::SoftwareControl);
 }
 
-void SettingsDialog::fillPortsInfo()
+void SerialSettingsDialog::fillPortsInfo()
 {
     ui->serialPortInfoListBox->clear();
     QString description;
@@ -192,7 +221,7 @@ void SettingsDialog::fillPortsInfo()
     ui->serialPortInfoListBox->addItem(tr("Custom"));
 }
 
-void SettingsDialog::updateSettings()
+void SerialSettingsDialog::updateSettings()
 {
     currentSettings.name = ui->serialPortInfoListBox->currentText();
 
@@ -221,4 +250,20 @@ void SettingsDialog::updateSettings()
     currentSettings.stringFlowControl = ui->flowControlBox->currentText();
 
     currentSettings.localEchoEnabled = ui->localEchoCheckBox->isChecked();
+}
+
+void SerialSettingsDialog::Settings::operator =(SerialSettingsDialog::Settings nSett)
+{
+    this->baudRate = nSett.baudRate;
+    this->dataBits = nSett.dataBits;
+    this->flowControl = nSett.flowControl;
+    this->localEchoEnabled = nSett.localEchoEnabled;
+    this->name = nSett.name;
+    this->parity = nSett.parity;
+    this->stopBits = nSett.stopBits;
+    this->stringBaudRate = nSett.stringBaudRate;
+    this->stringDataBits = nSett.stringDataBits;
+    this->stringFlowControl = nSett.stringFlowControl;
+    this->stringParity = nSett.stringParity;
+    this->stringStopBits = nSett.stringStopBits;
 }

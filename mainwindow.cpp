@@ -32,9 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
-    connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(headParamGet(int,QByteArray)));
+    connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
-    connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(allHeadParamGet(int,QByteArray)));
+    connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(getAllHeadParam(int,QByteArray)));
 
     indexer = new IndexerWidget(this);
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequst()));
@@ -42,9 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     indexerLiftSetDialog = new IndexerSettingDialog();
-    connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(indexerParamGet(QByteArray)));
-    connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(liftParamGet(QByteArray)));
-    connect(indexerLiftSetDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(machineParamGet(QByteArray)));
+    connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
+    connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
+    connect(indexerLiftSetDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
 
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
@@ -172,7 +172,7 @@ void MainWindow::changeHeadNo(int index)
     this->headSettingRequest(index);
 }
 
-void MainWindow::headParamGet(int index, QByteArray hParamArr)
+void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
     settings->setValue(QString("HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
     if(settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
@@ -194,7 +194,7 @@ void MainWindow::headParamGet(int index, QByteArray hParamArr)
 
 }
 
-void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
+void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 {
     int cnt;
     index++;
@@ -219,24 +219,29 @@ void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
     }
 }
 
-void MainWindow::indexerParamGet(QByteArray indexerParamArr)
+void MainWindow::getIndexerParam(QByteArray indexerParamArr)
 {
     settings->setValue(QString("INDEXER_PARAMS"), indexerParamArr);
     comPort->sendData(indexerParamArr);
 
 }
 
-void MainWindow::liftParamGet(QByteArray liftParamArr)
+void MainWindow::getLiftParam(QByteArray liftParamArr)
 {
     settings->setValue(QString("LIFT_PARAMS"), liftParamArr);
     comPort->sendData(liftParamArr);
 
 }
 
-void MainWindow::machineParamGet(QByteArray machineParamArr)
+void MainWindow::getMachineParam(QByteArray machineParamArr)
 {
     settings->setValue("MACHINE_PARAMS", machineParamArr);
     comPort->sendData(machineParamArr);
+}
+
+void MainWindow::getSerialSetting(SerialSettingsDialog::Settings comSett)
+{
+//    settings->setValue("COM_SETTING", QVariant(comSett));
 }
 
 void MainWindow::exitProgram()

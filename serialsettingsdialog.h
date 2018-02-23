@@ -60,14 +60,14 @@ QT_USE_NAMESPACE
 QT_BEGIN_NAMESPACE
 
 namespace Ui {
-class SettingsDialog;
+class SerialSettingsDialog;
 }
 
 class QIntValidator;
 
 QT_END_NAMESPACE
 
-class SettingsDialog : public QDialog
+class SerialSettingsDialog : public QDialog
 {
     Q_OBJECT
 
@@ -85,12 +85,18 @@ public:
         QSerialPort::FlowControl flowControl;
         QString stringFlowControl;
         bool localEchoEnabled;
+
+        void operator =(Settings nSett);
     };
 
-    explicit SettingsDialog(QWidget *parent = nullptr);
-    ~SettingsDialog();
+    explicit SerialSettingsDialog(QWidget *parent = nullptr);
+    explicit SerialSettingsDialog(Settings nSett, QWidget *parent = nullptr);
+    ~SerialSettingsDialog();
 
     Settings settings() const;
+
+signals:
+    void serialSettingAccepted(SerialSettingsDialog::Settings seittngs);
 
 private slots:
     void showPortInfo(int idx);
@@ -103,7 +109,7 @@ private slots:
     void updateSettings();
 
 private:
-    Ui::SettingsDialog *ui;
+    Ui::SerialSettingsDialog *ui;
     Settings currentSettings;
     QIntValidator *intValidator;
 };

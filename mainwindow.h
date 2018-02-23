@@ -22,6 +22,7 @@
 #include "numpaddialog.h"
 #include "serialport.h"
 #include "mailsender.h"
+#include "serialsettingsdialog.h"
 
 #include "settings.h"
 
@@ -64,11 +65,12 @@ private slots:
     void headSettingRequest(int index);
     void indexerLiftSettingRequst();
     void changeHeadNo(int index);
-    void headParamGet(int index, QByteArray hParamArr);
-    void allHeadParamGet(int index, QByteArray hParamArr);
-    void indexerParamGet(QByteArray indexerParamArr);
-    void liftParamGet(QByteArray liftParamArr);
-    void machineParamGet(QByteArray machineParamArr);
+    void getHeadParam(int index, QByteArray hParamArr);
+    void getAllHeadParam(int index, QByteArray hParamArr);
+    void getIndexerParam(QByteArray indexerParamArr);
+    void getLiftParam(QByteArray liftParamArr);
+    void getMachineParam(QByteArray machineParamArr);
+    void getSerialSetting(SerialSettingsDialog::Settings comSett);
     void exitProgram();
     void saveJob();
     void loadJob();

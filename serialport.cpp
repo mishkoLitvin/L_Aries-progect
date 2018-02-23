@@ -5,7 +5,20 @@
 SerialPort::SerialPort(QObject *parent):QObject(parent)
 {
     serial = new QSerialPort(this);
-    settingsComDialog = new SettingsDialog;
+    settingsComDialog = new SerialSettingsDialog();
+
+    connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
+    connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
+
+    connect(settingsComDialog, SIGNAL(serialSettingAccepted(SerialSettingsDialog::Settings)), this, SLOT(getSerialSetting(SerialSettingsDialog::Settings)));
+
+    this->openSerialPort();
+}
+
+SerialPort::SerialPort(SerialSettingsDialog::Settings settings, QObject *parent):QObject(parent)
+{
+    serial = new QSerialPort(this);
+    settingsComDialog = new SerialSettingsDialog(settings);
 
     connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
@@ -15,7 +28,7 @@ SerialPort::SerialPort(QObject *parent):QObject(parent)
 
 void SerialPort::openSerialPort()
 {
-    SettingsDialog::Settings p = settingsComDialog->settings();
+    SerialSettingsDialog::Settings p = settingsComDialog->settings();
     serial->setPortName(p.name);
     serial->setBaudRate(p.baudRate);
     serial->setDataBits(p.dataBits);
@@ -59,6 +72,11 @@ void SerialPort::handleError(QSerialPort::SerialPortError error)
 void SerialPort::showStatusMessage(const QString &message)
 {
     qDebug()<<message;
+}
+
+void SerialPort::getSerialSetting(SerialSettingsDialog::Settings setting)
+{
+    emit this->serialSettingAccepted(setting);
 }
 
 void SerialPort::sendData(QByteArray data)
