@@ -5,6 +5,7 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QLabel>
+#include <QMouseEvent>
 
 namespace Ui {
 class HeadForm;
@@ -35,9 +36,13 @@ private:
     QImage pixShirtShow, pixShirtHide, pixShirtAnimate;
 
     int index;
+    bool pixmapShown;
 
 private slots:
     void settingPButtonClicedSlot();
+
+protected:
+    void mousePressEvent(QMouseEvent *event);
 };
 
 

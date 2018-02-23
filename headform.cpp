@@ -53,10 +53,12 @@ void HeadForm::setPixmap(PixmapState state, QString stStr)
     case pixmapHide:
         ui->label->setPixmap(QPixmap::fromImage(pixShirtHide.scaled(ui->label->size(), Qt::KeepAspectRatio)));
         ui->label->setStyleSheet(stStr);
+        pixmapShown = false;
         break;
     case pixmapShow:
         ui->label->setPixmap(QPixmap::fromImage(pixShirtShow.scaled(ui->label->size(), Qt::KeepAspectRatio)));
         ui->label->setStyleSheet(stStr);
+        pixmapShown = true;
         break;
     case pixmapAnimate:
 //        QPixmap::fromImage(pixShirtShow.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio);
@@ -74,4 +76,15 @@ QSize HeadForm::getLabelSize()
 void HeadForm::settingPButtonClicedSlot()
 {
     emit this->settingButtonCliced(this->index);
+}
+
+void HeadForm::mousePressEvent(QMouseEvent *event)
+{
+    if(event->type() == QMouseEvent::MouseButtonDblClick)
+    {
+        if(pixmapShown)
+            this->setPixmap(pixmapHide, ui->label->styleSheet());
+        else
+            this->setPixmap(pixmapShow, ui->label->styleSheet());
+    }
 }

@@ -58,22 +58,22 @@ MainWindow::MainWindow(QWidget *parent) :
         headButton[i] = new HeadForm(ui->widgetHeads);
         headButton[i]->setIndex(i);
 
-        headButton[i]->setPixmap(HeadForm::pixmapShow);
+        headButton[i]->setPixmap(HeadForm::pixmapHide);
 
         if(settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
             switch (settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
             case 0:
-                headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                 break;
             case 1:
-                headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
                 break;
             case 2:
-                headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
                 break;
             }
         else
-            headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+            headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
 
         connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
@@ -179,17 +179,17 @@ void MainWindow::headParamGet(int index, QByteArray hParamArr)
 
         switch (settings->value(QString("HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[0]) {
         case 0:
-            headButton[index]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+            headButton[index]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
             break;
         case 1:
-            headButton[index]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+            headButton[index]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
             break;
         case 2:
-            headButton[index]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+            headButton[index]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
             break;
         }
     else
-        headButton[index]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+        headButton[index]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
     comPort->sendData(hParamArr);
 
 }
@@ -205,17 +205,17 @@ void MainWindow::allHeadParamGet(int index, QByteArray hParamArr)
         if(hParamArr[1]&0x01)
             switch (hParamArr[0]) {
             case 0:
-                headButton[cnt]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                headButton[cnt]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                 break;
             case 1:
-                headButton[cnt]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                headButton[cnt]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
                 break;
             case 2:
-                headButton[cnt]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                headButton[cnt]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
                 break;
             }
         else
-            headButton[cnt]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+            headButton[cnt]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
     }
 }
 
@@ -267,17 +267,17 @@ void MainWindow::loadJob()
             if(settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
                 switch (settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
                 case 0:
-                    headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                    headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                     break;
                 case 1:
-                    headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                    headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
                     break;
                 case 2:
-                    headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                    headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
                     break;
                 }
             else
-                headButton[i]->setPixmap(HeadForm::pixmapShow,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+                headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
         }
 
 }
