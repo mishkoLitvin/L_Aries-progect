@@ -54,10 +54,58 @@
 
 #include <QDialog>
 #include <QtSerialPort/QSerialPort>
+#include <QDataStream>
+#include <QMetaType>
 
 QT_USE_NAMESPACE
 
 QT_BEGIN_NAMESPACE
+
+struct ComSettings {
+    QString name;
+    qint32 baudRate;
+    QString stringBaudRate;
+    QSerialPort::DataBits dataBits;
+    QString stringDataBits;
+    QSerialPort::Parity parity;
+    QString stringParity;
+    QSerialPort::StopBits stopBits;
+    QString stringStopBits;
+    QSerialPort::FlowControl flowControl;
+    QString stringFlowControl;
+    bool localEchoEnabled;
+
+    ComSettings operator =(ComSettings nSett);
+
+};
+
+Q_DECLARE_METATYPE(ComSettings);
+
+inline QDataStream& operator<<(QDataStream& out, const ComSettings& st)
+{
+    out << st.name;
+    out << st.baudRate;
+    out << st.stringBaudRate;
+    out << st.stringDataBits;
+    out << st.stringParity;
+    out << st.stringStopBits;
+    out << st.stringFlowControl;
+    out << st.localEchoEnabled;
+    return out;
+}
+inline QDataStream& operator>>(QDataStream& in, ComSettings& st)
+{
+    in >> st.name;
+    in >> st.baudRate;
+    in >> st.stringBaudRate;
+    in >> st.stringDataBits;
+    in >> st.stringParity;
+    in >> st.stringStopBits;
+    in >> st.stringFlowControl;
+    in >> st.localEchoEnabled;
+    return in;
+}
+
 
 namespace Ui {
 class SerialSettingsDialog;
@@ -72,31 +120,22 @@ class SerialSettingsDialog : public QDialog
     Q_OBJECT
 
 public:
-    struct Settings {
-        QString name;
-        qint32 baudRate;
-        QString stringBaudRate;
-        QSerialPort::DataBits dataBits;
-        QString stringDataBits;
-        QSerialPort::Parity parity;
-        QString stringParity;
-        QSerialPort::StopBits stopBits;
-        QString stringStopBits;
-        QSerialPort::FlowControl flowControl;
-        QString stringFlowControl;
-        bool localEchoEnabled;
 
-        void operator =(Settings nSett);
-    };
+//    QDataStream &operator<<(QDataStream &out, const Settings &obj) {
+
+//       out <<obj.name<<obj.baudRate<<obj.stringBaudRate<<obj.dataBits;
+//       return out;
+
+//   }
 
     explicit SerialSettingsDialog(QWidget *parent = nullptr);
-    explicit SerialSettingsDialog(Settings nSett, QWidget *parent = nullptr);
+    explicit SerialSettingsDialog(ComSettings nSett, QWidget *parent = nullptr);
     ~SerialSettingsDialog();
 
-    Settings settings() const;
+    ComSettings settings() const;
 
 signals:
-    void serialSettingAccepted(SerialSettingsDialog::Settings seittngs);
+    void serialSettingAccepted(ComSettings seittngs);
 
 private slots:
     void showPortInfo(int idx);
@@ -110,7 +149,7 @@ private slots:
 
 private:
     Ui::SerialSettingsDialog *ui;
-    Settings currentSettings;
+    ComSettings currentSettings;
     QIntValidator *intValidator;
 };
 

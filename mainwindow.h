@@ -70,7 +70,7 @@ private slots:
     void getIndexerParam(QByteArray indexerParamArr);
     void getLiftParam(QByteArray liftParamArr);
     void getMachineParam(QByteArray machineParamArr);
-    void getSerialSetting(SerialSettingsDialog::Settings comSett);
+    void getSerialSetting(ComSettings comSett);
     void exitProgram();
     void saveJob();
     void loadJob();

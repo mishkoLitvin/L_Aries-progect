@@ -84,9 +84,11 @@ SerialSettingsDialog::SerialSettingsDialog(QWidget *parent) :
     fillPortsInfo();
 
     updateSettings();
+    qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
+
 }
 
-SerialSettingsDialog::SerialSettingsDialog(SerialSettingsDialog::Settings nSett, QWidget *parent):
+SerialSettingsDialog::SerialSettingsDialog(ComSettings nSett, QWidget *parent):
     QDialog(parent),
     ui(new Ui::SerialSettingsDialog)
 {
@@ -110,6 +112,7 @@ SerialSettingsDialog::SerialSettingsDialog(SerialSettingsDialog::Settings nSett,
 
     fillPortsParameters();
     fillPortsInfo();
+    qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
     updateSettings();
 }
@@ -119,7 +122,7 @@ SerialSettingsDialog::~SerialSettingsDialog()
     delete ui;
 }
 
-SerialSettingsDialog::Settings SerialSettingsDialog::settings() const
+ComSettings SerialSettingsDialog::settings() const
 {
     return currentSettings;
 }
@@ -252,18 +255,20 @@ void SerialSettingsDialog::updateSettings()
     currentSettings.localEchoEnabled = ui->localEchoCheckBox->isChecked();
 }
 
-void SerialSettingsDialog::Settings::operator =(SerialSettingsDialog::Settings nSett)
+ComSettings ComSettings::operator =(ComSettings nSett)
 {
-    this->baudRate = nSett.baudRate;
-    this->dataBits = nSett.dataBits;
-    this->flowControl = nSett.flowControl;
-    this->localEchoEnabled = nSett.localEchoEnabled;
-    this->name = nSett.name;
-    this->parity = nSett.parity;
-    this->stopBits = nSett.stopBits;
-    this->stringBaudRate = nSett.stringBaudRate;
-    this->stringDataBits = nSett.stringDataBits;
-    this->stringFlowControl = nSett.stringFlowControl;
-    this->stringParity = nSett.stringParity;
-    this->stringStopBits = nSett.stringStopBits;
+    ComSettings nStt;
+    nStt.baudRate = nSett.baudRate;
+    nStt.dataBits = nSett.dataBits;
+    nStt.flowControl = nSett.flowControl;
+    nStt.localEchoEnabled = nSett.localEchoEnabled;
+    nStt.name = nSett.name;
+    nStt.parity = nSett.parity;
+    nStt.stopBits = nSett.stopBits;
+    nStt.stringBaudRate = nSett.stringBaudRate;
+    nStt.stringDataBits = nSett.stringDataBits;
+    nStt.stringFlowControl = nSett.stringFlowControl;
+    nStt.stringParity = nSett.stringParity;
+    nStt.stringStopBits = nSett.stringStopBits;
+    return nStt;
 }
