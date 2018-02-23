@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(getAllHeadParam(int,QByteArray)));
 
     indexer = new IndexerWidget(this);
-    connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequst()));
+    connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequest()));
     ui->layoutIndexer->addWidget(indexer);
 
 
@@ -45,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
+
+    generalSettingDialog = new GeneralSettingDialog();
+    connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
 
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
@@ -128,7 +131,7 @@ void MainWindow::headSettingRequest(int index)
 
 }
 
-void MainWindow::indexerLiftSettingRequst()
+void MainWindow::indexerLiftSettingRequest()
 {
     QByteArray passwordBArr;
 #ifndef DEBUG_BUILD
@@ -160,6 +163,11 @@ void MainWindow::indexerLiftSettingRequst()
         msgBox.exec();
     }
 #endif
+}
+
+void MainWindow::generalSettingDialogRequest()
+{
+    generalSettingDialog->show();
 }
 
 void MainWindow::changeHeadNo(int index)
