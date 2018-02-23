@@ -19,6 +19,7 @@
 #include "headsettingdialog.h"
 #include "indexerwidget.h"
 #include "indexersettingdialog.h"
+#include "generalsettingdialog.h"
 #include "numpaddialog.h"
 #include "serialport.h"
 #include "mailsender.h"
@@ -49,6 +50,7 @@ private:
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;
     MachineSettings machineSettings;
+    GeneralSettingDialog *generalSettingDialog;
     SettingDialog *headSettingDialog;
     IndexerSettingDialog *indexerLiftSetDialog;
     IndexerWidget *indexer;
@@ -63,7 +65,8 @@ private:
 
 private slots:
     void headSettingRequest(int index);
-    void indexerLiftSettingRequst();
+    void indexerLiftSettingRequest();
+    void generalSettingDialogRequest();
     void changeHeadNo(int index);
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);
