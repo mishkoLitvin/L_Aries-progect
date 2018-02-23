@@ -11,8 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setStyleSheet(QString((
-                              "*{color: #ABEFF6;"
+    setStyleSheet(QString((   "*{color: #ABEFF6;"
                               "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
                               "selection-color: yellow;"
                               "border-radius: 10px;"
@@ -26,9 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     settings = new QSettings("settings.ini", QSettings::IniFormat);
 //    QByteArray passwordBArr;
-//    passwordBArr.append("2");
+//    passwordBArr.append("3");
 //    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
-//    settings->setValue("PASSWORD_INDEXER", temp);
+//    settings->setValue("PASSWORD_EMAIL", temp);
 //    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
@@ -60,9 +59,6 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         headButton[i] = new HeadForm(ui->widgetHeads);
         headButton[i]->setIndex(i);
-
-        headButton[i]->setPixmap(HeadForm::pixmapHide);
-
         if(settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
             switch (settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
             case 0:
@@ -80,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
+
 //    headButton[0]->setPixmap(HeadForm::pixmapAnimate,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
 //    headButton[4]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
 
@@ -89,7 +86,6 @@ MainWindow::MainWindow(QWidget *parent) :
     comPort = new SerialPort(this);
 
     mailSender = new MailSender(this);
-
 }
 
 MainWindow::~MainWindow()

@@ -2,6 +2,7 @@
 #define GENERALSETTINGDIALOG_H
 
 #include <QDialog>
+#include <QDebug>
 
 namespace Ui {
 class GeneralSettingDialog;
@@ -17,6 +18,15 @@ public:
 
 private:
     Ui::GeneralSettingDialog *ui;
+    bool acceptOnDeactilationEn;
+
+private slots:
+    void accept();
+    void reject();
+    void lockUnlockEmail();
+
+protected:
+    bool event(QEvent *e);
 };
 
 #endif // GENERALSETTINGDIALOG_H
