@@ -74,6 +74,7 @@ private slots:
     void getLiftParam(QByteArray liftParamArr);
     void getMachineParam(QByteArray machineParamArr);
     void getSerialSetting(ComSettings comSett);
+    void getEmailSettings(EmailSettings emailSett);
     void exitProgram();
     void saveJob();
     void loadJob();

@@ -8,6 +8,8 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     ui->setupUi(this);
     acceptOnDeactilationEn = true;
     ui->emailSettingWidget->setDisabled(true);
+    qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
+
 
     setStyleSheet(QString(("* {color: #ABEFF6;"
                            "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
@@ -18,6 +20,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
                            "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8080A0, stop: 0.8 #606070,stop: 1.0 #202030);}")));
 
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
+    connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -25,8 +28,23 @@ GeneralSettingDialog::~GeneralSettingDialog()
     delete ui;
 }
 
+void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
+{
+    ui->editPassword->setText(emailSett.senderPassword);
+    ui->editReceiver->setText(emailSett.receiverAdress);
+    ui->editSender->setText(emailSett.senderAdress);
+    ui->editSubject->setText(emailSett.emailSubject);
+}
+
 void GeneralSettingDialog::accept()
 {
+    EmailSettings emailSett;
+    emailSett.senderAdress = ui->editSender->text();
+    emailSett.senderPassword = ui->editPassword->text();
+    emailSett.receiverAdress = ui->editReceiver->text();
+    emailSett.emailSubject = ui->editSubject->text();
+    emit this->emailSettingsChanged(emailSett);
+
     this->hide();
 }
 

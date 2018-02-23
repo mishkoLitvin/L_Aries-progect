@@ -47,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     generalSettingDialog = new GeneralSettingDialog();
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
+    connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
+    generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
 
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
@@ -248,6 +250,11 @@ void MainWindow::getSerialSetting(ComSettings comSett)
 {
     settings->setValue("COM_SETTING", QVariant::fromValue(comSett));
 
+}
+
+void MainWindow::getEmailSettings(EmailSettings emailSett)
+{
+    settings->setValue("EMAIL_SETTINGS", QVariant::fromValue(emailSett));
 }
 
 void MainWindow::exitProgram()
