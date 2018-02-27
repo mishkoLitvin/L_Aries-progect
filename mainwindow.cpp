@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
                               "QPushButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)};"
                               )));
 
-    settings = new QSettings("settings.ini", QSettings::IniFormat);
+    settings = new QSettings("./settings.ini", QSettings::IniFormat);
 //    QByteArray passwordBArr;
 //    passwordBArr.append("3");
 //    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
@@ -62,8 +62,8 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         headButton[i] = new HeadForm(ui->widgetHeads);
         headButton[i]->setIndex(i);
-        if(settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
-            switch (settings->value(QString("HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
+        if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
+            switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
             case 0:
                 headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                 break;
@@ -90,6 +90,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
     mailSender = new MailSender(this);
+//    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
+//    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
+//    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 }
 
 MainWindow::~MainWindow()
@@ -209,7 +212,7 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
     for(cnt = 0; cnt<HEAD_COUNT; cnt++)
     {
         comPort->sendData(hParamArr);
-        settings->setValue(QString("HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
+        settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
         if(hParamArr[1]&0x01)
             switch (hParamArr[0]) {
             case 0:
