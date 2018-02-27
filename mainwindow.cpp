@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(getAllHeadParam(int,QByteArray)));
+    connect(headSettingDialog, SIGNAL(sendCommand(int,QByteArray)), this, SLOT(getHeadCommand(int,QByteArray)));
 
     indexer = new IndexerWidget(this);
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequest()));
@@ -224,6 +225,12 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
         else
             headButton[cnt]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
     }
+}
+
+void MainWindow::getHeadCommand(int index, QByteArray commandArr)
+{
+    qDebug()<<"commad:"<<index;
+    comPort->sendData(commandArr);
 }
 
 void MainWindow::getIndexerParam(QByteArray indexerParamArr)

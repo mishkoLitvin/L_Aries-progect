@@ -29,6 +29,7 @@ signals:
     void liftParamChanged(QByteArray liftParamArr);
     void machineParamChanged(QByteArray machinePararmArr);
 
+
 private:
     Ui::IndexerSettingDialog *ui;
 

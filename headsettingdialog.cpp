@@ -288,37 +288,72 @@ void SettingDialog::on_pushButtonPlast_clicked()
 
 void SettingDialog::on_pushButtonFL_clicked()
 {
-
+    QByteArray bArr;
+    bArr.append((char)0xCC);
+    bArr.append((char)this->index);
+    bArr.append((char)HeadSetting::FL);
+    bArr.append((char)0xDD);
+    emit this->sendCommand(this->index, bArr);
 }
 
 void SettingDialog::on_pushButtonMoveRear_clicked()
 {
-
+    QByteArray bArr;
+    bArr.append((char)0xCC);
+    bArr.append((char)this->index);
+    bArr.append((char)HeadSetting::MoveRear);
+    bArr.append((char)0xDD);
+    emit this->sendCommand(this->index, bArr);
 }
 
 void SettingDialog::on_pushButtonFL_SQ_clicked()
 {
-
+    QByteArray bArr;
+    bArr.append((char)0xCC);
+    bArr.append((char)this->index);
+    bArr.append((char)HeadSetting::SQ_FL);
+    bArr.append((char)0xDD);
+    emit this->sendCommand(this->index, bArr);
 }
 
 void SettingDialog::on_pushButtonMoveFront_clicked()
 {
-
+    QByteArray bArr;
+    bArr.append((char)0xCC);
+    bArr.append((char)this->index);
+    bArr.append((char)HeadSetting::MoveFront);
+    bArr.append((char)0xDD);
+    emit this->sendCommand(this->index, bArr);
 }
 
 void SettingDialog::on_pushButtonMTPMove_clicked()
 {
-
+    QByteArray bArr;
+    bArr.append((char)0xCC);
+    bArr.append((char)this->index);
+    bArr.append((char)HeadSetting::MPT_Move);
+    bArr.append((char)0xDD);
+    emit this->sendCommand(this->index, bArr);
 }
 
 void SettingDialog::on_pushButtonSQ_clicked()
 {
-
+    QByteArray bArr;
+    bArr.append((char)0xCC);
+    bArr.append((char)this->index);
+    bArr.append((char)HeadSetting::SQ);
+    bArr.append((char)0xDD);
+    emit this->sendCommand(this->index, bArr);
 }
 
 void SettingDialog::on_pushButtonMoveTest_clicked()
 {
-
+    QByteArray bArr;
+    bArr.append((char)0xCC);
+    bArr.append((char)this->index);
+    bArr.append((char)HeadSetting::MoveTest);
+    bArr.append((char)0xDD);
+    emit this->sendCommand(this->index, bArr);
 }
 
 void SettingDialog::on_pushButtonPressure_clicked()

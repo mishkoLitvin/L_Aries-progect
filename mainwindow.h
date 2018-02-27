@@ -70,6 +70,7 @@ private slots:
     void changeHeadNo(int index);
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);
+    void getHeadCommand(int index, QByteArray commandArr);
     void getIndexerParam(QByteArray indexerParamArr);
     void getLiftParam(QByteArray liftParamArr);
     void getMachineParam(QByteArray machineParamArr);
