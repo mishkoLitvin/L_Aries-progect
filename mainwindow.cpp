@@ -90,9 +90,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
     mailSender = new MailSender(this);
-//    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
-//    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
-//    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
+    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
+    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 }
 
 MainWindow::~MainWindow()
@@ -265,6 +265,13 @@ void MainWindow::getSerialSetting(ComSettings comSett)
 void MainWindow::getEmailSettings(EmailSettings emailSett)
 {
     settings->setValue("EMAIL_SETTINGS", QVariant::fromValue(emailSett));
+    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
+    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
+    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress;
+    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword;
+    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress;
+
 }
 
 void MainWindow::exitProgram()

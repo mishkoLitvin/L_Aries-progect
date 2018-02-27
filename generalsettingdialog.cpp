@@ -21,6 +21,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
 
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
     connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
+    connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -68,6 +69,14 @@ void GeneralSettingDialog::lockUnlockEmail()
         ui->emailSettingWidget->setDisabled(true);
         ui->pButtonLockUnlockEmail->setText("Unlock");
     }
+}
+
+void GeneralSettingDialog::hideShowPassword()
+{
+    if(ui->pButtonShowPassword->isChecked())
+        ui->editPassword->setEchoMode(QLineEdit::Normal);
+    if(!ui->pButtonShowPassword->isChecked())
+        ui->editPassword->setEchoMode(QLineEdit::Password);
 }
 
 bool GeneralSettingDialog::event(QEvent *e)

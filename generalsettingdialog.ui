@@ -83,7 +83,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="editSender"/>
+             <widget class="QLineEdit" name="editReceiver"/>
             </item>
            </layout>
           </item>
@@ -101,10 +101,20 @@
               <property name="text">
                <string>Show</string>
               </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item row="1" column="0" colspan="2">
-             <widget class="QLineEdit" name="editPassword"/>
+             <widget class="QLineEdit" name="editPassword">
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -132,7 +142,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="editReceiver"/>
+             <widget class="QLineEdit" name="editSender"/>
             </item>
            </layout>
           </item>
@@ -163,6 +173,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>pButtonLockUnlockEmail</tabstop>
+  <tabstop>editSender</tabstop>
+  <tabstop>editPassword</tabstop>
+  <tabstop>editReceiver</tabstop>
+  <tabstop>editSubject</tabstop>
+  <tabstop>pButtonReject</tabstop>
+  <tabstop>pButtonAccept</tabstop>
+  <tabstop>pButtonShowPassword</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

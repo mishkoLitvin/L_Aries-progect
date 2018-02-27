@@ -57,6 +57,7 @@ private slots:
     void accept();
     void reject();
     void lockUnlockEmail();
+    void hideShowPassword();
 
 protected:
     bool event(QEvent *e);
