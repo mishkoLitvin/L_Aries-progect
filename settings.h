@@ -100,6 +100,23 @@ public:
         QByteArray toByteArray();
     }IndexParameters;
 
+    typedef enum IndexerCommandsEn_{
+        IndLock = 0xA0,
+        MoveUp,
+        MoveDown,
+        MoveLeft = 0xA7,
+        MoveRight,
+        MoveLeftHalf,
+        MoveRightHalf,
+        MoveFull,
+        MoveHalf,
+        Auto,
+        Manual,
+        PrintManual,
+        PrintAuto,
+        PrintStop
+    }IndexerCommandsEn;
+
     IndexParameters indexerParam;
     LiftParameters liftParam;
 

@@ -37,7 +37,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QPushButton" name="pButtonLock">
+          <widget class="QToolButton" name="pButtonLock">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -45,7 +45,11 @@
             </size>
            </property>
            <property name="text">
-            <string>Lock</string>
+            <string>Unlock</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/unlock.png</normaloff>:/new/icons/icons/unlock.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -53,10 +57,16 @@
              <height>40</height>
             </size>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pButtonMove">
+          <widget class="QToolButton" name="pButtonMove">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -64,7 +74,11 @@
             </size>
            </property>
            <property name="text">
-            <string>Move</string>
+            <string>Move Half</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/arrows/icons/arrows/arrowRPartRound.png</normaloff>:/arrows/icons/arrows/arrowRPartRound.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -72,10 +86,16 @@
              <height>40</height>
             </size>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pButtonAuto">
+          <widget class="QToolButton" name="pButtonAuto">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -85,11 +105,21 @@
            <property name="text">
             <string>Manual</string>
            </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/playP.png</normaloff>:/new/icons/icons/playP.png</iconset>
+           </property>
            <property name="iconSize">
             <size>
              <width>40</width>
              <height>40</height>
             </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
            </property>
           </widget>
          </item>
@@ -98,7 +128,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="pButtonPrint">
+      <widget class="QToolButton" name="pButtonPrint">
        <property name="minimumSize">
         <size>
          <width>90</width>
@@ -110,8 +140,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons.qrc">
-         <normaloff>:/new/icons/icons/play.png</normaloff>
-         <normalon>:/new/icons/icons/stop.png</normalon>:/new/icons/icons/play.png</iconset>
+         <normaloff>:/new/icons/icons/playP.png</normaloff>:/new/icons/icons/playP.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -121,6 +150,9 @@
        </property>
        <property name="checkable">
         <bool>true</bool>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
       </widget>
      </item>
@@ -142,7 +174,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QPushButton" name="pButtonMoveLeft">
+          <widget class="QToolButton" name="pButtonMoveLeft">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -152,16 +184,23 @@
            <property name="text">
             <string>Left</string>
            </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/arrows/icons/arrows/arrowL.png</normaloff>:/arrows/icons/arrows/arrowL.png</iconset>
+           </property>
            <property name="iconSize">
             <size>
              <width>40</width>
              <height>40</height>
             </size>
            </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pButtonMoveUp">
+          <widget class="QToolButton" name="pButtonMoveUp">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -171,16 +210,26 @@
            <property name="text">
             <string>Up</string>
            </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/arrows/icons/arrows/arrowUPart.png</normaloff>:/arrows/icons/arrows/arrowUPart.png</iconset>
+           </property>
            <property name="iconSize">
             <size>
              <width>40</width>
              <height>40</height>
             </size>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pButtonRight">
+          <widget class="QToolButton" name="pButtonMoveRight">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -190,11 +239,18 @@
            <property name="text">
             <string>Right</string>
            </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/arrows/icons/arrows/arrowR.png</normaloff>:/arrows/icons/arrows/arrowR.png</iconset>
+           </property>
            <property name="iconSize">
             <size>
              <width>40</width>
              <height>40</height>
             </size>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
            </property>
           </widget>
          </item>

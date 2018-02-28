@@ -5,6 +5,10 @@
 
 #include <QResizeEvent>
 #include <QPushButton>
+#include <QDebug>
+
+#include "settings.h"
+
 
 namespace Ui {
 class IndexerWidget;
@@ -20,6 +24,7 @@ public:
 
 signals:
     void settingButtonCliced();
+    void sendCommand(QByteArray command);
 
 private slots:
 
@@ -29,7 +34,7 @@ private slots:
     void on_pButtonPrint_clicked();
     void on_pButtonMoveLeft_clicked();
     void on_pButtonMoveUp_clicked();
-    void on_pButtonRight_clicked();
+    void on_pButtonMoveRight_clicked();
     void settingPButtonClicSlot();
 
 private:

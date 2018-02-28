@@ -28,7 +28,7 @@
 #include "settings.h"
 
 #define HEAD_COUNT 10
-//#define DEBUG_BUILD
+#define DEBUG_BUILD
 
 namespace Ui {
 class MainWindow;
@@ -73,6 +73,7 @@ private slots:
     void getHeadCommand(int index, QByteArray commandArr);
     void getIndexerParam(QByteArray indexerParamArr);
     void getLiftParam(QByteArray liftParamArr);
+    void getIndexLiftCommand(QByteArray commandArr);
     void getMachineParam(QByteArray machineParamArr);
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
