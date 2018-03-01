@@ -60,7 +60,6 @@ private:
     QString truePassword = "qwerty";
     bool logedInHeadSettings = false;
     bool logedInIndexer = false;
-    bool logedInSerial = false;
 
     SerialPort *comPort;
 
@@ -69,7 +68,6 @@ private slots:
     void headSettingRequest(int index);
     void indexerLiftSettingRequest();
     void generalSettingDialogRequest();
-    void serialSettingsDialogRequest();
     void changeHeadNo(int index);
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);

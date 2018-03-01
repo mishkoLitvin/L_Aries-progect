@@ -8,7 +8,7 @@
 #include <QByteArray>
 #include <QDebug>
 
-static const uint16_t crctable[256] =
+const uint16_t crctable[256] =
 {
     0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
     0XC601, 0X06C0, 0X0780, 0XC741, 0X0500, 0XC5C1, 0XC481, 0X0440,
@@ -44,9 +44,16 @@ static const uint16_t crctable[256] =
     0X8201, 0X42C0, 0X4380, 0X8341, 0X4100, 0X81C1, 0X8081, 0X4040
 };
 
+class CrcCalc
+{
+public:
+     CrcCalc() {}
 
-uint16_t // Returns Calculated CRC value
-CalculateCRC16(
+private:
+
+
+public:
+static inline uint16_t CalculateCRC16(
     uint16_t crc,      // Seed for CRC calculation
     QByteArray c_ptr) // Pointer to byte array to perform CRC on
 
@@ -61,6 +68,9 @@ CalculateCRC16(
     }
     return crc;
 }
+
+};
+
 
 
 #endif // CRC16_H

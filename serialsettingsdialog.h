@@ -55,6 +55,7 @@
 #include <QDialog>
 #include <QtSerialPort/QSerialPort>
 #include <QDataStream>
+#include <QEvent>
 #include <QMetaType>
 
 QT_USE_NAMESPACE
@@ -146,8 +147,6 @@ private:
     ComSettings currentSettings;
     QIntValidator *intValidator;
 
-protected:
-    bool event(QEvent *e);
 };
 
 #endif // SETTINGSDIALOG_H

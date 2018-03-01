@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QDebug>
 #include <QByteArray>
+#include <QMessageBox>
+#include <QInputDialog>
 
 #include "settings.h"
 #include "numpaddialog.h"
@@ -50,6 +52,7 @@ public:
     void setEmailSettings(EmailSettings emailSett);
     void setMachineSetting(MachineSettings::MachineParameters machineParam);
     void setFocusLossAccept(bool flag);
+    void setPasswords(uint16_t serialPass, uint16_t mailPass);
 
 signals:
     void emailSettingsChanged(EmailSettings);
@@ -59,6 +62,9 @@ signals:
 private:
     Ui::GeneralSettingDialog *ui;
     bool acceptOnDeactilationEn;
+    bool logedInSerial = false;
+    uint16_t serialPassword;
+    uint16_t mailPassword;
 
 private slots:
     void accept();

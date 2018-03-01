@@ -1,5 +1,7 @@
 #include "generalsettingdialog.h"
 #include "ui_generalsettingdialog.h"
+#include "crc16.h"
+
 
 GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     QDialog(parent),
@@ -40,6 +42,12 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
 void GeneralSettingDialog::setFocusLossAccept(bool flag)
 {
     acceptOnDeactilationEn = flag;
+}
+
+void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass)
+{
+    this->serialPassword = serialPass;
+    this->mailPassword = mailPass;
 }
 
 void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
@@ -94,7 +102,7 @@ void GeneralSettingDialog::hideShowPassword()
 {
     if(ui->pButtonShowPassword->isChecked())
         ui->editPassword->setEchoMode(QLineEdit::Normal);
-    if(!ui->pButtonShowPassword->isChecked())
+    else
         ui->editPassword->setEchoMode(QLineEdit::Password);
 }
 
@@ -119,13 +127,36 @@ void GeneralSettingDialog::eventFilterSetup()
 
 void GeneralSettingDialog::changeSerialPortSettingsClicked()
 {
-    emit this->serialPortSettingsDialogRequested();
+    acceptOnDeactilationEn = false;
+    QByteArray passwordBArr;
+#ifndef DEBUG_BUILD
+
+    if(!logedInSerial){
+        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+    }
+    if(logedInSerial || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->serialPassword))
+#endif
+    {
+        logedInSerial = true;
+        emit this->serialPortSettingsDialogRequested();
+    }
+#ifndef DEBUG_BUILD
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet());
+        msgBox.setText("Wrong password!");
+        msgBox.setWindowTitle("Password");
+        msgBox.exec();
+    }
+#endif
 }
 
 bool GeneralSettingDialog::event(QEvent *e)
 {
     if(e->type()==QEvent::WindowDeactivate)
     {
+        qDebug() << "bububu blya";
         if(acceptOnDeactilationEn)
             this->accept();
     }

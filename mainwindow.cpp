@@ -35,11 +35,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
-//    QByteArray passwordBArr;
-//    passwordBArr.append("3");
-//    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
-//    settings->setValue("PASSWORD_EMAIL", temp);
-//    qDebug() << temp;
+    comPort = new SerialPort(this);
+    connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
+
+    mailSender = new MailSender(this);
+    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
+    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
+    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+
+
+    QByteArray passwordBArr;
+    passwordBArr.append("5");
+    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
+    settings->setValue("PASSWORD_MAIL", temp);
+    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
@@ -66,14 +75,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
+    generalSettingDialog->setPasswords(settings->value("PASSWORD_SERIAL").toInt(), settings->value("PASSWORD_MAIL").toInt());
 
-    serialSettingsDialog = new SerialSettingsDialog();
-    connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), this, SLOT(serialSettingsDialogRequest()));
+
+    connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
 
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
-    connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this, SLOT(machineSettingDialogCall()));
 
     int i;
 
@@ -101,13 +110,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->resize(QSize(1024, 768));
 
-    comPort = new SerialPort(this);
-    connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
-
-    mailSender = new MailSender(this);
-    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
-    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
-    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 
 //    this->setWindowState(Qt::WindowFullScreen);
 }
@@ -135,7 +137,7 @@ void MainWindow::indexerLiftSettingRequest()
     if(!logedInIndexer){
         passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
     }
-    if(logedInIndexer || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_INDEXER")))
+    if(logedInIndexer || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_INDEXER")))
 #endif
     {
         logedInIndexer = true;
@@ -166,33 +168,6 @@ void MainWindow::generalSettingDialogRequest()
     generalSettingDialog->show();
     generalSettingDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
                                this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
-}
-
-void MainWindow::serialSettingsDialogRequest()
-{
-    generalSettingDialog->setFocusLossAccept(false);
-    QByteArray passwordBArr;
-#ifndef DEBUG_BUILD
-
-    if(!logedInSerial){
-        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
-    }
-    if(logedInSerial || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_SERIAL")))
-#endif
-    {
-        logedInSerial = true;
-        serialSettingsDialog->show();
-    }
-#ifndef DEBUG_BUILD
-    else
-    {
-        QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet());
-        msgBox.setText("Wrong password!");
-        msgBox.setWindowTitle("Password");
-        msgBox.exec();
-    }
-#endif
 }
 
 void MainWindow::changeHeadNo(int index)
@@ -287,7 +262,8 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
 void MainWindow::getSerialSetting(ComSettings comSett)
 {
     settings->setValue("COM_SETTING", QVariant::fromValue(comSett));
-    generalSettingDialog->setFocusLossAccept(false);
+    generalSettingDialog->show();
+    generalSettingDialog->setFocusLossAccept(true);
 }
 
 void MainWindow::getEmailSettings(EmailSettings emailSett)

@@ -97,6 +97,8 @@ SerialSettingsDialog::SerialSettingsDialog(QWidget *parent) :
     updateSettings();
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
+    this->installEventFilter(this);
+
 }
 
 SerialSettingsDialog::SerialSettingsDialog(ComSettings nSett, QWidget *parent):
@@ -282,14 +284,4 @@ ComSettings ComSettings::operator =(ComSettings nSett)
     nStt.stringParity = nSett.stringParity;
     nStt.stringStopBits = nSett.stringStopBits;
     return nStt;
-}
-
-bool SerialSettingsDialog::event(QEvent *e)
-{
-    if(e->type()==QEvent::WindowDeactivate)
-    {
-        if(acceptOnDeactilationEn)
-            this->accept();
-    }
-    return QWidget::event(e);
 }
