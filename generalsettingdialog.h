@@ -49,10 +49,12 @@ public:
     ~GeneralSettingDialog();
     void setEmailSettings(EmailSettings emailSett);
     void setMachineSetting(MachineSettings::MachineParameters machineParam);
+    void setFocusLossAccept(bool flag);
 
 signals:
     void emailSettingsChanged(EmailSettings);
     void machineParamChanged(QByteArray machinePararmArr);
+    void serialPortSettingsDialogRequested();
 
 private:
     Ui::GeneralSettingDialog *ui;
@@ -64,6 +66,7 @@ private slots:
     void lockUnlockEmail();
     void hideShowPassword();
     void eventFilterSetup();
+    void changeSerialPortSettingsClicked();
 
 protected:
     bool event(QEvent *e);

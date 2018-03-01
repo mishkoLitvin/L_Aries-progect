@@ -23,6 +23,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
     connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
+    connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -34,6 +35,11 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
 {
     ui->spinBoxHeadsCount->setValue(machineParam.HeadCount);
     ui->dSpinBoxWarningTime->setValue(machineParam.WarningTime/10.);
+}
+
+void GeneralSettingDialog::setFocusLossAccept(bool flag)
+{
+    acceptOnDeactilationEn = flag;
 }
 
 void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
@@ -109,6 +115,11 @@ void GeneralSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
+}
+
+void GeneralSettingDialog::changeSerialPortSettingsClicked()
+{
+    emit this->serialPortSettingsDialogRequested();
 }
 
 bool GeneralSettingDialog::event(QEvent *e)
