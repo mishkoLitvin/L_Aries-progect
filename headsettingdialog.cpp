@@ -7,11 +7,18 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setStyleSheet(QString(("color: #ABEFF6;"
+    qDebug()<<"bubu";
+    setStyleSheet(QString(("*{color: #ABEFF6;"
                            "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
                            "selection-color: yellow;"
-                           "selection-background-color: blue;"
-                           "font: 14px bold italic large \"Times New Roman\"")));
+                           "selection-background-color: blue;}"
+                           "QPushButton:pressed{background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
+                           "QToolButton:pressed{background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
+                           "QDoubleSpinBox::up-button{width: 30px;}"
+                           "QDoubleSpinBox::down-button{width: 30px;}"
+                           )));
+    qDebug()<<"mumu";
+
 
     ui->tabWidget->setStyleSheet("QTabBar::tab {color: white;}"
                                     "QTabBar::tab:first:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);}"

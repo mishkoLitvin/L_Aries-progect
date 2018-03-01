@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
                               "border-style: outset;"
                               "border-color: #003070;"
                               "selection-background-color: blue;"
-                              "font: 14px bold italic large \"Times New Roman\"}"
+                              "font: 10px bold italic large \"Times New Roman\"}"
                               "QPushButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)};"
                               )));
 
@@ -35,8 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(getAllHeadParam(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(sendCommand(int,QByteArray)), this, SLOT(getHeadCommand(int,QByteArray)));
-    ui->laySettingWidgets->addWidget(headSettingDialog);
-    headSettingDialog->hide();
 
     indexer = new IndexerWidget(this);
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequest()));
@@ -47,16 +45,12 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
-    ui->laySettingWidgets->addWidget(indexerLiftSetDialog);
-    indexerLiftSetDialog->hide();
 
     generalSettingDialog = new GeneralSettingDialog();
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
-    ui->laySettingWidgets->addWidget(generalSettingDialog);
-    generalSettingDialog->hide();
 
     serialSettingsDialog = new SerialSettingsDialog();
     connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), this, SLOT(serialSettingsDialogRequest()));
@@ -90,11 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
 
-//    headButton[0]->setPixmap(HeadForm::pixmapAnimate,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
-//    headButton[4]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
-
-    this->resize(QSize(903, 729));
-    ui->widgetHeads->resize(QSize(881, 546));
+    this->resize(QSize(1024, 768));
 
     comPort = new SerialPort(this);
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
@@ -104,7 +94,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 
-    this->setWindowState(Qt::WindowMaximized);
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
 MainWindow::~MainWindow()
@@ -114,36 +104,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::headSettingRequest(int index)
 {
-
-//    QByteArray passwordBArr;
-//#ifndef DEBUG_BUILD
-//    if(!logedInHeadSettings)
-//    {
-//        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
-//    }
-//    if(logedInHeadSettings || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_HEAD_SETTING")))
-//#endif
-//    {
-//        logedInHeadSettings = true;
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
         headSettingDialog->setHeadParams(headSettings, index);
 //        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
-        indexerLiftSetDialog->move(this->pos().x()+this->width()/*-indexerLiftSetDialog->width()*/,
+        headSettingDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
                                    this->pos().y());
         headSettingDialog->show();
-//    }
-//#ifndef DEBUG_BUILD
-//    else
-//    {
-//        QMessageBox msgBox;
-//        msgBox.setStyleSheet(this->styleSheet());
-//        msgBox.setText("Wrong password!");
-//        msgBox.setWindowTitle("Password");
-//        msgBox.exec();
-//    }
-//#endif
-
-
 }
 
 void MainWindow::indexerLiftSettingRequest()
@@ -183,6 +149,8 @@ void MainWindow::generalSettingDialogRequest()
     machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
     generalSettingDialog->setMachineSetting(machineSettings.machineParam);
     generalSettingDialog->show();
+    generalSettingDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
+                               this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
 }
 
 void MainWindow::serialSettingsDialogRequest()
