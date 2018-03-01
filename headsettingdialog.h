@@ -48,16 +48,16 @@ private slots:
 
     void eventFilterSetup();
 
-    void on_pushButtonPlast_clicked();
-    void on_pushButtonFL_clicked();
-    void on_pushButtonMoveRear_clicked();
-    void on_pushButtonFL_SQ_clicked();
-    void on_pushButtonMoveFront_clicked();
-    void on_pushButtonMTPMove_clicked();
-    void on_pushButtonSQ_clicked();
-    void on_pushButtonMoveTest_clicked();
-    void on_pushButtonPressure_clicked();
-    void on_pushButtonHoldOn_clicked();
+    void on_toolButtonPlast_clicked();
+    void on_toolButtonFL_clicked();
+    void on_toolButtonMoveRear_clicked();
+    void on_toolButtonFL_SQ_clicked();
+    void on_toolButtonMoveFront_clicked();
+    void on_toolButtonMTPMove_clicked();
+    void on_toolButtonSQ_clicked();
+    void on_toolButtonMoveTest_clicked();
+    void on_toolButtonPressure_clicked();
+    void on_toolButtonHoldOn_clicked();
     void on_pushButtonCopyToAll_clicked();
 
 protected:

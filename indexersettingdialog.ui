@@ -39,6 +39,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="spinBoxHeadsCount">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -70,6 +76,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="dSpinBoxWarningTime">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -107,6 +119,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="dSpinBoxIndexDistance">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -171,6 +189,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="spinBoxIndexHomeOffset">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -205,6 +229,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="spinBoxIndexDistanceOffcet">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -239,6 +269,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="spinBoxIndexSpeed">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -273,6 +309,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="dSpinBoxIndexAccel">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -310,6 +352,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="spinBoxindexSpeedRet">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -344,6 +392,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="dSpinBoxIndexAccelRet">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -381,6 +435,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="dSpinBoxLiftDownDelay">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -418,6 +478,12 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="dSpinBoxLiftUpDelay">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>16</pointsize>
@@ -469,6 +535,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
              </property>
              <property name="font">
               <font>
@@ -537,6 +609,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>16</pointsize>
@@ -590,6 +668,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>16</pointsize>
@@ -632,6 +716,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
              </property>
              <property name="font">
               <font>

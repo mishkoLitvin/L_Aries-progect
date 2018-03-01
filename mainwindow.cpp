@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(getAllHeadParam(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(sendCommand(int,QByteArray)), this, SLOT(getHeadCommand(int,QByteArray)));
+    ui->laySettingWidgets->addWidget(headSettingDialog);
+    headSettingDialog->hide();
 
     indexer = new IndexerWidget(this);
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequest()));
@@ -46,12 +48,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
-
+    ui->laySettingWidgets->addWidget(indexerLiftSetDialog);
+    indexerLiftSetDialog->hide();
 
     generalSettingDialog = new GeneralSettingDialog();
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
+    ui->laySettingWidgets->addWidget(generalSettingDialog);
+    generalSettingDialog->hide();
 
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
@@ -95,6 +100,8 @@ MainWindow::MainWindow(QWidget *parent) :
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+
+    this->setWindowState(Qt::WindowMaximized);
 }
 
 MainWindow::~MainWindow()
@@ -105,33 +112,33 @@ MainWindow::~MainWindow()
 void MainWindow::headSettingRequest(int index)
 {
 
-    QByteArray passwordBArr;
-#ifndef DEBUG_BUILD
-    if(!logedInHeadSettings)
-    {
-        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
-    }
-    if(logedInHeadSettings || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_HEAD_SETTING")))
-#endif
-    {
-        logedInHeadSettings = true;
+//    QByteArray passwordBArr;
+//#ifndef DEBUG_BUILD
+//    if(!logedInHeadSettings)
+//    {
+//        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+//    }
+//    if(logedInHeadSettings || (CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_HEAD_SETTING")))
+//#endif
+//    {
+//        logedInHeadSettings = true;
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
         headSettingDialog->setHeadParams(headSettings, index);
 //        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
-        indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
+        indexerLiftSetDialog->move(this->pos().x()+this->width()/*-indexerLiftSetDialog->width()*/,
                                    this->pos().y());
         headSettingDialog->show();
-    }
-#ifndef DEBUG_BUILD
-    else
-    {
-        QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet());
-        msgBox.setText("Wrong password!");
-        msgBox.setWindowTitle("Password");
-        msgBox.exec();
-    }
-#endif
+//    }
+//#ifndef DEBUG_BUILD
+//    else
+//    {
+//        QMessageBox msgBox;
+//        msgBox.setStyleSheet(this->styleSheet());
+//        msgBox.setText("Wrong password!");
+//        msgBox.setWindowTitle("Password");
+//        msgBox.exec();
+//    }
+//#endif
 
 
 }

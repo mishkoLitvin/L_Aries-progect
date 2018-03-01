@@ -63,16 +63,16 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     connect(ui->pButtonHeadNoDec, SIGNAL(clicked(bool)), this, SLOT(pButtonDecClkd()));
 
     connect(ui->pushButtonCopyToAll, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonCopyToAll_clicked()));
-    connect(ui->pushButtonPlast, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonPlast_clicked()));
-    connect(ui->pushButtonMoveFront, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonMoveFront_clicked()));
-    connect(ui->pushButtonMoveRear, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonMoveRear_clicked()));
-    connect(ui->pushButtonMoveTest, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonMoveTest_clicked()));
-    connect(ui->pushButtonFL, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonFL_clicked()));
-    connect(ui->pushButtonFL_SQ, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonFL_SQ_clicked()));
-    connect(ui->pushButtonSQ, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonSQ_clicked()));
-    connect(ui->pushButtonMTPMove, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonMTPMove_clicked()));
-    connect(ui->pushButtonPressure, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonPressure_clicked()));
-    connect(ui->pushButtonHoldOn, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonHoldOn_clicked()));
+    connect(ui->toolButtonPlast, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonPlast_clicked()));
+    connect(ui->toolButtonMoveFront, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonMoveFront_clicked()));
+    connect(ui->toolButtonMoveRear, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonMoveRear_clicked()));
+    connect(ui->toolButtonMoveTest, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonMoveTest_clicked()));
+    connect(ui->toolButtonFL, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonFL_clicked()));
+    connect(ui->toolButtonFL_SQ, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonFL_SQ_clicked()));
+    connect(ui->toolButtonSQ, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonSQ_clicked()));
+    connect(ui->toolButtonMTPMove, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonMTPMove_clicked()));
+    connect(ui->toolButtonPressure, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonPressure_clicked()));
+    connect(ui->toolButtonHoldOn, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonHoldOn_clicked()));
 
 
     this->eventFilterSetup();
@@ -281,12 +281,12 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
 }
 
 
-void SettingDialog::on_pushButtonPlast_clicked()
+void SettingDialog::on_toolButtonPlast_clicked()
 {
 
 }
 
-void SettingDialog::on_pushButtonFL_clicked()
+void SettingDialog::on_toolButtonFL_clicked()
 {
     QByteArray bArr;
     bArr.append((char)0xCC);
@@ -296,7 +296,7 @@ void SettingDialog::on_pushButtonFL_clicked()
     emit this->sendCommand(this->index, bArr);
 }
 
-void SettingDialog::on_pushButtonMoveRear_clicked()
+void SettingDialog::on_toolButtonMoveRear_clicked()
 {
     QByteArray bArr;
     bArr.append((char)0xCC);
@@ -306,7 +306,7 @@ void SettingDialog::on_pushButtonMoveRear_clicked()
     emit this->sendCommand(this->index, bArr);
 }
 
-void SettingDialog::on_pushButtonFL_SQ_clicked()
+void SettingDialog::on_toolButtonFL_SQ_clicked()
 {
     QByteArray bArr;
     bArr.append((char)0xCC);
@@ -316,7 +316,7 @@ void SettingDialog::on_pushButtonFL_SQ_clicked()
     emit this->sendCommand(this->index, bArr);
 }
 
-void SettingDialog::on_pushButtonMoveFront_clicked()
+void SettingDialog::on_toolButtonMoveFront_clicked()
 {
     QByteArray bArr;
     bArr.append((char)0xCC);
@@ -326,7 +326,7 @@ void SettingDialog::on_pushButtonMoveFront_clicked()
     emit this->sendCommand(this->index, bArr);
 }
 
-void SettingDialog::on_pushButtonMTPMove_clicked()
+void SettingDialog::on_toolButtonMTPMove_clicked()
 {
     QByteArray bArr;
     bArr.append((char)0xCC);
@@ -336,7 +336,7 @@ void SettingDialog::on_pushButtonMTPMove_clicked()
     emit this->sendCommand(this->index, bArr);
 }
 
-void SettingDialog::on_pushButtonSQ_clicked()
+void SettingDialog::on_toolButtonSQ_clicked()
 {
     QByteArray bArr;
     bArr.append((char)0xCC);
@@ -346,7 +346,7 @@ void SettingDialog::on_pushButtonSQ_clicked()
     emit this->sendCommand(this->index, bArr);
 }
 
-void SettingDialog::on_pushButtonMoveTest_clicked()
+void SettingDialog::on_toolButtonMoveTest_clicked()
 {
     QByteArray bArr;
     bArr.append((char)0xCC);
@@ -356,12 +356,12 @@ void SettingDialog::on_pushButtonMoveTest_clicked()
     emit this->sendCommand(this->index, bArr);
 }
 
-void SettingDialog::on_pushButtonPressure_clicked()
+void SettingDialog::on_toolButtonPressure_clicked()
 {
 
 }
 
-void SettingDialog::on_pushButtonHoldOn_clicked()
+void SettingDialog::on_toolButtonHoldOn_clicked()
 {
 
 }

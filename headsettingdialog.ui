@@ -103,7 +103,7 @@
            <property name="minimumSize">
             <size>
              <width>64</width>
-             <height>64</height>
+             <height>55</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -134,7 +134,7 @@
            <property name="minimumSize">
             <size>
              <width>64</width>
-             <height>64</height>
+             <height>55</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -168,7 +168,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -206,6 +206,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>16</pointsize>
@@ -242,6 +248,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>16</pointsize>
@@ -277,6 +289,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
                </property>
                <property name="font">
                 <font>
@@ -318,6 +336,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>16</pointsize>
@@ -350,6 +374,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
                </property>
                <property name="font">
                 <font>
@@ -391,7 +421,7 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_23">
              <item>
-              <widget class="QPushButton" name="pushButtonPlast">
+              <widget class="QToolButton" name="toolButtonPlast">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -413,9 +443,12 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -433,7 +466,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonMTPMove">
+              <widget class="QToolButton" name="toolButtonMTPMove">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -455,9 +488,12 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -466,7 +502,7 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_21">
              <item>
-              <widget class="QPushButton" name="pushButtonFL">
+              <widget class="QToolButton" name="toolButtonFL">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -488,14 +524,17 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonFL_SQ">
+              <widget class="QToolButton" name="toolButtonFL_SQ">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -517,14 +556,17 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonSQ">
+              <widget class="QToolButton" name="toolButtonSQ">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -546,9 +588,12 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -557,7 +602,7 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_22">
              <item>
-              <widget class="QPushButton" name="pushButtonMoveRear">
+              <widget class="QToolButton" name="toolButtonMoveRear">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -579,14 +624,17 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonMoveFront">
+              <widget class="QToolButton" name="toolButtonMoveFront">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -608,14 +656,17 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonMoveTest">
+              <widget class="QToolButton" name="toolButtonMoveTest">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
@@ -637,9 +688,12 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>40</width>
-                 <height>40</height>
+                 <width>32</width>
+                 <height>32</height>
                 </size>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -650,7 +704,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_9">
            <item>
-            <widget class="QPushButton" name="pushButtonPressure">
+            <widget class="QToolButton" name="toolButtonPressure">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                <horstretch>0</horstretch>
@@ -668,14 +722,17 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>32</width>
+               <height>32</height>
               </size>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButtonHoldOn">
+            <widget class="QToolButton" name="toolButtonHoldOn">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                <horstretch>0</horstretch>
@@ -697,12 +754,15 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>32</width>
+               <height>32</height>
               </size>
              </property>
              <property name="checkable">
               <bool>true</bool>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
              </property>
             </widget>
            </item>
@@ -781,6 +841,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>16</pointsize>
@@ -816,6 +882,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
                </property>
                <property name="font">
                 <font>
@@ -865,6 +937,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
                </property>
                <property name="font">
                 <font>
@@ -967,6 +1045,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>16</pointsize>
@@ -1002,6 +1086,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
                </property>
                <property name="font">
                 <font>
@@ -1051,6 +1141,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>45</height>
+                </size>
                </property>
                <property name="font">
                 <font>
