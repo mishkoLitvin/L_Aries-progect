@@ -19,6 +19,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
                            "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);}"
                            "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8080A0, stop: 0.8 #606070,stop: 1.0 #202030);}")));
 
+    this->eventFilterSetup();
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
     connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
@@ -27,6 +28,12 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
 GeneralSettingDialog::~GeneralSettingDialog()
 {
     delete ui;
+}
+
+void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters machineParam)
+{
+    ui->spinBoxHeadsCount->setValue(machineParam.HeadCount);
+    ui->dSpinBoxWarningTime->setValue(machineParam.WarningTime/10.);
 }
 
 void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
@@ -45,6 +52,12 @@ void GeneralSettingDialog::accept()
     emailSett.receiverAdress = ui->editReceiver->text();
     emailSett.emailSubject = ui->editSubject->text();
     emit this->emailSettingsChanged(emailSett);
+
+    MachineSettings::MachineParameters machineParams;
+    machineParams.HeadCount = ui->spinBoxHeadsCount->value();
+    machineParams.WarningTime = ui->dSpinBoxWarningTime->value()*10;
+
+    emit this->machineParamChanged(machineParams.toByteArray());
 
     this->hide();
 }
@@ -79,6 +92,25 @@ void GeneralSettingDialog::hideShowPassword()
         ui->editPassword->setEchoMode(QLineEdit::Password);
 }
 
+void GeneralSettingDialog::eventFilterSetup()
+{
+    QObjectList objList = ui->dSpinBoxWarningTime->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    objList = ui->spinBoxHeadsCount->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+}
+
 bool GeneralSettingDialog::event(QEvent *e)
 {
     if(e->type()==QEvent::WindowDeactivate)
@@ -87,4 +119,16 @@ bool GeneralSettingDialog::event(QEvent *e)
             this->accept();
     }
     return QWidget::event(e);
+}
+
+bool GeneralSettingDialog::eventFilter(QObject *watched, QEvent *event)
+{
+    if(event->type() == QEvent::MouseButtonDblClick)
+    {
+        acceptOnDeactilationEn = false;
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue());
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();
+        acceptOnDeactilationEn = true;
+    }
+    return false;
 }

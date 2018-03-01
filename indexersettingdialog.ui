@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>355</width>
-    <height>653</height>
+    <height>723</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,55 +27,18 @@
        <string>Indexer setup</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_17" stretch="1,10">
+       <item row="4" column="1">
+        <layout class="QVBoxLayout" name="verticalLayout_15" stretch="1,10">
          <item>
-          <widget class="QLabel" name="label_14">
+          <widget class="QLabel" name="label_12">
            <property name="text">
-            <string>Heads count 
-2..18</string>
+            <string>Lift up delay 
+0.0..5.0 r/s</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="spinBoxHeadsCount">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>45</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <italic>true</italic>
-            </font>
-           </property>
-           <property name="decimals">
-            <number>0</number>
-           </property>
-           <property name="minimum">
-            <double>2.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>18.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_16" stretch="1,10">
-         <item>
-          <widget class="QLabel" name="label_13">
-           <property name="text">
-            <string>Warning time
-0.5..5.0 s</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="dSpinBoxWarningTime">
+          <widget class="QDoubleSpinBox" name="dSpinBoxLiftUpDelay">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -92,7 +55,7 @@
             <number>1</number>
            </property>
            <property name="minimum">
-            <double>0.500000000000000</double>
+            <double>0.000000000000000</double>
            </property>
            <property name="maximum">
             <double>5.000000000000000</double>
@@ -101,123 +64,13 @@
             <double>0.500000000000000</double>
            </property>
            <property name="value">
-            <double>0.500000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_18" stretch="1,10">
-         <item>
-          <widget class="QLabel" name="label_15">
-           <property name="text">
-            <string>Distance 
- 4.0..16.0 inch</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="dSpinBoxIndexDistance">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>45</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <italic>true</italic>
-            </font>
-           </property>
-           <property name="decimals">
-            <number>1</number>
-           </property>
-           <property name="minimum">
-            <double>4.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>16.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.500000000000000</double>
+            <double>5.000000000000000</double>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item row="1" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QPushButton" name="pushButton_3">
-           <property name="minimumSize">
-            <size>
-             <width>65</width>
-             <height>55</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Home</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_4">
-           <property name="minimumSize">
-            <size>
-             <width>65</width>
-             <height>55</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Move</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,10">
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Home offset 
- -10000..10000</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="spinBoxIndexHomeOffset">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>45</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <italic>true</italic>
-            </font>
-           </property>
-           <property name="decimals">
-            <number>0</number>
-           </property>
-           <property name="minimum">
-            <double>-10000.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>10000.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>100.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="1">
         <layout class="QVBoxLayout" name="verticalLayout_9" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_6">
@@ -257,7 +110,7 @@
          </item>
         </layout>
        </item>
-       <item row="3" column="0">
+       <item row="2" column="0">
         <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_7">
@@ -297,133 +150,7 @@
          </item>
         </layout>
        </item>
-       <item row="3" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,10">
-         <item>
-          <widget class="QLabel" name="label_9">
-           <property name="text">
-            <string>Acceleration 
-100..1000 r/s</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="dSpinBoxIndexAccel">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>45</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <italic>true</italic>
-            </font>
-           </property>
-           <property name="decimals">
-            <number>1</number>
-           </property>
-           <property name="minimum">
-            <double>100.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>1000.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>100.000000000000000</double>
-           </property>
-           <property name="value">
-            <double>1000.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
        <item row="4" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,10">
-         <item>
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>Return speed 
-500..3000 r/min</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="spinBoxindexSpeedRet">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>45</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <italic>true</italic>
-            </font>
-           </property>
-           <property name="decimals">
-            <number>0</number>
-           </property>
-           <property name="minimum">
-            <double>500.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>3000.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>50.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="4" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,10">
-         <item>
-          <widget class="QLabel" name="label_10">
-           <property name="text">
-            <string>Return acceleration 
-100..2000 r/s</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="dSpinBoxIndexAccelRet">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>45</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <italic>true</italic>
-            </font>
-           </property>
-           <property name="decimals">
-            <number>1</number>
-           </property>
-           <property name="minimum">
-            <double>100.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>2000.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>100.000000000000000</double>
-           </property>
-           <property name="value">
-            <double>2000.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="5" column="0">
         <layout class="QVBoxLayout" name="verticalLayout_14" stretch="1,10">
          <item>
           <widget class="QLabel" name="label_11">
@@ -466,18 +193,18 @@
          </item>
         </layout>
        </item>
-       <item row="5" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_15" stretch="1,10">
+       <item row="2" column="1">
+        <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,10">
          <item>
-          <widget class="QLabel" name="label_12">
+          <widget class="QLabel" name="label_9">
            <property name="text">
-            <string>Lift up delay 
-0.0..5.0 r/s</string>
+            <string>Acceleration 
+100..1000 r/s</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="dSpinBoxLiftUpDelay">
+          <widget class="QDoubleSpinBox" name="dSpinBoxIndexAccel">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -494,16 +221,209 @@
             <number>1</number>
            </property>
            <property name="minimum">
-            <double>0.000000000000000</double>
+            <double>100.000000000000000</double>
            </property>
            <property name="maximum">
-            <double>5.000000000000000</double>
+            <double>1000.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>100.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,10">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Home offset 
+ -10000..10000</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="spinBoxIndexHomeOffset">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="decimals">
+            <number>0</number>
+           </property>
+           <property name="minimum">
+            <double>-10000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>10000.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>100.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_18" stretch="1,10">
+         <item>
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>Distance 
+ 4.0..16.0 inch</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="dSpinBoxIndexDistance">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="decimals">
+            <number>1</number>
+           </property>
+           <property name="minimum">
+            <double>4.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>16.000000000000000</double>
            </property>
            <property name="singleStep">
             <double>0.500000000000000</double>
            </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,10">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Return speed 
+500..3000 r/min</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="spinBoxindexSpeedRet">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="decimals">
+            <number>0</number>
+           </property>
+           <property name="minimum">
+            <double>500.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>3000.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>50.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="1">
+        <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,10">
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Return acceleration 
+100..2000 r/s</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="dSpinBoxIndexAccelRet">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="decimals">
+            <number>1</number>
+           </property>
+           <property name="minimum">
+            <double>100.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>2000.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>100.000000000000000</double>
+           </property>
            <property name="value">
-            <double>5.000000000000000</double>
+            <double>2000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>55</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Home</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>55</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Move</string>
            </property>
           </widget>
          </item>

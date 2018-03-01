@@ -5,6 +5,9 @@
 #include <QDebug>
 #include <QByteArray>
 
+#include "settings.h"
+#include "numpaddialog.h"
+
 struct EmailSettings{
     QString senderAdress;
     QString senderPassword;
@@ -45,9 +48,11 @@ public:
     explicit GeneralSettingDialog(QWidget *parent = 0);
     ~GeneralSettingDialog();
     void setEmailSettings(EmailSettings emailSett);
+    void setMachineSetting(MachineSettings::MachineParameters machineParam);
 
 signals:
     void emailSettingsChanged(EmailSettings);
+    void machineParamChanged(QByteArray machinePararmArr);
 
 private:
     Ui::GeneralSettingDialog *ui;
@@ -58,9 +63,11 @@ private slots:
     void reject();
     void lockUnlockEmail();
     void hideShowPassword();
+    void eventFilterSetup();
 
 protected:
     bool event(QEvent *e);
+    bool eventFilter(QObject *watched, QEvent *event);
 };
 
 #endif // GENERALSETTINGDIALOG_H

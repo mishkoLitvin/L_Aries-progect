@@ -24,11 +24,11 @@ MainWindow::MainWindow(QWidget *parent) :
                               )));
 
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
-//    QByteArray passwordBArr;
-//    passwordBArr.append("3");
-//    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
-//    settings->setValue("PASSWORD_EMAIL", temp);
-//    qDebug() << temp;
+    QByteArray passwordBArr;
+    passwordBArr.append("3");
+    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
+    settings->setValue("PASSWORD_EMAIL", temp);
+    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
@@ -47,12 +47,12 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
-    connect(indexerLiftSetDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     ui->laySettingWidgets->addWidget(indexerLiftSetDialog);
     indexerLiftSetDialog->hide();
 
     generalSettingDialog = new GeneralSettingDialog();
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
+    connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     ui->laySettingWidgets->addWidget(generalSettingDialog);
@@ -157,10 +157,8 @@ void MainWindow::indexerLiftSettingRequest()
         logedInIndexer = true;
         indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
                                           settings->value("LIFT_PARAMS").value<QByteArray>());
-        machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
         indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam);
         indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam);
-        indexerLiftSetDialog->setMachineSetting(machineSettings.machineParam);
         indexerLiftSetDialog->show();
         indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
                                    this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
@@ -179,6 +177,8 @@ void MainWindow::indexerLiftSettingRequest()
 
 void MainWindow::generalSettingDialogRequest()
 {
+    machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
+    generalSettingDialog->setMachineSetting(machineSettings.machineParam);
     generalSettingDialog->show();
 }
 
