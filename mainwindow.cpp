@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    qDebug()<<"bubu";
+
     setStyleSheet(QString((   "*{color: #ABEFF6;"
                               "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
                               "selection-color: yellow;"
@@ -19,22 +21,32 @@ MainWindow::MainWindow(QWidget *parent) :
                               "border-style: outset;"
                               "border-color: #003070;"
                               "selection-background-color: blue;"
-                              "font: 10px bold italic large \"Times New Roman\"}"
-                              "QPushButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)};"
+                              "font: 14px bold italic large \"Times New Roman\"}"
+                              "QPushButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
+                              "QPushButton:checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #20A070, stop: 0.8 #00907F,stop: 1.0 #104020)}"
+                              "QToolButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
+                              "QDoubleSpinBox::up-button{width: 30px;}"
+                              "QDoubleSpinBox::down-button{width: 30px;}"
+                              "QDoubleSpinBox{font: 22px bold italic large \"Times New Roman\"}"
+                              "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);}"
+                              "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8080A0, stop: 0.8 #606070,stop: 1.0 #202030);}"
                               )));
+    qDebug()<<"mumu";
 
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
-    QByteArray passwordBArr;
-    passwordBArr.append("3");
-    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
-    settings->setValue("PASSWORD_EMAIL", temp);
-    qDebug() << temp;
+
+//    QByteArray passwordBArr;
+//    passwordBArr.append("3");
+//    uint16_t temp =  CalculateCRC16(0xFFFF, passwordBArr);
+//    settings->setValue("PASSWORD_EMAIL", temp);
+//    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(getAllHeadParam(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(sendCommand(int,QByteArray)), this, SLOT(getHeadCommand(int,QByteArray)));
+    headSettingDialog->setStyleSheet(this->styleSheet());
 
     indexer = new IndexerWidget(this);
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequest()));
@@ -45,12 +57,16 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
+    indexerLiftSetDialog->setStyleSheet(this->styleSheet());
+
 
     generalSettingDialog = new GeneralSettingDialog();
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
+    generalSettingDialog->setStyleSheet(this->styleSheet());
+
 
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
@@ -91,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 
-    this->setWindowState(Qt::WindowFullScreen);
+//    this->setWindowState(Qt::WindowFullScreen);
 }
 
 MainWindow::~MainWindow()

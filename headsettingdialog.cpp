@@ -7,18 +7,6 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qDebug()<<"bubu";
-    setStyleSheet(QString(("*{color: #ABEFF6;"
-                           "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
-                           "selection-color: yellow;"
-                           "selection-background-color: blue;}"
-                           "QPushButton:pressed{background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
-                           "QToolButton:pressed{background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
-                           "QDoubleSpinBox::up-button{width: 30px;}"
-                           "QDoubleSpinBox::down-button{width: 30px;}"
-                           )));
-    qDebug()<<"mumu";
-
 
     ui->tabWidget->setStyleSheet("QTabBar::tab {color: white;}"
                                     "QTabBar::tab:first:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);}"
@@ -28,7 +16,6 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
                                     "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #962AAD, stop: 0.8 #8C04A8,stop: 1.0 #6C0382);}"
                                     "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #77168B, stop: 0.8 #610A73,stop: 1.0 #4F025F);}"
                                  );
-    ui->pButtonHeadOnOff->setStyleSheet("QPushButton:checked: {qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #20A0F0, stop: 0.8 #2070A0,stop: 1.0 #104080}");
     this->index = index;
 
     ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
