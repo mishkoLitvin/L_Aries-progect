@@ -7,10 +7,8 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qDebug()<<"bubu";
     setStyleSheet(QString(("QToolButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)};"
                            "QToolButton:!enabled {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #304070, stop: 0.8 #203060,stop: 1.0 #101020)};")));
-    qDebug()<<"mumu";
 
     pButtonSets = new QPushButton(this);
 
