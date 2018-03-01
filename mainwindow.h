@@ -53,12 +53,14 @@ private:
     GeneralSettingDialog *generalSettingDialog;
     SettingDialog *headSettingDialog;
     IndexerSettingDialog *indexerLiftSetDialog;
+    SerialSettingsDialog *serialSettingsDialog;
     IndexerWidget *indexer;
     MailSender *mailSender;
 
     QString truePassword = "qwerty";
     bool logedInHeadSettings = false;
     bool logedInIndexer = false;
+    bool logedInSerial = false;
 
     SerialPort *comPort;
 
@@ -67,20 +69,20 @@ private slots:
     void headSettingRequest(int index);
     void indexerLiftSettingRequest();
     void generalSettingDialogRequest();
+    void serialSettingsDialogRequest();
     void changeHeadNo(int index);
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);
     void getHeadCommand(int index, QByteArray commandArr);
     void getIndexerParam(QByteArray indexerParamArr);
+    void getMachineParam(QByteArray machineParamArr);
     void getLiftParam(QByteArray liftParamArr);
     void getIndexLiftCommand(QByteArray commandArr);
-    void getMachineParam(QByteArray machineParamArr);
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
     void exitProgram();
     void saveJob();
     void loadJob();
-    void machineSettingDialogCall();
 
 
 

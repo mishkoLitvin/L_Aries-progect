@@ -121,13 +121,6 @@ class SerialSettingsDialog : public QDialog
 
 public:
 
-//    QDataStream &operator<<(QDataStream &out, const Settings &obj) {
-
-//       out <<obj.name<<obj.baudRate<<obj.stringBaudRate<<obj.dataBits;
-//       return out;
-
-//   }
-
     explicit SerialSettingsDialog(QWidget *parent = nullptr);
     explicit SerialSettingsDialog(ComSettings nSett, QWidget *parent = nullptr);
     ~SerialSettingsDialog();
@@ -149,8 +142,12 @@ private slots:
 
 private:
     Ui::SerialSettingsDialog *ui;
+    bool acceptOnDeactilationEn;
     ComSettings currentSettings;
     QIntValidator *intValidator;
+
+protected:
+    bool event(QEvent *e);
 };
 
 #endif // SETTINGSDIALOG_H
