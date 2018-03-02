@@ -112,6 +112,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 //    this->setWindowState(Qt::WindowFullScreen);
+//    this->setWindowOpacity(0.2);
 }
 
 MainWindow::~MainWindow()
@@ -262,7 +263,7 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
 void MainWindow::getSerialSetting(ComSettings comSett)
 {
     settings->setValue("COM_SETTING", QVariant::fromValue(comSett));
-    generalSettingDialog->show();
+    generalSettingDialog->raise();
     generalSettingDialog->setFocusLossAccept(true);
 }
 
