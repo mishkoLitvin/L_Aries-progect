@@ -122,8 +122,8 @@ class SerialSettingsDialog : public QDialog
 
 public:
 
-    explicit SerialSettingsDialog(QWidget *parent = nullptr);
-    explicit SerialSettingsDialog(ComSettings nSett, QWidget *parent = nullptr);
+    explicit SerialSettingsDialog(QWidget *parent = 0);
+    explicit SerialSettingsDialog(ComSettings nSett, QWidget *parent = 0);
     ~SerialSettingsDialog();
 
     ComSettings settings() const;

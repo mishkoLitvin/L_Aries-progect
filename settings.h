@@ -3,6 +3,8 @@
 
 #include <QByteArray>
 
+typedef u_int16_t uint16_t;
+
 class HeadSetting{
 public:
 

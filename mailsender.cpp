@@ -4,12 +4,8 @@
 MailSender::MailSender(QObject *parent) : QObject(parent)
 {
 //    smtp = new SmtpClient("smtp.gmail.com", 587, SmtpClient::TlsConnection);
-//    while (!QSslSocket::supportsSsl()) {
-//        delete smtp;
-        smtp = new SmtpClient("smtp.gmail.com", 465, SmtpClient::SslConnection);
-//    }
+    smtp = new SmtpClient("smtp.gmail.com", 465, SmtpClient::SslConnection);
 
-    qDebug()<<"ssl";
     senderAddr = new EmailAddress();
     recipientAddr = new EmailAddress();
     this->message.setSender(this->senderAddr);

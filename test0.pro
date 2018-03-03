@@ -82,7 +82,7 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     icons.qrc
 
-SMTP_LIBRARY_LOCATION = C:\Users\T\Dropbox\SharedProgects\NewProjects\buildsWin\build-SMTPEmailRelease
+win32:SMTP_LIBRARY_LOCATION = C:\Users\T\Dropbox\SharedProgects\NewProjects\buildsWin\build-SMTPEmailRelease
 win32:CONFIG(release, debug|release): LIBS += -L$$SMTP_LIBRARY_LOCATION/release/ -lSMTPEmail
 INCLUDEPATH += $$SMTP_LIBRARY_LOCATION
 DEPENDPATH += $$SMTP_LIBRARY_LOCATION

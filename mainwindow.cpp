@@ -11,44 +11,20 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qDebug()<<"bubu";
-
-    setStyleSheet(QString((   "*{color: #ABEFF6;"
-                              "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #80D0F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
-                              "selection-color: yellow;"
-                              "border-radius: 10px;"
-                              "border-width: 0px;"
-                              "border-style: outset;"
-                              "border-color: #003070;"
-                              "selection-background-color: blue;"
-                              "font: 14px bold italic large \"Times New Roman\"}"
-                              "QPushButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
-                              "QPushButton:checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #20A070, stop: 0.8 #00907F,stop: 1.0 #104020)}"
-                              "QToolButton:pressed {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0070FF, stop: 0.8 #3050A0,stop: 1.0 #103070)}"
-                              "QDoubleSpinBox::up-button{width: 30px;}"
-                              "QDoubleSpinBox::down-button{width: 30px;}"
-                              "QDoubleSpinBox{font: 22px bold italic large \"Times New Roman\"}"
-                              "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);}"
-                              "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8080A0, stop: 0.8 #606070,stop: 1.0 #202030);}"
-                              )));
-    qDebug()<<"mumu";
-
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
+    setStyleSheet(settings->value("STYLE/STYLE_SHEET").toString());
+
     comPort = new SerialPort(this);
-    connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
+    connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));   
 
-    mailSender = new MailSender(this);
-    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
-    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
-    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+//    settings->setValue("STYLE/STYLE_SHEET",this->styleSheet());
 
-
-    QByteArray passwordBArr;
-    passwordBArr.append("5");
-    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
-    settings->setValue("PASSWORD_MAIL", temp);
-    qDebug() << temp;
+//    QByteArray passwordBArr;
+//    passwordBArr.append("5");
+//    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
+//    settings->setValue("PASSWORD_MAIL", temp);
+//    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
@@ -70,13 +46,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     generalSettingDialog = new GeneralSettingDialog();
-    connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
-    connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
-    connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setPasswords(settings->value("PASSWORD_SERIAL").toInt(), settings->value("PASSWORD_MAIL").toInt());
+    connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
+    connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
+    connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
 
+    mailSender = new MailSender(this);
+    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
+    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
+    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 
     connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
 
@@ -273,9 +253,6 @@ void MainWindow::getEmailSettings(EmailSettings emailSett)
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
-    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress;
-    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword;
-    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress;
 }
 
 void MainWindow::exitProgram()

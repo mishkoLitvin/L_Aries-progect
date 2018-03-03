@@ -14,6 +14,7 @@
 #include <QInputDialog>
 #include <QByteArray>
 #include <QFileDialog>
+#include <QEvent>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -85,7 +86,8 @@ private slots:
 
 
 protected:
-   virtual void resizeEvent(QResizeEvent *e);
+    virtual void resizeEvent(QResizeEvent *e);
+
 };
 
 #endif // MAINWINDOW_H

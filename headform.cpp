@@ -16,10 +16,10 @@ HeadForm::HeadForm(QWidget *parent) :
     pixShirtAnimate.load(":/new/icons/icons/tt3.png");
 
 
-    pButtonSets = new QPushButton("S", this);
+    pButtonSets = new QPushButton("", this);
 
     pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
-    pButtonSets->resize(30,30);
+    pButtonSets->resize(40,40);
     pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
     pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
