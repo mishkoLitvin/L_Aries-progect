@@ -35,7 +35,7 @@ public:
     explicit NumpadDialog(QWidget *parent = 0);
     ~NumpadDialog();
 
-    static double getValue();
+    static double getValue(QWidget *parent = 0);
 
 private slots:
     void appendToLineEdit(int number);
@@ -48,6 +48,8 @@ private slots:
 private:
     Ui::NumpadDialog *ui;
     NumpadButton *buttons[10];
+
+    const QString stSheet;
 
     double value;
 };

@@ -184,10 +184,10 @@ void IndexerSettingDialog::eventFilterSetup()
 
 bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
 {
-    if(event->type() == QEvent::MouseButtonDblClick)
+    if((event->type()==QEvent::MouseButtonDblClick)|((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease)))
     {
         acceptOnDeactilationEn = false;
-        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue());
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue(this));
         qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();
         acceptOnDeactilationEn = true;
     }
@@ -196,7 +196,7 @@ bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
 
 bool IndexerSettingDialog::event(QEvent *e)
 {
-    if(e->type()==QEvent::WindowDeactivate)
+    if((e->type()==QEvent::WindowDeactivate)|((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave)))
     {
         if(acceptOnDeactilationEn)
             this->accept();

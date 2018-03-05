@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
+    qDebug()<<settings->fileName();
+
     setStyleSheet(settings->value("STYLE/STYLE_SHEET").toString());
 
     comPort = new SerialPort(this);
@@ -88,8 +90,8 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
 
-    this->resize(QSize(1024, 768));
-
+    if(QApplication::platformName() != "eglfs")
+        this->resize(QSize(1024, 768));
 
 //    this->setWindowState(Qt::WindowFullScreen);
 //    this->setWindowOpacity(0.2);
@@ -105,8 +107,9 @@ void MainWindow::headSettingRequest(int index)
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
         headSettingDialog->setHeadParams(headSettings, index);
 //        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
-        headSettingDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
-                                   this->pos().y());
+        headSettingDialog->move(this->pos().x()+this->width()-headSettingDialog->width()-30,
+                                   this->pos().y()+10);
+        qDebug()<<this->pos().x()+this->width()-headSettingDialog->width()-30<<this->pos().y()+10;
         headSettingDialog->show();
 }
 
@@ -128,7 +131,7 @@ void MainWindow::indexerLiftSettingRequest()
         indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam);
         indexerLiftSetDialog->show();
         indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
-                                   this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
+                                   this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
     }
 #ifndef DEBUG_BUILD
     else
@@ -147,8 +150,8 @@ void MainWindow::generalSettingDialogRequest()
     machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
     generalSettingDialog->setMachineSetting(machineSettings.machineParam);
     generalSettingDialog->show();
-    generalSettingDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
-                               this->pos().y()/*+this->height()-indexerLiftSetDialog->height()*/);
+    generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->width(),
+                               this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
 }
 
 void MainWindow::changeHeadNo(int index)

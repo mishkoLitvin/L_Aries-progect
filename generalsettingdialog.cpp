@@ -24,6 +24,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     this->eventFilterSetup();
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
     connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
+    connect(ui->pButtonReject, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
 }
@@ -154,7 +155,7 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 
 bool GeneralSettingDialog::event(QEvent *e)
 {
-    if(e->type()==QEvent::WindowDeactivate)
+    if((e->type()==QEvent::WindowDeactivate)|((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave)))
     {
         if(acceptOnDeactilationEn)
             this->accept();
@@ -164,10 +165,11 @@ bool GeneralSettingDialog::event(QEvent *e)
 
 bool GeneralSettingDialog::eventFilter(QObject *watched, QEvent *event)
 {
-    if(event->type() == QEvent::MouseButtonDblClick)
+
+    if((event->type()==QEvent::MouseButtonDblClick)|((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease)))
     {
         acceptOnDeactilationEn = false;
-        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue());
+        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue(this));
         qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();
         acceptOnDeactilationEn = true;
     }

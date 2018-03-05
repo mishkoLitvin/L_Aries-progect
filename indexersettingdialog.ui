@@ -706,7 +706,7 @@
       <widget class="QPushButton" name="pButtonCancel">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>55</width>
          <height>55</height>
         </size>
        </property>
@@ -719,7 +719,7 @@
       <widget class="QPushButton" name="pButtonOK">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>55</width>
          <height>55</height>
         </size>
        </property>
