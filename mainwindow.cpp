@@ -11,21 +11,21 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    settings = new QSettings("./settings.ini", QSettings::IniFormat);
+    qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
+    qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
-    qDebug()<<settings->fileName();
+    settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
     setStyleSheet(settings->value("STYLE/STYLE_SHEET").toString());
 
     comPort = new SerialPort(this);
-    connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));   
-
-//    settings->setValue("STYLE/STYLE_SHEET",this->styleSheet());
+    comPort->setComParams(settings->value("COM_SETTING").value<ComSettings>());
+    connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
 //    QByteArray passwordBArr;
-//    passwordBArr.append("5");
+//    passwordBArr.append("997");
 //    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
-//    settings->setValue("PASSWORD_MAIL", temp);
+//    settings->setValue("PASSWORDS/PASSWORD_GENERAL", temp);
 //    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
@@ -40,27 +40,26 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(indexer, SIGNAL(sendCommand(QByteArray)), this, SLOT(getIndexLiftCommand(QByteArray)));
     ui->layoutIndexer->addWidget(indexer);
 
-
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
     indexerLiftSetDialog->setStyleSheet(this->styleSheet());
 
-
     generalSettingDialog = new GeneralSettingDialog();
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
-    generalSettingDialog->setPasswords(settings->value("PASSWORD_SERIAL").toInt(), settings->value("PASSWORD_MAIL").toInt());
+    generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(), settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt());
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
+    connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
+//    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress;
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 
-    connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
 
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
@@ -121,7 +120,7 @@ void MainWindow::indexerLiftSettingRequest()
     if(!logedInIndexer){
         passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
     }
-    if(logedInIndexer || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORD_INDEXER")))
+    if(logedInIndexer || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_INDEXER")))
 #endif
     {
         logedInIndexer = true;
@@ -147,11 +146,32 @@ void MainWindow::indexerLiftSettingRequest()
 
 void MainWindow::generalSettingDialogRequest()
 {
-    machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
-    generalSettingDialog->setMachineSetting(machineSettings.machineParam);
-    generalSettingDialog->show();
-    generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->width(),
-                               this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
+    QByteArray passwordBArr;
+#ifndef DEBUG_BUILD
+    if(!logedInGeneral){
+        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+    }
+    if(logedInGeneral || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL")))
+#endif
+    {
+        logedInGeneral = true;
+
+        machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
+        generalSettingDialog->setMachineSetting(machineSettings.machineParam);
+        generalSettingDialog->show();
+        generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->width(),
+                                   this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
+    }
+#ifndef DEBUG_BUILD
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet());
+        msgBox.setText("Wrong password!");
+        msgBox.setWindowTitle("Password");
+        msgBox.exec();
+    }
+#endif
 }
 
 void MainWindow::changeHeadNo(int index)

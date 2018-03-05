@@ -61,6 +61,7 @@ private:
     QString truePassword = "qwerty";
     bool logedInHeadSettings = false;
     bool logedInIndexer = false;
+    bool logedInGeneral = false;
 
     SerialPort *comPort;
 

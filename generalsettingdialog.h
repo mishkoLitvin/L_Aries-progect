@@ -63,6 +63,7 @@ private:
     Ui::GeneralSettingDialog *ui;
     bool acceptOnDeactilationEn;
     bool logedInSerial = false;
+    bool logedInMail = false;
     uint16_t serialPassword;
     uint16_t mailPassword;
 

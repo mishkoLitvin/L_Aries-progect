@@ -30,6 +30,7 @@ public slots:
 
     void sendData(QByteArray data);
     void setupPort();
+    void setComParams(ComSettings sett);
 
 
 private slots:
@@ -37,6 +38,7 @@ private slots:
     void handleError(QSerialPort::SerialPortError error);
     void showStatusMessage(const QString &message);
     void getSerialSetting(ComSettings setting);
+
 
 
 

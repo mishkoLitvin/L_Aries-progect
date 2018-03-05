@@ -43,7 +43,7 @@ void SerialPort::openSerialPort()
                           .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
                           .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
     } else {
-        QMessageBox::critical(0, tr("Error"), "Could not connect to serial port"/*serial->errorString()*/);
+        QMessageBox::critical(0, tr("Error"), "Could not connect to serial port"+serial->errorString());
 
         showStatusMessage(tr("Open error"));
     }
@@ -92,4 +92,28 @@ void SerialPort::setupPort()
     this->closeSerialPort();
     settingsComDialog->exec();
     this->openSerialPort();
+}
+
+void SerialPort::setComParams(ComSettings sett)
+{
+    this->closeSerialPort();
+
+
+    serial->setPortName(sett.name);
+    serial->setBaudRate(sett.baudRate);
+    serial->setDataBits(static_cast<QSerialPort::DataBits>(sett.stringDataBits.toInt()));
+    serial->setParity(static_cast<QSerialPort::Parity>(sett.stringParity.toInt()));
+    serial->setStopBits(static_cast<QSerialPort::StopBits>(sett.stringStopBits.toInt()));
+    serial->setFlowControl(static_cast<QSerialPort::FlowControl>(sett.stringFlowControl.toInt()));
+    if (serial->open(QIODevice::ReadWrite)) {
+        settingsComDialog->setEnabled(false);
+        showStatusMessage(tr("Connected to %1 : %2, %3, %4, %5, %6")
+                          .arg(sett.name).arg(sett.stringBaudRate).arg(sett.stringDataBits)
+                          .arg(sett.stringParity).arg(sett.stringStopBits).arg(sett.stringFlowControl));
+    } else {
+        QMessageBox::critical(0, tr("Error"), "Could not connect to serial port"/*serial->errorString()*/);
+
+        showStatusMessage(tr("Open error"));
+    }
+
 }

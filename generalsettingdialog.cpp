@@ -12,15 +12,6 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     ui->emailSettingWidget->setDisabled(true);
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
 
-
-//    setStyleSheet(QString(("* {color: #ABEFF6;"
-//                           "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);"
-//                           "selection-color: yellow;"
-//                           "selection-background-color: blue;"
-//                           "font: 14px bold italic large \"Times New Roman\"}"
-//                           "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0080F0, stop: 0.8 #0050A0,stop: 1.0 #003070);}"
-//                           "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8080A0, stop: 0.8 #606070,stop: 1.0 #202030);}")));
-
     this->eventFilterSetup();
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
     connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
@@ -84,19 +75,39 @@ void GeneralSettingDialog::reject()
 
 void GeneralSettingDialog::lockUnlockEmail()
 {
-    if(ui->pButtonLockUnlockEmail->isChecked()){
-        ui->emailSettingWidget->setEnabled(true);
-        ui->pButtonLockUnlockEmail->setText("Lock");
-//        QByteArray passwordBArr;
-//        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
-//        if((CalculateCRC16(0xFFFF, passwordBArr) == ->value("PASSWORD_EMAIL"))){
+    acceptOnDeactilationEn = false;
+    QByteArray passwordBArr;
+#ifndef DEBUG_BUILD
+    if(!logedInMail){
+        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+    }
+    if(logedInMail || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->mailPassword))
+#endif
+    {
+        logedInMail = true;
+        if(ui->pButtonLockUnlockEmail->isChecked()){
+            ui->emailSettingWidget->setEnabled(true);
+            ui->pButtonLockUnlockEmail->setText("Lock");
+        }
+        else{
+            ui->emailSettingWidget->setDisabled(true);
+            ui->pButtonLockUnlockEmail->setText("Unlock");
+        }
+    }
+#ifndef DEBUG_BUILD
+    else
+    {
+        ui->pButtonLockUnlockEmail->setChecked(false);
+        QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet());
+        msgBox.setText("Wrong password!");
+        msgBox.setWindowTitle("Password");
+        msgBox.exec();
+    }
+#endif
+    acceptOnDeactilationEn = true;
 
-//        }
-    }
-    else{
-        ui->emailSettingWidget->setDisabled(true);
-        ui->pButtonLockUnlockEmail->setText("Unlock");
-    }
+
 }
 
 void GeneralSettingDialog::hideShowPassword()
@@ -151,6 +162,8 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
         msgBox.exec();
     }
 #endif
+    acceptOnDeactilationEn = true;
+
 }
 
 bool GeneralSettingDialog::event(QEvent *e)
