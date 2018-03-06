@@ -43,7 +43,10 @@ void SerialPort::openSerialPort()
                           .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
                           .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
     } else {
-        QMessageBox::critical(0, tr("Error"), "Could not connect to serial port"+serial->errorString());
+        QMessageBox::critical(0, tr("Error"), QString("Could not connect to serial port \n"
+                                                      "%1 : %2, %3, %4, %5, %6\n\n"+serial->errorString())
+                              .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
+                              .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
 
         showStatusMessage(tr("Open error"));
     }
