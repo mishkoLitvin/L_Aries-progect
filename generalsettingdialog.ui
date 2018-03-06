@@ -63,7 +63,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -262,13 +262,20 @@
       <attribute name="title">
        <string>Serial Port</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_6">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="lPortName">
+           <property name="text">
+            <string>Port name: </string>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QLabel" name="lBaudRate">
            <property name="text">
-            <string>BaudRate:</string>
+            <string>Baud rate:</string>
            </property>
           </widget>
          </item>
@@ -302,7 +309,7 @@
          </item>
         </layout>
        </item>
-       <item>
+       <item row="1" column="0">
         <widget class="QPushButton" name="pButtonChangeSerialSettings">
          <property name="minimumSize">
           <size>
@@ -319,7 +326,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="icon">
-       <iconset resource="icons.qrc">
+       <iconset>
         <normaloff>:/new/icons/icons/mail.png</normaloff>:/new/icons/icons/mail.png</iconset>
       </attribute>
       <attribute name="title">
