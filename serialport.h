@@ -31,6 +31,7 @@ public slots:
     void sendData(QByteArray data);
     void setupPort();
     void setComParams(ComSettings sett);
+    void setStyleSheet(QString stSheet);
 
 
 private slots:

@@ -120,3 +120,8 @@ void SerialPort::setComParams(ComSettings sett)
     }
 
 }
+
+void SerialPort::setStyleSheet(QString stSheet)
+{
+    settingsComDialog->setStyleSheet(stSheet);
+}

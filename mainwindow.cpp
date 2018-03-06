@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     comPort = new SerialPort(this);
     comPort->setComParams(settings->value("COM_SETTING").value<ComSettings>());
+    comPort->setStyleSheet(this->styleSheet());
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
 //    QByteArray passwordBArr;
@@ -298,6 +299,7 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
     headSettingDialog->setStyleSheet(this->styleSheet());
     indexerLiftSetDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setStyleSheet(this->styleSheet());
+    comPort->setStyleSheet(this->styleSheet());
 }
 
 void MainWindow::exitProgram()
