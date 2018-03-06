@@ -181,6 +181,7 @@ void GeneralSettingDialog::styleChanged(int index)
 
 void GeneralSettingDialog::showPortInfo(ComSettings comSett)
 {
+    ui->lPortName->setText(QString("Port name: %1").arg(comSett.name));
     ui->lBaudRate->setText(QString("Baud rate: %1").arg(comSett.baudRate));
     ui->lDataBits->setText(QString("Data bits: %1").arg(comSett.stringDataBits));
     ui->lFlowControl->setText(QString("Flow control: %1").arg(comSett.stringFlowControl));
