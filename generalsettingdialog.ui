@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>511</height>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -60,7 +60,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="generalSettings">
       <attribute name="title">
@@ -170,19 +170,60 @@
       <attribute name="title">
        <string>Serial Port</string>
       </attribute>
-      <widget class="QPushButton" name="pButtonChangeSerialSettings">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>150</y>
-         <width>80</width>
-         <height>28</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Change</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QLabel" name="lBaudRate">
+           <property name="text">
+            <string>BaudRate:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lDataBits">
+           <property name="text">
+            <string>Data bits:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lParity">
+           <property name="text">
+            <string>Parity:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lStopBits">
+           <property name="text">
+            <string>Stop bits:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lFlowControl">
+           <property name="text">
+            <string>Flow control:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pButtonChangeSerialSettings">
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>55</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Change</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">

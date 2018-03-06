@@ -129,7 +129,7 @@ public:
     ComSettings settings() const;
 
 signals:
-    void serialSettingAccepted(ComSettings seittngs);
+    void serialSettingAccepted(ComSettings comSett);
 
 private slots:
     void showPortInfo(int idx);

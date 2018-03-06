@@ -2,6 +2,7 @@
 #define GENERALSETTINGDIALOG_H
 
 #include <QDialog>
+#include <QString>
 #include <QDebug>
 #include <QByteArray>
 #include <QMessageBox>
@@ -9,6 +10,7 @@
 
 #include "settings.h"
 #include "numpaddialog.h"
+#include "serialsettingsdialog.h"
 
 struct EmailSettings{
     QString senderAdress;
@@ -53,6 +55,7 @@ public:
     void setMachineSetting(MachineSettings::MachineParameters machineParam);
     void setFocusLossAccept(bool flag);
     void setPasswords(uint16_t serialPass, uint16_t mailPass);
+    void showPortInfo(ComSettings comSett);
 
 signals:
     void emailSettingsChanged(EmailSettings);

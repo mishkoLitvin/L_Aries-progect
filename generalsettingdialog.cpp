@@ -2,7 +2,6 @@
 #include "ui_generalsettingdialog.h"
 #include "crc16.h"
 
-
 GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GeneralSettingDialog)
@@ -11,7 +10,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     acceptOnDeactilationEn = true;
     ui->emailSettingWidget->setDisabled(true);
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
-
+    qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
     this->eventFilterSetup();
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
     connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
@@ -164,6 +163,16 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 #endif
     acceptOnDeactilationEn = true;
 
+}
+
+void GeneralSettingDialog::showPortInfo(ComSettings comSett)
+{
+    qDebug() << "riiiiiiiiii";
+    ui->lBaudRate->setText(QString("Baud rate: %1").arg(comSett.baudRate));
+    ui->lDataBits->setText(QString("Data bits: %1").arg(comSett.stringDataBits));
+    ui->lFlowControl->setText(QString("Flow control: %1").arg(comSett.stringFlowControl));
+    ui->lParity->setText(QString("Parity: %1").arg(comSett.stringParity));
+    ui->lStopBits->setText(QString("Stop bits: %1").arg(comSett.stringStopBits));
 }
 
 bool GeneralSettingDialog::event(QEvent *e)

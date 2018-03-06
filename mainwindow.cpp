@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(), settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt());
+    generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
@@ -268,6 +269,7 @@ void MainWindow::getSerialSetting(ComSettings comSett)
     settings->setValue("COM_SETTING", QVariant::fromValue(comSett));
     generalSettingDialog->raise();
     generalSettingDialog->setFocusLossAccept(true);
+    generalSettingDialog->showPortInfo(comSett);
 }
 
 void MainWindow::getEmailSettings(EmailSettings emailSett)
