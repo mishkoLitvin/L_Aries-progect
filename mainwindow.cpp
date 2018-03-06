@@ -149,7 +149,7 @@ void MainWindow::indexerLiftSettingRequest()
     else
     {
         QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet());
+        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
         msgBox.setText("Wrong password!");
         msgBox.setWindowTitle("Password");
         msgBox.exec();
@@ -179,7 +179,7 @@ void MainWindow::generalSettingDialogRequest()
     else
     {
         QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet());
+        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
         msgBox.setText("Wrong password!");
         msgBox.setWindowTitle("Password");
         msgBox.exec();

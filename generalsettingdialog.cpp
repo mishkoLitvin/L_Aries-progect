@@ -107,7 +107,7 @@ void GeneralSettingDialog::lockUnlockEmail()
     {
         ui->pButtonLockUnlockEmail->setChecked(false);
         QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet());
+        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
         msgBox.setText("Wrong password!");
         msgBox.setWindowTitle("Password");
         msgBox.exec();
@@ -164,7 +164,7 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
     else
     {
         QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet());
+        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
         msgBox.setText("Wrong password!");
         msgBox.setWindowTitle("Password");
         msgBox.exec();
