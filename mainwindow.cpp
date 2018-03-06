@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
 //    QByteArray passwordBArr;
-//    passwordBArr.append("997");
+//    passwordBArr.append("998");
 //    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
-//    settings->setValue("PASSWORDS/PASSWORD_GENERAL", temp);
+//    settings->setValue("PASSWORDS/PASSWORD_INDEXER", temp);
 //    qDebug() << temp;
 
     headSettingDialog = new SettingDialog(headSettings);
@@ -118,7 +118,7 @@ void MainWindow::indexerLiftSettingRequest()
 #ifndef DEBUG_BUILD
 
     if(!logedInIndexer){
-        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
     }
     if(logedInIndexer || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_INDEXER")))
 #endif
@@ -149,7 +149,7 @@ void MainWindow::generalSettingDialogRequest()
     QByteArray passwordBArr;
 #ifndef DEBUG_BUILD
     if(!logedInGeneral){
-        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
     }
     if(logedInGeneral || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL")))
 #endif

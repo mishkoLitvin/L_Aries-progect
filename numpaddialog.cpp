@@ -1,11 +1,12 @@
 #include "numpaddialog.h"
 #include "ui_numpaddialog.h"
 
-NumpadDialog::NumpadDialog(QWidget *parent) :
+NumpadDialog::NumpadDialog(QWidget *parent, QString windowTitle) :
     QDialog(parent),
     ui(new Ui::NumpadDialog)
-{
+    {
     ui->setupUi(this);
+    this->setWindowTitle(windowTitle);
     this->setStyleSheet("QPushButton {font: 40px; min-width: 60px; min-height: 60px;}"
                         "QLineEdit {font: 40px; min-height: 50px;}"
                         );
@@ -40,9 +41,9 @@ NumpadDialog::~NumpadDialog()
     delete ui;
 }
 
-double NumpadDialog::getValue(QWidget *parent)
+double NumpadDialog::getValue(QWidget *parent, QString windowTitle)
 {
-    NumpadDialog numpad(parent);
+    NumpadDialog numpad(parent, windowTitle);
     numpad.exec();
     return numpad.value;
 }
