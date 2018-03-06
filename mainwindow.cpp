@@ -16,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
-    setStyleSheet(settings->value("STYLE/STYLE_SHEET").toString());
+    setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
+                                          +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
 
     comPort = new SerialPort(this);
     comPort->setComParams(settings->value("COM_SETTING").value<ComSettings>());
@@ -27,6 +28,16 @@ MainWindow::MainWindow(QWidget *parent) :
 //    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
 //    settings->setValue("PASSWORDS/PASSWORD_INDEXER", temp);
 //    qDebug() << temp;
+    int i;
+
+//    for()
+//    QStringList stList;
+//    stList.append("Blue");
+//    stList.append("Red");
+//    stList.append("Green");
+//    settings->setValue("STYLE/STYLE_LIST", stList);
+//    settings->setValue("STYLE/STYLE_SEL_INDEX", 0);
+
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
@@ -49,12 +60,13 @@ MainWindow::MainWindow(QWidget *parent) :
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(), settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt());
+    generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(), settings->value("STYLE/STYLE_SEL_INDEX").toInt());
     generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
-//    qDebug()<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress;
+    connect(generalSettingDialog, SIGNAL(styleChangedIndex(int)), this, SLOT(getVeiwSettings(int)));
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
@@ -66,7 +78,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
 
-    int i;
 
     for(i = 0; i<HEAD_COUNT; i++)
     {
@@ -278,6 +289,15 @@ void MainWindow::getEmailSettings(EmailSettings emailSett)
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+}
+
+void MainWindow::getVeiwSettings(int stSheetIndex)
+{
+    settings->setValue("STYLE/STYLE_SEL_INDEX", stSheetIndex);
+    setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"+QString::number(stSheetIndex))).toString());
+    headSettingDialog->setStyleSheet(this->styleSheet());
+    indexerLiftSetDialog->setStyleSheet(this->styleSheet());
+    generalSettingDialog->setStyleSheet(this->styleSheet());
 }
 
 void MainWindow::exitProgram()

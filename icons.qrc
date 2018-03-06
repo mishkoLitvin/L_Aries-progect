@@ -59,6 +59,8 @@
         <file>icons/uncheck.png</file>
         <file>icons/unlock.png</file>
         <file>icons/warm.png</file>
+        <file>icons/connect.png</file>
+        <file>icons/mail.png</file>
     </qresource>
     <qresource prefix="/arrows">
         <file>icons/arrows/arrowD.png</file>

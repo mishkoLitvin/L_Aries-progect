@@ -17,6 +17,8 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonReject, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
+    connect(ui->listWidget, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
+
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -39,6 +41,13 @@ void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass)
 {
     this->serialPassword = serialPass;
     this->mailPassword = mailPass;
+}
+
+void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect)
+{
+    qDebug()<<curSelect;
+    ui->listWidget->addItems(stList);
+    ui->listWidget->setCurrentRow(curSelect);
 }
 
 void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
@@ -165,9 +174,13 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 
 }
 
+void GeneralSettingDialog::styleChanged(int index)
+{
+    emit this->styleChangedIndex(index);
+}
+
 void GeneralSettingDialog::showPortInfo(ComSettings comSett)
 {
-    qDebug() << "riiiiiiiiii";
     ui->lBaudRate->setText(QString("Baud rate: %1").arg(comSett.baudRate));
     ui->lDataBits->setText(QString("Data bits: %1").arg(comSett.stringDataBits));
     ui->lFlowControl->setText(QString("Flow control: %1").arg(comSett.stringFlowControl));

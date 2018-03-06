@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>523</height>
+    <width>471</width>
+    <height>562</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,10 +59,98 @@
    </item>
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
-     <property name="currentIndex">
-      <number>1</number>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
      </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="elideMode">
+      <enum>Qt::ElideLeft</enum>
+     </property>
+     <property name="usesScrollButtons">
+      <bool>false</bool>
+     </property>
+     <property name="documentMode">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="tabVeiw">
+      <attribute name="icon">
+       <iconset resource="icons.qrc">
+        <normaloff>:/new/icons/icons/color.png</normaloff>:/new/icons/icons/color.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Veiw</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Theme:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QListWidget" name="listWidget">
+         <property name="font">
+          <font>
+           <pointsize>24</pointsize>
+          </font>
+         </property>
+         <property name="autoScrollMargin">
+          <number>40</number>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="generalSettings">
+      <attribute name="icon">
+       <iconset resource="icons.qrc">
+        <normaloff>:/new/icons/icons/blank.png</normaloff>:/new/icons/icons/blank.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>General</string>
       </attribute>
@@ -167,6 +255,10 @@
       </layout>
      </widget>
      <widget class="QWidget" name="serialPortSettings">
+      <attribute name="icon">
+       <iconset resource="icons.qrc">
+        <normaloff>:/new/icons/icons/connect.png</normaloff>:/new/icons/icons/connect.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Serial Port</string>
       </attribute>
@@ -226,6 +318,10 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab">
+      <attribute name="icon">
+       <iconset resource="icons.qrc">
+        <normaloff>:/new/icons/icons/mail.png</normaloff>:/new/icons/icons/mail.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Autosend</string>
       </attribute>
@@ -384,6 +480,8 @@
   <tabstop>pButtonAccept</tabstop>
   <tabstop>pButtonShowPassword</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
