@@ -32,10 +32,10 @@ signals:
     void valueSubmited(QString value);
 
 public:
-    explicit NumpadDialog(QWidget *parent = 0);
+    explicit NumpadDialog(QWidget *parent = 0, QString windowTitle = "Numpad");
     ~NumpadDialog();
 
-    static double getValue(QWidget *parent = 0);
+    static double getValue(QWidget *parent = 0, QString windowTitle = "Numpad");
 
 private slots:
     void appendToLineEdit(int number);

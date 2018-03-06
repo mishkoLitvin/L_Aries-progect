@@ -87,7 +87,7 @@ void GeneralSettingDialog::lockUnlockEmail()
     QByteArray passwordBArr;
 #ifndef DEBUG_BUILD
     if(!logedInMail){
-        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
     }
     if(logedInMail || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->mailPassword))
 #endif
@@ -152,7 +152,7 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 #ifndef DEBUG_BUILD
 
     if(!logedInSerial){
-        passwordBArr.append(QInputDialog::getText(this, "Password", "Entet password:", QLineEdit::Normal));
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
     }
     if(logedInSerial || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->serialPassword))
 #endif
