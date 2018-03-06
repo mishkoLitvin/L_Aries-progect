@@ -18,6 +18,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonReject, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
+    connect(ui->comboBoxStyleList, SIGNAL(currentIndexChanged(int)), this, SLOT(styleChanged(int)));
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -40,6 +41,13 @@ void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass)
 {
     this->serialPassword = serialPass;
     this->mailPassword = mailPass;
+}
+
+void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect)
+{
+    qDebug()<<curSelect;
+    ui->comboBoxStyleList->addItems(stList);
+    ui->comboBoxStyleList->setCurrentIndex(curSelect);
 }
 
 void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
@@ -164,6 +172,11 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 #endif
     acceptOnDeactilationEn = true;
 
+}
+
+void GeneralSettingDialog::styleChanged(int index)
+{
+    emit this->styleChangedIndex(index);
 }
 
 bool GeneralSettingDialog::event(QEvent *e)

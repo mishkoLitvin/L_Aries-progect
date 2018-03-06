@@ -22,7 +22,17 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
      <widget class="QWidget" name="IndexerTab">
+      <attribute name="icon">
+       <iconset resource="icons.qrc">
+        <normaloff>:/arrows/icons/arrows/arrowLR2.png</normaloff>:/arrows/icons/arrows/arrowLR2.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Indexer setup</string>
       </attribute>
@@ -432,6 +442,10 @@
       </layout>
      </widget>
      <widget class="QWidget" name="LiftTab">
+      <attribute name="icon">
+       <iconset resource="icons.qrc">
+        <normaloff>:/arrows/icons/arrows/arrowUD.png</normaloff>:/arrows/icons/arrows/arrowUD.png</iconset>
+      </attribute>
       <attribute name="title">
        <string>Lift setup</string>
       </attribute>
@@ -732,6 +746,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
