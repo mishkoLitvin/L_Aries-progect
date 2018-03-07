@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
     connect(indexerLiftSetDialog, SIGNAL(liftParamChanged(QByteArray)), this, SLOT(getLiftParam(QByteArray)));
+    connect(indexerLiftSetDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getIndexLiftSettComm(QByteArray)));
     indexerLiftSetDialog->setStyleSheet(this->styleSheet());
 
     generalSettingDialog = new GeneralSettingDialog();
@@ -246,7 +247,6 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 
 void MainWindow::getHeadCommand(int index, QByteArray commandArr)
 {
-    qDebug()<<"headcommand:"<<index;
     comPort->sendData(commandArr);
 }
 
@@ -264,9 +264,13 @@ void MainWindow::getLiftParam(QByteArray liftParamArr)
 
 }
 
+void MainWindow::getIndexLiftSettComm(QByteArray commandArr)
+{
+    comPort->sendData(commandArr);
+}
+
 void MainWindow::getIndexLiftCommand(QByteArray commandArr)
 {
-    qDebug()<<"I-L command:";
     comPort->sendData(commandArr);
 }
 

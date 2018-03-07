@@ -51,7 +51,7 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     }
 //    this->installEventFilter(this);
 
-    connect(ui->pushButtonOK, SIGNAL(clicked(bool)), this, SLOT(accepted()));
+    connect(ui->pushButtonOK, SIGNAL(clicked(bool)), this, SLOT(paramsAccepted()));
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(close()));
     connect(ui->pButtonHeadNoInc, SIGNAL(clicked(bool)), this, SLOT(pButtonIncClkd()));
     connect(ui->pButtonHeadNoDec, SIGNAL(clicked(bool)), this, SLOT(pButtonDecClkd()));
@@ -116,7 +116,7 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
     acceptOnDeactilationEn = true;
 }
 
-void SettingDialog::accepted()
+void SettingDialog::paramsAccepted()
 {
     HeadSetting hSttg;
 
@@ -157,14 +157,14 @@ void SettingDialog::accepted()
 
 void SettingDialog::pButtonIncClkd()
 {
-    this->accepted();
+    this->paramsAccepted();
 
     emit this->changeNumber(this->index+1);
 }
 
 void SettingDialog::pButtonDecClkd()
 {
-    this->accepted();
+    this->paramsAccepted();
 
     emit this->changeNumber(this->index-1);
 }
@@ -257,7 +257,7 @@ bool SettingDialog::event(QEvent *e)
     if((e->type()==QEvent::WindowDeactivate)|((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave)))
     {
         if(acceptOnDeactilationEn)
-            this->accepted();
+            this->paramsAccepted();
     }
     return QWidget::event(e);
 }
@@ -396,4 +396,196 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
     }
     emit this->setParamsToAll(this->index, hSttg.headParam.toByteArray());
     this->hide();
+}
+
+void SettingDialog::on_tabWidget_currentChanged(int index)
+{
+    QByteArray cmdArr;
+    int data = index;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeadType>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeadType&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_spinBoxRearSpeed_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadSpeedRear>>8));
+    cmdArr.append((char)(HeadSetting::HeadSpeedRear&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_dSpinBoxRearRange_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadLimitRear>>8));
+    cmdArr.append((char)(HeadSetting::HeadLimitRear&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_spinBoxFrontSpeed_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadSpeedFront>>8));
+    cmdArr.append((char)(HeadSetting::HeadSpeedFront&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_dSpinBoxFrontRange_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadLimitFront>>8));
+    cmdArr.append((char)(HeadSetting::HeadLimitFront&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_spinBoxStrokCount_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadStroksCount>>8));
+    cmdArr.append((char)(HeadSetting::HeadStroksCount&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_dSpinBoxHeatTime1Q_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime1Q>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime1Q&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_dSpinBoxHeatTime2Q_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime2Q>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime2Q&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_spinBoxDryPowerQ_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeatPower>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeatPower&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_dSpinBoxHeatTime1IR_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime1IR>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime1IR&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_dSpinBoxHeatTime2IR_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime2IR>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeatTime2IR&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_dSpinBoxDryingRangeIR_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeatDryRange>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeatDryRange&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }

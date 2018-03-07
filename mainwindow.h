@@ -77,6 +77,7 @@ private slots:
     void getIndexerParam(QByteArray indexerParamArr);
     void getMachineParam(QByteArray machineParamArr);
     void getLiftParam(QByteArray liftParamArr);
+    void getIndexLiftSettComm(QByteArray commandArr);
     void getIndexLiftCommand(QByteArray commandArr);
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);

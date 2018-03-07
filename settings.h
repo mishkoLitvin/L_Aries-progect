@@ -7,6 +7,25 @@ typedef u_int16_t uint16_t;
 
 class HeadSetting{
 public:
+    enum{
+        HeadDevice = 0x8000
+    };
+
+    enum {
+        HeadHeadType = 0xA0,
+        HeadPowerOn,
+        HeadSpeedRear,
+        HeadSpeedFront,
+        HeadStroksCount,
+        HeadLimitRear,
+        HeadLimitFront,
+        HeadHeatTime1Q = 0xB0,
+        HeadHeatTime2Q,
+        HeadHeatPower,
+        HeadHeatTime1IR = 0xC0,
+        HeadHeatTime2IR,
+        HeadHeatDryRange
+    };
 
     typedef enum HeadType_{
         PrintHead = 0,
@@ -78,6 +97,28 @@ public:
 class IndexerLiftSettings
 {
 public:
+
+    enum{
+        LiftDevice = 0x4000,
+        IndexerDevice = 0x6000
+    };
+
+    enum{
+        LiftDistance = 0x40,
+        LiftHomeOffcet,
+        LiftSpeed,
+        LiftAcceleration,
+        LiftDelayDown,
+        LiftDelayUp,
+        IndexDistance = 0x60,
+        IndexHomeOffset,
+        IndexDistOffcet,
+        IndexSpeed,
+        IndexAcceleration,
+        IndexSpeedRet,
+        IndexAccelerationRet
+    };
+
     typedef struct LiftParameters_{
         uint16_t distance = 0;
         int16_t homeOffcet = 0;
