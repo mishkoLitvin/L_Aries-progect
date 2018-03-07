@@ -282,72 +282,114 @@ void SettingDialog::on_toolButtonPlast_clicked()
 
 void SettingDialog::on_toolButtonFL_clicked()
 {
-    QByteArray bArr;
-    bArr.append((char)0xCC);
-    bArr.append((char)this->index);
-    bArr.append((char)HeadSetting::FL);
-    bArr.append((char)0xDD);
-    emit this->sendCommand(this->index, bArr);
+    QByteArray cmdArr;
+    uint16_t data;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::FL>>8));
+    cmdArr.append((char)(HeadSetting::FL&0x00FF));
+    cmdArr.append((char)(1>>8));
+    cmdArr.append((char)(1&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonMoveRear_clicked()
 {
-    QByteArray bArr;
-    bArr.append((char)0xCC);
-    bArr.append((char)this->index);
-    bArr.append((char)HeadSetting::MoveRear);
-    bArr.append((char)0xDD);
-    emit this->sendCommand(this->index, bArr);
+    QByteArray cmdArr;
+    uint16_t data;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::MoveRear>>8));
+    cmdArr.append((char)(HeadSetting::MoveRear&0x00FF));
+    cmdArr.append((char)(1>>8));
+    cmdArr.append((char)(1&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonFL_SQ_clicked()
 {
-    QByteArray bArr;
-    bArr.append((char)0xCC);
-    bArr.append((char)this->index);
-    bArr.append((char)HeadSetting::SQ_FL);
-    bArr.append((char)0xDD);
-    emit this->sendCommand(this->index, bArr);
+    QByteArray cmdArr;
+    uint16_t data;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::SQ_FL>>8));
+    cmdArr.append((char)(HeadSetting::SQ_FL&0x00FF));
+    cmdArr.append((char)(1>>8));
+    cmdArr.append((char)(1&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonMoveFront_clicked()
 {
-    QByteArray bArr;
-    bArr.append((char)0xCC);
-    bArr.append((char)this->index);
-    bArr.append((char)HeadSetting::MoveFront);
-    bArr.append((char)0xDD);
-    emit this->sendCommand(this->index, bArr);
+    QByteArray cmdArr;
+    uint16_t data;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::MoveFront>>8));
+    cmdArr.append((char)(HeadSetting::MoveFront&0x00FF));
+    cmdArr.append((char)(1>>8));
+    cmdArr.append((char)(1&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonMTPMove_clicked()
 {
-    QByteArray bArr;
-    bArr.append((char)0xCC);
-    bArr.append((char)this->index);
-    bArr.append((char)HeadSetting::MPT_Move);
-    bArr.append((char)0xDD);
-    emit this->sendCommand(this->index, bArr);
+    QByteArray cmdArr;
+    uint16_t data;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::MPT_Move>>8));
+    cmdArr.append((char)(HeadSetting::MPT_Move&0x00FF));
+    cmdArr.append((char)(1>>8));
+    cmdArr.append((char)(1&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonSQ_clicked()
 {
-    QByteArray bArr;
-    bArr.append((char)0xCC);
-    bArr.append((char)this->index);
-    bArr.append((char)HeadSetting::SQ);
-    bArr.append((char)0xDD);
-    emit this->sendCommand(this->index, bArr);
+    QByteArray cmdArr;
+    uint16_t data;
+    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::SQ>>8));
+    cmdArr.append((char)(HeadSetting::SQ&0x00FF));
+    cmdArr.append((char)(1>>8));
+    cmdArr.append((char)(1&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonMoveTest_clicked()
 {
-    QByteArray bArr;
-    bArr.append((char)0xCC);
-    bArr.append((char)this->index);
-    bArr.append((char)HeadSetting::MoveTest);
-    bArr.append((char)0xDD);
-    emit this->sendCommand(this->index, bArr);
+    QByteArray cmdArr;
+    uint16_t data;
+    cmdArr.append((char)((int)HeadSetting::HeadDevice>>8));
+    cmdArr.append((char)(((int)HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((int)HeadSetting::MoveTest>>8));
+    cmdArr.append((char)((int)HeadSetting::MoveTest&0x00FF));
+    cmdArr.append((char)(0));
+    cmdArr.append((char)(1));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonPressure_clicked()
