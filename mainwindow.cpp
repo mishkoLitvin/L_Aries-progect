@@ -31,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
 //    qDebug() << temp;
     int i;
 
-//    for()
 //    QStringList stList;
 //    stList.append("Blue");
 //    stList.append("Red");
@@ -68,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
     connect(generalSettingDialog, SIGNAL(emailSettingsChanged(EmailSettings)), this, SLOT(getEmailSettings(EmailSettings)));
     connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
+    connect(generalSettingDialog, SIGNAL(serviceSettingRequest()), this, SLOT(serviceStateChange()));
     connect(generalSettingDialog, SIGNAL(styleChangedIndex(int)), this, SLOT(getVeiwSettings(int)));
 
     mailSender = new MailSender(this);
@@ -106,6 +106,11 @@ MainWindow::MainWindow(QWidget *parent) :
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
 
+    logedInHeadSettings = false;
+    logedInIndexer = false;
+    logedInGeneral = false;
+    logedInService = false;
+
 //    this->setWindowState(Qt::WindowFullScreen);
 //    this->setWindowOpacity(0.2);
 }
@@ -131,10 +136,10 @@ void MainWindow::indexerLiftSettingRequest()
     QByteArray passwordBArr;
 #ifndef DEBUG_BUILD
 
-    if(!logedInIndexer){
+    if(!(logedInIndexer|logedInService)){
         passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
     }
-    if(logedInIndexer || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_INDEXER")))
+    if(logedInIndexer|logedInService || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_INDEXER")))
 #endif
     {
         logedInIndexer = true;
@@ -162,10 +167,10 @@ void MainWindow::generalSettingDialogRequest()
 {
     QByteArray passwordBArr;
 #ifndef DEBUG_BUILD
-    if(!logedInGeneral){
+    if(!(logedInGeneral|logedInService)){
         passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
     }
-    if(logedInGeneral || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL")))
+    if(logedInGeneral|logedInService || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL")))
 #endif
     {
         logedInGeneral = true;
@@ -304,6 +309,43 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
     indexerLiftSetDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setStyleSheet(this->styleSheet());
     comPort->setStyleSheet(this->styleSheet());
+}
+
+void MainWindow::serviceStateChange()
+{
+    QByteArray passwordBArr;
+#ifndef DEBUG_BUILD
+    if(!logedInService){
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
+    }
+    if(logedInService || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL")))
+#endif
+    {
+        MachineSettings::setServiceWidgEn(true);
+        logedInService = true;
+        machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
+        generalSettingDialog->setMachineSetting(machineSettings.machineParam);
+        generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->width(),
+                                   this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
+        generalSettingDialog->raise();
+        generalSettingDialog->show();
+        generalSettingDialog->setFocusLossAccept(true);
+
+    }
+#ifndef DEBUG_BUILD
+    else
+    {
+        MachineSettings::setServiceWidgEn(false);
+        QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
+        msgBox.setText("Wrong password!");
+        msgBox.setWindowTitle("Password");
+        msgBox.exec();
+        generalSettingDialog->show();
+        generalSettingDialog->setFocusLossAccept(true);
+
+    }
+#endif
 }
 
 void MainWindow::exitProgram()

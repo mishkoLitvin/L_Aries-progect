@@ -126,17 +126,16 @@ HeadSetting::HeadSetting(HeadParameters hParam)
 
 HeadSetting::HeadSetting()
 {
-    HeadParameters hParam;
-    this->headParam.headType = hParam.headType;
-    this->headParam.powerOn = hParam.powerOn;
-    this->headParam.speedRear = hParam.speedRear;
-    this->headParam.speedFront = hParam.speedFront;
-    this->headParam.heatPower = hParam.heatPower;
-    this->headParam.heatTime1 = hParam.heatTime1;
-    this->headParam.heatTime2 = hParam.heatTime2;
-    this->headParam.limitFront = hParam.limitFront;
-    this->headParam.limitRear = hParam.limitRear;
-    this->headParam.stroksCount = hParam.stroksCount;
+    this->headParam.headType = HeadSetting::PrintHead;
+    this->headParam.powerOn = 0;
+    this->headParam.speedRear = 10;
+    this->headParam.speedFront = 10;
+    this->headParam.heatPower = 50;
+    this->headParam.heatTime1 = 2;
+    this->headParam.heatTime2 = 2;
+    this->headParam.limitFront = 1;
+    this->headParam.limitRear = 1;
+    this->headParam.stroksCount = 1;
 }
 
 HeadSetting::~HeadSetting()
@@ -206,22 +205,20 @@ IndexerLiftSettings::IndexerLiftSettings(IndexerLiftSettings::IndexParameters in
 
 IndexerLiftSettings::IndexerLiftSettings()
 {
-    IndexParameters indParam;
-    this->indexerParam.acceleration = indParam.acceleration;
-    this->indexerParam.accelerationRet = indParam.accelerationRet;
-    this->indexerParam.distance = indParam.distance;
-    this->indexerParam.distOffcet = indParam.distOffcet;
-    this->indexerParam.homeOffset = indParam.homeOffset;
-    this->indexerParam.speed = indParam.speed;
-    this->indexerParam.speedRet = indParam.speedRet;
+    this->indexerParam.acceleration = 100;
+    this->indexerParam.accelerationRet = 100;
+    this->indexerParam.distance = 5;
+    this->indexerParam.distOffcet = 0;
+    this->indexerParam.homeOffset = 0;
+    this->indexerParam.speed = 100;
+    this->indexerParam.speedRet = 100;
 
-    LiftParameters lifParam;
-    this->liftParam.acceleration = lifParam.acceleration;
-    this->liftParam.delayDown = lifParam.delayDown;
-    this->liftParam.delayUp = lifParam.delayUp;
-    this->liftParam.distance = lifParam.distance;
-    this->liftParam.homeOffcet = lifParam.homeOffcet;
-    this->liftParam.speed = lifParam.speed;
+    this->liftParam.acceleration = 100;
+    this->liftParam.delayDown = 1;
+    this->liftParam.delayUp = 1;
+    this->liftParam.distance = 5;
+    this->liftParam.homeOffcet = 0;
+    this->liftParam.speed = 100;
 }
 
 void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifParamArr)
@@ -254,6 +251,8 @@ QByteArray MachineSettings::MachineParameters_::toByteArray()
     return bArr;
 }
 
+bool MachineSettings::serviceWidgetsEn;
+
 MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
 {
     this->machineParam.HeadCount = mParam.HeadCount;
@@ -262,13 +261,24 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
 
 MachineSettings::MachineSettings()
 {
-    MachineParameters mParam;
-    this->machineParam.HeadCount = mParam.HeadCount;
-    this->machineParam.WarningTime = mParam.HeadCount;
+    this->machineParam.HeadCount = 6;
+    this->machineParam.WarningTime = 1;
 }
 
 void MachineSettings::fromByteArray(QByteArray machineParamArray)
 {
     this->machineParam.HeadCount = ((0x00FF&((uint16_t)machineParamArray[1]))<<8)|(0x00FF&((uint16_t)machineParamArray[0]));
     this->machineParam.WarningTime = ((0x00FF&((uint16_t)machineParamArray[3]))<<8)|(0x00FF&((uint16_t)machineParamArray[2]));
+}
+
+bool MachineSettings::getServiceWidgEn()
+{
+    MachineSettings stt;
+    return stt.serviceWidgetsEn;
+}
+
+void MachineSettings::setServiceWidgEn(bool servEn)
+{
+    MachineSettings stt;
+    stt.serviceWidgetsEn = servEn;
 }

@@ -194,6 +194,22 @@ bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
+void IndexerSettingDialog::showEvent(QShowEvent *ev)
+{
+    ui->dSpinBoxIndexDistance->setVisible(MachineSettings::getServiceWidgEn());
+    ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn());
+    ui->spinBoxIndexDistanceOffcet->setVisible(MachineSettings::getServiceWidgEn());
+    ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn());
+    ui->dSpinBoxLiftDistance->setVisible(MachineSettings::getServiceWidgEn());
+    ui->spinBoxLiftHomeOffset->setVisible(MachineSettings::getServiceWidgEn());
+    ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
+    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn());
+    ui->labelH3->setVisible(MachineSettings::getServiceWidgEn());
+    ui->labelH4->setVisible(MachineSettings::getServiceWidgEn());
+    ui->labelH5->setVisible(MachineSettings::getServiceWidgEn());
+    ev->accept();
+}
+
 bool IndexerSettingDialog::event(QEvent *e)
 {
     if((e->type()==QEvent::WindowDeactivate)|((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave)))

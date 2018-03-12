@@ -58,10 +58,11 @@ private:
     IndexerWidget *indexer;
     MailSender *mailSender;
 
-    QString truePassword = "qwerty";
-    bool logedInHeadSettings = false;
-    bool logedInIndexer = false;
-    bool logedInGeneral = false;
+    QString truePassword;
+    bool logedInHeadSettings;
+    bool logedInIndexer;
+    bool logedInGeneral;
+    bool logedInService;
 
     SerialPort *comPort;
 
@@ -82,6 +83,7 @@ private slots:
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
     void getVeiwSettings(int stSheetIndex);
+    void serviceStateChange();
     void exitProgram();
     void saveJob();
     void loadJob();

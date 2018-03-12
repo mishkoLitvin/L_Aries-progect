@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QByteArray>
 #include <QEvent>
+#include <QShowEvent>
 #include <QLineEdit>
 
 #include "settings.h"
@@ -58,7 +59,8 @@ private slots:
 protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);
-
+    void showEvent(QShowEvent *ev);
 };
+
 
 #endif // INDEXERSETTINGDIALOG_H

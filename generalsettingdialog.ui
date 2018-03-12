@@ -63,7 +63,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -120,6 +120,9 @@
            <pointsize>24</pointsize>
           </font>
          </property>
+         <property name="lineWidth">
+          <number>3</number>
+         </property>
          <property name="autoScrollMargin">
           <number>40</number>
          </property>
@@ -127,6 +130,12 @@
           <size>
            <width>40</width>
            <height>40</height>
+          </size>
+         </property>
+         <property name="gridSize">
+          <size>
+           <width>0</width>
+           <height>55</height>
           </size>
          </property>
         </widget>
@@ -146,21 +155,21 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="generalSettings">
+     <widget class="QWidget" name="tabGeneralSettings">
       <attribute name="icon">
        <iconset resource="icons.qrc">
-        <normaloff>:/new/icons/icons/blank.png</normaloff>:/new/icons/icons/blank.png</iconset>
+        <normaloff>:/new/icons/icons/!!!!!!.png</normaloff>:/new/icons/icons/!!!!!!.png</iconset>
       </attribute>
       <attribute name="title">
        <string>General</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,5">
+      <layout class="QVBoxLayout" name="verticalLayout_4" stretch="2,6,0">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_17" stretch="1,10">
            <item>
-            <widget class="QLabel" name="label_14">
+            <widget class="QLabel" name="labelH1">
              <property name="text">
               <string>Heads count 
 2..18</string>
@@ -169,6 +178,12 @@
            </item>
            <item>
             <widget class="QDoubleSpinBox" name="spinBoxHeadsCount">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -206,6 +221,12 @@
            </item>
            <item>
             <widget class="QDoubleSpinBox" name="dSpinBoxWarningTime">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -252,81 +273,54 @@
          </property>
         </spacer>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="serialPortSettings">
-      <attribute name="icon">
-       <iconset resource="icons.qrc">
-        <normaloff>:/new/icons/icons/connect.png</normaloff>:/new/icons/icons/connect.png</iconset>
-      </attribute>
-      <attribute name="title">
-       <string>Serial Port</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_5">
-       <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QLabel" name="lPortName">
-           <property name="text">
-            <string>Port name: </string>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-          </widget>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="lBaudRate">
-           <property name="text">
-            <string>Baud rate:</string>
+          <widget class="QPushButton" name="pushButtonServiceState">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>80</height>
+            </size>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="lDataBits">
            <property name="text">
-            <string>Data bits:</string>
+            <string>SERVICE</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="lParity">
-           <property name="text">
-            <string>Parity:</string>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/settings.png</normaloff>:/new/icons/icons/settings.png</iconset>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="lStopBits">
-           <property name="text">
-            <string>Stop bits:</string>
+           <property name="iconSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="lFlowControl">
-           <property name="text">
-            <string>Flow control:</string>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pButtonChangeSerialSettings">
-         <property name="minimumSize">
-          <size>
-           <width>55</width>
-           <height>55</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Change</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="tabMaolSend">
       <attribute name="icon">
-       <iconset>
+       <iconset resource="icons.qrc">
         <normaloff>:/new/icons/icons/mail.png</normaloff>:/new/icons/icons/mail.png</iconset>
       </attribute>
       <attribute name="title">
@@ -468,6 +462,76 @@
            </layout>
           </item>
          </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabSerialPortSettings">
+      <attribute name="icon">
+       <iconset resource="icons.qrc">
+        <normaloff>:/new/icons/icons/connect.png</normaloff>:/new/icons/icons/connect.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Serial Port</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="lPortName">
+           <property name="text">
+            <string>Port name: </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lBaudRate">
+           <property name="text">
+            <string>Baud rate:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lDataBits">
+           <property name="text">
+            <string>Data bits:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lParity">
+           <property name="text">
+            <string>Parity:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lStopBits">
+           <property name="text">
+            <string>Stop bits:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lFlowControl">
+           <property name="text">
+            <string>Flow control:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pButtonChangeSerialSettings">
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>55</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Change</string>
+         </property>
         </widget>
        </item>
       </layout>
