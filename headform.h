@@ -20,8 +20,10 @@ public:
     ~HeadForm();
 
     typedef enum PixmapState_ {pixmapShow, pixmapHide, pixmapAnimate} PixmapState;
+    typedef enum SettBtnPos_ {AtLeftUp, AtLeftDown, AtRightUp, AtRightDown } SettBtnPos;
 
     void setIndex(int i);
+    void setSettBtnPosition(SettBtnPos position );
     void setPixmap(PixmapState state, QString stStr = "background-color: rgb(0,255,150);");
 
     QSize getLabelSize();

@@ -63,7 +63,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -135,7 +135,7 @@
          <property name="gridSize">
           <size>
            <width>0</width>
-           <height>55</height>
+           <height>40</height>
           </size>
          </property>
         </widget>
@@ -324,7 +324,7 @@
         <normaloff>:/new/icons/icons/mail.png</normaloff>:/new/icons/icons/mail.png</iconset>
       </attribute>
       <attribute name="title">
-       <string>Autosend</string>
+       <string>Mail setup</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">

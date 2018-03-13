@@ -207,6 +207,10 @@ void IndexerSettingDialog::showEvent(QShowEvent *ev)
     ui->labelH3->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH4->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH5->setVisible(MachineSettings::getServiceWidgEn());
+    ui->pButtonIndexHome->setVisible(MachineSettings::getServiceWidgEn());
+    ui->pButtonIndexMove->setVisible(MachineSettings::getServiceWidgEn());
+    ui->pButtonLiftHome->setVisible(MachineSettings::getServiceWidgEn());
+    ui->pButtonLiftMove->setVisible(MachineSettings::getServiceWidgEn());
     ev->accept();
 }
 

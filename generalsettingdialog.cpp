@@ -7,6 +7,9 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     ui(new Ui::GeneralSettingDialog)
 {
     ui->setupUi(this);
+
+    ui->listWidget->setStyleSheet("font: 28px bold italic large \"Times New Roman\"");
+
     acceptOnDeactilationEn = true;
     ui->emailSettingWidget->setDisabled(true);
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
@@ -238,5 +241,7 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
     ev->accept();
+    acceptOnDeactilationEn = true;
+
 
 }
