@@ -25,11 +25,13 @@
 #include "serialport.h"
 #include "mailsender.h"
 #include "serialsettingsdialog.h"
+#include "logodialog.h"
 
 #include "settings.h"
 
-#define HEAD_COUNT 10
+#define HEAD_COUNT 12
 //#define DEBUG_BUILD
+//#define SHOW_LOGO
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +49,7 @@ private:
     Ui::MainWindow *ui;
 
     HeadForm *headButton[HEAD_COUNT];
+    HeadSettingButton *headSettButton[HEAD_COUNT];
     QSettings *settings;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;

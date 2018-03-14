@@ -83,7 +83,7 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
     this->index = index;
 
     ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
-    ui->lcdNumberHeadNo->display(index);
+    ui->lcdNumberHeadNo->display(index+1);
 
     ui->pButtonHeadOnOff->setChecked(hSttg.headParam.powerOn&0x01);
 

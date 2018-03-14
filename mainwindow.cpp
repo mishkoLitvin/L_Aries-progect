@@ -18,6 +18,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
                                           +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
+#ifdef SHOW_LOGO
+    LogoDialog lD;
+    lD.setStyleSheet(this->styleSheet());
+    lD.move(this->geometry().center().x()-lD.geometry().center().x(), geometry().center().y()-lD.geometry().center().y());
+    lD.exec();
+#endif
+
     ui->widgetHeads->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
 
     comPort = new SerialPort(this);
@@ -100,16 +107,16 @@ MainWindow::MainWindow(QWidget *parent) :
             }
         else
             headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
-
+        headSettButton[i] = new HeadSettingButton(i, ui->widgetHeads);
         if(i<(HEAD_COUNT)/4)
-            headButton[i]->setSettBtnPosition(HeadForm::AtLeftDown);
-        if((i>=(HEAD_COUNT)/4)&(i<(HEAD_COUNT)/2))
-            headButton[i]->setSettBtnPosition(HeadForm::AtLeftUp);
-        if((i>=(HEAD_COUNT)/2)&(i<(3*HEAD_COUNT)/4))
             headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
-        if((i>=(3*HEAD_COUNT)/4)&(i<(HEAD_COUNT)))
+        if((i>=(HEAD_COUNT)/4)&(i<(HEAD_COUNT)/2))
             headButton[i]->setSettBtnPosition(HeadForm::AtRightDown);
-        connect(headButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
+        if((i>=(HEAD_COUNT)/2)&(i<(3*HEAD_COUNT)/4))
+            headButton[i]->setSettBtnPosition(HeadForm::AtLeftDown);
+        if((i>=(3*HEAD_COUNT)/4)&(i<(HEAD_COUNT)))
+            headButton[i]->setSettBtnPosition(HeadForm::AtLeftUp);
+        connect(headSettButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
 
     if(QApplication::platformName() != "eglfs")
@@ -230,7 +237,7 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
         }
     else
         headButton[index]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
-    comPort->sendData(hParamArr);
+//    comPort->sendData(hParamArr);
 
 }
 
@@ -406,18 +413,28 @@ void MainWindow::resizeEvent(QResizeEvent *e)
     areaH = ui->widgetHeads->height();
     areaW = ui->widgetHeads->width();
 
-//    qDebug()<<this->size()<<ui->widgetHeads->size();
-
     int i;
+    float sinCoef, cosCoef, R, x0_hb, y0_hb, x0_sb, y0_sb;
+    if(areaH<areaW)
+        R = areaH/2-headButton[0]->height()/2-headSettButton[0]->height()/2-10;
+    else
+        R = areaW/2-headButton[0]->width()/2-headSettButton[0]->width()/2-10;
+
+    x0_hb = ui->widgetHeads->width()/2-headButton[0]->width()/2;
+    y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/2;
+    x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
+    y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2;
+
     for(i = 0; i<HEAD_COUNT; i++)
     {
-        if(areaH<areaW)
-            headButton[i]->move(areaW/2+areaH/3*cos(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT)-73,
-                                areaH/2+areaH/3*sin(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT)-60);
-        else
-            headButton[i]->move(areaW/2+areaW/3*cos(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT)-73,
-                                areaH/2+areaW/3*sin(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT)-60);
+        sinCoef = sin(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT);
+        cosCoef = cos(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT);
 
+
+            headButton[i]->move(x0_hb+(R)*cosCoef,
+                                y0_hb+(R)*sinCoef);
+            headSettButton[i]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i]->width()/2)*cosCoef,
+                                y0_sb+(R+headButton[i]->height()/2+headSettButton[i]->width()/2)*sinCoef);
     }
 //    headButton[0]->move(areaW/2-73,
 //                        areaH/2-60);
