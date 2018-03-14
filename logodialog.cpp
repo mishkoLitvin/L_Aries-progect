@@ -7,8 +7,8 @@ LogoDialog::LogoDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint) ;
-
+    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    this->setWindowState(Qt::WindowMaximized);
 
     timer = new QTimer(this);
     timer->setInterval(30);
@@ -27,7 +27,7 @@ void LogoDialog::timerTimeOut()
 {
     static int timerCnt = 0;
     timerCnt++;
-    ui->progressBar->setValue(timerCnt);
+//    ui->progressBar->setValue(timerCnt);
     if(timerCnt>100)
         this->close();
 }

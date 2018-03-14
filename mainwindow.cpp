@@ -18,12 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
                                           +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
-#ifdef SHOW_LOGO
-    LogoDialog lD;
-    lD.setStyleSheet(this->styleSheet());
-    lD.move(this->geometry().center().x()-lD.geometry().center().x(), geometry().center().y()-lD.geometry().center().y());
-    lD.exec();
-#endif
 
     ui->widgetHeads->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
 
@@ -121,6 +115,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
+    else
+        this->setWindowState(Qt::WindowMaximized);
+    this->setButtonPoss();
 
     logedInHeadSettings = false;
     logedInIndexer = false;
@@ -407,8 +404,10 @@ void MainWindow::loadJob()
 
 }
 
-void MainWindow::resizeEvent(QResizeEvent *e)
+void MainWindow::setButtonPoss()
 {
+    qDebug()<<this->size()<<ui->widgetHeads->size();
+
     int areaW, areaH;
     areaH = ui->widgetHeads->height();
     areaW = ui->widgetHeads->width();
@@ -436,7 +435,15 @@ void MainWindow::resizeEvent(QResizeEvent *e)
             headSettButton[i]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i]->width()/2)*cosCoef,
                                 y0_sb+(R+headButton[i]->height()/2+headSettButton[i]->width()/2)*sinCoef);
     }
-//    headButton[0]->move(areaW/2-73,
-//                        areaH/2-60);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *e)
+{
+    this->setButtonPoss();
     e->accept();
+}
+
+void MainWindow::showEvent(QShowEvent *ev)
+{
+    this->setButtonPoss();
 }
