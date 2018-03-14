@@ -25,11 +25,13 @@
 #include "serialport.h"
 #include "mailsender.h"
 #include "serialsettingsdialog.h"
+#include "logodialog.h"
 
 #include "settings.h"
 
-#define HEAD_COUNT 10
+#define HEAD_COUNT 12
 //#define DEBUG_BUILD
+//#define SHOW_LOGO
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +49,7 @@ private:
     Ui::MainWindow *ui;
 
     HeadForm *headButton[HEAD_COUNT];
+    HeadSettingButton *headSettButton[HEAD_COUNT];
     QSettings *settings;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;
@@ -58,10 +61,11 @@ private:
     IndexerWidget *indexer;
     MailSender *mailSender;
 
-    QString truePassword = "qwerty";
-    bool logedInHeadSettings = false;
-    bool logedInIndexer = false;
-    bool logedInGeneral = false;
+    QString truePassword;
+    bool logedInHeadSettings;
+    bool logedInIndexer;
+    bool logedInGeneral;
+    bool logedInService;
 
     SerialPort *comPort;
 
@@ -77,10 +81,12 @@ private slots:
     void getIndexerParam(QByteArray indexerParamArr);
     void getMachineParam(QByteArray machineParamArr);
     void getLiftParam(QByteArray liftParamArr);
+    void getIndexLiftSettComm(QByteArray commandArr);
     void getIndexLiftCommand(QByteArray commandArr);
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
     void getVeiwSettings(int stSheetIndex);
+    void serviceStateChange();
     void exitProgram();
     void saveJob();
     void loadJob();

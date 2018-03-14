@@ -7,6 +7,7 @@
 #include <QByteArray>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QShowEvent>
 
 #include "settings.h"
 #include "numpaddialog.h"
@@ -63,12 +64,13 @@ signals:
     void machineParamChanged(QByteArray machinePararmArr);
     void serialPortSettingsDialogRequested();
     void styleChangedIndex(int index);
+    void serviceSettingRequest();
 
 private:
     Ui::GeneralSettingDialog *ui;
     bool acceptOnDeactilationEn;
-    bool logedInSerial = false;
-    bool logedInMail = false;
+    bool logedInSerial;
+    bool logedInMail;
     uint16_t serialPassword;
     uint16_t mailPassword;
 
@@ -79,11 +81,13 @@ private slots:
     void hideShowPassword();
     void eventFilterSetup();
     void changeSerialPortSettingsClicked();
+    void changeServiceStateClicked();
     void styleChanged(int index);
 
 protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);
+    void showEvent(QShowEvent *ev);
 };
 
 #endif // GENERALSETTINGDIALOG_H

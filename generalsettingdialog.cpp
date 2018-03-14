@@ -7,6 +7,9 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     ui(new Ui::GeneralSettingDialog)
 {
     ui->setupUi(this);
+
+    ui->listWidget->setStyleSheet("font: 28px bold italic large \"Times New Roman\"");
+
     acceptOnDeactilationEn = true;
     ui->emailSettingWidget->setDisabled(true);
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
@@ -18,7 +21,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
     connect(ui->listWidget, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
-
+    connect(ui->pushButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -174,6 +177,24 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 
 }
 
+void GeneralSettingDialog::changeServiceStateClicked()
+{
+    acceptOnDeactilationEn = false;
+    if(ui->pushButtonServiceState->isChecked())
+    {
+        emit this->serviceSettingRequest();
+        this->hide();
+        this->show();
+    }
+    else
+    {
+        MachineSettings::setServiceWidgEn(false);
+        this->hide();
+        this->show();
+    }
+
+}
+
 void GeneralSettingDialog::styleChanged(int index)
 {
     emit this->styleChangedIndex(index);
@@ -210,4 +231,17 @@ bool GeneralSettingDialog::eventFilter(QObject *watched, QEvent *event)
         acceptOnDeactilationEn = true;
     }
     return false;
+}
+
+void GeneralSettingDialog::showEvent(QShowEvent *ev)
+{
+    qDebug()<<MachineSettings::getServiceWidgEn();
+
+    ui->spinBoxHeadsCount->setVisible(MachineSettings::getServiceWidgEn());
+    ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
+    ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
+    ev->accept();
+    acceptOnDeactilationEn = true;
+
+
 }

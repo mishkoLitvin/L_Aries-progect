@@ -15,24 +15,24 @@ HeadForm::HeadForm(QWidget *parent) :
     pixShirtHide.load(":/new/icons/icons/blank.png");
     pixShirtAnimate.load(":/new/icons/icons/tt3.png");
 
+//    pButtonSets = new QPushButton("", this);
 
-    pButtonSets = new QPushButton("", this);
+//    pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
+//    pButtonSets->resize(40,40);
+//    pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
-    pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
-    pButtonSets->resize(40,40);
-    pButtonSets->move(this->width() - pButtonSets->width(), 0);
-
-    pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
+//    pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
 
     labelIndex = new QLabel(this);
-    labelIndex->setFont(QFont("Noto Sans",14,2,true));
-    labelIndex->setStyleSheet("background-color: rgb(50,200,250);");
+//    labelIndex->setFont(QFont("Noto Sans",20,4,true));
+    labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
-    labelIndex->resize(30,30);
-    labelIndex->move(this->width()-labelIndex->width(),this->height()-labelIndex->height());
+    labelIndex->resize(25,25);
+    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
 
 
-    connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicedSlot()));
+
+//    connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicedSlot()));
 }
 
 HeadForm::~HeadForm()
@@ -43,7 +43,28 @@ HeadForm::~HeadForm()
 void HeadForm::setIndex(int i)
 {
     this->index = i;
-    labelIndex->setText(QString::number(this->index));
+    labelIndex->setText(QString::number(this->index+1));
+    if(i+1<10)
+        labelIndex->resize(15,25);
+
+}
+
+void HeadForm::setSettBtnPosition(HeadForm::SettBtnPos position)
+{
+    switch (position) {
+    case AtRightUp:
+        labelIndex->move(this->width()-11-labelIndex->width(), 11);
+        break;
+    case AtRightDown:
+        labelIndex->move(this->width()-11-labelIndex->width(),ui->label->height()+11-labelIndex->height());
+        break;
+    case AtLeftUp:
+        labelIndex->move(11,11);
+        break;
+    case AtLeftDown:
+        labelIndex->move(11, ui->label->height()+11-labelIndex->height());
+        break;
+    }
 
 }
 
@@ -80,7 +101,7 @@ void HeadForm::settingPButtonClicedSlot()
 
 void HeadForm::mousePressEvent(QMouseEvent *event)
 {
-    if(event->type() == QMouseEvent::MouseButtonDblClick)
+    if(event->type() == QMouseEvent::MouseButtonPress)
     {
         if(pixmapShown)
             this->setPixmap(pixmapHide, ui->label->styleSheet());

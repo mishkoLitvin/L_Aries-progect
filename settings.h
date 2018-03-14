@@ -7,6 +7,25 @@ typedef u_int16_t uint16_t;
 
 class HeadSetting{
 public:
+    enum{
+        HeadDevice = 0x8000
+    };
+
+    enum {
+        HeadHeadType = 0xA0,
+        HeadPowerOn,
+        HeadSpeedRear,
+        HeadSpeedFront,
+        HeadStroksCount,
+        HeadLimitRear,
+        HeadLimitFront,
+        HeadHeatTime1Q = 0xB0,
+        HeadHeatTime2Q,
+        HeadHeatPower,
+        HeadHeatTime1IR = 0xC0,
+        HeadHeatTime2IR,
+        HeadHeatDryRange
+    };
 
     typedef enum HeadType_{
         PrintHead = 0,
@@ -15,16 +34,16 @@ public:
     }HeadType;
 
     typedef struct HeadParameters_{
-        HeadType headType = PrintHead;
-        bool powerOn = true;
-        uint16_t speedRear = 5;
-        uint16_t speedFront = 50;
-        uint16_t stroksCount = 1;
-        uint16_t limitRear = 0;
-        uint16_t limitFront = 30;
-        uint16_t heatTime1 = 1;
-        uint16_t heatTime2 = 1;
-        uint16_t heatPower = 1;
+        HeadType headType;
+        bool powerOn;
+        uint16_t speedRear;
+        uint16_t speedFront;
+        uint16_t stroksCount;
+        uint16_t limitRear;
+        uint16_t limitFront;
+        uint16_t heatTime1;
+        uint16_t heatTime2;
+        uint16_t heatPower;
 
         QByteArray toByteArray();
     }HeadParameters;
@@ -42,7 +61,7 @@ public:
     }HeadCommandsEn;
 
     typedef struct HeadComands_{
-        HeadCommandsEn headCmd = Idle;
+        HeadCommandsEn headCmd;
 
     }HeadComands;
 
@@ -57,12 +76,13 @@ public:
     ~HeadSetting();
 };
 
+
 class MachineSettings
 {
 public:
     typedef struct MachineParameters_{
-        uint16_t HeadCount = 0;
-        uint16_t WarningTime = 0;
+        uint16_t HeadCount;
+        uint16_t WarningTime;
 
         QByteArray toByteArray();
     }MachineParameters;
@@ -73,31 +93,60 @@ public:
     MachineSettings();
 
     void fromByteArray(QByteArray machineParamArray);
+
+    static bool serviceWidgetsEn;
+
+public:
+    static bool getServiceWidgEn();
+    static void setServiceWidgEn(bool servEn);
+
 };
 
 class IndexerLiftSettings
 {
 public:
+
+    enum{
+        LiftDevice = 0x4000,
+        IndexerDevice = 0x6000
+    };
+
+    enum{
+        LiftDistance = 0x40,
+        LiftHomeOffcet,
+        LiftSpeed,
+        LiftAcceleration,
+        LiftDelayDown,
+        LiftDelayUp,
+        IndexDistance = 0x60,
+        IndexHomeOffset,
+        IndexDistOffcet,
+        IndexSpeed,
+        IndexAcceleration,
+        IndexSpeedRet,
+        IndexAccelerationRet
+    };
+
     typedef struct LiftParameters_{
-        uint16_t distance = 0;
-        int16_t homeOffcet = 0;
-        uint16_t speed = 0;
-        uint16_t acceleration = 0;
-        uint16_t delayDown = 0;
-        uint16_t delayUp = 0;
+        uint16_t distance;
+        int16_t homeOffcet;
+        uint16_t speed;
+        uint16_t acceleration;
+        uint16_t delayDown;
+        uint16_t delayUp;
 
         QByteArray toByteArray();
     }LiftParameters;
 
 
     typedef struct IndexParameters_{
-        uint16_t distance = 0;
-        int16_t homeOffset = 0;
-        int16_t distOffcet = 0;
-        uint16_t speed = 0;
-        uint16_t acceleration = 0;
-        uint16_t speedRet = 0;
-        uint16_t accelerationRet = 0;
+        uint16_t distance;
+        int16_t homeOffset;
+        int16_t distOffcet;
+        uint16_t speed;
+        uint16_t acceleration;
+        uint16_t speedRet;
+        uint16_t accelerationRet;
 
         QByteArray toByteArray();
     }IndexParameters;

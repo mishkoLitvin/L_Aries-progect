@@ -10,7 +10,7 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
     pButtonSets = new QPushButton(this);
 
     pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
-    pButtonSets->resize(30,30);
+    pButtonSets->resize(50,50);
     pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
     connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicSlot()));
