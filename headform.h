@@ -41,15 +41,19 @@ class HeadForm : public QWidget
     Q_OBJECT
 
 public:
-    HeadForm(QWidget *parent = 0);
+    typedef enum HeadformType_{HeadPutingOn, HeadRemoving, HeadProcessing}HeadformType;
+
+    HeadForm(QWidget *parent = 0, HeadformType type = HeadProcessing);
     ~HeadForm();
 
-    typedef enum PixmapState_ {pixmapShow, pixmapHide, pixmapAnimate} PixmapState;
+    typedef enum HeadformState_ {shirtOn, shirtOff, shirtProcessing} HeadformState;
     typedef enum SettBtnPos_ {AtLeftUp, AtLeftDown, AtRightUp, AtRightDown } SettBtnPos;
 
     void setIndex(int i);
     void setSettBtnPosition(SettBtnPos position );
-    void setPixmap(PixmapState state, QString stStr = "background-color: rgb(0,255,150);");
+    void setPixmap(HeadformState state, QString stStr = "background-color: rgb(0,255,150);");
+    void setHeadformType(HeadformType type);
+    HeadformType getHeadformType();
 
     QSize getLabelSize();
 
@@ -58,15 +62,13 @@ signals:
 
 private:
     Ui::HeadForm *ui;
-//    QPushButton *pButtonSets;
     QLabel *labelIndex;
     QImage pixShirtShow, pixShirtHide, pixShirtAnimate;
 
     int index;
-    bool pixmapShown;
+    HeadformState headformState;
+    HeadformType headformType;
 
-private slots:
-    void settingPButtonClicedSlot();
 
 protected:
     void mousePressEvent(QMouseEvent *event);

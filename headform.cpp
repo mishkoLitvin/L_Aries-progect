@@ -5,39 +5,53 @@
 #include <QPalette>
 
 
-HeadForm::HeadForm(QWidget *parent) :
+HeadForm::HeadForm(QWidget *parent, HeadformType type) :
     QWidget(parent),
     ui(new Ui::HeadForm)
 {
     ui->setupUi(this);
 
+    headformType = type;
+
     pixShirtShow.load(":/new/icons/icons/tt.png");
     pixShirtHide.load(":/new/icons/icons/blank.png");
     pixShirtAnimate.load(":/new/icons/icons/tt3.png");
 
-//    pButtonSets = new QPushButton("", this);
+    this->setPixmap(shirtOff);
 
-//    pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
-//    pButtonSets->resize(40,40);
-//    pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
-//    pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
+    this->headformType = HeadProcessing;
 
     labelIndex = new QLabel(this);
-//    labelIndex->setFont(QFont("Noto Sans",20,4,true));
     labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
     labelIndex->resize(25,25);
     labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
 
-
-
-//    connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicedSlot()));
 }
 
 HeadForm::~HeadForm()
 {
     delete ui;
+}
+
+void HeadForm::setHeadformType(HeadForm::HeadformType type)
+{
+    switch (type)
+    {
+        case HeadProcessing:
+            this->headformType = HeadProcessing;
+            break;
+        case HeadPutingOn:
+            this->headformType = HeadPutingOn; break;
+        case HeadRemoving:
+            this->headformType = HeadRemoving; break;
+    };
+}
+
+HeadForm::HeadformType HeadForm::getHeadformType()
+{
+    return this->headformType;
 }
 
 void HeadForm::setIndex(int i)
@@ -68,23 +82,23 @@ void HeadForm::setSettBtnPosition(HeadForm::SettBtnPos position)
 
 }
 
-void HeadForm::setPixmap(PixmapState state, QString stStr)
+void HeadForm::setPixmap(HeadformState state, QString stStr)
 {
     switch(state){
-    case pixmapHide:
+    case shirtOff:
         ui->label->setPixmap(QPixmap::fromImage(pixShirtHide.scaled(ui->label->size(), Qt::KeepAspectRatio)));
         ui->label->setStyleSheet(stStr);
-        pixmapShown = false;
+        headformState = shirtOff;
         break;
-    case pixmapShow:
+    case shirtOn:
         ui->label->setPixmap(QPixmap::fromImage(pixShirtShow.scaled(ui->label->size(), Qt::KeepAspectRatio)));
         ui->label->setStyleSheet(stStr);
-        pixmapShown = true;
+        headformState = shirtOn;
         break;
-    case pixmapAnimate:
-//        QPixmap::fromImage(pixShirtShow.scaled(headButton[i]->getLabelSize(),Qt::KeepAspectRatio);
+    case shirtProcessing:
         ui->label->setPixmap(QPixmap::fromImage(pixShirtAnimate.scaled(ui->label->size(), Qt::KeepAspectRatio)));
         ui->label->setStyleSheet(stStr);
+        headformState = shirtProcessing;
         break;
     }
 }
@@ -94,18 +108,26 @@ QSize HeadForm::getLabelSize()
     return ui->label->size();
 }
 
-void HeadForm::settingPButtonClicedSlot()
-{
-    emit this->settingButtonCliced(this->index);
-}
 
 void HeadForm::mousePressEvent(QMouseEvent *event)
 {
     if(event->type() == QMouseEvent::MouseButtonPress)
     {
-        if(pixmapShown)
-            this->setPixmap(pixmapHide, ui->label->styleSheet());
+        if(this->headformType == HeadProcessing)
+        {
+            if(this->headformState == shirtOff)
+                this->setPixmap(shirtOn, ui->label->styleSheet());
+            else
+                this->setPixmap(shirtOff, ui->label->styleSheet());
+        }
         else
-            this->setPixmap(pixmapShow, ui->label->styleSheet());
+        {
+            switch(headformState)
+            {
+            case shirtOff: this->setPixmap(shirtOn); break;
+            case shirtOn: this->setPixmap(shirtProcessing); break;
+            case shirtProcessing: this->setPixmap(shirtOff); break;
+            }
+        }
     }
 }

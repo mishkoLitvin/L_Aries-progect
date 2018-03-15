@@ -93,6 +93,7 @@ void SerialPort::sendData(QByteArray data)
 void SerialPort::setupPort()
 {
     this->closeSerialPort();
+
     settingsComDialog->exec();
     this->openSerialPort();
 }
