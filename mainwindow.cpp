@@ -77,7 +77,6 @@ MainWindow::MainWindow(QWidget *parent) :
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 
-
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
@@ -85,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     for(i = 0; i<HEAD_COUNT; i++)
     {
-        headButton[i] = new HeadForm(ui->widgetHeads);
+        headButton.append(new HeadForm(ui->widgetHeads));
         headButton[i]->setIndex(i);
         if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
             switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
@@ -101,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent) :
             }
         else
             headButton[i]->setPixmap(HeadForm::pixmapHide,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
-        headSettButton[i] = new HeadSettingButton(i, ui->widgetHeads);
+        headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
         if(i<(HEAD_COUNT)/4)
             headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
         if((i>=(HEAD_COUNT)/4)&(i<(HEAD_COUNT)/2))

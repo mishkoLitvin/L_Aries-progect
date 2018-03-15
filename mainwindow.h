@@ -30,7 +30,7 @@
 
 #include "settings.h"
 
-#define HEAD_COUNT 12
+#define HEAD_COUNT 18
 //#define DEBUG_BUILD
 #define SHOW_LOGO
 
@@ -49,8 +49,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    HeadForm *headButton[HEAD_COUNT];
-    HeadSettingButton *headSettButton[HEAD_COUNT];
+    QList<HeadForm*> headButton;
+    QList<HeadSettingButton*> headSettButton;
     QSettings *settings;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;

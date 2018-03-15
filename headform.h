@@ -65,9 +65,6 @@ private:
     int index;
     bool pixmapShown;
 
-private slots:
-    void settingPButtonClicedSlot();
-
 protected:
     void mousePressEvent(QMouseEvent *event);
 };

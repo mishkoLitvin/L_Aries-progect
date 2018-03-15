@@ -15,24 +15,11 @@ HeadForm::HeadForm(QWidget *parent) :
     pixShirtHide.load(":/new/icons/icons/blank.png");
     pixShirtAnimate.load(":/new/icons/icons/tt3.png");
 
-//    pButtonSets = new QPushButton("", this);
-
-//    pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
-//    pButtonSets->resize(40,40);
-//    pButtonSets->move(this->width() - pButtonSets->width(), 0);
-
-//    pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
-
     labelIndex = new QLabel(this);
-//    labelIndex->setFont(QFont("Noto Sans",20,4,true));
     labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
     labelIndex->resize(25,25);
     labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
-
-
-
-//    connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicedSlot()));
 }
 
 HeadForm::~HeadForm()
@@ -92,11 +79,6 @@ void HeadForm::setPixmap(PixmapState state, QString stStr)
 QSize HeadForm::getLabelSize()
 {
     return ui->label->size();
-}
-
-void HeadForm::settingPButtonClicedSlot()
-{
-    emit this->settingButtonCliced(this->index);
 }
 
 void HeadForm::mousePressEvent(QMouseEvent *event)
