@@ -20,6 +20,7 @@ public:
         connect(this, SIGNAL(clicked()), this, SLOT(thisClicked()));
         this->setIcon(QIcon(":/new/icons/icons/settings.png"));
     }
+
 signals:
     void settingButtonCliced(int index);
 private:

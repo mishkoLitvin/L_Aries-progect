@@ -102,7 +102,8 @@ MainWindow::MainWindow(QWidget *parent) :
             }
         else
             headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
-        headSettButton[i] = new HeadSettingButton(i, ui->widgetHeads);
+
+        headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
         if(i<(headsCount)/4)
             headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
         if((i>=(headsCount)/4)&(i<(headsCount)/2))
@@ -133,6 +134,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    headButton.clear();
+    headSettButton.clear();
     delete ui;
 }
 
@@ -211,11 +214,11 @@ void MainWindow::generalSettingDialogRequest()
 
 void MainWindow::changeHeadNo(int index)
 {
-    if(index<0)
-        index = headsCount-1;
+    if(index<1)
+        index = headsCount-2;
     else
-        if(index == headsCount)
-            index = 0;
+        if(index == headsCount-1)
+            index = 1;
     this->headSettingRequest(index);
 }
 
