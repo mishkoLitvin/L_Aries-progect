@@ -18,14 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
                                           +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
-#ifdef SHOW_LOGO
-    LogoDialog lD;
-    lD.setStyleSheet(this->styleSheet());
-    lD.move(this->geometry().center().x()-lD.geometry().center().x(), geometry().center().y()-lD.geometry().center().y());
-    lD.exec();
-#endif
-
     ui->widgetHeads->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
+
+    headsCount = settings->value(QString("HEAD/HEADS_COUNT"), 1).toInt();
+    headsCount+=2;
 
     comPort = new SerialPort(this);
     comPort->setComParams(settings->value("COM_SETTING").value<ComSettings>());
@@ -83,15 +79,14 @@ MainWindow::MainWindow(QWidget *parent) :
     mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
     mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
 
-
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
 
 
-    for(i = 0; i<HEAD_COUNT; i++)
+    for(i = 0; i<headsCount; i++)
     {
-        headButton[i] = new HeadForm(ui->widgetHeads);
+        headButton.append(new HeadForm(ui->widgetHeads));
         headButton[i]->setIndex(i);
         if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
             switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
@@ -110,17 +105,21 @@ MainWindow::MainWindow(QWidget *parent) :
         headSettButton[i] = new HeadSettingButton(i, ui->widgetHeads);
         if(i<(HEAD_COUNT)/4)
             headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
-        if((i>=(HEAD_COUNT)/4)&(i<(HEAD_COUNT)/2))
+        if((i>=(headsCount)/4)&(i<(headsCount)/2))
             headButton[i]->setSettBtnPosition(HeadForm::AtRightDown);
-        if((i>=(HEAD_COUNT)/2)&(i<(3*HEAD_COUNT)/4))
+        if((i>=(headsCount)/2)&(i<(3*headsCount)/4))
             headButton[i]->setSettBtnPosition(HeadForm::AtLeftDown);
-        if((i>=(3*HEAD_COUNT)/4)&(i<(HEAD_COUNT)))
+        if((i>=(3*headsCount)/4)&(i<(headsCount)))
             headButton[i]->setSettBtnPosition(HeadForm::AtLeftUp);
         connect(headSettButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
 
+
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
+    else
+        this->setWindowState(Qt::WindowMaximized);
+    this->setButtonPoss();
 
     logedInHeadSettings = false;
     logedInIndexer = false;
@@ -212,9 +211,9 @@ void MainWindow::generalSettingDialogRequest()
 void MainWindow::changeHeadNo(int index)
 {
     if(index<0)
-        index = HEAD_COUNT-1;
+        index = headsCount-1;
     else
-        if(index == HEAD_COUNT)
+        if(index == headsCount)
             index = 0;
     this->headSettingRequest(index);
 }
@@ -245,7 +244,7 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 {
     int cnt;
     index++;
-    for(cnt = 0; cnt<HEAD_COUNT; cnt++)
+    for(cnt = 0; cnt<headsCount; cnt++)
     {
         comPort->sendData(hParamArr);
         settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
@@ -298,6 +297,26 @@ void MainWindow::getIndexLiftCommand(QByteArray commandArr)
 void MainWindow::getMachineParam(QByteArray machineParamArr)
 {
     settings->setValue("MACHINE_PARAMS", machineParamArr);
+    if(this->headsCount-2 != (((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]))))
+    {
+        QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+        msgBox.setText("Heads count changed");
+        msgBox.setInformativeText("To apply count changing please restart a program");
+        msgBox.setWindowTitle("Info");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
+        int ret = msgBox.exec();
+        switch (ret)
+        {
+        case QMessageBox::Save:
+            headsCount = ((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]));
+            settings->setValue(QString("HEAD/HEADS_COUNT"), headsCount);
+            break;
+        case QMessageBox::Discard:
+            break;
+        }
+    }
     comPort->sendData(machineParamArr);
 }
 
@@ -387,7 +406,7 @@ void MainWindow::loadJob()
     QString openFileName = QFileDialog::getOpenFileName(this, "Open job...",".","Setting file(*.ini)");
     settings = new QSettings(openFileName, QSettings::IniFormat);
     int i;
-    for(i = 0; i<HEAD_COUNT; i++)
+    for(i = 0; i<headsCount; i++)
         {
             if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
                 switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
@@ -407,8 +426,10 @@ void MainWindow::loadJob()
 
 }
 
-void MainWindow::resizeEvent(QResizeEvent *e)
+void MainWindow::setButtonPoss()
 {
+    qDebug()<<this->size()<<ui->widgetHeads->size();
+
     int areaW, areaH;
     areaH = ui->widgetHeads->height();
     areaW = ui->widgetHeads->width();
@@ -425,10 +446,10 @@ void MainWindow::resizeEvent(QResizeEvent *e)
     x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2;
 
-    for(i = 0; i<HEAD_COUNT; i++)
+    for(i = 0; i<headsCount; i++)
     {
-        sinCoef = sin(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT);
-        cosCoef = cos(2.*3.1415926*i/HEAD_COUNT+3.1415926/2.+3.1415926/HEAD_COUNT);
+        sinCoef = sin(2.*3.1415926*i/headsCount+3.1415926/2.+3.1415926/headsCount);
+        cosCoef = cos(2.*3.1415926*i/headsCount+3.1415926/2.+3.1415926/headsCount);
 
 
             headButton[i]->move(x0_hb+(R)*cosCoef,
@@ -436,7 +457,15 @@ void MainWindow::resizeEvent(QResizeEvent *e)
             headSettButton[i]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i]->width()/2)*cosCoef,
                                 y0_sb+(R+headButton[i]->height()/2+headSettButton[i]->width()/2)*sinCoef);
     }
-//    headButton[0]->move(areaW/2-73,
-//                        areaH/2-60);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *e)
+{
+    this->setButtonPoss();
     e->accept();
+}
+
+void MainWindow::showEvent(QShowEvent *ev)
+{
+    this->setButtonPoss();
 }

@@ -101,6 +101,7 @@ void HeadForm::setPixmap(HeadformState state, QString stStr)
         headformState = shirtProcessing;
         break;
     }
+
 }
 
 QSize HeadForm::getLabelSize()

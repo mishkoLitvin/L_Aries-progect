@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QResizeEvent>
+#include <QShowEvent>
 #include <QDebug>
 #include <QPixmap>
 #include <QImage>
@@ -15,6 +16,7 @@
 #include <QByteArray>
 #include <QFileDialog>
 #include <QEvent>
+#include <QMessageBox>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -25,13 +27,11 @@
 #include "serialport.h"
 #include "mailsender.h"
 #include "serialsettingsdialog.h"
-#include "logodialog.h"
 
 #include "settings.h"
 
-#define HEAD_COUNT 12
 //#define DEBUG_BUILD
-//#define SHOW_LOGO
+#define SHOW_LOGO
 
 namespace Ui {
 class MainWindow;
@@ -48,8 +48,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    HeadForm *headButton[HEAD_COUNT];
-    HeadSettingButton *headSettButton[HEAD_COUNT];
+    QList<HeadForm*> headButton;
+    QList<HeadSettingButton*> headSettButton;
     QSettings *settings;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;
@@ -68,6 +68,8 @@ private:
     bool logedInService;
 
     SerialPort *comPort;
+
+    int headsCount;
 
 
 private slots:
@@ -90,11 +92,13 @@ private slots:
     void exitProgram();
     void saveJob();
     void loadJob();
+    void setButtonPoss();
 
 
 
 protected:
     virtual void resizeEvent(QResizeEvent *e);
+    void showEvent(QShowEvent *ev);
 
 };
 
