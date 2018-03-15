@@ -5,13 +5,13 @@
 #include <QPalette>
 
 
-HeadForm::HeadForm(QWidget *parent, HeadformType type) :
+HeadForm::HeadForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::HeadForm)
 {
     ui->setupUi(this);
 
-    headformType = type;
+    headformType = HeadProcessing;
 
     pixShirtShow.load(":/new/icons/icons/tt.png");
     pixShirtHide.load(":/new/icons/icons/blank.png");
@@ -22,12 +22,11 @@ HeadForm::HeadForm(QWidget *parent, HeadformType type) :
 
     this->headformType = HeadProcessing;
 
-    labelIndex = new QLabel(this);
-    labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
+//    labelIndex = new QLabel(this);
+//    labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
-    labelIndex->resize(25,25);
-    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
-
+//    labelIndex->resize(25,25);
+//    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
 }
 
 HeadForm::~HeadForm()
@@ -40,12 +39,16 @@ void HeadForm::setHeadformType(HeadForm::HeadformType type)
     switch (type)
     {
         case HeadProcessing:
-            this->headformType = HeadProcessing;
-            break;
+            this->headformType = HeadProcessing; break;
         case HeadPutingOn:
-            this->headformType = HeadPutingOn; break;
+            this->headformType = HeadPutingOn;
+            labelIndex->hide();
+            break;
         case HeadRemoving:
-            this->headformType = HeadRemoving; break;
+            this->headformType = HeadRemoving;
+            labelIndex->hide();
+            this->setStyleSheet("*{background-color: #AA0000}");
+            break;
     };
 }
 
@@ -56,12 +59,16 @@ HeadForm::HeadformType HeadForm::getHeadformType()
 
 void HeadForm::setIndex(int i)
 {
-    this->index = i;
-    labelIndex->setText(QString::number(this->index+1));
-    if(i+1<10)
-        labelIndex->resize(15,25);
+    labelIndex = new QLabel(this);
+    labelIndex->setText(QString::number(i));
+    labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
+    labelIndex->resize(25,25);
+    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
 }
+
+
+
 
 void HeadForm::setSettBtnPosition(HeadForm::SettBtnPos position)
 {

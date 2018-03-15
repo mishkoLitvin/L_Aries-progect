@@ -103,7 +103,7 @@ MainWindow::MainWindow(QWidget *parent) :
         else
             headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
         headSettButton[i] = new HeadSettingButton(i, ui->widgetHeads);
-        if(i<(HEAD_COUNT)/4)
+        if(i<(headsCount)/4)
             headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
         if((i>=(headsCount)/4)&(i<(headsCount)/2))
             headButton[i]->setSettBtnPosition(HeadForm::AtRightDown);
@@ -113,7 +113,8 @@ MainWindow::MainWindow(QWidget *parent) :
             headButton[i]->setSettBtnPosition(HeadForm::AtLeftUp);
         connect(headSettButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
-
+    headButton.first()->setHeadformType(HeadForm::HeadPutingOn);
+    headButton.last()->setHeadformType(HeadForm::HeadRemoving);
 
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));

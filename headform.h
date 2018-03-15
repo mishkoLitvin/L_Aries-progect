@@ -43,7 +43,7 @@ class HeadForm : public QWidget
 public:
     typedef enum HeadformType_{HeadPutingOn, HeadRemoving, HeadProcessing}HeadformType;
 
-    HeadForm(QWidget *parent = 0, HeadformType type = HeadProcessing);
+    HeadForm(QWidget *parent = 0);
     ~HeadForm();
 
     typedef enum HeadformState_ {shirtOn, shirtOff, shirtProcessing} HeadformState;
