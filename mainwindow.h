@@ -16,6 +16,7 @@
 #include <QByteArray>
 #include <QFileDialog>
 #include <QEvent>
+#include <QMessageBox>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -26,11 +27,9 @@
 #include "serialport.h"
 #include "mailsender.h"
 #include "serialsettingsdialog.h"
-//#include "logodialog.h"
 
 #include "settings.h"
 
-#define HEAD_COUNT 18
 //#define DEBUG_BUILD
 #define SHOW_LOGO
 
@@ -69,6 +68,8 @@ private:
     bool logedInService;
 
     SerialPort *comPort;
+
+    int headsCount;
 
 
 private slots:

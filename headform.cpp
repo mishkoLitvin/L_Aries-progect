@@ -74,6 +74,7 @@ void HeadForm::setPixmap(PixmapState state, QString stStr)
         ui->label->setStyleSheet(stStr);
         break;
     }
+
 }
 
 QSize HeadForm::getLabelSize()
