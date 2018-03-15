@@ -88,41 +88,34 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         headButton.append(new HeadForm(ui->widgetHeads));
         headButton[i]->setIndex(i);
-        if(i==0)
-            headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
+        if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
+            switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
+            case 0:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                break;
+            case 1:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                break;
+            case 2:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                break;
+            }
         else
-            if(i==headsCount - 1)
-                headButton[i]->setHeadformType(HeadForm::HeadRemoving);
-            else
-                if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
-                    switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0])
-                    {
-                    case 0:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
-                        break;
-                    case 1:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
-                        break;
-                    case 2:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
-                        break;
-                    }
-                else
-                    headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
-        if((i != 0)&(i != headsCount-1))
-        {
-            headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
-            if(i<(headsCount)/4)
-                headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
-            if((i>=(headsCount)/4)&(i<(headsCount)/2))
-                headButton[i]->setSettBtnPosition(HeadForm::AtRightDown);
-            if((i>=(headsCount)/2)&(i<(3*headsCount)/4))
-                headButton[i]->setSettBtnPosition(HeadForm::AtLeftDown);
-            if((i>=(3*headsCount)/4)&(i<(headsCount)))
-                headButton[i]->setSettBtnPosition(HeadForm::AtLeftUp);
-            connect(headSettButton[i-1], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
-        }
+            headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+
+        headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
+        if(i<(headsCount)/4)
+            headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
+        if((i>=(headsCount)/4)&(i<(headsCount)/2))
+            headButton[i]->setSettBtnPosition(HeadForm::AtRightDown);
+        if((i>=(headsCount)/2)&(i<(3*headsCount)/4))
+            headButton[i]->setSettBtnPosition(HeadForm::AtLeftDown);
+        if((i>=(3*headsCount)/4)&(i<(headsCount)))
+            headButton[i]->setSettBtnPosition(HeadForm::AtLeftUp);
+        connect(headSettButton[i], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
     }
+    headButton.first()->setHeadformType(HeadForm::HeadPutingOn);
+    headButton.last()->setHeadformType(HeadForm::HeadRemoving);
 
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
@@ -311,7 +304,7 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
     if(this->headsCount-2 != (((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]))))
     {
         QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+        msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 150px; min-height: 55px}");
         msgBox.setText("Heads count changed");
         msgBox.setInformativeText("To apply count changing please restart a program");
         msgBox.setWindowTitle("Info");
@@ -465,9 +458,8 @@ void MainWindow::setButtonPoss()
 
             headButton[i]->move(x0_hb+(R)*cosCoef,
                                 y0_hb+(R)*sinCoef);
-            if((i != 0)&(i != headsCount-1))
-                headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
-                                        y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
+            headSettButton[i]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i]->width()/2)*cosCoef,
+                                y0_sb+(R+headButton[i]->height()/2+headSettButton[i]->width()/2)*sinCoef);
     }
 }
 
