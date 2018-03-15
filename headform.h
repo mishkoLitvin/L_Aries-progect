@@ -52,7 +52,7 @@ public:
 
     void setIndex(int i);
     void setSettBtnPosition(SettBtnPos position );
-    void setPixmap(HeadformState state, QString stStr = "background-color: rgb(0,255,150);");
+    void setPixmap(HeadformState state, QString stStr = "background-color: #999999;");
     void setHeadformType(HeadformType type);
     HeadformType getHeadformType();
 

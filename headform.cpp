@@ -22,11 +22,11 @@ HeadForm::HeadForm(QWidget *parent) :
 
     this->headformType = HeadProcessing;
 
-//    labelIndex = new QLabel(this);
-//    labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
+    labelIndex = new QLabel(this);
+    labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
-//    labelIndex->resize(25,25);
-//    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
+    labelIndex->resize(25,25);
+    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
 }
 
 HeadForm::~HeadForm()
@@ -43,11 +43,12 @@ void HeadForm::setHeadformType(HeadForm::HeadformType type)
         case HeadPutingOn:
             this->headformType = HeadPutingOn;
             labelIndex->hide();
+            ui->label->setStyleSheet("* {background-color: #009900}");
             break;
         case HeadRemoving:
             this->headformType = HeadRemoving;
             labelIndex->hide();
-            this->setStyleSheet("*{background-color: #AA0000}");
+            ui->label->setStyleSheet("background-color: #990000");
             break;
     };
 }
@@ -59,12 +60,9 @@ HeadForm::HeadformType HeadForm::getHeadformType()
 
 void HeadForm::setIndex(int i)
 {
-    labelIndex = new QLabel(this);
+    if(i<10)
+        labelIndex->resize(15,25);
     labelIndex->setText(QString::number(i));
-    labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
-
-    labelIndex->resize(25,25);
-    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
 }
 
 
@@ -132,9 +130,9 @@ void HeadForm::mousePressEvent(QMouseEvent *event)
         {
             switch(headformState)
             {
-            case shirtOff: this->setPixmap(shirtOn); break;
-            case shirtOn: this->setPixmap(shirtProcessing); break;
-            case shirtProcessing: this->setPixmap(shirtOff); break;
+            case shirtOff: this->setPixmap(shirtOn, ui->label->styleSheet()); break;
+            case shirtOn: this->setPixmap(shirtProcessing, ui->label->styleSheet()); break;
+            case shirtProcessing: this->setPixmap(shirtOff, ui->label->styleSheet()); break;
             }
         }
     }
