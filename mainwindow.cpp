@@ -150,6 +150,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ragSessionCount = 0;
     ragAllCount = settings->value("COUNTERS/RAG_ALL_CNT", 0).toInt();
+    indexerCiclesSession = 0;
+    indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
 }
 
 MainWindow::~MainWindow()
@@ -379,6 +381,10 @@ void MainWindow::exitProgram()
                             " and " + QString::number(ragAllCount) + " items in total.\n"
                             "\nHave a great day!");
 #endif
+
+    settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
+    settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCiclesAll);
+
     settings->sync();
     comPort->closeSerialPort();
 
@@ -453,7 +459,8 @@ void MainWindow::setButtonPoss()
 
 void MainWindow::timerTimeout()
 {
-    qDebug()<<"timerMain timeout";
+    indexerCiclesAll++;
+    indexerCiclesSession++;
     int i;
     for(i = headButton.length()-1; i>1; i--)
     {
@@ -473,7 +480,12 @@ void MainWindow::timerTimeout()
         }
         else
             headButton[1]->setPixmap(HeadForm::shirtOff);
-//    headButton[headButton.length()-1]->setPixmap(HeadForm::shirtOff);
+    if(headButton[headButton.length()-1]->getRagState() == HeadForm::shirtOn)
+    {
+       ragAllCount++;
+       ragSessionCount++;
+    }
+
     if(!indexer->getIsAutoPrint())
     {
         timerMain->stop();

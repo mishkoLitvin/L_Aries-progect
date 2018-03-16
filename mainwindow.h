@@ -76,6 +76,8 @@ private:
     bool logedInService;
     int headsCount;
 
+    int indexerCiclesSession;
+    int indexerCiclesAll;
     int ragSessionCount;
     int ragAllCount;
 
