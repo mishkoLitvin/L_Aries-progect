@@ -29,6 +29,7 @@
 #include "serialport.h"
 #include "mailsender.h"
 #include "serialsettingsdialog.h"
+#include "infowidget.h"
 
 #include "settings.h"
 
@@ -51,6 +52,7 @@ private:
 
     QList<HeadForm*> headButton;
     QList<HeadSettingButton*> headSettButton;
+    InfoWidget* infoWidget;
     QSettings *settings;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;

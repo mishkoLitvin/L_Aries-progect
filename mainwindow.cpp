@@ -136,6 +136,7 @@ MainWindow::MainWindow(QWidget *parent) :
             connect(headSettButton[i-1], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
         }
     }
+    infoWidget = new InfoWidget(ui->widgetHeads);
 
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
@@ -152,6 +153,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ragAllCount = settings->value("COUNTERS/RAG_ALL_CNT", 0).toInt();
     indexerCiclesSession = 0;
     indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
+
+    infoWidget->setTotal(ragAllCount);
 }
 
 MainWindow::~MainWindow()
@@ -455,6 +458,7 @@ void MainWindow::setButtonPoss()
                 headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
                                         y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
     }
+    infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
 }
 
 void MainWindow::timerTimeout()
@@ -483,7 +487,9 @@ void MainWindow::timerTimeout()
     if(headButton[headButton.length()-1]->getRagState() == HeadForm::shirtOn)
     {
        ragAllCount++;
+       infoWidget->setTotal(ragAllCount);
        ragSessionCount++;
+       infoWidget->setPrinted(ragSessionCount);
     }
 
     if(!indexer->getIsAutoPrint())
