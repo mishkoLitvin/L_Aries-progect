@@ -29,6 +29,8 @@ public:
 signals:
     void settingButtonCliced();
     void sendCommand(QByteArray command);
+    void startPrint(bool isAuto);
+    void stopPrint();
 
 private slots:
 
@@ -48,7 +50,7 @@ private:
 
     int halfCounter;
 
-    bool isAutoPrint;
+    bool isAutoPrintEnable;
 
 protected:
    virtual void resizeEvent(QResizeEvent *e);

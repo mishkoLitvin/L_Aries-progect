@@ -63,7 +63,7 @@ private:
     MailSender *mailSender;
 
     SerialPort *comPort;
-    QTimer timerMain;
+    QTimer *timerMain;
 
     QTime timeProgramStart;
     QTime timeProgramEnd;
@@ -102,6 +102,9 @@ private slots:
     void saveJob();
     void loadJob();
     void setButtonPoss();
+    void timerTimeout();
+    void startPrintProcess(bool autoPrint);
+    void stopPrintProcess();
 
 
 

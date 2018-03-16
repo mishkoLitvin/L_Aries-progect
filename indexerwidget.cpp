@@ -17,7 +17,7 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
 
     pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
 
-    isAutoPrint = false;
+    isAutoPrintEnable = false;
 }
 
 IndexerWidget::~IndexerWidget()
@@ -32,7 +32,7 @@ void IndexerWidget::manualPrintFinish()
 
 bool IndexerWidget::getIsAutoPrint()
 {
-    return this->isAutoPrint;
+    return this->isAutoPrintEnable;
 }
 
 void IndexerWidget::on_pButtonLock_clicked()
@@ -161,7 +161,7 @@ void IndexerWidget::on_pButtonAuto_clicked()
         ui->pButtonAuto->setIcon(QIcon(":/new/icons/icons/playP.png"));
         ui->pButtonPrint->setText("Print Auto");
         ui->pButtonPrint->setIcon(QIcon(":/new/icons/icons/play.png"));
-        isAutoPrint = true;
+        isAutoPrintEnable = true;
     }
     else
     {
@@ -181,7 +181,7 @@ void IndexerWidget::on_pButtonAuto_clicked()
         ui->pButtonAuto->setIcon(QIcon(":/new/icons/icons/play.png"));
         ui->pButtonPrint->setText("Print Manual");
         ui->pButtonPrint->setIcon(QIcon(":/new/icons/icons/playP.png"));
-        isAutoPrint = false;
+        isAutoPrintEnable = false;
     }
 }
 
@@ -218,6 +218,7 @@ void IndexerWidget::on_pButtonPrint_clicked()
         ui->pButtonMoveRight->setHidden(true);
         ui->pButtonMoveUp->setHidden(true);
         pButtonSets->setHidden(true);
+        emit this->startPrint(this->isAutoPrintEnable);
     }
     else
     {
@@ -250,7 +251,7 @@ void IndexerWidget::on_pButtonPrint_clicked()
         ui->pButtonMoveRight->setHidden(false);
         ui->pButtonMoveUp->setHidden(false);
         pButtonSets->setHidden(false);
-
+        emit this->stopPrint();
     }
 }
 

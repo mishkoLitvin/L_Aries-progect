@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent) :
     comPort->setStyleSheet(this->styleSheet());
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
+    timerMain = new QTimer(this);
+    connect(timerMain, SIGNAL(timeout()), this, SLOT(timerTimeout()));
+
 //    QByteArray passwordBArr;
 //    passwordBArr.append("998");
 //    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
@@ -62,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequest()));
     connect(indexer, SIGNAL(sendCommand(QByteArray)), this, SLOT(getIndexLiftCommand(QByteArray)));
     ui->layoutIndexer->addWidget(indexer);
+    connect(indexer, SIGNAL(startPrint(bool)), this, SLOT(startPrintProcess(bool)));
+    connect(indexer, SIGNAL(stopPrint()), this, SLOT(stopPrintProcess()));
 
     indexerLiftSetDialog = new IndexerSettingDialog();
     connect(indexerLiftSetDialog, SIGNAL(indexerParamChanged(QByteArray)), this, SLOT(getIndexerParam(QByteArray)));
@@ -158,7 +163,6 @@ void MainWindow::headSettingRequest(int index)
 {
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
         headSettingDialog->setHeadParams(headSettings, index);
-//        headSettingDialog->move(this->pos().x()+300+200*cos(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.),this->pos().y()+300+200*sin(2.*3.1415926*index/HEAD_COUNT+3.1415926/2.));
         headSettingDialog->move(this->pos().x()+this->width()-headSettingDialog->width()-30,
                                    this->pos().y()+10);
         qDebug()<<this->pos().x()+this->width()-headSettingDialog->width()-30<<this->pos().y()+10;
@@ -167,16 +171,6 @@ void MainWindow::headSettingRequest(int index)
 
 void MainWindow::indexerLiftSettingRequest()
 {
-//    QByteArray passwordBArr;
-//#ifndef DEBUG_BUILD
-
-//    if(!(logedInIndexer|logedInService)){
-//        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
-//    }
-//    if(logedInIndexer|logedInService || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_INDEXER")))
-//#endif
-//    {
-//        logedInIndexer = true;
         indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
                                           settings->value("LIFT_PARAMS").value<QByteArray>());
         indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam);
@@ -184,47 +178,15 @@ void MainWindow::indexerLiftSettingRequest()
         indexerLiftSetDialog->show();
         indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
                                    this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
-//    }
-//#ifndef DEBUG_BUILD
-//    else
-//    {
-//        QMessageBox msgBox;
-//        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
-//        msgBox.setText("Wrong password!");
-//        msgBox.setWindowTitle("Password");
-//        msgBox.exec();
-//    }
-//#endif
 }
 
 void MainWindow::generalSettingDialogRequest()
 {
-//    QByteArray passwordBArr;
-//#ifndef DEBUG_BUILD
-//    if(!(logedInGeneral|logedInService)){
-//        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
-//    }
-//    if(logedInGeneral|logedInService || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL")))
-//#endif
-//    {
-//        logedInGeneral = true;
-
         machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
         generalSettingDialog->setMachineSetting(machineSettings.machineParam);
         generalSettingDialog->show();
         generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->width(),
                                    this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
-//    }
-//#ifndef DEBUG_BUILD
-//    else
-//    {
-//        QMessageBox msgBox;
-//        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
-//        msgBox.setText("Wrong password!");
-//        msgBox.setWindowTitle("Password");
-//        msgBox.exec();
-//    }
-//#endif
 }
 
 void MainWindow::changeHeadNo(int index)
@@ -487,6 +449,46 @@ void MainWindow::setButtonPoss()
                 headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
                                         y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
     }
+}
+
+void MainWindow::timerTimeout()
+{
+    qDebug()<<"timerMain timeout";
+    int i;
+    for(i = headButton.length()-1; i>1; i--)
+    {
+        if(headButton[i-1]->getRagState() == HeadForm::shirtOn)
+            headButton[i]->setPixmap(HeadForm::shirtOn);
+        else
+            headButton[i]->setPixmap(HeadForm::shirtOff);
+    }
+
+    if(headButton[0]->getRagState() == HeadForm::shirtProcessing)
+        headButton[1]->setPixmap(HeadForm::shirtOn);
+    else
+        if(headButton[0]->getRagState() == HeadForm::shirtOn)
+        {
+            headButton[1]->setPixmap(HeadForm::shirtOn);
+            headButton[0]->setPixmap(HeadForm::shirtOff);
+        }
+        else
+            headButton[1]->setPixmap(HeadForm::shirtOff);
+//    headButton[headButton.length()-1]->setPixmap(HeadForm::shirtOff);
+    if(!indexer->getIsAutoPrint())
+    {
+        timerMain->stop();
+        indexer->manualPrintFinish();
+    }
+}
+
+void MainWindow::startPrintProcess(bool autoPrint)
+{
+    timerMain->start(1000);
+}
+
+void MainWindow::stopPrintProcess()
+{
+    timerMain->stop();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)
