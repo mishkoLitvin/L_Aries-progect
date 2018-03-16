@@ -372,12 +372,12 @@ void MainWindow::exitProgram()
 
 #ifndef DEBUG_BUILD
     mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
-                            "Program start time is " + timeProgramStart.toString("H:mm:ss") + "\n"
-                            "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + "\n"
-                            "Total work time is " + timeWorking.toString("H:mm:ss") + "\n"
+                            "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
+                            "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
+                            "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
                             "Machine printed " + QString::number(ragSessionCount) + " items this session"
-                            " and " + QString::number(ragAllCount) + " items in total\n"
-                            "\nHave a good day!");
+                            " and " + QString::number(ragAllCount) + " items in total.\n"
+                            "\nHave a great day!");
 #endif
     settings->sync();
     comPort->closeSerialPort();
