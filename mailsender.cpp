@@ -44,7 +44,7 @@ void MailSender::setSenderName(QString name)
     this->senderAddr->setName(name);
 }
 
-int MailSender::sendMessage(QString subject, QString message)
+int MailSender::sendMessage(QString message, QString subject)
 {
     this->messageText.setText(message);
     this->message.setSubject(subject);
