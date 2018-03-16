@@ -11,6 +11,8 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     ui->listWidget->setStyleSheet("font: 28px bold italic large \"Times New Roman\"");
 
     acceptOnDeactilationEn = true;
+    logedInSerial = false;
+    logedInMail = false;
     ui->emailSettingWidget->setDisabled(true);
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");

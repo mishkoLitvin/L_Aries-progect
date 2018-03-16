@@ -17,6 +17,7 @@
 #include <QFileDialog>
 #include <QEvent>
 #include <QMessageBox>
+#include <QTimer>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -31,7 +32,6 @@
 #include "settings.h"
 
 //#define DEBUG_BUILD
-#define SHOW_LOGO
 
 namespace Ui {
 class MainWindow;
@@ -61,15 +61,19 @@ private:
     IndexerWidget *indexer;
     MailSender *mailSender;
 
+    SerialPort *comPort;
+    QTimer timerMain;
+
     QString truePassword;
     bool logedInHeadSettings;
     bool logedInIndexer;
     bool logedInGeneral;
     bool logedInService;
-
-    SerialPort *comPort;
-
     int headsCount;
+
+    int ragSessionCount;
+    int ragAllCount;
+
 
 
 private slots:

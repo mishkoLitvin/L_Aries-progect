@@ -153,9 +153,10 @@ public:
 
     typedef enum IndexerCommandsEn_{
         IndLock = 0xA0,
+        IndUnLock,
         MoveUp,
         MoveDown,
-        MoveLeft = 0xA7,
+        MoveLeft,
         MoveRight,
         MoveLeftHalf,
         MoveRightHalf,

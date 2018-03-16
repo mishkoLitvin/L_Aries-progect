@@ -8,6 +8,7 @@
 #include <QDebug>
 
 #include "settings.h"
+#include "crc16.h"
 
 
 namespace Ui {
@@ -21,6 +22,9 @@ class IndexerWidget : public QWidget
 public:
     explicit IndexerWidget(QWidget *parent = 0);
     ~IndexerWidget();
+
+    void manualPrintFinish();
+    bool getIsAutoPrint();
 
 signals:
     void settingButtonCliced();
@@ -41,6 +45,10 @@ private:
     Ui::IndexerWidget *ui;
 
     QPushButton *pButtonSets;
+
+    int halfCounter;
+
+    bool isAutoPrint;
 
 protected:
    virtual void resizeEvent(QResizeEvent *e);

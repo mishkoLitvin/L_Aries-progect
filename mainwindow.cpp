@@ -14,11 +14,17 @@ MainWindow::MainWindow(QWidget *parent) :
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
+//    qDebug() << QSslSocket::supportsSsl();
+//    qDebug() << QSslSocket::sslLibraryBuildVersionString();
+//    qDebug() << QSslSocket::sslLibraryVersionString();
+
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
     setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
                                           +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
     ui->widgetHeads->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
+    ui->dockWidget->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
+
 
     headsCount = settings->value(QString("HEAD/HEADS_COUNT"), 1).toInt();
     headsCount+=2;
@@ -135,8 +141,8 @@ MainWindow::MainWindow(QWidget *parent) :
     logedInGeneral = false;
     logedInService = false;
 
-//    this->setWindowState(Qt::WindowFullScreen);
-//    this->setWindowOpacity(0.2);
+    ragSessionCount = 0;
+    ragAllCount = settings->value("COUNTERS/RAG_ALL_CNT", 0).toInt();
 }
 
 MainWindow::~MainWindow()
