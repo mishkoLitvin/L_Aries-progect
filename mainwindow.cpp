@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
+    timeProgramStart = QTime::currentTime();
+
 //    qDebug() << QSslSocket::supportsSsl();
 //    qDebug() << QSslSocket::sslLibraryBuildVersionString();
 //    qDebug() << QSslSocket::sslLibraryVersionString();
@@ -364,8 +366,14 @@ void MainWindow::serviceStateChange()
 
 void MainWindow::exitProgram()
 {
+    timeProgramEnd = QTime::currentTime();
+//    timeWorking = timeProgramEnd - timeProgramStart;
+
 #ifndef DEBUG_BUILD
-    mailSender->sendMessage();
+    mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
+                            "Program start time is " + timeProgramStart.toString("H:mm:ss") + "\n"
+                            "Program finisg time is " + timeProgramEnd.toString("H:mm:ss") + "\n"
+                            "Total work time is " /*+ timeProgramEnd.toString("H:mm:ss") +*/ "\nHave a good day!");
 #endif
     settings->sync();
     comPort->closeSerialPort();

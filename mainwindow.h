@@ -17,6 +17,7 @@
 #include <QFileDialog>
 #include <QEvent>
 #include <QMessageBox>
+#include <QTime>
 #include <QTimer>
 
 #include "headform.h"
@@ -63,6 +64,10 @@ private:
 
     SerialPort *comPort;
     QTimer *timerMain;
+
+    QTime timeProgramStart;
+    QTime timeProgramEnd;
+    QTime timeWorking;
 
     QString truePassword;
     bool logedInHeadSettings;

@@ -12,8 +12,8 @@ class MailSender : public QObject
 public:
     explicit MailSender(QObject *parent = 0);
 
-    int sendMessage(QString subject = "LiQt Machine interface autosend message",
-                    QString message = "Hi,\nThis is LiQt Machine Interface.\n");
+    int sendMessage(QString message = "Hi,\nThis is LiQt Machine Interface.\n",
+                    QString subject = "LiQt Machine interface autosend message");
 
 
 private:
