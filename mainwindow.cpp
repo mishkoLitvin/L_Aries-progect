@@ -434,14 +434,14 @@ void MainWindow::setButtonPoss()
     int i;
     float sinCoef, cosCoef, R, x0_hb, y0_hb, x0_sb, y0_sb;
     if(areaH<areaW)
-        R = areaH/2-headButton[0]->height()/2-headSettButton[0]->height()/2-10;
+        R = areaH/2-headButton[0]->height()/2-headSettButton[0]->height()/2+5;
     else
-        R = areaW/2-headButton[0]->width()/2-headSettButton[0]->width()/2-10;
+        R = areaW/2-headButton[0]->width()/2-headSettButton[0]->width()/2+5;
 
     x0_hb = ui->widgetHeads->width()/2-headButton[0]->width()/2;
-    y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/2;
+    y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/2+headSettButton[0]->width()/2;
     x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
-    y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2;
+    y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
 
     for(i = 0; i<headsCount; i++)
     {
@@ -495,7 +495,7 @@ void MainWindow::timerTimeout()
 
 void MainWindow::startPrintProcess(bool autoPrint)
 {
-    timerMain->start(1000);
+    timerMain->start(2000);
 }
 
 void MainWindow::stopPrintProcess()
