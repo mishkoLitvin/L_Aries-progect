@@ -9,8 +9,7 @@ NumpadDialog::NumpadDialog(QWidget *parent, QString windowTitle) :
     ui->setupUi(this);
     this->setWindowTitle(windowTitle);
     this->setStyleSheet("QPushButton {font: 40px; min-width: 60px; min-height: 60px;}"
-                        "QLineEdit {font: 40px; min-height: 50px;}"
-                        );
+                        "QLineEdit {font: 40px; min-height: 50px;}");
     int k;
     buttons[0] = new NumpadButton(0, QString::number(0));
     ui->layoutButtons->addWidget(buttons[0], 3, 0);

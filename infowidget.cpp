@@ -6,12 +6,20 @@ InfoWidget::InfoWidget(QWidget *parent) :
     ui(new Ui::InfoWidget)
 {
     ui->setupUi(this);
-    this->setStyleSheet("QFrame#InfoWidget{margin : 0px; border: 2px; padding: 0px; border-style: outset; border-radius: 4px;}"
-                        "QLabel#labelTotal {font-size: 9px; border: 2px outset black; border-radius: 2px;}"
-                        "QLabel#labelDZH {font-size: 9px; border: 2px outset black; border-radius: 2px;}"
-                        "QLabel#labelPrinted {border: 2px outset black; border-radius: 2px;}"
-                        "QLabel#labelRemain {border: 2px outset black; border-radius: 2px;}"
-                        "QLabel#labelSkipedShirts {border: 2px outset black; border-radius: 2px;}");
+//    this->setStyleSheet("QFrame#InfoWidget{margin : 0px; border: 2px; padding: 0px; border-style: outset; border-radius: 4px;}"
+//                        "QLabel#labelTotal {font-size: 9px; border: 2px outset black; border-radius: 2px;}"
+//                        "QLabel#labelDZH {font-size: 9px; border: 2px outset black; border-radius: 2px;}"
+//                        "QLabel#labelPrinted {border: 2px outset black; border-radius: 2px;}"
+//                        "QLabel#labelRemain {border: 2px outset black; border-radius: 2px;}"
+//                        "QLabel#labelSkipedShirts {border: 2px outset black; border-radius: 2px;}");
+
+    this->setStyleSheet("*{background-color: #50303030; color: white}"
+                        "QLabel{background-color: #00000000; padding: 1px;}"
+                        "QLabel#labelTotal {background-color: #50303030; font-size: 9px}"
+                        "QLabel#labelDZH {background-color: #50303030; font-size: 9px}"
+                        "QLabel#labelPrinted {background-color: #50303030;}"
+                        "QLabel#labelRemain {background-color: #50303030;}"
+                        "QLabel#labelSkipedShirts {background-color: #50303030;}");
 
     imageArrows.load(":/arrows/icons/arrows/arrowLR.png");
     ui->labelIndexerHalf->setPixmap(QPixmap::fromImage(imageArrows.scaled(ui->labelIndexerHalf->size(), Qt::KeepAspectRatio)));

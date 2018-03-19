@@ -26,6 +26,7 @@
 #include "indexersettingdialog.h"
 #include "generalsettingdialog.h"
 #include "numpaddialog.h"
+#include "keyboarddialog.h"
 #include "serialport.h"
 #include "mailsender.h"
 #include "serialsettingsdialog.h"
