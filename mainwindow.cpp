@@ -14,6 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
+    UserSetting *uS = new UserSetting(this);
+
+    uS->show();
+
     timeProgramStart = QTime::currentTime();
 
 //    qDebug() << QSslSocket::supportsSsl();
@@ -170,7 +174,6 @@ void MainWindow::headSettingRequest(int index)
         headSettingDialog->setHeadParams(headSettings, index);
         headSettingDialog->move(this->pos().x()+this->width()-headSettingDialog->width()-30,
                                    this->pos().y()+10);
-        qDebug()<<this->pos().x()+this->width()-headSettingDialog->width()-30<<this->pos().y()+10;
         headSettingDialog->show();
 }
 
@@ -428,8 +431,6 @@ void MainWindow::loadJob()
 
 void MainWindow::setButtonPoss()
 {
-    qDebug()<<this->size()<<ui->widgetHeads->size();
-
     int areaW, areaH;
     areaH = ui->widgetHeads->height();
     areaW = ui->widgetHeads->width();
@@ -501,7 +502,7 @@ void MainWindow::timerTimeout()
 
 void MainWindow::startPrintProcess(bool autoPrint)
 {
-    timerMain->start(2000);
+    timerMain->start(1000);
 }
 
 void MainWindow::stopPrintProcess()
@@ -518,4 +519,5 @@ void MainWindow::resizeEvent(QResizeEvent *e)
 void MainWindow::showEvent(QShowEvent *ev)
 {
     this->setButtonPoss();
+    ev->accept();
 }

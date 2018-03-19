@@ -244,6 +244,4 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
     ev->accept();
     acceptOnDeactilationEn = true;
-
-
 }

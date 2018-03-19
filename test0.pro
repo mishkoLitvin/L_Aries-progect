@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     mailsender.cpp\
     generalsettingdialog.cpp \
     logodialog.cpp \
-    infowidget.cpp
+    infowidget.cpp \
+    usersetting.cpp
 
 unix:SOURCES += mailSrc/emailaddress.cpp \
     mailSrc/mimeattachment.cpp \
@@ -57,7 +58,8 @@ HEADERS  += mainwindow.h \
     mailsender.h \
     generalsettingdialog.h \
     logodialog.h \
-    infowidget.h
+    infowidget.h \
+    usersetting.h
 
 unix:HEADERS  += mailSrc/emailaddress.h \
     mailSrc/mimeattachment.h \
@@ -83,12 +85,13 @@ FORMS    += mainwindow.ui \
     serialsettingsdialog.ui \
     generalsettingdialog.ui \
     logodialog.ui \
-    infowidget.ui
+    infowidget.ui \
+    usersetting.ui
 
 RESOURCES += \
     icons.qrc
 
 win32:SMTP_LIBRARY_LOCATION = C:\Users\T\Dropbox\SharedProgects\NewProjects\buildsWin\build-SMTPEmailRelease
 win32:CONFIG(release, debug|release): LIBS += -L$$SMTP_LIBRARY_LOCATION/release/ -lSMTPEmail
-INCLUDEPATH += $$SMTP_LIBRARY_LOCATION
-DEPENDPATH += $$SMTP_LIBRARY_LOCATION
+win32:INCLUDEPATH += $$SMTP_LIBRARY_LOCATION
+win32:DEPENDPATH += $$SMTP_LIBRARY_LOCATION

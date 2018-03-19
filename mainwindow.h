@@ -30,6 +30,7 @@
 #include "mailsender.h"
 #include "serialsettingsdialog.h"
 #include "infowidget.h"
+#include "usersetting.h"
 
 #include "settings.h"
 
