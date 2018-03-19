@@ -14,9 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
-    UserSetting *uS = new UserSetting(this);
+    usersSettingDialog = new UserSettingDialog(this);
 
-    uS->show();
+
+//    uS->show();
 
     timeProgramStart = QTime::currentTime();
 
@@ -44,11 +45,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timerMain, SIGNAL(timeout()), this, SLOT(timerTimeout()));
 
 //    QByteArray passwordBArr;
-//    passwordBArr.append("998");
+//    passwordBArr.append("666");
 //    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
-//    settings->setValue("PASSWORDS/PASSWORD_INDEXER", temp);
+//    settings->setValue("PASSWORDS/PASSWORD_USERS", temp);
 //    qDebug() << temp;
-    int i;
+//    int i;
 
 //    QStringList stList;
 //    stList.append("Blue");
@@ -81,7 +82,9 @@ MainWindow::MainWindow(QWidget *parent) :
     generalSettingDialog = new GeneralSettingDialog();
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
-    generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(), settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt());
+    generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(),
+                                       settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt(),
+                                       settings->value("PASSWORDS/PASSWORD_USERS").toInt());
     generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(), settings->value("STYLE/STYLE_SEL_INDEX").toInt());
     generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
@@ -90,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
     connect(generalSettingDialog, SIGNAL(serviceSettingRequest()), this, SLOT(serviceStateChange()));
     connect(generalSettingDialog, SIGNAL(styleChangedIndex(int)), this, SLOT(getVeiwSettings(int)));
+    connect(generalSettingDialog, SIGNAL(usersSettingRequest()), usersSettingDialog, SLOT(show()));
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
@@ -159,6 +163,8 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
 
     infoWidget->setTotal(ragAllCount);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -508,6 +514,52 @@ void MainWindow::startPrintProcess(bool autoPrint)
 void MainWindow::stopPrintProcess()
 {
     timerMain->stop();
+}
+
+void MainWindow::userLogin()
+{
+    LoginDialog loginDialog;
+    loginDialog.setUserNames(usersSettingDialog->getUserNames());
+    loginDialog.setStyleSheet(this->styleSheet()
+                              +"*{color: white; font: 24px bold italic large}"
+                              +"QPushButton {min-width: 70px; min-height: 55px}");
+    bool stayOnFlag = true, exitFlag = false;
+    for(;stayOnFlag;)
+    {
+        loginDialog.exec();
+        if(usersSettingDialog->isUser(loginDialog.userName, loginDialog.userPassword))
+            stayOnFlag = false;
+        else
+        {
+            QMessageBox msgBox;
+            msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+            msgBox.setText("Wrong user password");
+            msgBox.setInformativeText("To try login again press \"Yes\" \n"
+                                      "To exit press \"No\".");
+            msgBox.setWindowTitle("Login");
+            msgBox.setIcon(QMessageBox::Warning);
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            int ret = msgBox.exec();
+            switch (ret)
+            {
+            case QMessageBox::Yes:
+                stayOnFlag = true;
+                exitFlag = false;
+                break;
+            case QMessageBox::No:
+                stayOnFlag = false;
+                exitFlag = true;
+                break;
+            }
+        }
+    }
+
+    if(exitFlag)
+    {
+        this->close();
+        exit(0);
+    }
+
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)

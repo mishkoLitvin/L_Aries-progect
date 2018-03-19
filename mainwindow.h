@@ -32,6 +32,7 @@
 #include "serialsettingsdialog.h"
 #include "infowidget.h"
 #include "usersetting.h"
+#include "logindialog.h"
 
 #include "settings.h"
 
@@ -49,6 +50,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void userLogin();
+
+
 private:
     Ui::MainWindow *ui;
 
@@ -65,6 +69,7 @@ private:
     SerialSettingsDialog *serialSettingsDialog;
     IndexerWidget *indexer;
     MailSender *mailSender;
+    UserSettingDialog *usersSettingDialog;
 
     SerialPort *comPort;
     QTimer *timerMain;
@@ -111,7 +116,6 @@ private slots:
     void timerTimeout();
     void startPrintProcess(bool autoPrint);
     void stopPrintProcess();
-
 
 
 protected:
