@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/new/icons">
-        <file>icons/!!!!!!.png</file>
         <file>icons/anatol.png</file>
         <file>icons/blank.png</file>
         <file>icons/brush.png</file>
@@ -62,6 +61,7 @@
         <file>icons/connect.png</file>
         <file>icons/mail.png</file>
         <file>icons/AAAAAAAA.gif</file>
+        <file>icons/warning.png</file>
     </qresource>
     <qresource prefix="/arrows">
         <file>icons/arrows/arrowD.png</file>
