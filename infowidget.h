@@ -1,13 +1,15 @@
 #ifndef INFOWIDGET_H
 #define INFOWIDGET_H
 
-#include <QWidget>
+#include <QFrame>
+#include <QImage>
+#include <QBitmap>
 
 namespace Ui {
 class InfoWidget;
 }
 
-class InfoWidget : public QWidget
+class InfoWidget : public QFrame
 {
     Q_OBJECT
 
@@ -19,6 +21,7 @@ public:
 
 private:
     Ui::InfoWidget *ui;
+    QImage imageHome, imageLock, imageUp, imageArrows, imageEmerg, imageWarning, imageStopHand;
 };
 
 #endif // INFOWIDGET_H
