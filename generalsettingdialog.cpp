@@ -13,6 +13,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     acceptOnDeactilationEn = true;
     logedInSerial = false;
     logedInMail = false;
+    logedInUserSett = false;
     ui->emailSettingWidget->setDisabled(true);
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
@@ -24,6 +25,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
     connect(ui->listWidget, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
     connect(ui->pushButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
+    connect(ui->pushButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -42,10 +44,11 @@ void GeneralSettingDialog::setFocusLossAccept(bool flag)
     acceptOnDeactilationEn = flag;
 }
 
-void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass)
+void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass, uint16_t userPass)
 {
     this->serialPassword = serialPass;
     this->mailPassword = mailPass;
+    this->usersPassword = userPass;
 }
 
 void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect)
@@ -195,6 +198,31 @@ void GeneralSettingDialog::changeServiceStateClicked()
         this->show();
     }
 
+}
+
+void GeneralSettingDialog::userSettingClicked()
+{
+    QByteArray passwordBArr;
+#ifndef DEBUG_BUILD
+    if(!logedInUserSett){
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
+    }
+    if(logedInUserSett || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->usersPassword))
+#endif
+    {
+        logedInUserSett = true;
+        emit this->usersSettingRequest();
+    }
+#ifndef DEBUG_BUILD
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
+        msgBox.setText("Wrong password!");
+        msgBox.setWindowTitle("Password");
+        msgBox.exec();
+    }
+#endif
 }
 
 void GeneralSettingDialog::styleChanged(int index)

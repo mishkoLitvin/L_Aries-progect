@@ -55,7 +55,7 @@ public:
     void setEmailSettings(EmailSettings emailSett);
     void setMachineSetting(MachineSettings::MachineParameters machineParam);
     void setFocusLossAccept(bool flag);
-    void setPasswords(uint16_t serialPass, uint16_t mailPass);
+    void setPasswords(uint16_t serialPass, uint16_t mailPass, uint16_t userPass);
     void setStyleList(QStringList stList, int curSelect);
     void showPortInfo(ComSettings comSett);
 
@@ -65,14 +65,18 @@ signals:
     void serialPortSettingsDialogRequested();
     void styleChangedIndex(int index);
     void serviceSettingRequest();
+    void usersSettingRequest();
 
 private:
     Ui::GeneralSettingDialog *ui;
     bool acceptOnDeactilationEn;
     bool logedInSerial;
     bool logedInMail;
+    bool logedInUserSett;
+
     uint16_t serialPassword;
     uint16_t mailPassword;
+    uint16_t usersPassword;
 
 private slots:
     void accept();
@@ -82,6 +86,7 @@ private slots:
     void eventFilterSetup();
     void changeSerialPortSettingsClicked();
     void changeServiceStateClicked();
+    void userSettingClicked();
     void styleChanged(int index);
 
 protected:
