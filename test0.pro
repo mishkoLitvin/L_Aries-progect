@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     serialsettingsdialog.cpp \
     mailsender.cpp\
     generalsettingdialog.cpp \
-    logodialog.cpp
+    logodialog.cpp \
+    infowidget.cpp
 
 unix:SOURCES += mailSrc/emailaddress.cpp \
     mailSrc/mimeattachment.cpp \
@@ -55,7 +56,8 @@ HEADERS  += mainwindow.h \
     serialsettingsdialog.h \
     mailsender.h \
     generalsettingdialog.h \
-    logodialog.h
+    logodialog.h \
+    infowidget.h
 
 unix:HEADERS  += mailSrc/emailaddress.h \
     mailSrc/mimeattachment.h \
@@ -80,7 +82,8 @@ FORMS    += mainwindow.ui \
     numpaddialog.ui \
     serialsettingsdialog.ui \
     generalsettingdialog.ui \
-    logodialog.ui
+    logodialog.ui \
+    infowidget.ui
 
 RESOURCES += \
     icons.qrc
