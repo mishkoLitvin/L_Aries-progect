@@ -73,6 +73,12 @@ void UserSettingDialog::tableCellActivated(int row, int col)
     qDebug()<<row<<col;
     tableRowSelected = row;
     tableColnumSelected = col;
+    if(col != 0)
+    {
+        QString itemText = KeyboardDialog::getText(this);
+        if(itemText != "")
+            ui->tableWidget->item(row, col)->setText(itemText);
+    }
 }
 
 void UserSettingDialog::addUser()
@@ -81,6 +87,8 @@ void UserSettingDialog::addUser()
     ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1, 40);
     ui->tableWidget->setCellWidget(ui->tableWidget->rowCount()-1, 0, new QCheckBox("", this));
     ui->tableWidget->cellWidget(ui->tableWidget->rowCount()-1,0)->setMinimumSize(30,30);
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 1, new QTableWidgetItem());
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 2, new QTableWidgetItem());
     usersData->setValue("USER_COUNT", ui->tableWidget->rowCount());
 }
 
