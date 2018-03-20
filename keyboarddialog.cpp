@@ -48,9 +48,23 @@ KeyboardDialog::~KeyboardDialog()
     delete ui;
 }
 
-QString KeyboardDialog::getText(QWidget *parent, QString windowTitle)
+QString KeyboardDialog::getText(QWidget *parent, QString windowTitle, KeyboardPosition position)
 {
     KeyboardDialog keyboard(parent, windowTitle);
+    QSize windowSize;
+    foreach(QWidget *widget, QApplication::topLevelWidgets()) {
+      if(widget->objectName() == "MainWindow")
+      {
+          windowSize.setWidth(widget->width());
+          windowSize.setHeight(widget->height());
+      }
+    }
+    switch (position){
+    case Custom: break;
+    case Bottom: keyboard.move(windowSize.width()/2-keyboard.width()/2, windowSize.height()-keyboard.height());
+        qDebug() << keyboard.size() << windowSize;
+        qDebug() << windowSize.width()/2-keyboard.width()/2 << windowSize.height()-keyboard.height(); break;
+    }
     keyboard.exec();
     return keyboard.text;
 }

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QDebug>
+#include <QApplication>
 
 class KeyboardButton : public QPushButton{
     Q_OBJECT
@@ -29,11 +30,25 @@ class KeyboardDialog;
 class KeyboardDialog : public QDialog
 {
     Q_OBJECT
+private:
+    QStringList characters;
+    Ui::KeyboardDialog *ui;
+    QList<KeyboardButton*> buttons;
+    KeyboardButton* dashUnderscoreButton;
+    QString text;
+    bool capsLockFlag;
+    bool shiftFlag;
+
 
 public:
+    typedef enum KeyboardPosition_{
+        Bottom,
+        Custom
+    }KeyboardPosition;
+
     explicit KeyboardDialog(QWidget *parent = 0, QString windowTitle = "Keyboard");
     ~KeyboardDialog();
-    static QString getText(QWidget *parent = 0, QString windowTitle = "Keyboard");
+    static QString getText(QWidget *parent = 0, QString windowTitle = "Keyboard", KeyboardPosition position = Custom);
     void buttonsToUpper();
     void buttonsToLower();
 
@@ -49,15 +64,6 @@ private slots:
 
 signals:
     void keyClicked();
-
-private:
-    QStringList characters;
-    Ui::KeyboardDialog *ui;
-    QList<KeyboardButton*> buttons;
-    KeyboardButton* dashUnderscoreButton;
-    QString text;
-    bool capsLockFlag;
-    bool shiftFlag;
 };
 
 #endif // KEYBOARDDIALOG_H
