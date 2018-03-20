@@ -9,6 +9,7 @@ KeyboardDialog::KeyboardDialog(QWidget *parent, QString windowTitle) :
     this->setWindowTitle(windowTitle);
 
     this->setStyleSheet("KeyboardButton {font: 20px; min-width: 30px; min-height: 30px;}"
+//                        "KeyboardButton {max-width: 30px; max-height: 30px;}"
                         "QLineEdit {font: 20px; min-height: 30px;}");
 
     capsLockFlag = false;
@@ -30,6 +31,15 @@ KeyboardDialog::KeyboardDialog(QWidget *parent, QString windowTitle) :
     connect(ui->pbEnter, SIGNAL(clicked(bool)), this, SLOT(submitText()));
     connect(ui->pbCaps, SIGNAL(clicked(bool)), this, SLOT(capsLock()));
     connect(ui->pbShift, SIGNAL(clicked(bool)), this, SLOT(shift()));
+
+    KeyboardButton* atSignButton = new KeyboardButton("@");
+    ui->capsLayout->insertWidget(0, atSignButton/*, 0, Qt::AlignRight*/);
+    connect(atSignButton, SIGNAL(clicked(QString)), this, SLOT(appendToLineEdit(QString)));
+
+    dashUnderscoreButton = new KeyboardButton("-");
+    ui->enterLayout->insertWidget(0, dashUnderscoreButton);
+    connect(dashUnderscoreButton, SIGNAL(clicked(QString)), this, SLOT(appendToLineEdit(QString)));
+    connect(dashUnderscoreButton, SIGNAL(clicked(QString)), this, SLOT(deshift()));
 }
 
 KeyboardDialog::~KeyboardDialog()
@@ -80,8 +90,16 @@ void KeyboardDialog::shift()
 {
     if(!shiftFlag)
     {
-        if(!capsLockFlag) this->buttonsToUpper();
-        else this->buttonsToLower();
+        if(!capsLockFlag)
+        {
+            this->buttonsToUpper();
+            this->dashUnderscoreSwitch(false);
+        }
+        else
+        {
+            this->buttonsToLower();
+            this->dashUnderscoreSwitch(true);
+        }
         shiftFlag = true;
     }
     else deshift();
@@ -91,8 +109,16 @@ void KeyboardDialog::deshift()
 {
     if(shiftFlag)
     {
-        if(!capsLockFlag) this->buttonsToLower();
-        else this->buttonsToUpper();
+        if(!capsLockFlag)
+        {
+            this->buttonsToLower();
+            this->dashUnderscoreSwitch(true);
+        }
+        else
+        {
+            this->buttonsToUpper();
+            this->dashUnderscoreSwitch(false);
+        }
         shiftFlag = false;
     }
 }
@@ -102,11 +128,13 @@ void KeyboardDialog::capsLock()
     if (!capsLockFlag)
     {
         this->buttonsToUpper();
+        this->dashUnderscoreSwitch(false);
         capsLockFlag = true;
     }
     else
     {
         this->buttonsToLower();
+        this->dashUnderscoreSwitch(true);
         capsLockFlag = false;
     }
 
@@ -115,6 +143,20 @@ void KeyboardDialog::capsLock()
 void KeyboardDialog::someKeyClicked()
 {
     emit this->keyClicked();
+}
+
+void KeyboardDialog::dashUnderscoreSwitch(bool shifted)
+{
+    if(!shifted)
+    {
+        dashUnderscoreButton->setText("_");
+        dashUnderscoreButton->setCharacter("_");
+    }
+    else
+    {
+        dashUnderscoreButton->setText("-");
+        dashUnderscoreButton->setCharacter("-");
+    }
 }
 
 KeyboardButton::KeyboardButton(QString character)

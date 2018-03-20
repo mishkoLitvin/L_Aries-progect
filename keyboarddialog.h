@@ -45,6 +45,7 @@ private slots:
     void deshift();
     void capsLock();
     void someKeyClicked();
+    void dashUnderscoreSwitch(bool shifted = false); //if(!shifted): dash to underscore and vice versa
 
 signals:
     void keyClicked();
@@ -53,6 +54,7 @@ private:
     QStringList characters;
     Ui::KeyboardDialog *ui;
     QList<KeyboardButton*> buttons;
+    KeyboardButton* dashUnderscoreButton;
     QString text;
     bool capsLockFlag;
     bool shiftFlag;

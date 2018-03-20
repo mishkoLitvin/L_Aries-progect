@@ -163,8 +163,6 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
 
     infoWidget->setTotal(ragAllCount);
-
-
 }
 
 MainWindow::~MainWindow()
