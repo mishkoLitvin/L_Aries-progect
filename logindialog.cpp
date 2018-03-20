@@ -33,7 +33,7 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event)
 {
     if((event->type()==QEvent::MouseButtonDblClick)|((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease)))
     {
-        ui->lineEditPassword->setText(QString::number(NumpadDialog::getValue(this)));
+        ui->lineEditPassword->setText(KeyboardDialog::getText(this));
         ui->lineEditPassword->clearFocus();
     }
     return false;

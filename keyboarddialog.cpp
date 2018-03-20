@@ -15,7 +15,7 @@ KeyboardDialog::KeyboardDialog(QWidget *parent, QString windowTitle) :
     capsLockFlag = false;
     shiftFlag = false;
 
-    QString qwerty = "qwertyuiopasdfghjkl:zxcvbnm.,/";
+    QString qwerty = "1234567890qwertyuiopasdfghjkl:zxcvbnm.,/";
     characters = qwerty.split("", QString::SkipEmptyParts);
 
     int k = 0;

@@ -5,6 +5,7 @@
 #include <QEvent>
 
 #include "numpaddialog.h"
+#include "keyboarddialog.h"
 
 namespace Ui {
 class LoginDialog;
