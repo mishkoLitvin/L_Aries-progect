@@ -29,6 +29,7 @@ NumpadDialog::NumpadDialog(QWidget *parent, QString windowTitle) :
     ui->layoutButtons->addWidget(enterButton, 3, 3);
     connect(enterButton, SIGNAL(clicked(bool)), this, SLOT(submitValue()));
     QPushButton *backspaceButton = new QPushButton("<-");
+    backspaceButton->setAutoRepeat(true);
     ui->layoutButtons->addWidget(backspaceButton, 0, 3);
     connect(backspaceButton, SIGNAL(clicked(bool)), this, SLOT(backspace()));
     QPushButton *clearButton = new QPushButton("Clear");
