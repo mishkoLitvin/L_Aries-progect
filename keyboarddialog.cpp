@@ -8,8 +8,9 @@ KeyboardDialog::KeyboardDialog(QWidget *parent, QString windowTitle) :
     ui->setupUi(this);
     this->setWindowTitle(windowTitle);
 
-    this->setStyleSheet("KeyboardButton {font: 20px; min-width: 30px; min-height: 30px;}"
+    this->setStyleSheet("KeyboardButton {font: 20px; min-width: 50px; min-height: 50px; border-radius: 8px;}"
 //                        "KeyboardButton {max-width: 30px; max-height: 30px;}"
+                        "QPushButton {border-radius: 8px;}"
                         "QLineEdit {font: 20px; min-height: 30px;}");
 
     capsLockFlag = false;
