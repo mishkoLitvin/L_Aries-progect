@@ -104,7 +104,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
 
-
+    int i;
     for(i = 0; i<headsCount; i++)
     {
         headButton.append(new HeadForm(ui->widgetHeads));
@@ -163,8 +163,6 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
 
     infoWidget->setTotal(ragAllCount);
-
-
 }
 
 MainWindow::~MainWindow()
