@@ -28,7 +28,6 @@ KeyboardDialog::KeyboardDialog(QWidget *parent, QString windowTitle) :
         k++;
     }
 
-    ui->pbBackspace->setAutoRepeat(true);
     connect(ui->pbBackspace, SIGNAL(clicked(bool)), this, SLOT(backspace()));
     connect(ui->pbEnter, SIGNAL(clicked(bool)), this, SLOT(submitText()));
     connect(ui->pbCaps, SIGNAL(clicked(bool)), this, SLOT(capsLock()));
@@ -62,7 +61,9 @@ QString KeyboardDialog::getText(QWidget *parent, QString windowTitle, KeyboardPo
     }
     switch (position){
     case Custom: break;
-    case Bottom: keyboard.move(windowSize.width()/2-keyboard.width()/2, windowSize.height()-keyboard.height()); break;
+    case Bottom: keyboard.move(windowSize.width()/2-keyboard.width()/2, windowSize.height()-keyboard.height());
+        qDebug() << keyboard.size() << windowSize;
+        qDebug() << windowSize.width()/2-keyboard.width()/2 << windowSize.height()-keyboard.height(); break;
     }
     keyboard.exec();
     return keyboard.text;
