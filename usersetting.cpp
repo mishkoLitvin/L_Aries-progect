@@ -9,18 +9,24 @@ UserSettingDialog::UserSettingDialog(QWidget *parent) :
 
     usersData = new QSettings("./users.ini", QSettings::IniFormat);
 
-    ui->tableWidget->setRowCount(usersData->value("USER_COUNT", 0).toInt());
+    ui->checkBoxLoginDialogEn->setChecked(usersData->value("LOGIN_DIALOG_EN", false).toBool());
 
-    ui->tableWidget->setColumnWidth(0, 25);
-    ui->tableWidget->setColumnWidth(1, (ui->tableWidget->width()-40)/2);
-    ui->tableWidget->setColumnWidth(2, (ui->tableWidget->width()-40)/2);
+    ui->tableWidget->setRowCount(usersData->value("USER_COUNT", 0).toInt());
+    if(ui->tableWidget->rowCount() == 0)
+        ui->checkBoxLoginDialogEn->setChecked(false);
+
+    ui->tableWidget->setColumnWidth(0, 60);
+    ui->tableWidget->setColumnWidth(1, (ui->tableWidget->width()-80)/2);
+    ui->tableWidget->setColumnWidth(2, (ui->tableWidget->width()-80)/2);
 
     int i;
+    this->setStyleSheet("QCheckBox::indicator { width:32px; height: 32px;}");
     for(i = 0; i<ui->tableWidget->rowCount(); i++)
     {
-        ui->tableWidget->setRowHeight(i, 40);
+        ui->tableWidget->setRowHeight(i, 45);
         ui->tableWidget->setCellWidget(i, 0, new QCheckBox("", this));
-        ui->tableWidget->cellWidget(i,0)->setMinimumSize(30,30);
+        ui->tableWidget->cellWidget(i,0)->setMinimumSize(45,45);
+        static_cast<QCheckBox*>(ui->tableWidget->cellWidget(i, 0))->setStyleSheet("QCheckBox::indicator { width:40px; height: 40px;}");
 
         ui->tableWidget->setItem(i, 1, new QTableWidgetItem());
         ui->tableWidget->setItem(i, 2, new QTableWidgetItem());
@@ -35,6 +41,7 @@ UserSettingDialog::UserSettingDialog(QWidget *parent) :
     connect(ui->pButtonRemoveAll, SIGNAL(clicked(bool)), this, SLOT(removeAllUsers()));
     connect(ui->pButtonOK, SIGNAL(clicked(bool)), this, SLOT(acceptSlot()));
     connect(ui->pButtonCancel, SIGNAL(clicked(bool)), this, SLOT(rejectSlot()));
+    connect(ui->checkBoxLoginDialogEn, SIGNAL(clicked(bool)), this, SLOT(loginDialogEnable()));
 
 
 }
@@ -66,6 +73,11 @@ QStringList UserSettingDialog::getUserNames()
     for(i = 0; i<ui->tableWidget->rowCount(); i++)
         names.append(ui->tableWidget->item(i,1)->text());
     return names;
+}
+
+bool UserSettingDialog::getLoginWindowEnable()
+{
+    return ui->checkBoxLoginDialogEn->isChecked();
 }
 
 void UserSettingDialog::tableCellActivated(int row, int col)
@@ -123,6 +135,7 @@ void UserSettingDialog::acceptSlot()
         usersData->setValue("USER_"+QString::number(i)+"_NAME", ui->tableWidget->item(i,1)->text());
         usersData->setValue("USER_"+QString::number(i)+"_PASSWORD", ui->tableWidget->item(i,2)->text());
     }
+    usersData->sync();
     this->hide();
 }
 
@@ -131,9 +144,14 @@ void UserSettingDialog::rejectSlot()
     this->hide();
 }
 
+void UserSettingDialog::loginDialogEnable()
+{
+    usersData->setValue("LOGIN_DIALOG_EN", ui->checkBoxLoginDialogEn->isChecked());
+}
+
 void UserSettingDialog::showEvent(QShowEvent *ev)
 {
-    ui->tableWidget->setColumnWidth(0, 35);
-    ui->tableWidget->setColumnWidth(1, (ui->tableWidget->width()-40)/2);
-    ui->tableWidget->setColumnWidth(2, (ui->tableWidget->width()-40)/2);
+    ui->tableWidget->setColumnWidth(0, 45);
+    ui->tableWidget->setColumnWidth(1, (ui->tableWidget->width()-80)/2);
+    ui->tableWidget->setColumnWidth(2, (ui->tableWidget->width()-80)/2);
 }

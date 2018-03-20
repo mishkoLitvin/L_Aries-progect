@@ -23,6 +23,7 @@ public:
 
     bool isUser(QString userName, QString userPassw);
     QStringList getUserNames();
+    bool getLoginWindowEnable();
 
 private:
     Ui::UserSettingDialog *ui;
@@ -37,6 +38,7 @@ private slots:
     void removeAllUsers();
     void acceptSlot();
     void rejectSlot();
+    void loginDialogEnable();
 
 protected:
     void showEvent(QShowEvent *ev);

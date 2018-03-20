@@ -89,6 +89,7 @@ private:
     int indexerCiclesAll;
     int ragSessionCount;
     int ragAllCount;
+    QString userName;
 
 
 
