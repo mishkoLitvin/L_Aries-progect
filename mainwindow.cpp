@@ -383,13 +383,16 @@ void MainWindow::exitProgram()
     timeWorking = timeWorking.addMSecs(timeProgramStart.msecsTo(timeProgramEnd));
 
 #ifndef DEBUG_BUILD
-    mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
-                            "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
-                            "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
-                            "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
-                            "Machine printed " + QString::number(ragSessionCount) + " items this session"
-                            " and " + QString::number(ragAllCount) + " items in total.\n"
-                            "\nHave a great day!");
+    qDebug()<<"mail: "<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable;
+    if(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable)
+        mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
+                                "Worker: " + this->userName + ".\n"
+                                "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
+                                "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
+                                "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
+                                "Machine printed " + QString::number(ragSessionCount) + " items this session"
+                                " and " + QString::number(ragAllCount) + " items in total.\n"
+                                "\nHave a great day!");
 #endif
 
     settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
@@ -516,47 +519,55 @@ void MainWindow::stopPrintProcess()
 
 void MainWindow::userLogin()
 {
-    LoginDialog loginDialog;
-    loginDialog.setUserNames(usersSettingDialog->getUserNames());
-    loginDialog.setStyleSheet(this->styleSheet()
-                              +"*{color: white; font: 24px bold italic large}"
-                              +"QPushButton {min-width: 70px; min-height: 55px}");
-    bool stayOnFlag = true, exitFlag = false;
-    for(;stayOnFlag;)
+    if(usersSettingDialog->getLoginWindowEnable())
     {
-        loginDialog.exec();
-        if(usersSettingDialog->isUser(loginDialog.userName, loginDialog.userPassword))
-            stayOnFlag = false;
-        else
+        LoginDialog loginDialog;
+        loginDialog.setUserNames(usersSettingDialog->getUserNames());
+        loginDialog.setStyleSheet(this->styleSheet()
+                                  +"*{color: white; font: 24px bold italic large}"
+                                  +"QPushButton {min-width: 70px; min-height: 55px}");
+        bool stayOnFlag = true, exitFlag = false;
+        for(;stayOnFlag;)
         {
-            QMessageBox msgBox;
-            msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
-            msgBox.setText("Wrong user password");
-            msgBox.setInformativeText("To try login again press \"Yes\" \n"
-                                      "To exit press \"No\".");
-            msgBox.setWindowTitle("Login");
-            msgBox.setIcon(QMessageBox::Warning);
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            int ret = msgBox.exec();
-            switch (ret)
+            loginDialog.exec();
+            if(usersSettingDialog->isUser(loginDialog.userName, loginDialog.userPassword))
             {
-            case QMessageBox::Yes:
-                stayOnFlag = true;
-                exitFlag = false;
-                break;
-            case QMessageBox::No:
                 stayOnFlag = false;
-                exitFlag = true;
-                break;
+                this->userName = loginDialog.userName;
+            }
+            else
+            {
+                QMessageBox msgBox;
+                msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+                msgBox.setText("Wrong user password");
+                msgBox.setInformativeText("To try login again press \"Yes\" \n"
+                                          "To exit press \"No\".");
+                msgBox.setWindowTitle("Login");
+                msgBox.setIcon(QMessageBox::Warning);
+                msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+                int ret = msgBox.exec();
+                switch (ret)
+                {
+                case QMessageBox::Yes:
+                    stayOnFlag = true;
+                    exitFlag = false;
+                    break;
+                case QMessageBox::No:
+                    stayOnFlag = false;
+                    exitFlag = true;
+                    break;
+                }
             }
         }
-    }
 
-    if(exitFlag)
-    {
-        this->close();
-        exit(0);
+        if(exitFlag)
+        {
+            this->close();
+            exit(0);
+        }
     }
+    else
+        this->userName = "Default_user";
 
 }
 

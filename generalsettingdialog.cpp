@@ -64,6 +64,7 @@ void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
     ui->editReceiver->setText(emailSett.receiverAdress);
     ui->editSender->setText(emailSett.senderAdress);
     ui->editSubject->setText(emailSett.emailSubject);
+    ui->checkBoxMailSendEnable->setChecked(emailSett.mailEnable);
 }
 
 void GeneralSettingDialog::accept()
@@ -73,6 +74,7 @@ void GeneralSettingDialog::accept()
     emailSett.senderPassword = ui->editPassword->text();
     emailSett.receiverAdress = ui->editReceiver->text();
     emailSett.emailSubject = ui->editSubject->text();
+    emailSett.mailEnable = ui->checkBoxMailSendEnable->isChecked();
     emit this->emailSettingsChanged(emailSett);
 
     MachineSettings::MachineParameters machineParams;
@@ -103,10 +105,12 @@ void GeneralSettingDialog::lockUnlockEmail()
         logedInMail = true;
         if(ui->pButtonLockUnlockEmail->isChecked()){
             ui->emailSettingWidget->setEnabled(true);
+            ui->checkBoxMailSendEnable->setEnabled(true);
             ui->pButtonLockUnlockEmail->setText("Lock");
         }
         else{
-            ui->emailSettingWidget->setDisabled(true);
+            ui->emailSettingWidget->setEnabled(false);
+            ui->checkBoxMailSendEnable->setEnabled(false);
             ui->pButtonLockUnlockEmail->setText("Unlock");
         }
     }

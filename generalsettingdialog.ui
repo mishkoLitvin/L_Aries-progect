@@ -63,7 +63,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -287,7 +287,8 @@
             <string>Users setup</string>
            </property>
            <property name="icon">
-            <iconset theme="avatar-default-symbolic.symbolic.png"/>
+            <iconset theme="avatar-default-symbolic.symbolic.png">
+             <normaloff>.</normaloff>.</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -368,37 +369,51 @@
       <attribute name="title">
        <string>Mail setup</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>86</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QCheckBox" name="checkBoxMailSendEnable">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Enable mail sending</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>86</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pButtonLockUnlockEmail">
+           <property name="minimumSize">
+            <size>
+             <width>55</width>
+             <height>55</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Unlock</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="pButtonLockUnlockEmail">
-         <property name="minimumSize">
-          <size>
-           <width>55</width>
-           <height>55</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Unlock</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="3">
+       <item>
         <widget class="QWidget" name="emailSettingWidget" native="true">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="2" column="0">

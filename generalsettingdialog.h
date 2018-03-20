@@ -18,6 +18,7 @@ struct EmailSettings{
     QString senderPassword;
     QString receiverAdress;
     QString emailSubject;
+    bool mailEnable;
 };
 
 Q_DECLARE_METATYPE(EmailSettings)
@@ -28,7 +29,7 @@ inline QDataStream& operator<<(QDataStream& out, const EmailSettings& st)
     out << st.senderPassword;
     out << st.receiverAdress;
     out << st.emailSubject;
-
+    out << st.mailEnable;
     return out;
 }
 inline QDataStream& operator>>(QDataStream& in, EmailSettings& st)
@@ -37,7 +38,7 @@ inline QDataStream& operator>>(QDataStream& in, EmailSettings& st)
     in >> st.senderPassword;
     in >> st.receiverAdress;
     in >> st.emailSubject;
-
+    in >> st.mailEnable;
     return in;
 }
 
