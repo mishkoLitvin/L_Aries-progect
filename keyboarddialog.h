@@ -54,8 +54,8 @@ private:
     Ui::KeyboardDialog *ui;
     QList<KeyboardButton*> buttons;
     QString text;
-    bool capsLockFlag = false;
-    bool shiftFlag = false;
+    bool capsLockFlag;
+    bool shiftFlag;
 };
 
 #endif // KEYBOARDDIALOG_H

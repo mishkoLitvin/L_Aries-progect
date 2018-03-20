@@ -11,6 +11,9 @@ KeyboardDialog::KeyboardDialog(QWidget *parent, QString windowTitle) :
     this->setStyleSheet("KeyboardButton {font: 20px; min-width: 30px; min-height: 30px;}"
                         "QLineEdit {font: 20px; min-height: 30px;}");
 
+    capsLockFlag = false;
+    shiftFlag = false;
+
     QString qwerty = "qwertyuiopasdfghjkl:zxcvbnm.,/";
     characters = qwerty.split("", QString::SkipEmptyParts);
 
