@@ -7,6 +7,8 @@
 #include <QCheckBox>
 #include <QSettings>
 
+#include "keyboarddialog.h"
+
 namespace Ui {
 class UserSettingDialog;
 }
