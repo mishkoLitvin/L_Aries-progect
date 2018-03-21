@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>432</width>
+    <height>309</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,8 +26,23 @@
            <height>64</height>
           </size>
          </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="midLineWidth">
+          <number>1</number>
+         </property>
          <property name="text">
           <string>ico</string>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <property name="indent">
+          <number>-1</number>
          </property>
         </widget>
        </item>
@@ -63,7 +78,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>99</width>
+       <width>115</width>
        <height>20</height>
       </size>
      </property>
@@ -89,7 +104,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>99</width>
+       <width>115</width>
        <height>20</height>
       </size>
      </property>

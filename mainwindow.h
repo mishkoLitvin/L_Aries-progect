@@ -71,6 +71,7 @@ private:
     IndexerWidget *indexer;
     MailSender *mailSender;
     UserSettingDialog *usersSettingDialog;
+    MaintanceDialog* maintanceDialog;
 
     SerialPort *comPort;
     QTimer *timerMain;
@@ -90,6 +91,8 @@ private:
     int indexerCiclesAll;
     int ragSessionCount;
     int ragAllCount;
+    bool autoPrintEnabled;
+
     QString userName;
 
 
@@ -118,6 +121,7 @@ private slots:
     void timerTimeout();
     void startPrintProcess(bool autoPrint);
     void stopPrintProcess();
+    void maintanceWorkSlot();
 
 
 protected:

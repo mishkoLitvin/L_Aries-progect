@@ -159,6 +159,11 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
 
     infoWidget->setTotal(ragAllCount);
+
+    maintanceDialog = new MaintanceDialog(this);
+    connect(maintanceDialog, SIGNAL(stopRequest()), indexer, SLOT(printFinish()));
+    connect(maintanceDialog, SIGNAL(continueRequest()), timerMain, SLOT(start()));
+    connect(maintanceDialog, SIGNAL(maintanceWorkEnable()), this, SLOT(maintanceWorkSlot()));
 }
 
 MainWindow::~MainWindow()
@@ -270,7 +275,6 @@ void MainWindow::getLiftParam(QByteArray liftParamArr)
 {
     settings->setValue(QString("LIFT_PARAMS"), liftParamArr);
     comPort->sendData(liftParamArr);
-
 }
 
 void MainWindow::getIndexLiftSettComm(QByteArray commandArr)
@@ -499,18 +503,27 @@ void MainWindow::timerTimeout()
     if(!indexer->getIsAutoPrint())
     {
         timerMain->stop();
-        indexer->manualPrintFinish();
+        indexer->printFinish();
     }
+    qDebug()<<indexerCiclesAll;
+    maintanceDialog->check(indexerCiclesAll);
+
 }
 
 void MainWindow::startPrintProcess(bool autoPrint)
 {
     timerMain->start(1000);
+    this->autoPrintEnabled = autoPrint;
 }
 
 void MainWindow::stopPrintProcess()
 {
     timerMain->stop();
+}
+
+void MainWindow::maintanceWorkSlot()
+{
+    ui->pButtonMaintance->setHidden(false);
 }
 
 void MainWindow::userLogin()
@@ -576,5 +589,6 @@ void MainWindow::resizeEvent(QResizeEvent *e)
 void MainWindow::showEvent(QShowEvent *ev)
 {
     this->setButtonPoss();
+    ui->pButtonMaintance->setHidden(true);
     ev->accept();
 }

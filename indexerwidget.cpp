@@ -25,7 +25,7 @@ IndexerWidget::~IndexerWidget()
     delete ui;
 }
 
-void IndexerWidget::manualPrintFinish()
+void IndexerWidget::printFinish()
 {
     ui->pButtonPrint->click();
 }

@@ -23,8 +23,9 @@ public:
     explicit IndexerWidget(QWidget *parent = 0);
     ~IndexerWidget();
 
-    void manualPrintFinish();
     bool getIsAutoPrint();
+public slots:
+    void printFinish();
 
 signals:
     void settingButtonCliced();
