@@ -11,6 +11,7 @@
 
 #include "settings.h"
 #include "numpaddialog.h"
+#include "keyboarddialog.h"
 #include "serialsettingsdialog.h"
 
 struct EmailSettings{

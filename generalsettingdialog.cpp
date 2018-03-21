@@ -31,6 +31,8 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->listWidget, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
     connect(ui->pushButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
     connect(ui->pushButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
+
+
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -160,6 +162,10 @@ void GeneralSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
+    ui->editPassword->installEventFilter(this);
+    ui->editReceiver->installEventFilter(this);
+    ui->editSender->installEventFilter(this);
+    ui->editSubject->installEventFilter(this);
 }
 
 void GeneralSettingDialog::changeSerialPortSettingsClicked()
@@ -265,8 +271,26 @@ bool GeneralSettingDialog::eventFilter(QObject *watched, QEvent *event)
     if((event->type()==QEvent::MouseButtonDblClick)|((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease)))
     {
         acceptOnDeactilationEn = false;
-        qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue(this));
-        qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();
+        if((watched == ui->editPassword)
+                |(watched == ui->editReceiver)
+                |(watched == ui->editSender)
+                |(watched == ui->editSubject))
+        {
+            if(ui->pButtonLockUnlockEmail->isChecked())
+            {
+                QString text = KeyboardDialog::getText(this);
+                if(!text.isEmpty())
+                {
+                    qobject_cast<QLineEdit*>(watched)->setText(text);
+                    qobject_cast<QLineEdit*>(watched)->clearFocus();
+                }
+            }
+        }
+        else
+        {
+            qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue(this));
+            qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();
+        }
         acceptOnDeactilationEn = true;
     }
     return false;

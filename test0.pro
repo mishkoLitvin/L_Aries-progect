@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     infowidget.cpp \
     keyboarddialog.cpp \
     usersetting.cpp \
-    logindialog.cpp
+    logindialog.cpp \
+    maintancedialog.cpp
 
 unix:SOURCES += mailSrc/emailaddress.cpp \
     mailSrc/mimeattachment.cpp \
@@ -63,7 +64,8 @@ HEADERS  += mainwindow.h \
     infowidget.h \
     usersetting.h \
     logindialog.h \
-    keyboarddialog.h
+    keyboarddialog.h \
+    maintancedialog.h
 
 unix:HEADERS  += mailSrc/emailaddress.h \
     mailSrc/mimeattachment.h \
@@ -92,7 +94,8 @@ FORMS    += mainwindow.ui \
     infowidget.ui \
     usersetting.ui \
     logindialog.ui \
-    keyboarddialog.ui
+    keyboarddialog.ui \
+    maintancedialog.ui
 
 RESOURCES += \
     icons.qrc

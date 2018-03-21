@@ -33,6 +33,7 @@
 #include "infowidget.h"
 #include "usersetting.h"
 #include "logindialog.h"
+#include "maintancedialog.h"
 
 #include "settings.h"
 

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
+    <width>350</width>
     <height>760</height>
    </rect>
   </property>
@@ -214,8 +214,15 @@
             <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,10">
              <item>
               <widget class="QLabel" name="label">
+               <property name="font">
+                <font>
+                 <family>Serif</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
-                <string>Rear speed (5..100)%</string>
+                <string>Rear speed
+ (5..100)%</string>
                </property>
               </widget>
              </item>
@@ -257,7 +264,8 @@
              <item>
               <widget class="QLabel" name="label_2">
                <property name="text">
-                <string>Front speed (5..100)%</string>
+                <string>Front speed
+ (5..100)%</string>
                </property>
               </widget>
              </item>
@@ -345,7 +353,8 @@
              <item>
               <widget class="QLabel" name="label_5">
                <property name="text">
-                <string>Rear range (0..30) inch</string>
+                <string>Rear range
+ (0..30) inch</string>
                </property>
               </widget>
              </item>
@@ -384,7 +393,8 @@
              <item>
               <widget class="QLabel" name="label_6">
                <property name="text">
-                <string>Front range (0..30) inch</string>
+                <string>Front range 
+(0..30) inch</string>
                </property>
               </widget>
              </item>
