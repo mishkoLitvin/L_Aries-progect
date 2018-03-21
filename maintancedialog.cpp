@@ -129,7 +129,15 @@ void MaintanceDialog::check(int cyclesCount)
         {
             emit this->stopRequest();
             maintanceList[i].troubleType = (int)Warning;
-            bool service = MaintanceDialog::execute(maintanceList[i], this);
+
+            bool service = MaintanceDialog::execute(this,
+                                                    (MaintanceType)maintanceList[i].troubleType,
+                                                    maintanceList[i].troubleName,
+                                                    maintanceList[i].troubleInfo
+                                                    +"\nYou must do this after "
+                                                    +QString::number(settings->value("WARNING_CYCLES_COUNT", 50).toInt())
+                                                    +" cycles.",
+                                                    maintanceList[i].machineInfo);
             if(service)
             {
                 emit this->stopRequest();

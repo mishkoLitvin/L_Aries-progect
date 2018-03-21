@@ -162,7 +162,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     maintanceDialog = new MaintanceDialog(this);
     connect(maintanceDialog, SIGNAL(stopRequest()), indexer, SLOT(printFinish()));
-    connect(maintanceDialog, SIGNAL(continueRequest()), timerMain, SLOT(start()));
+    connect(maintanceDialog, SIGNAL(continueRequest()), indexer, SLOT(printStart()));
     connect(maintanceDialog, SIGNAL(maintanceWorkEnable()), this, SLOT(maintanceWorkSlot()));
 }
 

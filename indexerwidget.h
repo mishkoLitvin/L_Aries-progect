@@ -26,6 +26,7 @@ public:
     bool getIsAutoPrint();
 public slots:
     void printFinish();
+    void printStart();
 
 signals:
     void settingButtonCliced();
