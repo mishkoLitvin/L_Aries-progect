@@ -57,6 +57,7 @@
 #include <QDataStream>
 #include <QEvent>
 #include <QMetaType>
+#include <QStringList>
 
 QT_USE_NAMESPACE
 
@@ -134,6 +135,7 @@ signals:
 private slots:
     void showPortInfo(int idx);
     void apply();
+    void reject();
     void checkCustomBaudRatePolicy(int idx);
     void checkCustomDevicePathPolicy(int idx);
 

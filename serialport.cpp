@@ -95,6 +95,7 @@ void SerialPort::setupPort()
     this->closeSerialPort();
 
     settingsComDialog->exec();
+
     this->openSerialPort();
 }
 

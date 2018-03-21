@@ -74,6 +74,7 @@ SerialSettingsDialog::SerialSettingsDialog(QWidget *parent) :
 
     connect(ui->applyButton, &QPushButton::clicked,
             this, &SerialSettingsDialog::apply);
+    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->serialPortInfoListBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &SerialSettingsDialog::showPortInfo);
     connect(ui->baudRateBox,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -104,8 +105,10 @@ SerialSettingsDialog::SerialSettingsDialog(ComSettings nSett, QWidget *parent):
     this->settings() = nSett;
 
 
+
     connect(ui->applyButton, &QPushButton::clicked,
             this, &SerialSettingsDialog::apply);
+    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->serialPortInfoListBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &SerialSettingsDialog::showPortInfo);
     connect(ui->baudRateBox,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -117,6 +120,51 @@ SerialSettingsDialog::SerialSettingsDialog(ComSettings nSett, QWidget *parent):
     fillPortsParameters();
     fillPortsInfo();
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
+
+    int i;
+    bool stay = true;
+    for(i = 0; (i<ui->baudRateBox->count())&stay; i++)
+    {
+        if(ui->baudRateBox->itemText(i) == nSett.stringBaudRate)
+        {
+            ui->baudRateBox->setCurrentIndex(i);
+            stay = false;
+        }
+    }
+    if(!stay)
+        ui->baudRateBox->addItem(nSett.stringBaudRate, nSett.baudRate);
+
+    stay = true;
+    for(i = 0; (i<ui->dataBitsBox->count())&stay; i++)
+        if(ui->dataBitsBox->itemText(i) == nSett.stringDataBits)
+        {
+            ui->dataBitsBox->setCurrentIndex(i);
+            stay = false;
+        }
+
+    stay = true;
+    for(i = 0; (i<ui->parityBox->count())&stay; i++)
+        if(ui->parityBox->itemText(i) == nSett.stringParity)
+        {
+            ui->parityBox->setCurrentIndex(i);
+            stay = false;
+        }
+
+    stay = true;
+    for(i = 0; (i<ui->stopBitsBox->count())&stay; i++)
+        if(ui->stopBitsBox->itemText(i) == nSett.stringStopBits)
+        {
+            ui->stopBitsBox->setCurrentIndex(i);
+            stay = false;
+        }
+    stay = true;
+    for(i = 0; (i<ui->flowControlBox->count())&stay; i++)
+        if(ui->flowControlBox->itemText(i) == nSett.stringFlowControl)
+        {
+            ui->flowControlBox->setCurrentIndex(i);
+            stay = false;
+        }
+
 
     updateSettings();
 }
@@ -137,7 +185,10 @@ void SerialSettingsDialog::showPortInfo(int idx)
         return;
 
     QStringList list = ui->serialPortInfoListBox->itemData(idx).toStringList();
-    ui->descriptionLabel->setText(tr("Description: %1").arg(list.count() > 1 ? list.at(1) : tr(blankString)));
+    if((list.count() > 1)&(QString(list.at(1)).length()<15))
+        ui->descriptionLabel->setText(tr("Description: %1").arg(list.count() > 1 ? list.at(1) : tr(blankString)));
+    else
+        ui->descriptionLabel->setText(tr("Description: %1").arg(list.count() > 1 ? QString(QString(list.at(1)).mid(0,13)+"...") : tr(blankString)));
     ui->manufacturerLabel->setText(tr("Manufacturer: %1").arg(list.count() > 2 ? list.at(2) : tr(blankString)));
     ui->serialNumberLabel->setText(tr("Serial number: %1").arg(list.count() > 3 ? list.at(3) : tr(blankString)));
     ui->locationLabel->setText(tr("Location: %1").arg(list.count() > 4 ? list.at(4) : tr(blankString)));
@@ -149,6 +200,11 @@ void SerialSettingsDialog::apply()
 {
     updateSettings();
     emit this->serialSettingAccepted(this->settings());
+    accept();
+}
+
+void SerialSettingsDialog::reject()
+{
     accept();
 }
 

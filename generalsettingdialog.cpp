@@ -10,6 +10,11 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
 
     ui->listWidget->setStyleSheet("font: 28px bold italic large \"Times New Roman\"");
 
+    ui->editPassword->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
+    ui->editReceiver->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
+    ui->editSender->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
+    ui->editSubject->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
+
     acceptOnDeactilationEn = true;
     logedInSerial = false;
     logedInMail = false;
@@ -274,6 +279,9 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->spinBoxHeadsCount->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
+    ui->pushButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
     ev->accept();
     acceptOnDeactilationEn = true;
+
+
 }

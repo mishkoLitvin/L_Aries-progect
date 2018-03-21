@@ -16,9 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     usersSettingDialog = new UserSettingDialog(this);
 
-
-//    uS->show();
-
     timeProgramStart = QTime::currentTime();
 
 //    qDebug() << QSslSocket::supportsSsl();
@@ -36,8 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     headsCount = settings->value(QString("HEAD/HEADS_COUNT"), 1).toInt();
     headsCount+=2;
 
-    comPort = new SerialPort(this);
-    comPort->setComParams(settings->value("COM_SETTING").value<ComSettings>());
+    comPort = new SerialPort(settings->value("COM_SETTING").value<ComSettings>(),this);
     comPort->setStyleSheet(this->styleSheet());
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
