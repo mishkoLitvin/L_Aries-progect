@@ -121,7 +121,7 @@ private slots:
     void timerTimeout();
     void startPrintProcess(bool autoPrint);
     void stopPrintProcess();
-    void maintanceWorkSlot();
+    void maintanceWorkSlot(bool enable);
 
 
 protected:

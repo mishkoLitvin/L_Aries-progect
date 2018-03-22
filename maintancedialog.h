@@ -6,57 +6,9 @@
 #include <QDebug>
 #include <QSettings>
 
-class MaintanceElement {
-public:
-    int troubleType;
-    QString troubleName;
-    QString troubleInfo;
-    QString machineInfo;
-    int lastCount;
-    int repeatCyclesCount;
+#include "maintancewidget.h"
 
-    MaintanceElement(QString name = "trouble",
-                     QString trInfo = "trouble info",
-                     QString machInfo = "machine info",
-                     int lastCount = 0,
-                     int repeatCount = 0)
-    {
-        this->troubleType = 0;
-        this->troubleName = name;
-        this->troubleInfo = trInfo;
-        this->machineInfo = machInfo;
-        this->lastCount = lastCount;
-        this->repeatCyclesCount = repeatCount;
-    }
-
-
-};
-
-Q_DECLARE_METATYPE(MaintanceElement);
-
-inline QDataStream& operator<<(QDataStream& out, const MaintanceElement& st)
-{
-    out << st.troubleType;
-    out << st.troubleName;
-    out << st.troubleInfo;
-    out << st.machineInfo;
-    out << st.lastCount;
-    out << st.repeatCyclesCount;
-
-    return out;
-}
-inline QDataStream& operator>>(QDataStream& in, MaintanceElement& st)
-{
-    in >> st.troubleType;
-    in >> st.troubleName;
-    in >> st.troubleInfo;
-    in >> st.machineInfo;
-    in >> st.lastCount;
-    in >> st.repeatCyclesCount;
-
-    return in;
-}
-
+Q_DECLARE_METATYPE(QList<int>)
 
 namespace Ui {
 class MaintanceDialog;
@@ -94,10 +46,13 @@ public:
 
     void check(int cyclesCount);
 
+public slots:
+    void openMaintanceList();
+
 signals:
     void stopRequest();
     void continueRequest();
-    void maintanceWorkEnable();
+    void maintanceWorkEnable(bool enabled);
 
 private:
     Ui::MaintanceDialog *ui;
@@ -105,10 +60,16 @@ private:
     bool doItNow;
     QSettings* settings;
     QList <MaintanceElement> maintanceList;
+    QList <MaintanceElement> unsolvedList;
+    QList <int> unsolvedListIndex;
+    MaintanceWidget* maintanceWidget;
+    bool firstCheck;
+    int lastCyclesCount;
 
 private slots:
     void acceptSlot();
     void rejectSlot();
+    void solveItem(int index);
 };
 
 #endif // MAINTANCEDIALOG_H

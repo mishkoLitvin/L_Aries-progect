@@ -163,7 +163,8 @@ MainWindow::MainWindow(QWidget *parent) :
     maintanceDialog = new MaintanceDialog(this);
     connect(maintanceDialog, SIGNAL(stopRequest()), indexer, SLOT(printFinish()));
     connect(maintanceDialog, SIGNAL(continueRequest()), indexer, SLOT(printStart()));
-    connect(maintanceDialog, SIGNAL(maintanceWorkEnable()), this, SLOT(maintanceWorkSlot()));
+    connect(maintanceDialog, SIGNAL(maintanceWorkEnable(bool)), this, SLOT(maintanceWorkSlot(bool)));
+    connect(ui->pButtonMaintance, SIGNAL(clicked(bool)), maintanceDialog, SLOT(openMaintanceList()));
 }
 
 MainWindow::~MainWindow()
@@ -521,9 +522,9 @@ void MainWindow::stopPrintProcess()
     timerMain->stop();
 }
 
-void MainWindow::maintanceWorkSlot()
+void MainWindow::maintanceWorkSlot(bool enable)
 {
-    ui->pButtonMaintance->setHidden(false);
+    ui->pButtonMaintance->setVisible(enable);
 }
 
 void MainWindow::userLogin()
@@ -589,6 +590,6 @@ void MainWindow::resizeEvent(QResizeEvent *e)
 void MainWindow::showEvent(QShowEvent *ev)
 {
     this->setButtonPoss();
-    ui->pButtonMaintance->setHidden(true);
+    maintanceDialog->check(indexerCiclesAll);
     ev->accept();
 }
