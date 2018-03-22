@@ -48,6 +48,7 @@ public:
 
 public slots:
     void openMaintanceList();
+    void openDialog();
 
 signals:
     void stopRequest();
@@ -58,6 +59,8 @@ private:
     Ui::MaintanceDialog *ui;
 
     bool doItNow;
+    bool maintanceHaveWork;
+    bool maintanceHaveWarning;
     QSettings* settings;
     QList <MaintanceElement> maintanceList;
     QList <MaintanceElement> unsolvedList;

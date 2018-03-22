@@ -29,9 +29,9 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
     connect(ui->listWidget, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
-    connect(ui->pushButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
-    connect(ui->pushButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
-
+    connect(ui->pButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
+    connect(ui->pButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
+    connect(ui->pButtonDirection, SIGNAL(clicked(bool)), this, SLOT(changeDirection()));
 
 }
 
@@ -44,6 +44,18 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
 {
     ui->spinBoxHeadsCount->setValue(machineParam.HeadCount);
     ui->dSpinBoxWarningTime->setValue(machineParam.WarningTime/10.);
+    if(machineParam.Direction == -1)
+    {
+        ui->pButtonDirection->setChecked(true);
+        ui->pButtonDirection->setText("Direction\nclockwise");
+
+    }
+    else
+    {
+        ui->pButtonDirection->setChecked(false);
+        ui->pButtonDirection->setText("Direction\nanticlockwise");
+
+    }
 }
 
 void GeneralSettingDialog::setFocusLossAccept(bool flag)
@@ -87,6 +99,11 @@ void GeneralSettingDialog::accept()
     MachineSettings::MachineParameters machineParams;
     machineParams.HeadCount = ui->spinBoxHeadsCount->value();
     machineParams.WarningTime = ui->dSpinBoxWarningTime->value()*10;
+
+    if(ui->pButtonDirection->isChecked())
+        machineParams.Direction = -1;
+    else
+        machineParams.Direction = 1;
 
     emit this->machineParamChanged(machineParams.toByteArray());
 
@@ -200,7 +217,7 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 void GeneralSettingDialog::changeServiceStateClicked()
 {
     acceptOnDeactilationEn = false;
-    if(ui->pushButtonServiceState->isChecked())
+    if(ui->pButtonServiceState->isChecked())
     {
         emit this->serviceSettingRequest();
         this->hide();
@@ -243,6 +260,20 @@ void GeneralSettingDialog::userSettingClicked()
 void GeneralSettingDialog::styleChanged(int index)
 {
     emit this->styleChangedIndex(index);
+}
+
+void GeneralSettingDialog::changeDirection()
+{
+    if(ui->pButtonDirection->isChecked())
+    {
+        emit this->directionChanged(-1);
+        ui->pButtonDirection->setText("Direction\nclockwise");
+    }
+    else
+    {
+        emit this->directionChanged(1);
+        ui->pButtonDirection->setText("Direction\nanticlockwise");
+    }
 }
 
 void GeneralSettingDialog::showPortInfo(ComSettings comSett)
@@ -303,7 +334,7 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->spinBoxHeadsCount->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
-    ui->pushButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
+    ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
     ev->accept();
     acceptOnDeactilationEn = true;
 

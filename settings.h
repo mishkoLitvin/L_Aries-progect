@@ -83,6 +83,7 @@ public:
     typedef struct MachineParameters_{
         uint16_t HeadCount;
         uint16_t WarningTime;
+        int16_t Direction;
 
         QByteArray toByteArray();
     }MachineParameters;

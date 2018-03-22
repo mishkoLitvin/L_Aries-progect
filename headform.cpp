@@ -68,7 +68,7 @@ void HeadForm::setIndex(int i)
 
 
 
-void HeadForm::setSettBtnPosition(HeadForm::SettBtnPos position)
+void HeadForm::setIndexLabelPosition(HeadForm::SettBtnPos position)
 {
     switch (position) {
     case AtRightUp:

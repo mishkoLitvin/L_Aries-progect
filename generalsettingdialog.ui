@@ -40,6 +40,12 @@
        <property name="text">
         <string>Cancel</string>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item>
@@ -53,6 +59,12 @@
        <property name="text">
         <string>OK</string>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
       </widget>
      </item>
     </layout>
@@ -63,7 +75,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -263,6 +275,33 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
+          <widget class="QToolButton" name="pButtonDirection">
+           <property name="text">
+            <string>Direction
+clock</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/rotateRight.png</normaloff>:/new/icons/icons/rotateRight.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_5">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -274,32 +313,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButtonUserSetup">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>80</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Users setup</string>
-           </property>
-           <property name="icon">
-            <iconset theme="avatar-default-symbolic.symbolic.png">
-             <normaloff>.</normaloff>.</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>50</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>false</bool>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
@@ -319,6 +332,35 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
+          <widget class="QToolButton" name="pButtonUserSetup">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>55</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Users setup</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/user.png</normaloff>:/new/icons/icons/user.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_4">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -332,11 +374,11 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButtonServiceState">
+          <widget class="QToolButton" name="pButtonServiceState">
            <property name="minimumSize">
             <size>
-             <width>90</width>
-             <height>80</height>
+             <width>80</width>
+             <height>55</height>
             </size>
            </property>
            <property name="text">
@@ -354,6 +396,9 @@
            </property>
            <property name="checkable">
             <bool>true</bool>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
            </property>
           </widget>
          </item>

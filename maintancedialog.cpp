@@ -32,6 +32,8 @@ MaintanceDialog::MaintanceDialog(QWidget *parent) :
     }
 
     doItNow = false;
+    maintanceHaveWarning = false;
+    maintanceHaveWork = false;
 
     maintanceWidget = new MaintanceWidget(this);
 
@@ -173,17 +175,18 @@ void MaintanceDialog::check(int cyclesCount)
                           -settings->value("WARNING_CYCLES_COUNT", 50).toInt()))
                 &(cyclesCount<(maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount-1)))
         {
-            emit this->stopRequest();
+//            emit this->stopRequest();
             maintanceList[i].troubleType = (int)Warning;
-
-            bool service = MaintanceDialog::execute(this,
-                                                    (MaintanceType)maintanceList[i].troubleType,
-                                                    maintanceList[i].troubleName,
-                                                    maintanceList[i].troubleInfo
-                                                    +"\nYou must do this after "
-                                                    +QString::number(settings->value("WARNING_CYCLES_COUNT", 50).toInt())
-                                                    +" cycles.",
-                                                    maintanceList[i].machineInfo);
+            this->maintanceHaveWarning = true;
+            bool service = false;
+//            service = MaintanceDialog::execute(this,
+//                                               (MaintanceType)maintanceList[i].troubleType,
+//                                               maintanceList[i].troubleName,
+//                                               maintanceList[i].troubleInfo
+//                                               +"\nYou must do this after "
+//                                               +QString::number(settings->value("WARNING_CYCLES_COUNT", 50).toInt())
+//                                               +" cycles.",
+//                                               maintanceList[i].machineInfo);
             if(service)
             {
                 emit this->stopRequest();
@@ -197,7 +200,9 @@ void MaintanceDialog::check(int cyclesCount)
             if(cyclesCount == (maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount))
             {
                 maintanceList[i].troubleType = (int)Critical;
-                bool service = MaintanceDialog::execute(maintanceList[i], this);
+                bool service = false;
+//                MaintanceDialog::execute(maintanceList[i], this);
+                this->maintanceHaveWork = true;
                 if(service)
                 {
                     emit this->stopRequest();
@@ -206,7 +211,6 @@ void MaintanceDialog::check(int cyclesCount)
                 }
                 else
                 {
-
                     settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/TROUBLE_INDEX", maintanceList[i].troubleIndex);
                     settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/NAME", maintanceList[i].troubleName);
                     settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/TROUBLE_INFO", maintanceList[i].troubleInfo);
@@ -226,6 +230,7 @@ void MaintanceDialog::check(int cyclesCount)
                 (unsolvedList.length() > 0))
         {
             emit this->maintanceWorkEnable(true);
+            this->maintanceHaveWork = true;
         }
         else
             emit this->maintanceWorkEnable(false);
@@ -236,4 +241,10 @@ void MaintanceDialog::openMaintanceList()
 {
     maintanceWidget->setElemets(this->unsolvedList);
     maintanceWidget->show();
+}
+
+void MaintanceDialog::openDialog()
+{
+    if(maintanceHaveWork)
+        MaintanceDialog::execute(unsolvedList[0], this);
 }

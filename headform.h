@@ -51,7 +51,7 @@ public:
     typedef enum SettBtnPos_ {AtLeftUp, AtLeftDown, AtRightUp, AtRightDown } SettBtnPos;
 
     void setIndex(int i);
-    void setSettBtnPosition(SettBtnPos position );
+    void setIndexLabelPosition(SettBtnPos position );
     void setPixmap(HeadformState state, QString stStr);
     void setPixmap(HeadformState state);
 

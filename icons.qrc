@@ -62,6 +62,7 @@
         <file>icons/mail.png</file>
         <file>icons/AAAAAAAA.gif</file>
         <file>icons/warning.png</file>
+        <file>icons/user.png</file>
     </qresource>
     <qresource prefix="/arrows">
         <file>icons/arrows/arrowD.png</file>

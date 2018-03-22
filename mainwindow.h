@@ -107,6 +107,7 @@ private slots:
     void getHeadCommand(int index, QByteArray commandArr);
     void getIndexerParam(QByteArray indexerParamArr);
     void getMachineParam(QByteArray machineParamArr);
+    void getDirection(int direction);
     void getLiftParam(QByteArray liftParamArr);
     void getIndexLiftSettComm(QByteArray commandArr);
     void getIndexLiftCommand(QByteArray commandArr);
@@ -117,7 +118,7 @@ private slots:
     void exitProgram();
     void saveJob();
     void loadJob();
-    void setButtonPoss();
+    void setHeadsPosition();
     void timerTimeout();
     void startPrintProcess(bool autoPrint);
     void stopPrintProcess();

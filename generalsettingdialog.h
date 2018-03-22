@@ -68,6 +68,7 @@ signals:
     void styleChangedIndex(int index);
     void serviceSettingRequest();
     void usersSettingRequest();
+    void directionChanged(int dir);
 
 private:
     Ui::GeneralSettingDialog *ui;
@@ -90,6 +91,7 @@ private slots:
     void changeServiceStateClicked();
     void userSettingClicked();
     void styleChanged(int index);
+    void changeDirection();
 
 protected:
     bool event(QEvent *e);

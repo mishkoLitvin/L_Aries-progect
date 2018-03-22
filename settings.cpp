@@ -242,12 +242,13 @@ void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifPa
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(4);
+    bArr.resize(6);
     bArr[0] = (char)(this->HeadCount&0x00FF);
     bArr[1] = (char)(((this->HeadCount&0xFF00)>>8)&0x00FF);
     bArr[2] = (char)(this->WarningTime&0x00FF);
     bArr[3] = (char)(((this->WarningTime&0xFF00)>>8)&0x00FF);
-
+    bArr[4] = (char)(this->Direction&0x00FF);
+    bArr[5] = (char)(((this->Direction&0xFF00)>>8)&0x00FF);
     return bArr;
 }
 
@@ -257,18 +258,21 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
 {
     this->machineParam.HeadCount = mParam.HeadCount;
     this->machineParam.WarningTime = mParam.HeadCount;
+    this->machineParam.Direction = mParam.Direction;
 }
 
 MachineSettings::MachineSettings()
 {
     this->machineParam.HeadCount = 6;
     this->machineParam.WarningTime = 1;
+    this->machineParam.Direction = 1;
 }
 
 void MachineSettings::fromByteArray(QByteArray machineParamArray)
 {
     this->machineParam.HeadCount = ((0x00FF&((uint16_t)machineParamArray[1]))<<8)|(0x00FF&((uint16_t)machineParamArray[0]));
     this->machineParam.WarningTime = ((0x00FF&((uint16_t)machineParamArray[3]))<<8)|(0x00FF&((uint16_t)machineParamArray[2]));
+    this->machineParam.Direction = ((0x00FF&((uint16_t)machineParamArray[5]))<<8)|(0x00FF&((uint16_t)machineParamArray[4]));
 }
 
 bool MachineSettings::getServiceWidgEn()

@@ -76,6 +76,8 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerLiftSetDialog->setStyleSheet(this->styleSheet());
 
     generalSettingDialog = new GeneralSettingDialog();
+    machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
+    generalSettingDialog->setMachineSetting(machineSettings.machineParam);
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(),
@@ -90,6 +92,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(serviceSettingRequest()), this, SLOT(serviceStateChange()));
     connect(generalSettingDialog, SIGNAL(styleChangedIndex(int)), this, SLOT(getVeiwSettings(int)));
     connect(generalSettingDialog, SIGNAL(usersSettingRequest()), usersSettingDialog, SLOT(show()));
+    connect(generalSettingDialog, SIGNAL(directionChanged(int)), this, SLOT(getDirection(int)));
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
@@ -130,13 +133,13 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
             if(i<(headsCount)/4)
-                headButton[i]->setSettBtnPosition(HeadForm::AtRightUp);
+                headButton[i]->setIndexLabelPosition(HeadForm::AtRightUp);
             if((i>=(headsCount)/4)&(i<(headsCount)/2))
-                headButton[i]->setSettBtnPosition(HeadForm::AtRightDown);
+                headButton[i]->setIndexLabelPosition(HeadForm::AtRightDown);
             if((i>=(headsCount)/2)&(i<(3*headsCount)/4))
-                headButton[i]->setSettBtnPosition(HeadForm::AtLeftDown);
+                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftDown);
             if((i>=(3*headsCount)/4)&(i<(headsCount)))
-                headButton[i]->setSettBtnPosition(HeadForm::AtLeftUp);
+                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
             connect(headSettButton[i-1], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
         }
     }
@@ -146,7 +149,7 @@ MainWindow::MainWindow(QWidget *parent) :
         this->resize(QSize(1024, 768));
     else
         this->setWindowState(Qt::WindowMaximized);
-    this->setButtonPoss();
+    this->setHeadsPosition();
 
     logedInHeadSettings = false;
     logedInIndexer = false;
@@ -161,10 +164,12 @@ MainWindow::MainWindow(QWidget *parent) :
     infoWidget->setTotal(ragAllCount);
 
     maintanceDialog = new MaintanceDialog(this);
+    maintanceDialog->setStyleSheet(this->styleSheet());
     connect(maintanceDialog, SIGNAL(stopRequest()), indexer, SLOT(printFinish()));
     connect(maintanceDialog, SIGNAL(continueRequest()), indexer, SLOT(printStart()));
     connect(maintanceDialog, SIGNAL(maintanceWorkEnable(bool)), this, SLOT(maintanceWorkSlot(bool)));
     connect(ui->pButtonMaintance, SIGNAL(clicked(bool)), maintanceDialog, SLOT(openMaintanceList()));
+    connect(indexer, SIGNAL(stopPrint()), maintanceDialog, SLOT(openDialog()));
 }
 
 MainWindow::~MainWindow()
@@ -290,6 +295,7 @@ void MainWindow::getIndexLiftCommand(QByteArray commandArr)
 
 void MainWindow::getMachineParam(QByteArray machineParamArr)
 {
+    qDebug()<<machineParamArr.toHex();
     settings->setValue("MACHINE_PARAMS", machineParamArr);
     if(this->headsCount-2 != (((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]))))
     {
@@ -312,6 +318,13 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
         }
     }
     comPort->sendData(machineParamArr);
+    this->setHeadsPosition();
+}
+
+void MainWindow::getDirection(int direction)
+{
+    machineSettings.machineParam.Direction = direction;
+    this->setHeadsPosition();
 }
 
 void MainWindow::getSerialSetting(ComSettings comSett)
@@ -437,7 +450,7 @@ void MainWindow::loadJob()
 
 }
 
-void MainWindow::setButtonPoss()
+void MainWindow::setHeadsPosition()
 {
     int areaW, areaH;
     areaH = ui->widgetHeads->height();
@@ -455,18 +468,50 @@ void MainWindow::setButtonPoss()
     x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
 
+    int direction = machineSettings.machineParam.Direction;
+    qDebug()<<"direction:" << direction;
     for(i = 0; i<headsCount; i++)
     {
-        sinCoef = sin(2.*3.1415926*i/headsCount+3.1415926/2.+3.1415926/headsCount);
-        cosCoef = cos(2.*3.1415926*i/headsCount+3.1415926/2.+3.1415926/headsCount);
+        sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
+        cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
 
+        headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
 
-            headButton[i]->move(x0_hb+(R)*cosCoef,
-                                y0_hb+(R)*sinCoef);
-            if((i != 0)&(i != headsCount-1))
-                headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
-                                        y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
+        if((i != 0)&(i != headsCount-1))
+        {
+            headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
+                    y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
+            if(direction == 1)
+            {
+                if(i<(headsCount)/4)
+                    headButton[i]->setIndexLabelPosition(HeadForm::AtRightUp);
+                else
+                    if(i<(headsCount)/2)
+                        headButton[i]->setIndexLabelPosition(HeadForm::AtRightDown);
+                    else
+                        if(i<(3*headsCount)/4)
+                            headButton[i]->setIndexLabelPosition(HeadForm::AtLeftDown);
+                        else
+                            if(i<(headsCount))
+                                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
+            }
+            else
+            {
+                if(i<(headsCount)/4)
+                    headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
+                else
+                    if(i<(headsCount)/2)
+                        headButton[i]->setIndexLabelPosition(HeadForm::AtLeftDown);
+                    else
+                        if(i<(3*headsCount)/4)
+                            headButton[i]->setIndexLabelPosition(HeadForm::AtRightDown);
+                        else
+                            if(i<(headsCount))
+                                headButton[i]->setIndexLabelPosition(HeadForm::AtRightUp);
+            }
+        }
     }
+
     infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
 }
 
@@ -583,13 +628,13 @@ void MainWindow::userLogin()
 
 void MainWindow::resizeEvent(QResizeEvent *e)
 {
-    this->setButtonPoss();
+    this->setHeadsPosition();
     e->accept();
 }
 
 void MainWindow::showEvent(QShowEvent *ev)
 {
-    this->setButtonPoss();
+    this->setHeadsPosition();
     maintanceDialog->check(indexerCiclesAll);
     ev->accept();
 }
