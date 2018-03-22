@@ -193,8 +193,8 @@ void MaintanceDialog::check(int cyclesCount)
                 settings->setValue("ELEMENT_"+QString::number(i)+"/LAST_COUNT", cyclesCount);
                 maintanceList[i].lastCount = cyclesCount;
             }
-            else
-                emit this->continueRequest();
+//            else
+//                emit this->continueRequest();
         }
         else
             if(cyclesCount == (maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount))
@@ -246,5 +246,10 @@ void MaintanceDialog::openMaintanceList()
 void MaintanceDialog::openDialog()
 {
     if(maintanceHaveWork)
-        MaintanceDialog::execute(unsolvedList[0], this);
+    {
+        for(;unsolvedList.length()>0;)
+            if(MaintanceDialog::execute(unsolvedList[0], this))
+                this->solveItem(0);
+    }
+
 }
