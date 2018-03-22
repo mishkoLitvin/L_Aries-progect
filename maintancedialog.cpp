@@ -124,20 +124,14 @@ void MaintanceDialog::rejectSlot()
 
 void MaintanceDialog::solveItem(int index)
 {
-    settings->remove("UNSLOVED/ELEMENT_"+QString::number(index));
-
     unsolvedList.removeAt(index);
     settings->setValue("UNSOLVED_ELEMENTS_COUNT", unsolvedList.length());
 
-    int i;
-    for(i = 0; i<unsolvedListIndex.length(); i++)
-        if(unsolvedListIndex[i] == index)
-        {
-            settings->setValue("ELEMENT_"+QString::number(unsolvedListIndex[i])+"/LAST_COUNT", this->lastCyclesCount);
-            maintanceList[unsolvedListIndex[i]].lastCount = this->lastCyclesCount;
-            unsolvedListIndex.removeAt(i);
+    settings->remove("UNSLOVED/ELEMENT_"+QString::number(unsolvedListIndex[index]));
+    settings->setValue("ELEMENT_"+QString::number(unsolvedListIndex[index])+"/LAST_COUNT", this->lastCyclesCount);
+    maintanceList[unsolvedListIndex[index]].lastCount = this->lastCyclesCount;
+    unsolvedListIndex.removeAt(index);
 
-        }
 
     settings->setValue("UNSOLVED_ELEMENTS_LIST", QVariant::fromValue(unsolvedListIndex));
 
