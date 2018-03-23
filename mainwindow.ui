@@ -176,7 +176,7 @@
        <item>
         <widget class="QPushButton" name="pButtonMaintance">
          <property name="text">
-          <string>Maintance</string>
+          <string>Maintenance</string>
          </property>
          <property name="icon">
           <iconset resource="icons.qrc">

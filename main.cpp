@@ -10,7 +10,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+    w.masterCodeCheck();
     w.userLogin();
+
     //    LogoDialog lD;
     //    lD.exec();
     res = a.exec();

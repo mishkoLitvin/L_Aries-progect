@@ -180,6 +180,111 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::masterCodeCheck()
+{
+//    settings->setValue("MASTER_CODE/ENABLE", true);
+//    masterCodes = new QSettings("./masterCodes.ini", QSettings::IniFormat);
+//    masterCodes->setValue("LAST_DATE", QDate::currentDate());
+//    masterCodes->setValue("LAST_INDEX", 0);
+//    masterCodes->setValue("ALL_COUNT", 24);
+//    int i;
+//    QByteArray b;
+//    for(i = 0; i<24; i++)
+//    {
+//        b.clear();
+//        b.append(QString::number(i));
+//        masterCodes->setValue("CODES/INDEX_"+QString::number(i), b.toHex());
+//    }
+    if(settings->value("MASTER_CODE/ENABLE").toBool())
+    {
+        masterCodes = new QSettings("./masterCodes.ini", QSettings::IniFormat);
+        QDate dateNext = masterCodes->value("LAST_DATE").toDate().addMonths(1);
+        if(dateNext<QDate::currentDate())
+        {
+            bool stayOnFlag = true, exitFlag = false;
+            QMessageBox msgBox;
+            msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+            msgBox.setText("You mast enter a master code!\n Please contact manufacturer to get a next one.");
+            msgBox.setInformativeText("To enter code press \"Yes\" \n"
+                                      "To exit from program press \"No\".");
+            msgBox.setWindowTitle("Master code");
+            msgBox.setIcon(QMessageBox::Question);
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            int ret = msgBox.exec();
+            switch (ret)
+            {
+            case QMessageBox::Yes:
+                stayOnFlag = true;
+                exitFlag = false;
+                break;
+            case QMessageBox::No:
+                this->close();
+                exit(0);
+                break;
+            }
+
+            for(;stayOnFlag;)
+            {
+                QString code = KeyboardDialog::getText(this, "Master Code");
+                QByteArray codeArr;
+                codeArr.append(code);
+                if(codeArr.toHex() != masterCodes->value("CODES/INDEX_"
+                                                         +QString::number(masterCodes->value("LAST_INDEX").toInt())))
+                {
+                    QMessageBox msgBox;
+                    msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+                    msgBox.setText("Wrong master code!\n Please contact manufacturer to get a next one.");
+                    msgBox.setInformativeText("To try typing again press \"Yes\" \n"
+                                              "To exit press \"No\".");
+                    msgBox.setWindowTitle("Master code");
+                    msgBox.setIcon(QMessageBox::Warning);
+                    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+                    int ret = msgBox.exec();
+                    switch (ret)
+                    {
+                    case QMessageBox::Yes:
+                        stayOnFlag = true;
+                        exitFlag = false;
+                        break;
+                    case QMessageBox::No:
+                        stayOnFlag = false;
+                        exitFlag = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    QMessageBox msgBox;
+                    msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+                    msgBox.setText("Master code is correct!\n "
+                                   "You mast enter next one at "
+                                   +QDate::currentDate().addMonths(1).toString("dd MMMM yyyy"));
+
+                    msgBox.setWindowTitle("Master code");
+                    msgBox.setIcon(QMessageBox::Information);
+                    msgBox.setStandardButtons(QMessageBox::Ok );
+                    msgBox.exec();
+                    masterCodes->setValue("LAST_DATE", QDate::currentDate());
+                    masterCodes->setValue("LAST_INDEX", masterCodes->value("LAST_INDEX").toInt()+1);
+                    if(masterCodes->value("LAST_INDEX").toInt() ==
+                            masterCodes->value("ALL_COUNT").toInt())
+                    {
+                        settings->setValue("MASTER_CODE/ENABLE", false);
+                    }
+                    stayOnFlag = false;
+                    exitFlag = false;
+                }
+            }
+
+            if(exitFlag)
+            {
+                this->close();
+                exit(0);
+            }
+        }
+    }
+}
+
 void MainWindow::headSettingRequest(int index)
 {
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
@@ -470,7 +575,6 @@ void MainWindow::setHeadsPosition()
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
 
     int direction = machineSettings.machineParam.Direction;
-    qDebug()<<"direction:" << direction;
     for(i = 0; i<headsCount; i++)
     {
         sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);

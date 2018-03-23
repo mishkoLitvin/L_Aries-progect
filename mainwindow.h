@@ -19,6 +19,7 @@
 #include <QMessageBox>
 #include <QTime>
 #include <QTimer>
+#include <QDate>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -51,8 +52,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void masterCodeCheck();
     void userLogin();
-
 
 private:
     Ui::MainWindow *ui;
@@ -61,6 +62,7 @@ private:
     QList<HeadSettingButton*> headSettButton;
     InfoWidget* infoWidget;
     QSettings *settings;
+    QSettings *masterCodes;
     HeadSetting headSettings;
     IndexerLiftSettings indexerLiftSettings;
     MachineSettings machineSettings;
