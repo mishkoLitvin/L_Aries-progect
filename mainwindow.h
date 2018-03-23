@@ -91,6 +91,7 @@ private:
     int indexerCiclesAll;
     int ragSessionCount;
     int ragAllCount;
+    int ragAtHeadCount;
     bool autoPrintEnabled;
 
     QString userName;

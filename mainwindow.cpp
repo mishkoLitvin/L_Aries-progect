@@ -160,6 +160,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ragAllCount = settings->value("COUNTERS/RAG_ALL_CNT", 0).toInt();
     indexerCiclesSession = 0;
     indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
+    ragAtHeadCount = 0;
 
     infoWidget->setTotal(ragAllCount);
 
@@ -529,18 +530,23 @@ void MainWindow::timerTimeout()
     }
 
     if(headButton[0]->getRagState() == HeadForm::shirtProcessing)
+    {
         headButton[1]->setPixmap(HeadForm::shirtOn);
+        ragAtHeadCount++;
+    }
     else
         if(headButton[0]->getRagState() == HeadForm::shirtOn)
         {
             headButton[1]->setPixmap(HeadForm::shirtOn);
             headButton[0]->setPixmap(HeadForm::shirtOff);
+            ragAtHeadCount++;
         }
         else
             headButton[1]->setPixmap(HeadForm::shirtOff);
     if(headButton[headButton.length()-1]->getRagState() == HeadForm::shirtOn)
     {
        ragAllCount++;
+       ragAtHeadCount--;
        infoWidget->setTotal(ragAllCount);
        ragSessionCount++;
        infoWidget->setPrinted(ragSessionCount);
@@ -551,9 +557,13 @@ void MainWindow::timerTimeout()
         timerMain->stop();
         indexer->printFinish();
     }
-    qDebug()<<indexerCiclesAll;
-    maintanceDialog->check(indexerCiclesAll);
 
+    maintanceDialog->check(indexerCiclesAll);
+    if(ragAtHeadCount == 0)
+    {
+        timerMain->stop();
+        indexer->printFinish();
+    }
 }
 
 void MainWindow::startPrintProcess(bool autoPrint)
