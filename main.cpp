@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
     w.masterCodeCheck();
     w.userLogin();
 
-    //    LogoDialog lD;
-    //    lD.exec();
+//        LogoDialog lD;
+//        lD.exec();
     res = a.exec();
 
     return res;

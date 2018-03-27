@@ -8,7 +8,7 @@ LogoDialog::LogoDialog(QWidget *parent) :
     ui->setupUi(this);
 
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    this->setWindowState(Qt::WindowMaximized);
+//    this->setWindowState(Qt::WindowMaximized);
 
     timer = new QTimer(this);
     timer->setInterval(30);

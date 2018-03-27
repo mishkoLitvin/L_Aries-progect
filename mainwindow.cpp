@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
                                           +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
     ui->widgetHeads->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
-    ui->dockWidget->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
 
 
     headsCount = settings->value(QString("HEAD/HEADS_COUNT"), 1).toInt();
@@ -408,7 +407,8 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
         QMessageBox msgBox;
         msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
         msgBox.setText("Heads count changed");
-        msgBox.setInformativeText("To apply count changing please restart a program");
+        msgBox.setInformativeText("To apply count changing please restart a program\n"
+                                  "Press OK to exit");
         msgBox.setWindowTitle("Info");
         msgBox.setIcon(QMessageBox::Warning);
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
@@ -418,8 +418,12 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
         case QMessageBox::Save:
             headsCount = ((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]));
             settings->setValue(QString("HEAD/HEADS_COUNT"), headsCount);
+            this->exitProgram();
             break;
         case QMessageBox::Discard:
+            machineParamArr[0] = headsCount&0x00FF;
+            machineParamArr[1] = (headsCount>>8)&0x00FF;
+            settings->setValue("MACHINE_PARAMS", machineParamArr);
             break;
         }
     }
