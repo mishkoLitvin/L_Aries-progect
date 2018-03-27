@@ -284,8 +284,8 @@ void SettingDialog::on_toolButtonFL_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::FL>>8));
     cmdArr.append((char)(HeadSetting::FL&0x00FF));
     cmdArr.append((char)(1>>8));
@@ -300,8 +300,8 @@ void SettingDialog::on_toolButtonMoveRear_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::MoveRear>>8));
     cmdArr.append((char)(HeadSetting::MoveRear&0x00FF));
     cmdArr.append((char)(1>>8));
@@ -316,8 +316,8 @@ void SettingDialog::on_toolButtonFL_SQ_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::SQ_FL>>8));
     cmdArr.append((char)(HeadSetting::SQ_FL&0x00FF));
     cmdArr.append((char)(1>>8));
@@ -332,8 +332,8 @@ void SettingDialog::on_toolButtonMoveFront_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::MoveFront>>8));
     cmdArr.append((char)(HeadSetting::MoveFront&0x00FF));
     cmdArr.append((char)(1>>8));
@@ -348,8 +348,8 @@ void SettingDialog::on_toolButtonMTPMove_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::MPT_Move>>8));
     cmdArr.append((char)(HeadSetting::MPT_Move&0x00FF));
     cmdArr.append((char)(1>>8));
@@ -364,8 +364,8 @@ void SettingDialog::on_toolButtonSQ_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::SQ>>8));
     cmdArr.append((char)(HeadSetting::SQ&0x00FF));
     cmdArr.append((char)(1>>8));
@@ -380,8 +380,8 @@ void SettingDialog::on_toolButtonMoveTest_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)((int)HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)(((int)HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)((int)HeadSetting::MoveTest>>8));
     cmdArr.append((char)((int)HeadSetting::MoveTest&0x00FF));
     cmdArr.append((char)(0));
@@ -444,8 +444,8 @@ void SettingDialog::on_tabWidget_currentChanged(int index)
 {
     QByteArray cmdArr;
     int data = index;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeadType>>8));
     cmdArr.append((char)(HeadSetting::HeadHeadType&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -460,8 +460,8 @@ void SettingDialog::on_spinBoxRearSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadSpeedRear>>8));
     cmdArr.append((char)(HeadSetting::HeadSpeedRear&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -476,8 +476,8 @@ void SettingDialog::on_dSpinBoxRearRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadLimitRear>>8));
     cmdArr.append((char)(HeadSetting::HeadLimitRear&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -492,8 +492,8 @@ void SettingDialog::on_spinBoxFrontSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadSpeedFront>>8));
     cmdArr.append((char)(HeadSetting::HeadSpeedFront&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -508,8 +508,8 @@ void SettingDialog::on_dSpinBoxFrontRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadLimitFront>>8));
     cmdArr.append((char)(HeadSetting::HeadLimitFront&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -524,8 +524,8 @@ void SettingDialog::on_spinBoxStrokCount_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadStroksCount>>8));
     cmdArr.append((char)(HeadSetting::HeadStroksCount&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -540,8 +540,8 @@ void SettingDialog::on_dSpinBoxHeatTime1Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeatTime1Q>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatTime1Q&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -556,8 +556,8 @@ void SettingDialog::on_dSpinBoxHeatTime2Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeatTime2Q>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatTime2Q&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -572,8 +572,8 @@ void SettingDialog::on_spinBoxDryPowerQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeatPower>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatPower&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -588,8 +588,8 @@ void SettingDialog::on_dSpinBoxHeatTime1IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeatTime1IR>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatTime1IR&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -604,8 +604,8 @@ void SettingDialog::on_dSpinBoxHeatTime2IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeatTime2IR>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatTime2IR&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -620,8 +620,8 @@ void SettingDialog::on_dSpinBoxDryingRangeIR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(HeadSetting::HeadDevice>>8));
-    cmdArr.append((char)((HeadSetting::HeadDevice|this->index)&0x00FF));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeatDryRange>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatDryRange&0x00FF));
     cmdArr.append((char)(data>>8));

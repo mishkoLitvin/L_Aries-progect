@@ -8,7 +8,7 @@ typedef u_int16_t uint16_t;
 class HeadSetting{
 public:
     enum{
-        HeadDevice = 0x8000
+        HeadDeviceAdrOffcet = 0x0002
     };
 
     enum {
@@ -108,24 +108,24 @@ class IndexerLiftSettings
 public:
 
     enum{
-        LiftDevice = 0x4000,
-        IndexerDevice = 0x6000
+        LiftDevice = 0x0001,
+        IndexerDevice = 0x0002
     };
 
     enum{
-        LiftDistance = 0x40,
-        LiftHomeOffcet,
-        LiftSpeed,
-        LiftAcceleration,
-        LiftDelayDown,
-        LiftDelayUp,
-        IndexDistance = 0x60,
-        IndexHomeOffset,
-        IndexDistOffcet,
-        IndexSpeed,
-        IndexAcceleration,
-        IndexSpeedRet,
-        IndexAccelerationRet
+        LiftDistance = 0x16,
+        LiftHomeOffcet = 0x15,
+        LiftSpeed = 0x17,
+        LiftAcceleration = 0x18,
+        LiftDelayDown = 0x07,
+        LiftDelayUp = 0x07,
+        IndexHomeOffset = 0x01,
+        IndexDistOffcet = 0x02,
+        IndexDistance = 0x08,
+        IndexSpeed = 0x03,
+        IndexAcceleration = 0x0A,
+        IndexSpeedRet = 0x0C,
+        IndexAccelerationRet = 0x0B
     };
 
     typedef struct LiftParameters_{
