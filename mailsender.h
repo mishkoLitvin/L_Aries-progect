@@ -12,9 +12,8 @@ class MailSender : public QObject
 public:
     explicit MailSender(QObject *parent = 0);
 
-    int sendMessage(QString message = "Hi,\nThis is LiQt Machine Interface.\n",
-                    QString subject = "LiQt Machine interface autosend message");
-
+    int sendMessage(QString message, QString subject);
+    int sendMessage(QString message);
 
 private:
     SmtpClient *smtp;
@@ -22,12 +21,14 @@ private:
     EmailAddress *senderAddr;
     EmailAddress *recipientAddr;
     MimeText messageText;
+    QString messageSubject;
 
 
 signals:
 
 public slots:
     void setRecipientMailAdress(QString mail = "mishko.litvin@gmail.com");
+    void setEmailSubject(QString subject = "LiQt Machine interface autosend message");
     void setRecipientName(QString name = "Customer");
     void setSenderMailAdress(QString mail = "Liqt.autosend@gmail.com");
     void setSenderPassword(QString pswd = "D7C5cqAz");

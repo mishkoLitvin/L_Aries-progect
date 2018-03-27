@@ -448,9 +448,10 @@ void MainWindow::getSerialSetting(ComSettings comSett)
 void MainWindow::getEmailSettings(EmailSettings emailSett)
 {
     settings->setValue("EMAIL_SETTINGS", QVariant::fromValue(emailSett));
-    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
-    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
-    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+    mailSender->setSenderMailAdress(emailSett.senderAdress);
+    mailSender->setSenderPassword(emailSett.senderPassword);
+    mailSender->setRecipientMailAdress(emailSett.receiverAdress);
+    mailSender->setEmailSubject(emailSett.emailSubject);
 }
 
 void MainWindow::getVeiwSettings(int stSheetIndex)
@@ -516,7 +517,7 @@ void MainWindow::exitProgram()
                                 "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
                                 "Machine printed " + QString::number(ragSessionCount) + " items this session"
                                 " and " + QString::number(ragAllCount) + " items in total.\n"
-                                "\nHave a great day!");
+                                "\nHave a great day!" );
 #endif
 
     settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
@@ -569,9 +570,9 @@ void MainWindow::setHeadsPosition()
     int i;
     float sinCoef, cosCoef, R, x0_hb, y0_hb, x0_sb, y0_sb;
     if(areaH<areaW)
-        R = areaH/2-headButton[0]->height()/2-headSettButton[0]->height()/2+5;
+        R = areaH/2-headButton[0]->height()/2-headSettButton[0]->height()/2-10;
     else
-        R = areaW/2-headButton[0]->width()/2-headSettButton[0]->width()/2+5;
+        R = areaW/2-headButton[0]->width()/2-headSettButton[0]->width()/2-10;
 
     x0_hb = ui->widgetHeads->width()/2-headButton[0]->width()/2;
     y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/2+headSettButton[0]->width()/2;
