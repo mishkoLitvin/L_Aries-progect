@@ -16,11 +16,17 @@ MailSender::MailSender(QObject *parent) : QObject(parent)
     this->setSenderMailAdress();
     this->setSenderName();
     this->setSenderPassword();
+    this->setEmailSubject();
 }
 
 void MailSender::setRecipientMailAdress(QString mail)
 {
     this->recipientAddr->setAddress(mail);
+}
+
+void MailSender::setEmailSubject(QString subject)
+{
+    this->messageSubject = subject;
 }
 
 void MailSender::setRecipientName(QString name)
@@ -67,4 +73,9 @@ int MailSender::sendMessage(QString message, QString subject)
 
     smtp->quit();
     return 0;
+}
+
+int MailSender::sendMessage(QString message)
+{
+    this->sendMessage(message, this->messageSubject);
 }

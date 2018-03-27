@@ -92,7 +92,10 @@ void GeneralSettingDialog::accept()
     emailSett.senderAdress = ui->editSender->text();
     emailSett.senderPassword = ui->editPassword->text();
     emailSett.receiverAdress = ui->editReceiver->text();
-    emailSett.emailSubject = ui->editSubject->text();
+    if(ui->editSubject->text().isEmpty())
+        emailSett.emailSubject = "LiQt machine interface autosend message";
+    else
+        emailSett.emailSubject = ui->editSubject->text();
     emailSett.mailEnable = ui->checkBoxMailSendEnable->isChecked();
     emit this->emailSettingsChanged(emailSett);
 
@@ -268,11 +271,16 @@ void GeneralSettingDialog::changeDirection()
     {
         emit this->directionChanged(-1);
         ui->pButtonDirection->setText("Direction\nclockwise");
+        this->directionIcon.addFile(":/new/icons/icons/rotateRight.png");
+        ui->pButtonDirection->setIcon(directionIcon);
     }
     else
     {
         emit this->directionChanged(1);
         ui->pButtonDirection->setText("Direction\nanticlockwise");
+        this->directionIcon.addFile(":/new/icons/icons/rotateLeft.png");
+        ui->pButtonDirection->setIcon(directionIcon);
+
     }
 }
 

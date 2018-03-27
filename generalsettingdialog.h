@@ -81,6 +81,8 @@ private:
     uint16_t mailPassword;
     uint16_t usersPassword;
 
+    QIcon directionIcon;
+
 private slots:
     void accept();
     void reject();

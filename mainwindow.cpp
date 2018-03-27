@@ -448,9 +448,10 @@ void MainWindow::getSerialSetting(ComSettings comSett)
 void MainWindow::getEmailSettings(EmailSettings emailSett)
 {
     settings->setValue("EMAIL_SETTINGS", QVariant::fromValue(emailSett));
-    mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
-    mailSender->setSenderPassword(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderPassword);
-    mailSender->setRecipientMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().receiverAdress);
+    mailSender->setSenderMailAdress(emailSett.senderAdress);
+    mailSender->setSenderPassword(emailSett.senderPassword);
+    mailSender->setRecipientMailAdress(emailSett.receiverAdress);
+    mailSender->setEmailSubject(emailSett.emailSubject);
 }
 
 void MainWindow::getVeiwSettings(int stSheetIndex)
@@ -516,7 +517,7 @@ void MainWindow::exitProgram()
                                 "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
                                 "Machine printed " + QString::number(ragSessionCount) + " items this session"
                                 " and " + QString::number(ragAllCount) + " items in total.\n"
-                                "\nHave a great day!");
+                                "\nHave a great day!" );
 #endif
 
     settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
