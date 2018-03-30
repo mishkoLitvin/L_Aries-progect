@@ -4,6 +4,7 @@
 #include <QByteArray>
 
 typedef u_int16_t uint16_t;
+typedef u_int8_t uint8_t;
 
 class HeadSetting{
 public:
@@ -12,18 +13,18 @@ public:
     };
 
     enum {
-        HeadHeadType = 0xA0,
+        HeadHeadType = 0x21,
         HeadPowerOn,
-        HeadSpeedRear,
-        HeadSpeedFront,
-        HeadStroksCount,
-        HeadLimitRear,
-        HeadLimitFront,
-        HeadHeatTime1Q = 0xB0,
-        HeadHeatTime2Q,
-        HeadHeatPower,
-        HeadHeatTime1IR = 0xC0,
-        HeadHeatTime2IR,
+        HeadSpeedRear = 0x02,
+        HeadSpeedFront = 0x03,
+        HeadStroksCount = 0x07,
+        HeadLimitRear = 0x16,
+        HeadLimitFront = 0x17,
+        HeadHeatTime1Q = 0x07,
+        HeadHeatTime2Q = 0x08,
+        HeadHeatPower = 0x1D,
+        HeadHeatTime1IR = 0x1F,
+        HeadHeatTime2IR = 0x20,
         HeadHeatDryRange
     };
 
@@ -80,6 +81,32 @@ public:
 class MachineSettings
 {
 public:
+
+    enum{
+        MasterDevice = 0x0000
+    };
+
+    enum{
+        MasterHeadCount = 0x0001,
+        MasterIndexLiftCommand = 0x0004
+    };
+
+    typedef union MachineState_{
+        struct{
+            uint8_t printStop:1;    //0
+            uint8_t reserved:1;     //1
+            uint8_t lockUnLock:1;   //2
+            uint8_t upDown:1;       //3
+            uint8_t halfFull:1;     //4
+            uint8_t reserved2:1;    //5
+            uint8_t manualAuto:1;   //6
+            uint8_t airRelease:1;   //7
+            uint8_t easySetup:1;    //8
+            uint8_t reserved3:7;    //9-15
+        } bit;
+        uint16_t all;
+    }MachineState;
+
     typedef struct MachineParameters_{
         uint16_t HeadCount;
         uint16_t WarningTime;
@@ -125,7 +152,8 @@ public:
         IndexSpeed = 0x03,
         IndexAcceleration = 0x0A,
         IndexSpeedRet = 0x0C,
-        IndexAccelerationRet = 0x0B
+        IndexAccelerationRet = 0x0B,
+        IndexDirection = 0x04
     };
 
     typedef struct LiftParameters_{
@@ -153,22 +181,20 @@ public:
     }IndexParameters;
 
     typedef enum IndexerCommandsEn_{
-        IndLock = 0xA0,
-        IndUnLock,
-        MoveUp,
-        MoveDown,
+        IndexLock_UnLock = 0x02,
+        MoveUp_Down = 0x03,
         MoveLeft,
         MoveRight,
         MoveLeftHalf,
         MoveRightHalf,
-        MoveFull,
-        MoveHalf,
-        Auto,
-        Manual,
-        PrintManual,
-        PrintAuto,
-        PrintStop
+        MoveFull_Half = 0x04,
+        Auto_Manual = 0x06,
+        PrintStart_Stop = 0x00,
+        AirRelease = 0x07,
+        EasySetup = 0x08
     }IndexerCommandsEn;
+
+
 
     IndexParameters indexerParam;
     LiftParameters liftParam;

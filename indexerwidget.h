@@ -54,6 +54,8 @@ private:
 
     bool isAutoPrintEnable;
 
+    MachineSettings::MachineState machineState;
+
 protected:
    virtual void resizeEvent(QResizeEvent *e);
 
