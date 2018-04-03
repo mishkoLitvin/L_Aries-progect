@@ -54,11 +54,12 @@ class GeneralSettingDialog : public QDialog
 public:
     explicit GeneralSettingDialog(QWidget *parent = 0);
     ~GeneralSettingDialog();
+    void setIconFolder(QString path);
     void setEmailSettings(EmailSettings emailSett);
     void setMachineSetting(MachineSettings::MachineParameters machineParam);
     void setFocusLossAccept(bool flag);
     void setPasswords(uint16_t serialPass, uint16_t mailPass, uint16_t userPass);
-    void setStyleList(QStringList stList, int curSelect);
+    void setStyleList(QStringList stList, int curSelect, QStringList iconList, int iconSel);
     void showPortInfo(ComSettings comSett);
 
 signals:
@@ -66,6 +67,7 @@ signals:
     void machineParamChanged(QByteArray machinePararmArr);
     void serialPortSettingsDialogRequested();
     void styleChangedIndex(int index);
+    void iconsChangedIndex(int index);
     void serviceSettingRequest();
     void usersSettingRequest();
     void directionChanged(int dir);
@@ -82,6 +84,7 @@ private:
     uint16_t usersPassword;
 
     QIcon directionIcon;
+    QString pathIcon;
 
 private slots:
     void accept();
@@ -93,6 +96,7 @@ private slots:
     void changeServiceStateClicked();
     void userSettingClicked();
     void styleChanged(int index);
+    void iconChanged(int index);
     void changeDirection();
 
 protected:

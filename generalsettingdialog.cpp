@@ -8,7 +8,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->listWidget->setStyleSheet("font: 28px bold italic large \"Times New Roman\"");
+    ui->listWidgetStyle->setStyleSheet("font: 28px bold italic large \"Times New Roman\"");
 
     ui->editPassword->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
     ui->editReceiver->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
@@ -28,7 +28,8 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonReject, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
-    connect(ui->listWidget, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
+    connect(ui->listWidgetStyle, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
+    connect(ui->listWidgetIcons, SIGNAL(currentRowChanged(int)), this, SLOT(iconChanged(int)));
     connect(ui->pButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
     connect(ui->pButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
     connect(ui->pButtonDirection, SIGNAL(clicked(bool)), this, SLOT(changeDirection()));
@@ -38,6 +39,29 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
 GeneralSettingDialog::~GeneralSettingDialog()
 {
     delete ui;
+}
+
+void GeneralSettingDialog::setIconFolder(QString path)
+{
+    pathIcon = path;
+    ui->pButtonAccept->setIcon(QIcon(pathIcon+"/check.png"));
+    ui->pButtonReject->setIcon(QIcon(pathIcon+"/multip.png"));
+
+    if(ui->pButtonDirection->isChecked())
+        ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateRight.png"));
+    else
+        ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateLeft.png"));
+    ui->pButtonServiceState->setIcon(QIcon(pathIcon+"/maintanse.png"));
+    ui->pButtonUserSetup->setIcon(QIcon(pathIcon+"/user.png"));
+
+
+
+    ui->tabWidget->setTabIcon(0, QIcon(pathIcon+"/color.png"));
+    ui->tabWidget->setTabIcon(1, QIcon(pathIcon+"/stopHand.png"));
+    ui->tabWidget->setTabIcon(2, QIcon(pathIcon+"/mail.png"));
+    ui->tabWidget->setTabIcon(3, QIcon(pathIcon+"/connect.png"));
+
+
 }
 
 void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters machineParam)
@@ -70,11 +94,13 @@ void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass, 
     this->usersPassword = userPass;
 }
 
-void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect)
+void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect, QStringList iconList, int iconSel)
 {
     qDebug()<<curSelect;
-    ui->listWidget->addItems(stList);
-    ui->listWidget->setCurrentRow(curSelect);
+    ui->listWidgetStyle->addItems(stList);
+    ui->listWidgetStyle->setCurrentRow(curSelect);
+    ui->listWidgetIcons->addItems(iconList);
+    ui->listWidgetIcons->setCurrentRow(iconSel);
 }
 
 void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
@@ -265,22 +291,24 @@ void GeneralSettingDialog::styleChanged(int index)
     emit this->styleChangedIndex(index);
 }
 
+void GeneralSettingDialog::iconChanged(int index)
+{
+    emit this->iconsChangedIndex(index);
+}
+
 void GeneralSettingDialog::changeDirection()
 {
     if(ui->pButtonDirection->isChecked())
     {
         emit this->directionChanged(-1);
         ui->pButtonDirection->setText("Direction\nclockwise");
-        this->directionIcon.addFile(":/new/icons/icons/rotateRight.png");
-        ui->pButtonDirection->setIcon(directionIcon);
+        ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateRight.png"));
     }
     else
     {
         emit this->directionChanged(1);
         ui->pButtonDirection->setText("Direction\nanticlockwise");
-        this->directionIcon.addFile(":/new/icons/icons/rotateLeft.png");
-        ui->pButtonDirection->setIcon(directionIcon);
-
+        ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateLeft.png"));
     }
 }
 

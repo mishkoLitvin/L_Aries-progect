@@ -126,6 +126,8 @@ private slots:
     void startPrintProcess(bool autoPrint);
     void stopPrintProcess();
     void maintanceWorkSlot(bool enable);
+    void setIconFolder(int index);
+
 
 
 protected:

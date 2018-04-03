@@ -82,7 +82,10 @@ MainWindow::MainWindow(QWidget *parent) :
     generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(),
                                        settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt(),
                                        settings->value("PASSWORDS/PASSWORD_USERS").toInt());
-    generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(), settings->value("STYLE/STYLE_SEL_INDEX").toInt());
+    generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(),
+                                       settings->value("STYLE/STYLE_SEL_INDEX").toInt(),
+                                       settings->value("STYLE/ICON_LIST").value<QStringList>(),
+                                       settings->value("STYLE/ICON_SEL_INDEX").toInt());
     generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
@@ -90,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(serialPortSettingsDialogRequested()), comPort, SLOT(setupPort()));
     connect(generalSettingDialog, SIGNAL(serviceSettingRequest()), this, SLOT(serviceStateChange()));
     connect(generalSettingDialog, SIGNAL(styleChangedIndex(int)), this, SLOT(getVeiwSettings(int)));
+    connect(generalSettingDialog, SIGNAL(iconsChangedIndex(int)), this, SLOT(setIconFolder(int)));
     connect(generalSettingDialog, SIGNAL(usersSettingRequest()), usersSettingDialog, SLOT(show()));
     connect(generalSettingDialog, SIGNAL(directionChanged(int)), this, SLOT(getDirection(int)));
 
@@ -170,6 +174,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(maintanceDialog, SIGNAL(maintanceWorkEnable(bool)), this, SLOT(maintanceWorkSlot(bool)));
     connect(ui->pButtonMaintance, SIGNAL(clicked(bool)), maintanceDialog, SLOT(openMaintanceList()));
     connect(indexer, SIGNAL(stopPrint()), maintanceDialog, SLOT(openDialog()));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -691,6 +697,26 @@ void MainWindow::maintanceWorkSlot(bool enable)
     ui->pButtonMaintance->setVisible(enable);
 }
 
+void MainWindow::setIconFolder(int index)
+{
+    QString path = settings->value("STYLE/ICON_PATH").value<QStringList>().at(index);
+    settings->setValue("STYLE/ICON_SEL_INDEX", index);
+
+    ui->pButtonExit->setIcon(QIcon(path+"/exit.png"));
+    ui->pButtonSetting->setIcon(QIcon(path+"/settings.png"));
+    ui->pButtonLoadJob->setIcon(QIcon(path+"/load.png"));
+    ui->pButtonSaveJob->setIcon(QIcon(path+"/save.png"));
+    ui->pButtonMaintance->setIcon(QIcon(path+"/warning.png"));
+
+    indexer->setIconFolder(path);
+    headSettingDialog->setIconFolder(path);
+    generalSettingDialog->setIconFolder(path);
+
+    int i;
+    for(i = 0; i<headSettButton.length(); i++)
+        headSettButton[i]->setIconPath(path+"/settings.png");
+}
+
 void MainWindow::userLogin()
 {
     if(usersSettingDialog->getLoginWindowEnable())
@@ -753,6 +779,7 @@ void MainWindow::resizeEvent(QResizeEvent *e)
 
 void MainWindow::showEvent(QShowEvent *ev)
 {
+    this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
     this->setHeadsPosition();
     maintanceDialog->check(indexerCiclesAll);
     ev->accept();

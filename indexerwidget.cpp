@@ -15,7 +15,7 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
 
     connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicSlot()));
 
-    pButtonSets->setIcon(QIcon(":/new/icons/icons/settings.png"));
+    pButtonSets->setIcon(QIcon(pathIcon+"/settings.png"));
 
     isAutoPrintEnable = false;
     machineState.all = 0x0000;
@@ -43,6 +43,45 @@ bool IndexerWidget::getIsAutoPrint()
     return this->isAutoPrintEnable;
 }
 
+void IndexerWidget::setIconFolder(QString path)
+{
+    pathIcon = path;
+    if(ui->pButtonLock->isChecked())
+        ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
+    else
+        ui->pButtonLock->setIcon(QIcon(pathIcon+"/unlock.png"));
+
+    if(ui->pButtonMove->isChecked())
+    {
+        ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPart2Round.png"));
+        ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowLPart.png"));
+        ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowRPart.png"));
+    }
+    else
+    {
+        ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPartRound.png"));
+        ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowL.png"));
+        ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowR.png"));
+    }
+
+    if(ui->pButtonAuto->isChecked())
+    {
+        ui->pButtonAuto->setIcon(QIcon(pathIcon+"/playP.png"));
+        ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
+    }
+    else
+    {
+        ui->pButtonAuto->setIcon(QIcon(pathIcon+"/play.png"));
+        ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
+    }
+    if(ui->pButtonMoveUp->isChecked())
+        ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowDPart.png"));
+    else
+        ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowUPart.png"));
+    pButtonSets->setIcon(QIcon(pathIcon+"/settings.png"));
+
+}
+
 void IndexerWidget::on_pButtonLock_clicked()
 {
     QByteArray bArr;
@@ -62,7 +101,7 @@ void IndexerWidget::on_pButtonLock_clicked()
     if(ui->pButtonLock->isChecked())
     {
         ui->pButtonLock->setText("Lock");
-        ui->pButtonLock->setIcon(QIcon(":/new/icons/icons/lock.png"));
+        ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
         ui->pButtonPrint->setHidden(true);
         ui->pButtonAuto->setHidden(true);
         ui->pButtonMove->setHidden(true);
@@ -74,7 +113,7 @@ void IndexerWidget::on_pButtonLock_clicked()
     else
     {
         ui->pButtonLock->setText("Unlock");
-        ui->pButtonLock->setIcon(QIcon(":/new/icons/icons/unlock.png"));
+        ui->pButtonLock->setIcon(QIcon(pathIcon+"/unlock.png"));
         ui->pButtonPrint->setHidden(false);
         ui->pButtonAuto->setHidden(false);
         ui->pButtonMove->setHidden(false);
@@ -104,9 +143,9 @@ void IndexerWidget::on_pButtonMove_clicked()
     if(ui->pButtonMove->isChecked())
     {
         ui->pButtonMove->setText("Move full");
-        ui->pButtonMove->setIcon(QIcon(":/arrows/icons/arrows/arrowRPart2Round.png"));
-        ui->pButtonMoveLeft->setIcon(QIcon(":/arrows/icons/arrows/arrowLPart.png"));
-        ui->pButtonMoveRight->setIcon(QIcon(":/arrows/icons/arrows/arrowRPart.png"));
+        ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPart2Round.png"));
+        ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowLPart.png"));
+        ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowRPart.png"));
         ui->pButtonLock->setHidden(true);
         ui->pButtonAuto->setHidden(true);
         ui->pButtonMoveUp->setHidden(true);
@@ -117,9 +156,9 @@ void IndexerWidget::on_pButtonMove_clicked()
     else
     {
         ui->pButtonMove->setText("Move half");
-        ui->pButtonMove->setIcon(QIcon(":/arrows/icons/arrows/arrowRPartRound.png"));
-        ui->pButtonMoveLeft->setIcon(QIcon(":/arrows/icons/arrows/arrowL.png"));
-        ui->pButtonMoveRight->setIcon(QIcon(":/arrows/icons/arrows/arrowR.png"));
+        ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPartRound.png"));
+        ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowL.png"));
+        ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowR.png"));
         ui->pButtonLock->setHidden(false);
         ui->pButtonAuto->setHidden(false);
         ui->pButtonMoveUp->setHidden(false);
@@ -147,17 +186,17 @@ void IndexerWidget::on_pButtonAuto_clicked()
     if(ui->pButtonAuto->isChecked())
     {
         ui->pButtonAuto->setText("Manual");
-        ui->pButtonAuto->setIcon(QIcon(":/new/icons/icons/playP.png"));
+        ui->pButtonAuto->setIcon(QIcon(pathIcon+"/playP.png"));
         ui->pButtonPrint->setText("Print Auto");
-        ui->pButtonPrint->setIcon(QIcon(":/new/icons/icons/play.png"));
+        ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
         isAutoPrintEnable = true;
     }
     else
     {
         ui->pButtonAuto->setText("Auto");
-        ui->pButtonAuto->setIcon(QIcon(":/new/icons/icons/play.png"));
+        ui->pButtonAuto->setIcon(QIcon(pathIcon+"/play.png"));
         ui->pButtonPrint->setText("Print Manual");
-        ui->pButtonPrint->setIcon(QIcon(":/new/icons/icons/playP.png"));
+        ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
         isAutoPrintEnable = false;
     }
 }
@@ -182,7 +221,7 @@ void IndexerWidget::on_pButtonPrint_clicked()
     {
 
         ui->pButtonPrint->setText("Stop");
-        ui->pButtonPrint->setIcon(QIcon(":/new/icons/icons/stop.png"));
+        ui->pButtonPrint->setIcon(QIcon(pathIcon+"/stop.png"));
         ui->pButtonLock->setHidden(true);
         ui->pButtonAuto->setHidden(true);
         ui->pButtonMove->setHidden(true);
@@ -197,12 +236,12 @@ void IndexerWidget::on_pButtonPrint_clicked()
         if(ui->pButtonAuto->isChecked())
         {
             ui->pButtonPrint->setText("Print Auto");
-            ui->pButtonPrint->setIcon(QIcon(":/new/icons/icons/play.png"));
+            ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
         }
         else
         {
             ui->pButtonPrint->setText("Print Manual");
-            ui->pButtonPrint->setIcon(QIcon(":/new/icons/icons/playP.png"));
+            ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
         }
         ui->pButtonLock->setHidden(false);
         ui->pButtonAuto->setHidden(false);
@@ -259,7 +298,7 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
     if(ui->pButtonMoveUp->isChecked())
     {
         ui->pButtonMoveUp->setText("Down");
-        ui->pButtonMoveUp->setIcon(QIcon(":/arrows/icons/arrows/arrowDPart.png"));
+        ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowDPart.png"));
         ui->pButtonLock->setHidden(true);
         ui->pButtonAuto->setHidden(true);
         ui->pButtonMove->setHidden(true);
@@ -271,7 +310,7 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
     else
     {
         ui->pButtonMoveUp->setText("Up");
-        ui->pButtonMoveUp->setIcon(QIcon(":/arrows/icons/arrows/arrowUPart.png"));
+        ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowUPart.png"));
         ui->pButtonLock->setHidden(false);
         ui->pButtonAuto->setHidden(false);
         ui->pButtonMove->setHidden(false);

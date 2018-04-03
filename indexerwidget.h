@@ -24,6 +24,8 @@ public:
     ~IndexerWidget();
 
     bool getIsAutoPrint();
+    void setIconFolder(QString path);
+
 public slots:
     void printFinish();
     void printStart();
@@ -53,6 +55,7 @@ private:
     int halfCounter;
 
     bool isAutoPrintEnable;
+    QString pathIcon;
 
     MachineSettings::MachineState machineState;
 

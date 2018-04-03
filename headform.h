@@ -18,7 +18,10 @@ public:
         this->setStyleSheet("background-color: rgb(100,250,100);");
         this->resize(40,40);
         connect(this, SIGNAL(clicked()), this, SLOT(thisClicked()));
-        this->setIcon(QIcon(":/new/icons/icons/settings.png"));
+    }
+    void setIconPath(QString path)
+    {
+        this->setIcon(QIcon(path));
     }
 
 signals:

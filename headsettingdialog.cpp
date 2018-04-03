@@ -116,6 +116,28 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
     acceptOnDeactilationEn = true;
 }
 
+void SettingDialog::setIconFolder(QString path)
+{
+    ui->toolButtonFL->setIcon(QIcon(path+"/sqfl_up.png"));
+    ui->toolButtonFL_SQ->setIcon(QIcon(path+"/sqfl_middle.png"));
+    ui->toolButtonSQ->setIcon(QIcon(path+"/sqfl_down.png"));
+    ui->toolButtonHoldOn->setIcon(QIcon(path+"/handNO.png"));
+    ui->toolButtonMoveFront->setIcon(QIcon(path+"/arrows/arrowDL.png"));
+    ui->toolButtonMoveRear->setIcon(QIcon(path+"/arrows/arrowUR.png"));
+    ui->toolButtonMoveTest->setIcon(QIcon(path+"/arrows/arrowLR2.png"));
+    ui->toolButtonMTPMove->setIcon(QIcon(path+"/arrows/arrowUD.png"));
+    ui->toolButtonPlast->setIcon(QIcon(path+"/Bucket.png"));
+
+    ui->pushButtonOK->setIcon(QIcon(path+"/check.png"));
+    ui->pushButtonCancel->setIcon(QIcon(path+"/multip.png"));
+    ui->pushButtonCopyToAll->setIcon(QIcon(path+"/copy.png"));
+
+    ui->tabWidget->setTabIcon(0, QIcon(path+"/brush.png"));
+    ui->tabWidget->setTabIcon(1, QIcon(path+"/lamp.png"));
+    ui->tabWidget->setTabIcon(2, QIcon(path+"/heat.png"));
+
+}
+
 void SettingDialog::paramsAccepted()
 {
     HeadSetting hSttg;

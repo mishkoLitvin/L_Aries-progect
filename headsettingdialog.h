@@ -29,6 +29,8 @@ public:
     ~SettingDialog();
 
     void setHeadParams(HeadSetting hSttg, int index = 0);
+    void setIconFolder(QString path);
+
 
 signals:
     void accept(int index, QByteArray hParamArr);
