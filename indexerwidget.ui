@@ -48,7 +48,7 @@
             <string>Unlock</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/new/icons/icons/unlock.png</normaloff>:/new/icons/icons/unlock.png</iconset>
            </property>
            <property name="iconSize">
@@ -77,7 +77,7 @@
             <string>Move Half</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/arrows/icons/arrows/arrowRPartRound.png</normaloff>:/arrows/icons/arrows/arrowRPartRound.png</iconset>
            </property>
            <property name="iconSize">
@@ -106,7 +106,7 @@
             <string>Auto</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/new/icons/icons/play.png</normaloff>:/new/icons/icons/play.png</iconset>
            </property>
            <property name="iconSize">
@@ -152,7 +152,7 @@
         <string>Print Manual</string>
        </property>
        <property name="icon">
-        <iconset resource="icons.qrc">
+        <iconset>
          <normaloff>:/new/icons/icons/playP.png</normaloff>:/new/icons/icons/playP.png</iconset>
        </property>
        <property name="iconSize">
@@ -211,7 +211,7 @@
             <string>Left</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/arrows/icons/arrows/arrowL.png</normaloff>:/arrows/icons/arrows/arrowL.png</iconset>
            </property>
            <property name="iconSize">
@@ -237,7 +237,7 @@
             <string>Up</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/arrows/icons/arrows/arrowUPart.png</normaloff>:/arrows/icons/arrows/arrowUPart.png</iconset>
            </property>
            <property name="iconSize">
@@ -266,7 +266,7 @@
             <string>Right</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/arrows/icons/arrows/arrowR.png</normaloff>:/arrows/icons/arrows/arrowR.png</iconset>
            </property>
            <property name="iconSize">
@@ -301,8 +301,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

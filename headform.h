@@ -57,6 +57,7 @@ public:
     void setIndexLabelPosition(SettBtnPos position );
     void setPixmap(HeadformState state, QString stStr);
     void setPixmap(HeadformState state);
+    void setIconPath(QString path);
 
     HeadformState getRagState();
     void setHeadformType(HeadformType type);
@@ -71,6 +72,8 @@ private:
     Ui::HeadForm *ui;
     QLabel *labelIndex;
     QImage pixShirtShow, pixShirtHide, pixShirtAnimate;
+
+    QString pathImage;
 
     int index;
     HeadformState headformState;

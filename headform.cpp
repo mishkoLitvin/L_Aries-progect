@@ -13,14 +13,12 @@ HeadForm::HeadForm(QWidget *parent) :
 
     headformType = HeadProcessing;
 
-    pixShirtShow.load(":/new/icons/icons/tt.png");
-    pixShirtHide.load(":/new/icons/icons/blank.png");
-    pixShirtAnimate.load(":/new/icons/icons/tt3.png");
-
-    this->setPixmap(shirtOff);
-
-
     this->headformType = HeadProcessing;
+
+    pixShirtShow.load(":/new/icons/icons/Base/tt.png");
+    pixShirtHide.load(":/new/icons/icons/Base/blank.png");
+    pixShirtAnimate.load(":/new/icons/icons/Base/tt3.png");
+
 
     labelIndex = new QLabel(this);
     labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
@@ -111,6 +109,15 @@ void HeadForm::setPixmap(HeadformState state, QString stStr)
 void HeadForm::setPixmap(HeadForm::HeadformState state)
 {
     this->setPixmap(state, ui->label->styleSheet());
+}
+
+void HeadForm::setIconPath(QString path)
+{
+    pathImage = path;
+    pixShirtShow.load(path+"/tt.png");
+    pixShirtHide.load(path+"/blank.png");
+    pixShirtAnimate.load(path+"/tt3.png");
+    this->setPixmap(shirtOff);
 }
 
 HeadForm::HeadformState HeadForm::getRagState()

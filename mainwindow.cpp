@@ -699,6 +699,7 @@ void MainWindow::maintanceWorkSlot(bool enable)
 
 void MainWindow::setIconFolder(int index)
 {
+
     QString path = settings->value("STYLE/ICON_PATH").value<QStringList>().at(index);
     settings->setValue("STYLE/ICON_SEL_INDEX", index);
 
@@ -712,7 +713,11 @@ void MainWindow::setIconFolder(int index)
     headSettingDialog->setIconFolder(path);
     generalSettingDialog->setIconFolder(path);
 
+
     int i;
+    qDebug()<<headButton.length()<<headSettButton.length();
+    for(i = 0; i<headButton.length(); i++)
+        headButton[i]->setIconPath(path);
     for(i = 0; i<headSettButton.length(); i++)
         headSettButton[i]->setIconPath(path+"/settings.png");
 }

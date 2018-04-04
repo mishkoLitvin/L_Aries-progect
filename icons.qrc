@@ -33,6 +33,9 @@
         <file>icons/Base/name.png</file>
         <file>icons/Base/on.png</file>
         <file>icons/Base/play.png</file>
+        <file>icons/Base/tt.png</file>
+        <file>icons/Base/tt2.png</file>
+        <file>icons/Base/tt3.png</file>
     </qresource>
     <qresource prefix="/arrows">
         <file>icons/Base/arrows/arrowD.png</file>
