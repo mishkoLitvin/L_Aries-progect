@@ -439,7 +439,7 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
 
 void MainWindow::getDirection(int direction)
 {
-    machineSettings.machineParam.Direction = direction;
+    machineSettings.machineParam.direction = direction;
     this->setHeadsPosition();
 }
 
@@ -585,7 +585,7 @@ void MainWindow::setHeadsPosition()
     x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
 
-    int direction = machineSettings.machineParam.Direction;
+    int direction = machineSettings.machineParam.direction;
     for(i = 0; i<headsCount; i++)
     {
         sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);

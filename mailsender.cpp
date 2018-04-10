@@ -77,5 +77,5 @@ int MailSender::sendMessage(QString message, QString subject)
 
 int MailSender::sendMessage(QString message)
 {
-    this->sendMessage(message, this->messageSubject);
+    return this->sendMessage(message, this->messageSubject);
 }

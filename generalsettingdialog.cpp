@@ -8,7 +8,8 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->listWidgetStyle->setStyleSheet("font: 28px bold italic large \"Times New Roman\"");
+    ui->listWidgetStyle->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
+    ui->listWidgetIcons->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
 
     ui->editPassword->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
     ui->editReceiver->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
@@ -33,6 +34,10 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
     connect(ui->pButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
     connect(ui->pButtonDirection, SIGNAL(clicked(bool)), this, SLOT(changeDirection()));
+
+    MachineSettings::MachineType t;
+    t++;
+    qDebug()<< "type"<<(int)t;
 
 }
 
@@ -66,9 +71,9 @@ void GeneralSettingDialog::setIconFolder(QString path)
 
 void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters machineParam)
 {
-    ui->spinBoxHeadsCount->setValue(machineParam.HeadCount);
-    ui->dSpinBoxWarningTime->setValue(machineParam.WarningTime/10.);
-    if(machineParam.Direction == -1)
+    ui->spinBoxHeadsCount->setValue(machineParam.headCount);
+    ui->dSpinBoxWarningTime->setValue(machineParam.warningTime/10.);
+    if(machineParam.direction == -1)
     {
         ui->pButtonDirection->setChecked(true);
         ui->pButtonDirection->setText("Direction\nclockwise");
@@ -126,13 +131,13 @@ void GeneralSettingDialog::accept()
     emit this->emailSettingsChanged(emailSett);
 
     MachineSettings::MachineParameters machineParams;
-    machineParams.HeadCount = ui->spinBoxHeadsCount->value();
-    machineParams.WarningTime = ui->dSpinBoxWarningTime->value()*10;
+    machineParams.headCount = ui->spinBoxHeadsCount->value();
+    machineParams.warningTime = ui->dSpinBoxWarningTime->value()*10;
 
     if(ui->pButtonDirection->isChecked())
-        machineParams.Direction = -1;
+        machineParams.direction = -1;
     else
-        machineParams.Direction = 1;
+        machineParams.direction = 1;
 
     emit this->machineParamChanged(machineParams.toByteArray());
 
@@ -365,8 +370,6 @@ bool GeneralSettingDialog::eventFilter(QObject *watched, QEvent *event)
 
 void GeneralSettingDialog::showEvent(QShowEvent *ev)
 {
-    qDebug()<<MachineSettings::getServiceWidgEn();
-
     ui->spinBoxHeadsCount->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());

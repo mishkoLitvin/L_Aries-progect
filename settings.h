@@ -3,8 +3,8 @@
 
 #include <QByteArray>
 
-//typedef u_int16_t uint16_t;
-//typedef u_int8_t uint8_t;
+typedef u_int16_t uint16_t;
+typedef u_int8_t uint8_t;
 
 class HeadSetting{
 public:
@@ -107,11 +107,18 @@ public:
         uint16_t all;
     }MachineState;
 
-    typedef struct MachineParameters_{
-        uint16_t HeadCount;
-        uint16_t WarningTime;
-        int16_t Direction;
+    typedef enum MachineType_{
+        VoltServo = 0x0011,
+        VoltAC = 0x0021,
+        Vector = 0x0012,
+        Titan = 0x0013
+    }MachineType;
 
+    typedef struct MachineParameters_{
+        uint16_t headCount;
+        uint16_t warningTime;
+        int16_t direction;
+        MachineType machineType;
         QByteArray toByteArray();
     }MachineParameters;
 
@@ -140,20 +147,20 @@ public:
     };
 
     enum{
-        LiftDistance = 0x16,
-        LiftHomeOffcet = 0x15,
-        LiftSpeed = 0x17,
-        LiftAcceleration = 0x18,
-        LiftDelayDown = 0x07,
-        LiftDelayUp = 0x07,
         IndexHomeOffset = 0x01,
         IndexDistOffcet = 0x02,
-        IndexDistance = 0x08,
         IndexSpeed = 0x03,
+        IndexDirection = 0x04,
+        LiftDelayDown = 0x07,
+        LiftDelayUp = 0x07,
+        IndexDistance = 0x08,
         IndexAcceleration = 0x0A,
-        IndexSpeedRet = 0x0C,
         IndexAccelerationRet = 0x0B,
-        IndexDirection = 0x04
+        IndexSpeedRet = 0x0C,
+        LiftHomeOffcet = 0x15,
+        LiftDistance = 0x16,
+        LiftSpeed = 0x17,
+        LiftAcceleration = 0x18,
     };
 
     typedef struct LiftParameters_{

@@ -243,12 +243,14 @@ QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
     QByteArray bArr;
     bArr.resize(6);
-    bArr[0] = (char)(this->HeadCount&0x00FF);
-    bArr[1] = (char)(((this->HeadCount&0xFF00)>>8)&0x00FF);
-    bArr[2] = (char)(this->WarningTime&0x00FF);
-    bArr[3] = (char)(((this->WarningTime&0xFF00)>>8)&0x00FF);
-    bArr[4] = (char)(this->Direction&0x00FF);
-    bArr[5] = (char)(((this->Direction&0xFF00)>>8)&0x00FF);
+    bArr[0] = (char)(this->headCount&0x00FF);
+    bArr[1] = (char)(((this->headCount&0xFF00)>>8)&0x00FF);
+    bArr[2] = (char)(this->warningTime&0x00FF);
+    bArr[3] = (char)(((this->warningTime&0xFF00)>>8)&0x00FF);
+    bArr[4] = (char)(this->direction&0x00FF);
+    bArr[5] = (char)(((this->direction&0xFF00)>>8)&0x00FF);
+    bArr[6] = (char)(this->machineType&0x00FF);
+    bArr[7] = (char)(((this->machineType&0xFF00)>>8)&0x00FF);
     return bArr;
 }
 
@@ -256,23 +258,31 @@ bool MachineSettings::serviceWidgetsEn;
 
 MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
 {
-    this->machineParam.HeadCount = mParam.HeadCount;
-    this->machineParam.WarningTime = mParam.HeadCount;
-    this->machineParam.Direction = mParam.Direction;
+    this->machineParam.headCount = mParam.headCount;
+    this->machineParam.warningTime = mParam.headCount;
+    this->machineParam.direction = mParam.direction;
+    this->machineParam.machineType = mParam.machineType;
 }
 
 MachineSettings::MachineSettings()
 {
-    this->machineParam.HeadCount = 6;
-    this->machineParam.WarningTime = 1;
-    this->machineParam.Direction = 1;
+    this->machineParam.headCount = 6;
+    this->machineParam.warningTime = 1;
+    this->machineParam.direction = 1;
+    this->machineParam.machineType = MachineSettings::Vector;
 }
 
 void MachineSettings::fromByteArray(QByteArray machineParamArray)
 {
-    this->machineParam.HeadCount = ((0x00FF&((uint16_t)machineParamArray[1]))<<8)|(0x00FF&((uint16_t)machineParamArray[0]));
-    this->machineParam.WarningTime = ((0x00FF&((uint16_t)machineParamArray[3]))<<8)|(0x00FF&((uint16_t)machineParamArray[2]));
-    this->machineParam.Direction = ((0x00FF&((uint16_t)machineParamArray[5]))<<8)|(0x00FF&((uint16_t)machineParamArray[4]));
+    this->machineParam.headCount = ((0x00FF&((uint16_t)machineParamArray[1]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[0]));
+    this->machineParam.warningTime = ((0x00FF&((uint16_t)machineParamArray[3]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[2]));
+    this->machineParam.direction = ((0x00FF&((uint16_t)machineParamArray[5]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[4]));
+    this->machineParam.machineType = static_cast<MachineSettings::MachineType>
+            (((0x00FF&((uint16_t)machineParamArray[7]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[6])));
 }
 
 bool MachineSettings::getServiceWidgEn()

@@ -75,7 +75,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -94,7 +94,7 @@
      </property>
      <widget class="QWidget" name="tabVeiw">
       <attribute name="icon">
-       <iconset theme="applications-graphics-symbolic.symbolic.png" resource="icons.qrc">
+       <iconset theme="applications-graphics-symbolic.symbolic.png">
         <normaloff>:/new/icons/icons/color.png</normaloff>:/new/icons/icons/color.png</iconset>
       </attribute>
       <attribute name="title">
@@ -196,7 +196,7 @@
      </widget>
      <widget class="QWidget" name="tabGeneralSettings">
       <attribute name="icon">
-       <iconset resource="icons.qrc">
+       <iconset>
         <normaloff>:/new/icons/icons/warning.png</normaloff>:/new/icons/icons/warning.png</iconset>
       </attribute>
       <attribute name="title">
@@ -300,6 +300,9 @@
         </layout>
        </item>
        <item>
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QToolButton" name="pButtonDirection">
@@ -308,7 +311,7 @@
 clock</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/new/icons/icons/rotateRight.png</normaloff>:/new/icons/icons/rotateRight.png</iconset>
            </property>
            <property name="iconSize">
@@ -370,7 +373,7 @@ clock</string>
             <string>Users setup</string>
            </property>
            <property name="icon">
-            <iconset resource="icons.qrc">
+            <iconset>
              <normaloff>:/new/icons/icons/user.png</normaloff>:/new/icons/icons/user.png</iconset>
            </property>
            <property name="iconSize">
@@ -412,7 +415,7 @@ clock</string>
             <string>SERVICE</string>
            </property>
            <property name="icon">
-            <iconset theme="preferences-system-symbolic.symbolic.png" resource="icons.qrc">
+            <iconset theme="preferences-system-symbolic.symbolic.png">
              <normaloff>:/new/icons/icons/settings.png</normaloff>:/new/icons/icons/settings.png</iconset>
            </property>
            <property name="iconSize">
@@ -435,7 +438,7 @@ clock</string>
      </widget>
      <widget class="QWidget" name="tabMaolSend">
       <attribute name="icon">
-       <iconset theme="x-office-address-book-symbolic.symbolic.png" resource="icons.qrc">
+       <iconset theme="x-office-address-book-symbolic.symbolic.png">
         <normaloff>:/new/icons/icons/mail.png</normaloff>:/new/icons/icons/mail.png</iconset>
       </attribute>
       <attribute name="title">
@@ -597,7 +600,7 @@ clock</string>
      </widget>
      <widget class="QWidget" name="tabSerialPortSettings">
       <attribute name="icon">
-       <iconset theme="send-to-symbolic.symbolic.png" resource="icons.qrc">
+       <iconset theme="send-to-symbolic.symbolic.png">
         <normaloff>:/new/icons/icons/connect.png</normaloff>:/new/icons/icons/connect.png</iconset>
       </attribute>
       <attribute name="title">
@@ -680,8 +683,6 @@ clock</string>
   <tabstop>pButtonAccept</tabstop>
   <tabstop>pButtonShowPassword</tabstop>
  </tabstops>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
