@@ -22,6 +22,7 @@ IndexerSettingDialog::IndexerSettingDialog(QWidget *parent) :
 
     acceptOnDeactilationEn = true;
 
+
 }
 
 IndexerSettingDialog::~IndexerSettingDialog()
@@ -31,6 +32,7 @@ IndexerSettingDialog::~IndexerSettingDialog()
 
 void IndexerSettingDialog::setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam)
 {
+    this->disconnectAll();
     ui->dSpinBoxIndexAccel->setValue(indexParam.acceleration/10.);
     ui->dSpinBoxIndexAccelRet->setValue(indexParam.accelerationRet/10);
     ui->dSpinBoxIndexDistance->setValue(indexParam.distance/10.);
@@ -38,16 +40,55 @@ void IndexerSettingDialog::setIndexerSetting(IndexerLiftSettings::IndexParameter
     ui->spinBoxIndexHomeOffset->setValue(indexParam.homeOffset);
     ui->spinBoxIndexSpeed->setValue(indexParam.speed);
     ui->spinBoxindexSpeedRet->setValue(indexParam.speedRet);
+    this->connectAll();
 }
 
 void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters liftParam)
 {
+    this->disconnectAll();
     ui->dSpinBoxLiftAccel->setValue(liftParam.acceleration/10.);
     ui->dSpinBoxLiftDownDelay->setValue(liftParam.delayDown/10.);
     ui->dSpinBoxLiftUpDelay->setValue(liftParam.delayUp/10.);
     ui->dSpinBoxLiftDistance->setValue(liftParam.distance/10.);
     ui->spinBoxLiftHomeOffset->setValue(liftParam.homeOffcet);
     ui->spinBoxLiftSpeed->setValue(liftParam.speed);
+    this->connectAll();
+}
+
+void IndexerSettingDialog::connectAll()
+{
+    connect(ui->dSpinBoxIndexAccel, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxIndexAccel_valueChanged(double)));
+    connect(ui->dSpinBoxIndexAccelRet, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxIndexAccelRet_valueChanged(double)));
+    connect(ui->dSpinBoxIndexDistance, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxIndexDistance_valueChanged(double)));
+    connect(ui->spinBoxIndexDistanceOffcet, SIGNAL(valueChanged(double)), this, SLOT(spinBoxIndexDistanceOffcet_valueChanged(double)));
+    connect(ui->spinBoxIndexHomeOffset, SIGNAL(valueChanged(double)), this, SLOT(spinBoxIndexHomeOffset_valueChanged(double)));
+    connect(ui->spinBoxIndexSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxIndexSpeed_valueChanged(double)));
+    connect(ui->spinBoxindexSpeedRet, SIGNAL(valueChanged(double)), this, SLOT(spinBoxindexSpeedRet_valueChanged(double)));
+
+    connect(ui->dSpinBoxLiftAccel, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftAccel_valueChanged(double)));
+    connect(ui->dSpinBoxLiftDistance, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftDistance_valueChanged(double)));
+    connect(ui->dSpinBoxLiftDownDelay, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftDownDelay_valueChanged(double)));
+    connect(ui->dSpinBoxLiftUpDelay, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftUpDelay_valueChanged(double)));
+    connect(ui->spinBoxLiftHomeOffset, SIGNAL(valueChanged(double)), this, SLOT(spinBoxLiftHomeOffset_valueChanged(double)));
+    connect(ui->spinBoxLiftSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxLiftSpeed_valueChanged(double)));
+}
+
+void IndexerSettingDialog::disconnectAll()
+{
+    disconnect(ui->dSpinBoxIndexAccel, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxIndexAccel_valueChanged(double)));
+    disconnect(ui->dSpinBoxIndexAccelRet, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxIndexAccelRet_valueChanged(double)));
+    disconnect(ui->dSpinBoxIndexDistance, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxIndexDistance_valueChanged(double)));
+    disconnect(ui->spinBoxIndexDistanceOffcet, SIGNAL(valueChanged(double)), this, SLOT(spinBoxIndexDistanceOffcet_valueChanged(double)));
+    disconnect(ui->spinBoxIndexHomeOffset, SIGNAL(valueChanged(double)), this, SLOT(spinBoxIndexHomeOffset_valueChanged(double)));
+    disconnect(ui->spinBoxIndexSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxIndexSpeed_valueChanged(double)));
+    disconnect(ui->spinBoxindexSpeedRet, SIGNAL(valueChanged(double)), this, SLOT(spinBoxindexSpeedRet_valueChanged(double)));
+
+    disconnect(ui->dSpinBoxLiftAccel, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftAccel_valueChanged(double)));
+    disconnect(ui->dSpinBoxLiftDistance, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftDistance_valueChanged(double)));
+    disconnect(ui->dSpinBoxLiftDownDelay, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftDownDelay_valueChanged(double)));
+    disconnect(ui->dSpinBoxLiftUpDelay, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftUpDelay_valueChanged(double)));
+    disconnect(ui->spinBoxLiftHomeOffset, SIGNAL(valueChanged(double)), this, SLOT(spinBoxLiftHomeOffset_valueChanged(double)));
+    disconnect(ui->spinBoxLiftSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxLiftSpeed_valueChanged(double)));
 }
 
 
@@ -225,7 +266,7 @@ bool IndexerSettingDialog::event(QEvent *e)
 }
 
 
-void IndexerSettingDialog::on_dSpinBoxIndexDistance_valueChanged(double arg1)
+void IndexerSettingDialog::dSpinBoxIndexDistance_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -241,7 +282,7 @@ void IndexerSettingDialog::on_dSpinBoxIndexDistance_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_spinBoxIndexHomeOffset_valueChanged(double arg1)
+void IndexerSettingDialog::spinBoxIndexHomeOffset_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -257,7 +298,7 @@ void IndexerSettingDialog::on_spinBoxIndexHomeOffset_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_spinBoxIndexDistanceOffcet_valueChanged(double arg1)
+void IndexerSettingDialog::spinBoxIndexDistanceOffcet_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -273,7 +314,7 @@ void IndexerSettingDialog::on_spinBoxIndexDistanceOffcet_valueChanged(double arg
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_spinBoxIndexSpeed_valueChanged(double arg1)
+void IndexerSettingDialog::spinBoxIndexSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -289,7 +330,7 @@ void IndexerSettingDialog::on_spinBoxIndexSpeed_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_dSpinBoxIndexAccel_valueChanged(double arg1)
+void IndexerSettingDialog::dSpinBoxIndexAccel_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -305,7 +346,7 @@ void IndexerSettingDialog::on_dSpinBoxIndexAccel_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_spinBoxindexSpeedRet_valueChanged(double arg1)
+void IndexerSettingDialog::spinBoxindexSpeedRet_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -321,7 +362,7 @@ void IndexerSettingDialog::on_spinBoxindexSpeedRet_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_dSpinBoxIndexAccelRet_valueChanged(double arg1)
+void IndexerSettingDialog::dSpinBoxIndexAccelRet_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -337,7 +378,7 @@ void IndexerSettingDialog::on_dSpinBoxIndexAccelRet_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_dSpinBoxLiftDownDelay_valueChanged(double arg1)
+void IndexerSettingDialog::dSpinBoxLiftDownDelay_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -353,7 +394,7 @@ void IndexerSettingDialog::on_dSpinBoxLiftDownDelay_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_dSpinBoxLiftUpDelay_valueChanged(double arg1)
+void IndexerSettingDialog::dSpinBoxLiftUpDelay_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -369,7 +410,7 @@ void IndexerSettingDialog::on_dSpinBoxLiftUpDelay_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_dSpinBoxLiftDistance_valueChanged(double arg1)
+void IndexerSettingDialog::dSpinBoxLiftDistance_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -385,7 +426,7 @@ void IndexerSettingDialog::on_dSpinBoxLiftDistance_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_spinBoxLiftHomeOffset_valueChanged(double arg1)
+void IndexerSettingDialog::spinBoxLiftHomeOffset_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -401,7 +442,7 @@ void IndexerSettingDialog::on_spinBoxLiftHomeOffset_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_spinBoxLiftSpeed_valueChanged(double arg1)
+void IndexerSettingDialog::spinBoxLiftSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -417,7 +458,7 @@ void IndexerSettingDialog::on_spinBoxLiftSpeed_valueChanged(double arg1)
     emit this->sendCommand(cmdArr);
 }
 
-void IndexerSettingDialog::on_dSpinBoxLiftAccel_valueChanged(double arg1)
+void IndexerSettingDialog::dSpinBoxLiftAccel_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;

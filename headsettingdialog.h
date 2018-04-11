@@ -50,6 +50,9 @@ private slots:
     void pButtonIncClkd();
     void pButtonDecClkd();
 
+    void connectAll();
+    void disconnectAll();
+
     void eventFilterSetup();
 
     void on_toolButtonPlast_clicked();
@@ -64,18 +67,18 @@ private slots:
     void on_toolButtonHoldOn_clicked();
     void on_pushButtonCopyToAll_clicked();
 
-    void on_tabWidget_currentChanged(int index);
-    void on_spinBoxRearSpeed_valueChanged(double arg1);
-    void on_dSpinBoxRearRange_valueChanged(double arg1);
-    void on_spinBoxFrontSpeed_valueChanged(double arg1);
-    void on_dSpinBoxFrontRange_valueChanged(double arg1);
-    void on_spinBoxStrokCount_valueChanged(double arg1);
-    void on_dSpinBoxHeatTime1Q_valueChanged(double arg1);
-    void on_dSpinBoxHeatTime2Q_valueChanged(double arg1);
-    void on_spinBoxDryPowerQ_valueChanged(double arg1);
-    void on_dSpinBoxHeatTime1IR_valueChanged(double arg1);
-    void on_dSpinBoxHeatTime2IR_valueChanged(double arg1);
-    void on_dSpinBoxDryingRangeIR_valueChanged(double arg1);
+    void tabWidget_currentChanged(int index);
+    void spinBoxRearSpeed_valueChanged(double arg1);
+    void dSpinBoxRearRange_valueChanged(double arg1);
+    void spinBoxFrontSpeed_valueChanged(double arg1);
+    void dSpinBoxFrontRange_valueChanged(double arg1);
+    void spinBoxStrokCount_valueChanged(double arg1);
+    void dSpinBoxHeatTime1Q_valueChanged(double arg1);
+    void dSpinBoxHeatTime2Q_valueChanged(double arg1);
+    void spinBoxDryPowerQ_valueChanged(double arg1);
+    void dSpinBoxHeatTime1IR_valueChanged(double arg1);
+    void dSpinBoxHeatTime2IR_valueChanged(double arg1);
+    void dSpinBoxDryingRangeIR_valueChanged(double arg1);
 
 protected:
     bool event(QEvent *e);

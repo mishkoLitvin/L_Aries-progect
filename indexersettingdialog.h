@@ -38,23 +38,26 @@ private:
     bool acceptOnDeactilationEn;
 
 private slots:
+
+    void connectAll();
+    void disconnectAll();
     void accept();
     void reject();
     void eventFilterSetup();
 
-    void on_dSpinBoxIndexDistance_valueChanged(double arg1);
-    void on_spinBoxIndexHomeOffset_valueChanged(double arg1);
-    void on_spinBoxIndexDistanceOffcet_valueChanged(double arg1);
-    void on_spinBoxIndexSpeed_valueChanged(double arg1);
-    void on_dSpinBoxIndexAccel_valueChanged(double arg1);
-    void on_spinBoxindexSpeedRet_valueChanged(double arg1);
-    void on_dSpinBoxIndexAccelRet_valueChanged(double arg1);
-    void on_dSpinBoxLiftDownDelay_valueChanged(double arg1);
-    void on_dSpinBoxLiftUpDelay_valueChanged(double arg1);
-    void on_dSpinBoxLiftDistance_valueChanged(double arg1);
-    void on_spinBoxLiftHomeOffset_valueChanged(double arg1);
-    void on_spinBoxLiftSpeed_valueChanged(double arg1);
-    void on_dSpinBoxLiftAccel_valueChanged(double arg1);
+    void dSpinBoxIndexDistance_valueChanged(double arg1);
+    void spinBoxIndexHomeOffset_valueChanged(double arg1);
+    void spinBoxIndexDistanceOffcet_valueChanged(double arg1);
+    void spinBoxIndexSpeed_valueChanged(double arg1);
+    void dSpinBoxIndexAccel_valueChanged(double arg1);
+    void spinBoxindexSpeedRet_valueChanged(double arg1);
+    void dSpinBoxIndexAccelRet_valueChanged(double arg1);
+    void dSpinBoxLiftDownDelay_valueChanged(double arg1);
+    void dSpinBoxLiftUpDelay_valueChanged(double arg1);
+    void dSpinBoxLiftDistance_valueChanged(double arg1);
+    void spinBoxLiftHomeOffset_valueChanged(double arg1);
+    void spinBoxLiftSpeed_valueChanged(double arg1);
+    void dSpinBoxLiftAccel_valueChanged(double arg1);
 
 protected:
     bool event(QEvent *e);

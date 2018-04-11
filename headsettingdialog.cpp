@@ -80,6 +80,8 @@ SettingDialog::~SettingDialog()
 
 void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
 {
+    this->disconnectAll();
+
     this->index = index;
 
     ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
@@ -114,6 +116,7 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
     }
     }
     acceptOnDeactilationEn = true;
+    this->connectAll();
 }
 
 void SettingDialog::setIconFolder(QString path)
@@ -189,6 +192,38 @@ void SettingDialog::pButtonDecClkd()
     this->paramsAccepted();
 
     emit this->changeNumber(this->index-1);
+}
+
+void SettingDialog::connectAll()
+{
+    connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabWidget_currentChanged(int )));
+    connect(ui->spinBoxRearSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxRearSpeed_valueChanged(double )));
+    connect(ui->dSpinBoxRearRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxRearRange_valueChanged(double )));
+    connect(ui->spinBoxFrontSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxFrontSpeed_valueChanged(double )));
+    connect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
+    connect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
+    connect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
+    connect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
+    connect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
+    connect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
+    connect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
+    connect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
+}
+
+void SettingDialog::disconnectAll()
+{
+    disconnect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabWidget_currentChanged(int )));
+    disconnect(ui->spinBoxRearSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxRearSpeed_valueChanged(double )));
+    disconnect(ui->dSpinBoxRearRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxRearRange_valueChanged(double )));
+    disconnect(ui->spinBoxFrontSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxFrontSpeed_valueChanged(double )));
+    disconnect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
+    disconnect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
+    disconnect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
+    disconnect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
+    disconnect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
+    disconnect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
+    disconnect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
+    disconnect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
 }
 
 void SettingDialog::eventFilterSetup()
@@ -462,7 +497,7 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
     this->hide();
 }
 
-void SettingDialog::on_tabWidget_currentChanged(int index)
+void SettingDialog::tabWidget_currentChanged(int index)
 {
     QByteArray cmdArr;
     int data = index;
@@ -478,7 +513,7 @@ void SettingDialog::on_tabWidget_currentChanged(int index)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_spinBoxRearSpeed_valueChanged(double arg1)
+void SettingDialog::spinBoxRearSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -494,7 +529,7 @@ void SettingDialog::on_spinBoxRearSpeed_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_dSpinBoxRearRange_valueChanged(double arg1)
+void SettingDialog::dSpinBoxRearRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -510,7 +545,7 @@ void SettingDialog::on_dSpinBoxRearRange_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_spinBoxFrontSpeed_valueChanged(double arg1)
+void SettingDialog::spinBoxFrontSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -526,7 +561,7 @@ void SettingDialog::on_spinBoxFrontSpeed_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_dSpinBoxFrontRange_valueChanged(double arg1)
+void SettingDialog::dSpinBoxFrontRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -542,7 +577,7 @@ void SettingDialog::on_dSpinBoxFrontRange_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_spinBoxStrokCount_valueChanged(double arg1)
+void SettingDialog::spinBoxStrokCount_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -558,7 +593,7 @@ void SettingDialog::on_spinBoxStrokCount_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_dSpinBoxHeatTime1Q_valueChanged(double arg1)
+void SettingDialog::dSpinBoxHeatTime1Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -574,7 +609,7 @@ void SettingDialog::on_dSpinBoxHeatTime1Q_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_dSpinBoxHeatTime2Q_valueChanged(double arg1)
+void SettingDialog::dSpinBoxHeatTime2Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -590,7 +625,7 @@ void SettingDialog::on_dSpinBoxHeatTime2Q_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_spinBoxDryPowerQ_valueChanged(double arg1)
+void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
@@ -606,7 +641,7 @@ void SettingDialog::on_spinBoxDryPowerQ_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_dSpinBoxHeatTime1IR_valueChanged(double arg1)
+void SettingDialog::dSpinBoxHeatTime1IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -622,7 +657,7 @@ void SettingDialog::on_dSpinBoxHeatTime1IR_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_dSpinBoxHeatTime2IR_valueChanged(double arg1)
+void SettingDialog::dSpinBoxHeatTime2IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
@@ -638,7 +673,7 @@ void SettingDialog::on_dSpinBoxHeatTime2IR_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_dSpinBoxDryingRangeIR_valueChanged(double arg1)
+void SettingDialog::dSpinBoxDryingRangeIR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;

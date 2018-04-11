@@ -11,11 +11,17 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     ui->listWidgetStyle->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
     ui->listWidgetIcons->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
 
-    ui->editPassword->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
-    ui->editReceiver->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
-    ui->editSender->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
-    ui->editSubject->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
+//    ui->editPassword->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
+//    ui->editReceiver->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
+//    ui->editSender->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
+//    ui->editSubject->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
 
+    MachineSettings mSett;
+    int i;
+    for(i = 0; i<mSett.machineTypeList.length(); i++)
+    {
+        ui->comboBoxMacineType->addItem(mSett.machineTypeList[i], mSett.machineTypeData[i]);
+    }
     acceptOnDeactilationEn = true;
     logedInSerial = false;
     logedInMail = false;
@@ -34,10 +40,6 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
     connect(ui->pButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
     connect(ui->pButtonDirection, SIGNAL(clicked(bool)), this, SLOT(changeDirection()));
-
-    MachineSettings::MachineType t;
-    t++;
-    qDebug()<< "type"<<(int)t;
 
 }
 
@@ -83,8 +85,8 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     {
         ui->pButtonDirection->setChecked(false);
         ui->pButtonDirection->setText("Direction\nanticlockwise");
-
     }
+    ui->comboBoxMacineType->setCurrentIndex(machineParam.machineType);
 }
 
 void GeneralSettingDialog::setFocusLossAccept(bool flag)
@@ -101,7 +103,6 @@ void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass, 
 
 void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect, QStringList iconList, int iconSel)
 {
-    qDebug()<<curSelect;
     ui->listWidgetStyle->addItems(stList);
     ui->listWidgetStyle->setCurrentRow(curSelect);
     ui->listWidgetIcons->addItems(iconList);
@@ -133,6 +134,7 @@ void GeneralSettingDialog::accept()
     MachineSettings::MachineParameters machineParams;
     machineParams.headCount = ui->spinBoxHeadsCount->value();
     machineParams.warningTime = ui->dSpinBoxWarningTime->value()*10;
+    machineParams.machineType = (MachineSettings::MachineType)ui->comboBoxMacineType->currentIndex();
 
     if(ui->pButtonDirection->isChecked())
         machineParams.direction = -1;
@@ -374,6 +376,8 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
     ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
+    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn());
+    ui->comboBoxMacineType->setVisible(MachineSettings::getServiceWidgEn());
     ev->accept();
     acceptOnDeactilationEn = true;
 

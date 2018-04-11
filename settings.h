@@ -2,6 +2,7 @@
 #define HEADSETTING_H
 
 #include <QByteArray>
+#include <QStringList>
 
 typedef u_int16_t uint16_t;
 typedef u_int8_t uint8_t;
@@ -108,11 +109,16 @@ public:
     }MachineState;
 
     typedef enum MachineType_{
-        VoltServo = 0x0011,
-        VoltAC = 0x0021,
-        Vector = 0x0012,
-        Titan = 0x0013
+        VoltServo = 0x0000,
+        VoltAC,
+        Vector,
+        TitanASE,
+        TitanASA,
+        TitanAAA
     }MachineType;
+
+    QStringList machineTypeList;
+    QList<int> machineTypeData;
 
     typedef struct MachineParameters_{
         uint16_t headCount;

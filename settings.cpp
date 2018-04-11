@@ -258,6 +258,8 @@ bool MachineSettings::serviceWidgetsEn;
 
 MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
 {
+    machineTypeList<<"VoltServo"<<"VoltAC"  <<"Vector"  <<"TitanASE"<<"TitanASA"<<"TitanAAA";
+    machineTypeData<<0x0111     <<0x0121    <<0x0112    <<0x0113    <<0x0213    <<0x0333;
     this->machineParam.headCount = mParam.headCount;
     this->machineParam.warningTime = mParam.headCount;
     this->machineParam.direction = mParam.direction;
@@ -266,6 +268,8 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
 
 MachineSettings::MachineSettings()
 {
+    machineTypeList<<"VoltServo"<<"VoltAC"  <<"Vector"  <<"TitanASE"<<"TitanASA"<<"TitanAAA";
+    machineTypeData<<0x0111     <<0x0121    <<0x0112    <<0x0113    <<0x0213    <<0x0333;
     this->machineParam.headCount = 6;
     this->machineParam.warningTime = 1;
     this->machineParam.direction = 1;

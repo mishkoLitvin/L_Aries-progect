@@ -384,14 +384,14 @@ void MainWindow::getHeadCommand(int index, QByteArray commandArr)
 void MainWindow::getIndexerParam(QByteArray indexerParamArr)
 {
     settings->setValue(QString("INDEXER_PARAMS"), indexerParamArr);
-    comPort->sendData(indexerParamArr);
+//    comPort->sendData(indexerParamArr);
 
 }
 
 void MainWindow::getLiftParam(QByteArray liftParamArr)
 {
     settings->setValue(QString("LIFT_PARAMS"), liftParamArr);
-    comPort->sendData(liftParamArr);
+//    comPort->sendData(liftParamArr);
 }
 
 void MainWindow::getIndexLiftSettComm(QByteArray commandArr)
@@ -433,7 +433,7 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
             break;
         }
     }
-    comPort->sendData(machineParamArr);
+//    comPort->sendData(machineParamArr);
     this->setHeadsPosition();
 }
 
