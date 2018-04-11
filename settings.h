@@ -19,8 +19,11 @@ public:
         HeadSpeedRear = 0x02,
         HeadSpeedFront = 0x03,
         HeadStroksCount = 0x07,
-        HeadLimitRear = 0x16,
-        HeadLimitFront = 0x17,
+        HeadSBStroksCount = 0x07,
+        HeadRangeLimit1 = 0x16,
+        HeadRangeLimit2 = 0x17,
+        HeadFlDwellTime = 0x16,
+        HeadSqDwellTime = 0x17,
         HeadHeatTime1Q = 0x07,
         HeadHeatTime2Q = 0x08,
         HeadHeatPower = 0x1D,
@@ -41,8 +44,11 @@ public:
         uint16_t speedRear;
         uint16_t speedFront;
         uint16_t stroksCount;
+        uint16_t stroksSBCount;
         uint16_t limitRear;
         uint16_t limitFront;
+        uint16_t dwellFLTime;
+        uint16_t dwellSQTime;
         uint16_t heatTime1;
         uint16_t heatTime2;
         uint16_t heatPower;
@@ -136,10 +142,14 @@ public:
     void fromByteArray(QByteArray machineParamArray);
 
     static bool serviceWidgetsEn;
+    static MachineType machineTypeStat;
 
 public:
     static bool getServiceWidgEn();
     static void setServiceWidgEn(bool servEn);
+
+    static MachineType getMachineType();
+    static void setMachineType(MachineType mType);
 
 };
 

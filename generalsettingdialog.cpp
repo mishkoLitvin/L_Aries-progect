@@ -135,6 +135,7 @@ void GeneralSettingDialog::accept()
     machineParams.headCount = ui->spinBoxHeadsCount->value();
     machineParams.warningTime = ui->dSpinBoxWarningTime->value()*10;
     machineParams.machineType = (MachineSettings::MachineType)ui->comboBoxMacineType->currentIndex();
+    MachineSettings::setMachineType(machineParams.machineType);
 
     if(ui->pButtonDirection->isChecked())
         machineParams.direction = -1;

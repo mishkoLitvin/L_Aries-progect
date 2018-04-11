@@ -3,38 +3,24 @@
 
 void HeadSetting::fromByteArray(QByteArray hParamArr)
 {
-    switch(hParamArr[0])
-    {
-    case 0:
-    {
-        this->headParam.headType = PrintHead;
-        this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
-        this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
-        this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
-        this->headParam.limitRear = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
-        this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[9]))<<8)|(0x00FF&((uint16_t)hParamArr[8]));
-        this->headParam.stroksCount = ((0x00FF&((uint16_t)hParamArr[11]))<<8)|(0x00FF&((uint16_t)hParamArr[10]));
-        break;
-    }
-    case 1:
-    {
-        this->headParam.headType = QuartzHead;
-        this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
-        this->headParam.heatTime1 = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
-        this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
-        this->headParam.heatPower = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
-        break;
-    }
-    case 2:
-    {
-        this->headParam.headType = InfraRedHead;
-        this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
-        this->headParam.heatTime1 = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
-        this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
-        this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
-        break;
-    }
-    }
+    if(hParamArr.length()!=26)
+        hParamArr.resize(26);
+
+    this->headParam.headType = PrintHead;
+    this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
+    this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
+    this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
+    this->headParam.limitRear = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
+    this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[9]))<<8)|(0x00FF&((uint16_t)hParamArr[8]));
+    this->headParam.stroksCount = ((0x00FF&((uint16_t)hParamArr[11]))<<8)|(0x00FF&((uint16_t)hParamArr[10]));
+    this->headParam.stroksSBCount = ((0x00FF&((uint16_t)hParamArr[13]))<<8)|(0x00FF&((uint16_t)hParamArr[12]));
+    this->headParam.dwellFLTime = ((0x00FF&((uint16_t)hParamArr[15]))<<8)|(0x00FF&((uint16_t)hParamArr[14]));
+    this->headParam.dwellSQTime = ((0x00FF&((uint16_t)hParamArr[17]))<<8)|(0x00FF&((uint16_t)hParamArr[16]));
+    this->headParam.heatTime1 = ((0x00FF&((uint16_t)hParamArr[19]))<<8)|(0x00FF&((uint16_t)hParamArr[18]));
+    this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[21]))<<8)|(0x00FF&((uint16_t)hParamArr[20]));
+    this->headParam.heatPower = ((0x00FF&((uint16_t)hParamArr[23]))<<8)|(0x00FF&((uint16_t)hParamArr[22]));
+    this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[25]))<<8)|(0x00FF&((uint16_t)hParamArr[24]));
+
 }
 
 HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters hParam)
@@ -47,65 +33,46 @@ HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters 
     hp.heatTime2 = hParam.heatTime2;
     hp.limitFront = hParam.limitFront;
     hp.limitRear = hParam.limitRear;
+    hp.dwellFLTime = hParam.dwellFLTime;
+    hp.dwellSQTime = hParam.dwellSQTime;
     hp.speedFront = hParam.speedFront;
     hp.speedRear = hParam.speedRear;
     hp.stroksCount = hParam.stroksCount;
+    hp.stroksSBCount = hParam.stroksSBCount;
+
     return hp;
 }
 
 QByteArray HeadSetting::HeadParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(12);
+    bArr.resize(26);
     bArr[0] = this->headType;
     bArr[1] = (char)(this->powerOn&0x01);
-    switch(this->headType)
-    {
-    case PrintHead:
-    {
-        bArr[2] = (char)(this->speedRear&0x00FF);
-        bArr[3] = (char)(((this->speedRear&0xFF00)>>8)&0x00FF);
-        bArr[4] = (char)(this->speedFront&0x00FF);
-        bArr[5] = (char)(((this->speedFront&0xFF00)>>8)&0x00FF);
-        bArr[6] = (char)(this->limitRear&0x00FF);
-        bArr[7] = (char)(((this->limitRear&0xFF00)>>8)&0x00FF);
-        bArr[8] = (char)(this->limitFront&0x00FF);
-        bArr[9] = (char)(((this->limitFront&0xFF00)>>8)&0x00FF);
-        bArr[10] = (char)(this->stroksCount&0x00FF);
-        bArr[11] = (char)(((this->stroksCount&0xFF00)>>8)&0x00FF);
-        break;
-    }
-    case QuartzHead:
-    {
-        bArr[2] = (char)(this->heatTime1&0x00FF);
-        bArr[3] = (char)(((this->heatTime1&0xFF00)>>8)&0x00FF);
-        bArr[4] = (char)(this->heatTime2&0x00FF);
-        bArr[5] = (char)(((this->heatTime2&0xFF00)>>8)&0x00FF);
-        bArr[6] = (char)(this->heatPower&0x00FF);
-        bArr[7] = (char)(((this->heatPower&0xFF00)>>8)&0x00FF);
-        bArr[8] = (char)0x55;
-        bArr[9] = (char)0x55;
-        bArr[10] = (char)0x55;
-        bArr[11] = (char)0x55;
-        break;
-    }
-    case InfraRedHead:
-    {
-        bArr[2] = (char)(this->heatTime1&0x00FF);
-        bArr[3] = (char)(((this->heatTime1&0xFF00)>>8)&0x00FF);
-        bArr[4] = (char)(this->heatTime2&0x00FF);
-        bArr[5] = (char)(((this->heatTime2&0xFF00)>>8)&0x00FF);
-        bArr[6] = (char)(this->limitFront&0x00FF);
-        bArr[7] = (char)(((this->limitFront&0xFF00)>>8)&0x00FF);
-        bArr[8] = (char)0x55;
-        bArr[9] = (char)0x55;
-        bArr[10] = (char)0x55;
-        bArr[11] = (char)0x55;
-        break;
-    }
-    }
-
-
+    bArr[2] = (char)(this->speedRear&0x00FF);
+    bArr[3] = (char)(((this->speedRear&0xFF00)>>8)&0x00FF);
+    bArr[4] = (char)(this->speedFront&0x00FF);
+    bArr[5] = (char)(((this->speedFront&0xFF00)>>8)&0x00FF);
+    bArr[6] = (char)(this->limitRear&0x00FF);
+    bArr[7] = (char)(((this->limitRear&0xFF00)>>8)&0x00FF);
+    bArr[8] = (char)(this->limitFront&0x00FF);
+    bArr[9] = (char)(((this->limitFront&0xFF00)>>8)&0x00FF);
+    bArr[10] = (char)(this->stroksCount&0x00FF);
+    bArr[11] = (char)(((this->stroksCount&0xFF00)>>8)&0x00FF);
+    bArr[12] = (char)(this->stroksSBCount&0x00FF);
+    bArr[13] = (char)(((this->stroksSBCount&0xFF00)>>8)&0x00FF);
+    bArr[14] = (char)(this->dwellFLTime&0x00FF);
+    bArr[15] = (char)(((this->dwellFLTime&0xFF00)>>8)&0x00FF);
+    bArr[16] = (char)(this->dwellSQTime&0x00FF);
+    bArr[17] = (char)(((this->dwellSQTime&0xFF00)>>8)&0x00FF);
+    bArr[18] = (char)(this->heatTime1&0x00FF);
+    bArr[19] = (char)(((this->heatTime1&0xFF00)>>8)&0x00FF);
+    bArr[20] = (char)(this->heatTime2&0x00FF);
+    bArr[21] = (char)(((this->heatTime2&0xFF00)>>8)&0x00FF);
+    bArr[22] = (char)(this->heatPower&0x00FF);
+    bArr[23] = (char)(((this->heatPower&0xFF00)>>8)&0x00FF);
+    bArr[24] = (char)(this->limitFront&0x00FF);
+    bArr[25] = (char)(((this->limitFront&0xFF00)>>8)&0x00FF);
     return bArr;
 }
 
@@ -122,6 +89,9 @@ HeadSetting::HeadSetting(HeadParameters hParam)
     this->headParam.limitFront = hParam.limitFront;
     this->headParam.limitRear = hParam.limitRear;
     this->headParam.stroksCount = hParam.stroksCount;
+    this->headParam.stroksSBCount = hParam.stroksSBCount;
+    this->headParam.dwellFLTime = hParam.dwellFLTime;
+    this->headParam.dwellSQTime = hParam.dwellSQTime;
 }
 
 HeadSetting::HeadSetting()
@@ -136,6 +106,9 @@ HeadSetting::HeadSetting()
     this->headParam.limitFront = 1;
     this->headParam.limitRear = 1;
     this->headParam.stroksCount = 1;
+    this->headParam.stroksSBCount = 0;
+    this->headParam.dwellFLTime = 1;
+    this->headParam.dwellSQTime = 1;
 }
 
 HeadSetting::~HeadSetting()
@@ -239,6 +212,10 @@ void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifPa
     this->liftParam.delayUp = ((0x00FF&((uint16_t)lifParamArr[11]))<<8)|(0x00FF&((uint16_t)lifParamArr[10]));
 }
 
+
+bool MachineSettings::serviceWidgetsEn;
+MachineSettings::MachineType MachineSettings::machineTypeStat;
+
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
     QByteArray bArr;
@@ -254,8 +231,6 @@ QByteArray MachineSettings::MachineParameters_::toByteArray()
     return bArr;
 }
 
-bool MachineSettings::serviceWidgetsEn;
-
 MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
 {
     machineTypeList<<"VoltServo"<<"VoltAC"  <<"Vector"  <<"TitanASE"<<"TitanASA"<<"TitanAAA";
@@ -264,6 +239,7 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
     this->machineParam.warningTime = mParam.headCount;
     this->machineParam.direction = mParam.direction;
     this->machineParam.machineType = mParam.machineType;
+    this->machineTypeStat = mParam.machineType;
 }
 
 MachineSettings::MachineSettings()
@@ -287,6 +263,7 @@ void MachineSettings::fromByteArray(QByteArray machineParamArray)
     this->machineParam.machineType = static_cast<MachineSettings::MachineType>
             (((0x00FF&((uint16_t)machineParamArray[7]))<<8)
             |(0x00FF&((uint16_t)machineParamArray[6])));
+    this->machineTypeStat = this->machineParam.machineType;
 }
 
 bool MachineSettings::getServiceWidgEn()
@@ -299,4 +276,16 @@ void MachineSettings::setServiceWidgEn(bool servEn)
 {
     MachineSettings stt;
     stt.serviceWidgetsEn = servEn;
+}
+
+MachineSettings::MachineType MachineSettings::getMachineType()
+{
+    MachineSettings stt;
+    return stt.machineTypeStat;
+}
+
+void MachineSettings::setMachineType(MachineSettings::MachineType mType)
+{
+    MachineSettings stt;
+    stt.machineTypeStat = mType;
 }

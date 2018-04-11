@@ -202,12 +202,15 @@ void SettingDialog::connectAll()
     connect(ui->spinBoxFrontSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxFrontSpeed_valueChanged(double )));
     connect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     connect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
+    connect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double)));
     connect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
     connect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
     connect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
+    connect(ui->dSpinBoxFlDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFlDwellTime_valueChanged(double )));
+    connect(ui->dSpinBoxSqDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxSqDwellTime_valueChanged(double )));
 }
 
 void SettingDialog::disconnectAll()
@@ -218,12 +221,16 @@ void SettingDialog::disconnectAll()
     disconnect(ui->spinBoxFrontSpeed, SIGNAL(valueChanged(double)), this, SLOT(spinBoxFrontSpeed_valueChanged(double )));
     disconnect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     disconnect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
+    disconnect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
     disconnect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
     disconnect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
+    disconnect(ui->dSpinBoxFlDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFlDwellTime_valueChanged(double )));
+    disconnect(ui->dSpinBoxSqDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxSqDwellTime_valueChanged(double )));
+
 }
 
 void SettingDialog::eventFilterSetup()
@@ -306,6 +313,28 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
+    objList = ui->spinBoxSBStrokCount->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    objList = ui->dSpinBoxFlDwellTime->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    objList = ui->dSpinBoxSqDwellTime->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
 
 }
 
@@ -329,6 +358,47 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
         acceptOnDeactilationEn = true;
     }
     return false;
+}
+
+void SettingDialog::showEvent(QShowEvent *ev)
+{
+    qDebug()<<MachineSettings::getMachineType();
+    ui->labelSP1->setVisible(!((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
+    ui->labelSP2->setVisible(!((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
+    ui->spinBoxFrontSpeed->setVisible(!((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
+    ui->spinBoxRearSpeed->setVisible(!((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
+
+    ui->labelRL1->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->labelRL2->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->dSpinBoxFrontRange->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->dSpinBoxRearRange->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+
+    ui->labelDwT1->setVisible(((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
+                               |(MachineSettings::getMachineType() == MachineSettings::Vector)));
+    ui->labelDwT2->setVisible(((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                               |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
+                               |(MachineSettings::getMachineType() == MachineSettings::Vector)));
+    ui->dSpinBoxFlDwellTime->setVisible(((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
+                                         |(MachineSettings::getMachineType() == MachineSettings::Vector)));
+    ui->dSpinBoxSqDwellTime->setVisible(((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
+                                         |(MachineSettings::getMachineType() == MachineSettings::Vector)));
+
+    ev->accept();
 }
 
 
@@ -535,8 +605,8 @@ void SettingDialog::dSpinBoxRearRange_valueChanged(double arg1)
     int data = arg1*10;
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadLimitRear>>8));
-    cmdArr.append((char)(HeadSetting::HeadLimitRear&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadRangeLimit1>>8));
+    cmdArr.append((char)(HeadSetting::HeadRangeLimit1&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
@@ -567,8 +637,8 @@ void SettingDialog::dSpinBoxFrontRange_valueChanged(double arg1)
     int data = arg1*10;
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadLimitFront>>8));
-    cmdArr.append((char)(HeadSetting::HeadLimitFront&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadRangeLimit2>>8));
+    cmdArr.append((char)(HeadSetting::HeadRangeLimit2&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
@@ -585,6 +655,22 @@ void SettingDialog::spinBoxStrokCount_valueChanged(double arg1)
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadStroksCount>>8));
     cmdArr.append((char)(HeadSetting::HeadStroksCount&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::spinBoxSBStrokCount_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadSBStroksCount>>8));
+    cmdArr.append((char)(HeadSetting::HeadSBStroksCount&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
@@ -681,6 +767,38 @@ void SettingDialog::dSpinBoxDryingRangeIR_valueChanged(double arg1)
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append((char)(HeadSetting::HeadHeatDryRange>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatDryRange&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::dSpinBoxFlDwellTime_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlDwellTime>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlDwellTime&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::dSpinBoxSqDwellTime_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadSqDwellTime>>8));
+    cmdArr.append((char)(HeadSetting::HeadSqDwellTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);

@@ -73,16 +73,22 @@ private slots:
     void spinBoxFrontSpeed_valueChanged(double arg1);
     void dSpinBoxFrontRange_valueChanged(double arg1);
     void spinBoxStrokCount_valueChanged(double arg1);
+    void spinBoxSBStrokCount_valueChanged(double arg1);
     void dSpinBoxHeatTime1Q_valueChanged(double arg1);
     void dSpinBoxHeatTime2Q_valueChanged(double arg1);
     void spinBoxDryPowerQ_valueChanged(double arg1);
     void dSpinBoxHeatTime1IR_valueChanged(double arg1);
     void dSpinBoxHeatTime2IR_valueChanged(double arg1);
     void dSpinBoxDryingRangeIR_valueChanged(double arg1);
+    void dSpinBoxFlDwellTime_valueChanged(double arg1);
+    void dSpinBoxSqDwellTime_valueChanged(double arg1);
 
 protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);
+    void showEvent(QShowEvent *ev);
+
+
 };
 
 
