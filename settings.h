@@ -95,7 +95,8 @@ public:
 
     enum{
         MasterHeadCount = 0x0001,
-        MasterIndexLiftCommand = 0x0004
+        MasterIndexLiftCommand = 0x0004,
+        MasterMachineType = 0x0011
     };
 
     typedef union MachineState_{
@@ -158,8 +159,8 @@ class IndexerLiftSettings
 public:
 
     enum{
-        LiftDevice = 0x0001,
-        IndexerDevice = 0x0002
+        LiftDevice = 0x0002,
+        IndexerDevice = 0x0001
     };
 
     enum{
@@ -177,6 +178,8 @@ public:
         LiftDistance = 0x16,
         LiftSpeed = 0x17,
         LiftAcceleration = 0x18,
+
+        WarningTime = 0x0D,
     };
 
     typedef struct LiftParameters_{

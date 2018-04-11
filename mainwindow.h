@@ -114,6 +114,7 @@ private slots:
     void getLiftParam(QByteArray liftParamArr);
     void getIndexLiftSettComm(QByteArray commandArr);
     void getIndexLiftCommand(QByteArray commandArr);
+    void getMachineCommand(QByteArray commandArr);
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
     void getVeiwSettings(int stSheetIndex);

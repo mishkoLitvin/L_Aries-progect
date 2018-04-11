@@ -71,6 +71,8 @@ signals:
     void serviceSettingRequest();
     void usersSettingRequest();
     void directionChanged(int dir);
+    void sendCommand(QByteArray command);
+
 
 private:
     Ui::GeneralSettingDialog *ui;
@@ -98,6 +100,9 @@ private slots:
     void styleChanged(int index);
     void iconChanged(int index);
     void changeDirection();
+    void headCountChanged(double arg1);
+    void machineTypeChanget(int index);
+    void warningTimeChanged(double arg1);
 
 protected:
     bool event(QEvent *e);

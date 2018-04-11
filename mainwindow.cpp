@@ -96,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(iconsChangedIndex(int)), this, SLOT(setIconFolder(int)));
     connect(generalSettingDialog, SIGNAL(usersSettingRequest()), usersSettingDialog, SLOT(show()));
     connect(generalSettingDialog, SIGNAL(directionChanged(int)), this, SLOT(getDirection(int)));
+    connect(generalSettingDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getMachineCommand(QByteArray)));
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS").value<EmailSettings>().senderAdress);
@@ -400,6 +401,11 @@ void MainWindow::getIndexLiftSettComm(QByteArray commandArr)
 }
 
 void MainWindow::getIndexLiftCommand(QByteArray commandArr)
+{
+    comPort->sendData(commandArr);
+}
+
+void MainWindow::getMachineCommand(QByteArray commandArr)
 {
     comPort->sendData(commandArr);
 }
