@@ -20,6 +20,7 @@ private slots:
     void thisClicked()
     {
         emit this->clicked(this->character);
+        this->clearFocus();
     }
 };
 

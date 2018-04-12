@@ -157,6 +157,13 @@ Lock
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pbEnter</tabstop>
+  <tabstop>pbCaps</tabstop>
+  <tabstop>pbShift</tabstop>
+  <tabstop>pbBackspace</tabstop>
+  <tabstop>lineEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
