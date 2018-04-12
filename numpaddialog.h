@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QDebug>
+#include <QAction>
+#include <QKeySequence>
 
 class NumpadButton : public QPushButton{
     Q_OBJECT
@@ -17,6 +19,7 @@ private slots:
     void thisClicked()
     {
         emit this->clicked(this->index);
+        this->clearFocus();
     }
 };
 
@@ -50,6 +53,8 @@ private:
     NumpadButton *buttons[10];
 
     const QString stSheet;
+
+    QAction* actionSubmit;
 
     double value;
 };
