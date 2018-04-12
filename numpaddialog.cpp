@@ -10,7 +10,12 @@ NumpadDialog::NumpadDialog(QWidget *parent, QString windowTitle) :
     this->setWindowTitle(windowTitle);
     this->setStyleSheet("QPushButton {font: 40px; min-width: 60px; min-height: 60px;}"
                         "QLineEdit {font: 40px; min-height: 50px;}");
+
+    QPushButton *enterButton = new QPushButton("Enter");
+    ui->layoutButtons->addWidget(enterButton, 3, 3);
+    connect(enterButton, SIGNAL(clicked(bool)), this, SLOT(submitValue()));
     int k;
+
     buttons[0] = new NumpadButton(0, QString::number(0));
     ui->layoutButtons->addWidget(buttons[0], 3, 0);
     connect(buttons[0], SIGNAL(clicked()), this, SLOT(appendZero()));
@@ -25,9 +30,6 @@ NumpadDialog::NumpadDialog(QWidget *parent, QString windowTitle) :
     QPushButton *signButton = new QPushButton("+/-");
     ui->layoutButtons->addWidget(signButton, 3, 2);
     connect(signButton, SIGNAL(clicked(bool)), this, SLOT(changeSign()));
-    QPushButton *enterButton = new QPushButton("Enter");
-    ui->layoutButtons->addWidget(enterButton, 3, 3);
-    connect(enterButton, SIGNAL(clicked(bool)), this, SLOT(submitValue()));
     QPushButton *backspaceButton = new QPushButton("<-");
     backspaceButton->setAutoRepeat(true);
     ui->layoutButtons->addWidget(backspaceButton, 0, 3);
