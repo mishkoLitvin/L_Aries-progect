@@ -314,6 +314,16 @@ void MainWindow::indexerLiftSettingRequest()
 void MainWindow::generalSettingDialogRequest()
 {
         machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
+        generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
+        generalSettingDialog->setStyleSheet(this->styleSheet());
+        generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(),
+                                           settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt(),
+                                           settings->value("PASSWORDS/PASSWORD_USERS").toInt());
+        generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(),
+                                           settings->value("STYLE/STYLE_SEL_INDEX").toInt(),
+                                           settings->value("STYLE/ICON_LIST").value<QStringList>(),
+                                           settings->value("STYLE/ICON_SEL_INDEX").toInt());
+        generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
         generalSettingDialog->setMachineSetting(machineSettings.machineParam);
         generalSettingDialog->show();
         generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->width(),
@@ -332,6 +342,7 @@ void MainWindow::changeHeadNo(int index)
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
+    qDebug()<<"uiiiiiiiiiii";
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
     if(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
 

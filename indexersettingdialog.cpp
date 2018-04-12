@@ -94,31 +94,37 @@ void IndexerSettingDialog::disconnectAll()
 
 void IndexerSettingDialog::accept()
 {
-    IndexerLiftSettings::IndexParameters indexParam;
-    indexParam.acceleration = ui->dSpinBoxIndexAccel->value()*10.;
-    indexParam.accelerationRet = ui->dSpinBoxIndexAccelRet->value()*10.;
-    indexParam.distance = ui->dSpinBoxIndexDistance->value()*10.;
-    indexParam.distOffcet = ui->spinBoxIndexDistanceOffcet->value();
-    indexParam.homeOffset = ui->spinBoxIndexHomeOffset->value();
-    indexParam.speed = ui->spinBoxIndexSpeed->value();
-    indexParam.speedRet = ui->spinBoxindexSpeedRet->value();
+    if(acceptEnable)
+    {
+        IndexerLiftSettings::IndexParameters indexParam;
+        indexParam.acceleration = ui->dSpinBoxIndexAccel->value()*10.;
+        indexParam.accelerationRet = ui->dSpinBoxIndexAccelRet->value()*10.;
+        indexParam.distance = ui->dSpinBoxIndexDistance->value()*10.;
+        indexParam.distOffcet = ui->spinBoxIndexDistanceOffcet->value();
+        indexParam.homeOffset = ui->spinBoxIndexHomeOffset->value();
+        indexParam.speed = ui->spinBoxIndexSpeed->value();
+        indexParam.speedRet = ui->spinBoxindexSpeedRet->value();
 
-    IndexerLiftSettings::LiftParameters liftParams;
-    liftParams.acceleration = ui->dSpinBoxLiftAccel->value()*10.;
-    liftParams.delayDown = ui->dSpinBoxLiftDownDelay->value()*10.;
-    liftParams.delayUp = ui->dSpinBoxLiftUpDelay->value()*10.;
-    liftParams.distance = ui->dSpinBoxLiftDistance->value()*10.;
-    liftParams.homeOffcet = ui->spinBoxLiftHomeOffset->value();
-    liftParams.speed = ui->spinBoxLiftSpeed->value();
+        IndexerLiftSettings::LiftParameters liftParams;
+        liftParams.acceleration = ui->dSpinBoxLiftAccel->value()*10.;
+        liftParams.delayDown = ui->dSpinBoxLiftDownDelay->value()*10.;
+        liftParams.delayUp = ui->dSpinBoxLiftUpDelay->value()*10.;
+        liftParams.distance = ui->dSpinBoxLiftDistance->value()*10.;
+        liftParams.homeOffcet = ui->spinBoxLiftHomeOffset->value();
+        liftParams.speed = ui->spinBoxLiftSpeed->value();
 
-    emit this->indexerParamChanged(indexParam.toByteArray());
-    emit this->liftParamChanged(liftParams.toByteArray());
+        emit this->indexerParamChanged(indexParam.toByteArray());
+        emit this->liftParamChanged(liftParams.toByteArray());
 
-    this->hide();
+        this->hide();
+    }
+    else
+        acceptEnable = true;
 }
 
 void IndexerSettingDialog::reject()
 {
+    acceptEnable = false;
     this->hide();
 }
 
@@ -237,6 +243,7 @@ bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
 
 void IndexerSettingDialog::showEvent(QShowEvent *ev)
 {
+    acceptEnable = true;
     ui->dSpinBoxIndexDistance->setVisible(MachineSettings::getServiceWidgEn());
     ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn());
     ui->spinBoxIndexDistanceOffcet->setVisible(MachineSettings::getServiceWidgEn());

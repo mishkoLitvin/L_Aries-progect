@@ -77,6 +77,7 @@ signals:
 private:
     Ui::GeneralSettingDialog *ui;
     bool acceptOnDeactilationEn;
+    bool acceptEnable;
     bool logedInSerial;
     bool logedInMail;
     bool logedInUserSett;

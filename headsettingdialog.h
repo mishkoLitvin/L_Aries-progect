@@ -44,9 +44,11 @@ private:
 
     int index;
     bool acceptOnDeactilationEn;
+    bool acceptEnable;
 
 private slots:
-    void paramsAccepted();
+    void accept();
+    void reject();
     void pButtonIncClkd();
     void pButtonDecClkd();
 

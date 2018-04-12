@@ -51,8 +51,8 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     }
 //    this->installEventFilter(this);
 
-    connect(ui->pushButtonOK, SIGNAL(clicked(bool)), this, SLOT(paramsAccepted()));
-    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(close()));
+    connect(ui->pushButtonOK, SIGNAL(clicked(bool)), this, SLOT(accept()));
+    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonHeadNoInc, SIGNAL(clicked(bool)), this, SLOT(pButtonIncClkd()));
     connect(ui->pButtonHeadNoDec, SIGNAL(clicked(bool)), this, SLOT(pButtonDecClkd()));
 
@@ -141,55 +141,64 @@ void SettingDialog::setIconFolder(QString path)
 
 }
 
-void SettingDialog::paramsAccepted()
+void SettingDialog::accept()
 {
-    HeadSetting hSttg;
+    if(acceptEnable)
+    {
+        HeadSetting hSttg;
+        hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
+        switch(ui->tabWidget->currentIndex())
+        {
+        case 0:
+        {
+            hSttg.headParam.headType = HeadSetting::PrintHead;
+            hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
+            hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
+            hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
+            hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
+            hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
+            break;
+        }
+        case 1:
+        {
+            hSttg.headParam.headType = HeadSetting::QuartzHead;
+            hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
+            hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
+            hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
+            break;
+        }
+        case 2:
+        {
+            hSttg.headParam.headType = HeadSetting::InfraRedHead;
+            hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
+            hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
+            hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
+            break;
+        }
+        }
+        emit this->accept(this->index, hSttg.headParam.toByteArray());
+        this->hide();
+    }
+    else
+        acceptEnable = true;
+}
 
-    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-    switch(ui->tabWidget->currentIndex())
-    {
-    case 0:
-    {
-        hSttg.headParam.headType = HeadSetting::PrintHead;
-        hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
-        hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
-        hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
-        hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
-        hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
-        break;
-    }
-    case 1:
-    {
-        hSttg.headParam.headType = HeadSetting::QuartzHead;
-        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
-        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
-        hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
-        break;
-    }
-    case 2:
-    {
-        hSttg.headParam.headType = HeadSetting::InfraRedHead;
-        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
-        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-        hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
-        break;
-    }
-    }
-    emit this->accept(this->index, hSttg.headParam.toByteArray());
+void SettingDialog::reject()
+{
+    acceptEnable = false;
     this->hide();
-
 }
 
 void SettingDialog::pButtonIncClkd()
 {
-    this->paramsAccepted();
+    this->accept();
 
     emit this->changeNumber(this->index+1);
 }
 
 void SettingDialog::pButtonDecClkd()
 {
-    this->paramsAccepted();
+    this->accept();
 
     emit this->changeNumber(this->index-1);
 }
@@ -343,7 +352,7 @@ bool SettingDialog::event(QEvent *e)
     if((e->type()==QEvent::WindowDeactivate)|((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave)))
     {
         if(acceptOnDeactilationEn)
-            this->paramsAccepted();
+            this->accept();
     }
     return QWidget::event(e);
 }
@@ -362,7 +371,7 @@ bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
 
 void SettingDialog::showEvent(QShowEvent *ev)
 {
-    qDebug()<<MachineSettings::getMachineType();
+    acceptEnable = true;
     ui->labelSP1->setVisible(!((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
                                |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
                                |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
