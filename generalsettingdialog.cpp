@@ -123,35 +123,40 @@ void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
 
 void GeneralSettingDialog::accept()
 {
-    EmailSettings emailSett;
-    emailSett.senderAdress = ui->editSender->text();
-    emailSett.senderPassword = ui->editPassword->text();
-    emailSett.receiverAdress = ui->editReceiver->text();
-    if(ui->editSubject->text().isEmpty())
-        emailSett.emailSubject = "LiQt machine interface autosend message";
+    if(acceptEnable)
+    {
+        EmailSettings emailSett;
+        emailSett.senderAdress = ui->editSender->text();
+        emailSett.senderPassword = ui->editPassword->text();
+        emailSett.receiverAdress = ui->editReceiver->text();
+        if(ui->editSubject->text().isEmpty())
+            emailSett.emailSubject = "LiQt machine interface autosend message";
+        else
+            emailSett.emailSubject = ui->editSubject->text();
+        emailSett.mailEnable = ui->checkBoxMailSendEnable->isChecked();
+        emit this->emailSettingsChanged(emailSett);
+
+        MachineSettings::MachineParameters machineParams;
+        machineParams.headCount = ui->spinBoxHeadsCount->value();
+        machineParams.warningTime = ui->dSpinBoxWarningTime->value()*10;
+        machineParams.machineType = (MachineSettings::MachineType)ui->comboBoxMacineType->currentIndex();
+        MachineSettings::setMachineType(machineParams.machineType);
+
+        if(ui->pButtonDirection->isChecked())
+            machineParams.direction = -1;
+        else
+            machineParams.direction = 1;
+
+        emit this->machineParamChanged(machineParams.toByteArray());
+        this->hide();
+    }
     else
-        emailSett.emailSubject = ui->editSubject->text();
-    emailSett.mailEnable = ui->checkBoxMailSendEnable->isChecked();
-    emit this->emailSettingsChanged(emailSett);
-
-    MachineSettings::MachineParameters machineParams;
-    machineParams.headCount = ui->spinBoxHeadsCount->value();
-    machineParams.warningTime = ui->dSpinBoxWarningTime->value()*10;
-    machineParams.machineType = (MachineSettings::MachineType)ui->comboBoxMacineType->currentIndex();
-    MachineSettings::setMachineType(machineParams.machineType);
-
-    if(ui->pButtonDirection->isChecked())
-        machineParams.direction = -1;
-    else
-        machineParams.direction = 1;
-
-    emit this->machineParamChanged(machineParams.toByteArray());
-
-    this->hide();
+        acceptEnable = true;
 }
 
 void GeneralSettingDialog::reject()
 {
+    acceptEnable = false;
     this->hide();
 }
 
@@ -445,6 +450,6 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->comboBoxMacineType->setVisible(MachineSettings::getServiceWidgEn());
     ev->accept();
     acceptOnDeactilationEn = true;
-
+    acceptEnable = true;
 
 }

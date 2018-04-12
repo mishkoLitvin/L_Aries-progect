@@ -1055,7 +1055,7 @@
              <item>
               <widget class="QLabel" name="label_9">
                <property name="text">
-                <string>Heat time 1 (0,1..10)s</string>
+                <string>Heat time 2 (0,1..10)s</string>
                </property>
               </widget>
              </item>
@@ -1259,7 +1259,7 @@
              <item>
               <widget class="QLabel" name="label_10">
                <property name="text">
-                <string>Heat time 1 (0,1..10)s</string>
+                <string>Heat time 2 (0,1..10)s</string>
                </property>
               </widget>
              </item>

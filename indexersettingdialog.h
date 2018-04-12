@@ -36,6 +36,7 @@ private:
     Ui::IndexerSettingDialog *ui;
 
     bool acceptOnDeactilationEn;
+    bool acceptEnable;
 
 private slots:
 
