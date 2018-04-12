@@ -122,7 +122,7 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
 void SettingDialog::setIconFolder(QString path)
 {
     ui->toolButtonFL->setIcon(QIcon(path+"/sqfl_up.png"));
-    ui->toolButtonFL_SQ->setIcon(QIcon(path+"/sqfl_middle.png"));
+    ui->toolButtonFL_SQup->setIcon(QIcon(path+"/sqfl_middle.png"));
     ui->toolButtonSQ->setIcon(QIcon(path+"/sqfl_down.png"));
     ui->toolButtonHoldOn->setIcon(QIcon(path+"/handNO.png"));
     ui->toolButtonMoveFront->setIcon(QIcon(path+"/arrows/arrowDL.png"));
@@ -399,13 +399,24 @@ void SettingDialog::showEvent(QShowEvent *ev)
                                |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
                                |(MachineSettings::getMachineType() == MachineSettings::Vector)));
     ui->dSpinBoxFlDwellTime->setVisible(((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
-                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
-                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
+                                         |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                         |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
                                          |(MachineSettings::getMachineType() == MachineSettings::Vector)));
     ui->dSpinBoxSqDwellTime->setVisible(((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
-                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
-                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
+                                         |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                         |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
                                          |(MachineSettings::getMachineType() == MachineSettings::Vector)));
+
+    ui->toolButtonFL->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->toolButtonFL_SQup->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->toolButtonSQ->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->toolButtonHoldOn->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->toolButtonPressure->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->toolButtonFL_SQ->setVisible(!(MachineSettings::getMachineType() == MachineSettings::VoltServo));
+    ui->toolButtonPressureAir->setVisible(((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                                           |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                           |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
+
 
     ev->accept();
 }
@@ -448,7 +459,7 @@ void SettingDialog::on_toolButtonMoveRear_clicked()
     emit this->sendCommand(this->index, cmdArr);
 }
 
-void SettingDialog::on_toolButtonFL_SQ_clicked()
+void SettingDialog::on_toolButtonFL_SQup_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
@@ -574,6 +585,31 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
     }
     emit this->setParamsToAll(this->index, hSttg.headParam.toByteArray());
     this->hide();
+}
+
+void SettingDialog::on_toolButtonFL_SQ_clicked(bool checked)
+{
+
+}
+
+void SettingDialog::on_toolButtonStepBack_clicked()
+{
+
+}
+
+void SettingDialog::on_toolButtonIndexHere_clicked()
+{
+
+}
+
+void SettingDialog::on_toolButtonInkColor_clicked()
+{
+
+}
+
+void SettingDialog::on_toolButtonPressureAir_clicked()
+{
+
 }
 
 void SettingDialog::tabWidget_currentChanged(int index)
@@ -815,3 +851,5 @@ void SettingDialog::dSpinBoxSqDwellTime_valueChanged(double arg1)
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
+
+
