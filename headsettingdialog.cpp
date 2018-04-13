@@ -16,6 +16,10 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
                                     "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #962AAD, stop: 0.8 #8C04A8,stop: 1.0 #6C0382);}"
                                     "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #77168B, stop: 0.8 #610A73,stop: 1.0 #4F025F);}"
                                  );
+
+    ui->widgetQuartzWithoutTempSensor->setStyleSheet(".QWidget {border-style: none; background-color: 0x00000000}");
+    ui->widgetQuartzWithTempSensor->setStyleSheet(".QWidget {border-style: none; background-color: 0x00000000}");
+
     this->index = index;
 
     ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
@@ -68,6 +72,8 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
 //    connect(ui->toolButtonPressure, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonPressure_clicked()));
 //    connect(ui->toolButtonHoldOn, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonHoldOn_clicked()));
 
+    withTemperatureSensor = false;
+    connect(ui->checkBoxQuartzTempSensor, SIGNAL(toggled(bool)), this, SLOT(temperatureSensoreChanged(bool)));
 
     this->eventFilterSetup();
 
@@ -212,14 +218,21 @@ void SettingDialog::connectAll()
     connect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     connect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
     connect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double)));
-    connect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
-    connect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
     connect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
     connect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
     connect(ui->dSpinBoxFlDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFlDwellTime_valueChanged(double )));
     connect(ui->dSpinBoxSqDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxSqDwellTime_valueChanged(double )));
+    connect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
+    connect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
+    connect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double)));
+    connect(ui->dSpinBoxStepbackDryTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxStepbackDryTimeQ_valueChanged(double)));
+    connect(ui->dSpinBoxTemperatureSetQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxTemperatureSetQ_valueChanged(double)));
+    connect(ui->dSpinBoxDryTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryTimeQ_valueChanged(double)));
+    connect(ui->dSpinBoxStandbyTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxStandbyTimeQ_valueChanged(double)));
+    connect(ui->spinBoxStandbyPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStandbyPowerQ_valueChanged(double)));
+    connect(ui->dSpinBoxWarmFlashTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxWarmFlashTimeQ_valueChanged(double)));
 }
 
 void SettingDialog::disconnectAll()
@@ -231,15 +244,21 @@ void SettingDialog::disconnectAll()
     disconnect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     disconnect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
     disconnect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double )));
-    disconnect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
-    disconnect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
     disconnect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
     disconnect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
     disconnect(ui->dSpinBoxFlDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFlDwellTime_valueChanged(double )));
     disconnect(ui->dSpinBoxSqDwellTime, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxSqDwellTime_valueChanged(double )));
-
+    disconnect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
+    disconnect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
+    disconnect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double)));
+    disconnect(ui->dSpinBoxStepbackDryTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxStepbackDryTimeQ_valueChanged(double)));
+    disconnect(ui->dSpinBoxTemperatureSetQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxTemperatureSetQ_valueChanged(double)));
+    disconnect(ui->dSpinBoxDryTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryTimeQ_valueChanged(double)));
+    disconnect(ui->dSpinBoxStandbyTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxStandbyTimeQ_valueChanged(double)));
+    disconnect(ui->spinBoxStandbyPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStandbyPowerQ_valueChanged(double)));
+    disconnect(ui->dSpinBoxWarmFlashTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxWarmFlashTimeQ_valueChanged(double)));
 }
 
 void SettingDialog::eventFilterSetup()
@@ -345,6 +364,60 @@ void SettingDialog::eventFilterSetup()
             cast->installEventFilter(this);
     }
 
+    objList = ui->dSpinBoxDryTimeQ->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    objList = ui->dSpinBoxStandbyTimeQ->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    objList = ui->dSpinBoxStepbackDryTimeQ->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    objList = ui->dSpinBoxTemperatureSetQ->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    objList = ui->dSpinBoxWarmFlashTimeQ->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
+    objList = ui->spinBoxStandbyPowerQ->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+}
+
+void SettingDialog::temperatureSensoreChanged(bool tempSens)
+{
+    this->withTemperatureSensor = tempSens;
+    this->hide();
+    this->show();
 }
 
 bool SettingDialog::event(QEvent *e)
@@ -406,6 +479,9 @@ void SettingDialog::showEvent(QShowEvent *ev)
                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
                                          |(MachineSettings::getMachineType() == MachineSettings::Vector)));
+
+    ui->widgetQuartzWithoutTempSensor->setVisible(!withTemperatureSensor);
+    ui->widgetQuartzWithTempSensor->setVisible(withTemperatureSensor);
 
     ev->accept();
 }
@@ -734,6 +810,36 @@ void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::dSpinBoxStepbackDryTimeQ_valueChanged(double arg1)
+{
+
+}
+
+void SettingDialog::dSpinBoxTemperatureSetQ_valueChanged(double arg1)
+{
+
+}
+
+void SettingDialog::dSpinBoxDryTimeQ_valueChanged(double arg1)
+{
+
+}
+
+void SettingDialog::spinBoxStandbyPowerQ_valueChanged(double arg1)
+{
+
+}
+
+void SettingDialog::dSpinBoxStandbyTimeQ_valueChanged(double arg1)
+{
+
+}
+
+void SettingDialog::dSpinBoxWarmFlashTimeQ_valueChanged(double arg1)
+{
+
 }
 
 void SettingDialog::dSpinBoxHeatTime1IR_valueChanged(double arg1)

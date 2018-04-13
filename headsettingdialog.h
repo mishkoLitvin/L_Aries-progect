@@ -42,6 +42,7 @@ signals:
 private:
     Ui::SettingDialog *ui;
 
+    bool withTemperatureSensor;
     int index;
     bool acceptOnDeactilationEn;
     bool acceptEnable;
@@ -56,6 +57,8 @@ private slots:
     void disconnectAll();
 
     void eventFilterSetup();
+
+    void temperatureSensoreChanged(bool tempSens);
 
     void on_toolButtonPlast_clicked();
     void on_toolButtonFL_clicked();
@@ -76,14 +79,21 @@ private slots:
     void dSpinBoxFrontRange_valueChanged(double arg1);
     void spinBoxStrokCount_valueChanged(double arg1);
     void spinBoxSBStrokCount_valueChanged(double arg1);
-    void dSpinBoxHeatTime1Q_valueChanged(double arg1);
-    void dSpinBoxHeatTime2Q_valueChanged(double arg1);
-    void spinBoxDryPowerQ_valueChanged(double arg1);
     void dSpinBoxHeatTime1IR_valueChanged(double arg1);
     void dSpinBoxHeatTime2IR_valueChanged(double arg1);
     void dSpinBoxDryingRangeIR_valueChanged(double arg1);
     void dSpinBoxFlDwellTime_valueChanged(double arg1);
     void dSpinBoxSqDwellTime_valueChanged(double arg1);
+    void dSpinBoxHeatTime1Q_valueChanged(double arg1);
+    void dSpinBoxHeatTime2Q_valueChanged(double arg1);
+    void spinBoxDryPowerQ_valueChanged(double arg1);
+    void dSpinBoxStepbackDryTimeQ_valueChanged(double arg1);
+    void dSpinBoxTemperatureSetQ_valueChanged(double arg1);
+    void dSpinBoxDryTimeQ_valueChanged(double arg1);
+    void spinBoxStandbyPowerQ_valueChanged(double arg1);
+    void dSpinBoxStandbyTimeQ_valueChanged(double arg1);
+    void dSpinBoxWarmFlashTimeQ_valueChanged(double arg1);
+
 
 protected:
     bool event(QEvent *e);
