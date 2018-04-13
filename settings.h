@@ -20,18 +20,25 @@ public:
         HeadSpeedFront = 0x03,
         HeadFlDwellTime = 0x04,
         HeadSqDwellTime = 0x05,
-        HeadStroksCount = 0x07,
-        HeadHeatTime1Q = 0x07,
-        HeadHeatTime2Q = 0x08,
+        HeadStroksCount = 0x06,
+        HeadFlashTime1Q = 0x07,
+        HeadFlashTime2Q = 0x08,
         HeadSBStroksCount = 0x0E,
+        HeadHoldOnOff = 0x14,
         HeadRangeLimit1 = 0x16,
         HeadRangeLimit2 = 0x17,
-        HeadHeatPower = 0x1D,
-        HeadHeatTime1IR = 0x1F,
-        HeadHeatTime2IR = 0x20,
+        HeadHeatTemper = 0x18,
+        HeadHeatTimeIR = 0x19,
+        HeadFlashPowerStBy = 0x1A,
+        HeadFlashTimeStBy = 0x1B,
+        HeadFlashPowerWtoutIR = 0x1D,
+        HeadHeatWarmTime = 0x1F,
+        HeadFlashWarmTime = 0x20,
         HeadHeadType = 0x21,
         HeadPowerOn,
-        HeadHeatDryRange
+        HeadHeatDryRange,
+        HeadHeatTime1IR,
+        HeadHeatTime2IR
     };
 
     typedef enum HeadType_{
@@ -54,6 +61,16 @@ public:
         uint16_t heatTime1;
         uint16_t heatTime2;
         uint16_t heatPower;
+        uint16_t heatLimit;
+        uint16_t heatTime1Q;
+        uint16_t heatTime2Q;
+        uint16_t dryPowerQ;
+        uint16_t stepbackDryTimeQ;
+        uint16_t temperatureSetQ;
+        uint16_t dryTimeQ;
+        uint16_t standbyTimeQ;
+        uint16_t standbyPowerQ;
+        uint16_t warmFlashTimeQ;
 
         QByteArray toByteArray();
     }HeadParameters;

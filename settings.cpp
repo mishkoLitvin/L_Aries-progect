@@ -5,10 +5,10 @@ uint32_t HeadSetting::headStateAll;
 
 void HeadSetting::fromByteArray(QByteArray hParamArr)
 {
-    if(hParamArr.length()!=26)
-        hParamArr.resize(26);
+    if(hParamArr.length()!=44)
+        hParamArr.resize(44);
 
-    this->headParam.headType = PrintHead;
+    this->headParam.headType = (HeadSetting::HeadType)((uint8_t)hParamArr[0]);
     this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
     this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
     this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
@@ -22,6 +22,16 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
     this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[21]))<<8)|(0x00FF&((uint16_t)hParamArr[20]));
     this->headParam.heatPower = ((0x00FF&((uint16_t)hParamArr[23]))<<8)|(0x00FF&((uint16_t)hParamArr[22]));
     this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[25]))<<8)|(0x00FF&((uint16_t)hParamArr[24]));
+    this->headParam.heatTime1Q = ((0x00FF&((uint16_t)hParamArr[27]))<<8)|(0x00FF&((uint16_t)hParamArr[26]));
+    this->headParam.heatTime2Q = ((0x00FF&((uint16_t)hParamArr[29]))<<8)|(0x00FF&((uint16_t)hParamArr[28]));
+    this->headParam.dryPowerQ = ((0x00FF&((uint16_t)hParamArr[31]))<<8)|(0x00FF&((uint16_t)hParamArr[30]));
+    this->headParam.stepbackDryTimeQ = ((0x00FF&((uint16_t)hParamArr[33]))<<8)|(0x00FF&((uint16_t)hParamArr[32]));
+    this->headParam.temperatureSetQ = ((0x00FF&((uint16_t)hParamArr[35]))<<8)|(0x00FF&((uint16_t)hParamArr[34]));
+    this->headParam.dryTimeQ = ((0x00FF&((uint16_t)hParamArr[37]))<<8)|(0x00FF&((uint16_t)hParamArr[36]));
+    this->headParam.standbyTimeQ = ((0x00FF&((uint16_t)hParamArr[39]))<<8)|(0x00FF&((uint16_t)hParamArr[38]));
+    this->headParam.standbyPowerQ = ((0x00FF&((uint16_t)hParamArr[41]))<<8)|(0x00FF&((uint16_t)hParamArr[40]));
+    this->headParam.warmFlashTimeQ = ((0x00FF&((uint16_t)hParamArr[43]))<<8)|(0x00FF&((uint16_t)hParamArr[42]));
+
 }
 
 HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters hParam)
@@ -40,14 +50,22 @@ HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters 
     hp.speedRear = hParam.speedRear;
     hp.stroksCount = hParam.stroksCount;
     hp.stroksSBCount = hParam.stroksSBCount;
-
+    hp.heatTime1Q = hParam.heatTime1Q;
+    hp.heatTime2Q = hParam.heatTime2Q;
+    hp.dryPowerQ = hParam.dryPowerQ;
+    hp.stepbackDryTimeQ = hParam.stepbackDryTimeQ;
+    hp.temperatureSetQ = hParam.temperatureSetQ;
+    hp.dryTimeQ = hParam.dryTimeQ;
+    hp.standbyTimeQ = hParam.standbyTimeQ;
+    hp.standbyPowerQ = hParam.standbyPowerQ;
+    hp.warmFlashTimeQ = hParam.warmFlashTimeQ;
     return hp;
 }
 
 QByteArray HeadSetting::HeadParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(26);
+    bArr.resize(43);
     bArr[0] = this->headType;
     bArr[1] = (char)(this->powerOn&0x01);
     bArr[2] = (char)(this->speedRear&0x00FF);
@@ -74,6 +92,25 @@ QByteArray HeadSetting::HeadParameters_::toByteArray()
     bArr[23] = (char)(((this->heatPower&0xFF00)>>8)&0x00FF);
     bArr[24] = (char)(this->limitFront&0x00FF);
     bArr[25] = (char)(((this->limitFront&0xFF00)>>8)&0x00FF);
+    bArr[26] = (char)(this->heatTime1Q&0x00FF);
+    bArr[27] = (char)(((this->heatTime1Q&0xFF00)>>8)&0x00FF);
+    bArr[28] = (char)(this->heatTime2Q&0x00FF);
+    bArr[29] = (char)(((this->heatTime2Q&0xFF00)>>8)&0x00FF);
+    bArr[30] = (char)(this->dryPowerQ&0x00FF);
+    bArr[31] = (char)(((this->dryPowerQ&0xFF00)>>8)&0x00FF);
+    bArr[32] = (char)(this->stepbackDryTimeQ&0x00FF);
+    bArr[33] = (char)(((this->stepbackDryTimeQ&0xFF00)>>8)&0x00FF);
+    bArr[34] = (char)(this->temperatureSetQ&0x00FF);
+    bArr[35] = (char)(((this->temperatureSetQ&0xFF00)>>8)&0x00FF);
+    bArr[36] = (char)(this->dryTimeQ&0x00FF);
+    bArr[37] = (char)(((this->dryTimeQ&0xFF00)>>8)&0x00FF);
+    bArr[38] = (char)(this->standbyTimeQ&0x00FF);
+    bArr[39] = (char)(((this->standbyTimeQ&0xFF00)>>8)&0x00FF);
+    bArr[40] = (char)(this->standbyPowerQ&0x00FF);
+    bArr[41] = (char)(((this->standbyPowerQ&0xFF00)>>8)&0x00FF);
+    bArr[42] = (char)(this->warmFlashTimeQ&0x00FF);
+    bArr[43] = (char)(((this->warmFlashTimeQ&0xFF00)>>8)&0x00FF);
+
     return bArr;
 }
 
@@ -92,6 +129,16 @@ HeadSetting::HeadSetting(HeadParameters hParam)
     this->headParam.stroksSBCount = hParam.stroksSBCount;
     this->headParam.dwellFLTime = hParam.dwellFLTime;
     this->headParam.dwellSQTime = hParam.dwellSQTime;
+    this->headParam.heatTime1Q = hParam.heatTime1Q;
+    this->headParam.heatTime2Q = hParam.heatTime2Q;
+    this->headParam.dryPowerQ = hParam.dryPowerQ;
+    this->headParam.stepbackDryTimeQ = hParam.stepbackDryTimeQ;
+    this->headParam.temperatureSetQ = hParam.temperatureSetQ;
+    this->headParam.dryTimeQ = hParam.dryTimeQ;
+    this->headParam.standbyTimeQ = hParam.standbyTimeQ;
+    this->headParam.standbyPowerQ = hParam.standbyPowerQ;
+    this->headParam.warmFlashTimeQ = hParam.warmFlashTimeQ;
+
 }
 
 HeadSetting::HeadSetting()
@@ -109,6 +156,15 @@ HeadSetting::HeadSetting()
     this->headParam.stroksSBCount = 0;
     this->headParam.dwellFLTime = 1;
     this->headParam.dwellSQTime = 1;
+    this->headParam.heatTime1Q = 0;
+    this->headParam.heatTime2Q = 0;
+    this->headParam.dryPowerQ = 0;
+    this->headParam.stepbackDryTimeQ = 0;
+    this->headParam.temperatureSetQ = 0;
+    this->headParam.dryTimeQ = 0;
+    this->headParam.standbyTimeQ = 0;
+    this->headParam.standbyPowerQ = 0;
+    this->headParam.warmFlashTimeQ = 0;
 }
 
 HeadSetting::~HeadSetting()

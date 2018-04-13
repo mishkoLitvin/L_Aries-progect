@@ -36,6 +36,7 @@
         <file>icons/Base/tt.png</file>
         <file>icons/Base/tt2.png</file>
         <file>icons/Base/tt3.png</file>
+        <file>icons/Base/uncheck.png</file>
     </qresource>
     <qresource prefix="/arrows">
         <file>icons/Base/arrows/arrowD.png</file>

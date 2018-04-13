@@ -19,6 +19,15 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     ui->widgetQuartzWithoutTempSensor->setStyleSheet(".QWidget {border-style: none; background-color: 0x00000000}");
     ui->widgetQuartzWithTempSensor->setStyleSheet(".QWidget {border-style: none; background-color: 0x00000000}");
 
+    ui->rButtonTime1->setStyleSheet(this->styleSheet()+"QRadioButton{border-style: none; background-color: 0x00000000}"
+                                                       "QRadioButton::indicator {width: 55px;height: 55px;} "
+                                                       "QRadioButton::indicator::unchecked {image: url(:/new/icons/icons/Base/uncheck.png);}"
+                                                       "QRadioButton::indicator::checked {image: url(:/new/icons/icons/Base/check.png);}");
+    ui->rButtonTime2->setStyleSheet(this->styleSheet()+"QRadioButton{border-style: none; background-color: 0x00000000}"
+                                                       "QRadioButton::indicator {width: 55px;height: 55px;}"
+                                                       "QRadioButton::indicator::unchecked {image: url(:/new/icons/icons/Base/uncheck.png);}"
+                                                       "QRadioButton::indicator::checked {image: url(:/new/icons/icons/Base/check.png);}");
+
     this->index = index;
 
     ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
@@ -26,35 +35,31 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
 
     ui->pButtonHeadOnOff->setChecked(hSttg.headParam.powerOn&0x01);
 
-    switch(ui->tabWidget->currentIndex())
-    {
-    case 0:
-    {
-        ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
-        ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
-        ui->dSpinBoxFrontRange->setValue(hSttg.headParam.limitFront/10.);
-        ui->dSpinBoxRearRange->setValue(hSttg.headParam.limitRear/10.);
-        ui->spinBoxStrokCount->setValue(hSttg.headParam.stroksCount);
-        ui->spinBoxSBStrokCount->setValue(hSttg.headParam.stroksSBCount);
-        ui->dSpinBoxFlDwellTime->setValue(hSttg.headParam.dwellFLTime);
-        ui->dSpinBoxSqDwellTime->setValue(hSttg.headParam.dwellSQTime);
-        break;
-    }
-    case 1:
-    {
-        ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1/10.);
-        ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2/10.);
-        ui->spinBoxDryPowerQ->setValue(hSttg.headParam.heatPower);
-        break;
-    }
-    case 2:
-    {
-        ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
-        ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
-        ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.limitFront/10.);
-        break;
-    }
-    }
+
+    ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
+    ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
+    ui->dSpinBoxFrontRange->setValue(hSttg.headParam.limitFront/10.);
+    ui->dSpinBoxRearRange->setValue(hSttg.headParam.limitRear/10.);
+    ui->spinBoxStrokCount->setValue(hSttg.headParam.stroksCount);
+    ui->spinBoxSBStrokCount->setValue(hSttg.headParam.stroksSBCount);
+    ui->dSpinBoxFlDwellTime->setValue(hSttg.headParam.dwellFLTime);
+    ui->dSpinBoxSqDwellTime->setValue(hSttg.headParam.dwellSQTime);
+
+    ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1Q/10.);
+    ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2Q/10.);
+    ui->spinBoxDryPowerQ->setValue(hSttg.headParam.dryPowerQ);
+    ui->dSpinBoxStepbackDryTimeQ->setValue(hSttg.headParam.stepbackDryTimeQ/10.);
+    ui->dSpinBoxTemperatureSetQ->setValue(hSttg.headParam.temperatureSetQ);
+    ui->dSpinBoxDryTimeQ->setValue(hSttg.headParam.dryTimeQ/10.);
+    ui->dSpinBoxStandbyTimeQ->setValue(hSttg.headParam.standbyTimeQ/10.);
+    ui->spinBoxStandbyPowerQ->setValue(hSttg.headParam.standbyPowerQ);
+    ui->dSpinBoxWarmFlashTimeQ->setValue(hSttg.headParam.warmFlashTimeQ/10.);
+
+
+    ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
+    ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
+    ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.heatLimit/10.);
+
 //    this->installEventFilter(this);
 
     connect(ui->pushButtonOK, SIGNAL(clicked(bool)), this, SLOT(accept()));
@@ -107,13 +112,21 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
     ui->dSpinBoxFlDwellTime->setValue(hSttg.headParam.dwellFLTime);
     ui->dSpinBoxSqDwellTime->setValue(hSttg.headParam.dwellSQTime);
 
-    ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1/10.);
-    ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2/10.);
-    ui->spinBoxDryPowerQ->setValue(hSttg.headParam.heatPower);
+    ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1Q/10.);
+    ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2Q/10.);
+    ui->spinBoxDryPowerQ->setValue(hSttg.headParam.dryPowerQ);
+    ui->dSpinBoxStepbackDryTimeQ->setValue(hSttg.headParam.stepbackDryTimeQ/10.);
+    ui->dSpinBoxTemperatureSetQ->setValue(hSttg.headParam.temperatureSetQ);
+    ui->dSpinBoxDryTimeQ->setValue(hSttg.headParam.dryTimeQ/10.);
+    ui->dSpinBoxStandbyTimeQ->setValue(hSttg.headParam.standbyTimeQ/10.);
+    ui->spinBoxStandbyPowerQ->setValue(hSttg.headParam.standbyPowerQ);
+    ui->dSpinBoxWarmFlashTimeQ->setValue(hSttg.headParam.warmFlashTimeQ/10.);
 
     ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
     ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
-    ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.limitFront/10.);
+    ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.heatLimit/10.);
+
+
 
 
     acceptOnDeactilationEn = true;
@@ -154,7 +167,6 @@ void SettingDialog::accept()
     {
         HeadSetting hSttg;
         hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-
         hSttg.headParam.headType = (HeadSetting::HeadType)ui->tabWidget->currentIndex();
         hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
         hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
@@ -164,12 +176,18 @@ void SettingDialog::accept()
         hSttg.headParam.stroksSBCount = ui->spinBoxSBStrokCount->value();
         hSttg.headParam.dwellFLTime = ui->dSpinBoxFlDwellTime->value();
         hSttg.headParam.dwellSQTime = ui->dSpinBoxSqDwellTime->value();
-        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
-        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
-        hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
         hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
         hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-        hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
+        hSttg.headParam.heatLimit = ui->dSpinBoxDryingRangeIR->value()*10;
+        hSttg.headParam.heatTime1Q = ui->dSpinBoxHeatTime1Q->value()*10;
+        hSttg.headParam.heatTime2Q = ui->dSpinBoxHeatTime2Q->value()*10;
+        hSttg.headParam.dryPowerQ = ui->spinBoxDryPowerQ->value();
+        hSttg.headParam.stepbackDryTimeQ = ui->dSpinBoxStepbackDryTimeQ->value()*10;
+        hSttg.headParam.temperatureSetQ = ui->dSpinBoxTemperatureSetQ->value();
+        hSttg.headParam.dryTimeQ = ui->dSpinBoxDryTimeQ->value()*10;
+        hSttg.headParam.standbyTimeQ = ui->dSpinBoxStandbyTimeQ->value()*10;
+        hSttg.headParam.standbyPowerQ = ui->spinBoxStandbyPowerQ->value();
+        hSttg.headParam.warmFlashTimeQ = ui->dSpinBoxWarmFlashTimeQ->value()*10;
 
         emit this->accept(this->index, hSttg.headParam.toByteArray());
         this->hide();
@@ -207,9 +225,6 @@ void SettingDialog::connectAll()
     connect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     connect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
     connect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double)));
-    connect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
-    connect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
-    connect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
     connect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
@@ -235,9 +250,6 @@ void SettingDialog::disconnectAll()
     disconnect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     disconnect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
     disconnect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double )));
-    disconnect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
-    disconnect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
-    disconnect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
     disconnect(ui->dSpinBoxDryingRangeIR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxDryingRangeIR_valueChanged(double )));
@@ -814,8 +826,8 @@ void SettingDialog::dSpinBoxHeatTime1Q_valueChanged(double arg1)
     int data = arg1*10;
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadHeatTime1Q>>8));
-    cmdArr.append((char)(HeadSetting::HeadHeatTime1Q&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
@@ -830,8 +842,8 @@ void SettingDialog::dSpinBoxHeatTime2Q_valueChanged(double arg1)
     int data = arg1*10;
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadHeatTime2Q>>8));
-    cmdArr.append((char)(HeadSetting::HeadHeatTime2Q&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashTime2Q>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashTime2Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
@@ -846,8 +858,8 @@ void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
     int data = arg1;
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadHeatPower>>8));
-    cmdArr.append((char)(HeadSetting::HeadHeatPower&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
@@ -858,32 +870,98 @@ void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
 
 void SettingDialog::dSpinBoxStepbackDryTimeQ_valueChanged(double arg1)
 {
-
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::dSpinBoxTemperatureSetQ_valueChanged(double arg1)
 {
-
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadHeatTemper>>8));
+    cmdArr.append((char)(HeadSetting::HeadHeatTemper&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::dSpinBoxDryTimeQ_valueChanged(double arg1)
 {
-
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::spinBoxStandbyPowerQ_valueChanged(double arg1)
 {
-
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::dSpinBoxStandbyTimeQ_valueChanged(double arg1)
 {
-
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::dSpinBoxWarmFlashTimeQ_valueChanged(double arg1)
 {
-
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashWarmTime>>8));
+    cmdArr.append((char)(HeadSetting::HeadFlashWarmTime&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::dSpinBoxHeatTime1IR_valueChanged(double arg1)
