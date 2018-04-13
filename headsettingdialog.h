@@ -63,7 +63,7 @@ private slots:
     void on_toolButtonPlast_clicked();
     void on_toolButtonFL_clicked();
     void on_toolButtonMoveRear_clicked();
-    void on_toolButtonFL_SQ_clicked();
+    void on_toolButtonFL_SQup_clicked();
     void on_toolButtonMoveFront_clicked();
     void on_toolButtonMTPMove_clicked();
     void on_toolButtonSQ_clicked();
@@ -71,6 +71,11 @@ private slots:
     void on_toolButtonPressure_clicked();
     void on_toolButtonHoldOn_clicked();
     void on_pushButtonCopyToAll_clicked();
+    void on_toolButtonFL_SQ_clicked(bool checked);
+    void on_toolButtonStepBack_clicked();
+    void on_toolButtonIndexHere_clicked();
+    void on_toolButtonInkColor_clicked();
+    void on_toolButtonPressureAir_clicked();
 
     void tabWidget_currentChanged(int index);
     void spinBoxRearSpeed_valueChanged(double arg1);
@@ -93,6 +98,8 @@ private slots:
     void spinBoxStandbyPowerQ_valueChanged(double arg1);
     void dSpinBoxStandbyTimeQ_valueChanged(double arg1);
     void dSpinBoxWarmFlashTimeQ_valueChanged(double arg1);
+
+
 
 
 protected:

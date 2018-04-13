@@ -342,7 +342,6 @@ void MainWindow::changeHeadNo(int index)
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
-    qDebug()<<"uiiiiiiiiiii";
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
     if(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
 
