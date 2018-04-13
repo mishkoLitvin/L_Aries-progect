@@ -103,7 +103,6 @@ private slots:
 
 
 
-
 protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);

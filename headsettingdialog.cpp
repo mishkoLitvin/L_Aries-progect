@@ -16,7 +16,6 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
                                     "QTabBar::tab:selected, QTabBar::tab:hover {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #962AAD, stop: 0.8 #8C04A8,stop: 1.0 #6C0382);}"
                                     "QTabBar::tab:!selected {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #77168B, stop: 0.8 #610A73,stop: 1.0 #4F025F);}"
                                  );
-
     ui->widgetQuartzWithoutTempSensor->setStyleSheet(".QWidget {border-style: none; background-color: 0x00000000}");
     ui->widgetQuartzWithTempSensor->setStyleSheet(".QWidget {border-style: none; background-color: 0x00000000}");
 
@@ -208,6 +207,8 @@ void SettingDialog::connectAll()
     connect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     connect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
     connect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double)));
+    connect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
+    connect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
     connect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     connect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
@@ -234,6 +235,8 @@ void SettingDialog::disconnectAll()
     disconnect(ui->dSpinBoxFrontRange, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxFrontRange_valueChanged(double )));
     disconnect(ui->spinBoxStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStrokCount_valueChanged(double )));
     disconnect(ui->spinBoxSBStrokCount, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSBStrokCount_valueChanged(double )));
+    disconnect(ui->dSpinBoxHeatTime1Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1Q_valueChanged(double )));
+    disconnect(ui->dSpinBoxHeatTime2Q, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2Q_valueChanged(double )));
     disconnect(ui->spinBoxDryPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxDryPowerQ_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime1IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime1IR_valueChanged(double )));
     disconnect(ui->dSpinBoxHeatTime2IR, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxHeatTime2IR_valueChanged(double )));
@@ -470,9 +473,6 @@ void SettingDialog::showEvent(QShowEvent *ev)
                                          |(MachineSettings::getMachineType() == MachineSettings::TitanASE)
                                          |(MachineSettings::getMachineType() == MachineSettings::Vector)));
 
-    ui->widgetQuartzWithoutTempSensor->setVisible(!withTemperatureSensor);
-    ui->widgetQuartzWithTempSensor->setVisible(withTemperatureSensor);
-
     ui->toolButtonFL->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
     ui->toolButtonFL_SQup->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
     ui->toolButtonSQ->setVisible((MachineSettings::getMachineType() == MachineSettings::VoltServo));
@@ -483,6 +483,8 @@ void SettingDialog::showEvent(QShowEvent *ev)
                                            |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
                                            |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
 
+    ui->widgetQuartzWithoutTempSensor->setVisible(!withTemperatureSensor);
+    ui->widgetQuartzWithTempSensor->setVisible(withTemperatureSensor);
 
     ev->accept();
 }
