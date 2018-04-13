@@ -28,7 +28,7 @@ public:
     explicit SettingDialog(HeadSetting hSttg, int index = 0, QWidget *parent = 0);
     ~SettingDialog();
 
-    void setHeadParams(HeadSetting hSttg, int index = 0);
+    void setHeadParams(HeadSetting hSttg, int index = 0, bool disconnect = true);
     void setIconFolder(QString path);
 
 
@@ -73,6 +73,7 @@ private slots:
     void on_toolButtonIndexHere_clicked();
     void on_toolButtonInkColor_clicked();
     void on_toolButtonPressureAir_clicked();
+    void on_pButtonHeadOnOff_clicked();
 
     void tabWidget_currentChanged(int index);
     void spinBoxRearSpeed_valueChanged(double arg1);
@@ -89,6 +90,7 @@ private slots:
     void dSpinBoxDryingRangeIR_valueChanged(double arg1);
     void dSpinBoxFlDwellTime_valueChanged(double arg1);
     void dSpinBoxSqDwellTime_valueChanged(double arg1);
+
 
 
 

@@ -32,6 +32,9 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
         ui->dSpinBoxFrontRange->setValue(hSttg.headParam.limitFront/10.);
         ui->dSpinBoxRearRange->setValue(hSttg.headParam.limitRear/10.);
         ui->spinBoxStrokCount->setValue(hSttg.headParam.stroksCount);
+        ui->spinBoxSBStrokCount->setValue(hSttg.headParam.stroksSBCount);
+        ui->dSpinBoxFlDwellTime->setValue(hSttg.headParam.dwellFLTime);
+        ui->dSpinBoxSqDwellTime->setValue(hSttg.headParam.dwellSQTime);
         break;
     }
     case 1:
@@ -56,7 +59,7 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     connect(ui->pButtonHeadNoInc, SIGNAL(clicked(bool)), this, SLOT(pButtonIncClkd()));
     connect(ui->pButtonHeadNoDec, SIGNAL(clicked(bool)), this, SLOT(pButtonDecClkd()));
 
-    connect(ui->pushButtonCopyToAll, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonCopyToAll_clicked()));
+//    connect(ui->pushButtonCopyToAll, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonCopyToAll_clicked()));
 //    connect(ui->toolButtonPlast, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonPlast_clicked()));
 //    connect(ui->toolButtonMoveFront, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonMoveFront_clicked()));
 //    connect(ui->toolButtonMoveRear, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonMoveRear_clicked()));
@@ -78,9 +81,10 @@ SettingDialog::~SettingDialog()
     delete ui;
 }
 
-void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
+void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
 {
-    this->disconnectAll();
+    if(disconnect)
+        this->disconnectAll();
 
     this->index = index;
 
@@ -89,34 +93,32 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index)
 
     ui->pButtonHeadOnOff->setChecked(hSttg.headParam.powerOn&0x01);
 
-    switch(ui->tabWidget->currentIndex())
-    {
-    case 0:
-    {
-        ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
-        ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
-        ui->dSpinBoxFrontRange->setValue(hSttg.headParam.limitFront/10.);
-        ui->dSpinBoxRearRange->setValue(hSttg.headParam.limitRear/10.);
-        ui->spinBoxStrokCount->setValue(hSttg.headParam.stroksCount);
-        break;
-    }
-    case 1:
-    {
-        ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1/10.);
-        ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2/10.);
-        ui->spinBoxDryPowerQ->setValue(hSttg.headParam.heatPower);
-        break;
-    }
-    case 2:
-    {
-        ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
-        ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
-        ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.limitFront/10.);
-        break;
-    }
-    }
+    ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
+    ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
+    ui->dSpinBoxFrontRange->setValue(hSttg.headParam.limitFront/10.);
+    ui->dSpinBoxRearRange->setValue(hSttg.headParam.limitRear/10.);
+    ui->spinBoxStrokCount->setValue(hSttg.headParam.stroksCount);
+    ui->spinBoxSBStrokCount->setValue(hSttg.headParam.stroksSBCount);
+    ui->dSpinBoxFlDwellTime->setValue(hSttg.headParam.dwellFLTime);
+    ui->dSpinBoxSqDwellTime->setValue(hSttg.headParam.dwellSQTime);
+
+    ui->dSpinBoxHeatTime1Q->setValue(hSttg.headParam.heatTime1/10.);
+    ui->dSpinBoxHeatTime2Q->setValue(hSttg.headParam.heatTime2/10.);
+    ui->spinBoxDryPowerQ->setValue(hSttg.headParam.heatPower);
+
+    ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
+    ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
+    ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.limitFront/10.);
+
+
     acceptOnDeactilationEn = true;
-    this->connectAll();
+    if(disconnect)
+        this->connectAll();
+    else
+    {
+        acceptEnable = true;
+        this->accept();
+    }
 }
 
 void SettingDialog::setIconFolder(QString path)
@@ -147,35 +149,23 @@ void SettingDialog::accept()
     {
         HeadSetting hSttg;
         hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-        switch(ui->tabWidget->currentIndex())
-        {
-        case 0:
-        {
-            hSttg.headParam.headType = HeadSetting::PrintHead;
-            hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
-            hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
-            hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
-            hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
-            hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
-            break;
-        }
-        case 1:
-        {
-            hSttg.headParam.headType = HeadSetting::QuartzHead;
-            hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
-            hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
-            hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
-            break;
-        }
-        case 2:
-        {
-            hSttg.headParam.headType = HeadSetting::InfraRedHead;
-            hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
-            hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-            hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
-            break;
-        }
-        }
+
+        hSttg.headParam.headType = (HeadSetting::HeadType)ui->tabWidget->currentIndex();
+        hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
+        hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
+        hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
+        hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
+        hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
+        hSttg.headParam.stroksSBCount = ui->spinBoxSBStrokCount->value();
+        hSttg.headParam.dwellFLTime = ui->dSpinBoxFlDwellTime->value();
+        hSttg.headParam.dwellSQTime = ui->dSpinBoxSqDwellTime->value();
+        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
+        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
+        hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
+        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
+        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
+        hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
+
         emit this->accept(this->index, hSttg.headParam.toByteArray());
         this->hide();
     }
@@ -554,37 +544,24 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
     HeadSetting hSttg;
 
     hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-    switch(ui->tabWidget->currentIndex())
-    {
-    case 0:
-    {
-        hSttg.headParam.headType = HeadSetting::PrintHead;
-        hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
-        hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
-        hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
-        hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
-        hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
-        break;
-    }
-    case 1:
-    {
-        hSttg.headParam.headType = HeadSetting::QuartzHead;
-        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
-        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
-        hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
-        break;
-    }
-    case 2:
-    {
-        hSttg.headParam.headType = HeadSetting::InfraRedHead;
-        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
-        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-        hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
-        break;
-    }
-    }
+
+    hSttg.headParam.headType = (HeadSetting::HeadType)ui->tabWidget->currentIndex();
+    hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
+    hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
+    hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
+    hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
+    hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
+    hSttg.headParam.stroksSBCount = ui->spinBoxSBStrokCount->value();
+    hSttg.headParam.dwellFLTime = ui->dSpinBoxFlDwellTime->value();
+    hSttg.headParam.dwellSQTime = ui->dSpinBoxSqDwellTime->value();
+    hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
+    hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
+    hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
+    hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
+    hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
+    hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
+
     emit this->setParamsToAll(this->index, hSttg.headParam.toByteArray());
-    this->hide();
 }
 
 void SettingDialog::on_toolButtonFL_SQ_clicked(bool checked)
@@ -610,6 +587,35 @@ void SettingDialog::on_toolButtonInkColor_clicked()
 void SettingDialog::on_toolButtonPressureAir_clicked()
 {
 
+}
+
+void SettingDialog::on_pButtonHeadOnOff_clicked()
+{
+    HeadSetting::setHeadStateAtIndex(this->index, ui->pButtonHeadOnOff->isChecked());
+
+    QByteArray cmdArr;
+    int data;
+    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+    if(this->index<16)
+    {
+        cmdArr.append((char)(MachineSettings::MasterHeadStateLo>>8));
+        cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
+        cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
+        cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
+    }
+    else
+    {
+        cmdArr.append((char)(MachineSettings::MasterHeadStateHi>>8));
+        cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
+        cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
+        cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
+    }
+
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::tabWidget_currentChanged(int index)
@@ -851,5 +857,7 @@ void SettingDialog::dSpinBoxSqDwellTime_valueChanged(double arg1)
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
+
+
 
 
