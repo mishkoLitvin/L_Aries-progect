@@ -4,8 +4,10 @@
 #include <QByteArray>
 #include <QStringList>
 
+typedef u_int32_t uint32_t;
 typedef u_int16_t uint16_t;
 typedef u_int8_t uint8_t;
+
 
 class HeadSetting{
 public:
@@ -14,21 +16,21 @@ public:
     };
 
     enum {
-        HeadHeadType = 0x21,
-        HeadPowerOn,
         HeadSpeedRear = 0x02,
         HeadSpeedFront = 0x03,
+        HeadFlDwellTime = 0x04,
+        HeadSqDwellTime = 0x05,
         HeadStroksCount = 0x07,
+        HeadHeatTime1Q = 0x07,
+        HeadHeatTime2Q = 0x08,
         HeadSBStroksCount = 0x0E,
         HeadRangeLimit1 = 0x16,
         HeadRangeLimit2 = 0x17,
-        HeadFlDwellTime = 0x04,
-        HeadSqDwellTime = 0x05,
-        HeadHeatTime1Q = 0x07,
-        HeadHeatTime2Q = 0x08,
         HeadHeatPower = 0x1D,
         HeadHeatTime1IR = 0x1F,
         HeadHeatTime2IR = 0x20,
+        HeadHeadType = 0x21,
+        HeadPowerOn,
         HeadHeatDryRange
     };
 
@@ -82,6 +84,13 @@ public:
     HeadSetting(HeadParameters hParam);
     HeadSetting();
     ~HeadSetting();
+
+    static uint32_t headStateAll;
+
+    static uint16_t getHeadStateLo();
+    static uint16_t getHeadStateHi();
+    static bool getHeadStateAtIndex(uint8_t index);
+    static void setHeadStateAtIndex(uint8_t index, bool state);
 };
 
 
@@ -96,7 +105,9 @@ public:
     enum{
         MasterHeadCount = 0x0001,
         MasterIndexLiftCommand = 0x0004,
-        MasterMachineType = 0x0011
+        MasterHeadStateLo = 0x0005,
+        MasterHeadStateHi = 0x0009,
+        MasterMachineType = 0x0011,
     };
 
     typedef union MachineState_{

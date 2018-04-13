@@ -133,6 +133,7 @@ MainWindow::MainWindow(QWidget *parent) :
                     }
                 else
                     headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+        HeadSetting::setHeadStateAtIndex(i, (bool) settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01);
         if((i != 0)&(i != headsCount-1))
         {
             headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
@@ -147,6 +148,7 @@ MainWindow::MainWindow(QWidget *parent) :
             connect(headSettButton[i-1], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
         }
     }
+
     infoWidget = new InfoWidget(ui->widgetHeads);
 
     if(QApplication::platformName() != "eglfs")
@@ -188,19 +190,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::masterCodeCheck()
 {
-//    settings->setValue("MASTER_CODE/ENABLE", true);
-//    masterCodes = new QSettings("./masterCodes.ini", QSettings::IniFormat);
-//    masterCodes->setValue("LAST_DATE", QDate::currentDate());
-//    masterCodes->setValue("LAST_INDEX", 0);
-//    masterCodes->setValue("ALL_COUNT", 24);
-//    int i;
-//    QByteArray b;
-//    for(i = 0; i<24; i++)
-//    {
-//        b.clear();
-//        b.append(QString::number(i));
-//        masterCodes->setValue("CODES/INDEX_"+QString::number(i), b.toHex());
-//    }
     if(settings->value("MASTER_CODE/ENABLE").toBool())
     {
         masterCodes = new QSettings("./masterCodes.ini", QSettings::IniFormat);
@@ -342,6 +331,8 @@ void MainWindow::changeHeadNo(int index)
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
+    HeadSetting::setHeadStateAtIndex(index, (bool) hParamArr[1]&0x01);
+
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
     if(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
 
@@ -364,11 +355,16 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 
 void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 {
+
     int cnt;
     index++;
-    for(cnt = 0; cnt<headsCount; cnt++)
+    for(cnt = 1; cnt<headsCount-1; cnt++)
     {
-        comPort->sendData(hParamArr);
+        HeadSetting::setHeadStateAtIndex(cnt, (bool) hParamArr[1]&0x01);
+        headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM")).value<QByteArray>());
+        headSettingDialog->setHeadParams(headSettings, cnt);
+        headSettings.fromByteArray(hParamArr);
+        headSettingDialog->setHeadParams(headSettings, cnt, false);
         settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
         if(hParamArr[1]&0x01)
             switch (hParamArr[0]) {
@@ -385,6 +381,34 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
         else
             headButton[cnt]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
     }
+
+    QByteArray cmdArr;
+    int data;
+
+    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterHeadStateLo>>8));
+    cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
+    cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
+    cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    comPort->sendData(cmdArr);
+    cmdArr.clear();
+
+    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterHeadStateHi>>8));
+    cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
+    cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
+    cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    comPort->sendData(cmdArr);
+
+
 }
 
 void MainWindow::getHeadCommand(int index, QByteArray commandArr)

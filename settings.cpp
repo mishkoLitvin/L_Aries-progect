@@ -1,6 +1,8 @@
 #include "settings.h"
 #include <QDebug>
 
+uint32_t HeadSetting::headStateAll;
+
 void HeadSetting::fromByteArray(QByteArray hParamArr)
 {
     if(hParamArr.length()!=26)
@@ -20,7 +22,6 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
     this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[21]))<<8)|(0x00FF&((uint16_t)hParamArr[20]));
     this->headParam.heatPower = ((0x00FF&((uint16_t)hParamArr[23]))<<8)|(0x00FF&((uint16_t)hParamArr[22]));
     this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[25]))<<8)|(0x00FF&((uint16_t)hParamArr[24]));
-
 }
 
 HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters hParam)
@@ -78,7 +79,6 @@ QByteArray HeadSetting::HeadParameters_::toByteArray()
 
 HeadSetting::HeadSetting(HeadParameters hParam)
 {
-
     this->headParam.headType = hParam.headType;
     this->headParam.powerOn = hParam.powerOn;
     this->headParam.speedRear = hParam.speedRear;
@@ -114,6 +114,29 @@ HeadSetting::HeadSetting()
 HeadSetting::~HeadSetting()
 {
 
+}
+
+uint16_t HeadSetting::getHeadStateLo()
+{
+    return static_cast<uint16_t>((HeadSetting::headStateAll)&0x0000FFFF);
+}
+
+uint16_t HeadSetting::getHeadStateHi()
+{
+    return static_cast<uint16_t>(((HeadSetting::headStateAll)>>16)&0x0000FFFF);
+}
+
+bool HeadSetting::getHeadStateAtIndex(uint8_t index)
+{
+    return static_cast<bool>((HeadSetting::headStateAll)&(1<<index));
+}
+
+void HeadSetting::setHeadStateAtIndex(uint8_t index, bool state)
+{
+    if(state)
+        HeadSetting::headStateAll |= (1<<(index));
+    else
+        HeadSetting::headStateAll &= (~(1<<index));
 }
 
 QByteArray IndexerLiftSettings::LiftParameters_::toByteArray()
