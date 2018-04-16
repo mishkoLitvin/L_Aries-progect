@@ -101,6 +101,7 @@ private:
 
 
 private slots:
+    void zeroStart();
     void headSettingRequest(int index);
     void indexerLiftSettingRequest();
     void generalSettingDialogRequest();

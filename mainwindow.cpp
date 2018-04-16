@@ -151,6 +151,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     infoWidget = new InfoWidget(ui->widgetHeads);
 
+
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
     else
@@ -178,7 +179,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonMaintance, SIGNAL(clicked(bool)), maintanceDialog, SLOT(openMaintanceList()));
     connect(indexer, SIGNAL(stopPrint()), maintanceDialog, SLOT(openDialog()));
 
-
+    this->zeroStart();
 }
 
 MainWindow::~MainWindow()
@@ -308,10 +309,10 @@ void MainWindow::generalSettingDialogRequest()
         generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(),
                                            settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt(),
                                            settings->value("PASSWORDS/PASSWORD_USERS").toInt());
-        generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(),
-                                           settings->value("STYLE/STYLE_SEL_INDEX").toInt(),
-                                           settings->value("STYLE/ICON_LIST").value<QStringList>(),
-                                           settings->value("STYLE/ICON_SEL_INDEX").toInt());
+//        generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(),
+//                                           settings->value("STYLE/STYLE_SEL_INDEX").toInt(),
+//                                           settings->value("STYLE/ICON_LIST").value<QStringList>(),
+//                                           settings->value("STYLE/ICON_SEL_INDEX").toInt());
         generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
         generalSettingDialog->setMachineSetting(machineSettings.machineParam);
         generalSettingDialog->show();
@@ -760,6 +761,8 @@ void MainWindow::setIconFolder(int index)
         headButton[i]->setIconPath(path);
     for(i = 0; i<headSettButton.length(); i++)
         headSettButton[i]->setIconPath(path+"/settings.png");
+
+    infoWidget->setIconFolder(path);
 }
 
 void MainWindow::userLogin()
@@ -814,6 +817,11 @@ void MainWindow::userLogin()
     else
         this->userName = "Default_user";
 
+}
+
+void MainWindow::zeroStart()
+{
+    infoWidget->setIndicatorState(0x03);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)

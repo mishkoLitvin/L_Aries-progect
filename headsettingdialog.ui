@@ -155,7 +155,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -449,7 +449,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>SB strok count (1..10)</string>
+                <string>SB strok count (0..10)</string>
                </property>
               </widget>
              </item>
@@ -477,7 +477,7 @@
                 <number>0</number>
                </property>
                <property name="minimum">
-                <double>1.000000000000000</double>
+                <double>0.000000000000000</double>
                </property>
                <property name="maximum">
                 <double>10.000000000000000</double>
@@ -529,7 +529,7 @@
                 <number>1</number>
                </property>
                <property name="minimum">
-                <double>1.000000000000000</double>
+                <double>0.000000000000000</double>
                </property>
                <property name="maximum">
                 <double>3.000000000000000</double>
@@ -586,7 +586,7 @@
                 <number>1</number>
                </property>
                <property name="minimum">
-                <double>1.000000000000000</double>
+                <double>0.000000000000000</double>
                </property>
                <property name="maximum">
                 <double>3.000000000000000</double>

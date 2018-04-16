@@ -37,6 +37,10 @@
         <file>icons/Base/tt2.png</file>
         <file>icons/Base/tt3.png</file>
         <file>icons/Base/uncheck.png</file>
+        <file>icons/Base/unlock.png</file>
+        <file>icons/Base/stopEmerg.png</file>
+        <file>icons/Base/stopHand.png</file>
+        <file>icons/Base/warning.png</file>
     </qresource>
     <qresource prefix="/arrows">
         <file>icons/Base/arrows/arrowD.png</file>
