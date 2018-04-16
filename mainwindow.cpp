@@ -113,7 +113,10 @@ MainWindow::MainWindow(QWidget *parent) :
         headButton.append(new HeadForm(ui->widgetHeads));
         headButton[i]->setIndex(i);
         if(i==0)
+        {
             headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
+            connect(headButton[i], SIGNAL(loadStateChanged(LoadState)), this, SLOT(getLoadState(LoadState)));
+        }
         else
             if(i==headsCount - 1)
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
@@ -133,7 +136,9 @@ MainWindow::MainWindow(QWidget *parent) :
                     }
                 else
                     headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+
         HeadSetting::setHeadStateAtIndex(i, (bool) settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01);
+
         if((i != 0)&(i != headsCount-1))
         {
             headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
@@ -415,6 +420,22 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 void MainWindow::getHeadCommand(int index, QByteArray commandArr)
 {
     comPort->sendData(commandArr);
+}
+
+void MainWindow::getLoadState(LoadState stase)
+{
+    QByteArray cmdArr;
+    int data;
+    cmdArr.append((char)((IndexerLiftSettings::IndexerDevice)>>8));
+    cmdArr.append((char)((IndexerLiftSettings::IndexerDevice)&0x00FF));
+    cmdArr.append((char)(IndexerLiftSettings::LoadHeadState>>8));
+    cmdArr.append((char)(IndexerLiftSettings::LoadHeadState&0x00FF));
+    cmdArr.append((char)(stase>>8));
+    cmdArr.append((char)(stase&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    comPort->sendData(cmdArr);
 }
 
 void MainWindow::getIndexerParam(QByteArray indexerParamArr)

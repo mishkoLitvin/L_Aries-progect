@@ -151,5 +151,15 @@ void HeadForm::mousePressEvent(QMouseEvent *event)
             case shirtProcessing: this->setPixmap(shirtOff, ui->label->styleSheet()); break;
             }
         }
+        if(headformType == HeadPutingOn)
+        {
+            switch(headformState)
+            {
+            case shirtOff: emit this->loadStateChanged(LoadClean); break;
+            case shirtOn: emit this->loadStateChanged(LoadOne); break;
+            case shirtProcessing: emit this->loadStateChanged(LoadAuto); break;
+            }
+        }
     }
+
 }

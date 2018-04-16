@@ -202,12 +202,14 @@ public:
         IndexAcceleration = 0x0A,
         IndexAccelerationRet = 0x0B,
         IndexSpeedRet = 0x0C,
+        WarningTime = 0x0D,
+
         LiftHomeOffcet = 0x15,
         LiftDistance = 0x16,
         LiftSpeed = 0x17,
         LiftAcceleration = 0x18,
+        LoadHeadState = 0x1F,
 
-        WarningTime = 0x0D,
     };
 
     typedef struct LiftParameters_{

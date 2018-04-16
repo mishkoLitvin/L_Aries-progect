@@ -35,6 +35,12 @@ private slots:
     }
 };
 
+typedef enum LoadState_
+{
+    LoadClean = 0x10,
+    LoadOne = 0x20,
+    LoadAuto = 0x30
+}LoadState;
 
 namespace Ui {
 class HeadForm;
@@ -45,7 +51,12 @@ class HeadForm : public QWidget
     Q_OBJECT
 
 public:
-    typedef enum HeadformType_{HeadPutingOn, HeadRemoving, HeadProcessing}HeadformType;
+    typedef enum HeadformType_
+    {
+        HeadPutingOn,
+        HeadRemoving,
+        HeadProcessing}
+    HeadformType;
 
     HeadForm(QWidget *parent = 0);
     ~HeadForm();
@@ -67,6 +78,7 @@ public:
 
 signals:
     void settingButtonCliced(int index);
+    void loadStateChanged(LoadState state);
 
 private:
     Ui::HeadForm *ui;
