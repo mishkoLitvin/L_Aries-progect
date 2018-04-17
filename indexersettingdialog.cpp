@@ -244,21 +244,51 @@ bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
 void IndexerSettingDialog::showEvent(QShowEvent *ev)
 {
     acceptEnable = true;
-    ui->dSpinBoxIndexDistance->setVisible(MachineSettings::getServiceWidgEn());
-    ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn());
-    ui->spinBoxIndexDistanceOffcet->setVisible(MachineSettings::getServiceWidgEn());
-    ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn());
-    ui->dSpinBoxLiftDistance->setVisible(MachineSettings::getServiceWidgEn());
-    ui->spinBoxLiftHomeOffset->setVisible(MachineSettings::getServiceWidgEn());
-    ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
-    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn());
-    ui->labelH3->setVisible(MachineSettings::getServiceWidgEn());
-    ui->labelH4->setVisible(MachineSettings::getServiceWidgEn());
-    ui->labelH5->setVisible(MachineSettings::getServiceWidgEn());
-    ui->pButtonIndexHome->setVisible(MachineSettings::getServiceWidgEn());
-    ui->pButtonIndexMove->setVisible(MachineSettings::getServiceWidgEn());
-    ui->pButtonLiftHome->setVisible(MachineSettings::getServiceWidgEn());
-    ui->pButtonLiftMove->setVisible(MachineSettings::getServiceWidgEn());
+    ui->dSpinBoxIndexDistance->setVisible(MachineSettings::getServiceWidgEn()
+                                          &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn()
+                                           &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->spinBoxIndexDistanceOffcet->setVisible(MachineSettings::getServiceWidgEn()
+                                               &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn()
+                                           &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->dSpinBoxLiftDistance->setVisible(MachineSettings::getServiceWidgEn()
+                                         &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->spinBoxLiftHomeOffset->setVisible(MachineSettings::getServiceWidgEn()
+                                          &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->labelH1->setVisible(MachineSettings::getServiceWidgEn()
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn()
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->labelH3->setVisible(MachineSettings::getServiceWidgEn()
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->labelH4->setVisible(MachineSettings::getServiceWidgEn()
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->labelH5->setVisible(MachineSettings::getServiceWidgEn()
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->pButtonIndexHome->setVisible(MachineSettings::getServiceWidgEn()
+                                     &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->pButtonIndexMove->setVisible(MachineSettings::getServiceWidgEn()
+                                     &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->pButtonLiftHome->setVisible(MachineSettings::getServiceWidgEn()
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+    ui->pButtonLiftMove->setVisible(MachineSettings::getServiceWidgEn()
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+
+    ui->labelS1->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->labelS2->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->labelS3->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->labelA1->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->labelA2->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->labelA3->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->dSpinBoxIndexAccel->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->dSpinBoxIndexAccelRet->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->spinBoxIndexSpeed->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->spinBoxindexSpeedRet->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->dSpinBoxLiftAccel->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->spinBoxLiftSpeed->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+
+
     ev->accept();
 }
 
