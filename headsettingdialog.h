@@ -70,13 +70,18 @@ private slots:
     void on_toolButtonMoveTest_clicked();
     void on_toolButtonPressure_clicked();
     void on_toolButtonHoldOn_clicked();
-    void on_pushButtonCopyToAll_clicked();
-    void on_toolButtonFL_SQ_clicked(bool checked);
+    void on_toolButtonFL_SQ_clicked();
     void on_toolButtonStepBack_clicked();
     void on_toolButtonIndexHere_clicked();
     void on_toolButtonInkColor_clicked();
     void on_toolButtonPressureAir_clicked();
     void on_pButtonHeadOnOff_clicked();
+    void on_toolButtonQuartzPreheat_clicked();
+    void on_toolButtonQuartzTest_clicked();
+    void on_toolButtonQuartzStepBack_clicked();
+    void on_toolButtonQuartzWarming_clicked();
+    void on_pushButtonCopyToAll_clicked();
+
 
     void tabWidget_currentChanged(int index);
     void spinBoxRearSpeed_valueChanged(double arg1);
@@ -99,8 +104,6 @@ private slots:
     void spinBoxStandbyPowerQ_valueChanged(double arg1);
     void dSpinBoxStandbyTimeQ_valueChanged(double arg1);
     void dSpinBoxWarmFlashTimeQ_valueChanged(double arg1);
-
-
 
 
 protected:

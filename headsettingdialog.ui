@@ -155,7 +155,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -632,6 +632,9 @@
                <width>32</width>
                <height>32</height>
               </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
              </property>
              <property name="toolButtonStyle">
               <enum>Qt::ToolButtonTextUnderIcon</enum>

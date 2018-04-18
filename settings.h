@@ -42,7 +42,7 @@ public:
     };
 
     typedef enum HeadType_{
-        PrintHead = 0,
+        PrintHead = 0x0258,
         QuartzHead,
         InfraRedHead
     }HeadType;
@@ -77,14 +77,31 @@ public:
 
     typedef enum HeadCommandsEn_{
         Idle = 0,
-        MoveRear,
+        MoveRear = 0x0672,
         MoveFront,
         MoveTest,
+        SQ,
         FL,
         SQ_FL,
-        SQ,
+        Hold_Off,
+        Hold_On,
+        TeachPosition1,
+        TeachPosition2,
+        SQ_FL_UpDown,
         MPT_Move,
-        Hold_on
+        PressureSQ = 0x005A,
+        AirRelease = 0x005A,
+        TimeSelect_1 = 0x025B,
+        TimeSelect_2,
+        TimeSelect_3,
+        Stepback,
+        Plast_water,
+        Preheat,
+        IndexHere,
+        SensorOn_Off,
+        TemperatureUnit,
+        WarmFlash,
+        HeatTest
     }HeadCommandsEn;
 
     typedef struct HeadComands_{
@@ -121,6 +138,7 @@ public:
 
     enum{
         MasterHeadCount = 0x0001,
+        MasterLastButton = 0x0003,
         MasterIndexLiftCommand = 0x0004,
         MasterHeadStateLo = 0x0005,
         MasterHeadStateHi = 0x0009,
