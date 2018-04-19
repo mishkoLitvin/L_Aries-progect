@@ -732,7 +732,8 @@ void MainWindow::timerTimeout()
     if(!indexer->getIsAutoPrint())
     {
         timerMain->stop();
-        indexer->printFinish();
+        if(ragAtHeadCount > 0)
+            indexer->printFinish();
     }
 
     maintanceDialog->check(indexerCiclesAll);

@@ -62,6 +62,7 @@ void SerialPort::closeSerialPort()
 void SerialPort::readData()
 {
     QByteArray data = serial->readAll();
+
     qDebug()<<data.toHex();
     emit this->dataReady(data);
 }
@@ -86,8 +87,15 @@ void SerialPort::getSerialSetting(ComSettings setting)
 
 void SerialPort::sendData(QByteArray data)
 {
-    serial->write(data);
-    qDebug()<<"console: "<<data.toHex();
+    QByteArray dataToSend;
+    int i;
+    for(i = 0; i<data.length(); i++)
+    {
+        dataToSend.append((data[i]>>4)&0x0F);
+        dataToSend.append(data[i]&0x0F);
+    }
+    serial->write(dataToSend);
+    qDebug()<<"console: "<<data.toHex()<<" 4:"<<dataToSend.toHex();
 }
 
 void SerialPort::setupPort()
