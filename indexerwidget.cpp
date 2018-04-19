@@ -46,6 +46,8 @@ bool IndexerWidget::getIsAutoPrint()
 void IndexerWidget::setIconFolder(QString path)
 {
     pathIcon = path;
+    ui->pButtonHome->setIcon(QIcon(pathIcon+"/home.png"));
+    ui->pButtonReset->setIcon(QIcon(pathIcon+"/reset.png"));
     if(ui->pButtonLock->isChecked())
         ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
     else

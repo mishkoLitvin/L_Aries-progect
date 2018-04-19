@@ -28,6 +28,18 @@ SerialPort::SerialPort(ComSettings settings, QObject *parent):QObject(parent)
     this->openSerialPort();
 }
 
+QByteArray SerialPort::dataTransform(QByteArray data)
+{
+    QByteArray trData;
+    trData.resize(data.length()/2);
+    int i;
+    for(i = 0; i<trData.length(); i++)
+    {
+        trData[i] = ((data[i*2]<<4)&0xF0)|(data[i*2+1]&0x0F);
+    }
+    return trData;
+}
+
 void SerialPort::openSerialPort()
 {
     ComSettings p = settingsComDialog->settings();
@@ -61,10 +73,21 @@ void SerialPort::closeSerialPort()
 
 void SerialPort::readData()
 {
-    QByteArray data = serial->readAll();
+    static QByteArray data;
+    data += serial->readAll();
 
-    qDebug()<<data.toHex();
-    emit this->dataReady(data);
+    if(data.length()>15)
+    {
+        data8 = dataTransform(data);
+        bool ok;
+        modData8.all = data8.toHex().toLong(&ok, 16);
+        if(CrcCalc::CalculateCRC16(0xFFFF, data8.mid(0,6)) == modData8.fileds.crc16Val)
+        {
+            emit this->dataReady(data8);
+            emit this->dataReady(modData8);
+        }
+        data.clear();
+    }
 }
 
 void SerialPort::handleError(QSerialPort::SerialPortError error)
