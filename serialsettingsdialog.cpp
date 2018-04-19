@@ -104,8 +104,6 @@ SerialSettingsDialog::SerialSettingsDialog(ComSettings nSett, QWidget *parent):
     ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
     this->settings() = nSett;
 
-
-
     connect(ui->applyButton, &QPushButton::clicked,
             this, &SerialSettingsDialog::apply);
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
@@ -123,6 +121,18 @@ SerialSettingsDialog::SerialSettingsDialog(ComSettings nSett, QWidget *parent):
 
     int i;
     bool stay = true;
+    for(i = 0; (i<ui->serialPortInfoListBox->count())&stay; i++)
+    {
+        if(ui->serialPortInfoListBox->itemText(i) == nSett.name)
+        {
+            ui->serialPortInfoListBox->setCurrentIndex(i);
+            stay = false;
+        }
+    }
+    if(!stay)
+        ui->serialPortInfoListBox->addItem(nSett.name);
+
+    stay = true;
     for(i = 0; (i<ui->baudRateBox->count())&stay; i++)
     {
         if(ui->baudRateBox->itemText(i) == nSett.stringBaudRate)

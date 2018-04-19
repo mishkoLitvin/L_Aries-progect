@@ -141,6 +141,64 @@
       </spacer>
      </item>
      <item>
+      <widget class="QToolButton" name="pButtonHome">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Home</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/new/icons/icons/playP.png</normaloff>:/new/icons/icons/playP.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>60</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="pButtonReset">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Reset</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/new/icons/icons/playP.png</normaloff>:/new/icons/icons/playP.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>60</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="pButtonPrint">
        <property name="minimumSize">
         <size>

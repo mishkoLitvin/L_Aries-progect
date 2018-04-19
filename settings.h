@@ -255,7 +255,9 @@ public:
     }IndexParameters;
 
     typedef enum IndexerCommandsEn_{
-        IndexLock_UnLock = 0x02,
+        Machine_Reset = 0x0001,
+        Machine_Home = 0x0009,
+        IndexLock_UnLock = 0x000A,
         MoveUp_Down = 0x03,
         MoveLeft,
         MoveRight,
@@ -263,9 +265,12 @@ public:
         MoveRightHalf,
         MoveFull_Half = 0x04,
         Auto_Manual = 0x06,
-        PrintStart_Stop = 0x00,
-        AirRelease = 0x07,
-        EasySetup = 0x08
+        PrintStart_Stop = 0x000B,
+        AirRelease = 0x005A,
+        EasySetup = 0x08,
+        IndexMoveHome = 0x00B8,
+        IndexMoveEnd = 0x00B9,
+
     }IndexerCommandsEn;
 
 

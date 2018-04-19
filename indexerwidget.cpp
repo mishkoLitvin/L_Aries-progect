@@ -346,6 +346,52 @@ void IndexerWidget::on_pButtonMoveRight_clicked()
     emit this->sendCommand(bArr);
 }
 
+void IndexerWidget::on_pButtonReset_clicked()
+{
+    QByteArray cmdArr;
+    uint16_t data;
+    data = IndexerLiftSettings::Machine_Reset;
+    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+//    QByteArray bArr;
+//    bArr.append((char)(0x75));//"u"
+//    bArr.append((char)(0x78));//"x"
+//    bArr.append((char)(0x75));//"u"
+//    bArr.append((char)(0x72));//"r"
+//    emit this->sendCommand(bArr);
+//    QThread::msleep(500);
+//    bArr.clear();
+//    bArr.append((char)(0x75));//"u"
+//    bArr.append((char)(0x72));//"r"
+//    emit this->sendCommand(bArr);
+//    QThread::msleep(500);
+}
+
+void IndexerWidget::on_pButtonHome_clicked()
+{
+    QByteArray cmdArr;
+    uint16_t data;
+    data = IndexerLiftSettings::Machine_Home;
+    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
 void IndexerWidget::settingPButtonClicSlot()
 {
     emit this->settingButtonCliced();

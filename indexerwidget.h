@@ -6,6 +6,7 @@
 #include <QResizeEvent>
 #include <QPushButton>
 #include <QDebug>
+#include <QThread>
 
 #include "settings.h"
 #include "crc16.h"
@@ -45,7 +46,10 @@ private slots:
     void on_pButtonMoveLeft_clicked();
     void on_pButtonMoveUp_clicked();
     void on_pButtonMoveRight_clicked();
+    void on_pButtonReset_clicked();
+    void on_pButtonHome_clicked();
     void settingPButtonClicSlot();
+
 
 private:
     Ui::IndexerWidget *ui;

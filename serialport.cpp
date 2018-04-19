@@ -96,6 +96,7 @@ void SerialPort::sendData(QByteArray data)
     }
     serial->write(dataToSend);
     qDebug()<<"console: "<<data.toHex()<<" 4:"<<dataToSend.toHex();
+    serial->waitForBytesWritten(-1);
 }
 
 void SerialPort::setupPort()
