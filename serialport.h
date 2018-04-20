@@ -33,18 +33,18 @@ private:
             uint8_t dataLo:8;
             uint8_t dataHi:8;
             uint8_t registerNoLo:8;
-            uint8_t registerNoHi:8;
+//            uint8_t registerNoHi:8;
             uint8_t adressLo:8;
-            uint8_t adressHi:8;
+//            uint8_t adressHi:8;
 
         }bits;
         struct{
             uint16_t crc16Val:16;
             uint16_t data:16;
-            uint16_t registerNo:16;
-            uint16_t adress:16;
+            uint8_t registerNo:8;
+            uint8_t adress:8;
         }fileds;
-        u_int64_t all;
+        u_int64_t all:48;
     }ModData;
 
     ModData modData8;

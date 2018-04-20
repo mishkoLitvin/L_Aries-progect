@@ -328,9 +328,9 @@ void GeneralSettingDialog::changeDirection()
     }
     QByteArray cmdArr;
     int data = ui->pButtonDirection->isChecked();
-    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
+//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-    cmdArr.append((char)(IndexerLiftSettings::IndexDirection>>8));
+//    cmdArr.append((char)(IndexerLiftSettings::IndexDirection>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexDirection&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -344,9 +344,9 @@ void GeneralSettingDialog::headCountChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
+//    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
     cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterHeadCount>>8));
+//    cmdArr.append((char)(MachineSettings::MasterHeadCount>>8));
     cmdArr.append((char)(MachineSettings::MasterHeadCount&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -361,9 +361,9 @@ void GeneralSettingDialog::machineTypeChanget(int index)
     MachineSettings mStt;
     QByteArray cmdArr;
     int data = mStt.machineTypeData[index];
-    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
+//    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
     cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterMachineType>>8));
+//    cmdArr.append((char)(MachineSettings::MasterMachineType>>8));
     cmdArr.append((char)(MachineSettings::MasterMachineType&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -377,9 +377,9 @@ void GeneralSettingDialog::warningTimeChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
+//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-    cmdArr.append((char)(IndexerLiftSettings::WarningTime>>8));
+//    cmdArr.append((char)(IndexerLiftSettings::WarningTime>>8));
     cmdArr.append((char)(IndexerLiftSettings::WarningTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));

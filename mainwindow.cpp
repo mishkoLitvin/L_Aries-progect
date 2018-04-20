@@ -391,9 +391,9 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
     QByteArray cmdArr;
     int data;
 
-    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterHeadStateLo>>8));
+//    cmdArr.append((char)(MachineSettings::MasterHeadStateLo>>8));
     cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
     cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
     cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
@@ -403,9 +403,9 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
     comPort->sendData(cmdArr);
     cmdArr.clear();
 
-    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterHeadStateHi>>8));
+//    cmdArr.append((char)(MachineSettings::MasterHeadStateHi>>8));
     cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
     cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
     cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
@@ -426,9 +426,9 @@ void MainWindow::getLoadState(LoadState stase)
 {
     QByteArray cmdArr;
     int data;
-    cmdArr.append((char)((IndexerLiftSettings::IndexerDevice)>>8));
+//    cmdArr.append((char)((IndexerLiftSettings::IndexerDevice)>>8));
     cmdArr.append((char)((IndexerLiftSettings::IndexerDevice)&0x00FF));
-    cmdArr.append((char)(IndexerLiftSettings::LoadHeadState>>8));
+//    cmdArr.append((char)(IndexerLiftSettings::LoadHeadState>>8));
     cmdArr.append((char)(IndexerLiftSettings::LoadHeadState&0x00FF));
     cmdArr.append((char)(stase>>8));
     cmdArr.append((char)(stase&0x00FF));
