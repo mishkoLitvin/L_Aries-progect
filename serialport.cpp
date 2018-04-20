@@ -75,18 +75,27 @@ void SerialPort::readData()
 {
     static QByteArray data;
     data += serial->readAll();
-
-    if(data.length()>11)
+    while(data.length()>11)
     {
-        data8 = dataTransform(data);
+        data8 = dataTransform(data.mid(0,12));
         bool ok;
         modData8.all = data8.toHex().toLong(&ok, 16);
         if(CrcCalc::CalculateCRC16(0xFFFF, data8.mid(0,4)) == modData8.fileds.crc16Val)
         {
-            emit this->dataReady(data8);
-            emit this->dataReady(modData8);
+            if(modData8.fileds.registerNo&0x80)
+            {
+                serial->write(data.mid(0,12));
+                emit this->dataReady(data8);
+                emit this->dataReady(modData8);
+                qDebug()<<"all"<<data8.toHex()<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data;
+                data.remove(0,12);
+            }
+            else
+                emit this->dataReady(modData8);
+
         }
-        data.clear();
+        else
+            data.clear();
     }
 }
 

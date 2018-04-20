@@ -214,7 +214,7 @@ public:
         IndexDistOffcet = 0x02,
         IndexSpeed = 0x03,
         IndexDirection = 0x04,
-        LiftDelayDown = 0x07,
+        LiftDelayDown = 0x1C,
         LiftDelayUp = 0x07,
         IndexDistance = 0x08,
         IndexAcceleration = 0x0A,
@@ -288,6 +288,188 @@ public:
 
     void fromByteArray(QByteArray indParamArr, QByteArray lifParamArr);
 };
+
+
+class Register{
+
+    Register(){}
+
+    typedef union MasterReg_{
+        struct reg{
+            uint16_t masterReg_DEV_INF_H;
+            uint16_t masterReg_SIZE;
+            uint16_t _res;
+            uint16_t masterReg_PRZ;
+            uint16_t masterReg_STA;
+            uint16_t masterheadReg;
+            uint16_t masterReg_LAM;
+            uint16_t masterReg_TOTALH;
+            uint16_t masterReg_TOTALL;
+            uint16_t masterheadReg1;
+            uint16_t masterReg_PAL;
+            uint16_t masterReg_INPUT;
+            uint16_t masterReg_REMAINH;
+            uint16_t masterReg_REMAINL;
+            uint16_t masterReg_SPEED;
+            uint16_t masterReg_PRINTEDH;
+            uint16_t masterReg_PRINTEDL;
+            uint16_t masterReg_MACHINE_TYPE;
+            uint16_t masterReg_PAL1;
+            uint16_t masterReg_EKR;
+            uint16_t masterReg_ACTIVHEAD_L;
+            uint16_t masterReg_ACTIVHEAD_H;
+            uint16_t masterReg_DEVERR;
+            uint16_t masterReg_ERR;
+            uint16_t masterReg_KODH;
+            uint16_t masterReg_KODL;
+            uint16_t masterReg_DATH;
+            uint16_t masterReg_DATL;
+            uint16_t masterReg_KOD_ON;
+            uint16_t masterReg_DAT;
+            uint16_t REG_KOD_WPISZ;
+            uint16_t masterReg_HRW;
+            uint16_t masterReg_HRW1;
+            uint16_t masterReg_KOD_ON2;
+            uint16_t masterReg_KOD_ON3;
+            uint16_t masterReg_ERROR_MESSAGE;
+            uint16_t masterReg_DEV_INF_L;
+        }field;
+    }MasterReg;
+
+    typedef union IndexerReg_{
+        struct reg{
+            uint16_t masterReg_DEV_INF_H;
+            uint16_t indexerReg_HOME_OFF;
+            uint16_t indexerReg_DIST_OFF;
+            uint16_t indexerReg_MAX_SPEED;
+            uint16_t indexerReg_DIR;
+            uint16_t _res0;
+            uint16_t indexerReg_CYCLE_DWELL;
+            uint16_t indexerliftReg_UP_DELAY;
+            uint16_t indexerReg_DIST;
+            uint16_t indexerReg_TM;
+            uint16_t indexerReg_ACC;
+            uint16_t indexerReg_RACC;
+            uint16_t _res1;
+            uint16_t indexerReg_RSPEED;
+            uint16_t indexerReg_WARN;
+            uint16_t _res2;
+            uint16_t _res3;
+            uint16_t _res4;
+            uint16_t _res5;
+            uint16_t _res6;
+            uint16_t _res7;
+            uint16_t liftReg_HOME_OFF;
+            uint16_t liftReg_DIST;
+            uint16_t liftReg_SPEED;
+            uint16_t liftReg_ACC;
+            uint16_t indexerReg_HRW_TIME_1;
+            uint16_t indexerReg_HRW_TIME_2;
+            uint16_t indexerReg_HRW_TIME_3;
+            uint16_t indexerReg_HRW_TIME_4;
+            uint16_t indexerReg_MODE;
+            uint16_t _res8;
+            uint16_t indexerReg_LOAD;
+            uint16_t indexerReg_WARM_CYCLES;
+            uint16_t indexerReg_WARM_TEMP;
+            uint16_t indexerReg_WARM_TIME;
+            uint16_t indexerReg_SKOK_SR;
+            uint16_t indexerReg_DEV_INF_L;
+        }field;
+    }IndexerReg;
+
+    typedef union LiftReg_{
+        struct reg{
+            uint16_t _res0;
+            uint16_t _res1;
+            uint16_t _res2;
+            uint16_t _res3;
+            uint16_t _res4;
+            uint16_t _res5;
+            uint16_t liftReg_SEQU1_L;
+            uint16_t liftReg_SEQU1_H;
+            uint16_t liftReg_SEQU2_L;
+            uint16_t liftReg_SEQU2_H;
+            uint16_t liftReg_SEQU3_L;
+            uint16_t liftReg_SEQU3_H;
+            uint16_t liftReg_SEQU4_L;
+            uint16_t liftReg_SEQU4_H;
+            uint16_t liftReg_SEQU5_L;
+            uint16_t liftReg_SEQU5_H;
+            uint16_t liftReg_SEQU6_L;
+            uint16_t liftReg_SEQU6_H;
+            uint16_t liftReg_SEQU7_L;
+            uint16_t liftReg_SEQU7_H;
+            uint16_t liftReg_SEQU8_L;
+            uint16_t liftReg_SEQU8_H;
+            uint16_t liftReg_DIST_PULSE_L;
+            uint16_t liftReg_DIST_PULSE_H;
+            uint16_t REG_TEMP_UNIT;
+            uint16_t REG_GET_ZERO_OFF_CONTACT;
+            uint16_t REG_SKIPC_H;
+            uint16_t REG_SKIPC_L;
+            uint16_t liftReg_DOWN_DELAY;
+            uint16_t REG_PCB35_STAN;
+            uint16_t REG_PCB35_ROZ;
+            uint16_t REG_PCB35_SELECT;
+            uint16_t REG_PCB35_HEAT;
+            uint16_t REG_PCB35_ERR_DEV;
+            uint16_t REG_PCB35_MACHINE_TYPE;
+            uint16_t REG_PCB35_ERR_MESSAGE;
+        }field;
+    }LiftReg;
+
+    typedef union HeadReg_{
+        struct reg{
+            uint16_t REG_DEV_INF_H;
+            uint16_t ON;
+            uint16_t headReg_RSPD;
+            uint16_t headReg_FSPD;
+            uint16_t headReg_FLDWE;
+            uint16_t headReg_SQDWE;
+            uint16_t headReg_NOSTR;
+            uint16_t headReg_RW1_TIME;
+            uint16_t headReg_RW2_TIME;
+            uint16_t headReg_RW3_TIME;
+            uint16_t REG_INP;
+            uint16_t headReg_ROZ;
+            uint16_t headReg_STAN;
+            uint16_t REG_KEY;
+            uint16_t headReg_SBSTR;
+            uint16_t REG_LED;
+            uint16_t headRegT;
+            uint16_t headReg_R;
+            uint16_t headReg_G;
+            uint16_t headReg_B;
+            uint16_t REG_SERVO_HOLD;
+            uint16_t REG_SHUTTLE_REAR_POS;
+            uint16_t headReg_RANGE_1;
+            uint16_t headReg_RANGE_2;
+            uint16_t REG_TEMP_SET;
+            uint16_t REG_SENSOR_TIME;
+            uint16_t REG_STANDBY_POWER;
+            uint16_t REG_STANDBY_TIME;
+            uint16_t headReg_CONFIG;
+            uint16_t REG_RW_POWER;
+            uint16_t REG_TEMP_MEAS;
+            uint16_t headReg_WARM_PAL_TIME;
+            uint16_t headReg_WARM_FLASH_TIME;
+            uint16_t headReg_MACHINE_TYPE;
+            uint16_t headReg_PRESSURE_1;
+            uint16_t headReg_PRESSURE_2;
+            uint16_t headReg_PRESSURE_3;
+            uint16_t headReg_PRESSURE_4;
+            uint16_t headReg_PRESSURE_5;
+            uint16_t headReg_ERROR_MESSAGE;
+            uint16_t REG_HMI_DATA;
+            uint16_t REV_STR1;
+            uint16_t REV_STR2;
+            uint16_t REG_DEV_INF_L;
+        }field;
+    }HeadReg;
+
+};
+
 
 
 #endif // HEADSETTING_H

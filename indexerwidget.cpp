@@ -253,12 +253,12 @@ void IndexerWidget::on_pButtonPrint_clicked()
         emit this->stopPrint();
     }
 
-            bArr.append((char)((machineState.all)>>8));
-            bArr.append((char)((machineState.all)&0x00FF));
-            data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
-            bArr.append((char)(data>>8));
-            bArr.append((char)(data&0x00FF));
-            emit this->sendCommand(bArr);
+    bArr.append((char)((data)>>8));
+    bArr.append((char)((data)&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    bArr.append((char)(data>>8));
+    bArr.append((char)(data&0x00FF));
+    emit this->sendCommand(bArr);
 }
 
 void IndexerWidget::on_pButtonMoveLeft_clicked()
