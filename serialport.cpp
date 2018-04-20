@@ -85,7 +85,6 @@ void SerialPort::readData()
         {
             emit this->dataReady(data8);
             emit this->dataReady(modData8);
-            qDebug()<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data<<modData8.fileds.crc16Val;
         }
         data.clear();
     }

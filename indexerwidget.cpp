@@ -92,9 +92,10 @@ void IndexerWidget::on_pButtonLock_clicked()
 //    bArr.append((char)(MachineSettings::MasterDevice>>8));
     bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
 //    bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-    bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
-    bArr.append((char)((machineState.all)>>8));
-    bArr.append((char)((machineState.all)&0x00FF));
+    bArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    data = IndexerLiftSettings::MoveUp_Down;
+    bArr.append((char)(data>>8));
+    bArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
@@ -133,10 +134,11 @@ void IndexerWidget::on_pButtonMove_clicked()
     machineState.bit.halfFull = (ui->pButtonMove->isChecked());
 //    bArr.append((char)(MachineSettings::MasterDevice>>8));
     bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-//    bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-    bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
-    bArr.append((char)((machineState.all)>>8));
-    bArr.append((char)((machineState.all)&0x00FF));
+//    bArr.append((char)(MachineSettings::MasterLastButton>>8));
+    bArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    data = IndexerLiftSettings::MoveFull_Half;
+    bArr.append((char)((data)>>8));
+    bArr.append((char)((data)&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
@@ -176,10 +178,11 @@ void IndexerWidget::on_pButtonAuto_clicked()
     machineState.bit.manualAuto = ui->pButtonAuto->isChecked();
 //    bArr.append((char)(MachineSettings::MasterDevice>>8));
     bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-//    bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-    bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
-    bArr.append((char)((machineState.all)>>8));
-    bArr.append((char)((machineState.all)&0x00FF));
+//    bArr.append((char)(MachineSettings::MasterLastButton>>8));
+    bArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    data = IndexerLiftSettings::Auto_Manual;
+    bArr.append((char)((data)>>8));
+    bArr.append((char)((data)&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
@@ -210,18 +213,12 @@ void IndexerWidget::on_pButtonPrint_clicked()
     machineState.bit.printStop = ui->pButtonPrint->isChecked();
 //    bArr.append((char)(MachineSettings::MasterDevice>>8));
     bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-//    bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-    bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
-    bArr.append((char)((machineState.all)>>8));
-    bArr.append((char)((machineState.all)&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
-    bArr.append((char)(data>>8));
-    bArr.append((char)(data&0x00FF));
-    emit this->sendCommand(bArr);
+//    bArr.append((char)(MachineSettings::MasterLastButton>>8));
+    bArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
 
     if(ui->pButtonPrint->isChecked())
     {
-
+        data = IndexerLiftSettings::PrintStart;
         ui->pButtonPrint->setText("Stop");
         ui->pButtonPrint->setIcon(QIcon(pathIcon+"/stop.png"));
         ui->pButtonLock->setHidden(true);
@@ -235,6 +232,7 @@ void IndexerWidget::on_pButtonPrint_clicked()
     }
     else
     {
+        data = IndexerLiftSettings::PrintStop;
         if(ui->pButtonAuto->isChecked())
         {
             ui->pButtonPrint->setText("Print Auto");
@@ -254,28 +252,36 @@ void IndexerWidget::on_pButtonPrint_clicked()
         pButtonSets->setHidden(false);
         emit this->stopPrint();
     }
+
+            bArr.append((char)((machineState.all)>>8));
+            bArr.append((char)((machineState.all)&0x00FF));
+            data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+            bArr.append((char)(data>>8));
+            bArr.append((char)(data&0x00FF));
+            emit this->sendCommand(bArr);
 }
 
 void IndexerWidget::on_pButtonMoveLeft_clicked()
 {
     QByteArray bArr;
+    int data;
 //    bArr.append((char)(MachineSettings::MasterDevice>>8));
     bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
+//    bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
+    bArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     if(ui->pButtonMove->isChecked())
     {
-//        bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-        bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
+        data = IndexerLiftSettings::MoveLeftHalf;
         halfCounter--;
         ui->pButtonMove->setHidden(halfCounter%2);
     }
     else
     {
-//        bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-        bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
+        data = IndexerLiftSettings::MoveLeft;
     }
-    bArr.append((char)(1>>8));
-    bArr.append((char)(1&0x00FF));
-    int data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    bArr.append((char)(data>>8));
+    bArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
@@ -288,10 +294,11 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
     machineState.bit.upDown = ui->pButtonMoveUp->isChecked();
 //    bArr.append((char)(MachineSettings::MasterDevice>>8));
     bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-//    bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-    bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
-    bArr.append((char)((machineState.all)>>8));
-    bArr.append((char)((machineState.all)&0x00FF));
+//    bArr.append((char)(MachineSettings::MasterLastButton>>8));
+    bArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    data = IndexerLiftSettings::MoveUp_Down;
+    bArr.append((char)((data)>>8));
+    bArr.append((char)((data)&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
@@ -325,27 +332,29 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
 
 void IndexerWidget::on_pButtonMoveRight_clicked()
 {
-    QByteArray bArr;
-//    bArr.append((char)(MachineSettings::MasterDevice>>8));
-    bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
+    QByteArray cmdArr;
+    int data;
+//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+
     if(ui->pButtonMove->isChecked())
     {
-//        bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-        bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
+        data = IndexerLiftSettings::MoveRightHalf;
         halfCounter++;
         ui->pButtonMove->setHidden(halfCounter%2);
     }
     else
     {
-//        bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
-        bArr.append((char)(MachineSettings::MasterIndexLiftCommand&0x00FF));
+        data = IndexerLiftSettings::MoveRight;
     }
-    bArr.append((char)(1>>8));
-    bArr.append((char)(1&0x00FF));
-    int data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
-    bArr.append((char)(data>>8));
-    bArr.append((char)(data&0x00FF));
-    emit this->sendCommand(bArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
 }
 
 void IndexerWidget::on_pButtonReset_clicked()

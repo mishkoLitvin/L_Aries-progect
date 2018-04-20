@@ -327,11 +327,12 @@ void GeneralSettingDialog::changeDirection()
         ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateLeft.png"));
     }
     QByteArray cmdArr;
-    int data = ui->pButtonDirection->isChecked();
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
-    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexDirection>>8));
-    cmdArr.append((char)(IndexerLiftSettings::IndexDirection&0x00FF));
+    int data;
+//    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
+    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
+//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    data = IndexerLiftSettings::IndexDirChange;
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);

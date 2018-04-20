@@ -835,6 +835,10 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
+
+
+
+
 }
 
 void SettingDialog::on_pushButtonCopyToAll_clicked()
