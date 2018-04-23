@@ -47,53 +47,57 @@ const uint16_t crctable[256] =
 class CrcCalc
 {
 public:
-     CrcCalc() {}
+    CrcCalc() {}
 
 private:
 
 
 public:
-static inline uint16_t CalculateCRC16(
-    uint16_t crc,      // Seed for CRC calculation
-    QByteArray c_ptr) // Pointer to byte array to perform CRC on
+    static uint16_t CalculateCRC16(
+            uint16_t crc,      // Seed for CRC calculation
+            QByteArray c_ptr) // Pointer to byte array to perform CRC on
 
-{
-    uint8_t nTemp;
-
-    for(int i = 0;i<c_ptr.length(); i++)
     {
-        nTemp = ((char)c_ptr[i]) ^ crc;
-        crc >>= 8;
-        crc ^= crctable[nTemp];
-    }
-    return crc;
-}
+        uint8_t nTemp;
 
-static inline uint16_t CalculateCRC16(QByteArray inpArr)
-{
-
-    uint32_t mask=0x7FFF;
-    uint32_t out;
-    bool ok;
-    uint32_t inp = inpArr.toHex().toLong(&ok, 16);
-    out = inp & mask;
-    uint32_t jed=0x80000000;
-    uint32_t wiel=0xC0030000;
-    uint8_t i;
-    for(i = 0 ; i <= 15 ; i++)
-    {
-        if(jed & inp)
+        for(int i = 0;i<c_ptr.length(); i++)
         {
-            inp^=wiel;
-            inp=(inp & (~mask)) | out;
+            nTemp = ((char)c_ptr[i]) ^ crc;
+            crc >>= 8;
+            crc ^= crctable[nTemp];
         }
-        wiel = wiel>>1;
-        mask = mask>>1;
-        jed = jed>>1;
-        out = inp&mask;
+        return crc;
     }
-    return (uint16_t)inp;
-}
+
+public:
+    static uint16_t CalculateCRC16(QByteArray inpArr)
+    {
+        uint32_t mask=0x7FFF;
+        uint32_t out;
+        uint32_t inp = 0;
+        inp = ((((uint32_t)inpArr[0])<<24)&0xFF000000)
+                |((((uint32_t)inpArr[1])<<16)&0x00FF0000)
+                |((((uint32_t)inpArr[2])<<8)&0x0000FF00)
+                |(((uint32_t)inpArr[3])&0x000000FF);
+//        qDebug()<<"input:"<<inp;
+        out = inp & mask;
+        uint32_t jed=0x80000000;
+        uint32_t wiel=0xC0030000;
+        uint8_t i;
+        for(i = 0 ; i < 16 ; i++)
+        {
+            if(jed & inp)
+            {
+                inp^=wiel;
+                inp=(inp & (~mask)) | out;
+            }
+            wiel = wiel>>1;
+            mask = mask>>1;
+            jed = jed>>1;
+            out = inp&mask;
+        }
+        return (uint16_t)inp;
+    }
 };
 
 

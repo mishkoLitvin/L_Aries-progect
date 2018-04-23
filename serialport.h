@@ -20,8 +20,8 @@ typedef union ModData_{
         uint8_t dataHi:8;
         uint8_t registerNoLo:8;
 //            uint8_t registerNoHi:8;
-        uint8_t adressLo:7;
-        uint8_t rwBit:1;
+        uint8_t adressLo:8;
+//        uint8_t rwBit:1;
 //            uint8_t adressHi:8;
 
     }bits;
@@ -29,8 +29,8 @@ typedef union ModData_{
         uint16_t crc16Val:16;
         uint16_t data:16;
         uint8_t registerNo:8;
-        uint8_t adress:7;
-        uint8_t rwBit:1;
+        uint8_t adress:8;
+//        uint8_t rwBit:1;
     }fileds;
     u_int64_t all:48;
 }ModData;

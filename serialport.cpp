@@ -89,28 +89,51 @@ void SerialPort::readData()
 {
     static QByteArray data;
     data += serial->readAll();
-    if(data.length()>5)
+    while(data.length()>5)
     {
+//        qDebug()<<data.toHex();
         bool ok;
         modData8.all = data.toHex().toLong(&ok, 16);
-        if(CrcCalc::CalculateCRC16(data.mid(0,4)) == modData8.fileds.crc16Val)
+        if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
+            data.remove(0,1);
+        else
         {
-            modData8.fileds.registerNo &= 0x7F;
-            modData8.fileds.adress &= 0x7F;
-
+            data.remove(0,6);
             this->sendData(modData8.fileds.adress,
                            modData8.fileds.registerNo,
                            modData8.fileds.data);
+            if((modData8.fileds.adress != 0)
+                    &(modData8.fileds.registerNo != 2)
+                    &(modData8.fileds.data != 0))
+                qDebug()<<"all"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data;
+
         }
-//        qDebug()<<"crc check:"<<(CrcCalc::CalculateCRC16(data.mid(0,4)) == modData8.fileds.crc16Val);
+    }
+//    if(data.length()>5)
+//    {
+//        bool ok;
+//        modData8.all = data.toHex().toLong(&ok, 16);
+////        if(CrcCalc::CalculateCRC16(data.mid(0,4)) == modData8.fileds.crc16Val)
+//        {
+//            modData8.fileds.registerNo &= 0x7F;
+//            modData8.fileds.adress &= 0x7F;
+
+//            this->sendData(modData8.fileds.adress,
+//                           modData8.fileds.registerNo,
+//                           modData8.fileds.data);
+//        }
+//        qDebug()<<modData8.fileds.adress
+//               <<modData8.fileds.registerNo
+//              <<modData8.fileds.data
+//             <<"crc check:"<<(CrcCalc::CalculateCRC16(data.mid(0,4)) == modData8.fileds.crc16Val);
 
 //        if(CrcCalc::CalculateCRC16(data8.mid(0,4)) == modData8.fileds.crc16Val)
 //            qDebug()<<"all"<<data.toHex()
 //                   <<modData8.fileds.adress
 //                  <<modData8.fileds.registerNo
 //                 <<modData8.fileds.data;
-        data.remove(0,6);
-    }
+//        data.remove(0,6);
+//    }
 
 //    while(data.length()>11)
 //    {
