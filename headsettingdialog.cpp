@@ -178,13 +178,13 @@ void SettingDialog::accept()
         HeadSetting hSttg;
         hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
         switch (hSttg.headParam.headType) {
-        case HeadSetting::PrintHead-HeadSetting::PrintHead:
+        case (HeadSetting::PrintHead-HeadSetting::PrintHead):
             hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
             break;
-        case HeadSetting::QuartzHead-HeadSetting::PrintHead:
+        case (HeadSetting::QuartzHead-HeadSetting::PrintHead):
             hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
             break;
-        case HeadSetting::InfraRedHead-HeadSetting::PrintHead:
+        case (HeadSetting::InfraRedHead-HeadSetting::PrintHead):
             hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
             break;
         }
@@ -868,13 +868,13 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 
     hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
     switch (hSttg.headParam.headType) {
-    case HeadSetting::PrintHead-HeadSetting::PrintHead:
+    case (HeadSetting::PrintHead-HeadSetting::PrintHead):
         hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
         break;
-    case HeadSetting::QuartzHead-HeadSetting::PrintHead:
+    case (HeadSetting::QuartzHead-HeadSetting::PrintHead):
         hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
         break;
-    case HeadSetting::InfraRedHead-HeadSetting::PrintHead:
+    case (HeadSetting::InfraRedHead-HeadSetting::PrintHead):
         hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
         break;
     }

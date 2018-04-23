@@ -34,6 +34,7 @@ public slots:
 signals:
     void settingButtonCliced();
     void sendCommand(QByteArray command);
+    void resetRequest();
     void startPrint(bool isAuto);
     void stopPrint();
 

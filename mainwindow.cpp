@@ -65,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
     indexer = new IndexerWidget(this);
     connect(indexer, SIGNAL(settingButtonCliced()), this, SLOT(indexerLiftSettingRequest()));
     connect(indexer, SIGNAL(sendCommand(QByteArray)), this, SLOT(getIndexLiftCommand(QByteArray)));
+    connect(indexer, SIGNAL(resetRequest()), this, SLOT(resetMachine()));
     ui->layoutIndexer->addWidget(indexer);
     connect(indexer, SIGNAL(startPrint(bool)), this, SLOT(startPrintProcess(bool)));
     connect(indexer, SIGNAL(stopPrint()), this, SLOT(stopPrintProcess()));
@@ -341,6 +342,36 @@ void MainWindow::changeHeadNo(int index)
     this->headSettingRequest(index);
 }
 
+void MainWindow::resetMachine()
+{
+    ComSettings comSett = settings->value("COM_SETTING").value<ComSettings>();
+
+    comSett.stringBaudRate = "19200";
+    comSett.stringParity = "None";
+    comSett.stringStopBits = "1";
+    comSett.stringDataBits = "5";
+
+    comPort->openSerialPort(comSett);
+
+    QByteArray bArr;
+
+    bArr.append((char)(0x75));//"u"
+    bArr.append((char)(0x78));//"x"
+    bArr.append((char)(0x75));//"u"
+    bArr.append((char)(0x72));//"r"
+    comPort->sendData(bArr, true);
+    QThread::msleep(500);
+    bArr.clear();
+    bArr.append((char)(0x75));//"u"
+    bArr.append((char)(0x72));//"r"
+    comPort->sendData(bArr, true);
+    QThread::msleep(500);
+
+    comPort->closeSerialPort();
+
+    comPort->openSerialPort(settings->value("COM_SETTING").value<ComSettings>());
+}
+
 void MainWindow::getSerialData(ModData modData)
 {
     if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
@@ -484,7 +515,6 @@ void MainWindow::getSerialData(ModData modData)
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
-    qDebug()<<(uint8_t)hParamArr[1];
     HeadSetting::setHeadStateAtIndex(index, ((bool) (((uint8_t)hParamArr[1]==2)
                                              |((uint8_t)hParamArr[1]==4)
                                              |((uint8_t)hParamArr[1]==6)
@@ -627,7 +657,6 @@ void MainWindow::getMachineCommand(QByteArray commandArr)
 
 void MainWindow::getMachineParam(QByteArray machineParamArr)
 {
-    qDebug()<<machineParamArr.toHex();
     settings->setValue("MACHINE_PARAMS", machineParamArr);
     if(this->headsCount-2 != (((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]))))
     {
@@ -947,7 +976,6 @@ void MainWindow::setIconFolder(int index)
 
 
     int i;
-    qDebug()<<headButton.length()<<headSettButton.length();
     for(i = 0; i<headButton.length(); i++)
         headButton[i]->setIconPath(path);
     for(i = 0; i<headSettButton.length(); i++)

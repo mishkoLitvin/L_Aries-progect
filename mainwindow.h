@@ -107,7 +107,8 @@ private slots:
     void headSettingRequest(int index);
     void indexerLiftSettingRequest();
     void generalSettingDialogRequest();
-    void changeHeadNo(int index);\
+    void changeHeadNo(int index);
+    void resetMachine();
     void getSerialData(ModData modData);
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);
