@@ -96,7 +96,7 @@ void IndexerWidget::on_pButtonLock_clicked()
     data = IndexerLiftSettings::MoveUp_Down;
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    data = CrcCalc::CalculateCRC16(bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
@@ -139,7 +139,7 @@ void IndexerWidget::on_pButtonMove_clicked()
     data = IndexerLiftSettings::MoveFull_Half;
     bArr.append((char)((data)>>8));
     bArr.append((char)((data)&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    data = CrcCalc::CalculateCRC16(bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
@@ -183,7 +183,7 @@ void IndexerWidget::on_pButtonAuto_clicked()
     data = IndexerLiftSettings::Auto_Manual;
     bArr.append((char)((data)>>8));
     bArr.append((char)((data)&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    data = CrcCalc::CalculateCRC16(bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
@@ -255,7 +255,7 @@ void IndexerWidget::on_pButtonPrint_clicked()
 
     bArr.append((char)((data)>>8));
     bArr.append((char)((data)&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    data = CrcCalc::CalculateCRC16(bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
@@ -281,7 +281,7 @@ void IndexerWidget::on_pButtonMoveLeft_clicked()
     }
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    data = CrcCalc::CalculateCRC16(bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
@@ -299,7 +299,7 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
     data = IndexerLiftSettings::MoveUp_Down;
     bArr.append((char)((data)>>8));
     bArr.append((char)((data)&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, bArr);
+    data = CrcCalc::CalculateCRC16(bArr);
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
@@ -351,7 +351,7 @@ void IndexerWidget::on_pButtonMoveRight_clicked()
     }
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(cmdArr);
@@ -368,7 +368,7 @@ void IndexerWidget::on_pButtonReset_clicked()
 //    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
 //    cmdArr.append((char)(data>>8));
 //    cmdArr.append((char)(data&0x00FF));
-//    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+//    data = CrcCalc::CalculateCRC16(cmdArr);
 //    cmdArr.append((char)(data>>8));
 //    cmdArr.append((char)(data&0x00FF));
 //    emit this->sendCommand(cmdArr);
@@ -386,7 +386,7 @@ void IndexerWidget::on_pButtonHome_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(cmdArr);

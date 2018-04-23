@@ -126,18 +126,21 @@ MainWindow::MainWindow(QWidget *parent) :
                 if((((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==2)|
                         (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==4)|
                         (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==6))
-                    switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0])
+                {
+                    headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
+                    switch (headSettings.headParam.headType)
                     {
-                    case 0:
+                    case HeadSetting::PrintHead:
                         headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                         break;
-                    case 1:
+                    case HeadSetting::QuartzHead:
                         headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
                         break;
-                    case 2:
+                    case HeadSetting::InfraRedHead:
                         headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
                         break;
                     }
+                }
                 else
                     headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
 
@@ -526,14 +529,14 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
     if((((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1])==2)|
             (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1])==4)|
             (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1])==6))
-        switch (settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[0]) {
-        case 0:
+        switch ((HeadSetting::HeadType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0])))) {
+        case HeadSetting::PrintHead:
             headButton[index]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
             break;
-        case 1:
+        case HeadSetting::QuartzHead:
             headButton[index]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
             break;
-        case 2:
+        case HeadSetting::InfraRedHead:
             headButton[index]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
             break;
         }
@@ -562,14 +565,14 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
                     |((uint8_t)hParamArr[1]==8)
                     |((uint8_t)hParamArr[1]==10)
                     |((uint8_t)hParamArr[1]==12))))
-            switch (hParamArr[0]) {
-            case 0:
+            switch ((HeadSetting::HeadType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0])))) {
+            case HeadSetting::PrintHead:
                 headButton[cnt]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                 break;
-            case 1:
+            case HeadSetting::QuartzHead:
                 headButton[cnt]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
                 break;
-            case 2:
+            case HeadSetting::InfraRedHead:
                 headButton[cnt]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
                 break;
             }
@@ -810,17 +813,20 @@ void MainWindow::loadJob()
                 if((((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==2)|
                         (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==4)|
                         (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==6))
-                    switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
-                    case 0:
+                {
+                    headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
+                    switch (headSettings.headParam.headType) {
+                    case HeadSetting::PrintHead:
                         headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
                         break;
-                    case 1:
+                    case HeadSetting::QuartzHead:
                         headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
                         break;
-                    case 2:
+                    case HeadSetting::InfraRedHead:
                         headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
                         break;
                     }
+                }
                 else
                     headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
     }

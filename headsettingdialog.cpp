@@ -174,17 +174,17 @@ void SettingDialog::accept()
 {
     if(acceptEnable)
     {
-        qDebug()<<(uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+        qDebug()<<(uint16_t)((ui->tabWidget->currentIndex()+HeadSetting::PrintHead));
         HeadSetting hSttg;
-        hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
+        hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex()+HeadSetting::PrintHead);
         switch (hSttg.headParam.headType) {
-        case (HeadSetting::PrintHead-HeadSetting::PrintHead):
+        case (HeadSetting::PrintHead):
             hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
             break;
-        case (HeadSetting::QuartzHead-HeadSetting::PrintHead):
+        case (HeadSetting::QuartzHead):
             hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
             break;
-        case (HeadSetting::InfraRedHead-HeadSetting::PrintHead):
+        case (HeadSetting::InfraRedHead):
             hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
             break;
         }
@@ -539,7 +539,7 @@ void SettingDialog::on_toolButtonFL_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -556,7 +556,7 @@ void SettingDialog::on_toolButtonMoveRear_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -573,7 +573,7 @@ void SettingDialog::on_toolButtonFL_SQup_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -590,7 +590,7 @@ void SettingDialog::on_toolButtonMoveFront_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -607,7 +607,7 @@ void SettingDialog::on_toolButtonMTPMove_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -624,7 +624,7 @@ void SettingDialog::on_toolButtonSQ_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -641,7 +641,7 @@ void SettingDialog::on_toolButtonMoveTest_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -658,7 +658,7 @@ void SettingDialog::on_toolButtonPressure_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -682,7 +682,7 @@ void SettingDialog::on_toolButtonHoldOn_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -699,7 +699,7 @@ void SettingDialog::on_toolButtonFL_SQ_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -716,7 +716,7 @@ void SettingDialog::on_toolButtonStepBack_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -733,7 +733,7 @@ void SettingDialog::on_toolButtonIndexHere_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -755,7 +755,7 @@ void SettingDialog::on_toolButtonPressureAir_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -772,7 +772,7 @@ void SettingDialog::on_toolButtonQuartzPreheat_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -789,7 +789,7 @@ void SettingDialog::on_toolButtonQuartzTest_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -806,7 +806,7 @@ void SettingDialog::on_toolButtonQuartzStepBack_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -823,7 +823,7 @@ void SettingDialog::on_toolButtonQuartzWarming_clicked()
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -852,7 +852,7 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
         cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
     }
 
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -866,20 +866,20 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 {
     HeadSetting hSttg;
 
-    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
+    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex()+HeadSetting::PrintHead);
     switch (hSttg.headParam.headType) {
-    case (HeadSetting::PrintHead-HeadSetting::PrintHead):
+    case (HeadSetting::PrintHead):
         hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
         break;
-    case (HeadSetting::QuartzHead-HeadSetting::PrintHead):
+    case (HeadSetting::QuartzHead):
         hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
         break;
-    case (HeadSetting::InfraRedHead-HeadSetting::PrintHead):
+    case (HeadSetting::InfraRedHead):
         hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
         break;
     }
 
-    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
+    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex()+HeadSetting::PrintHead);
     hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
     hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
     hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
@@ -908,7 +908,7 @@ void SettingDialog::tabWidget_currentChanged(int index)
     cmdArr.append((char)(HeadSetting::HeadHeadType&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -924,7 +924,7 @@ void SettingDialog::spinBoxRearSpeed_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadSpeedRear&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -940,7 +940,7 @@ void SettingDialog::dSpinBoxRearRange_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadRangeLimit1&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -956,7 +956,7 @@ void SettingDialog::spinBoxFrontSpeed_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadSpeedFront&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -972,7 +972,7 @@ void SettingDialog::dSpinBoxFrontRange_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadRangeLimit2&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -988,7 +988,7 @@ void SettingDialog::spinBoxStrokCount_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadStroksCount&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1004,7 +1004,7 @@ void SettingDialog::spinBoxSBStrokCount_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadSBStroksCount&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1020,7 +1020,7 @@ void SettingDialog::dSpinBoxHeatTime1Q_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1036,7 +1036,7 @@ void SettingDialog::dSpinBoxHeatTime2Q_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashTime2Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1052,7 +1052,7 @@ void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1068,7 +1068,7 @@ void SettingDialog::dSpinBoxStepbackDryTimeQ_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1084,7 +1084,7 @@ void SettingDialog::dSpinBoxTemperatureSetQ_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadHeatTemper&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1100,7 +1100,7 @@ void SettingDialog::dSpinBoxDryTimeQ_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1116,7 +1116,7 @@ void SettingDialog::spinBoxStandbyPowerQ_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1132,7 +1132,7 @@ void SettingDialog::dSpinBoxStandbyTimeQ_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1148,7 +1148,7 @@ void SettingDialog::dSpinBoxWarmFlashTimeQ_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlashWarmTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1164,7 +1164,7 @@ void SettingDialog::dSpinBoxHeatTime1IR_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadHeatTime1IR&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1180,7 +1180,7 @@ void SettingDialog::dSpinBoxHeatTime2IR_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadHeatTime2IR&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1196,7 +1196,7 @@ void SettingDialog::dSpinBoxDryingRangeIR_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadHeatDryRange&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1212,7 +1212,7 @@ void SettingDialog::dSpinBoxFlDwellTime_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadFlDwellTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
@@ -1228,7 +1228,7 @@ void SettingDialog::dSpinBoxSqDwellTime_valueChanged(double arg1)
     cmdArr.append((char)(HeadSetting::HeadSqDwellTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
