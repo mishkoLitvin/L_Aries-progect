@@ -368,3 +368,71 @@ void MachineSettings::setMachineType(MachineSettings::MachineType mType)
     MachineSettings stt;
     stt.machineTypeStat = mType;
 }
+
+Register::Register(uint8_t headCount)
+{
+    masterRegPtr = &(masterReg.memBeg);
+    indexerRegPtr = &(indexerReg.memBeg);
+    liftRegPtr = &(liftReg.memBeg);
+
+    unsigned int i;
+    for(i = 0; i<headCount; i++)
+    {
+        headRegList.append(*(new HeadReg));
+        headRegPtrList.append(&(headRegList[i].memBeg));
+    }
+
+    for(i = 0; i < sizeof(MasterReg); i++)
+    {
+        *(i+masterRegPtr) = i;
+    }
+
+    for(i = 0; i < sizeof(MasterReg); i++)
+        qDebug()<<*(i+masterRegPtr);
+
+}
+
+void Register::writeReg(uint8_t dev, uint8_t place, uint16_t data)
+{
+    if(dev<=HeadSetting::HeadDeviceAdrOffcet)
+        switch (dev) {
+        case MachineSettings::MasterDevice:
+            *(masterRegPtr+place) = data;
+            break;
+        case IndexerLiftSettings::IndexerDevice:
+            *(indexerRegPtr+place) = data;
+            break;
+        case IndexerLiftSettings::LiftDevice:
+            *(liftRegPtr+place) = data;
+            break;
+        }
+    else
+    {
+        int i = dev - HeadSetting::HeadDeviceAdrOffcet;
+        *(headRegPtrList[i]+place) = data;
+    }
+
+}
+
+uint16_t Register::readReg(uint8_t dev, uint8_t place)
+{
+    uint16_t data;
+    if(dev<=HeadSetting::HeadDeviceAdrOffcet)
+        switch (dev) {
+        case MachineSettings::MasterDevice:
+            data = *(masterRegPtr+place);
+            break;
+        case IndexerLiftSettings::IndexerDevice:
+            data = *(indexerRegPtr+place);
+            break;
+        case IndexerLiftSettings::LiftDevice:
+            data = *(liftRegPtr+place);
+            break;
+        }
+    else
+    {
+        int i = dev - HeadSetting::HeadDeviceAdrOffcet;
+        data = *(headRegPtrList[i]+place);
+    }
+    return data;
+}

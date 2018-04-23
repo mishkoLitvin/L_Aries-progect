@@ -98,6 +98,8 @@ private:
 
     QString userName;
 
+    Register *registers;
+
 
 
 private slots:

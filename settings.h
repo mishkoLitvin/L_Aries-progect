@@ -3,6 +3,7 @@
 
 #include <QByteArray>
 #include <QStringList>
+#include <QList>
 
 typedef u_int32_t uint32_t;
 typedef u_int16_t uint16_t;
@@ -292,7 +293,8 @@ public:
 
 class Register{
 
-    Register(){}
+public:
+    Register(uint8_t headCount);
 
     typedef union MasterReg_{
         struct reg{
@@ -334,6 +336,7 @@ class Register{
             uint16_t masterReg_ERROR_MESSAGE;
             uint16_t masterReg_DEV_INF_L;
         }field;
+        uint16_t memBeg;
     }MasterReg;
 
     typedef union IndexerReg_{
@@ -376,6 +379,7 @@ class Register{
             uint16_t indexerReg_SKOK_SR;
             uint16_t indexerReg_DEV_INF_L;
         }field;
+        uint16_t memBeg;
     }IndexerReg;
 
     typedef union LiftReg_{
@@ -417,6 +421,7 @@ class Register{
             uint16_t REG_PCB35_MACHINE_TYPE;
             uint16_t REG_PCB35_ERR_MESSAGE;
         }field;
+        uint16_t memBeg;
     }LiftReg;
 
     typedef union HeadReg_{
@@ -466,7 +471,21 @@ class Register{
             uint16_t REV_STR2;
             uint16_t REG_DEV_INF_L;
         }field;
+        uint16_t memBeg;
     }HeadReg;
+
+    MasterReg masterReg;
+    IndexerReg indexerReg;
+    LiftReg liftReg;
+    QList<HeadReg> headRegList;
+
+    uint16_t* masterRegPtr;
+    uint16_t* indexerRegPtr;
+    uint16_t* liftRegPtr;
+    QList<uint16_t*> headRegPtrList;
+
+    void writeReg(uint8_t dev, uint8_t place, uint16_t data);
+    uint16_t readReg(uint8_t dev, uint8_t place);
 
 };
 

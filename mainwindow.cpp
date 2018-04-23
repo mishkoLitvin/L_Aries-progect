@@ -184,6 +184,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonMaintance, SIGNAL(clicked(bool)), maintanceDialog, SLOT(openMaintanceList()));
     connect(indexer, SIGNAL(stopPrint()), maintanceDialog, SLOT(openDialog()));
 
+    registers = new Register(headsCount);
+    comPort->setRegisterPointer(this->registers);
+
     this->zeroStart();
 }
 

@@ -20,11 +20,14 @@ public:
     explicit SerialPort(QObject *parent = 0);
     explicit SerialPort(ComSettings settings, QObject *parent = 0);
 
+    void setRegisterPointer(Register* regPtr);
 private:
     SerialSettingsDialog *settingsComDialog;
     QSerialPort *serial;
 
     QByteArray dataTransform(QByteArray data);
+
+    Register *registers;
 
     typedef union ModData_{
         struct{
@@ -57,6 +60,7 @@ public slots:
     void closeSerialPort();
 
     void sendData(QByteArray data);
+    void sendData(uint8_t dev, uint8_t place, uint16_t data);
     void setupPort();
     void setComParams(ComSettings sett);
     void setStyleSheet(QString stSheet);
@@ -67,9 +71,6 @@ private slots:
     void handleError(QSerialPort::SerialPortError error);
     void showStatusMessage(const QString &message);
     void getSerialSetting(ComSettings setting);
-
-
-
 
 signals:
     void dataReady(QByteArray data);
