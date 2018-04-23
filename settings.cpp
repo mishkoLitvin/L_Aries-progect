@@ -64,7 +64,6 @@ HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters 
 
 QByteArray HeadSetting::HeadParameters_::toByteArray()
 {
-    qDebug()<<(uint8_t) this->powerOn;
     QByteArray bArr;
     bArr.resize(43);
     bArr[0] = this->headType;

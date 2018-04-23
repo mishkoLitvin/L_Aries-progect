@@ -128,6 +128,7 @@ public:
     ~SerialSettingsDialog();
 
     ComSettings settings() const;
+    void setSettings(ComSettings nSett);
 
 signals:
     void serialSettingAccepted(ComSettings comSett);

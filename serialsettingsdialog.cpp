@@ -189,6 +189,68 @@ ComSettings SerialSettingsDialog::settings() const
     return currentSettings;
 }
 
+void SerialSettingsDialog::setSettings(ComSettings nSett)
+{
+    qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
+
+    int i;
+    bool stay = true;
+    for(i = 0; (i<ui->serialPortInfoListBox->count())&stay; i++)
+    {
+        if(ui->serialPortInfoListBox->itemText(i) == nSett.name)
+        {
+            ui->serialPortInfoListBox->setCurrentIndex(i);
+            stay = false;
+        }
+    }
+    if(!stay)
+        ui->serialPortInfoListBox->addItem(nSett.name);
+
+    stay = true;
+    for(i = 0; (i<ui->baudRateBox->count())&stay; i++)
+    {
+        if(ui->baudRateBox->itemText(i) == nSett.stringBaudRate)
+        {
+            ui->baudRateBox->setCurrentIndex(i);
+            stay = false;
+        }
+    }
+    if(!stay)
+        ui->baudRateBox->addItem(nSett.stringBaudRate, nSett.baudRate);
+
+    stay = true;
+    for(i = 0; (i<ui->dataBitsBox->count())&stay; i++)
+        if(ui->dataBitsBox->itemText(i) == nSett.stringDataBits)
+        {
+            ui->dataBitsBox->setCurrentIndex(i);
+            stay = false;
+        }
+
+    stay = true;
+    for(i = 0; (i<ui->parityBox->count())&stay; i++)
+        if(ui->parityBox->itemText(i) == nSett.stringParity)
+        {
+            ui->parityBox->setCurrentIndex(i);
+            stay = false;
+        }
+
+    stay = true;
+    for(i = 0; (i<ui->stopBitsBox->count())&stay; i++)
+        if(ui->stopBitsBox->itemText(i) == nSett.stringStopBits)
+        {
+            ui->stopBitsBox->setCurrentIndex(i);
+            stay = false;
+        }
+    stay = true;
+    for(i = 0; (i<ui->flowControlBox->count())&stay; i++)
+        if(ui->flowControlBox->itemText(i) == nSett.stringFlowControl)
+        {
+            ui->flowControlBox->setCurrentIndex(i);
+            stay = false;
+        }
+    updateSettings();
+}
+
 void SerialSettingsDialog::showPortInfo(int idx)
 {
     if (idx == -1)

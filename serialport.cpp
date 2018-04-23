@@ -69,6 +69,15 @@ void SerialPort::openSerialPort()
     }
 }
 
+void SerialPort::openSerialPort(ComSettings cSett)
+{
+    this->closeSerialPort();
+
+    settingsComDialog->setSettings(cSett);
+
+    this->openSerialPort();
+}
+
 void SerialPort::closeSerialPort()
 {
     if (serial->isOpen())
@@ -80,40 +89,62 @@ void SerialPort::readData()
 {
     static QByteArray data;
     data += serial->readAll();
-    while(data.length()>11)
+    if(data.length()>5)
     {
-
-        data8 = dataTransform(data.mid(0,12));
         bool ok;
-        modData8.all = data8.toHex().toLong(&ok, 16);
-        if(CrcCalc::CalculateCRC16(0xFFFF, data8.mid(0,4)) == modData8.fileds.crc16Val)
+        modData8.all = data.toHex().toLong(&ok, 16);
+        if(CrcCalc::CalculateCRC16(data.mid(0,4)) == modData8.fileds.crc16Val)
         {
-            qDebug()<<data.length();
-            if(modData8.fileds.registerNo&0x80)
-            {
-                serial->write(data.mid(0,12));
-//                emit this->dataReady(data8);
-                emit this->dataReady(modData8);
-                registers->writeReg(modData8.fileds.adress,
-                                    modData8.fileds.registerNo,
-                                    modData8.fileds.data);
-                qDebug()<<"all"<<data8.toHex()<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data;
-                data.remove(0,12);
-            }
-            else
-            {
-                this->sendData(modData8.fileds.adress,
-                               modData8.fileds.registerNo,
-                               registers->readReg(modData8.fileds.adress,
-                                                  modData8.fileds.registerNo));
-                emit this->dataReady(modData8);
-                qDebug()<<"all"<<data8.toHex()<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data;
-                data.remove(0,12);
-            }
+            modData8.fileds.registerNo &= 0x7F;
+            modData8.fileds.adress &= 0x7F;
+
+            this->sendData(modData8.fileds.adress,
+                           modData8.fileds.registerNo,
+                           modData8.fileds.data);
         }
-        else
-            data.clear();
+//        qDebug()<<"crc check:"<<(CrcCalc::CalculateCRC16(data.mid(0,4)) == modData8.fileds.crc16Val);
+
+//        if(CrcCalc::CalculateCRC16(data8.mid(0,4)) == modData8.fileds.crc16Val)
+//            qDebug()<<"all"<<data.toHex()
+//                   <<modData8.fileds.adress
+//                  <<modData8.fileds.registerNo
+//                 <<modData8.fileds.data;
+        data.remove(0,6);
     }
+
+//    while(data.length()>11)
+//    {
+//        data8 = dataTransform(data.mid(0,12));
+//        bool ok;
+//        modData8.all = data8.toHex().toLong(&ok, 16);
+//        if(CrcCalc::CalculateCRC16(0xFFFF, data8.mid(0,4)) == modData8.fileds.crc16Val)
+//        {
+//            qDebug()<<data.length();
+//            if(modData8.fileds.registerNo&0x80)
+//            {
+//                serial->write(data.mid(0,12));
+////                emit this->dataReady(data8);
+//                emit this->dataReady(modData8);
+//                registers->writeReg(modData8.fileds.adress,
+//                                    modData8.fileds.registerNo,
+//                                    modData8.fileds.data);
+//                qDebug()<<"all"<<data8.toHex()<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data;
+//                data.remove(0,12);
+//            }
+//            else
+//            {
+//                this->sendData(modData8.fileds.adress,
+//                               modData8.fileds.registerNo,
+//                               registers->readReg(modData8.fileds.adress,
+//                                                  modData8.fileds.registerNo));
+//                emit this->dataReady(modData8);
+//                qDebug()<<"all"<<data8.toHex()<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data;
+//                data.remove(0,12);
+//            }
+//        }
+//        else
+//            data.clear();
+//    }
 }
 
 void SerialPort::handleError(QSerialPort::SerialPortError error)
@@ -126,7 +157,7 @@ void SerialPort::handleError(QSerialPort::SerialPortError error)
 
 void SerialPort::showStatusMessage(const QString &message)
 {
-    qDebug()<<message;
+    qDebug()<<"Status message:"<<message;
 }
 
 void SerialPort::getSerialSetting(ComSettings setting)
@@ -134,23 +165,36 @@ void SerialPort::getSerialSetting(ComSettings setting)
     emit this->serialSettingAccepted(setting);
 }
 
-void SerialPort::sendData(QByteArray data)
+void SerialPort::sendData(QByteArray data, bool halfByte)
 {
     bool ok;
     modData8.all = data.toHex().toLong(&ok, 16);
     registers->writeReg(modData8.fileds.adress,
                         modData8.fileds.registerNo,
                         modData8.fileds.data);
-    QByteArray dataToSend;
-    int i;
-    for(i = 0; i<data.length(); i++)
+    if(halfByte)
     {
-        dataToSend.append((data[i]>>4)&0x0F);
-        dataToSend.append(data[i]&0x0F);
+        QByteArray dataToSend;
+        int i;
+        for(i = 0; i<data.length(); i++)
+        {
+            dataToSend.append((data[i]>>4)&0x0F);
+            dataToSend.append(data[i]&0x0F);
+        }
+        serial->write(dataToSend);
+//        qDebug()<<"console: "<<data.toHex()<<" 4:"<<dataToSend.toHex();
     }
-    serial->write(dataToSend);
-    qDebug()<<"console: "<<data.toHex()<<" 4:"<<dataToSend.toHex();
-    serial->waitForBytesWritten(-1);
+    else
+    {
+        data.remove(4,2);
+        uint16_t crc;
+        crc = CrcCalc::CalculateCRC16(data);
+        data.append((char)((crc>>8)&0x00FF));
+        data.append((char)(crc&0x00FF));
+        serial->write(data);
+//        qDebug()<<"console: "<<data.toHex();
+    }
+        serial->waitForBytesWritten(-1);
 }
 
 void SerialPort::sendData(uint8_t dev, uint8_t place, uint16_t data)
@@ -161,18 +205,11 @@ void SerialPort::sendData(uint8_t dev, uint8_t place, uint16_t data)
     dataArr.append((char)((data>>8)&0x00FF));
     dataArr.append((char)(data&0x00FF));
     uint16_t crc;
-    crc = CrcCalc::CalculateCRC16(0xFFFF, dataArr);
+    crc = CrcCalc::CalculateCRC16(dataArr);
     dataArr.append((char)((crc>>8)&0x00FF));
     dataArr.append((char)(crc&0x00FF));
-    QByteArray dataToSend;
-    int i;
-    for(i = 0; i<dataArr.length(); i++)
-    {
-        dataToSend.append((dataArr[i]>>4)&0x0F);
-        dataToSend.append(dataArr[i]&0x0F);
-    }
-    serial->write(dataToSend);
-    qDebug()<<"console: "<<dataArr.toHex()<<" 4:"<<dataToSend.toHex();
+    serial->write(dataArr);
+//    qDebug()<<"console: "<<dataArr.toHex();
     serial->waitForBytesWritten(-1);
 }
 
@@ -188,7 +225,6 @@ void SerialPort::setupPort()
 void SerialPort::setComParams(ComSettings sett)
 {
     this->closeSerialPort();
-
 
     serial->setPortName(sett.name);
     serial->setBaudRate(sett.baudRate);
