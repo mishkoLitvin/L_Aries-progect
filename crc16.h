@@ -69,8 +69,32 @@ static inline uint16_t CalculateCRC16(
     return crc;
 }
 
-};
+static inline uint16_t CalculateCRC16(QByteArray inpArr)
+{
 
+    uint32_t mask=0x7FFF;
+    uint32_t out;
+    bool ok;
+    uint32_t inp = inpArr.toHex().toLong(&ok, 16);
+    out = inp & mask;
+    uint32_t jed=0x80000000;
+    uint32_t wiel=0xC0030000;
+    uint8_t i;
+    for(i = 0 ; i <= 15 ; i++)
+    {
+        if(jed & inp)
+        {
+            inp^=wiel;
+            inp=(inp & (~mask)) | out;
+        }
+        wiel = wiel>>1;
+        mask = mask>>1;
+        jed = jed>>1;
+        out = inp&mask;
+    }
+    return (uint16_t)inp;
+}
+};
 
 
 #endif // CRC16_H
