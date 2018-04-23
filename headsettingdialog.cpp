@@ -30,11 +30,15 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
 
     this->index = index;
 
-    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
+    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType-HeadSetting::PrintHead);
     ui->lcdNumberHeadNo->display(index);
 
-    ui->pButtonHeadOnOff->setChecked(hSttg.headParam.powerOn&0x01);
-
+    ui->pButtonHeadOnOff->setChecked((hSttg.headParam.powerOn==2)|
+                                     (hSttg.headParam.powerOn==4)|
+                                     (hSttg.headParam.powerOn==6)|
+                                     (hSttg.headParam.powerOn==8)|
+                                     (hSttg.headParam.powerOn==10)|
+                                     (hSttg.headParam.powerOn==12));
 
     ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
     ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
@@ -98,10 +102,15 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
 
     this->index = index;
 
-    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType);
+    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType-HeadSetting::PrintHead);
     ui->lcdNumberHeadNo->display(index);
 
-    ui->pButtonHeadOnOff->setChecked(hSttg.headParam.powerOn&0x01);
+    ui->pButtonHeadOnOff->setChecked((bool)((hSttg.headParam.powerOn==2)|
+                                     (hSttg.headParam.powerOn==4)|
+                                     (hSttg.headParam.powerOn==6)|
+                                     (hSttg.headParam.powerOn==8)|
+                                     (hSttg.headParam.powerOn==10)|
+                                     (hSttg.headParam.powerOn==12)));
 
     ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
     ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
@@ -165,9 +174,21 @@ void SettingDialog::accept()
 {
     if(acceptEnable)
     {
+        qDebug()<<(uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
         HeadSetting hSttg;
-        hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-        hSttg.headParam.headType = (HeadSetting::HeadType)ui->tabWidget->currentIndex();
+        hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
+        switch (hSttg.headParam.headType) {
+        case HeadSetting::PrintHead-HeadSetting::PrintHead:
+            hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        case HeadSetting::QuartzHead-HeadSetting::PrintHead:
+            hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        case HeadSetting::InfraRedHead-HeadSetting::PrintHead:
+            hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        }
+
         hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
         hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
         hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
@@ -845,9 +866,20 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 {
     HeadSetting hSttg;
 
-    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
+    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
+    switch (hSttg.headParam.headType) {
+    case HeadSetting::PrintHead-HeadSetting::PrintHead:
+        hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+        break;
+    case HeadSetting::QuartzHead-HeadSetting::PrintHead:
+        hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+        break;
+    case HeadSetting::InfraRedHead-HeadSetting::PrintHead:
+        hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+        break;
+    }
 
-    hSttg.headParam.headType = (HeadSetting::HeadType)ui->tabWidget->currentIndex();
+    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex());
     hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
     hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
     hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
@@ -869,7 +901,7 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 void SettingDialog::tabWidget_currentChanged(int index)
 {
     QByteArray cmdArr;
-    int data = index;
+    int data = index+HeadSetting::PrintHead;
 //    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
 //    cmdArr.append((char)(HeadSetting::HeadHeadType>>8));

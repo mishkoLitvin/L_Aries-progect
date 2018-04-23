@@ -22,7 +22,7 @@ public:
     void setTotal(int val);
 
     void setIconFolder(QString path);
-    void setIndicatorState(char state);
+    void setIndicatorState(u_int16_t state);
 
 
 private:

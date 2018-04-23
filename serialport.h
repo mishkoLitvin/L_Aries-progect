@@ -12,6 +12,27 @@
 #include "crc16.h"
 
 
+typedef union ModData_{
+    struct{
+        uint8_t crc16ValLo:8;
+        uint8_t crc16ValHi:8;
+        uint8_t dataLo:8;
+        uint8_t dataHi:8;
+        uint8_t registerNoLo:8;
+//            uint8_t registerNoHi:8;
+        uint8_t adressLo:8;
+//            uint8_t adressHi:8;
+
+    }bits;
+    struct{
+        uint16_t crc16Val:16;
+        uint16_t data:16;
+        uint8_t registerNo:8;
+        uint8_t adress:8;
+    }fileds;
+    u_int64_t all:48;
+}ModData;
+
 class SerialPort : public QObject
 {
     Q_OBJECT
@@ -29,31 +50,8 @@ private:
 
     Register *registers;
 
-    typedef union ModData_{
-        struct{
-            uint8_t crc16ValLo:8;
-            uint8_t crc16ValHi:8;
-            uint8_t dataLo:8;
-            uint8_t dataHi:8;
-            uint8_t registerNoLo:8;
-//            uint8_t registerNoHi:8;
-            uint8_t adressLo:8;
-//            uint8_t adressHi:8;
-
-        }bits;
-        struct{
-            uint16_t crc16Val:16;
-            uint16_t data:16;
-            uint8_t registerNo:8;
-            uint8_t adress:8;
-        }fileds;
-        u_int64_t all:48;
-    }ModData;
-
     ModData modData8;
     QByteArray data8;
-
-
 
 public slots:
     void openSerialPort();

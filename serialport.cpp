@@ -92,7 +92,7 @@ void SerialPort::readData()
             if(modData8.fileds.registerNo&0x80)
             {
                 serial->write(data.mid(0,12));
-                emit this->dataReady(data8);
+//                emit this->dataReady(data8);
                 emit this->dataReady(modData8);
                 registers->writeReg(modData8.fileds.adress,
                                     modData8.fileds.registerNo,
@@ -107,6 +107,7 @@ void SerialPort::readData()
                                registers->readReg(modData8.fileds.adress,
                                                   modData8.fileds.registerNo));
                 emit this->dataReady(modData8);
+                qDebug()<<"all"<<data8.toHex()<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data;
                 data.remove(0,12);
             }
         }

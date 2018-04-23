@@ -106,35 +106,35 @@ void InfoWidget::setIconFolder(QString path)
     ui->labelStopHand->setGraphicsEffect(effect[6]);
 }
 
-void InfoWidget::setIndicatorState(char state)
+void InfoWidget::setIndicatorState(u_int16_t state)
 {
     effect[0]->setOpacity(1);
 
-    if(state&0x01)
+    if(state&0x0001)
         effect[0]->setOpacity(1);
     else
         effect[0]->setOpacity(0.1);
-    if(state&0x02)
+    if(state&0x0002)
         effect[1]->setOpacity(1);
     else
         effect[1]->setOpacity(0.1);
-    if(state&0x04)
+    if(state&0x0004)
         effect[2]->setOpacity(1);
     else
         effect[2]->setOpacity(0.1);
-    if(state&0x08)
+    if(state&0x0008)
         effect[3]->setOpacity(1);
     else
         effect[3]->setOpacity(0.1);
-    if(state&0x10)
+    if(state&0x0010)
         effect[4]->setOpacity(1);
     else
         effect[4]->setOpacity(0.1);
-    if(state&0x20)
+    if(state&0x0020)
         effect[5]->setOpacity(1);
     else
         effect[5]->setOpacity(0.1);
-    if(state&0x40)
+    if(state&0x0040)
         effect[6]->setOpacity(1);
     else
         effect[6]->setOpacity(0.1);

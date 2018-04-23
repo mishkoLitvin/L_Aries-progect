@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     comPort = new SerialPort(settings->value("COM_SETTING").value<ComSettings>(),this);
     comPort->setStyleSheet(this->styleSheet());
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
+    connect(comPort, SIGNAL(dataReady(ModData)), this, SLOT(getSerialData(ModData)));
 
     timerMain = new QTimer(this);
     connect(timerMain, SIGNAL(timeout()), this, SLOT(timerTimeout()));
@@ -121,7 +122,9 @@ MainWindow::MainWindow(QWidget *parent) :
             if(i==headsCount - 1)
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
-                if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
+                if((((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==2)|
+                        (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==4)|
+                        (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==6))
                     switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0])
                     {
                     case 0:
@@ -325,7 +328,7 @@ void MainWindow::generalSettingDialogRequest()
         generalSettingDialog->setMachineSetting(machineSettings.machineParam);
         generalSettingDialog->show();
         generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->width(),
-                                   this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
+                                   this->pos().y()+10);
 }
 
 void MainWindow::changeHeadNo(int index)
@@ -338,13 +341,161 @@ void MainWindow::changeHeadNo(int index)
     this->headSettingRequest(index);
 }
 
+void MainWindow::getSerialData(ModData modData)
+{
+    if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
+    {
+        switch (modData.fileds.adress) {
+        case MachineSettings::MasterDevice:
+            switch (modData.fileds.registerNo) {
+            case Register::masterReg_EKR:
+                infoWidget->setIndicatorState(modData.fileds.data);
+                break;
+            default:
+                break;
+            }
+            break;
+        case IndexerLiftSettings::IndexerDevice:
+            indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
+                                              settings->value("LIFT_PARAMS").value<QByteArray>());
+            switch (modData.fileds.registerNo) {
+            case Register::indexerReg_ACC:
+                indexerLiftSettings.indexerParam.acceleration = modData.fileds.data;
+            case Register::indexerReg_RACC:
+                indexerLiftSettings.indexerParam.accelerationRet = modData.fileds.data;
+            case Register::indexerReg_DIST:
+                indexerLiftSettings.indexerParam.distance = modData.fileds.data;
+            case Register::indexerReg_DIST_OFF:
+                indexerLiftSettings.indexerParam.distOffcet = modData.fileds.data;
+            case Register::indexerReg_HOME_OFF:
+                indexerLiftSettings.indexerParam.homeOffset = modData.fileds.data;
+            case Register::indexerReg_MAX_SPEED:
+                indexerLiftSettings.indexerParam.speed = modData.fileds.data;
+            case Register::indexerReg_RSPEED:
+                indexerLiftSettings.indexerParam.speedRet = modData.fileds.data;
+            case Register::indexerliftReg_UP_DELAY:
+                indexerLiftSettings.liftParam.delayUp = modData.fileds.data; //FUCKING DISASTER!!!!!!!!
+
+                break;
+            default:
+                break;
+            }
+            settings->setValue(QString("INDEXER_PARAMS"), indexerLiftSettings.indexerParam.toByteArray());
+
+            break;
+        case IndexerLiftSettings::LiftDevice:
+            indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
+                                              settings->value("LIFT_PARAMS").value<QByteArray>());
+            switch (modData.fileds.registerNo) {
+            case Register::liftReg_ACC:
+                indexerLiftSettings.liftParam.acceleration = modData.fileds.data;
+            case Register::liftReg_DOWN_DELAY:
+                indexerLiftSettings.liftParam.delayDown = modData.fileds.data;
+            case Register::liftReg_DIST:
+                indexerLiftSettings.liftParam.distance = modData.fileds.data;
+            case Register::liftReg_HOME_OFF:
+                indexerLiftSettings.liftParam.homeOffcet = modData.fileds.data;
+            case Register::liftReg_SPEED:
+                indexerLiftSettings.liftParam.speed = modData.fileds.data;
+                break;
+            default:
+                break;
+            }
+            break;
+            settings->setValue(QString("INDEXER_PARAMS"), indexerLiftSettings.indexerParam.toByteArray());
+
+        default:
+            break;
+        }
+    }
+    else
+    {
+        int i;
+        i = modData.fileds.adress - HeadSetting::HeadDeviceAdrOffcet;
+        headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
+        switch (modData.fileds.registerNo) {
+        case Register::REG_RW_POWER:
+            headSettings.headParam.dryPowerQ = modData.fileds.data;
+            break;
+        case Register::REG_SENSOR_TIME:
+            headSettings.headParam.dryTimeQ = modData.fileds.data;
+            break;
+        case Register::headReg_FLDWE:
+            headSettings.headParam.dwellFLTime = modData.fileds.data;
+            break;
+        case Register::headReg_SQDWE:
+            headSettings.headParam.dwellSQTime = modData.fileds.data;
+            break;
+        case Register::headReg_MACHINE_TYPE:
+            headSettings.headParam.headType = (HeadSetting::HeadType)modData.fileds.data;
+            break;
+        case Register::REG_SHUTTLE_REAR_POS:
+            headSettings.headParam.heatLimit = modData.fileds.data;
+            break;
+        case Register::headReg_RW1_TIME:
+            headSettings.headParam.heatTime1Q = modData.fileds.data;
+            break;
+        case Register::headReg_RW2_TIME:
+            headSettings.headParam.heatTime2Q = modData.fileds.data;
+            break;
+        case Register::headReg_RANGE_1:
+            headSettings.headParam.limitFront = modData.fileds.data;
+            break;
+        case Register::headReg_RANGE_2:
+            headSettings.headParam.limitRear = modData.fileds.data;
+            break;
+        case Register::headReg_ON:
+            headSettings.headParam.powerOn = modData.fileds.data;
+            break;
+        case Register::headReg_FSPD:
+            headSettings.headParam.speedFront = modData.fileds.data;
+            break;
+        case Register::headReg_RSPD:
+            headSettings.headParam.speedRear = modData.fileds.data;
+            break;
+        case Register::REG_STANDBY_POWER:
+            headSettings.headParam.standbyPowerQ = modData.fileds.data;
+            break;
+        case Register::REG_STANDBY_TIME:
+            headSettings.headParam.standbyTimeQ = modData.fileds.data;
+            break;
+//        case Register::REG_STANDBY_POWER:
+//            headSettings.headParam.stepbackDryTimeQ = modData.fileds.data;
+//            break;
+        case Register::headReg_NOSTR:
+            headSettings.headParam.stroksCount = modData.fileds.data;
+            break;
+        case Register::headReg_SBSTR:
+            headSettings.headParam.stroksSBCount = modData.fileds.data;
+            break;
+        case Register::REG_TEMP_SET:
+            headSettings.headParam.temperatureSetQ = modData.fileds.data;
+            break;
+        case Register::headReg_WARM_FLASH_TIME:
+            headSettings.headParam.warmFlashTimeQ = modData.fileds.data;
+            break;
+        default:
+            break;
+        }
+        settings->setValue(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM"), headSettings.headParam.toByteArray());
+
+    }
+}
+
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
-    HeadSetting::setHeadStateAtIndex(index, (bool) hParamArr[1]&0x01);
+    qDebug()<<(uint8_t)hParamArr[1];
+    HeadSetting::setHeadStateAtIndex(index, ((bool) (((uint8_t)hParamArr[1]==2)
+                                             |((uint8_t)hParamArr[1]==4)
+                                             |((uint8_t)hParamArr[1]==6)
+                                             |((uint8_t)hParamArr[1]==8)
+                                             |((uint8_t)hParamArr[1]==10)
+                                             |((uint8_t)hParamArr[1]==12))));
 
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
-    if(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1]&0x01)
-
+    if((((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1])==2)|
+            (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1])==4)|
+            (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[1])==6))
         switch (settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>()[0]) {
         case 0:
             headButton[index]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
@@ -375,7 +526,12 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
         headSettings.fromByteArray(hParamArr);
         headSettingDialog->setHeadParams(headSettings, cnt, false);
         settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
-        if(hParamArr[1]&0x01)
+        if(((bool) (((uint8_t)hParamArr[1]==2)
+                    |((uint8_t)hParamArr[1]==4)
+                    |((uint8_t)hParamArr[1]==6)
+                    |((uint8_t)hParamArr[1]==8)
+                    |((uint8_t)hParamArr[1]==10)
+                    |((uint8_t)hParamArr[1]==12))))
             switch (hParamArr[0]) {
             case 0:
                 headButton[cnt]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
@@ -622,7 +778,9 @@ void MainWindow::loadJob()
             if(i==headsCount - 1)
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
-                if(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1]&0x01)
+                if((((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==2)|
+                        (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==4)|
+                        (((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==6))
                     switch (settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[0]) {
                     case 0:
                         headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");

@@ -9,7 +9,7 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
         hParamArr.resize(44);
 
     this->headParam.headType = (HeadSetting::HeadType)((uint8_t)hParamArr[0]);
-    this->headParam.powerOn = (bool)(hParamArr[1]&0x01);
+    this->headParam.powerOn = ((uint8_t)hParamArr[1]);
     this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
     this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
     this->headParam.limitRear = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
@@ -64,10 +64,11 @@ HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters 
 
 QByteArray HeadSetting::HeadParameters_::toByteArray()
 {
+    qDebug()<<(uint8_t) this->powerOn;
     QByteArray bArr;
     bArr.resize(43);
     bArr[0] = this->headType;
-    bArr[1] = (char)(this->powerOn&0x01);
+    bArr[1] = (char)(this->powerOn);
     bArr[2] = (char)(this->speedRear&0x00FF);
     bArr[3] = (char)(((this->speedRear&0xFF00)>>8)&0x00FF);
     bArr[4] = (char)(this->speedFront&0x00FF);
@@ -386,9 +387,6 @@ Register::Register(uint8_t headCount)
     {
         *(i+masterRegPtr) = i;
     }
-
-    for(i = 0; i < sizeof(MasterReg); i++)
-        qDebug()<<*(i+masterRegPtr);
 
 }
 

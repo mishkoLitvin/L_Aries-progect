@@ -45,12 +45,12 @@ public:
     typedef enum HeadType_{
         PrintHead = 0x0258,
         QuartzHead,
-        InfraRedHead
+        InfraRedHead,
     }HeadType;
 
     typedef struct HeadParameters_{
         HeadType headType;
-        bool powerOn;
+        uint8_t powerOn;
         uint16_t speedRear;
         uint16_t speedFront;
         uint16_t stroksCount;
@@ -288,6 +288,7 @@ public:
     IndexerLiftSettings();
 
     void fromByteArray(QByteArray indParamArr, QByteArray lifParamArr);
+
 };
 
 
@@ -427,7 +428,7 @@ public:
     typedef union HeadReg_{
         struct reg{
             uint16_t REG_DEV_INF_H;
-            uint16_t ON;
+            uint16_t headReg_ON;
             uint16_t headReg_RSPD;
             uint16_t headReg_FSPD;
             uint16_t headReg_FLDWE;
@@ -436,7 +437,7 @@ public:
             uint16_t headReg_RW1_TIME;
             uint16_t headReg_RW2_TIME;
             uint16_t headReg_RW3_TIME;
-            uint16_t REG_INP;
+            uint16_t headReg_REG_INP;
             uint16_t headReg_ROZ;
             uint16_t headReg_STAN;
             uint16_t REG_KEY;
@@ -486,6 +487,165 @@ public:
 
     void writeReg(uint8_t dev, uint8_t place, uint16_t data);
     uint16_t readReg(uint8_t dev, uint8_t place);
+
+    enum MasterRegNom{
+        masterReg_DEV_INF_H,
+        masterReg_SIZE,
+        _res,
+        masterReg_PRZ,
+        masterReg_STA,
+        masterheadReg,
+        masterReg_LAM,
+        masterReg_TOTALH,
+        masterReg_TOTALL,
+        masterheadReg1,
+        masterReg_PAL,
+        masterReg_INPUT,
+        masterReg_REMAINH,
+        masterReg_REMAINL,
+        masterReg_SPEED,
+        masterReg_PRINTEDH,
+        masterReg_PRINTEDL,
+        masterReg_MACHINE_TYPE,
+        masterReg_PAL1,
+        masterReg_EKR,
+        masterReg_ACTIVHEAD_L,
+        masterReg_ACTIVHEAD_H,
+        masterReg_DEVERR,
+        masterReg_ERR,
+        masterReg_KODH,
+        masterReg_KODL,
+        masterReg_DATH,
+        masterReg_DATL,
+        masterReg_KOD_ON,
+        masterReg_DAT,
+        REG_KOD_WPISZ,
+        masterReg_HRW,
+        masterReg_HRW1,
+        masterReg_KOD_ON2,
+        masterReg_KOD_ON3,
+        masterReg_ERROR_MESSAGE,
+        masterReg_DEV_INF_L,
+    };
+    enum IndexerRegNom{
+        indexerReg_HOME_OFF = 0x01,
+        indexerReg_DIST_OFF,
+        indexerReg_MAX_SPEED,
+        indexerReg_DIR,
+        _res0,
+        indexerReg_CYCLE_DWELL,
+        indexerliftReg_UP_DELAY,
+        indexerReg_DIST,
+        indexerReg_TM,
+        indexerReg_ACC,
+        indexerReg_RACC,
+        _res1,
+        indexerReg_RSPEED,
+        indexerReg_WARN,
+        _res2,
+        _res3,
+        _res4,
+        _res5,
+        _res6,
+        _res7,
+        liftReg_HOME_OFF,
+        liftReg_DIST,
+        liftReg_SPEED,
+        liftReg_ACC,
+        indexerReg_HRW_TIME_1,
+        indexerReg_HRW_TIME_2,
+        indexerReg_HRW_TIME_3,
+        indexerReg_HRW_TIME_4,
+        indexerReg_MODE,
+        _res8,
+        indexerReg_LOAD,
+        indexerReg_WARM_CYCLES,
+        indexerReg_WARM_TEMP,
+        indexerReg_WARM_TIME,
+        indexerReg_SKOK_SR,
+        indexerReg_DEV_INF_L,
+    };
+
+    enum LiftRegNom{
+        liftReg_SEQU1_L = 0x06,
+        liftReg_SEQU1_H,
+        liftReg_SEQU2_L,
+        liftReg_SEQU2_H,
+        liftReg_SEQU3_L,
+        liftReg_SEQU3_H,
+        liftReg_SEQU4_L,
+        liftReg_SEQU4_H,
+        liftReg_SEQU5_L,
+        liftReg_SEQU5_H,
+        liftReg_SEQU6_L,
+        liftReg_SEQU6_H,
+        liftReg_SEQU7_L,
+        liftReg_SEQU7_H,
+        liftReg_SEQU8_L,
+        liftReg_SEQU8_H,
+        liftReg_DIST_PULSE_L,
+        liftReg_DIST_PULSE_H,
+        REG_TEMP_UNIT,
+        REG_GET_ZERO_OFF_CONTACT,
+        REG_SKIPC_H,
+        REG_SKIPC_L,
+        liftReg_DOWN_DELAY,
+        REG_PCB35_STAN,
+        REG_PCB35_ROZ,
+        REG_PCB35_SELECT,
+        REG_PCB35_HEAT,
+        REG_PCB35_ERR_DEV,
+        REG_PCB35_MACHINE_TYPE,
+        REG_PCB35_ERR_MESSAGE,
+    };
+
+    enum HeadRegNom{
+        REG_DEV_INF_H,
+        headReg_ON,
+        headReg_RSPD,
+        headReg_FSPD,
+        headReg_FLDWE,
+        headReg_SQDWE,
+        headReg_NOSTR,
+        headReg_RW1_TIME,
+        headReg_RW2_TIME,
+        headReg_RW3_TIME,
+        REG_INP,
+        headReg_ROZ,
+        headReg_STAN,
+        REG_KEY,
+        headReg_SBSTR,
+        REG_LED,
+        headRegT,
+        headReg_R,
+        headReg_G,
+        headReg_B,
+        REG_SERVO_HOLD,
+        REG_SHUTTLE_REAR_POS,
+        headReg_RANGE_1,
+        headReg_RANGE_2,
+        REG_TEMP_SET,
+        REG_SENSOR_TIME,
+        REG_STANDBY_POWER,
+        REG_STANDBY_TIME,
+        headReg_CONFIG,
+        REG_RW_POWER,
+        REG_TEMP_MEAS,
+        headReg_WARM_PAL_TIME,
+        headReg_WARM_FLASH_TIME,
+        headReg_MACHINE_TYPE,
+        headReg_PRESSURE_1,
+        headReg_PRESSURE_2,
+        headReg_PRESSURE_3,
+        headReg_PRESSURE_4,
+        headReg_PRESSURE_5,
+        headReg_ERROR_MESSAGE,
+        REG_HMI_DATA,
+        REV_STR1,
+        REV_STR2,
+        REG_DEV_INF_L,
+    };
+
 
 };
 
