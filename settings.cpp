@@ -8,7 +8,7 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
     if(hParamArr.length()!=45)
         hParamArr.resize(45);
 
-    this->headParam.headType = (HeadSetting::HeadType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0])));;
+    this->headParam.headOnType = (HeadSetting::HeadOnType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0])));;
     this->headParam.powerOn = ((uint8_t)hParamArr[2]);
     this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[4]))<<8)|(0x00FF&((uint16_t)hParamArr[3]));
     this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[6]))<<8)|(0x00FF&((uint16_t)hParamArr[5]));
@@ -37,7 +37,7 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
 HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters hParam)
 {
     HeadParameters hp;
-    hp.headType = hParam.headType;
+    hp.headOnType = hParam.headOnType;
     hp.powerOn = hParam.powerOn;
     hp.heatPower = hParam.heatPower;
     hp.heatTime1 = hParam.heatTime1;
@@ -66,8 +66,8 @@ QByteArray HeadSetting::HeadParameters_::toByteArray()
 {
     QByteArray bArr;
     bArr.resize(45);
-    bArr[0] = (char)(this->headType&0x00FF);
-    bArr[1] = (char)(((this->headType&0xFF00)>>8)&0x00FF);
+    bArr[0] = (char)(this->headOnType&0x00FF);
+    bArr[1] = (char)(((this->headOnType&0xFF00)>>8)&0x00FF);
     bArr[2] = (char)(this->powerOn);
     bArr[3] = (char)(this->speedRear&0x00FF);
     bArr[4] = (char)(((this->speedRear&0xFF00)>>8)&0x00FF);
@@ -117,7 +117,7 @@ QByteArray HeadSetting::HeadParameters_::toByteArray()
 
 HeadSetting::HeadSetting(HeadParameters hParam)
 {
-    this->headParam.headType = hParam.headType;
+    this->headParam.headOnType = hParam.headOnType;
     this->headParam.powerOn = hParam.powerOn;
     this->headParam.speedRear = hParam.speedRear;
     this->headParam.speedFront = hParam.speedFront;
@@ -144,7 +144,7 @@ HeadSetting::HeadSetting(HeadParameters hParam)
 
 HeadSetting::HeadSetting()
 {
-    this->headParam.headType = HeadSetting::PrintHead;
+    this->headParam.headOnType = HeadSetting::PrintHeadOff;
     this->headParam.powerOn = 0;
     this->headParam.speedRear = 10;
     this->headParam.speedFront = 10;
@@ -188,8 +188,9 @@ bool HeadSetting::getHeadStateAtIndex(uint8_t index)
     return static_cast<bool>((HeadSetting::headStateAll)&(1<<index));
 }
 
-void HeadSetting::setHeadStateAtIndex(uint8_t index, bool state)
+void HeadSetting::setHeadOn_OffStateInd(uint8_t index, bool state)
 {
+    qDebug()<<index<<state;
     if(state)
         HeadSetting::headStateAll |= (1<<(index));
     else
@@ -299,7 +300,7 @@ MachineSettings::MachineType MachineSettings::machineTypeStat;
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(6);
+    bArr.resize(12);
     bArr[0] = (char)(this->headCount&0x00FF);
     bArr[1] = (char)(((this->headCount&0xFF00)>>8)&0x00FF);
     bArr[2] = (char)(this->warningTime&0x00FF);
@@ -308,6 +309,10 @@ QByteArray MachineSettings::MachineParameters_::toByteArray()
     bArr[5] = (char)(((this->direction&0xFF00)>>8)&0x00FF);
     bArr[6] = (char)(this->machineType&0x00FF);
     bArr[7] = (char)(((this->machineType&0xFF00)>>8)&0x00FF);
+    bArr[8] = (char)(this->headType.all&0x00FF);
+    bArr[9] = (char)(((this->headType.all&0xFF00)>>8)&0x00FF);
+    bArr[10] = (char)(this->indexeLiftType.all&0x00FF);
+    bArr[11] = (char)(((this->indexeLiftType.all&0xFF00)>>8)&0x00FF);
     return bArr;
 }
 
@@ -320,6 +325,8 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
     this->machineParam.direction = mParam.direction;
     this->machineParam.machineType = mParam.machineType;
     this->machineTypeStat = mParam.machineType;
+    this->machineParam.headType = mParam.headType;
+    this->machineParam.indexeLiftType = mParam.indexeLiftType;
 }
 
 MachineSettings::MachineSettings()
@@ -330,6 +337,8 @@ MachineSettings::MachineSettings()
     this->machineParam.warningTime = 1;
     this->machineParam.direction = 1;
     this->machineParam.machineType = MachineSettings::Vector;
+    this->machineParam.headType.all = 0;
+    this->machineParam.indexeLiftType.all = 0;
 }
 
 void MachineSettings::fromByteArray(QByteArray machineParamArray)
@@ -344,6 +353,10 @@ void MachineSettings::fromByteArray(QByteArray machineParamArray)
             (((0x00FF&((uint16_t)machineParamArray[7]))<<8)
             |(0x00FF&((uint16_t)machineParamArray[6])));
     this->machineTypeStat = this->machineParam.machineType;
+    this->machineParam.headType.all =  (((0x00FF&((uint16_t)machineParamArray[9]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[8])));
+    this->machineParam.indexeLiftType.all = (((0x00FF&((uint16_t)machineParamArray[11]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[10])));
 }
 
 bool MachineSettings::getServiceWidgEn()
@@ -395,19 +408,23 @@ void Register::writeReg(uint8_t dev, uint8_t place, uint16_t data)
     if(dev<=HeadSetting::HeadDeviceAdrOffcet)
         switch (dev) {
         case MachineSettings::MasterDevice:
-            *(masterRegPtr+place) = data;
+            if(place<37)
+                *(masterRegPtr+place) = data;
             break;
         case IndexerLiftSettings::IndexerDevice:
-            *(indexerRegPtr+place) = data;
+            if(place<37)
+                *(indexerRegPtr+place) = data;
             break;
         case IndexerLiftSettings::LiftDevice:
-            *(liftRegPtr+place) = data;
+            if(place<36)
+                *(liftRegPtr+place) = data;
             break;
         }
     else
     {
         int i = dev - HeadSetting::HeadDeviceAdrOffcet;
-        *(headRegPtrList[i]+place) = data;
+        if((i<headRegPtrList.length())&(place<44))
+            *(headRegPtrList[i]+place) = data;
     }
 
 }
@@ -430,7 +447,177 @@ uint16_t Register::readReg(uint8_t dev, uint8_t place)
     else
     {
         int i = dev - HeadSetting::HeadDeviceAdrOffcet;
-        data = *(headRegPtrList[i]+place);
+        if(i<headRegPtrList.length())
+            data = *(headRegPtrList[i]+place);
+        else
+            data = 0x0000;
     }
     return data;
+}
+
+void Register::setMasterReg(MachineSettings mSett)
+{
+    this->machineSettings = mSett;
+//    this->masterReg.field.masterReg_DEV_INF_H;
+    this->masterReg.field.masterReg_SIZE = mSett.machineParam.headCount;
+//    this->masterReg.field.masterReg_PRZ;
+//    this->masterReg.field.masterReg_STA;
+//    this->masterReg.field.masterheadReg;
+//    this->masterReg.field.masterReg_LAM;
+//    this->masterReg.field.masterReg_TOTALH;
+//    this->masterReg.field.masterReg_TOTALL;
+//    this->masterReg.field.masterheadReg1;
+//    this->masterReg.field.masterReg_PAL;
+//    this->masterReg.field.masterReg_INPUT;
+//    this->masterReg.field.masterReg_REMAINH;
+//    this->masterReg.field.masterReg_REMAINL;
+//    this->masterReg.field.masterReg_SPEED;
+//    this->masterReg.field.masterReg_PRINTEDH;
+//    this->masterReg.field.masterReg_PRINTEDL;
+    this->masterReg.field.masterReg_MACHINE_TYPE = mSett.machineParam.machineType;
+//    this->masterReg.field.masterReg_PAL1;
+//    this->masterReg.field.masterReg_EKR;
+//    this->masterReg.field.masterReg_ACTIVHEAD_L;
+//    this->masterReg.field.masterReg_ACTIVHEAD_H;
+//    this->masterReg.field.masterReg_DEVERR;
+//    this->masterReg.field.masterReg_ERR;
+//    this->masterReg.field.masterReg_KODH;
+//    this->masterReg.field.masterReg_KODL;
+//    this->masterReg.field.masterReg_DATH;
+//    this->masterReg.field.masterReg_DATL;
+//    this->masterReg.field.masterReg_KOD_ON;
+    this->masterReg.field.masterReg_DAT = (uint16_t)(((uint16_t)(18<<9))|((uint16_t)(4<<5)|(uint16_t)(25)));
+//    this->masterReg.field.REG_KOD_WPISZ;
+//    this->masterReg.field.masterReg_HRW;
+//    this->masterReg.field.masterReg_HRW1;
+//    this->masterReg.field.masterReg_KOD_ON2;
+//    this->masterReg.field.masterReg_KOD_ON3;
+//    this->masterReg.field.masterReg_ERROR_MESSAGE;
+//    this->masterReg.field.masterReg_DEV_INF_L;
+}
+
+void Register::setHeadReg(int index, HeadSetting hSett)
+{
+//    this->headRegList[index].field.REG_DEV_INF_H;
+    this->headRegList[index].field.headReg_ON = hSett.headParam.powerOn;
+    this->headRegList[index].field.headReg_RSPD = hSett.headParam.speedRear;
+    this->headRegList[index].field.headReg_FSPD = hSett.headParam.speedFront;
+    this->headRegList[index].field.headReg_FLDWE = hSett.headParam.dwellFLTime;
+    this->headRegList[index].field.headReg_SQDWE = hSett.headParam.dwellSQTime;
+    this->headRegList[index].field.headReg_NOSTR = hSett.headParam.stroksCount;
+    this->headRegList[index].field.headReg_RW1_TIME = hSett.headParam.heatTime1Q;
+    this->headRegList[index].field.headReg_RW2_TIME = hSett.headParam.heatTime2Q;
+    this->headRegList[index].field.headReg_RW3_TIME = 0;
+//    this->headRegList[index].field.headReg_REG_INP;
+//    this->headRegList[index].field.headReg_ROZ;
+//    this->headRegList[index].field.headReg_STAN;
+//    this->headRegList[index].field.REG_KEY;
+    this->headRegList[index].field.headReg_SBSTR = hSett.headParam.stroksSBCount;
+//    this->headRegList[index].field.REG_LED;
+    this->headRegList[index].field.headRegIsHeat = 0;
+//    this->headRegList[index].field.headReg_R;
+//    this->headRegList[index].field.headReg_G;
+//    this->headRegList[index].field.headReg_B;
+    this->headRegList[index].field.REG_SERVO_HOLD = 0;
+    this->headRegList[index].field.REG_SHUTTLE_REAR_POS = hSett.headParam.heatLimit;
+//    this->headRegList[index].field.headReg_RANGE_1;
+//    this->headRegList[index].field.headReg_RANGE_2;
+    this->headRegList[index].field.REG_TEMP_SET = hSett.headParam.temperatureSetQ;
+    this->headRegList[index].field.REG_SENSOR_TIME = hSett.headParam.heatTime1Q;
+    this->headRegList[index].field.REG_STANDBY_POWER = hSett.headParam.standbyPowerQ;
+    this->headRegList[index].field.REG_STANDBY_TIME = hSett.headParam.standbyTimeQ;
+    this->headRegList[index].field.headReg_CONFIG = 0x00;
+    this->headRegList[index].field.REG_RW_POWER = hSett.headParam.dryPowerQ;
+//    this->headRegList[index].field.REG_TEMP_MEAS;
+    this->headRegList[index].field.headReg_WARM_PAL_TIME = hSett.headParam.warmFlashTimeQ;
+    this->headRegList[index].field.headReg_WARM_FLASH_TIME = hSett.headParam.warmFlashTimeQ;
+//    this->headRegList[index].field.headReg_MACHINE_TYPE;
+//    this->headRegList[index].field.headReg_PRESSURE_1;
+//    this->headRegList[index].field.headReg_PRESSURE_2;
+//    this->headRegList[index].field.headReg_PRESSURE_3;
+//    this->headRegList[index].field.headReg_PRESSURE_4;
+//    this->headRegList[index].field.headReg_PRESSURE_5;
+//    this->headRegList[index].field.headReg_ERROR_MESSAGE;
+//    this->headRegList[index].field.REG_HMI_DATA;
+//    this->headRegList[index].field.REV_STR1;
+//    this->headRegList[index].field.REV_STR2;
+//    this->headRegList[index].field.REG_DEV_INF_L;
+}
+
+void Register::setIndexLiftReg(IndexerLiftSettings iLSett)
+{
+//    this->indexerReg.field.masterReg_DEV_INF_H;
+    this->indexerReg.field.indexerReg_HOME_OFF = iLSett.indexerParam.homeOffset;
+    this->indexerReg.field.indexerReg_DIST_OFF = iLSett.indexerParam.distOffcet;
+    this->indexerReg.field.indexerReg_MAX_SPEED = iLSett.indexerParam.speed;
+    this->indexerReg.field.indexerReg_DIR = this->machineSettings.machineParam.direction;
+//    this->indexerReg.field.indexerReg_CYCLE_DWELL;
+    this->indexerReg.field.indexerliftReg_UP_DELAY = iLSett.liftParam.delayUp;
+    this->indexerReg.field.indexerReg_DIST = iLSett.indexerParam.distance;
+//    this->indexerReg.field.indexerReg_TM;
+    this->indexerReg.field.indexerReg_ACC = iLSett.indexerParam.acceleration;
+    this->indexerReg.field.indexerReg_RACC = iLSett.indexerParam.accelerationRet;
+    this->indexerReg.field.indexerReg_RSPEED = iLSett.indexerParam.speedRet;
+//    this->indexerReg.field.indexerReg_WARN;
+    this->indexerReg.field.liftReg_HOME_OFF = iLSett.liftParam.homeOffcet;
+    this->indexerReg.field.liftReg_DIST = iLSett.liftParam.distance;
+    this->indexerReg.field.liftReg_SPEED = iLSett.liftParam.speed;
+    this->indexerReg.field.liftReg_ACC = iLSett.liftParam.acceleration;
+//    this->indexerReg.field.indexerReg_HRW_TIME_1;
+//    this->indexerReg.field.indexerReg_HRW_TIME_2;
+//    this->indexerReg.field.indexerReg_HRW_TIME_3;
+//    this->indexerReg.field.indexerReg_HRW_TIME_4;
+//    this->indexerReg.field.indexerReg_MODE;
+    this->indexerReg.field.indexerReg_LOAD = 0;
+//    this->indexerReg.field.indexerReg_WARM_CYCLES;
+//    this->indexerReg.field.indexerReg_WARM_TEMP;
+//    this->indexerReg.field.indexerReg_WARM_TIME;
+    this->indexerReg.field.indexerReg_SKOK_SR = 10;
+//    this->indexerReg.field.indexerReg_DEV_INF_L;
+
+
+//    this->liftReg.field.liftReg_SEQU1_L;
+//    this->liftReg.field.liftReg_SEQU1_H;
+//    this->liftReg.field.liftReg_SEQU2_L;
+//    this->liftReg.field.liftReg_SEQU2_H;
+//    this->liftReg.field.liftReg_SEQU3_L;
+//    this->liftReg.field.liftReg_SEQU3_H;
+//    this->liftReg.field.liftReg_SEQU4_L;
+//    this->liftReg.field.liftReg_SEQU4_H;
+//    this->liftReg.field.liftReg_SEQU5_L;
+//    this->liftReg.field.liftReg_SEQU5_H;
+//    this->liftReg.field.liftReg_SEQU6_L;
+//    this->liftReg.field.liftReg_SEQU6_H;
+//    this->liftReg.field.liftReg_SEQU7_L;
+//    this->liftReg.field.liftReg_SEQU7_H;
+//    this->liftReg.field.liftReg_SEQU8_L;
+//    this->liftReg.field.liftReg_SEQU8_H;
+    double R = 90./25.4;
+    double P = 15./25.4;
+    double PULSE = 10000;
+    double a, b, cosa, sina, sinb, r1;
+    uint32_t pulse;
+    r1 = ((double)this->indexerReg.field.liftReg_DIST/100.) + (75./25.4);
+    cosa = (R * R + P * P - r1 * r1) / (2 * R * P);
+    a = acos(cosa);
+    sina = sin(a);
+    sinb = (R * sina)/r1;
+    b = asin(sinb);
+    if(r1 > (90./25.4))
+        b = 3.1415926 - b;
+    pulse = (uint32_t)((b*PULSE*30)/(2. * 3.1415926));
+    this->liftReg.field.liftReg_DIST_PULSE_L = ((uint16_t)(pulse&0x0000FFFF));
+    this->liftReg.field.liftReg_DIST_PULSE_H = ((uint16_t)((pulse>>16)&0x0000FFFF));
+//    this->liftReg.field.REG_TEMP_UNIT;
+//    this->liftReg.field.REG_GET_ZERO_OFF_CONTACT;
+//    this->liftReg.field.REG_SKIPC_H;
+//    this->liftReg.field.REG_SKIPC_L;
+    this->liftReg.field.liftReg_DOWN_DELAY = iLSett.liftParam.delayDown;
+//    this->liftReg.field.REG_PCB35_STAN;
+//    this->liftReg.field.REG_PCB35_ROZ;
+//    this->liftReg.field.REG_PCB35_SELECT;
+//    this->liftReg.field.REG_PCB35_HEAT;
+//    this->liftReg.field.REG_PCB35_ERR_DEV;
+//    this->liftReg.field.REG_PCB35_MACHINE_TYPE;
+//    this->liftReg.field.REG_PCB35_ERR_MESSAGE;
 }

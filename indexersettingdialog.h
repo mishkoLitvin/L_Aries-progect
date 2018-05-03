@@ -60,6 +60,14 @@ private slots:
     void spinBoxLiftSpeed_valueChanged(double arg1);
     void dSpinBoxLiftAccel_valueChanged(double arg1);
 
+    void on_pButtonLiftMove_clicked();
+
+    void on_pButtonLiftHome_clicked();
+
+    void on_pButtonIndexMove_clicked();
+
+    void on_pButtonIndexHome_clicked();
+
 protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);

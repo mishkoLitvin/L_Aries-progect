@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>667</width>
+    <width>724</width>
     <height>137</height>
    </rect>
   </property>
@@ -45,7 +45,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Unlock</string>
+            <string>Lock</string>
            </property>
            <property name="icon">
             <iconset>
@@ -59,6 +59,9 @@
            </property>
            <property name="checkable">
             <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
            </property>
            <property name="toolButtonStyle">
             <enum>Qt::ToolButtonTextUnderIcon</enum>

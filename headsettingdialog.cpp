@@ -30,7 +30,6 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
 
     this->index = index;
 
-    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType-HeadSetting::PrintHead);
     ui->lcdNumberHeadNo->display(index);
 
     ui->pButtonHeadOnOff->setChecked((hSttg.headParam.powerOn==2)|
@@ -39,6 +38,9 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
                                      (hSttg.headParam.powerOn==8)|
                                      (hSttg.headParam.powerOn==10)|
                                      (hSttg.headParam.powerOn==12));
+    ui->tabWidget->setCurrentIndex((hSttg.headParam.headOnType
+                                    -HeadSetting::PrintHeadOff
+                                    -ui->pButtonHeadOnOff->isChecked())/2);
 
     ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
     ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
@@ -102,15 +104,12 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
 
     this->index = index;
 
-    ui->tabWidget->setCurrentIndex(hSttg.headParam.headType-HeadSetting::PrintHead);
-    ui->lcdNumberHeadNo->display(index);
+    ui->pButtonHeadOnOff->setChecked((bool)hSttg.headParam.powerOn);
 
-    ui->pButtonHeadOnOff->setChecked((bool)((hSttg.headParam.powerOn==2)|
-                                     (hSttg.headParam.powerOn==4)|
-                                     (hSttg.headParam.powerOn==6)|
-                                     (hSttg.headParam.powerOn==8)|
-                                     (hSttg.headParam.powerOn==10)|
-                                     (hSttg.headParam.powerOn==12)));
+    ui->tabWidget->setCurrentIndex((hSttg.headParam.headOnType
+                                    -HeadSetting::PrintHeadOff
+                                    -ui->pButtonHeadOnOff->isChecked())/2);
+    ui->lcdNumberHeadNo->display(index);
 
     ui->spinBoxRearSpeed->setValue(hSttg.headParam.speedRear);
     ui->spinBoxFrontSpeed->setValue(hSttg.headParam.speedFront);
@@ -174,20 +173,25 @@ void SettingDialog::accept()
 {
     if(acceptEnable)
     {
-        qDebug()<<(uint16_t)((ui->tabWidget->currentIndex()+HeadSetting::PrintHead));
         HeadSetting hSttg;
-        hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex()+HeadSetting::PrintHead);
-        switch (hSttg.headParam.headType) {
-        case (HeadSetting::PrintHead):
-            hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        case (HeadSetting::QuartzHead):
-            hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        case (HeadSetting::InfraRedHead):
-            hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        }
+        if(ui->pButtonHeadOnOff->isChecked())
+            hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
+        else
+            hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
+
+        hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
+
+//        switch ((HeadSetting::HeadOnType)hSttg.headParam.headOnType) {
+//        case (HeadSetting::PrintHeadOn):
+//            hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+//            break;
+//        case (HeadSetting::QuartzHeadOn):
+//            hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+//            break;
+//        case (HeadSetting::InfraRedHeadOn):
+//            hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+//            break;
+//        }
 
         hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
         hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
@@ -533,9 +537,7 @@ void SettingDialog::on_toolButtonFL_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::FL|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -549,10 +551,8 @@ void SettingDialog::on_toolButtonMoveRear_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    data= HeadSetting::MoveRear|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    data= HeadSetting::MoveRear+((this->index-1)<<5);
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -567,9 +567,7 @@ void SettingDialog::on_toolButtonFL_SQup_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::SQ_FL|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -583,10 +581,8 @@ void SettingDialog::on_toolButtonMoveFront_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    data= HeadSetting::MoveFront|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
+    data= HeadSetting::MoveFront+((this->index-1)<<5);
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -601,9 +597,7 @@ void SettingDialog::on_toolButtonMTPMove_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::MPT_Move|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -618,9 +612,7 @@ void SettingDialog::on_toolButtonSQ_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::SQ|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -635,9 +627,7 @@ void SettingDialog::on_toolButtonMoveTest_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::MoveTest|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -652,9 +642,7 @@ void SettingDialog::on_toolButtonPressure_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::PressureSQ|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -676,9 +664,7 @@ void SettingDialog::on_toolButtonHoldOn_clicked()
         data = HeadSetting::Hold_On|((this->index-1)<<5);
     else
         data = HeadSetting::Hold_Off|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -693,9 +679,7 @@ void SettingDialog::on_toolButtonFL_SQ_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::SQ_FL|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -710,9 +694,7 @@ void SettingDialog::on_toolButtonStepBack_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::Stepback|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -727,9 +709,7 @@ void SettingDialog::on_toolButtonIndexHere_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::IndexHere|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -749,9 +729,7 @@ void SettingDialog::on_toolButtonPressureAir_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::AirRelease|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -766,9 +744,7 @@ void SettingDialog::on_toolButtonQuartzPreheat_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::Preheat|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -783,9 +759,7 @@ void SettingDialog::on_toolButtonQuartzTest_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::HeatTest|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -800,9 +774,7 @@ void SettingDialog::on_toolButtonQuartzStepBack_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::Stepback|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -817,9 +789,7 @@ void SettingDialog::on_toolButtonQuartzWarming_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::WarmFlash|((this->index-1)<<5);
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -831,22 +801,19 @@ void SettingDialog::on_toolButtonQuartzWarming_clicked()
 
 void SettingDialog::on_pButtonHeadOnOff_clicked()
 {
-    HeadSetting::setHeadStateAtIndex(this->index, ui->pButtonHeadOnOff->isChecked());
+    HeadSetting::setHeadOn_OffStateInd(this->index, ui->pButtonHeadOnOff->isChecked());
 
     QByteArray cmdArr;
     int data;
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
     if(this->index<16)
     {
-//        cmdArr.append((char)(MachineSettings::MasterHeadStateLo>>8));
         cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
         cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
         cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
     }
     else
     {
-//        cmdArr.append((char)(MachineSettings::MasterHeadStateHi>>8));
         cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
         cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
         cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
@@ -866,20 +833,25 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 {
     HeadSetting hSttg;
 
-    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex()+HeadSetting::PrintHead);
-    switch (hSttg.headParam.headType) {
-    case (HeadSetting::PrintHead):
-        hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-        break;
-    case (HeadSetting::QuartzHead):
-        hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-        break;
-    case (HeadSetting::InfraRedHead):
-        hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-        break;
-    }
+    if(ui->pButtonHeadOnOff->isChecked())
+        hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
+    else
+        hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
 
-    hSttg.headParam.headType = (HeadSetting::HeadType)(ui->tabWidget->currentIndex()+HeadSetting::PrintHead);
+    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
+
+//    switch (ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn) {
+//    case (HeadSetting::PrintHeadOn):
+//        hSttg.headParam.headOnType = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+//        break;
+//    case (HeadSetting::QuartzHeadOn):
+//        hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+//        break;
+//    case (HeadSetting::InfraRedHeadOn):
+//        hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+//        break;
+//    }
+
     hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
     hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
     hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
@@ -901,11 +873,9 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 void SettingDialog::tabWidget_currentChanged(int index)
 {
     QByteArray cmdArr;
-    int data = index+HeadSetting::PrintHead;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
+    int data = index*2+HeadSetting::PrintHeadOff+ui->pButtonHeadOnOff->isChecked();
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadHeadType>>8));
-    cmdArr.append((char)(HeadSetting::HeadHeadType&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadPowerOn&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
@@ -918,9 +888,7 @@ void SettingDialog::spinBoxRearSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadSpeedRear>>8));
     cmdArr.append((char)(HeadSetting::HeadSpeedRear&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -934,9 +902,7 @@ void SettingDialog::dSpinBoxRearRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadRangeLimit1>>8));
     cmdArr.append((char)(HeadSetting::HeadRangeLimit1&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -950,9 +916,7 @@ void SettingDialog::spinBoxFrontSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadSpeedFront>>8));
     cmdArr.append((char)(HeadSetting::HeadSpeedFront&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -966,9 +930,7 @@ void SettingDialog::dSpinBoxFrontRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadRangeLimit2>>8));
     cmdArr.append((char)(HeadSetting::HeadRangeLimit2&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -982,9 +944,7 @@ void SettingDialog::spinBoxStrokCount_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadStroksCount>>8));
     cmdArr.append((char)(HeadSetting::HeadStroksCount&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -998,9 +958,7 @@ void SettingDialog::spinBoxSBStrokCount_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadSBStroksCount>>8));
     cmdArr.append((char)(HeadSetting::HeadSBStroksCount&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1014,9 +972,7 @@ void SettingDialog::dSpinBoxHeatTime1Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1030,9 +986,7 @@ void SettingDialog::dSpinBoxHeatTime2Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashTime2Q>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashTime2Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1046,9 +1000,7 @@ void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1062,9 +1014,7 @@ void SettingDialog::dSpinBoxStepbackDryTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1078,9 +1028,7 @@ void SettingDialog::dSpinBoxTemperatureSetQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadHeatTemper>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatTemper&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1094,9 +1042,7 @@ void SettingDialog::dSpinBoxDryTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1110,9 +1056,7 @@ void SettingDialog::spinBoxStandbyPowerQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1126,9 +1070,7 @@ void SettingDialog::dSpinBoxStandbyTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1142,9 +1084,7 @@ void SettingDialog::dSpinBoxWarmFlashTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlashWarmTime>>8));
     cmdArr.append((char)(HeadSetting::HeadFlashWarmTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1158,9 +1098,7 @@ void SettingDialog::dSpinBoxHeatTime1IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadHeatTime1IR>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatTime1IR&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1174,9 +1112,7 @@ void SettingDialog::dSpinBoxHeatTime2IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadHeatTime2IR>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatTime2IR&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1190,9 +1126,7 @@ void SettingDialog::dSpinBoxDryingRangeIR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadHeatDryRange>>8));
     cmdArr.append((char)(HeadSetting::HeadHeatDryRange&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1206,9 +1140,7 @@ void SettingDialog::dSpinBoxFlDwellTime_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadFlDwellTime>>8));
     cmdArr.append((char)(HeadSetting::HeadFlDwellTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -1222,9 +1154,7 @@ void SettingDialog::dSpinBoxSqDwellTime_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)>>8));
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-//    cmdArr.append((char)(HeadSetting::HeadSqDwellTime>>8));
     cmdArr.append((char)(HeadSetting::HeadSqDwellTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));

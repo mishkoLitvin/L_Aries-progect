@@ -41,6 +41,7 @@ InfoWidget::InfoWidget(QWidget *parent) :
     for(i = 0; i<7; i++)
     {
         effect[i] = new QGraphicsOpacityEffect();
+        effect[i]->setOpacityMask(QBrush(Qt::black, Qt::SolidPattern));
         effect[i]->setOpacity(0.1);
     }
 
@@ -110,32 +111,76 @@ void InfoWidget::setIndicatorState(u_int16_t state)
 {
     effect[0]->setOpacity(1);
 
-    if(state&0x0001)
-        effect[0]->setOpacity(1);
-    else
+    switch ((u_int8_t)(state>>8)) {
+    case 0:
+        effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[0]->setOpacity(0.9);
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        break;
+    case 1:
+        effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[0]->setOpacity(0.9);
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        break;
+    case 2:
+        effect[0]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
+        effect[0]->setOpacity(0.9);
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        break;
+    case 3:
+        effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[0]->setOpacity(0.3);
+        break;
+    case 4:
         effect[0]->setOpacity(0.1);
-    if(state&0x0002)
-        effect[1]->setOpacity(1);
-    else
+        effect[1]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        break;
+    case 5:
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        break;
+    case 6:
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        break;
+    case 7:
+        effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[0]->setOpacity(0.1);
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[1]->setOpacity(0.1);
-    if(state&0x0004)
-        effect[2]->setOpacity(1);
-    else
+        effect[2]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[2]->setOpacity(0.1);
-    if(state&0x0008)
-        effect[3]->setOpacity(1);
-    else
+        effect[3]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[3]->setOpacity(0.1);
-    if(state&0x0010)
-        effect[4]->setOpacity(1);
-    else
-        effect[4]->setOpacity(0.1);
-    if(state&0x0020)
-        effect[5]->setOpacity(1);
-    else
-        effect[5]->setOpacity(0.1);
-    if(state&0x0040)
-        effect[6]->setOpacity(1);
-    else
-        effect[6]->setOpacity(0.1);
+        break;
+    case 8:
+        break;
+    case 9:
+        effect[2]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
+        effect[2]->setOpacity(0.9);
+        break;
+    case 10:
+        effect[3]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[3]->setOpacity(0.9);
+        break;
+    case 11:
+        effect[3]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
+        effect[3]->setOpacity(0.9);
+        break;
+    default:
+        break;
+    }
+    effect[4]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
+    effect[4]->setOpacity(((state&0x4)>>2)+0.1);
+    effect[5]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
+    effect[5]->setOpacity((state&0x1)+0.1);
+    effect[6]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
+    effect[6]->setOpacity(((state&0x2)>>1)+0.1);
+
+
+
 }

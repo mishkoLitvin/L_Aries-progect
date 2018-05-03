@@ -11,11 +11,6 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     ui->listWidgetStyle->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
     ui->listWidgetIcons->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
 
-//    ui->editPassword->setStyleSheet("font: 16px bold italic large \"Times New Roman\"");
-//    ui->editReceiver->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
-//    ui->editSender->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
-//    ui->editSubject->setStyleSheet("font: 20px bold italic large \"Times New Roman\"");
-
     MachineSettings mSett;
     int i;
     for(i = 0; i<mSett.machineTypeList.length(); i++)
@@ -316,21 +311,19 @@ void GeneralSettingDialog::changeDirection()
 {
     if(ui->pButtonDirection->isChecked())
     {
-        emit this->directionChanged(-1);
-        ui->pButtonDirection->setText("Direction\nclockwise");
-        ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateRight.png"));
-    }
-    else
-    {
         emit this->directionChanged(1);
         ui->pButtonDirection->setText("Direction\nanticlockwise");
         ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateLeft.png"));
     }
+    else
+    {
+        emit this->directionChanged(-1);
+        ui->pButtonDirection->setText("Direction\nclockwise");
+        ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateRight.png"));
+    }
     QByteArray cmdArr;
     int data;
-//    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
     cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     data = IndexerLiftSettings::IndexDirChange;
     cmdArr.append((char)(data>>8));
@@ -345,9 +338,7 @@ void GeneralSettingDialog::headCountChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
     cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterHeadCount>>8));
     cmdArr.append((char)(MachineSettings::MasterHeadCount&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -362,9 +353,7 @@ void GeneralSettingDialog::machineTypeChanget(int index)
     MachineSettings mStt;
     QByteArray cmdArr;
     int data = mStt.machineTypeData[index];
-//    cmdArr.append((char)(MachineSettings::MasterDevice>>8));
     cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterMachineType>>8));
     cmdArr.append((char)(MachineSettings::MasterMachineType&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -378,9 +367,7 @@ void GeneralSettingDialog::warningTimeChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::WarningTime>>8));
     cmdArr.append((char)(IndexerLiftSettings::WarningTime&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));

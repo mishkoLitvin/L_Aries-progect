@@ -49,7 +49,7 @@ void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters li
     ui->dSpinBoxLiftAccel->setValue(liftParam.acceleration/10.);
     ui->dSpinBoxLiftDownDelay->setValue(liftParam.delayDown/10.);
     ui->dSpinBoxLiftUpDelay->setValue(liftParam.delayUp/10.);
-    ui->dSpinBoxLiftDistance->setValue(liftParam.distance/10.);
+    ui->dSpinBoxLiftDistance->setValue(liftParam.distance/100.);
     ui->spinBoxLiftHomeOffset->setValue(liftParam.homeOffcet);
     ui->spinBoxLiftSpeed->setValue(liftParam.speed);
     this->connectAll();
@@ -109,7 +109,7 @@ void IndexerSettingDialog::accept()
         liftParams.acceleration = ui->dSpinBoxLiftAccel->value()*10.;
         liftParams.delayDown = ui->dSpinBoxLiftDownDelay->value()*10.;
         liftParams.delayUp = ui->dSpinBoxLiftUpDelay->value()*10.;
-        liftParams.distance = ui->dSpinBoxLiftDistance->value()*10.;
+        liftParams.distance = ui->dSpinBoxLiftDistance->value()*100.;
         liftParams.homeOffcet = ui->spinBoxLiftHomeOffset->value();
         liftParams.speed = ui->spinBoxLiftSpeed->value();
 
@@ -307,9 +307,7 @@ void IndexerSettingDialog::dSpinBoxIndexDistance_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexDistance>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexDistance&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -323,9 +321,7 @@ void IndexerSettingDialog::spinBoxIndexHomeOffset_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexHomeOffset>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexHomeOffset&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -339,9 +335,7 @@ void IndexerSettingDialog::spinBoxIndexDistanceOffcet_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexDistOffcet>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexDistOffcet&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -355,9 +349,7 @@ void IndexerSettingDialog::spinBoxIndexSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexSpeed>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexSpeed&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -371,9 +363,7 @@ void IndexerSettingDialog::dSpinBoxIndexAccel_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexAcceleration>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexAcceleration&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -387,9 +377,7 @@ void IndexerSettingDialog::spinBoxindexSpeedRet_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexSpeedRet>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexSpeedRet&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -403,9 +391,7 @@ void IndexerSettingDialog::dSpinBoxIndexAccelRet_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::IndexAccelerationRet>>8));
     cmdArr.append((char)(IndexerLiftSettings::IndexAccelerationRet&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -419,9 +405,7 @@ void IndexerSettingDialog::dSpinBoxLiftDownDelay_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDelayDown>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDelayDown&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -435,9 +419,7 @@ void IndexerSettingDialog::dSpinBoxLiftUpDelay_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDelayUp>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDelayUp&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -450,10 +432,8 @@ void IndexerSettingDialog::dSpinBoxLiftUpDelay_valueChanged(double arg1)
 void IndexerSettingDialog::dSpinBoxLiftDistance_valueChanged(double arg1)
 {
     QByteArray cmdArr;
-    int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDevice>>8));
+    int data = arg1*100;
     cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDistance>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDistance&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -467,9 +447,7 @@ void IndexerSettingDialog::spinBoxLiftHomeOffset_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::LiftHomeOffcet>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftHomeOffcet&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -483,9 +461,7 @@ void IndexerSettingDialog::spinBoxLiftSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::LiftSpeed>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftSpeed&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -499,10 +475,64 @@ void IndexerSettingDialog::dSpinBoxLiftAccel_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-//    cmdArr.append((char)(IndexerLiftSettings::LiftDevice>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
-//    cmdArr.append((char)(IndexerLiftSettings::LiftAcceleration>>8));
     cmdArr.append((char)(IndexerLiftSettings::LiftAcceleration&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
+void IndexerSettingDialog::on_pButtonLiftMove_clicked()
+{
+    QByteArray cmdArr;
+    int data = IndexerLiftSettings::LiftMoveEnd;
+    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
+void IndexerSettingDialog::on_pButtonLiftHome_clicked()
+{
+    QByteArray cmdArr;
+    int data = IndexerLiftSettings::LiftMoveHome;
+    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
+void IndexerSettingDialog::on_pButtonIndexMove_clicked()
+{
+    QByteArray cmdArr;
+    int data = IndexerLiftSettings::IndexMoveEnd;
+    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
+void IndexerSettingDialog::on_pButtonIndexHome_clicked()
+{
+    QByteArray cmdArr;
+    int data = IndexerLiftSettings::IndexMoveHome;
+    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);

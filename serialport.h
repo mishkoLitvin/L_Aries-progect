@@ -14,23 +14,18 @@
 
 typedef union ModData_{
     struct{
-        uint8_t crc16ValLo:8;
-        uint8_t crc16ValHi:8;
-        uint8_t dataLo:8;
-        uint8_t dataHi:8;
-        uint8_t registerNoLo:8;
-//            uint8_t registerNoHi:8;
-        uint8_t adressLo:8;
-//        uint8_t rwBit:1;
-//            uint8_t adressHi:8;
-
-    }bits;
-    struct{
         uint16_t crc16Val:16;
         uint16_t data:16;
         uint8_t registerNo:8;
         uint8_t adress:8;
-//        uint8_t rwBit:1;
+    }bits;
+    struct{
+        uint16_t crc16Val:16;
+        uint16_t data:16;
+        uint8_t registerNo:7;
+        uint8_t rwBit:1;
+        uint8_t adress:7;
+        uint8_t rwBit_:1;
     }fileds;
     u_int64_t all:48;
 }ModData;
@@ -53,15 +48,19 @@ private:
     Register *registers;
 
     ModData modData8;
-    QByteArray data8;
+    QByteArray dataToSendBuff;
+    int replyCnt;
+    bool initApp;
+
+
 
 public slots:
     void openSerialPort();
     void openSerialPort(ComSettings cSett);
     void closeSerialPort();
 
-    void sendData(QByteArray data, bool halfByte = false);
-    void sendData(uint8_t dev, uint8_t place, uint16_t data);
+    void sendData(QByteArray data, bool send = false, bool halfByte = false);
+    void sendModData(uint8_t dev, uint8_t place, uint16_t data);
     void setupPort();
     void setComParams(ComSettings sett);
     void setStyleSheet(QString stSheet);

@@ -4,6 +4,7 @@
 #include <QByteArray>
 #include <QStringList>
 #include <QList>
+#include "math.h"
 
 typedef u_int32_t uint32_t;
 typedef u_int16_t uint16_t;
@@ -36,20 +37,23 @@ public:
         HeadHeatWarmTime = 0x1F,
         HeadFlashWarmTime = 0x20,
         HeadHeadType = 0x21,
-        HeadPowerOn,
+        HeadPowerOn = 0x01,
         HeadHeatDryRange,
         HeadHeatTime1IR,
         HeadHeatTime2IR
     };
 
-    typedef enum HeadType_{
-        PrintHead = 0x0258,
-        QuartzHead,
-        InfraRedHead,
-    }HeadType;
+    typedef enum HeadOnType_{
+        PrintHeadOff = 0x0001,
+        PrintHeadOn,
+        QuartzHeadOff,
+        QuartzHeadOn,
+        InfraRedHeadOff,
+        InfraRedHeadOn,
+    }HeadOnType;
 
     typedef struct HeadParameters_{
-        HeadType headType;
+        HeadOnType headOnType;
         uint8_t powerOn;
         uint16_t speedRear;
         uint16_t speedFront;
@@ -125,7 +129,7 @@ public:
     static uint16_t getHeadStateLo();
     static uint16_t getHeadStateHi();
     static bool getHeadStateAtIndex(uint8_t index);
-    static void setHeadStateAtIndex(uint8_t index, bool state);
+    static void setHeadOn_OffStateInd(uint8_t index, bool state);
 };
 
 
@@ -171,6 +175,29 @@ public:
         TitanAAA
     }MachineType;
 
+    typedef union MachineHeadType_{
+        struct{
+            uint8_t servoDriveType:3;
+            uint8_t carriageType:3;
+            uint8_t sqFlType:2;
+        }field;
+        uint8_t all;
+    }MachineHeadType;
+
+    typedef union MachineIndexLiftType_{
+        struct{
+            uint16_t mainServoDriveType:3;
+            uint16_t indexerType:3;
+            uint16_t liftType:3;
+            uint16_t lockType:3;
+            uint16_t hmiIsConnected:1;
+            uint16_t keypadIsConnected:1;
+            uint16_t res_:2;
+        }field;
+        uint16_t all;
+    }MachineIndexLiftType;
+
+
     QStringList machineTypeList;
     QList<int> machineTypeData;
 
@@ -179,6 +206,8 @@ public:
         uint16_t warningTime;
         int16_t direction;
         MachineType machineType;
+        MachineHeadType headType;
+        MachineIndexLiftType indexeLiftType;
         QByteArray toByteArray();
     }MachineParameters;
 
@@ -271,8 +300,8 @@ public:
         PrintStop = 0x000B,
         AirRelease = 0x005A,
         EasySetup = 0x08,
-        IndexMoveHome = 0x00B8,
-        IndexMoveEnd = 0x00B9,
+        IndexMoveHome = 0x005B,
+        IndexMoveEnd = 0x005C,
         LiftMoveHome = 0x00B8,
         LiftMoveEnd = 0x00B9,
         IndexDirChange = 0x005D,
@@ -443,7 +472,7 @@ public:
             uint16_t REG_KEY;
             uint16_t headReg_SBSTR;
             uint16_t REG_LED;
-            uint16_t headRegT;
+            uint16_t headRegIsHeat;
             uint16_t headReg_R;
             uint16_t headReg_G;
             uint16_t headReg_B;
@@ -485,8 +514,16 @@ public:
     uint16_t* liftRegPtr;
     QList<uint16_t*> headRegPtrList;
 
+    HeadSetting headSettings;
+    IndexerLiftSettings indexerLiftSettings;
+    MachineSettings machineSettings;
+
     void writeReg(uint8_t dev, uint8_t place, uint16_t data);
     uint16_t readReg(uint8_t dev, uint8_t place);
+    void setMasterReg(MachineSettings mSett);
+    void setHeadReg(int index, HeadSetting hSett);
+    void setIndexLiftReg(IndexerLiftSettings iLSett);
+
 
     enum MasterRegNom{
         masterReg_DEV_INF_H,

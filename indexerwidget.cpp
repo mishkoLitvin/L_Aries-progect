@@ -19,6 +19,8 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
 
     isAutoPrintEnable = false;
     machineState.all = 0x0000;
+
+
 }
 
 IndexerWidget::~IndexerWidget()
@@ -49,9 +51,9 @@ void IndexerWidget::setIconFolder(QString path)
     ui->pButtonHome->setIcon(QIcon(pathIcon+"/home.png"));
     ui->pButtonReset->setIcon(QIcon(pathIcon+"/reset.png"));
     if(ui->pButtonLock->isChecked())
-        ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
-    else
         ui->pButtonLock->setIcon(QIcon(pathIcon+"/unlock.png"));
+    else
+        ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
 
     if(ui->pButtonMove->isChecked())
     {
@@ -93,7 +95,7 @@ void IndexerWidget::on_pButtonLock_clicked()
     bArr.append((char)(MachineSettings::MasterDevice&0x00FF));
 //    bArr.append((char)(MachineSettings::MasterIndexLiftCommand>>8));
     bArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    data = IndexerLiftSettings::MoveUp_Down;
+    data = IndexerLiftSettings::IndexLock;
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(bArr);
@@ -102,18 +104,6 @@ void IndexerWidget::on_pButtonLock_clicked()
     emit this->sendCommand(bArr);
 
     if(ui->pButtonLock->isChecked())
-    {
-        ui->pButtonLock->setText("Lock");
-        ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
-        ui->pButtonPrint->setHidden(true);
-        ui->pButtonAuto->setHidden(true);
-        ui->pButtonMove->setHidden(true);
-        ui->pButtonMoveLeft->setHidden(true);
-        ui->pButtonMoveRight->setHidden(true);
-        ui->pButtonMoveUp->setHidden(true);
-        pButtonSets->setHidden(true);
-    }
-    else
     {
         ui->pButtonLock->setText("Unlock");
         ui->pButtonLock->setIcon(QIcon(pathIcon+"/unlock.png"));
@@ -124,6 +114,18 @@ void IndexerWidget::on_pButtonLock_clicked()
         ui->pButtonMoveRight->setHidden(false);
         ui->pButtonMoveUp->setHidden(false);
         pButtonSets->setHidden(false);
+    }
+    else
+    {
+        ui->pButtonLock->setText("Lock");
+        ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
+        ui->pButtonPrint->setHidden(true);
+        ui->pButtonAuto->setHidden(true);
+        ui->pButtonMove->setHidden(true);
+        ui->pButtonMoveLeft->setHidden(true);
+        ui->pButtonMoveRight->setHidden(true);
+        ui->pButtonMoveUp->setHidden(true);
+        pButtonSets->setHidden(true);
     }
 }
 
@@ -334,9 +336,7 @@ void IndexerWidget::on_pButtonMoveRight_clicked()
 {
     QByteArray cmdArr;
     int data;
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
 
     if(ui->pButtonMove->isChecked())
@@ -380,9 +380,7 @@ void IndexerWidget::on_pButtonHome_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = IndexerLiftSettings::Machine_Home;
-//    cmdArr.append((char)((MachineSettings::MasterDevice)>>8));
     cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterLastButton>>8));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
