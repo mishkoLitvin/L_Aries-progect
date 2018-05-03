@@ -85,6 +85,23 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
         ui->pButtonDirection->setText("Direction\nanticlockwise");
     }
     ui->comboBoxMacineType->setCurrentIndex(machineParam.machineType);
+
+    ui->comboBoxCarriageT->setCurrentIndex(machineParam.headType.field.carriageType-1);
+    ui->comboBoxHeadServoT->setCurrentIndex(machineParam.headType.field.servoDriveType);
+    ui->comboBoxSqFlT->setCurrentIndex(machineParam.headType.field.sqFlType-1);
+
+    ui->comboBoxIndexerT->setCurrentIndex(machineParam.indexeLiftType.field.indexerType-1);
+    ui->comboBoxLiftT->setCurrentIndex(machineParam.indexeLiftType.field.liftType-1);
+    ui->comboBoxLockT->setCurrentIndex(machineParam.indexeLiftType.field.lockType);
+    ui->comboBoxMainServoT->setCurrentIndex(machineParam.indexeLiftType.field.mainServoDriveType);
+
+    ui->checkBoxHMIConnected->setChecked(machineParam.indexeLiftType.field.hmiIsConnected);
+    ui->checkBoxKeyPadConnected->setChecked(machineParam.indexeLiftType.field.keypadIsConnected);
+
+    ui->dSpinBoxHeadMaxRange->setValue(machineParam.headMaxRange/10);
+    ui->dSpinBoxIndexerScrew->setValue(machineParam.indexerScrewPinch);
+    ui->dSpinBoxLiftGear->setValue(machineParam.liftGearRatio);
+    qDebug()<<machineParam.liftGearRatio<<machineParam.indexerScrewPinch;
 }
 
 void GeneralSettingDialog::setFocusLossAccept(bool flag)
@@ -136,6 +153,18 @@ void GeneralSettingDialog::accept()
         machineParams.warningTime = ui->dSpinBoxWarningTime->value()*10;
         machineParams.machineType = (MachineSettings::MachineType)ui->comboBoxMacineType->currentIndex();
         MachineSettings::setMachineType(machineParams.machineType);
+        machineParams.headMaxRange = ui->dSpinBoxHeadMaxRange->value()*10;
+        machineParams.liftGearRatio = ui->dSpinBoxLiftGear->value();
+        machineParams.indexerScrewPinch = ui->dSpinBoxIndexerScrew->value();
+        machineParams.headType.field.carriageType = ui->comboBoxCarriageT->currentIndex()+1;
+        machineParams.headType.field.servoDriveType = ui->comboBoxHeadServoT->currentIndex();
+        machineParams.headType.field.sqFlType = ui->comboBoxSqFlT->currentIndex()+1;
+        machineParams.indexeLiftType.field.hmiIsConnected = ui->checkBoxHMIConnected->isChecked();
+        machineParams.indexeLiftType.field.keypadIsConnected = ui->checkBoxKeyPadConnected->isChecked();
+        machineParams.indexeLiftType.field.indexerType = ui->comboBoxIndexerT->currentIndex()+1;
+        machineParams.indexeLiftType.field.liftType = ui->comboBoxLiftT->currentIndex()+1;
+        machineParams.indexeLiftType.field.lockType = ui->comboBoxLockT->currentIndex();
+        machineParams.indexeLiftType.field.mainServoDriveType = ui->comboBoxMainServoT->currentIndex();
 
         if(ui->pButtonDirection->isChecked())
             machineParams.direction = -1;
@@ -219,6 +248,28 @@ void GeneralSettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
+    objList = ui->dSpinBoxHeadMaxRange->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    objList = ui->dSpinBoxIndexerScrew->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+    objList = ui->dSpinBoxLiftGear->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
+
     ui->editPassword->installEventFilter(this);
     ui->editReceiver->installEventFilter(this);
     ui->editSender->installEventFilter(this);
@@ -434,8 +485,9 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
     ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
-    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn());
-    ui->comboBoxMacineType->setVisible(MachineSettings::getServiceWidgEn());
+//    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn());
+//    ui->comboBoxMacineType->setVisible(MachineSettings::getServiceWidgEn());
+    ui->widgetServiceSettings->setVisible(MachineSettings::getServiceWidgEn());
     ev->accept();
     acceptOnDeactilationEn = true;
     acceptEnable = true;

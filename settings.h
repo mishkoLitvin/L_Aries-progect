@@ -208,6 +208,9 @@ public:
         MachineType machineType;
         MachineHeadType headType;
         MachineIndexLiftType indexeLiftType;
+        uint16_t headMaxRange;
+        uint16_t liftGearRatio;
+        uint16_t indexerScrewPinch;
         QByteArray toByteArray();
     }MachineParameters;
 
@@ -504,6 +507,7 @@ public:
         uint16_t memBeg;
     }HeadReg;
 
+private:
     MasterReg masterReg;
     IndexerReg indexerReg;
     LiftReg liftReg;
@@ -518,11 +522,13 @@ public:
     IndexerLiftSettings indexerLiftSettings;
     MachineSettings machineSettings;
 
+public:
     void writeReg(uint8_t dev, uint8_t place, uint16_t data);
     uint16_t readReg(uint8_t dev, uint8_t place);
     void setMasterReg(MachineSettings mSett);
     void setHeadReg(int index, HeadSetting hSett);
     void setIndexLiftReg(IndexerLiftSettings iLSett);
+    static uint32_t calcLiftPulse(uint16_t gearRatio, uint16_t liftDist = 118);
 
 
     enum MasterRegNom{

@@ -300,7 +300,7 @@ MachineSettings::MachineType MachineSettings::machineTypeStat;
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(12);
+    bArr.resize(18);
     bArr[0] = (char)(this->headCount&0x00FF);
     bArr[1] = (char)(((this->headCount&0xFF00)>>8)&0x00FF);
     bArr[2] = (char)(this->warningTime&0x00FF);
@@ -313,6 +313,12 @@ QByteArray MachineSettings::MachineParameters_::toByteArray()
     bArr[9] = (char)(((this->headType.all&0xFF00)>>8)&0x00FF);
     bArr[10] = (char)(this->indexeLiftType.all&0x00FF);
     bArr[11] = (char)(((this->indexeLiftType.all&0xFF00)>>8)&0x00FF);
+    bArr[12] = (char)(this->headMaxRange&0x00FF);
+    bArr[13] = (char)(((this->headMaxRange&0xFF00)>>8)&0x00FF);
+    bArr[14] = (char)(this->liftGearRatio&0x00FF);
+    bArr[15] = (char)(((this->liftGearRatio&0xFF00)>>8)&0x00FF);
+    bArr[16] = (char)(this->indexerScrewPinch&0x00FF);
+    bArr[17] = (char)(((this->indexerScrewPinch&0xFF00)>>8)&0x00FF);
     return bArr;
 }
 
@@ -327,6 +333,9 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
     this->machineTypeStat = mParam.machineType;
     this->machineParam.headType = mParam.headType;
     this->machineParam.indexeLiftType = mParam.indexeLiftType;
+    this->machineParam.headMaxRange = mParam.headMaxRange;
+    this->machineParam.liftGearRatio = mParam.liftGearRatio;
+    this->machineParam.indexerScrewPinch = mParam.indexerScrewPinch;
 }
 
 MachineSettings::MachineSettings()
@@ -339,6 +348,9 @@ MachineSettings::MachineSettings()
     this->machineParam.machineType = MachineSettings::Vector;
     this->machineParam.headType.all = 0;
     this->machineParam.indexeLiftType.all = 0;
+    this->machineParam.headMaxRange = 300;
+    this->machineParam.liftGearRatio = 30;
+    this->machineParam.indexerScrewPinch = 10;
 }
 
 void MachineSettings::fromByteArray(QByteArray machineParamArray)
@@ -357,6 +369,12 @@ void MachineSettings::fromByteArray(QByteArray machineParamArray)
             |(0x00FF&((uint16_t)machineParamArray[8])));
     this->machineParam.indexeLiftType.all = (((0x00FF&((uint16_t)machineParamArray[11]))<<8)
             |(0x00FF&((uint16_t)machineParamArray[10])));
+    this->machineParam.headMaxRange = (((0x00FF&((uint16_t)machineParamArray[13]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[12])));
+    this->machineParam.liftGearRatio = (((0x00FF&((uint16_t)machineParamArray[15]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[14])));
+    this->machineParam.indexerScrewPinch = (((0x00FF&((uint16_t)machineParamArray[17]))<<8)
+            |(0x00FF&((uint16_t)machineParamArray[16])));
 }
 
 bool MachineSettings::getServiceWidgEn()
@@ -373,14 +391,12 @@ void MachineSettings::setServiceWidgEn(bool servEn)
 
 MachineSettings::MachineType MachineSettings::getMachineType()
 {
-    MachineSettings stt;
-    return stt.machineTypeStat;
+    return MachineSettings::machineTypeStat;
 }
 
 void MachineSettings::setMachineType(MachineSettings::MachineType mType)
 {
-    MachineSettings stt;
-    stt.machineTypeStat = mType;
+    MachineSettings::machineTypeStat = mType;
 }
 
 Register::Register(uint8_t headCount)
@@ -546,6 +562,7 @@ void Register::setHeadReg(int index, HeadSetting hSett)
 
 void Register::setIndexLiftReg(IndexerLiftSettings iLSett)
 {
+    this->indexerLiftSettings = iLSett;
 //    this->indexerReg.field.masterReg_DEV_INF_H;
     this->indexerReg.field.indexerReg_HOME_OFF = iLSett.indexerParam.homeOffset;
     this->indexerReg.field.indexerReg_DIST_OFF = iLSett.indexerParam.distOffcet;
@@ -592,22 +609,10 @@ void Register::setIndexLiftReg(IndexerLiftSettings iLSett)
 //    this->liftReg.field.liftReg_SEQU7_H;
 //    this->liftReg.field.liftReg_SEQU8_L;
 //    this->liftReg.field.liftReg_SEQU8_H;
-    double R = 90./25.4;
-    double P = 15./25.4;
-    double PULSE = 10000;
-    double a, b, cosa, sina, sinb, r1;
-    uint32_t pulse;
-    r1 = ((double)this->indexerReg.field.liftReg_DIST/100.) + (75./25.4);
-    cosa = (R * R + P * P - r1 * r1) / (2 * R * P);
-    a = acos(cosa);
-    sina = sin(a);
-    sinb = (R * sina)/r1;
-    b = asin(sinb);
-    if(r1 > (90./25.4))
-        b = 3.1415926 - b;
-    pulse = (uint32_t)((b*PULSE*30)/(2. * 3.1415926));
-    this->liftReg.field.liftReg_DIST_PULSE_L = ((uint16_t)(pulse&0x0000FFFF));
-    this->liftReg.field.liftReg_DIST_PULSE_H = ((uint16_t)((pulse>>16)&0x0000FFFF));
+    uint32_t liftPulseDist = Register::calcLiftPulse(this->machineSettings.machineParam.liftGearRatio,
+                                                     this->indexerLiftSettings.liftParam.distance);
+    this->liftReg.field.liftReg_DIST_PULSE_L = ((uint16_t)(liftPulseDist&0x0000FFFF));
+    this->liftReg.field.liftReg_DIST_PULSE_H = ((uint16_t)((liftPulseDist>>16)&0x0000FFFF));
 //    this->liftReg.field.REG_TEMP_UNIT;
 //    this->liftReg.field.REG_GET_ZERO_OFF_CONTACT;
 //    this->liftReg.field.REG_SKIPC_H;
@@ -619,5 +624,22 @@ void Register::setIndexLiftReg(IndexerLiftSettings iLSett)
 //    this->liftReg.field.REG_PCB35_HEAT;
 //    this->liftReg.field.REG_PCB35_ERR_DEV;
 //    this->liftReg.field.REG_PCB35_MACHINE_TYPE;
-//    this->liftReg.field.REG_PCB35_ERR_MESSAGE;
+    //    this->liftReg.field.REG_PCB35_ERR_MESSAGE;
+}
+
+uint32_t Register::calcLiftPulse(uint16_t gearRatio, uint16_t liftDist)
+{
+    double R = 90./25.4;
+    double P = 15./25.4;
+    double PULSE = 10000;
+    double a, b, cosa, sina, sinb, r1;
+    r1 = ((double)liftDist/100.) + (75./25.4);
+    cosa = (R * R + P * P - r1 * r1) / (2 * R * P);
+    a = acos(cosa);
+    sina = sin(a);
+    sinb = (R * sina)/r1;
+    b = asin(sinb);
+    if(r1 > (90./25.4))
+        b = 3.1415926 - b;
+    return (uint32_t)((b*PULSE*gearRatio)/(2. * 3.1415926));
 }
