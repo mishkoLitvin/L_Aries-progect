@@ -101,7 +101,12 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     ui->dSpinBoxHeadMaxRange->setValue(machineParam.headMaxRange/10);
     ui->dSpinBoxIndexerScrew->setValue(machineParam.indexerScrewPinch);
     ui->dSpinBoxLiftGear->setValue(machineParam.liftGearRatio);
-    qDebug()<<machineParam.liftGearRatio<<machineParam.indexerScrewPinch;
+
+//    =============================================
+    MachineSettings::setHeadMaxRange(machineParam.headMaxRange);
+    MachineSettings::setHeadType(machineParam.headType.all);
+    MachineSettings::setIndexLiftType(machineParam.indexeLiftType.all);
+//    ===============================================
 }
 
 void GeneralSettingDialog::setFocusLossAccept(bool flag)
@@ -165,7 +170,11 @@ void GeneralSettingDialog::accept()
         machineParams.indexeLiftType.field.liftType = ui->comboBoxLiftT->currentIndex()+1;
         machineParams.indexeLiftType.field.lockType = ui->comboBoxLockT->currentIndex();
         machineParams.indexeLiftType.field.mainServoDriveType = ui->comboBoxMainServoT->currentIndex();
-
+        //    =============================================
+        MachineSettings::setHeadMaxRange(machineParams.headMaxRange/10);
+        MachineSettings::setHeadType(machineParams.headType.all);
+        MachineSettings::setIndexLiftType(machineParams.indexeLiftType.all);
+        //    ===============================================
         if(ui->pButtonDirection->isChecked())
             machineParams.direction = -1;
         else
@@ -173,9 +182,12 @@ void GeneralSettingDialog::accept()
 
         emit this->machineParamChanged(machineParams.toByteArray());
         this->hide();
+
     }
     else
         acceptEnable = true;
+
+
 }
 
 void GeneralSettingDialog::reject()

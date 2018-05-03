@@ -97,6 +97,7 @@ void SerialPort::closeSerialPort()
 
 void SerialPort::readData()
 {
+    qDebug()<<MachineSettings::getHeadMaxRange()<<MachineSettings::getHeadType()<<MachineSettings::getIndexLiftType();
     static QByteArray data = 0;
     static bool firstByte = true;
     data.append(serial->readAll());
@@ -151,7 +152,7 @@ void SerialPort::readData()
                         switch(replyCnt){
                         case 0:
                             bArr.clear();
-                            data = (uint16_t)(((uint16_t)(18<<9))|((uint16_t)(4<<5)|(uint16_t)(27)));
+                            data = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_DAT);
                             bArr.append(MachineSettings::MasterDevice);
                             bArr.append(Register::masterReg_DAT);
                             bArr.append((char)(data>>8));
@@ -165,7 +166,7 @@ void SerialPort::readData()
                             bArr.clear();
                             bArr.append((char)MachineSettings::MasterDevice);
                             bArr.append((char)MachineSettings::MasterMachineType);
-                            data = 300;
+                            data = MachineSettings::getHeadMaxRange();
                             bArr.append((char)(data>>8));
                             bArr.append((char)(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
@@ -177,7 +178,7 @@ void SerialPort::readData()
                             bArr.clear();
                             bArr.append((char)MachineSettings::MasterDevice);
                             bArr.append((char)MachineSettings::MasterMachineType);
-                            data = 0x0092;
+                            data = MachineSettings::getHeadType();
                             bArr.append((char)(data>>8));
                             bArr.append((char)(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
@@ -189,7 +190,7 @@ void SerialPort::readData()
                             bArr.clear();
                             bArr.append((char)MachineSettings::MasterDevice);
                             bArr.append((char)MachineSettings::MasterMachineType);
-                            data = 0x04D9;//((0<<13)|(0<<12)|(2<<9)|(3<<6)|(3<<3)|(1));
+                            data = MachineSettings::getIndexLiftType();
                             bArr.append((char)(data>>8));
                             bArr.append((char)(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
@@ -201,7 +202,7 @@ void SerialPort::readData()
                             bArr.clear();
                             bArr.append((char)IndexerLiftSettings::IndexerDevice);
                             bArr.append((char)Register::indexerReg_SKOK_SR);
-                            data = 0x000A;
+                            data = registers->readReg(IndexerLiftSettings::IndexerDevice, Register::indexerReg_SKOK_SR);
                             bArr.append((char)(data>>8));
                             bArr.append((char)(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);

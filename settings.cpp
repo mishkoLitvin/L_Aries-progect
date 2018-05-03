@@ -296,6 +296,9 @@ void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifPa
 
 bool MachineSettings::serviceWidgetsEn;
 MachineSettings::MachineType MachineSettings::machineTypeStat;
+uint16_t MachineSettings::headMaxRangeStat;
+uint16_t MachineSettings::headTypeStat;
+uint16_t MachineSettings::indexerLiftTypeStat;
 
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
@@ -397,6 +400,36 @@ MachineSettings::MachineType MachineSettings::getMachineType()
 void MachineSettings::setMachineType(MachineSettings::MachineType mType)
 {
     MachineSettings::machineTypeStat = mType;
+}
+
+uint16_t MachineSettings::getHeadMaxRange()
+{
+    return MachineSettings::headMaxRangeStat;
+}
+
+uint16_t MachineSettings::getHeadType()
+{
+    return MachineSettings::headTypeStat;
+}
+
+uint16_t MachineSettings::getIndexLiftType()
+{
+    return MachineSettings::indexerLiftTypeStat;
+}
+
+void MachineSettings::setHeadMaxRange(uint16_t val)
+{
+    MachineSettings::headMaxRangeStat = val;
+}
+
+void MachineSettings::setHeadType(uint16_t val)
+{
+    MachineSettings::headTypeStat = val;
+}
+
+void MachineSettings::setIndexLiftType(uint16_t val)
+{
+    MachineSettings::indexerLiftTypeStat = val;
 }
 
 Register::Register(uint8_t headCount)
@@ -502,7 +535,9 @@ void Register::setMasterReg(MachineSettings mSett)
 //    this->masterReg.field.masterReg_DATH;
 //    this->masterReg.field.masterReg_DATL;
 //    this->masterReg.field.masterReg_KOD_ON;
-    this->masterReg.field.masterReg_DAT = (uint16_t)(((uint16_t)(18<<9))|((uint16_t)(4<<5)|(uint16_t)(25)));
+    this->masterReg.field.masterReg_DAT = (uint16_t)(((uint16_t)((QDate::currentDate().year()-2000)<<9))
+                                                     |((uint16_t)(QDate::currentDate().month()<<5)
+                                                       |(uint16_t)(QDate::currentDate().day())));
 //    this->masterReg.field.REG_KOD_WPISZ;
 //    this->masterReg.field.masterReg_HRW;
 //    this->masterReg.field.masterReg_HRW1;
@@ -643,3 +678,5 @@ uint32_t Register::calcLiftPulse(uint16_t gearRatio, uint16_t liftDist)
         b = 3.1415926 - b;
     return (uint32_t)((b*PULSE*gearRatio)/(2. * 3.1415926));
 }
+
+

@@ -4,6 +4,7 @@
 #include <QByteArray>
 #include <QStringList>
 #include <QList>
+#include <QDate>
 #include "math.h"
 
 typedef u_int32_t uint32_t;
@@ -230,6 +231,23 @@ public:
 
     static MachineType getMachineType();
     static void setMachineType(MachineType mType);
+
+    //=================================================================================
+    //this part of code is mustwrited becose machine will not start without this data
+    //but master board dont ask that.
+private:
+    static uint16_t headMaxRangeStat;
+    static uint16_t headTypeStat;
+    static uint16_t indexerLiftTypeStat;
+public:
+    static uint16_t getHeadMaxRange();
+    static uint16_t getHeadType();
+    static uint16_t getIndexLiftType();
+    static void setHeadMaxRange(uint16_t val);
+    static void setHeadType(uint16_t val);
+    static void setIndexLiftType(uint16_t val);
+    //end of mustwrited code.
+    //=================================================================================
 
 };
 
@@ -529,7 +547,6 @@ public:
     void setHeadReg(int index, HeadSetting hSett);
     void setIndexLiftReg(IndexerLiftSettings iLSett);
     static uint32_t calcLiftPulse(uint16_t gearRatio, uint16_t liftDist = 118);
-
 
     enum MasterRegNom{
         masterReg_DEV_INF_H,
