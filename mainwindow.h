@@ -35,6 +35,7 @@
 #include "usersetting.h"
 #include "logindialog.h"
 #include "maintancedialog.h"
+#include "exitdialog.h"
 
 #include "settings.h"
 
@@ -54,6 +55,7 @@ public:
 
     void masterCodeCheck();
     void userLogin();
+    ExitDialog::ExitCode exitCode;
 
 private:
     Ui::MainWindow *ui;

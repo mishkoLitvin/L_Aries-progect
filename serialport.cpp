@@ -90,6 +90,7 @@ void SerialPort::closeSerialPort()
     if (serial->isOpen())
     {
         serial->close();
+        qDebug()<<"Serial disconnected.";
     }
     settingsComDialog->setEnabled(true);
 

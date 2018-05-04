@@ -801,11 +801,12 @@ void MainWindow::serviceStateChange()
 
 void MainWindow::exitProgram()
 {
+    this->exitCode = ExitDialog::tryExit(this);
+
     timeProgramEnd = QTime::currentTime();
     timeWorking.setHMS(0,0,0);
     timeWorking = timeWorking.addMSecs(timeProgramStart.msecsTo(timeProgramEnd));
 
-#ifndef DEBUG_BUILD
     qDebug()<<"mail: "<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable;
     if(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable)
         mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
@@ -816,15 +817,40 @@ void MainWindow::exitProgram()
                                 "Machine printed " + QString::number(ragSessionCount) + " items this session"
                                 " and " + QString::number(ragAllCount) + " items in total.\n"
                                 "\nHave a great day!" );
-#endif
 
     settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
     settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCiclesAll);
 
     settings->sync();
-    comPort->closeSerialPort();
+    if(this->exitCode != ExitDialog::Continue)
+    {
+        comPort->closeSerialPort();
 
-    this->close();
+        switch (this->exitCode) {
+        case ExitDialog::ExitFromProgram:
+            this->close();
+            break;
+        case ExitDialog::RestartProgram:
+            this->close();
+            break;
+        case ExitDialog::ReprogramMachine:
+            qDebug()<<"Here will be function to call reprogram dialog";
+            break;
+        case ExitDialog::Shutdown:
+            qDebug()<<"System call to halt";
+            this->close();
+            break;
+        case ExitDialog::RestartMachine:
+            qDebug()<<"System call to restart";
+            this->close();
+            break;
+        case ExitDialog::ServiceMode:
+            qDebug()<<"Service mode. Comunication is disabled";
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void MainWindow::saveJob()
