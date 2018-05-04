@@ -285,6 +285,7 @@ void SerialPort::getSerialSetting(ComSettings setting)
 
 void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
 {
+    qDebug()<<"send:"<<data.toHex().toUpper();
     bool ok;
     ModData mData;
     mData.all = data.toHex().toLong(&ok, 16);

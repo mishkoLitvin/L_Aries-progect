@@ -355,7 +355,6 @@ void MainWindow::changeHeadNo(int index)
 
 void MainWindow::resetMachine()
 {
-    static bool needCompleteReset = true;
     ComSettings comSett = settings->value("COM_SETTING").value<ComSettings>();
     QByteArray bArr;
 
@@ -384,7 +383,7 @@ void MainWindow::resetMachine()
 
         comPort->openSerialPort(settings->value("COM_SETTING").value<ComSettings>());
 
-//        needCompleteReset = false;
+        needCompleteReset = false;
     }
     else
     {
@@ -825,13 +824,26 @@ void MainWindow::exitProgram()
     if(this->exitCode != ExitDialog::Continue)
     {
         comPort->closeSerialPort();
+        QProgressDialog *pDialog = new QProgressDialog("Wait for machine shutdown.", "Cancel", 0, 30);
+        pDialog->setWindowModality(Qt::WindowModal);
+        pDialog->setStyleSheet(this->styleSheet());
+        pDialog->setAutoClose(true);
 
         switch (this->exitCode) {
         case ExitDialog::ExitFromProgram:
             this->close();
             break;
         case ExitDialog::RestartProgram:
-            this->close();
+            pDialog->setValue(0);
+            for (int i = pDialog->minimum(); i <= pDialog->maximum(); i++)
+            {
+                pDialog->setValue(i);
+                QThread::msleep(200);
+                if(pDialog->wasCanceled())
+                    break;
+            }
+            if(!pDialog->wasCanceled())
+                this->close();
             break;
         case ExitDialog::ReprogramMachine:
             qDebug()<<"Here will be function to call reprogram dialog";
@@ -1111,7 +1123,8 @@ void MainWindow::userLogin()
 
 void MainWindow::zeroStart()
 {
-
+    needCompleteReset = true;
+    this->resetMachine();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)

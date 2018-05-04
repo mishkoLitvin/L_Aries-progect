@@ -19,16 +19,16 @@ int main(int argc, char *argv[])
         w.userLogin();
         res = a.exec();
         eCode = w.exitCode;
-        if(eCode ==ExitDialog::Shutdown)
-        {
-            QProcess proc;
-            proc.startDetached("shutdown -P now");
-        }
-        if(eCode ==ExitDialog::RestartMachine)
-        {
-            QProcess proc;
-            proc.startDetached("reboot");
-        }
+//        if(eCode ==ExitDialog::Shutdown)
+//        {
+//            QProcess proc;
+//            proc.startDetached("shutdown -P now");
+//        }
+//        if(eCode ==ExitDialog::RestartMachine)
+//        {
+//            QProcess proc;
+//            proc.startDetached("reboot");
+//        }
 
         qDebug()<<"Exit code:"<<w.exitCode;
     }

@@ -17,6 +17,7 @@
 #include <QFileDialog>
 #include <QEvent>
 #include <QMessageBox>
+#include <QProgressDialog>
 #include <QTime>
 #include <QTimer>
 #include <QDate>
@@ -90,6 +91,7 @@ private:
     bool logedInGeneral;
     bool logedInService;
     int headsCount;
+    bool needCompleteReset;
 
     int indexerCiclesSession;
     int indexerCiclesAll;
@@ -98,9 +100,7 @@ private:
     uint32_t ragAllCountReg;
     int ragAtHeadCount;
     bool autoPrintEnabled;
-
     QString userName;
-
     Register *registers;
 
 
