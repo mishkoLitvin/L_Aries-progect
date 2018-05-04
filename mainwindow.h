@@ -93,6 +93,7 @@ private:
     int indexerCiclesAll;
     int ragSessionCount;
     int ragAllCount;
+    uint32_t ragAllCountReg;
     int ragAtHeadCount;
     bool autoPrintEnabled;
 
@@ -129,7 +130,7 @@ private slots:
     void saveJob();
     void loadJob();
     void setHeadsPosition();
-    void timerTimeout();
+    void indexerStepFinish();
     void startPrintProcess(bool autoPrint);
     void stopPrintProcess();
     void maintanceWorkSlot(bool enable);

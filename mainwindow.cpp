@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(comPort, SIGNAL(dataReady(ModData)), this, SLOT(getSerialData(ModData)));
 
     timerMain = new QTimer(this);
-    connect(timerMain, SIGNAL(timeout()), this, SLOT(timerTimeout()));
+    connect(timerMain, SIGNAL(timeout()), this, SLOT(indexerStepFinish()));
 
 //    QByteArray passwordBArr;
 //    passwordBArr.append("666");
@@ -403,31 +403,6 @@ void MainWindow::resetMachine()
         bArr.append((char)MachineSettings::MasterDevice);
         bArr.append((char)MachineSettings::MasterMachineType);
     }
-//    data = 300;
-//    bArr.append((char)(data>>8));
-//    bArr.append((char)(data&0x00FF));
-//    data = CrcCalc::CalculateCRC16(bArr);
-//    bArr.append((char)(data>>8));
-//    bArr.append((char)(data&0x00FF));
-//    comPort->sendData(bArr);
-
-//    data = ((2<<6)|(2<<3)|0);
-//    bArr[2] = ((char)(data>>8));
-//    bArr[3] = ((char)(data&0x00FF));
-//    data = CrcCalc::CalculateCRC16(bArr);
-//    bArr[4] = ((char)(data>>8));
-//    bArr[5] = ((char)(data&0x00FF));
-//    comPort->sendData(bArr);
-
-//    data = ((0<<13)|(0<<12)|(2<<9)|(3<<6)|(3<<3)|(1));
-//    bArr[2] = ((char)(data>>8));
-//    bArr[3] = ((char)(data&0x00FF));
-//    data = CrcCalc::CalculateCRC16(bArr);
-//    bArr[4] = ((char)(data>>8));
-//    bArr[5] = ((char)(data&0x00FF));
-//    comPort->sendData(bArr);
-
-//    qDebug()<<comPort->dataToSendBuff.toHex();
 }
 
 void MainWindow::getSerialData(ModData modData)
@@ -441,6 +416,17 @@ void MainWindow::getSerialData(ModData modData)
                 infoWidget->setIndicatorState(modData.fileds.data);
                 qDebug()<<"Indicator: "<<modData.fileds.data;
                 break;
+            case Register::masterReg_TOTALL:
+                ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
+                ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
+                if(this->ragAllCount<(ragAllCountReg))
+                {
+                    this->indexerStepFinish();
+                }
+                break;
+            case Register::masterReg_TOTALH:
+                ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
+                ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
             default:
                 break;
             }
@@ -477,8 +463,8 @@ void MainWindow::getSerialData(ModData modData)
                 break;
             }
             settings->setValue(QString("INDEXER_PARAMS"), indexerLiftSettings.indexerParam.toByteArray());
-
             break;
+
         case IndexerLiftSettings::LiftDevice:
             indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
                                               settings->value("LIFT_PARAMS").value<QByteArray>());
@@ -612,7 +598,6 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
     for(cnt = 1; cnt<headsCount-1; cnt++)
     {
         HeadSetting::setHeadOn_OffStateInd(cnt, static_cast<bool>(hParamArr[2]&0x01));
-        qDebug()<<cnt<<(bool)(hParamArr[2]&0x01)<<HeadSetting::getHeadStateLo();
 
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM")).value<QByteArray>());
         headSettingDialog->setHeadParams(headSettings, cnt);
@@ -951,7 +936,7 @@ void MainWindow::setHeadsPosition()
     infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
 }
 
-void MainWindow::timerTimeout()
+void MainWindow::indexerStepFinish()
 {
     indexerCiclesAll++;
     indexerCiclesSession++;

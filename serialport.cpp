@@ -97,7 +97,6 @@ void SerialPort::closeSerialPort()
 
 void SerialPort::readData()
 {
-    qDebug()<<MachineSettings::getHeadMaxRange()<<MachineSettings::getHeadType()<<MachineSettings::getIndexLiftType();
     static QByteArray data = 0;
     static bool firstByte = true;
     data.append(serial->readAll());
