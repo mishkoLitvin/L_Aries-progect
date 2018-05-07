@@ -37,6 +37,7 @@
 #include "logindialog.h"
 #include "maintancedialog.h"
 #include "exitdialog.h"
+#include "cyclesdialog.h"
 
 #include "settings.h"
 
@@ -77,6 +78,7 @@ private:
     MailSender *mailSender;
     UserSettingDialog *usersSettingDialog;
     MaintanceDialog* maintanceDialog;
+    CyclesDialog* cycleDialog;
 
     SerialPort *comPort;
     QTimer *timerMain;

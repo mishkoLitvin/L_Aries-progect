@@ -200,6 +200,10 @@ MainWindow::MainWindow(QWidget *parent) :
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
         registers->setHeadReg(i, headSettings);
     }
+
+    cycleDialog = new CyclesDialog(this->headsCount, this);
+    cycleDialog->show();
+
     this->zeroStart();
 }
 
