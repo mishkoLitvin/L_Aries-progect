@@ -13,8 +13,18 @@ CyclesDialog::CyclesDialog(int headCount, QWidget *parent):
     ui(new Ui::CyclesDialog)
 {
     ui->setupUi(this);
+    this->setStyleSheet("QPushButton:!checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A0A0C0, stop: 0.8 #90907F,stop: 1.0 #108020)}"
+                        "QPushButton:checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #40D080, stop: 0.8 #10B07F,stop: 1.0 #30A040)}"
+                        "QLabel{background-color: rgba(255, 255, 255, 200)}"
+                        "QLabel{font: 14px bold italic large \"Serif\"}");
+    ui->pButtonON->setStyleSheet("QToolButton:!checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A0A0C0, stop: 0.8 #90907F,stop: 1.0 #108020)}"
+                                 "QToolButton:checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #40D080, stop: 0.8 #10B07F,stop: 1.0 #30A040)}");
+
 
     this->headCount = headCount;
+
+    cycleSettings = new QSettings("./cycles.ini", QSettings::IniFormat);
+
     int i, j;
     QObjectList objList;
 
@@ -35,25 +45,34 @@ CyclesDialog::CyclesDialog(int headCount, QWidget *parent):
                                       "subcontrol-origin: border;"
                                       "subcontrol-position: bottom right;}");
         spinBoxList[i]->children()[0]->installEventFilter(this);
+
+        this->labelList.append(new QLabel(ui->widgetSpinPlace));
+        labelList[i]->setText(QString::number(i)+":");
+        if(i<10)
+            labelList[i]->resize(15,25);
+        else
+            labelList[i]->resize(25,25);
+
+
     }
 
     for(i = 0; i<8; i++)
     {
         cycleValues.append(new int[headCount]);
         for(j = 0; j<headCount; j++)
-            cycleValues[i][j] = 0;
+            cycleValues[i][j] = cycleSettings->value("CYCLE_"+QString::number(i)+
+                                                     "/HEAD_"+QString::number(j), 0).toInt();
     }
-    cycleValues[0][0] = 10;
-    cycleValues[0][1] = 9;
-    cycleValues[0][2] = 8;
-    cycleValues[0][3] = 7;
-    cycleValues[0][8] = 10;
-
-    this->setStyleSheet("QPushButton:!checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A0A0C0, stop: 0.8 #90907F,stop: 1.0 #108020)}"
-                        "QPushButton:checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #40D080, stop: 0.8 #10B07F,stop: 1.0 #30A040)}");
-    ui->pButtonON->setStyleSheet("QToolButton:!checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A0A0C0, stop: 0.8 #90907F,stop: 1.0 #108020)}"
-                                 "QToolButton:checked {background-color:qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #40D080, stop: 0.8 #10B07F,stop: 1.0 #30A040)}");
-
+    cycleState = cycleSettings->value("CYCLE_STATE").toInt();
+    ui->pButtonC1->setChecked(cycleState&(1<<0));
+    ui->pButtonC2->setChecked(cycleState&(1<<1));
+    ui->pButtonC3->setChecked(cycleState&(1<<2));
+    ui->pButtonC4->setChecked(cycleState&(1<<3));
+    ui->pButtonC5->setChecked(cycleState&(1<<4));
+    ui->pButtonC6->setChecked(cycleState&(1<<5));
+    ui->pButtonC7->setChecked(cycleState&(1<<6));
+    ui->pButtonC8->setChecked(cycleState&(1<<7));
+    ui->pButtonON->setChecked(cycleState&(1<<0));
 
     lastCycleSel = 0;
     this->loadValues(cycleValues[0]);
@@ -86,6 +105,7 @@ void CyclesDialog::showEvent(QShowEvent *ev)
         cosCoef = cos(2.*3.1415926*i/headCount+3.1415926/2.+3.1415926/headCount);
 
         spinBoxList[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
+        labelList[i]->move(x0_hb+(R)*cosCoef, y0_hb-3+(R)*sinCoef);
     }
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
@@ -112,6 +132,9 @@ void CyclesDialog::on_pButtonOK_clicked()
 
 void CyclesDialog::on_pButtonON_clicked()
 {
+    cycleState &= (~(1<<lastCycleSel));
+    cycleState |= ((ui->pButtonON->isChecked())<<lastCycleSel);
+    cycleSettings->setValue("CYCLE_STATE", cycleState);
     switch (lastCycleSel) {
     case 0:
         ui->pButtonC1->setChecked(ui->pButtonON->isChecked());
@@ -140,7 +163,6 @@ void CyclesDialog::on_pButtonON_clicked()
     default:
         break;
     }
-
 }
 
 void CyclesDialog::on_pButtonPrev_clicked()
@@ -321,7 +343,12 @@ void CyclesDialog::saveValues()
 {
     int i;
     for(i = 0; i<spinBoxList.length(); i++)
+    {
         cycleValues[lastCycleSel][i] = spinBoxList[i]->value();
+        cycleSettings->setValue("CYCLE_"+QString::number(lastCycleSel)+
+                                "/HEAD_"+QString::number(i), spinBoxList[i]->value());
+
+    }
 }
 
 

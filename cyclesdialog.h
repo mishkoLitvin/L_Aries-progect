@@ -3,11 +3,13 @@
 
 #include <QDialog>
 #include <QDoubleSpinBox>
+#include <QLabel>
 #include <QLineEdit>
 #include <QList>
 #include <QShowEvent>
 #include <QFocusEvent>
 #include <QEvent>
+#include <QSettings>
 
 #include "settings.h"
 #include "numpaddialog.h"
@@ -32,9 +34,13 @@ private:
     Ui::CyclesDialog *ui;
     int headCount;
     QList<QDoubleSpinBox*> spinBoxList;
+    QList<QLabel*> labelList;
 
     int lastCycleSel;
     QList<int*> cycleValues;
+    int cycleState;
+
+    QSettings *cycleSettings;
 
 protected:
     void showEvent(QShowEvent *ev);
