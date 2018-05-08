@@ -42,6 +42,9 @@ private:
 
     QSettings *cycleSettings;
 
+    QList<uint32_t> headStateList;
+    QList<uint32_t> headStrokList;
+
 protected:
     void showEvent(QShowEvent *ev);
     bool eventFilter(QObject *watched, QEvent *event);

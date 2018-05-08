@@ -127,6 +127,27 @@ bool CyclesDialog::eventFilter(QObject *watched, QEvent *event)
 
 void CyclesDialog::on_pButtonOK_clicked()
 {
+    int i, j;
+    for(i = 0; i < cycleValues.length(); i++)
+    {
+        headStateList << 0;
+        for(j = 0; j<headCount; j++)
+        {
+            headStateList[i] |= (((uint32_t)((bool)(cycleValues[i][j]>0)))<<j);
+        }
+    }
+    qDebug()<<headStateList;
+
+    for(j = 0; j<headCount; j++)
+    {
+        headStrokList << 0;
+        for(i = 0; i < cycleValues.length(); i++)
+        {
+            headStrokList[j] |= (((uint32_t)((uint8_t)(cycleValues[i][j]))&0x0F)<<i*4);
+        }
+    }
+    qDebug()<<headStrokList;
+
     this->accept();
 }
 
