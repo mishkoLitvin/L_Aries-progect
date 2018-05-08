@@ -15,30 +15,43 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,10">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5,1">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,5,0">
      <item>
-      <widget class="QPushButton" name="pushButton_9">
+      <widget class="QToolButton" name="pButtonPrev">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>90</width>
          <height>40</height>
         </size>
        </property>
        <property name="text">
         <string>PREVIOUS</string>
        </property>
+       <property name="icon">
+        <iconset resource="icons.qrc">
+         <normaloff>:/arrows/icons/Base/arrows/arrowLPart.png</normaloff>:/arrows/icons/Base/arrows/arrowLPart.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
+       </property>
       </widget>
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="pButtonC1">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -60,7 +73,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="pButtonC2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -82,7 +95,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="pButtonC3">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -104,7 +117,7 @@
         </widget>
        </item>
        <item row="0" column="3">
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="pButtonC4">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -126,7 +139,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="pButtonC5">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -148,7 +161,7 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="pButtonC6">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -170,7 +183,7 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QPushButton" name="pushButton_7">
+        <widget class="QPushButton" name="pButtonC7">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -192,7 +205,7 @@
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QPushButton" name="pushButton_8">
+        <widget class="QPushButton" name="pButtonC8">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -216,21 +229,34 @@
       </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_10">
+      <widget class="QToolButton" name="pButtonNext">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>90</width>
          <height>40</height>
         </size>
        </property>
        <property name="text">
         <string>NEXT</string>
+       </property>
+       <property name="icon">
+        <iconset resource="icons.qrc">
+         <normaloff>:/arrows/icons/Base/arrows/arrowRPart.png</normaloff>:/arrows/icons/Base/arrows/arrowRPart.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
       </widget>
      </item>
@@ -239,6 +265,53 @@
    <item>
     <widget class="QWidget" name="widgetSpinPlace" native="true">
      <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Cycle No:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="lcdNumber">
+          <property name="digitCount">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="pButtonON">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>ON</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
       <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
@@ -268,7 +341,13 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_11">
+         <widget class="QToolButton" name="pButtonOK">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="text">
            <string>OK</string>
           </property>
@@ -281,6 +360,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
