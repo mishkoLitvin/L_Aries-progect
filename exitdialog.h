@@ -2,6 +2,9 @@
 #define EXITDIALOG_H
 
 #include <QDialog>
+#include <QShowEvent>
+
+#include "settings.h"
 
 namespace Ui {
 class ExitDialog;
@@ -44,6 +47,9 @@ private slots:
 
 private:
     Ui::ExitDialog *ui;
+
+protected:
+    void showEvent(QShowEvent *ev);
 };
 
 #endif // EXITDIALOG_H

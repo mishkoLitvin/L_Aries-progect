@@ -177,8 +177,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ragSessionCount = 0;
     ragAllCount = settings->value("COUNTERS/RAG_ALL_CNT", 0).toInt();
-    indexerCiclesSession = 0;
-    indexerCiclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
+    indexerCyclesSession = 0;
+    indexerCyclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
     ragAtHeadCount = 0;
 
     infoWidget->setTotal(ragAllCount);
@@ -205,6 +205,7 @@ MainWindow::MainWindow(QWidget *parent) :
     cycleDialog->show();
 
     this->zeroStart();
+    ui->widgetHeads->installEventFilter(this);
 }
 
 MainWindow::~MainWindow()
@@ -822,7 +823,7 @@ void MainWindow::exitProgram()
                                 "\nHave a great day!" );
 
     settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
-    settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCiclesAll);
+    settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCyclesAll);
 
     settings->sync();
     if(this->exitCode != ExitDialog::Continue)
@@ -980,8 +981,8 @@ void MainWindow::setHeadsPosition()
 
 void MainWindow::indexerStepFinish()
 {
-    indexerCiclesAll++;
-    indexerCiclesSession++;
+    indexerCyclesAll++;
+    indexerCyclesSession++;
     int i;
     for(i = headButton.length()-1; i>1; i--)
     {
@@ -1021,7 +1022,7 @@ void MainWindow::indexerStepFinish()
             indexer->printFinish();
     }
 
-    maintanceDialog->check(indexerCiclesAll);
+    maintanceDialog->check(indexerCyclesAll);
     if(ragAtHeadCount == 0)
     {
 //        timerMain->stop();
@@ -1129,6 +1130,8 @@ void MainWindow::zeroStart()
 {
     needCompleteReset = true;
     this->resetMachine();
+
+    serviceCounter = 0;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)
@@ -1141,6 +1144,18 @@ void MainWindow::showEvent(QShowEvent *ev)
 {
     this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
     this->setHeadsPosition();
-    maintanceDialog->check(indexerCiclesAll);
+    maintanceDialog->check(indexerCyclesAll);
     ev->accept();
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
+{
+    if((ev->type() == QMouseEvent::MouseButtonRelease)&(obj==ui->widgetHeads))
+    {
+        serviceCounter++;
+        if(serviceCounter>10)
+            MachineSettings::setServiceWidgEn(true);
+    }
+    return false;
+
 }

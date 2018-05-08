@@ -61,3 +61,9 @@ void ExitDialog::on_pushButton_clicked()
     this->exitCode = Continue;
     this->accept();
 }
+
+void ExitDialog::showEvent(QShowEvent *ev)
+{
+    ui->widget->setVisible(MachineSettings::getServiceWidgEn());
+    ev->accept();
+}

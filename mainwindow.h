@@ -95,8 +95,8 @@ private:
     int headsCount;
     bool needCompleteReset;
 
-    int indexerCiclesSession;
-    int indexerCiclesAll;
+    int indexerCyclesSession;
+    int indexerCyclesAll;
     int ragSessionCount;
     int ragAllCount;
     uint32_t ragAllCountReg;
@@ -105,6 +105,7 @@ private:
     QString userName;
     Register *registers;
 
+    uint8_t serviceCounter;
 
 
 private slots:
@@ -145,6 +146,7 @@ private slots:
 protected:
     virtual void resizeEvent(QResizeEvent *e);
     void showEvent(QShowEvent *ev);
+    bool eventFilter(QObject *obj, QEvent *ev);
 
 };
 
