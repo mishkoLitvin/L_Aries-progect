@@ -16,6 +16,7 @@ ExitDialog::~ExitDialog()
 ExitDialog::ExitCode ExitDialog::tryExit(QWidget *parent)
 {
     ExitDialog dialog(parent);
+    dialog.move(parent->width()/2-dialog.width()/2, parent->height()/2-dialog.height()/2);
     dialog.exec();
     return dialog.exitCode;
 }

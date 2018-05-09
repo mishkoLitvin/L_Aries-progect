@@ -202,7 +202,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     cycleDialog = new CyclesDialog(this->headsCount, this);
-    cycleDialog->show();
+    connect(ui->pButtonCyclesSetup, SIGNAL(clicked(bool)), cycleDialog, SLOT(show()));
     connect(cycleDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getCyclesCommand(QByteArray)));
 
     this->zeroStart();
