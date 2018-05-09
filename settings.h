@@ -212,6 +212,7 @@ public:
         uint16_t headMaxRange;
         uint16_t liftGearRatio;
         uint16_t indexerScrewPinch;
+        uint8_t useUnloadHead;
         QByteArray toByteArray();
     }MachineParameters;
 

@@ -36,18 +36,19 @@ void HeadForm::setHeadformType(HeadForm::HeadformType type)
 {
     switch (type)
     {
-        case HeadProcessing:
-            this->headformType = HeadProcessing; break;
-        case HeadPutingOn:
-            this->headformType = HeadPutingOn;
-            labelIndex->hide();
-            ui->label->setStyleSheet("* {background-color: #009900}");
-            break;
-        case HeadRemoving:
-            this->headformType = HeadRemoving;
-            labelIndex->hide();
-            ui->label->setStyleSheet("background-color: #990000");
-            break;
+    case HeadProcessing:
+        this->headformType = HeadProcessing;
+        break;
+    case HeadPutingOn:
+        this->headformType = HeadPutingOn;
+        labelIndex->hide();
+        ui->label->setStyleSheet("* {background-color: #009900}");
+        break;
+    case HeadRemoving:
+        this->headformType = HeadRemoving;
+        labelIndex->hide();
+        ui->label->setStyleSheet("background-color: #990000");
+        break;
     };
 }
 

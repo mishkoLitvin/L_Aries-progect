@@ -35,6 +35,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
     connect(ui->pButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
     connect(ui->pButtonDirection, SIGNAL(clicked(bool)), this, SLOT(changeDirection()));
+    connect(ui->pButtonUseUnload, SIGNAL(clicked(bool)), this, SLOT(useUnloadStateChanged()));
     connect(ui->spinBoxHeadsCount, SIGNAL(valueChanged(double)), this, SLOT(headCountChanged(double)));
     connect(ui->dSpinBoxWarningTime, SIGNAL(valueChanged(double)), this, SLOT(warningTimeChanged(double)));
     connect(ui->comboBoxMacineType, SIGNAL(currentIndexChanged(int)), this, SLOT(machineTypeChanget(int)));
@@ -101,6 +102,17 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     ui->dSpinBoxHeadMaxRange->setValue(machineParam.headMaxRange/10);
     ui->dSpinBoxIndexerScrew->setValue(machineParam.indexerScrewPinch);
     ui->dSpinBoxLiftGear->setValue(machineParam.liftGearRatio);
+    ui->pButtonUseUnload->setChecked(machineParam.useUnloadHead);
+    if(machineParam.useUnloadHead)
+    {
+        ui->pButtonUseUnload->setText("Don't use\nunload palett");
+        ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt.png"));
+    }
+    else
+    {
+        ui->pButtonUseUnload->setText("Use\nunload palett");
+        ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt3.png"));
+    }
 
 //    =============================================
     MachineSettings::setHeadMaxRange(machineParam.headMaxRange);
@@ -161,6 +173,7 @@ void GeneralSettingDialog::accept()
         machineParams.headMaxRange = ui->dSpinBoxHeadMaxRange->value()*10;
         machineParams.liftGearRatio = ui->dSpinBoxLiftGear->value();
         machineParams.indexerScrewPinch = ui->dSpinBoxIndexerScrew->value();
+        machineParams.useUnloadHead = ui->pButtonUseUnload->isChecked();
         machineParams.headType.field.carriageType = ui->comboBoxCarriageT->currentIndex()+1;
         machineParams.headType.field.servoDriveType = ui->comboBoxHeadServoT->currentIndex();
         machineParams.headType.field.sqFlType = ui->comboBoxSqFlT->currentIndex()+1;
@@ -395,6 +408,22 @@ void GeneralSettingDialog::changeDirection()
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(cmdArr);
+}
+
+void GeneralSettingDialog::useUnloadStateChanged()
+{
+    emit this->unloadStateChanged(ui->pButtonUseUnload->isChecked());
+    if(ui->pButtonUseUnload->isChecked())
+    {
+
+        ui->pButtonUseUnload->setText("Don't use\nunload palett");
+        ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt.png"));
+    }
+    else
+    {
+        ui->pButtonUseUnload->setText("Use\nunload palett");
+        ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt3.png"));
+    }
 }
 
 void GeneralSettingDialog::headCountChanged(double arg1)

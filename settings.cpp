@@ -190,7 +190,6 @@ bool HeadSetting::getHeadStateAtIndex(uint8_t index)
 
 void HeadSetting::setHeadOn_OffStateInd(uint8_t index, bool state)
 {
-    qDebug()<<index<<state;
     if(state)
         HeadSetting::headStateAll |= (1<<(index));
     else
@@ -303,7 +302,7 @@ uint16_t MachineSettings::indexerLiftTypeStat;
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(18);
+    bArr.resize(19);
     bArr[0] = (char)(this->headCount&0x00FF);
     bArr[1] = (char)(((this->headCount&0xFF00)>>8)&0x00FF);
     bArr[2] = (char)(this->warningTime&0x00FF);
@@ -322,6 +321,7 @@ QByteArray MachineSettings::MachineParameters_::toByteArray()
     bArr[15] = (char)(((this->liftGearRatio&0xFF00)>>8)&0x00FF);
     bArr[16] = (char)(this->indexerScrewPinch&0x00FF);
     bArr[17] = (char)(((this->indexerScrewPinch&0xFF00)>>8)&0x00FF);
+    bArr[18] = (char)(this->useUnloadHead&0x00FF);
     return bArr;
 }
 
@@ -339,6 +339,7 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
     this->machineParam.headMaxRange = mParam.headMaxRange;
     this->machineParam.liftGearRatio = mParam.liftGearRatio;
     this->machineParam.indexerScrewPinch = mParam.indexerScrewPinch;
+    this->machineParam.useUnloadHead = mParam.useUnloadHead;
 }
 
 MachineSettings::MachineSettings()
@@ -354,6 +355,7 @@ MachineSettings::MachineSettings()
     this->machineParam.headMaxRange = 300;
     this->machineParam.liftGearRatio = 30;
     this->machineParam.indexerScrewPinch = 10;
+    this->machineParam.useUnloadHead = false;
 }
 
 void MachineSettings::fromByteArray(QByteArray machineParamArray)
@@ -378,6 +380,7 @@ void MachineSettings::fromByteArray(QByteArray machineParamArray)
             |(0x00FF&((uint16_t)machineParamArray[14])));
     this->machineParam.indexerScrewPinch = (((0x00FF&((uint16_t)machineParamArray[17]))<<8)
             |(0x00FF&((uint16_t)machineParamArray[16])));
+    this->machineParam.useUnloadHead = (bool)(0x00FF&((uint16_t)machineParamArray[18]));
 }
 
 bool MachineSettings::getServiceWidgEn()

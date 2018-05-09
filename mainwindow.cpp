@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     headsCount = settings->value(QString("HEAD/HEADS_COUNT"), 1).toInt();
-    headsCount+=2;
 
     comPort = new SerialPort(settings->value("COM_SETTING").value<ComSettings>(),this);
     comPort->setStyleSheet(this->styleSheet());
@@ -100,6 +99,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(iconsChangedIndex(int)), this, SLOT(setIconFolder(int)));
     connect(generalSettingDialog, SIGNAL(usersSettingRequest()), usersSettingDialog, SLOT(show()));
     connect(generalSettingDialog, SIGNAL(directionChanged(int)), this, SLOT(getDirection(int)));
+    connect(generalSettingDialog, SIGNAL(unloadStateChanged(bool)), this, SLOT(getUnloadState(bool)));
     connect(generalSettingDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getMachineCommand(QByteArray)));
 
     mailSender = new MailSender(this);
@@ -110,6 +110,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonExit, SIGNAL(clicked(bool)), this, SLOT(exitProgram()));
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
+
+    if(this->machineSettings.machineParam.useUnloadHead)
+        headsCount+=2;
+    else
+        headsCount+=1;
 
     int i;
     for(i = 0; i<headsCount; i++)
@@ -122,7 +127,7 @@ MainWindow::MainWindow(QWidget *parent) :
             connect(headButton[i], SIGNAL(loadStateChanged(LoadState)), this, SLOT(getLoadState(LoadState)));
         }
         else
-            if(i==headsCount - 1)
+            if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
                 if(((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]))
@@ -146,7 +151,8 @@ MainWindow::MainWindow(QWidget *parent) :
                     headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
         HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
 
-        if((i != 0)&(i != headsCount-1))
+        if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
+                     |((i != headsCount)&(!machineSettings.machineParam.useUnloadHead))))
         {
             headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
             if(i<(headsCount)/4)
@@ -338,10 +344,6 @@ void MainWindow::generalSettingDialogRequest()
         generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL").toInt(),
                                            settings->value("PASSWORDS/PASSWORD_LOCK_MAIL").toInt(),
                                            settings->value("PASSWORDS/PASSWORD_USERS").toInt());
-//        generalSettingDialog->setStyleList(settings->value("STYLE/STYLE_LIST").value<QStringList>(),
-//                                           settings->value("STYLE/STYLE_SEL_INDEX").toInt(),
-//                                           settings->value("STYLE/ICON_LIST").value<QStringList>(),
-//                                           settings->value("STYLE/ICON_SEL_INDEX").toInt());
         generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
         generalSettingDialog->setMachineSetting(machineSettings.machineParam);
         generalSettingDialog->show();
@@ -352,10 +354,25 @@ void MainWindow::generalSettingDialogRequest()
 void MainWindow::changeHeadNo(int index)
 {
     if(index<1)
-        index = headsCount-2;
+    {
+        if(this->machineSettings.machineParam.useUnloadHead)
+            index = headsCount - 2;
+        else
+            index = headsCount - 1;
+    }
     else
-        if(index == headsCount-1)
-            index = 1;
+    {
+        if(this->machineSettings.machineParam.useUnloadHead)
+        {
+            if(index > headsCount-2)
+                index = 1;
+        }
+        else
+        {
+            if(index > headsCount-1)
+                index = 1;
+        }
+    }
     this->headSettingRequest(index);
 }
 
@@ -710,7 +727,12 @@ void MainWindow::getMachineCommand(QByteArray commandArr)
 void MainWindow::getMachineParam(QByteArray machineParamArr)
 {
     settings->setValue("MACHINE_PARAMS", machineParamArr);
-    if(this->headsCount-2 != (((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]))))
+    MachineSettings mSett;
+    mSett.fromByteArray(machineParamArr);
+
+    if(((this->headsCount-1 != mSett.machineParam.headCount)&(mSett.machineParam.useUnloadHead))
+            |((this->headsCount-2 != mSett.machineParam.headCount)&(!mSett.machineParam.useUnloadHead))
+            |(mSett.machineParam.useUnloadHead != this->machineSettings.machineParam.useUnloadHead))
     {
         QMessageBox msgBox;
         msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
@@ -727,6 +749,7 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
             headsCount = ((0x00FF&((uint16_t)machineParamArr[1]))<<8)|(0x00FF&((uint16_t)machineParamArr[0]));
             settings->setValue(QString("HEAD/HEADS_COUNT"), headsCount);
             this->exitProgram();
+//            this->setHeadsPosition();
             break;
         case QMessageBox::Discard:
             machineParamArr[0] = headsCount&0x00FF;
@@ -735,14 +758,30 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
             break;
         }
     }
+
 //    comPort->sendData(machineParamArr);
     this->setHeadsPosition();
+
+
 }
 
 void MainWindow::getDirection(int direction)
 {
     machineSettings.machineParam.direction = direction;
     this->setHeadsPosition();
+}
+
+void MainWindow::getUnloadState(bool state)
+{
+    if(state)
+    {
+        headButton[headsCount - 1]->setHeadformType(HeadForm::HeadProcessing);
+    }
+    else
+    {
+        headButton[headsCount - 1]->setHeadformType(HeadForm::HeadRemoving);
+
+    }
 }
 
 void MainWindow::getSerialSetting(ComSettings comSett)
@@ -849,7 +888,7 @@ void MainWindow::exitProgram()
             for (int i = pDialog->minimum(); i <= pDialog->maximum(); i++)
             {
                 pDialog->setValue(i);
-                QThread::msleep(200);
+                QThread::msleep(2);
                 if(pDialog->wasCanceled())
                     break;
             }
@@ -887,6 +926,7 @@ void MainWindow::loadJob()
     delete settings;
     QString openFileName = QFileDialog::getOpenFileName(this, "Open job...",".","Setting file(*.ini)");
     settings = new QSettings(openFileName, QSettings::IniFormat);
+    this->machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
     int i;
     for(i = 0; i<headsCount; i++)
         {
@@ -895,7 +935,7 @@ void MainWindow::loadJob()
             headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
         }
         else
-            if(i==headsCount - 1)
+            if((i==headsCount - 1)&(machineSettings.machineParam.useUnloadHead))
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
                 if((((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[1])==2)|
@@ -940,14 +980,20 @@ void MainWindow::setHeadsPosition()
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
 
     int direction = machineSettings.machineParam.direction;
-    for(i = 0; i<headsCount; i++)
+    qDebug()<<1<<headsCount;
+
+    for(i = 0;
+        ((i<headsCount)) ;
+        i++)
     {
         sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
         cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
 
         headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
+        qDebug()<<2<<i;
 
-        if((i != 0)&(i != headsCount-1))
+        if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
+                     |(!machineSettings.machineParam.useUnloadHead)))
         {
             headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
                     y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);

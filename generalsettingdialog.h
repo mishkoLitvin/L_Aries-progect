@@ -71,6 +71,7 @@ signals:
     void serviceSettingRequest();
     void usersSettingRequest();
     void directionChanged(int dir);
+    void unloadStateChanged(bool state);
     void sendCommand(QByteArray command);
 
 
@@ -101,6 +102,7 @@ private slots:
     void styleChanged(int index);
     void iconChanged(int index);
     void changeDirection();
+    void useUnloadStateChanged();
     void headCountChanged(double arg1);
     void machineTypeChanget(int index);
     void warningTimeChanged(double arg1);

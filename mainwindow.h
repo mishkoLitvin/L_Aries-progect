@@ -124,6 +124,7 @@ private slots:
     void getIndexerParam(QByteArray indexerParamArr);
     void getMachineParam(QByteArray machineParamArr);
     void getDirection(int direction);
+    void getUnloadState(bool state);
     void getLiftParam(QByteArray liftParamArr);
     void getIndexLiftSettComm(QByteArray commandArr);
     void getIndexLiftCommand(QByteArray commandArr);
