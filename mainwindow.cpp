@@ -203,6 +203,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     cycleDialog = new CyclesDialog(this->headsCount, this);
     cycleDialog->show();
+    connect(cycleDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getCyclesCommand(QByteArray)));
 
     this->zeroStart();
     ui->widgetHeads->installEventFilter(this);
@@ -655,6 +656,11 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 }
 
 void MainWindow::getHeadCommand(int index, QByteArray commandArr)
+{
+    comPort->sendData(commandArr);
+}
+
+void MainWindow::getCyclesCommand(QByteArray commandArr)
 {
     comPort->sendData(commandArr);
 }

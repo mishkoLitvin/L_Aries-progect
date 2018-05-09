@@ -127,7 +127,10 @@ bool CyclesDialog::eventFilter(QObject *watched, QEvent *event)
 
 void CyclesDialog::on_pButtonOK_clicked()
 {
+    headStateList.clear();
     int i, j;
+    QByteArray cmdArr;
+    uint16_t data;
     for(i = 0; i < cycleValues.length(); i++)
     {
         headStateList << 0;
@@ -135,9 +138,31 @@ void CyclesDialog::on_pButtonOK_clicked()
         {
             headStateList[i] |= (((uint32_t)((bool)(cycleValues[i][j]>0)))<<j);
         }
+        cmdArr.clear();
+        data = (headStateList[i]&0x0000FFFF);
+        cmdArr.append(IndexerLiftSettings::LiftDevice);
+        cmdArr.append(Register::liftReg_SEQU1_L+i*2);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        data = CrcCalc::CalculateCRC16(cmdArr);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        emit this->sendCommand(cmdArr);
+
+        cmdArr.clear();
+        data = ((headStateList[i]>>16)&0x0000FFFF);
+        cmdArr.append(IndexerLiftSettings::LiftDevice);
+        cmdArr.append(Register::liftReg_SEQU1_H+i*2);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        data = CrcCalc::CalculateCRC16(cmdArr);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        emit this->sendCommand(cmdArr);
     }
     qDebug()<<headStateList;
 
+    headStrokList.clear();
     for(j = 0; j<headCount; j++)
     {
         headStrokList << 0;
@@ -145,6 +170,27 @@ void CyclesDialog::on_pButtonOK_clicked()
         {
             headStrokList[j] |= (((uint32_t)((uint8_t)(cycleValues[i][j]))&0x0F)<<i*4);
         }
+        cmdArr.clear();
+        data = (headStrokList[j]&0x0000FFFF);
+        cmdArr.append(HeadSetting::HeadDeviceAdrOffcet+j);
+        cmdArr.append(Register::headReg_REVOLVER_STR_L);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        data = CrcCalc::CalculateCRC16(cmdArr);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        emit this->sendCommand(cmdArr);
+
+        cmdArr.clear();
+        data = ((headStrokList[j]>>16)&0x0000FFFF);
+        cmdArr.append(HeadSetting::HeadDeviceAdrOffcet+j);
+        cmdArr.append(Register::headReg_REVOLVER_STR_H);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        data = CrcCalc::CalculateCRC16(cmdArr);
+        cmdArr.append((char)(data>>8));
+        cmdArr.append((char)(data&0x00FF));
+        emit this->sendCommand(cmdArr);
     }
     qDebug()<<headStrokList;
 

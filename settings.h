@@ -518,8 +518,8 @@ public:
             uint16_t headReg_PRESSURE_5;
             uint16_t headReg_ERROR_MESSAGE;
             uint16_t REG_HMI_DATA;
-            uint16_t REV_STR1;
-            uint16_t REV_STR2;
+            uint16_t headReg_REVOLVER_STR_L;
+            uint16_t headReg_REVOLVER_STR_H;
             uint16_t REG_DEV_INF_L;
         }field;
         uint16_t memBeg;
@@ -701,8 +701,8 @@ public:
         headReg_PRESSURE_5,
         headReg_ERROR_MESSAGE,
         REG_HMI_DATA,
-        REV_STR1,
-        REV_STR2,
+        headReg_REVOLVER_STR_L,
+        headReg_REVOLVER_STR_H,
         REG_DEV_INF_L,
     };
 

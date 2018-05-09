@@ -10,9 +10,11 @@
 #include <QFocusEvent>
 #include <QEvent>
 #include <QSettings>
+#include <QByteArray>
 
 #include "settings.h"
 #include "numpaddialog.h"
+#include "crc16.h"
 
 #include <QDebug>
 
@@ -29,6 +31,9 @@ public:
     explicit CyclesDialog(int headCount, QWidget *parent = 0);
 
     ~CyclesDialog();
+
+signals:
+    void sendCommand(QByteArray cndArr);
 
 private:
     Ui::CyclesDialog *ui;
