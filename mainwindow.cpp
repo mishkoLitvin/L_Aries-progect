@@ -455,8 +455,9 @@ void MainWindow::getSerialData(ModData modData)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));
             break;
             case Register::masterReg_paletStHigh:
+
                 for(i = 16; i<headsCount-1; i++)
-                    headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));
+                    headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh)&(1<<(i-15)));
             break;
             default:
                 break;
