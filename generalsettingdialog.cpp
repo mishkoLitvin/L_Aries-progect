@@ -524,6 +524,7 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
 {
     ui->spinBoxHeadsCount->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
+    ui->pButtonUseUnload->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
     ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
 //    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn());

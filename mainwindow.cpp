@@ -980,7 +980,6 @@ void MainWindow::setHeadsPosition()
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
 
     int direction = machineSettings.machineParam.direction;
-    qDebug()<<1<<headsCount;
 
     for(i = 0;
         ((i<headsCount)) ;
@@ -990,7 +989,6 @@ void MainWindow::setHeadsPosition()
         cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
 
         headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
-        qDebug()<<2<<i;
 
         if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
                      |(!machineSettings.machineParam.useUnloadHead)))
