@@ -429,6 +429,7 @@ void MainWindow::resetMachine()
 
 void MainWindow::getSerialData(ModData modData)
 {
+    int i;
     if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
     {
         switch (modData.fileds.adress) {
@@ -441,14 +442,22 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_TOTALL:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
-                if(this->ragAllCount<(ragAllCountReg))
-                {
-                    this->indexerStepFinish();
-                }
+//                if(this->ragAllCount<(ragAllCountReg))
+//                {
+//                    this->indexerStepFinish();
+//                }
                 break;
             case Register::masterReg_TOTALH:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
+            case Register::masterReg_paletStLow:
+                for(i = 1; i<headsCount-1; i++)
+                    headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));
+            break;
+            case Register::masterReg_paletStHigh:
+                for(i = 16; i<headsCount-1; i++)
+                    headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));
+            break;
             default:
                 break;
             }

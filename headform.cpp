@@ -112,6 +112,15 @@ void HeadForm::setPixmap(HeadForm::HeadformState state)
     this->setPixmap(state, ui->label->styleSheet());
 }
 
+void HeadForm::setRagOn(bool state)
+{
+    if(state)
+        this->setPixmap(shirtOn);
+    else
+        this->setPixmap(shirtOff);
+}
+
+
 void HeadForm::setIconPath(QString path)
 {
     pathImage = path;

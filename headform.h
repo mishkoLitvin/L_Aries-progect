@@ -68,6 +68,7 @@ public:
     void setIndexLabelPosition(SettBtnPos position );
     void setPixmap(HeadformState state, QString stStr);
     void setPixmap(HeadformState state);
+    void setRagOn(bool state);
     void setIconPath(QString path);
 
     HeadformState getRagState();
