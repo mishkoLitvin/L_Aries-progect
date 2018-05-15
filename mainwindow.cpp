@@ -739,9 +739,8 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
     settings->setValue("MACHINE_PARAMS", machineParamArr);
     MachineSettings mSett;
     mSett.fromByteArray(machineParamArr);
-
-    if(((this->headsCount-1 != mSett.machineParam.headCount)&(mSett.machineParam.useUnloadHead))
-            |((this->headsCount-2 != mSett.machineParam.headCount)&(!mSett.machineParam.useUnloadHead))
+    if(((this->headsCount-2 != mSett.machineParam.headCount)&(mSett.machineParam.useUnloadHead))
+            |((this->headsCount-1 != mSett.machineParam.headCount)&(!mSett.machineParam.useUnloadHead))
             |(mSett.machineParam.useUnloadHead != this->machineSettings.machineParam.useUnloadHead))
     {
         QMessageBox msgBox;
