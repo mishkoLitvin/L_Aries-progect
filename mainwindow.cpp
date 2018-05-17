@@ -1067,6 +1067,9 @@ void MainWindow::setHeadsPosition()
         }
     }
 
+    ui->widgetTopMenu->move(ui->widgetHeads->pos());
+    ui->widgetTopMenu->resize(ui->widgetHeads->width()-18, 65);
+
     infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
 
     ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
@@ -1242,9 +1245,11 @@ void MainWindow::zeroStart()
 
     serviceCounter = 0;
 
-    ui->labelPalet->setStyleSheet("QLabel{padding-bottom: 0px; font: 12px bold italic large \"Serif\"}");
+    ui->widgetTopMenu->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
+
+    ui->labelPalet->setStyleSheet("QLabel{font: 12px bold italic large \"Serif\"}");
     ui->dSpinBoxLiftOffcet->setValue(1.18-this->indexerLiftSettings.liftParam.distance/100.);
-    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 60px;"
+    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
                                           "padding-top: 0px;"
                                           "font: 20px bold italic large \"Serif\"}"
                                           "QDoubleSpinBox::up-button {"
@@ -1264,7 +1269,7 @@ void MainWindow::zeroStart()
 
     ui->labelDelay->setStyleSheet("QLabel{padding-bottom: 0px; font: 12px bold italic large \"Serif\"}");
     ui->dSpinBoxStepDelay->setValue(this->machineSettings.machineParam.stepTimeDelay/10.);
-    ui->dSpinBoxStepDelay->setStyleSheet("QDoubleSpinBox{min-height: 60px;"
+    ui->dSpinBoxStepDelay->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
                                           "padding-top: 0px;"
                                           "font: 20px bold italic large \"Serif\"}"
                                           "QDoubleSpinBox::up-button {"
