@@ -202,6 +202,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->widgetHeads->installEventFilter(this);
     ui->dSpinBoxLiftOffcet->children()[0]->installEventFilter(this);
     connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
+    ui->dSpinBoxStepDelay->children()[0]->installEventFilter(this);
+    connect(ui->dSpinBoxStepDelay, SIGNAL(valueChanged(double)), this, SLOT(getStepDelayTime(double)));
 }
 
 MainWindow::~MainWindow()
@@ -770,6 +772,22 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
 
 }
 
+void MainWindow::getStepDelayTime(double arg1)
+{
+    this->machineSettings.machineParam.stepTimeDelay = arg1*10;
+    settings->setValue(QString("MACHINE_PARAMS"), this->machineSettings.machineParam.toByteArray());
+    QByteArray cmdArr;
+    int data = arg1*10;
+    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
+    cmdArr.append((char)(IndexerLiftSettings::IndexStepTimeDelay&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    comPort->sendData(cmdArr);
+}
+
 void MainWindow::getDirection(int direction)
 {
     machineSettings.machineParam.direction = direction;
@@ -1053,6 +1071,8 @@ void MainWindow::setHeadsPosition()
 
     ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
                                  infoWidget->pos().y()-ui->widgetLiftOffcet->height());
+    ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
+                                 infoWidget->pos().y()+infoWidget->height());
 }
 
 void MainWindow::indexerStepFinish()
@@ -1241,6 +1261,26 @@ void MainWindow::zeroStart()
                                           "}"
                                           );
     ui->widgetLiftOffcet->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
+
+    ui->labelDelay->setStyleSheet("QLabel{padding-bottom: 0px; font: 12px bold italic large \"Serif\"}");
+    ui->dSpinBoxStepDelay->setValue(this->machineSettings.machineParam.stepTimeDelay/10.);
+    ui->dSpinBoxStepDelay->setStyleSheet("QDoubleSpinBox{min-height: 60px;"
+                                          "padding-top: 0px;"
+                                          "font: 20px bold italic large \"Serif\"}"
+                                          "QDoubleSpinBox::up-button {"
+                                          "width: 45px;"
+                                          "height: 55px;"
+                                          "subcontrol-origin: content;"
+                                          "subcontrol-position: right;"
+                                          "}"
+                                          "QDoubleSpinBox::down-button {"
+                                          "width: 45px;"
+                                          "height: 55px;"
+                                          "subcontrol-origin: content;"
+                                          "subcontrol-position: left;"
+                                          "}"
+                                          );
+    ui->widgetStepDelay->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)
@@ -1267,7 +1307,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
     }
     if(((ev->type() == QMouseEvent::MouseButtonDblClick)
         |((QApplication::platformName() == "eglfs")&(ev->type()==QEvent::MouseButtonRelease)))
-            &(obj->parent()==ui->dSpinBoxLiftOffcet))
+            &((obj->parent()==ui->dSpinBoxLiftOffcet)|(obj->parent()==ui->dSpinBoxStepDelay)))
     {
         qobject_cast<QDoubleSpinBox*>(obj->parent())->setValue(NumpadDialog::getValue(this));
         qobject_cast<QDoubleSpinBox*>(obj->parent())->clearFocus();

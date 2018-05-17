@@ -148,7 +148,7 @@ public:
         MasterIndexLiftCommand = 0x0004,
         MasterHeadStateLo = 0x0005,
         MasterHeadStateHi = 0x0009,
-        MasterMachineType = 0x0011,
+        MasterMachineType = 0x0011
     };
 
     typedef union MachineState_{
@@ -213,6 +213,7 @@ public:
         uint16_t liftGearRatio;
         uint16_t indexerScrewPinch;
         uint8_t useUnloadHead;
+        uint8_t stepTimeDelay;
         QByteArray toByteArray();
     }MachineParameters;
 
@@ -266,6 +267,7 @@ public:
         IndexDistOffcet = 0x02,
         IndexSpeed = 0x03,
         IndexDirection = 0x04,
+        IndexStepTimeDelay = 0x06,
         LiftDelayDown = 0x1C,
         LiftDelayUp = 0x07,
         IndexDistance = 0x08,

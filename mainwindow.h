@@ -123,6 +123,7 @@ private slots:
     void getLoadState(LoadState stase);
     void getIndexerParam(QByteArray indexerParamArr);
     void getMachineParam(QByteArray machineParamArr);
+    void getStepDelayTime(double arg1);
     void getDirection(int direction);
     void getUnloadState(bool state);
     void getLiftParam(QByteArray liftParamArr);
