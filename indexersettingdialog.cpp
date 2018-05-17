@@ -55,6 +55,29 @@ void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters li
     this->connectAll();
 }
 
+void IndexerSettingDialog::setLiftDistance(float distance)
+{
+    disconnect(ui->dSpinBoxLiftDistance, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftDistance_valueChanged(double)));
+    ui->dSpinBoxLiftDistance->setValue(distance);
+    connect(ui->dSpinBoxLiftDistance, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftDistance_valueChanged(double)));
+
+    QByteArray cmdArr;
+    int data = distance*100;
+    cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
+    cmdArr.append((char)(IndexerLiftSettings::LiftDistance&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
+float IndexerSettingDialog::getLiftDistance()
+{
+    return ui->dSpinBoxLiftDistance->value();
+}
+
 void IndexerSettingDialog::connectAll()
 {
     connect(ui->dSpinBoxIndexAccel, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxIndexAccel_valueChanged(double)));

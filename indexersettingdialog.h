@@ -25,6 +25,9 @@ public:
     ~IndexerSettingDialog();
     void setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam);
     void setLiftSetting(IndexerLiftSettings::LiftParameters liftParam);
+    void setLiftDistance(float distance);
+    float getLiftDistance();
+
 
 signals:
     void indexerParamChanged(QByteArray indexParamArr);

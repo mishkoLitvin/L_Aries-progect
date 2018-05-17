@@ -169,25 +169,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     infoWidget = new InfoWidget(ui->widgetHeads);
 
-
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
     else
         this->setWindowState(Qt::WindowMaximized);
+
     this->setHeadsPosition();
-
-    logedInHeadSettings = false;
-    logedInIndexer = false;
-    logedInGeneral = false;
-    logedInService = false;
-
-    ragSessionCount = 0;
-    ragAllCount = settings->value("COUNTERS/RAG_ALL_CNT", 0).toInt();
-    indexerCyclesSession = 0;
-    indexerCyclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
-    ragAtHeadCount = 0;
-
-    infoWidget->setTotal(ragAllCount);
 
     maintanceDialog = new MaintanceDialog(this);
     maintanceDialog->setStyleSheet(this->styleSheet());
@@ -213,6 +200,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->zeroStart();
     ui->widgetHeads->installEventFilter(this);
+    ui->dSpinBoxLiftOffcet->children()[0]->installEventFilter(this);
+    connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
 }
 
 MainWindow::~MainWindow()
@@ -716,7 +705,14 @@ void MainWindow::getIndexerParam(QByteArray indexerParamArr)
 void MainWindow::getLiftParam(QByteArray liftParamArr)
 {
     settings->setValue(QString("LIFT_PARAMS"), liftParamArr);
-//    comPort->sendData(liftParamArr);
+    //    comPort->sendData(liftParamArr);
+}
+
+void MainWindow::getLiftOffcet(double arg1)
+{
+    indexerLiftSetDialog->setLiftDistance(1.18-arg1);
+    this->indexerLiftSettings.liftParam.distance = (1.18-arg1)*100;
+    settings->setValue(QString("LIFT_PARAMS"), this->indexerLiftSettings.liftParam.toByteArray());
 }
 
 void MainWindow::getIndexLiftSettComm(QByteArray commandArr)
@@ -813,11 +809,29 @@ void MainWindow::getEmailSettings(EmailSettings emailSett)
 void MainWindow::getVeiwSettings(int stSheetIndex)
 {
     settings->setValue("STYLE/STYLE_SEL_INDEX", stSheetIndex);
-    setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"+QString::number(stSheetIndex))).toString());
+    this->setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"+QString::number(stSheetIndex))).toString());
     headSettingDialog->setStyleSheet(this->styleSheet());
     indexerLiftSetDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setStyleSheet(this->styleSheet());
     comPort->setStyleSheet(this->styleSheet());
+    ui->labelPalet->setStyleSheet("QLabel{padding-bottom: 0px; font: 16px bold italic large \"Serif\"}");
+    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 60px;"
+                                          "padding-top: 0px;"
+                                          "font: 20px bold italic large \"Serif\"}"
+                                          "QDoubleSpinBox::up-button {"
+                                          "width: 45px;"
+                                          "height: 55px;"
+                                          "subcontrol-origin: content;"
+                                          "subcontrol-position: right;"
+                                          "}"
+                                          "QDoubleSpinBox::down-button {"
+                                          "width: 45px;"
+                                          "height: 55px;"
+                                          "subcontrol-origin: content;"
+                                          "subcontrol-position: left;"
+                                          "}"
+                                          );
+    ui->widgetLiftOffcet->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
 }
 
 void MainWindow::serviceStateChange()
@@ -1036,6 +1050,9 @@ void MainWindow::setHeadsPosition()
     }
 
     infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
+
+    ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
+                                 infoWidget->pos().y()-ui->widgetLiftOffcet->height());
 }
 
 void MainWindow::indexerStepFinish()
@@ -1188,9 +1205,42 @@ void MainWindow::userLogin()
 void MainWindow::zeroStart()
 {
     needCompleteReset = true;
-    this->resetMachine();
+//    this->resetMachine();
+
+    logedInHeadSettings = false;
+    logedInIndexer = false;
+    logedInGeneral = false;
+    logedInService = false;
+
+    ragSessionCount = 0;
+    ragAllCount = settings->value("COUNTERS/RAG_ALL_CNT", 0).toInt();
+    indexerCyclesSession = 0;
+    indexerCyclesAll = settings->value("COUNTERS/INDEXER_ALL_CNT", 0).toInt();
+    ragAtHeadCount = 0;
+
+    infoWidget->setTotal(ragAllCount);
 
     serviceCounter = 0;
+
+    ui->labelPalet->setStyleSheet("QLabel{padding-bottom: 0px; font: 12px bold italic large \"Serif\"}");
+    ui->dSpinBoxLiftOffcet->setValue(1.18-this->indexerLiftSettings.liftParam.distance/100.);
+    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 60px;"
+                                          "padding-top: 0px;"
+                                          "font: 20px bold italic large \"Serif\"}"
+                                          "QDoubleSpinBox::up-button {"
+                                          "width: 45px;"
+                                          "height: 55px;"
+                                          "subcontrol-origin: content;"
+                                          "subcontrol-position: right;"
+                                          "}"
+                                          "QDoubleSpinBox::down-button {"
+                                          "width: 45px;"
+                                          "height: 55px;"
+                                          "subcontrol-origin: content;"
+                                          "subcontrol-position: left;"
+                                          "}"
+                                          );
+    ui->widgetLiftOffcet->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)
@@ -1214,6 +1264,13 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
         serviceCounter++;
         if(serviceCounter>10)
             MachineSettings::setServiceWidgEn(true);
+    }
+    if(((ev->type() == QMouseEvent::MouseButtonDblClick)
+        |((QApplication::platformName() == "eglfs")&(ev->type()==QEvent::MouseButtonRelease)))
+            &(obj->parent()==ui->dSpinBoxLiftOffcet))
+    {
+        qobject_cast<QDoubleSpinBox*>(obj->parent())->setValue(NumpadDialog::getValue(this));
+        qobject_cast<QDoubleSpinBox*>(obj->parent())->clearFocus();
     }
     return false;
 
