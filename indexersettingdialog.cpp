@@ -317,7 +317,9 @@ void IndexerSettingDialog::showEvent(QShowEvent *ev)
 
 bool IndexerSettingDialog::event(QEvent *e)
 {
-    if((e->type()==QEvent::WindowDeactivate)|((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave)))
+    if((e->type()==QEvent::WindowDeactivate)
+            |((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave))
+            |((QApplication::platformName() == "linuxfb")&(e->type()==QEvent::MouseButtonRelease)))
     {
         if(acceptOnDeactilationEn)
             this->accept();

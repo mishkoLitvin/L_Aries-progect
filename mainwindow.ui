@@ -76,6 +76,12 @@
             <property name="text">
              <string>Palet distance:</string>
             </property>
+            <property name="textFormat">
+             <enum>Qt::RichText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item>
@@ -97,6 +103,9 @@
               <width>160</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="suffix">
+             <string> inch</string>
             </property>
             <property name="maximum">
              <double>0.380000000000000</double>
@@ -162,6 +171,12 @@
             <property name="text">
              <string>Delay before step:</string>
             </property>
+            <property name="textFormat">
+             <enum>Qt::RichText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item>
@@ -183,6 +198,9 @@
               <width>160</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="suffix">
+             <string> inch</string>
             </property>
             <property name="decimals">
              <number>1</number>

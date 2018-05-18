@@ -452,7 +452,9 @@ void SettingDialog::temperatureSensoreChanged(bool tempSens)
 
 bool SettingDialog::event(QEvent *e)
 {
-    if((e->type()==QEvent::WindowDeactivate)|((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave)))
+    if((e->type()==QEvent::WindowDeactivate)
+            |((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave))
+            |((QApplication::platformName() == "linuxfb")&(e->type()==QEvent::Leave)))
     {
         if(acceptOnDeactilationEn)
             this->accept();
@@ -462,7 +464,9 @@ bool SettingDialog::event(QEvent *e)
 
 bool SettingDialog::eventFilter(QObject *watched, QEvent *event)
 {
-    if((event->type()==QEvent::MouseButtonDblClick)|((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease)))
+    if((event->type()==QEvent::MouseButtonDblClick)
+            |((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease))
+            |((QApplication::platformName() == "linuxfb")&(event->type()==QEvent::MouseButtonRelease)))
     {
         acceptOnDeactilationEn = false;
         qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue(this));

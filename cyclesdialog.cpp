@@ -117,7 +117,8 @@ void CyclesDialog::showEvent(QShowEvent *ev)
 bool CyclesDialog::eventFilter(QObject *watched, QEvent *event)
 {
     if((event->type()==QEvent::MouseButtonDblClick)
-            |((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease)))
+            |((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease))
+            |((QApplication::platformName() == "linuxfb")&(event->type()==QEvent::MouseButtonRelease)))
     {
         qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue(this));
         qobject_cast<QDoubleSpinBox*>(watched->parent())->clearFocus();

@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    qDebug() << QSslSocket::supportsSsl();
 //    qDebug() << QSslSocket::sslLibraryBuildVersionString();
 //    qDebug() << QSslSocket::sslLibraryVersionString();
+    qDebug() << QApplication::platformName();
 
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
@@ -591,6 +592,8 @@ void MainWindow::getSerialData(ModData modData)
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
+    qDebug() << QApplication::platformName();
+
     HeadSetting::setHeadOn_OffStateInd(index, static_cast<bool>(hParamArr[2]));
 
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
@@ -1075,7 +1078,7 @@ void MainWindow::setHeadsPosition()
     ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
                                  infoWidget->pos().y()-ui->widgetLiftOffcet->height());
     ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
-                                 infoWidget->pos().y()+infoWidget->height());
+                                 infoWidget->pos().y()+infoWidget->height()+6);
 }
 
 void MainWindow::indexerStepFinish()
@@ -1251,7 +1254,8 @@ void MainWindow::zeroStart()
     ui->dSpinBoxLiftOffcet->setValue(1.18-this->indexerLiftSettings.liftParam.distance/100.);
     ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
                                           "padding-top: 0px;"
-                                          "font: 20px bold italic large \"Serif\"}"
+                                          "border-style: none;"
+                                          "font: 16px bold italic large \"Serif\"}"
                                           "QDoubleSpinBox::up-button {"
                                           "width: 45px;"
                                           "height: 55px;"
@@ -1260,32 +1264,33 @@ void MainWindow::zeroStart()
                                           "}"
                                           "QDoubleSpinBox::down-button {"
                                           "width: 45px;"
-                                          "height: 55px;"
+                                          "height: 50px;"
                                           "subcontrol-origin: content;"
                                           "subcontrol-position: left;"
                                           "}"
                                           );
-    ui->widgetLiftOffcet->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
+    ui->widgetLiftOffcet->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
 
     ui->labelDelay->setStyleSheet("QLabel{padding-bottom: 0px; font: 12px bold italic large \"Serif\"}");
     ui->dSpinBoxStepDelay->setValue(this->machineSettings.machineParam.stepTimeDelay/10.);
     ui->dSpinBoxStepDelay->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
-                                          "padding-top: 0px;"
-                                          "font: 20px bold italic large \"Serif\"}"
-                                          "QDoubleSpinBox::up-button {"
-                                          "width: 45px;"
-                                          "height: 55px;"
-                                          "subcontrol-origin: content;"
-                                          "subcontrol-position: right;"
-                                          "}"
-                                          "QDoubleSpinBox::down-button {"
-                                          "width: 45px;"
-                                          "height: 55px;"
-                                          "subcontrol-origin: content;"
-                                          "subcontrol-position: left;"
-                                          "}"
-                                          );
-    ui->widgetStepDelay->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
+                                         "border-style: none;"
+                                         "padding-top: 0px;"
+                                         "font: 16px bold italic large \"Serif\"}"
+                                         "QDoubleSpinBox::up-button {"
+                                         "width: 45px;"
+                                         "height: 55px;"
+                                         "subcontrol-origin: content;"
+                                         "subcontrol-position: right;"
+                                         "}"
+                                         "QDoubleSpinBox::down-button {"
+                                         "width: 45px;"
+                                         "height: 50px;"
+                                         "subcontrol-origin: content;"
+                                         "subcontrol-position: left;"
+                                         "}"
+                                         );
+    ui->widgetStepDelay->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)
@@ -1311,7 +1316,8 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
             MachineSettings::setServiceWidgEn(true);
     }
     if(((ev->type() == QMouseEvent::MouseButtonDblClick)
-        |((QApplication::platformName() == "eglfs")&(ev->type()==QEvent::MouseButtonRelease)))
+        |((QApplication::platformName() == "eglfs")&(ev->type()==QEvent::MouseButtonRelease))
+        |((QApplication::platformName() == "linuxfb")&(ev->type()==QEvent::MouseButtonRelease)))
             &((obj->parent()==ui->dSpinBoxLiftOffcet)|(obj->parent()==ui->dSpinBoxStepDelay)))
     {
         qobject_cast<QDoubleSpinBox*>(obj->parent())->setValue(NumpadDialog::getValue(this));
