@@ -192,10 +192,9 @@ void GeneralSettingDialog::accept()
             machineParams.direction = -1;
         else
             machineParams.direction = 1;
-
-        emit this->machineParamChanged(machineParams.toByteArray());
+        acceptEnable = false;
         this->hide();
-
+        emit this->machineParamChanged(machineParams.toByteArray());
     }
     else
         acceptEnable = true;

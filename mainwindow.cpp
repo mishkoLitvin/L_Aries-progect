@@ -901,9 +901,12 @@ void MainWindow::serviceStateChange()
 #endif
 }
 
-void MainWindow::exitProgram()
+void MainWindow::exitProgram(bool restart)
 {
-    this->exitCode = ExitDialog::tryExit(this);
+    if(!restart)
+        this->exitCode = ExitDialog::tryExit(this);
+    else
+        this->exitCode = ExitDialog::RestartProgram;
 
     timeProgramEnd = QTime::currentTime();
     timeWorking.setHMS(0,0,0);
@@ -941,7 +944,7 @@ void MainWindow::exitProgram()
             for (int i = pDialog->minimum(); i <= pDialog->maximum(); i++)
             {
                 pDialog->setValue(i);
-                QThread::msleep(2);
+                QThread::msleep(200);
                 if(pDialog->wasCanceled())
                     break;
             }
@@ -1240,7 +1243,8 @@ void MainWindow::userLogin()
 void MainWindow::zeroStart()
 {
     needCompleteReset = true;
-//    this->resetMachine();
+    this->resetMachine();
+    MachineSettings::serviceWidgetsEn = false;
 
     logedInHeadSettings = false;
     logedInIndexer = false;

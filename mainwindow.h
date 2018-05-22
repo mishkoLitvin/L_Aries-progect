@@ -135,7 +135,7 @@ private slots:
     void getEmailSettings(EmailSettings emailSett);
     void getVeiwSettings(int stSheetIndex);
     void serviceStateChange();
-    void exitProgram();
+    void exitProgram(bool restart = false);
     void saveJob();
     void loadJob();
     void setHeadsPosition();
