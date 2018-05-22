@@ -107,25 +107,11 @@ void IndexerWidget::on_pButtonLock_clicked()
     {
         ui->pButtonLock->setText("Unlock");
         ui->pButtonLock->setIcon(QIcon(pathIcon+"/unlock.png"));
-        ui->pButtonPrint->setHidden(false);
-        ui->pButtonAuto->setHidden(false);
-        ui->pButtonMove->setHidden(false);
-        ui->pButtonMoveLeft->setHidden(false);
-        ui->pButtonMoveRight->setHidden(false);
-        ui->pButtonMoveUp->setHidden(false);
-        pButtonSets->setHidden(false);
     }
     else
     {
         ui->pButtonLock->setText("Lock");
         ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
-        ui->pButtonPrint->setHidden(true);
-        ui->pButtonAuto->setHidden(true);
-        ui->pButtonMove->setHidden(true);
-        ui->pButtonMoveLeft->setHidden(true);
-        ui->pButtonMoveRight->setHidden(true);
-        ui->pButtonMoveUp->setHidden(true);
-        pButtonSets->setHidden(true);
     }
 }
 
@@ -152,11 +138,6 @@ void IndexerWidget::on_pButtonMove_clicked()
         ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPart2Round.png"));
         ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowLPart.png"));
         ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowRPart.png"));
-        ui->pButtonLock->setHidden(true);
-        ui->pButtonAuto->setHidden(true);
-        ui->pButtonMoveUp->setHidden(true);
-        ui->pButtonPrint->setHidden(true);
-        pButtonSets->setHidden(true);
         halfCounter = 0;
     }
     else
@@ -165,11 +146,6 @@ void IndexerWidget::on_pButtonMove_clicked()
         ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPartRound.png"));
         ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowL.png"));
         ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowR.png"));
-        ui->pButtonLock->setHidden(false);
-        ui->pButtonAuto->setHidden(false);
-        ui->pButtonMoveUp->setHidden(false);
-        ui->pButtonPrint->setHidden(false);
-        pButtonSets->setHidden(false);
     }
 }
 
@@ -223,13 +199,6 @@ void IndexerWidget::on_pButtonPrint_clicked()
         data = IndexerLiftSettings::PrintStart;
         ui->pButtonPrint->setText("Stop");
         ui->pButtonPrint->setIcon(QIcon(pathIcon+"/stop.png"));
-        ui->pButtonLock->setHidden(true);
-        ui->pButtonAuto->setHidden(true);
-        ui->pButtonMove->setHidden(true);
-        ui->pButtonMoveLeft->setHidden(true);
-        ui->pButtonMoveRight->setHidden(true);
-        ui->pButtonMoveUp->setHidden(true);
-        pButtonSets->setHidden(true);
         emit this->startPrint(this->isAutoPrintEnable);
     }
     else
@@ -245,13 +214,6 @@ void IndexerWidget::on_pButtonPrint_clicked()
             ui->pButtonPrint->setText("Print Manual");
             ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
         }
-        ui->pButtonLock->setHidden(false);
-        ui->pButtonAuto->setHidden(false);
-        ui->pButtonMove->setHidden(false);
-        ui->pButtonMoveLeft->setHidden(false);
-        ui->pButtonMoveRight->setHidden(false);
-        ui->pButtonMoveUp->setHidden(false);
-        pButtonSets->setHidden(false);
         emit this->stopPrint();
     }
 
@@ -310,25 +272,11 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
     {
         ui->pButtonMoveUp->setText("Down");
         ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowDPart.png"));
-        ui->pButtonLock->setHidden(true);
-        ui->pButtonAuto->setHidden(true);
-        ui->pButtonMove->setHidden(true);
-        ui->pButtonMoveLeft->setHidden(true);
-        ui->pButtonMoveRight->setHidden(true);
-        ui->pButtonPrint->setHidden(true);
-        pButtonSets->setHidden(true);
     }
     else
     {
         ui->pButtonMoveUp->setText("Up");
         ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowUPart.png"));
-        ui->pButtonLock->setHidden(false);
-        ui->pButtonAuto->setHidden(false);
-        ui->pButtonMove->setHidden(false);
-        ui->pButtonMoveLeft->setHidden(false);
-        ui->pButtonMoveRight->setHidden(false);
-        ui->pButtonPrint->setHidden(false);
-        pButtonSets->setHidden(false);
     }
 }
 
@@ -393,6 +341,22 @@ void IndexerWidget::on_pButtonHome_clicked()
 void IndexerWidget::settingPButtonClicSlot()
 {
     emit this->settingButtonCliced();
+}
+
+void IndexerWidget::setWidgetState(u_int16_t state)
+{
+    uint8_t hb = ((state>>8)&0x00FF);
+    ui->pButtonReset->setEnabled(hb == 0);
+    ui->pButtonPrint->setEnabled((hb == 7)|(hb == 8));
+    ui->pButtonLock->setEnabled(((hb == 4)|(hb == 7)));
+    ui->pButtonAuto->setEnabled(hb == 7);
+    ui->pButtonMove->setEnabled((hb == 7)&(hb != 11));
+    ui->pButtonMoveLeft->setEnabled((hb == 7)|(hb == 11));
+    ui->pButtonMoveRight->setEnabled((hb == 7)|(hb == 11));
+    ui->pButtonMoveUp->setEnabled((hb == 7)|(hb == 9));
+    ui->pButtonHome->setEnabled(hb == 2);
+
+    pButtonSets->setHidden(true);
 }
 
 void IndexerWidget::resizeEvent(QResizeEvent *e)

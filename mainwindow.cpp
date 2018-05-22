@@ -429,19 +429,28 @@ void MainWindow::getSerialData(ModData modData)
             switch (modData.fileds.registerNo) {
             case Register::masterReg_EKR:
                 infoWidget->setIndicatorState(modData.fileds.data);
+                indexer->setWidgetState(modData.fileds.data);
                 qDebug()<<"Indicator: "<<modData.fileds.data;
                 break;
             case Register::masterReg_TOTALL:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
-//                if(this->ragAllCount<(ragAllCountReg))
-//                {
-//                    this->indexerStepFinish();
-//                }
+                infoWidget->setTotal(ragAllCount);
                 break;
             case Register::masterReg_TOTALH:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
+                infoWidget->setTotal(ragAllCount);
+            case Register::masterReg_PRINTEDL:
+                ragSessionCount = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDH);
+                ragSessionCount = (ragSessionCount<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDL);
+                infoWidget->setPrinted(ragSessionCount);
+                break;
+            case Register::masterReg_PRINTEDH:
+                ragSessionCount = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDH);
+                ragSessionCount = (ragSessionCount<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDL);
+                infoWidget->setPrinted(ragSessionCount);
+                break;
             case Register::masterReg_paletStLow:
                 for(i = 1; i<headsCount-1; i++)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));

@@ -30,6 +30,8 @@ public:
 public slots:
     void printFinish();
     void printStart();
+    void setWidgetState(u_int16_t state);
+
 
 signals:
     void settingButtonCliced();

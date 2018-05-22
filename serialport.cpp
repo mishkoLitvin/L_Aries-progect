@@ -134,6 +134,7 @@ void SerialPort::readData()
                 {
                     if(modData8.fileds.data != 0)
                     {
+
                         dataToSendBuff.remove(0,6);
                         if(initApp)
                             replyCnt++;
