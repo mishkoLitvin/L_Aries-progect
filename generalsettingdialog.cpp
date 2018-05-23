@@ -39,7 +39,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->spinBoxHeadsCount, SIGNAL(valueChanged(double)), this, SLOT(headCountChanged(double)));
     connect(ui->dSpinBoxWarningTime, SIGNAL(valueChanged(double)), this, SLOT(warningTimeChanged(double)));
     connect(ui->comboBoxMacineType, SIGNAL(currentIndexChanged(int)), this, SLOT(machineTypeChanget(int)));
-
+    connect(ui->pButtonCyclesEnable, SIGNAL(clicked(bool)), this, SLOT(changeCyclesState()));
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -72,6 +72,7 @@ void GeneralSettingDialog::setIconFolder(QString path)
 
 void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters machineParam)
 {
+    machineParamGl = machineParam;
     ui->spinBoxHeadsCount->setValue(machineParam.headCount);
     ui->dSpinBoxWarningTime->setValue(machineParam.warningTime/10.);
     if(machineParam.direction == -1)
@@ -85,6 +86,22 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
         ui->pButtonDirection->setChecked(false);
         ui->pButtonDirection->setText("Direction\nanticlockwise");
     }
+
+    if(machineParam.lastRevWarm.field.revolver)
+    {
+        ui->pButtonCyclesEnable->setChecked(true);
+        ui->pButtonCyclesEnable->setText("Cycles\nDisable");
+        ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cyclesDis.png"));
+
+
+    }
+    else
+    {
+        ui->pButtonCyclesEnable->setChecked(false);
+        ui->pButtonCyclesEnable->setText("Cycles\nEnable");
+        ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cycles.png"));
+    }
+
     ui->comboBoxMacineType->setCurrentIndex(machineParam.machineType);
 
     ui->comboBoxCarriageT->setCurrentIndex(machineParam.headType.field.carriageType-1);
@@ -174,6 +191,7 @@ void GeneralSettingDialog::accept()
         machineParams.liftGearRatio = ui->dSpinBoxLiftGear->value();
         machineParams.indexerScrewPinch = ui->dSpinBoxIndexerScrew->value();
         machineParams.useUnloadHead = ui->pButtonUseUnload->isChecked();
+        machineParams.lastRevWarm.field.revolver = ui->pButtonCyclesEnable->isChecked();
         machineParams.headType.field.carriageType = ui->comboBoxCarriageT->currentIndex()+1;
         machineParams.headType.field.servoDriveType = ui->comboBoxHeadServoT->currentIndex();
         machineParams.headType.field.sqFlType = ui->comboBoxSqFlT->currentIndex()+1;
@@ -401,6 +419,31 @@ void GeneralSettingDialog::changeDirection()
     cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
     cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
     data = IndexerLiftSettings::IndexDirChange;
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
+void GeneralSettingDialog::changeCyclesState()
+{
+    if(ui->pButtonCyclesEnable->isChecked())
+    {
+        ui->pButtonCyclesEnable->setText("Disable\ncycles");
+        ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cyclesDis.png"));
+    }
+    else
+    {
+        ui->pButtonCyclesEnable->setText("Enable\ncycles");
+        ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cycles.png"));
+    }
+    QByteArray cmdArr;
+    int data;
+    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
+    cmdArr.append((char)(IndexerLiftSettings::IndexLastRevolvWarm&0x00FF));
+    data = this->machineParamGl.lastRevWarm.all;
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);

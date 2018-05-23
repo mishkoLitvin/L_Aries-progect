@@ -77,6 +77,9 @@ signals:
 
 private:
     Ui::GeneralSettingDialog *ui;
+
+    MachineSettings::MachineParameters machineParamGl;
+
     bool acceptOnDeactilationEn;
     bool acceptEnable;
     bool logedInSerial;
@@ -102,10 +105,12 @@ private slots:
     void styleChanged(int index);
     void iconChanged(int index);
     void changeDirection();
+    void changeCyclesState();
     void useUnloadStateChanged();
     void headCountChanged(double arg1);
     void machineTypeChanget(int index);
     void warningTimeChanged(double arg1);
+
 
 protected:
     bool event(QEvent *e);

@@ -749,6 +749,7 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
     settings->setValue("MACHINE_PARAMS", machineParamArr);
     MachineSettings mSett;
     mSett.fromByteArray(machineParamArr);
+    ui->pButtonCyclesSetup->setVisible(mSett.machineParam.lastRevWarm.field.revolver);
     if(((this->headsCount-2 != mSett.machineParam.headCount)&(mSett.machineParam.useUnloadHead))
             |((this->headsCount-1 != mSett.machineParam.headCount)&(!mSett.machineParam.useUnloadHead))
             |(mSett.machineParam.useUnloadHead != this->machineSettings.machineParam.useUnloadHead))
@@ -1171,6 +1172,8 @@ void MainWindow::setIconFolder(int index)
     ui->pButtonLoadJob->setIcon(QIcon(path+"/load.png"));
     ui->pButtonSaveJob->setIcon(QIcon(path+"/save.png"));
     ui->pButtonMaintance->setIcon(QIcon(path+"/warning.png"));
+    ui->pButtonCyclesSetup->setIcon(QIcon(path+"/cycles.png"));
+
 
     indexer->setIconFolder(path);
     headSettingDialog->setIconFolder(path);
@@ -1317,6 +1320,8 @@ void MainWindow::showEvent(QShowEvent *ev)
     this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
     this->setHeadsPosition();
     maintanceDialog->check(indexerCyclesAll);
+    ui->pButtonCyclesSetup->setVisible(this->machineSettings.machineParam.lastRevWarm.field.revolver);
+
     ev->accept();
 }
 

@@ -198,6 +198,16 @@ public:
         uint16_t all;
     }MachineIndexLiftType;
 
+    typedef union LastRevolverWarm_{
+        struct{
+            uint8_t multiple:1;
+            uint8_t last:1;
+            uint8_t revolver:1;
+            uint8_t warm:1;
+            uint8_t res:4;
+        }field;
+        uint8_t all;
+    }LastRevolverWarm;
 
     QStringList machineTypeList;
     QList<int> machineTypeData;
@@ -214,6 +224,7 @@ public:
         uint16_t indexerScrewPinch;
         uint8_t useUnloadHead;
         uint8_t stepTimeDelay;
+        LastRevolverWarm lastRevWarm;
         QByteArray toByteArray();
     }MachineParameters;
 
@@ -271,6 +282,7 @@ public:
         LiftDelayDown = 0x1C,
         LiftDelayUp = 0x07,
         IndexDistance = 0x08,
+        IndexLastRevolvWarm = 0x09,
         IndexAcceleration = 0x0A,
         IndexAccelerationRet = 0x0B,
         IndexSpeedRet = 0x0C,

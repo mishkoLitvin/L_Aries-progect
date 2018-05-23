@@ -302,7 +302,7 @@ uint16_t MachineSettings::indexerLiftTypeStat;
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(20);
+    bArr.resize(21);
     bArr[0] = (char)(this->headCount&0x00FF);
     bArr[1] = (char)(((this->headCount&0xFF00)>>8)&0x00FF);
     bArr[2] = (char)(this->warningTime&0x00FF);
@@ -323,6 +323,7 @@ QByteArray MachineSettings::MachineParameters_::toByteArray()
     bArr[17] = (char)(((this->indexerScrewPinch&0xFF00)>>8)&0x00FF);
     bArr[18] = (char)(this->useUnloadHead&0x00FF);
     bArr[19] = (char)(this->stepTimeDelay&0x00FF);
+    bArr[20] = (char)(this->lastRevWarm.all&0x00FF);
     return bArr;
 }
 
@@ -342,7 +343,7 @@ MachineSettings::MachineSettings(MachineSettings::MachineParameters mParam)
     this->machineParam.indexerScrewPinch = mParam.indexerScrewPinch;
     this->machineParam.useUnloadHead = mParam.useUnloadHead;
     this->machineParam.stepTimeDelay = mParam.stepTimeDelay;
-
+    this->machineParam.lastRevWarm.all = mParam.lastRevWarm.all;
 }
 
 MachineSettings::MachineSettings()
@@ -387,7 +388,7 @@ void MachineSettings::fromByteArray(QByteArray machineParamArray)
             |(0x00FF&((uint16_t)machineParamArray[16])));
     this->machineParam.useUnloadHead = (bool)(0x00FF&((uint16_t)machineParamArray[18]));
     this->machineParam.stepTimeDelay = (0x00FF&((uint8_t)machineParamArray[19]));
-
+    this->machineParam.lastRevWarm.all = (0x00FF&((uint8_t)machineParamArray[20]));
 }
 
 bool MachineSettings::getServiceWidgEn()
