@@ -195,6 +195,10 @@ MainWindow::MainWindow(QWidget *parent) :
         registers->setHeadReg(i, headSettings);
     }
 
+    udpHandler = new UdpSocket(this);
+    udpHandler->startUdp(true);
+    connect(udpHandler, SIGNAL(dataReady(QByteArray)), this, SLOT(getUdpData(QByteArray)));
+
     cycleDialog = new CyclesDialog(this->headsCount, this);
     connect(ui->pButtonCyclesSetup, SIGNAL(clicked(bool)), cycleDialog, SLOT(show()));
     connect(cycleDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getCyclesCommand(QByteArray)));
@@ -422,6 +426,8 @@ void MainWindow::resetMachine()
 void MainWindow::getSerialData(ModData modData)
 {
     int i;
+    QByteArray bArr;
+
     if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
     {
         switch (modData.fileds.adress) {
@@ -430,6 +436,11 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_EKR:
                 infoWidget->setIndicatorState(modData.fileds.data);
                 indexer->setWidgetState(modData.fileds.data);
+                bArr.append((char)MachineSettings::MasterDevice);
+                bArr.append((char)Register::masterReg_EKR);
+                bArr.append((char)(modData.fileds.data>>8));
+                bArr.append((char)(modData.fileds.data&0x00FF));
+                udpHandler->sendData(bArr);
                 qDebug()<<"Indicator: "<<modData.fileds.data;
                 break;
             case Register::masterReg_TOTALL:
@@ -597,6 +608,11 @@ void MainWindow::getSerialData(ModData modData)
         settings->setValue(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM"), headSettings.headParam.toByteArray());
 
     }
+}
+
+void MainWindow::getUdpData(QByteArray data)
+{
+    indexer->clickButton(data);
 }
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)

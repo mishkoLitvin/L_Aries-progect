@@ -38,6 +38,7 @@
 #include "maintancedialog.h"
 #include "exitdialog.h"
 #include "cyclesdialog.h"
+#include "udpsocket.h"
 
 #include "settings.h"
 
@@ -81,6 +82,8 @@ private:
     CyclesDialog* cycleDialog;
 
     SerialPort *comPort;
+    UdpSocket *udpHandler;
+
     QTimer *timerMain;
 
     QTime timeProgramStart;
@@ -116,6 +119,7 @@ private slots:
     void changeHeadNo(int index);
     void resetMachine();
     void getSerialData(ModData modData);
+    void getUdpData(QByteArray data);
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);
     void getHeadCommand(int index, QByteArray commandArr);

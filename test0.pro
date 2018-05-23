@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     maintancedialog.cpp \
     maintancewidget.cpp \
     exitdialog.cpp \
-    cyclesdialog.cpp
+    cyclesdialog.cpp \
+    udpsocket.cpp
 
 unix:SOURCES += mailSrc/emailaddress.cpp \
     mailSrc/mimeattachment.cpp \
@@ -71,7 +72,8 @@ HEADERS  += mainwindow.h \
     maintancedialog.h \
     maintancewidget.h \
     exitdialog.h \
-    cyclesdialog.h
+    cyclesdialog.h \
+    udpsocket.h
 
 unix:HEADERS  += mailSrc/emailaddress.h \
     mailSrc/mimeattachment.h \

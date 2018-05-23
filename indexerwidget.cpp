@@ -86,6 +86,42 @@ void IndexerWidget::setIconFolder(QString path)
 
 }
 
+void IndexerWidget::clickButton(QByteArray data)
+{
+    switch (data[3]) {
+    case IndexerLiftSettings::Machine_Reset:
+        ui->pButtonReset->click();
+        break;
+    case IndexerLiftSettings::Machine_Home:
+        ui->pButtonHome->click();
+        break;
+    case IndexerLiftSettings::IndexLock:
+        ui->pButtonLock->click();
+        break;
+    case IndexerLiftSettings::MoveUp_Down:
+        ui->pButtonMoveUp->click();
+        break;
+    case IndexerLiftSettings::MoveLeft:
+        ui->pButtonMoveLeft->click();
+        break;
+    case IndexerLiftSettings::MoveRight:
+        ui->pButtonMoveRight->click();
+        break;
+    case IndexerLiftSettings::MoveFull_Half:
+        ui->pButtonMove->click();
+        break;
+    case IndexerLiftSettings::Auto_Manual:
+        ui->pButtonAuto->click();
+        break;
+    case IndexerLiftSettings::PrintStart:
+        ui->pButtonPrint->click();
+        break;
+
+    default:
+        break;
+    }
+}
+
 void IndexerWidget::on_pButtonLock_clicked()
 {
     QByteArray bArr;
