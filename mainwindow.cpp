@@ -446,12 +446,12 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_TOTALL:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
-                infoWidget->setTotal(ragAllCount);
+                infoWidget->setTotal(ragAllCountReg);
                 break;
             case Register::masterReg_TOTALH:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
-                infoWidget->setTotal(ragAllCount);
+                infoWidget->setTotal(ragAllCountReg);
             case Register::masterReg_PRINTEDL:
                 ragSessionCount = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDH);
                 ragSessionCount = (ragSessionCount<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDL);
@@ -463,12 +463,12 @@ void MainWindow::getSerialData(ModData modData)
                 infoWidget->setPrinted(ragSessionCount);
                 break;
             case Register::masterReg_paletStLow:
-                for(i = 1; i<headsCount-1; i++)
+                for(i = 1; i<headsCount; i++)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));
             break;
             case Register::masterReg_paletStHigh:
 
-                for(i = 16; i<headsCount-1; i++)
+                for(i = 16; i<headsCount; i++)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh)&(1<<(i-15)));
             break;
             default:
@@ -1264,6 +1264,7 @@ void MainWindow::zeroStart()
     needCompleteReset = true;
     this->resetMachine();
     MachineSettings::serviceWidgetsEn = false;
+    this->exitCode = ExitDialog::Continue;
 
     logedInHeadSettings = false;
     logedInIndexer = false;

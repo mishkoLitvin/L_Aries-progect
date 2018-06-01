@@ -92,8 +92,6 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
         ui->pButtonCyclesEnable->setChecked(true);
         ui->pButtonCyclesEnable->setText("Cycles\nDisable");
         ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cyclesDis.png"));
-
-
     }
     else
     {

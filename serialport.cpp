@@ -103,6 +103,7 @@ void SerialPort::readData()
     data.append(serial->readAll());
     while(data.length()>5)
     {
+
         bool ok;
         modData8.all = data.mid(0,6).toHex().toLong(&ok, 16);
         if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
