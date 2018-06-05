@@ -63,7 +63,7 @@ void IndexerSettingDialog::setLiftDistance(float distance)
 
     QByteArray cmdArr;
     int data = distance*100;
-    cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
+    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::LiftDistance&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -458,7 +458,7 @@ void IndexerSettingDialog::dSpinBoxLiftDistance_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*100;
-    cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
+    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::LiftDistance&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -471,8 +471,8 @@ void IndexerSettingDialog::dSpinBoxLiftDistance_valueChanged(double arg1)
 void IndexerSettingDialog::spinBoxLiftHomeOffset_valueChanged(double arg1)
 {
     QByteArray cmdArr;
-    int data = arg1*10;
-    cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
+    int data = arg1;
+    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::LiftHomeOffcet&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -485,8 +485,8 @@ void IndexerSettingDialog::spinBoxLiftHomeOffset_valueChanged(double arg1)
 void IndexerSettingDialog::spinBoxLiftSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
-    int data = arg1*10;
-    cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
+    int data = arg1;
+    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::LiftSpeed&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
@@ -500,7 +500,7 @@ void IndexerSettingDialog::dSpinBoxLiftAccel_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(IndexerLiftSettings::LiftDevice&0x00FF));
+    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::LiftAcceleration&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));

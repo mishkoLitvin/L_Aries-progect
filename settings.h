@@ -292,6 +292,7 @@ public:
         LiftDistance = 0x16,
         LiftSpeed = 0x17,
         LiftAcceleration = 0x18,
+
         LoadHeadState = 0x1F,
 
     };

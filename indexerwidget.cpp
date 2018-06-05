@@ -392,7 +392,7 @@ void IndexerWidget::setWidgetState(u_int16_t state)
     ui->pButtonMoveUp->setEnabled((hb == 7)|(hb == 9));
     ui->pButtonHome->setEnabled(hb == 2);
 
-    pButtonSets->setHidden(true);
+//    pButtonSets->setHidden(true);
 }
 
 void IndexerWidget::resizeEvent(QResizeEvent *e)

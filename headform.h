@@ -37,9 +37,9 @@ private slots:
 
 typedef enum LoadState_
 {
-    LoadClean = 0x10,
-    LoadOne = 0x20,
-    LoadAuto = 0x30
+    LoadClean = 0x00,
+    LoadOne = 0x01,
+    LoadAuto = 0x02
 }LoadState;
 
 namespace Ui {

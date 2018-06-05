@@ -132,7 +132,7 @@ void CyclesDialog::on_pButtonOK_clicked()
     int i, j;
     QByteArray cmdArr;
     uint16_t data;
-    for(i = 1; i < cycleValues.length(); i++)
+    for(i = 0; i < cycleValues.length(); i++)
     {
         headStateList << 0;
         for(j = 0; j<headCount; j++)

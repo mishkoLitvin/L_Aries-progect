@@ -25,7 +25,7 @@ SerialPort::SerialPort(ComSettings settings, QObject *parent):QObject(parent)
 
     connect(settingsComDialog, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
 
-    this->openSerialPort();
+//    this->openSerialPort();
 }
 
 void SerialPort::setRegisterPointer(Register *regPtr)
@@ -103,7 +103,6 @@ void SerialPort::readData()
     data.append(serial->readAll());
     while(data.length()>5)
     {
-
         bool ok;
         modData8.all = data.mid(0,6).toHex().toLong(&ok, 16);
         if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
@@ -112,16 +111,16 @@ void SerialPort::readData()
         {
             if(modData8.fileds.rwBit)
             {
+//                qDebug()<<"write:"
+//                       <<modData8.fileds.adress
+//                      <<modData8.fileds.registerNo
+//                     <<modData8.fileds.data;
                 this->sendData(data.mid(0,6), true);
                 registers->writeReg(modData8.fileds.adress,
                                     modData8.fileds.registerNo,
                                     modData8.fileds.data);
                 if(!((modData8.fileds.adress == 0)&(modData8.fileds.registerNo == 2)))
                     emit this->dataReady(modData8);
-                qDebug()<<"write:"
-                       <<modData8.fileds.adress
-                      <<modData8.fileds.registerNo
-                     <<modData8.fileds.data;
                 if((modData8.fileds.adress == 0)
                         &(modData8.fileds.registerNo == 34)
                         &(modData8.fileds.data == 65535))
@@ -287,7 +286,6 @@ void SerialPort::getSerialSetting(ComSettings setting)
 
 void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
 {
-    qDebug()<<"send:"<<data.toHex().toUpper();
     bool ok;
     ModData mData;
     mData.all = data.toHex().toLong(&ok, 16);
@@ -305,12 +303,15 @@ void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
             dataToSend.append(data[i]&0x0F);
         }
         serial->write(dataToSend);
+        serial->waitForBytesWritten(-1);
     }
     else
     {
         if(send)
         {
+//            qDebug()<<"send:"<<data.toHex().toUpper();
             serial->write(data);
+            serial->waitForBytesWritten(-1);
         }
         else
         {
@@ -318,7 +319,7 @@ void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
             qDebug()<<"buff:"<<dataToSendBuff.length()<<dataToSendBuff.toHex();
         }
     }
-        serial->waitForBytesWritten(-1);
+//
 }
 
 void SerialPort::sendModData(uint8_t dev, uint8_t place, uint16_t data)

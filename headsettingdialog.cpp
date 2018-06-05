@@ -104,8 +104,13 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
 
     this->index = index;
 
-    ui->pButtonHeadOnOff->setChecked((bool)hSttg.headParam.powerOn);
-
+//    ui->pButtonHeadOnOff->setChecked((bool)hSttg.headParam.powerOn);
+    ui->pButtonHeadOnOff->setChecked((hSttg.headParam.powerOn==2)|
+                                     (hSttg.headParam.powerOn==4)|
+                                     (hSttg.headParam.powerOn==6)|
+                                     (hSttg.headParam.powerOn==8)|
+                                     (hSttg.headParam.powerOn==10)|
+                                     (hSttg.headParam.powerOn==12));
     ui->tabWidget->setCurrentIndex((hSttg.headParam.headOnType
                                     -HeadSetting::PrintHeadOff
                                     -ui->pButtonHeadOnOff->isChecked())/2);
@@ -181,17 +186,27 @@ void SettingDialog::accept()
 
         hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
 
-//        switch ((HeadSetting::HeadOnType)hSttg.headParam.headOnType) {
-//        case (HeadSetting::PrintHeadOn):
-//            hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-//            break;
-//        case (HeadSetting::QuartzHeadOn):
-//            hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-//            break;
-//        case (HeadSetting::InfraRedHeadOn):
-//            hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-//            break;
-//        }
+        switch ((HeadSetting::HeadOnType)hSttg.headParam.headOnType) {
+        case (HeadSetting::PrintHeadOn):
+            hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        case (HeadSetting::QuartzHeadOn):
+            hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        case (HeadSetting::InfraRedHeadOn):
+            hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        case (HeadSetting::PrintHeadOff):
+            hSttg.headParam.powerOn = (uint8_t)(0+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        case (HeadSetting::QuartzHeadOff):
+            hSttg.headParam.powerOn = (uint8_t)(2+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+        case (HeadSetting::InfraRedHeadOff):
+            hSttg.headParam.powerOn = (uint8_t)(4+(uint8_t)ui->pButtonHeadOnOff->isChecked());
+            break;
+
+        }
 
         hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
         hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();

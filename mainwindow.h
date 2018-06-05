@@ -129,7 +129,7 @@ private slots:
     void getMachineParam(QByteArray machineParamArr);
     void getStepDelayTime(double arg1);
     void getDirection(int direction);
-    void getUnloadState(bool state);
+    void setUnloadState(bool state);
     void getLiftParam(QByteArray liftParamArr);
     void getLiftOffcet(double arg1);
     void getIndexLiftSettComm(QByteArray commandArr);
