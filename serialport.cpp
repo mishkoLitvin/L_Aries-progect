@@ -111,10 +111,10 @@ void SerialPort::readData()
         {
             if(modData8.fileds.rwBit)
             {
-//                qDebug()<<"write:"
-//                       <<modData8.fileds.adress
-//                      <<modData8.fileds.registerNo
-//                     <<modData8.fileds.data;
+                qDebug()<<"write:"
+                       <<modData8.fileds.adress
+                      <<modData8.fileds.registerNo
+                     <<modData8.fileds.data;
                 this->sendData(data.mid(0,6), true);
                 registers->writeReg(modData8.fileds.adress,
                                     modData8.fileds.registerNo,

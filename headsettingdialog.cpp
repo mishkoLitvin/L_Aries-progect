@@ -105,12 +105,12 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
     this->index = index;
 
 //    ui->pButtonHeadOnOff->setChecked((bool)hSttg.headParam.powerOn);
-    ui->pButtonHeadOnOff->setChecked((hSttg.headParam.powerOn==2)|
-                                     (hSttg.headParam.powerOn==4)|
-                                     (hSttg.headParam.powerOn==6)|
-                                     (hSttg.headParam.powerOn==8)|
-                                     (hSttg.headParam.powerOn==10)|
-                                     (hSttg.headParam.powerOn==12));
+    ui->pButtonHeadOnOff->setChecked((hSttg.headParam.headOnType==2)|
+                                     (hSttg.headParam.headOnType==4)|
+                                     (hSttg.headParam.headOnType==6)|
+                                     (hSttg.headParam.headOnType==8)|
+                                     (hSttg.headParam.headOnType==10)|
+                                     (hSttg.headParam.headOnType==12));
     ui->tabWidget->setCurrentIndex((hSttg.headParam.headOnType
                                     -HeadSetting::PrintHeadOff
                                     -ui->pButtonHeadOnOff->isChecked())/2);
@@ -185,28 +185,6 @@ void SettingDialog::accept()
             hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
 
         hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-
-        switch ((HeadSetting::HeadOnType)hSttg.headParam.headOnType) {
-        case (HeadSetting::PrintHeadOn):
-            hSttg.headParam.powerOn = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        case (HeadSetting::QuartzHeadOn):
-            hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        case (HeadSetting::InfraRedHeadOn):
-            hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        case (HeadSetting::PrintHeadOff):
-            hSttg.headParam.powerOn = (uint8_t)(0+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        case (HeadSetting::QuartzHeadOff):
-            hSttg.headParam.powerOn = (uint8_t)(2+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-        case (HeadSetting::InfraRedHeadOff):
-            hSttg.headParam.powerOn = (uint8_t)(4+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-            break;
-
-        }
 
         hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
         hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
@@ -824,26 +802,37 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
 
     QByteArray cmdArr;
     int data;
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    if(this->index<16)
-    {
-        cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
-        cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
-        cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
-    }
-    else
-    {
-        cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
-        cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
-        cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
-    }
+//    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+//    cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
+//    cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
+//    cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
+//    data = CrcCalc::CalculateCRC16(cmdArr);
+//    cmdArr.append((char)(data>>8));
+//    cmdArr.append((char)(data&0x00FF));
+//    emit this->sendCommand(this->index, cmdArr);
 
+//    cmdArr.clear();
+
+//    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+//    cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
+//    cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
+//    cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
+//    data = CrcCalc::CalculateCRC16(cmdArr);
+//    cmdArr.append((char)(data>>8));
+//    cmdArr.append((char)(data&0x00FF));
+//    emit this->sendCommand(this->index, cmdArr);
+
+    cmdArr.clear();
+
+    data = this->index+500;
+    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
-
-
 
 
 }

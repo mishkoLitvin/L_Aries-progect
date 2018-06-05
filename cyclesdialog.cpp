@@ -31,6 +31,8 @@ CyclesDialog::CyclesDialog(int headCount, QWidget *parent):
     for(i = 0; i<headCount; i++)
     {
         this->spinBoxList.append(new QDoubleSpinBox(ui->widgetSpinPlace));
+        if(i == 0)
+            spinBoxList[0]->setEnabled(false);
         spinBoxList[i]->setRange(0, 10);
         spinBoxList[i]->setDecimals(0);
         spinBoxList[i]->resize(80, 65);
@@ -52,8 +54,6 @@ CyclesDialog::CyclesDialog(int headCount, QWidget *parent):
             labelList[i]->resize(15,25);
         else
             labelList[i]->resize(25,25);
-
-
     }
 
     for(i = 0; i<8; i++)
@@ -77,7 +77,6 @@ CyclesDialog::CyclesDialog(int headCount, QWidget *parent):
     lastCycleSel = 0;
     this->loadValues(cycleValues[0]);
     ui->lcdNumber->display(1);
-
 
 }
 
@@ -128,6 +127,7 @@ bool CyclesDialog::eventFilter(QObject *watched, QEvent *event)
 
 void CyclesDialog::on_pButtonOK_clicked()
 {
+    this->saveValues();
     headStateList.clear();
     int i, j;
     QByteArray cmdArr;
@@ -135,7 +135,9 @@ void CyclesDialog::on_pButtonOK_clicked()
     for(i = 0; i < cycleValues.length(); i++)
     {
         headStateList << 0;
-        for(j = 0; j<headCount; j++)
+        headStateList[i] |= (uint32_t)((bool)(cycleState&(1<<i)));
+        qDebug()<<headStateList[i];
+        for(j = 1; j<headCount; j++)
         {
             headStateList[i] |= (((uint32_t)((bool)(cycleValues[i][j]>0)))<<j);
         }
@@ -161,18 +163,19 @@ void CyclesDialog::on_pButtonOK_clicked()
         cmdArr.append((char)(data&0x00FF));
         emit this->sendCommand(cmdArr);
     }
-    qDebug()<<headStateList;
+    qDebug()<<"Head state list:"<<headStateList;
 
     headStrokList.clear();
+    uint32_t temp32;
+
     for(j = 1; j<headCount; j++)
     {
-        headStrokList << 0;
+        temp32 = 0;
         for(i = 0; i < cycleValues.length(); i++)
-        {
-            headStrokList[j] |= (((uint32_t)((uint8_t)(cycleValues[i][j]))&0x0F)<<i*4);
-        }
+            temp32 |= (((((uint32_t)(cycleValues[i][j]))&0x0000000F)<<(i*4))&(0x0F<<(i*4)));
+        headStrokList.append(temp32);
         cmdArr.clear();
-        data = (headStrokList[j]&0x0000FFFF);
+        data = (temp32&0x0000FFFF);
         cmdArr.append(HeadSetting::HeadDeviceAdrOffcet+j);
         cmdArr.append(Register::headReg_REVOLVER_STR_L);
         cmdArr.append((char)(data>>8));
@@ -183,7 +186,7 @@ void CyclesDialog::on_pButtonOK_clicked()
         emit this->sendCommand(cmdArr);
 
         cmdArr.clear();
-        data = ((headStrokList[j]>>16)&0x0000FFFF);
+        data = ((temp32>>16)&0x0000FFFF);
         cmdArr.append(HeadSetting::HeadDeviceAdrOffcet+j);
         cmdArr.append(Register::headReg_REVOLVER_STR_H);
         cmdArr.append((char)(data>>8));
@@ -193,8 +196,7 @@ void CyclesDialog::on_pButtonOK_clicked()
         cmdArr.append((char)(data&0x00FF));
         emit this->sendCommand(cmdArr);
     }
-    qDebug()<<headStrokList;
-
+    qDebug()<<"Head strok list:"<<headStrokList;
     this->accept();
 }
 

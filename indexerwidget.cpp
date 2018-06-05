@@ -30,14 +30,14 @@ IndexerWidget::~IndexerWidget()
 
 void IndexerWidget::printFinish()
 {
-    ui->pButtonPrint->setChecked(true);
-    ui->pButtonPrint->click();
+//    ui->pButtonPrint->setChecked(true);
+//    ui->pButtonPrint->click();
 }
 
 void IndexerWidget::printStart()
 {
-    ui->pButtonPrint->setChecked(false);
-    ui->pButtonPrint->click();
+//    ui->pButtonPrint->setChecked(false);
+//    ui->pButtonPrint->click();
 }
 
 bool IndexerWidget::getIsAutoPrint()

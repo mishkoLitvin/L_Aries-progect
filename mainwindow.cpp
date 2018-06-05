@@ -131,35 +131,7 @@ MainWindow::MainWindow(QWidget *parent) :
             if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
-                if(((uint8_t)settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]))
-                {
-                    headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
-                    qDebug()<<(uint16_t)headSettings.headParam.headOnType;
-                    switch ((HeadSetting::HeadOnType)headSettings.headParam.headOnType)
-                    {
-                    case HeadSetting::PrintHeadOn:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
-                        break;
-                    case HeadSetting::QuartzHeadOn:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
-                        break;
-                    case HeadSetting::InfraRedHeadOn:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
-                        break;
-                    case HeadSetting::PrintHeadOff:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A4ADC4, stop: 0.7 #A4ADC4, stop: 0.9 #04589D,stop: 1.0 #011D36);");
-                        break;
-                    case HeadSetting::QuartzHeadOff:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #B8A6C4, stop: 0.7 #B8A6C4, stop: 0.9 #562773,stop: 1.0 #14043C);");
-                        break;
-                    case HeadSetting::InfraRedHeadOff:
-                        headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DEA8AB, stop: 0.7 #DEA8AB, stop: 0.9 #A91349,stop: 1.0 #681030);");
-                        break;
-
-                    }
-                }
-                else
-                    headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
         HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
 
         if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
@@ -452,30 +424,29 @@ void MainWindow::getSerialData(ModData modData)
                 bArr.append((char)(modData.fileds.data&0x00FF));
                 udpHandler->sendData(bArr);
                 qDebug()<<"Indicator: "<<modData.fileds.data;
+                if(modData.fileds.data == 0x0800)
+                    this->indexerStepFinish();
                 break;
             case Register::masterReg_TOTALL:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
 //                infoWidget->setTotal(ragAllCount+ragSessionCount);
-                qDebug()<<"Rag count come"<<ragAllCountReg;
-                if(ragAllCountReg>ragAllCount)
-                    this->indexerStepFinish();
-                else
-                    ragAllCountReg = ragAllCount;
+                qDebug()<<"Rag count come"<<ragAllCountReg<<ragAllCount;
+
                 break;
             case Register::masterReg_TOTALH:
                 ragAllCountReg = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALH);
                 ragAllCountReg = (ragAllCountReg<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_TOTALL);
 //                infoWidget->setTotal(ragAllCount+ragSessionCount);
             case Register::masterReg_PRINTEDL:
-                ragSessionCount = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDH);
-                ragSessionCount = (ragSessionCount<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDL);
+//                ragSessionCount = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDH);
+//                ragSessionCount = (ragSessionCount<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDL);
                 qDebug()<<"Rag session come"<<ragSessionCount;
 //                infoWidget->setPrinted(ragSessionCount);
                 break;
             case Register::masterReg_PRINTEDH:
-                ragSessionCount = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDH);
-                ragSessionCount = (ragSessionCount<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDL);
+//                ragSessionCount = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDH);
+//                ragSessionCount = (ragSessionCount<<16)|registers->readReg(MachineSettings::MasterDevice, Register::masterReg_PRINTEDL);
 //                infoWidget->setPrinted(ragSessionCount);
                 break;
             case Register::masterReg_paletStLow:
@@ -621,7 +592,31 @@ void MainWindow::getSerialData(ModData modData)
             break;
         }
         settings->setValue(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM"), headSettings.headParam.toByteArray());
-
+        if((i<headsCount)&(modData.fileds.registerNo==Register::headReg_ON))
+        {
+//            qDebug()<<"setHead"<<i;
+            switch ((HeadSetting::HeadOnType)headSettings.headParam.headOnType)
+            {
+            case HeadSetting::PrintHeadOn:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                break;
+            case HeadSetting::QuartzHeadOn:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                break;
+            case HeadSetting::InfraRedHeadOn:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                break;
+            case HeadSetting::PrintHeadOff:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A4ADC4, stop: 0.7 #A4ADC4, stop: 0.9 #04589D,stop: 1.0 #011D36);");
+                break;
+            case HeadSetting::QuartzHeadOff:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #B8A6C4, stop: 0.7 #B8A6C4, stop: 0.9 #562773,stop: 1.0 #14043C);");
+                break;
+            case HeadSetting::InfraRedHeadOff:
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DEA8AB, stop: 0.7 #DEA8AB, stop: 0.9 #A91349,stop: 1.0 #681030);");
+                break;
+            }
+        }
     }
 }
 
@@ -632,10 +627,8 @@ void MainWindow::getUdpData(QByteArray data)
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 {
-    qDebug() << QApplication::platformName();
-
     HeadSetting::setHeadOn_OffStateInd(index, static_cast<bool>(hParamArr[2]));
-
+    qDebug()<<"head on:"<<(HeadSetting::HeadOnType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0])));
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
     switch ((HeadSetting::HeadOnType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0]))))
     {
@@ -967,10 +960,10 @@ void MainWindow::exitProgram(bool restart)
                                 "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
                                 "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
                                 "Machine printed " + QString::number(ragSessionCount) + " items this session"
-                                " and " + QString::number(ragAllCount+ragSessionCount) + " items in total.\n"
+                                " and " + QString::number(ragAllCount) + " items in total.\n"
                                 "\nHave a great day!" );
 
-    settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount+ragSessionCount);
+    settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
     settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCyclesAll);
 
     settings->sync();
@@ -1153,33 +1146,10 @@ void MainWindow::indexerStepFinish()
 {
     indexerCyclesAll++;
     indexerCyclesSession++;
-    int i;
-    for(i = headButton.length()-1; i>1; i--)
-    {
-        if(headButton[i-1]->getRagState() == HeadForm::shirtOn)
-            headButton[i]->setPixmap(HeadForm::shirtOn);
-        else
-            headButton[i]->setPixmap(HeadForm::shirtOff);
-    }
 
-    if(headButton[0]->getRagState() == HeadForm::shirtProcessing)
-    {
-        headButton[1]->setPixmap(HeadForm::shirtOn);
-        ragAtHeadCount++;
-    }
-    else
-        if(headButton[0]->getRagState() == HeadForm::shirtOn)
-        {
-            headButton[1]->setPixmap(HeadForm::shirtOn);
-            headButton[0]->setPixmap(HeadForm::shirtOff);
-            ragAtHeadCount++;
-        }
-        else
-            headButton[1]->setPixmap(HeadForm::shirtOff);
     if(headButton[headButton.length()-1]->getRagState() == HeadForm::shirtOn)
     {
        ragAllCount++;
-       ragAtHeadCount--;
        infoWidget->setTotal(ragAllCount);
        ragSessionCount++;
        infoWidget->setPrinted(ragSessionCount);
@@ -1187,15 +1157,12 @@ void MainWindow::indexerStepFinish()
 
     if(!indexer->getIsAutoPrint())
     {
-//        timerMain->stop();
         if(ragAtHeadCount > 0)
             indexer->printFinish();
     }
-
     maintanceDialog->check(indexerCyclesAll);
     if(ragAtHeadCount == 0)
     {
-//        timerMain->stop();
         indexer->printFinish();
     }
     infoWidget->setPrinted(ragSessionCount);
@@ -1205,13 +1172,12 @@ void MainWindow::indexerStepFinish()
 
 void MainWindow::startPrintProcess(bool autoPrint)
 {
-//    timerMain->start(1000);
     this->autoPrintEnabled = autoPrint;
 }
 
 void MainWindow::stopPrintProcess()
 {
-//    timerMain->stop();
+
 }
 
 void MainWindow::maintanceWorkSlot(bool enable)

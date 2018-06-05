@@ -40,6 +40,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->dSpinBoxWarningTime, SIGNAL(valueChanged(double)), this, SLOT(warningTimeChanged(double)));
     connect(ui->comboBoxMacineType, SIGNAL(currentIndexChanged(int)), this, SLOT(machineTypeChanget(int)));
     connect(ui->pButtonCyclesEnable, SIGNAL(clicked(bool)), this, SLOT(changeCyclesState()));
+
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -427,6 +428,10 @@ void GeneralSettingDialog::changeDirection()
 
 void GeneralSettingDialog::changeCyclesState()
 {
+    this->machineParamGl.lastRevWarm.all = 0;
+    this->machineParamGl.lastRevWarm.field.revolver = ui->pButtonCyclesEnable->isChecked();
+    this->machineParamGl.lastRevWarm.field.last = ui->pButtonCyclesEnable->isChecked();
+
     if(ui->pButtonCyclesEnable->isChecked())
     {
         ui->pButtonCyclesEnable->setText("Disable\ncycles");
