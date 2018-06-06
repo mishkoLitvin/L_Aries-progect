@@ -154,4 +154,6 @@ void UserSettingDialog::showEvent(QShowEvent *ev)
     ui->tableWidget->setColumnWidth(0, 45);
     ui->tableWidget->setColumnWidth(1, (ui->tableWidget->width()-80)/2);
     ui->tableWidget->setColumnWidth(2, (ui->tableWidget->width()-80)/2);
+
+    ev->accept();
 }

@@ -6,6 +6,7 @@
 #include <QBitmap>
 #include <QGraphicsEffect>
 #include <QDebug>
+#include <QTime>
 
 namespace Ui {
 class InfoWidget;
@@ -29,6 +30,7 @@ private:
     Ui::InfoWidget *ui;
     QImage imageHome, imageLock, imageUp, imageArrows, imageEmerg, imageWarning, imageStopHand;
     QString pathIcon;
+    QTime lastTime;
 
     QGraphicsOpacityEffect* effect[7];
 

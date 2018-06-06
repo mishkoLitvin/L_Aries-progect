@@ -190,13 +190,10 @@ bool HeadSetting::getHeadStateAtIndex(uint8_t index)
 
 void HeadSetting::setHeadOn_OffStateInd(uint8_t index, bool state)
 {
-    qDebug()<<"HeadState b:"<<HeadSetting::headStateAll;
     if(state)
         HeadSetting::headStateAll &= (~(1<<(index)));
     else
         HeadSetting::headStateAll |= ((1<<index));
-    qDebug()<<"HeadState a:"<<HeadSetting::headStateAll;
-
 }
 
 QByteArray IndexerLiftSettings::LiftParameters_::toByteArray()

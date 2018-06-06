@@ -584,3 +584,8 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     acceptEnable = true;
 
 }
+
+void GeneralSettingDialog::on_pButtonHeadsActivation_clicked()
+{
+    emit this->headActivationRequest();
+}

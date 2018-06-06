@@ -382,17 +382,48 @@ void IndexerWidget::settingPButtonClicSlot()
 void IndexerWidget::setWidgetState(u_int16_t state)
 {
     uint8_t hb = ((state>>8)&0x00FF);
-    ui->pButtonReset->setEnabled(hb == 0);
+    qDebug()<<"Down menu state:"<<hb;
+    ui->pButtonReset->setVisible((hb == 0)|(hb == 17)|(hb == 18));
+    ui->pButtonHome->setVisible(hb == 2);
+
+    ui->pButtonPrint->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+    ui->pButtonLock->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+    ui->pButtonAuto->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+    ui->pButtonMove->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+    ui->pButtonMoveLeft->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+    ui->pButtonMoveRight->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+    ui->pButtonMoveUp->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+
+    ui->pButtonReset->setEnabled((hb == 0)|(hb == 17)|(hb == 18));
     ui->pButtonPrint->setEnabled((hb == 7)|(hb == 8));
     ui->pButtonLock->setEnabled(((hb == 4)|(hb == 7)));
     ui->pButtonAuto->setEnabled(hb == 7);
     ui->pButtonMove->setEnabled((hb == 7)&(hb != 11));
-    ui->pButtonMoveLeft->setEnabled((hb == 7)|(hb == 11));
-    ui->pButtonMoveRight->setEnabled((hb == 7)|(hb == 11));
+    ui->pButtonMoveLeft->setEnabled((hb == 7)|(hb == 11)|(hb == 10));
+    ui->pButtonMoveRight->setEnabled((hb == 7)|(hb == 11)|(hb == 10));
     ui->pButtonMoveUp->setEnabled((hb == 7)|(hb == 9));
     ui->pButtonHome->setEnabled(hb == 2);
 
-//    pButtonSets->setHidden(true);
+    if(hb == 8)
+    {
+        ui->pButtonPrint->setChecked(true);
+        ui->pButtonPrint->setText("Stop");
+        ui->pButtonPrint->setIcon(QIcon(pathIcon+"/stop.png"));
+    }
+    if(hb == 7)
+    {
+        ui->pButtonPrint->setChecked(false);
+        if(ui->pButtonAuto->isChecked())
+        {
+            ui->pButtonPrint->setText("Print Auto");
+            ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
+        }
+        else
+        {
+            ui->pButtonPrint->setText("Print Manual");
+            ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
+        }
+    }
 }
 
 void IndexerWidget::resizeEvent(QResizeEvent *e)

@@ -111,10 +111,10 @@ void SerialPort::readData()
         {
             if(modData8.fileds.rwBit)
             {
-                qDebug()<<"write:"
-                       <<modData8.fileds.adress
-                      <<modData8.fileds.registerNo
-                     <<modData8.fileds.data;
+//                qDebug()<<"write:"
+//                       <<modData8.fileds.adress
+//                      <<modData8.fileds.registerNo
+//                     <<modData8.fileds.data;
                 this->sendData(data.mid(0,6), true);
                 registers->writeReg(modData8.fileds.adress,
                                     modData8.fileds.registerNo,
@@ -244,8 +244,8 @@ void SerialPort::readData()
 
                     if((dataToSendBuff.length()>5))
                     {
-                        qDebug()<<"read request:"<<modData8.bits.adress<<modData8.bits.registerNo<<modData8.bits.data
-                            <<"\t\trequest send:"<<0<< 2<< (uint16_t)dataToSendBuff[0]<< (uint16_t)dataToSendBuff[1];
+//                        qDebug()<<"read request:"<<modData8.bits.adress<<modData8.bits.registerNo<<modData8.bits.data
+//                            <<"\t\trequest send:"<<0<< 2<< (uint16_t)dataToSendBuff[0]<< (uint16_t)dataToSendBuff[1];
                         this->sendModData(0, 2, ((uint16_t)(((uint16_t)(dataToSendBuff[0]<<8))|dataToSendBuff[1])));
                     }
                     else

@@ -69,6 +69,7 @@ signals:
     void styleChangedIndex(int index);
     void iconsChangedIndex(int index);
     void serviceSettingRequest();
+    void headActivationRequest();
     void usersSettingRequest();
     void directionChanged(int dir);
     void unloadStateChanged(bool state);
@@ -110,7 +111,7 @@ private slots:
     void headCountChanged(double arg1);
     void machineTypeChanget(int index);
     void warningTimeChanged(double arg1);
-
+    void on_pButtonHeadsActivation_clicked();
 
 protected:
     bool event(QEvent *e);

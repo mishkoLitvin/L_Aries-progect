@@ -33,8 +33,8 @@ IndexerSettingDialog::~IndexerSettingDialog()
 void IndexerSettingDialog::setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam)
 {
     this->disconnectAll();
-    ui->dSpinBoxIndexAccel->setValue(indexParam.acceleration/10.);
-    ui->dSpinBoxIndexAccelRet->setValue(indexParam.accelerationRet/10);
+    ui->dSpinBoxIndexAccel->setValue(indexParam.acceleration/*/10.*/);
+    ui->dSpinBoxIndexAccelRet->setValue(indexParam.accelerationRet/*/10*/);
     ui->dSpinBoxIndexDistance->setValue(indexParam.distance/10.);
     ui->spinBoxIndexDistanceOffcet->setValue(indexParam.distOffcet);
     ui->spinBoxIndexHomeOffset->setValue(indexParam.homeOffset);
@@ -46,7 +46,7 @@ void IndexerSettingDialog::setIndexerSetting(IndexerLiftSettings::IndexParameter
 void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters liftParam)
 {
     this->disconnectAll();
-    ui->dSpinBoxLiftAccel->setValue(liftParam.acceleration/10.);
+    ui->dSpinBoxLiftAccel->setValue(liftParam.acceleration/*/10.*/);
     ui->dSpinBoxLiftDownDelay->setValue(liftParam.delayDown/10.);
     ui->dSpinBoxLiftUpDelay->setValue(liftParam.delayUp/10.);
     ui->dSpinBoxLiftDistance->setValue(liftParam.distance/100.);
@@ -55,7 +55,7 @@ void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters li
     this->connectAll();
 }
 
-void IndexerSettingDialog::setLiftDistance(float distance)
+void IndexerSettingDialog::setLiftDistance(float distance, int gearRatio)
 {
     disconnect(ui->dSpinBoxLiftDistance, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxLiftDistance_valueChanged(double)));
     ui->dSpinBoxLiftDistance->setValue(distance);
@@ -71,6 +71,31 @@ void IndexerSettingDialog::setLiftDistance(float distance)
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(cmdArr);
+
+    uint32_t liftPulseDist = Register::calcLiftPulse(gearRatio, distance*100);
+
+    cmdArr.clear();
+    cmdArr.append((char)IndexerLiftSettings::LiftDevice);
+    cmdArr.append((char)Register::liftReg_DIST_PULSE_L);
+    data = ((uint16_t)(liftPulseDist&0x0000FFFF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+
+    cmdArr.clear();
+    cmdArr.append((char)IndexerLiftSettings::LiftDevice);
+    cmdArr.append((char)Register::liftReg_DIST_PULSE_H);
+    data = ((uint16_t)((liftPulseDist>>16)&0x0000FFFF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+
 }
 
 float IndexerSettingDialog::getLiftDistance()
@@ -120,8 +145,8 @@ void IndexerSettingDialog::accept()
     if(acceptEnable)
     {
         IndexerLiftSettings::IndexParameters indexParam;
-        indexParam.acceleration = ui->dSpinBoxIndexAccel->value()*10.;
-        indexParam.accelerationRet = ui->dSpinBoxIndexAccelRet->value()*10.;
+        indexParam.acceleration = ui->dSpinBoxIndexAccel->value()/**10.*/;
+        indexParam.accelerationRet = ui->dSpinBoxIndexAccelRet->value()/**10.*/;
         indexParam.distance = ui->dSpinBoxIndexDistance->value()*10.;
         indexParam.distOffcet = ui->spinBoxIndexDistanceOffcet->value();
         indexParam.homeOffset = ui->spinBoxIndexHomeOffset->value();
@@ -129,7 +154,7 @@ void IndexerSettingDialog::accept()
         indexParam.speedRet = ui->spinBoxindexSpeedRet->value();
 
         IndexerLiftSettings::LiftParameters liftParams;
-        liftParams.acceleration = ui->dSpinBoxLiftAccel->value()*10.;
+        liftParams.acceleration = ui->dSpinBoxLiftAccel->value()/**10.*/;
         liftParams.delayDown = ui->dSpinBoxLiftDownDelay->value()*10.;
         liftParams.delayUp = ui->dSpinBoxLiftUpDelay->value()*10.;
         liftParams.distance = ui->dSpinBoxLiftDistance->value()*100.;
@@ -387,7 +412,7 @@ void IndexerSettingDialog::spinBoxIndexSpeed_valueChanged(double arg1)
 void IndexerSettingDialog::dSpinBoxIndexAccel_valueChanged(double arg1)
 {
     QByteArray cmdArr;
-    int data = arg1*10;
+    int data = arg1/**10*/;
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::IndexAcceleration&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -415,7 +440,7 @@ void IndexerSettingDialog::spinBoxindexSpeedRet_valueChanged(double arg1)
 void IndexerSettingDialog::dSpinBoxIndexAccelRet_valueChanged(double arg1)
 {
     QByteArray cmdArr;
-    int data = arg1*10;
+    int data = arg1/**10*/;
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::IndexAccelerationRet&0x00FF));
     cmdArr.append((char)(data>>8));
@@ -499,7 +524,7 @@ void IndexerSettingDialog::spinBoxLiftSpeed_valueChanged(double arg1)
 void IndexerSettingDialog::dSpinBoxLiftAccel_valueChanged(double arg1)
 {
     QByteArray cmdArr;
-    int data = arg1*10;
+    int data = arg1/**10*/;
     cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
     cmdArr.append((char)(IndexerLiftSettings::LiftAcceleration&0x00FF));
     cmdArr.append((char)(data>>8));

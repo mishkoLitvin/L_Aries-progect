@@ -57,6 +57,12 @@ InfoWidget::~InfoWidget()
 void InfoWidget::setPrinted(int val)
 {
     ui->labelPrinted->setText("Printed: " + QString::number(val));
+
+    QTime curTime = QTime::currentTime();
+    if((val>1)&((lastTime.secsTo(curTime))>0))
+        ui->labelDZH->setText("R/H:"+QString::number(3600000/lastTime.msecsTo(curTime)));
+    lastTime = curTime;
+
 }
 
 void InfoWidget::setTotal(int val)

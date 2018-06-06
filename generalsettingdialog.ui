@@ -828,6 +828,33 @@ Disable</string>
             </widget>
            </item>
            <item>
+            <widget class="QToolButton" name="pButtonHeadsActivation">
+             <property name="text">
+              <string>Heads
+activation</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/new/icons/icons/rotateRight.png</normaloff>:/new/icons/icons/rotateRight.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer_5">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>

@@ -179,14 +179,7 @@ void MaintanceDialog::check(int cyclesCount)
             maintanceList[i].troubleType = (int)Warning;
             this->maintanceHaveWarning = true;
             bool service = false;
-//            service = MaintanceDialog::execute(this,
-//                                               (MaintanceType)maintanceList[i].troubleType,
-//                                               maintanceList[i].troubleName,
-//                                               maintanceList[i].troubleInfo
-//                                               +"\nYou must do this after "
-//                                               +QString::number(settings->value("WARNING_CYCLES_COUNT", 50).toInt())
-//                                               +" cycles.",
-//                                               maintanceList[i].machineInfo);
+
             if(service)
             {
                 emit this->stopRequest();
@@ -222,7 +215,7 @@ void MaintanceDialog::check(int cyclesCount)
                     settings->setValue("UNSOLVED_ELEMENTS_COUNT", unsolvedList.length());
                     settings->setValue("UNSOLVED_ELEMENTS_LIST", QVariant::fromValue(unsolvedListIndex));
                     emit this->maintanceWorkEnable(true);
-                    qDebug()<<unsolvedListIndex;
+                    qDebug()<<"Maintanance unsolved: "<<unsolvedListIndex;
                 }
 
             }

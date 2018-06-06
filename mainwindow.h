@@ -39,6 +39,8 @@
 #include "exitdialog.h"
 #include "cyclesdialog.h"
 #include "udpsocket.h"
+#include "headactivationdialog.h"
+
 
 #include "settings.h"
 
@@ -80,6 +82,7 @@ private:
     UserSettingDialog *usersSettingDialog;
     MaintanceDialog* maintanceDialog;
     CyclesDialog* cycleDialog;
+    HeadActivationDialog *headActDialog;
 
     SerialPort *comPort;
     UdpSocket *udpHandler;
@@ -123,6 +126,7 @@ private slots:
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);
     void getHeadCommand(int index, QByteArray commandArr);
+    void getHeadActivCommand(QByteArray commandArr);
     void getCyclesCommand(QByteArray commandArr);
     void getLoadState(LoadState stase);
     void getIndexerParam(QByteArray indexerParamArr);

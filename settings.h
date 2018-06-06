@@ -285,8 +285,8 @@ public:
         IndexLastRevolvWarm = 0x09,
         IndexAcceleration = 0x0A,
         IndexAccelerationRet = 0x0B,
-        IndexSpeedRet = 0x0C,
-        WarningTime = 0x0D,
+        IndexSpeedRet = 0x0D,
+        WarningTime = 0x0E,
 
         LiftHomeOffcet = 0x15,
         LiftDistance = 0x16,

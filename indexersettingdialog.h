@@ -25,7 +25,7 @@ public:
     ~IndexerSettingDialog();
     void setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam);
     void setLiftSetting(IndexerLiftSettings::LiftParameters liftParam);
-    void setLiftDistance(float distance);
+    void setLiftDistance(float distance, int gearRatio);
     float getLiftDistance();
 
 
@@ -64,11 +64,8 @@ private slots:
     void dSpinBoxLiftAccel_valueChanged(double arg1);
 
     void on_pButtonLiftMove_clicked();
-
     void on_pButtonLiftHome_clicked();
-
     void on_pButtonIndexMove_clicked();
-
     void on_pButtonIndexHome_clicked();
 
 protected:
