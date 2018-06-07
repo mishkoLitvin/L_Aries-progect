@@ -1089,12 +1089,18 @@ void MainWindow::setHeadsPosition()
 
     int direction = machineSettings.machineParam.direction;
 
-    for(i = 0;
-        ((i<headsCount)) ;
-        i++)
+    for(i = 0; i<headsCount; i++)
     {
-        sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
-        cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
+        sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.
+                      +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+        cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.
+                      +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+//        if(this->machineSettings.machineParam.useUnloadHead)
+//            sinCoef+=direction*3.1415926/headsCount;
+
+//        sinCoef = sin(sinCoef);
+//        cosCoef = cos(sinCoef);
+
 
         headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
 

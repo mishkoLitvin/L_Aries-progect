@@ -702,6 +702,20 @@ void SettingDialog::on_toolButtonStepBack_clicked()
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
+
+    cmdArr.clear();
+    if(ui->toolButtonStepBack->isChecked())
+        data = (~((1<<8)<<3))&this->headSettings.headParam.headOnType;
+    else
+        data = ((1<<8)<<3)|this->headSettings.headParam.headOnType;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonIndexHere_clicked()
@@ -717,6 +731,8 @@ void SettingDialog::on_toolButtonIndexHere_clicked()
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
+
+
 }
 
 void SettingDialog::on_toolButtonInkColor_clicked()
@@ -1181,7 +1197,7 @@ void SettingDialog::rButtonTime1_clicked()
     QByteArray cmdArr;
     int data;
     if(ui->rButtonTime1->isChecked())
-        data = ((0<<8)<<1)|this->headSettings.headParam.headOnType;
+        data = (~((1<<8)<<1))&this->headSettings.headParam.headOnType;
     else
         data = ((1<<8)<<1)|this->headSettings.headParam.headOnType;
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
