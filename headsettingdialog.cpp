@@ -72,6 +72,8 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonHeadNoInc, SIGNAL(clicked(bool)), this, SLOT(pButtonIncClkd()));
     connect(ui->pButtonHeadNoDec, SIGNAL(clicked(bool)), this, SLOT(pButtonDecClkd()));
+    connect(ui->rButtonTime1, SIGNAL(clicked(bool)), this, SLOT(rButtonTime1_clicked()));
+    connect(ui->rButtonTime2, SIGNAL(clicked(bool)), this, SLOT(rButtonTime1_clicked()));
 
 //    connect(ui->pushButtonCopyToAll, SIGNAL(clicked(bool)), this, SLOT(on_pushButtonCopyToAll_clicked()));
 //    connect(ui->toolButtonPlast, SIGNAL(clicked(bool)), this, SLOT(on_toolButtonPlast_clicked()));
@@ -99,6 +101,7 @@ SettingDialog::~SettingDialog()
 
 void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
 {
+    this->headSettings = hSttg;
     if(disconnect)
         this->disconnectAll();
 
@@ -1009,7 +1012,7 @@ void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
     QByteArray cmdArr;
     int data = arg1;
     cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadFlashPowerWtoutIR&0x00FF));
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
@@ -1172,3 +1175,21 @@ void SettingDialog::dSpinBoxSqDwellTime_valueChanged(double arg1)
     emit this->sendCommand(this->index, cmdArr);
 }
 
+
+void SettingDialog::rButtonTime1_clicked()
+{
+    QByteArray cmdArr;
+    int data;
+    if(ui->rButtonTime1->isChecked())
+        data = ((0<<8)<<1)|this->headSettings.headParam.headOnType;
+    else
+        data = ((1<<8)<<1)|this->headSettings.headParam.headOnType;
+    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append((char)(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
