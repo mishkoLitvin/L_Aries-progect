@@ -19,8 +19,6 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
 
     isAutoPrintEnable = false;
     machineState.all = 0x0000;
-
-
 }
 
 IndexerWidget::~IndexerWidget()
