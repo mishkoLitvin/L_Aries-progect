@@ -75,6 +75,7 @@ signals:
     void dataReady(QByteArray data);
     void dataReady(ModData modData);
     void serialSettingAccepted(ComSettings seittngs);
+    void working();
 };
 
 #endif // SERIALPORT_H

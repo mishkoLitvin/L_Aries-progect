@@ -115,7 +115,7 @@ void InfoWidget::setIconFolder(QString path)
 
 void InfoWidget::setIndicatorState(u_int16_t state)
 {
-    effect[0]->setOpacity(1);
+//    effect[0]->setOpacity(1);
 
     switch ((u_int8_t)(state>>8)) {
     case 0:

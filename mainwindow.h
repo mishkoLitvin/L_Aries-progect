@@ -21,6 +21,7 @@
 #include <QTime>
 #include <QTimer>
 #include <QDate>
+#include <QStringList>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -88,6 +89,7 @@ private:
     UdpSocket *udpHandler;
 
     QTimer *timerMain;
+    QTimer *watchDog;
 
     QTime timeProgramStart;
     QTime timeProgramEnd;
@@ -116,6 +118,7 @@ private:
 
 private slots:
     void zeroStart();
+    void watchDogTimeout();
     void headSettingRequest(int index);
     void indexerLiftSettingRequest();
     void generalSettingDialogRequest();

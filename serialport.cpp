@@ -101,14 +101,20 @@ void SerialPort::readData()
     static QByteArray data = 0;
     static bool firstByte = true;
     data.append(serial->readAll());
+
     while(data.length()>5)
     {
         bool ok;
         modData8.all = data.mid(0,6).toHex().toLong(&ok, 16);
-        if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
-            data.remove(0,1);
-        else
+//        if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
+//        {
+//            qDebug()<<"CRC Err!!!";
+//            data.remove(0,1);
+//        }
+//        else
         {
+//            qDebug()<<"Got data:"<<data.mid(0,6).toHex().toUpper();
+            emit this->working();
             if(modData8.fileds.rwBit)
             {
 //                qDebug()<<"write:"
@@ -254,9 +260,9 @@ void SerialPort::readData()
                 }
                 else
                 {
-                    qDebug()<<"read reg:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data
-                        <<"\t\treg send:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<registers->readReg(modData8.fileds.adress,
-                                                                                                                  modData8.fileds.registerNo);
+//                    qDebug()<<"read reg:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data
+//                        <<"\t\treg send:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<registers->readReg(modData8.fileds.adress,
+//                                                                                                                  modData8.fileds.registerNo);
                     this->sendModData(modData8.bits.adress, modData8.bits.registerNo, registers->readReg(modData8.fileds.adress,
                                                                                                          modData8.fileds.registerNo));
                 }
@@ -309,7 +315,7 @@ void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
     {
         if(send)
         {
-//            qDebug()<<"send:"<<data.toHex().toUpper();
+//            qDebug()<<"send data:"<<data.toHex().toUpper();
             serial->write(data);
             serial->waitForBytesWritten(-1);
         }
@@ -335,6 +341,7 @@ void SerialPort::sendModData(uint8_t dev, uint8_t place, uint16_t data)
     dataArr.append((char)(crc&0x00FF));
     serial->write(dataArr);
     serial->waitForBytesWritten(-1);
+//    qDebug()<<"send mod data:"<<dataArr.toHex().toUpper();
 }
 
 void SerialPort::setupPort()

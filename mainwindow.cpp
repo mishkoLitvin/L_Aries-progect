@@ -190,14 +190,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonCyclesSetup, SIGNAL(clicked(bool)), cycleDialog, SLOT(show()));
     connect(cycleDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getCyclesCommand(QByteArray)));
 
-    this->zeroStart();
     ui->widgetHeads->installEventFilter(this);
     ui->dSpinBoxLiftOffcet->children()[0]->installEventFilter(this);
     connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
     ui->dSpinBoxStepDelay->children()[0]->installEventFilter(this);
     connect(ui->dSpinBoxStepDelay, SIGNAL(valueChanged(double)), this, SLOT(getStepDelayTime(double)));
 
-
+    watchDog = new QTimer(this);
+    watchDog->setInterval(1000);
+    connect(watchDog, SIGNAL(timeout()), this, SLOT(watchDogTimeout()));
+    connect(comPort, SIGNAL(working()), watchDog, SLOT(start()));
+    this->zeroStart();
 }
 
 MainWindow::~MainWindow()
@@ -417,7 +420,7 @@ void MainWindow::getSerialData(ModData modData)
 {
     int i;
     QByteArray bArr;
-
+    watchDog->start();
     if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
     {
         switch (modData.fileds.adress) {
@@ -435,13 +438,12 @@ void MainWindow::getSerialData(ModData modData)
                 break;
             case Register::masterReg_EKR:
                 infoWidget->setIndicatorState(modData.fileds.data);
-                indexer->setWidgetState(modData.fileds.data);
+                indexer->setState(modData.fileds.data);
                 bArr.append((char)MachineSettings::MasterDevice);
                 bArr.append((char)Register::masterReg_EKR);
                 bArr.append((char)(modData.fileds.data>>8));
                 bArr.append((char)(modData.fileds.data&0x00FF));
                 udpHandler->sendData(bArr);
-                qDebug()<<"Indicator: "<<modData.fileds.data;
                 if(modData.fileds.data == 0x0800)
                     this->indexerStepFinish();
                 break;
@@ -539,8 +541,11 @@ void MainWindow::getSerialData(ModData modData)
             headSettings.headParam.dwellSQTime = modData.fileds.data;
             break;
         case Register::headReg_ON:
+//            qDebug()<<"Reg head ON got: "<<modData.fileds.data;
+
             headSettings.headParam.headOnType = (HeadSetting::HeadOnType)modData.fileds.data;
             headSettings.headParam.powerOn = modData.fileds.data;
+
             break;
         case Register::REG_SHUTTLE_REAR_POS:
             headSettings.headParam.heatLimit = modData.fileds.data;
@@ -587,8 +592,9 @@ void MainWindow::getSerialData(ModData modData)
         settings->setValue(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM"), headSettings.headParam.toByteArray());
         if((i<headsCount)&(modData.fileds.registerNo==Register::headReg_ON))
         {
+//            qDebug()<<"ON to head set: "<<headSettings.headParam.headOnType;
             if(headActDialog->getHeadActivAtIndex(i))
-                switch ((HeadSetting::HeadOnType)headSettings.headParam.headOnType)
+                switch ((HeadSetting::HeadOnType)(headSettings.headParam.headOnType&0x0F))
                 {
                 case HeadSetting::PrintHeadOn:
                     headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
@@ -1176,7 +1182,6 @@ void MainWindow::indexerStepFinish()
     }
     infoWidget->setPrinted(ragSessionCount);
     infoWidget->setTotal(ragAllCount);
-    qDebug()<<"indexer all count:"<<indexerCyclesSession<<indexerCyclesAll;
 }
 
 void MainWindow::startPrintProcess(bool autoPrint)
@@ -1196,30 +1201,33 @@ void MainWindow::maintanceWorkSlot(bool enable)
 
 void MainWindow::setIconFolder(int index)
 {
+    QStringList list = settings->value("STYLE/ICON_PATH").value<QStringList>();
+    if(list.length()>index)
+    {
+        QString path = list[index];
+        settings->setValue("STYLE/ICON_SEL_INDEX", index);
 
-    QString path = settings->value("STYLE/ICON_PATH").value<QStringList>().at(index);
-    settings->setValue("STYLE/ICON_SEL_INDEX", index);
-
-    ui->pButtonExit->setIcon(QIcon(path+"/exit.png"));
-    ui->pButtonSetting->setIcon(QIcon(path+"/settings.png"));
-    ui->pButtonLoadJob->setIcon(QIcon(path+"/load.png"));
-    ui->pButtonSaveJob->setIcon(QIcon(path+"/save.png"));
-    ui->pButtonMaintance->setIcon(QIcon(path+"/warning.png"));
-    ui->pButtonCyclesSetup->setIcon(QIcon(path+"/cycles.png"));
-
-
-    indexer->setIconFolder(path);
-    headSettingDialog->setIconFolder(path);
-    generalSettingDialog->setIconFolder(path);
+        ui->pButtonExit->setIcon(QIcon(path+"/exit.png"));
+        ui->pButtonSetting->setIcon(QIcon(path+"/settings.png"));
+        ui->pButtonLoadJob->setIcon(QIcon(path+"/load.png"));
+        ui->pButtonSaveJob->setIcon(QIcon(path+"/save.png"));
+        ui->pButtonMaintance->setIcon(QIcon(path+"/warning.png"));
+        ui->pButtonCyclesSetup->setIcon(QIcon(path+"/cycles.png"));
 
 
-    int i;
-    for(i = 0; i<headButton.length(); i++)
-        headButton[i]->setIconPath(path);
-    for(i = 0; i<headSettButton.length(); i++)
-        headSettButton[i]->setIconPath(path+"/settings.png");
+        indexer->setIconFolder(path);
+        headSettingDialog->setIconFolder(path);
+        generalSettingDialog->setIconFolder(path);
 
-    infoWidget->setIconFolder(path);
+
+        int i;
+        for(i = 0; i<headButton.length(); i++)
+            headButton[i]->setIconPath(path);
+        for(i = 0; i<headSettButton.length(); i++)
+            headSettButton[i]->setIconPath(path+"/settings.png");
+
+        infoWidget->setIconFolder(path);
+    }
 }
 
 void MainWindow::userLogin()
@@ -1278,7 +1286,6 @@ void MainWindow::userLogin()
 
 void MainWindow::zeroStart()
 {
-
     needCompleteReset = true;
     this->resetMachine();
     MachineSettings::serviceWidgetsEn = false;
@@ -1345,6 +1352,16 @@ void MainWindow::zeroStart()
                                          );
     ui->widgetStepDelay->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
 
+    watchDog->start();
+
+}
+
+void MainWindow::watchDogTimeout()
+{
+    qDebug()<<"WatchDog handler call";
+//    needCompleteReset = true;
+//    indexer->setState(0x0);
+//    infoWidget->setIndicatorState(0x704);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)
@@ -1355,10 +1372,10 @@ void MainWindow::resizeEvent(QResizeEvent *e)
 
 void MainWindow::showEvent(QShowEvent *ev)
 {
-    this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
     this->setHeadsPosition();
     maintanceDialog->check(indexerCyclesAll);
     ui->pButtonCyclesSetup->setVisible(this->machineSettings.machineParam.lastRevWarm.field.revolver);
+    this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
 
     ev->accept();
 }

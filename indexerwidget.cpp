@@ -259,6 +259,10 @@ void IndexerWidget::on_pButtonPrint_clicked()
     bArr.append((char)(data>>8));
     bArr.append((char)(data&0x00FF));
     emit this->sendCommand(bArr);
+    if(ui->pButtonPrint->isChecked())
+        emit this->startPrint(this->isAutoPrintEnable);
+    else
+        emit this->stopPrint();
 }
 
 void IndexerWidget::on_pButtonMoveLeft_clicked()
@@ -379,10 +383,9 @@ void IndexerWidget::settingPButtonClicSlot()
     emit this->settingButtonCliced();
 }
 
-void IndexerWidget::setWidgetState(u_int16_t state)
+void IndexerWidget::setState(u_int16_t state)
 {
     uint8_t hb = ((state>>8)&0x00FF);
-    qDebug()<<"Down menu state:"<<hb;
     ui->pButtonReset->setVisible((hb == 0)|(hb == 17)|(hb == 18));
     ui->pButtonHome->setVisible(hb == 2);
 
