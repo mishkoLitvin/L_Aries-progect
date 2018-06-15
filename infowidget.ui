@@ -155,7 +155,9 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>TextLabel1
+Label2
+Label3</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

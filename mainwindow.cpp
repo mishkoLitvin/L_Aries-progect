@@ -174,6 +174,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     registers = new Register(headsCount);
     comPort->setRegisterPointer(this->registers);
+    infoWidget->setRegisterPointer(this->registers);
     registers->setMasterReg(this->machineSettings);
     registers->setIndexLiftReg(this->indexerLiftSettings);
     for(i = 0; i < this->headsCount; i++)
@@ -454,6 +455,10 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_paletStHigh:
                 for(i = 16; i<headsCount; i++)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh)&(1<<(i-16)));
+            break;
+            case Register::masterReg_ERROR_MESSAGE:
+
+                infoWidget->setErrorText(this->machineSettings.machineParam, 0);
             break;
             default:
                 break;
