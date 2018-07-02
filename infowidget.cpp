@@ -47,6 +47,7 @@ InfoWidget::InfoWidget(QWidget *parent) :
 
     errMasages = new QSettings("messages.ini", QSettings::IniFormat, this);
 
+    errMasages->setValue("HEAD/err"+QString::number(0), QString("err"));
 //    ui->labelHome->pixmap()->setMask();
 
 }
@@ -237,31 +238,35 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
         msgStrRow2 = "Head servo drive "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage),"").toString();
     }
     else
-        if(errMessage<32)
+        if((errMessage>=16)&(errMessage<32))
         {
             qDebug()<<"SQ_FL";
-            msgStrRow2 = "Head SQ/FL drive "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage-2001),"").toString();
+            msgStrRow2 = "Head SQ/FL drive "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage-16),"").toString();
         }
         else
-            if((errMessage>=100)&(errMessage<1001))
-            {
-                qDebug()<<"Main servo";
-                if(machineParameters.indexeLiftType.field.indexerType == 0)
-                    msgStrRow2 = errMasages->value("MAIN_ESTUN/err"+QString::number(errMessage-100),"").toString();
-                if(machineParameters.indexeLiftType.field.indexerType == 1)
-                    msgStrRow2 = errMasages->value("MAIN_DELTA/err"+QString::number(errMessage-100),"").toString();
-            }
+            if(errMessage == 32)
+                msgStrRow2 = "Head "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage),"").toString();
             else
-                if((errMessage>=1001)&(errMessage<2001))
+                if((errMessage>=100)&(errMessage<1001))
                 {
-                    qDebug()<<"Machine error";
-                    msgStrRow2 = errMasages->value("MACHINE/err"+QString::number(errMessage-1001),"").toString();
+                    qDebug()<<"Main servo";
+                    if(machineParameters.indexeLiftType.field.indexerType == 0)
+                        msgStrRow2 = errMasages->value("MAIN_ESTUN/err"+QString::number(errMessage-100),"").toString();
+                    if(machineParameters.indexeLiftType.field.indexerType == 1)
+                        msgStrRow2 = errMasages->value("MAIN_DELTA/err"+QString::number(errMessage-100),"").toString();
                 }
                 else
-                    if(errMessage>=2001)
+                    if((errMessage>=1001)&(errMessage<2001))
                     {
-                        qDebug()<<"Head error";
-                        msgStrRow2 = "Head "+errMasages->value("HEAD/err"+QString::number(errMessage-2001),"").toString();
+                        qDebug()<<"Machine error";
+                        msgStrRow2 = errMasages->value("MACHINE/err"+QString::number(errMessage-1001),"").toString();
                     }
+                    else
+                        if(errMessage>=2001)
+                        {
+                            qDebug()<<"Head error";
+                            msgStrRow2 = "Head "+errMasages->value("HEAD/err"+QString::number(errMessage-2001),"").toString();
+                        }
+
     ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+"\nPlease press Reset button.");
 }

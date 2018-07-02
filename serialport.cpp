@@ -106,21 +106,21 @@ void SerialPort::readData()
     {
         bool ok;
         modData8.all = data.mid(0,6).toHex().toLong(&ok, 16);
-//        if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
-//        {
-//            qDebug()<<"CRC Err!!!";
-//            data.remove(0,1);
-//        }
-//        else
+        if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
+        {
+            qDebug()<<"CRC Err!!!";
+            data.remove(0,1);
+        }
+        else
         {
 //            qDebug()<<"Got data:"<<data.mid(0,6).toHex().toUpper();
             emit this->working();
             if(modData8.fileds.rwBit)
             {
-//                qDebug()<<"write:"
-//                       <<modData8.fileds.adress
-//                      <<modData8.fileds.registerNo
-//                     <<modData8.fileds.data;
+                qDebug()<<"write:"
+                       <<modData8.fileds.adress
+                      <<modData8.fileds.registerNo
+                     <<modData8.fileds.data;
                 this->sendData(data.mid(0,6), true);
                 registers->writeReg(modData8.fileds.adress,
                                     modData8.fileds.registerNo,
