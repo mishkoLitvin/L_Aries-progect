@@ -14,6 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
     qRegisterMetaTypeStreamOperators<EmailSettings>("EmailSettings");
     qRegisterMetaTypeStreamOperators<ComSettings>("ComSettings");
 
+//    translator = new QTranslator(this);
+////    qApp->removeTranslator(translator);
+//    qDebug()<<"translator"<<translator->load("lang/l_UA.qm");
+//    qApp->installTranslator(translator);
+
     usersSettingDialog = new UserSettingDialog(this);
 
     timeProgramStart = QTime::currentTime();
@@ -202,6 +207,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(watchDog, SIGNAL(timeout()), this, SLOT(watchDogTimeout()));
     connect(comPort, SIGNAL(working()), watchDog, SLOT(start()));
     this->zeroStart();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -1363,7 +1370,7 @@ void MainWindow::zeroStart()
 
 void MainWindow::watchDogTimeout()
 {
-    qDebug()<<"WatchDog handler call";
+//    qDebug()<<"WatchDog handler call";
 //    needCompleteReset = true;
 //    indexer->setState(0x0);
 //    infoWidget->setIndicatorState(0x704);

@@ -22,6 +22,7 @@
 #include <QTimer>
 #include <QDate>
 #include <QStringList>
+#include <QTranslator>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -114,6 +115,8 @@ private:
     Register *registers;
 
     uint8_t serviceCounter;
+
+    QTranslator *translator;
 
 
 private slots:
