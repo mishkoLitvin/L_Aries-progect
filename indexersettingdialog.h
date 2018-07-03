@@ -72,6 +72,7 @@ protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);
     void showEvent(QShowEvent *ev);
+    void changeEvent(QEvent *event);
 };
 
 

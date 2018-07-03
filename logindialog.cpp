@@ -40,3 +40,11 @@ bool LoginDialog::eventFilter(QObject *watched, QEvent *event)
     }
     return false;
 }
+
+void LoginDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}

@@ -157,3 +157,11 @@ void UserSettingDialog::showEvent(QShowEvent *ev)
 
     ev->accept();
 }
+
+void UserSettingDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}

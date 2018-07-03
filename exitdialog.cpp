@@ -68,3 +68,11 @@ void ExitDialog::showEvent(QShowEvent *ev)
     ui->widget->setVisible(MachineSettings::getServiceWidgEn());
     ev->accept();
 }
+
+void ExitDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}

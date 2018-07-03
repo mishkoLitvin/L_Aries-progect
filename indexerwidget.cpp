@@ -139,12 +139,12 @@ void IndexerWidget::on_pButtonLock_clicked()
 
     if(ui->pButtonLock->isChecked())
     {
-        ui->pButtonLock->setText("Unlock");
+        ui->pButtonLock->setText(tr("Unlock"));
         ui->pButtonLock->setIcon(QIcon(pathIcon+"/unlock.png"));
     }
     else
     {
-        ui->pButtonLock->setText("Lock");
+        ui->pButtonLock->setText(tr("Lock"));
         ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
     }
 }
@@ -168,7 +168,7 @@ void IndexerWidget::on_pButtonMove_clicked()
 
     if(ui->pButtonMove->isChecked())
     {
-        ui->pButtonMove->setText("Move full");
+        ui->pButtonMove->setText(tr("Move full"));
         ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPart2Round.png"));
         ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowLPart.png"));
         ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowRPart.png"));
@@ -176,7 +176,7 @@ void IndexerWidget::on_pButtonMove_clicked()
     }
     else
     {
-        ui->pButtonMove->setText("Move half");
+        ui->pButtonMove->setText(tr("Move half"));
         ui->pButtonMove->setIcon(QIcon(pathIcon+"/arrows/arrowRPartRound.png"));
         ui->pButtonMoveLeft->setIcon(QIcon(pathIcon+"/arrows/arrowL.png"));
         ui->pButtonMoveRight->setIcon(QIcon(pathIcon+"/arrows/arrowR.png"));
@@ -202,17 +202,17 @@ void IndexerWidget::on_pButtonAuto_clicked()
 
     if(ui->pButtonAuto->isChecked())
     {
-        ui->pButtonAuto->setText("Manual");
+        ui->pButtonAuto->setText(tr("Manual"));
         ui->pButtonAuto->setIcon(QIcon(pathIcon+"/playP.png"));
-        ui->pButtonPrint->setText("Print Auto");
+        ui->pButtonPrint->setText(tr("Print Auto"));
         ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
         isAutoPrintEnable = true;
     }
     else
     {
-        ui->pButtonAuto->setText("Auto");
+        ui->pButtonAuto->setText(tr("Auto"));
         ui->pButtonAuto->setIcon(QIcon(pathIcon+"/play.png"));
-        ui->pButtonPrint->setText("Print Manual");
+        ui->pButtonPrint->setText(tr("Print Manual"));
         ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
         isAutoPrintEnable = false;
     }
@@ -231,7 +231,7 @@ void IndexerWidget::on_pButtonPrint_clicked()
     if(ui->pButtonPrint->isChecked())
     {
         data = IndexerLiftSettings::PrintStart;
-        ui->pButtonPrint->setText("Stop");
+        ui->pButtonPrint->setText(tr("Stop"));
         ui->pButtonPrint->setIcon(QIcon(pathIcon+"/stop.png"));
         emit this->startPrint(this->isAutoPrintEnable);
     }
@@ -240,12 +240,12 @@ void IndexerWidget::on_pButtonPrint_clicked()
         data = IndexerLiftSettings::PrintStop;
         if(ui->pButtonAuto->isChecked())
         {
-            ui->pButtonPrint->setText("Print Auto");
+            ui->pButtonPrint->setText(tr("Print Auto"));
             ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
         }
         else
         {
-            ui->pButtonPrint->setText("Print Manual");
+            ui->pButtonPrint->setText(tr("Print Manual"));
             ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
         }
         emit this->stopPrint();
@@ -308,12 +308,12 @@ void IndexerWidget::on_pButtonMoveUp_clicked()
 
     if(ui->pButtonMoveUp->isChecked())
     {
-        ui->pButtonMoveUp->setText("Down");
+        ui->pButtonMoveUp->setText(tr("Down"));
         ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowDPart.png"));
     }
     else
     {
-        ui->pButtonMoveUp->setText("Up");
+        ui->pButtonMoveUp->setText(tr("Up"));
         ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowUPart.png"));
     }
 }
@@ -408,7 +408,7 @@ void IndexerWidget::setState(u_int16_t state)
     if(hb == 8)
     {
         ui->pButtonPrint->setChecked(true);
-        ui->pButtonPrint->setText("Stop");
+        ui->pButtonPrint->setText(tr("Stop"));
         ui->pButtonPrint->setIcon(QIcon(pathIcon+"/stop.png"));
     }
     if(hb == 7)
@@ -416,12 +416,12 @@ void IndexerWidget::setState(u_int16_t state)
         ui->pButtonPrint->setChecked(false);
         if(ui->pButtonAuto->isChecked())
         {
-            ui->pButtonPrint->setText("Print Auto");
+            ui->pButtonPrint->setText(tr("Print Auto"));
             ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
         }
         else
         {
-            ui->pButtonPrint->setText("Print Manual");
+            ui->pButtonPrint->setText(tr("Print Manual"));
             ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
         }
     }
@@ -432,4 +432,12 @@ void IndexerWidget::resizeEvent(QResizeEvent *e)
     pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
     e->accept();
+}
+
+void IndexerWidget::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
 }

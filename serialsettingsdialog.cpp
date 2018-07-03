@@ -386,6 +386,14 @@ void SerialSettingsDialog::updateSettings()
     currentSettings.localEchoEnabled = ui->localEchoCheckBox->isChecked();
 }
 
+void SerialSettingsDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}
+
 ComSettings ComSettings::operator =(ComSettings nSett)
 {
     ComSettings nStt;

@@ -32,7 +32,7 @@ private slots:
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
-
+    void changeEvent(QEvent *event);
 };
 
 #endif // LOGINDIALOG_H

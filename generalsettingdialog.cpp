@@ -32,6 +32,7 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
     connect(ui->listWidgetStyle, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
     connect(ui->listWidgetIcons, SIGNAL(currentRowChanged(int)), this, SLOT(iconChanged(int)));
+    connect(ui->comboBoxLang, SIGNAL(currentIndexChanged(int)), this, SLOT(langChanged(int)));
     connect(ui->pButtonServiceState, SIGNAL(clicked(bool)), this, SLOT(changeServiceStateClicked()));
     connect(ui->pButtonUserSetup, SIGNAL(clicked(bool)), this, SLOT(userSettingClicked()));
     connect(ui->pButtonDirection, SIGNAL(clicked(bool)), this, SLOT(changeDirection()));
@@ -79,25 +80,25 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     if(machineParam.direction == -1)
     {
         ui->pButtonDirection->setChecked(true);
-        ui->pButtonDirection->setText("Direction\nclockwise");
+        ui->pButtonDirection->setText(tr("Direction\nclockwise"));
 
     }
     else
     {
         ui->pButtonDirection->setChecked(false);
-        ui->pButtonDirection->setText("Direction\nanticlockwise");
+        ui->pButtonDirection->setText(tr("Direction\nanticlockwise"));
     }
 
     if(machineParam.lastRevWarm.field.revolver)
     {
         ui->pButtonCyclesEnable->setChecked(true);
-        ui->pButtonCyclesEnable->setText("Cycles\nDisable");
+        ui->pButtonCyclesEnable->setText(tr("Cycles\nDisable"));
         ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cyclesDis.png"));
     }
     else
     {
         ui->pButtonCyclesEnable->setChecked(false);
-        ui->pButtonCyclesEnable->setText("Cycles\nEnable");
+        ui->pButtonCyclesEnable->setText(tr("Cycles\nEnable"));
         ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cycles.png"));
     }
 
@@ -121,12 +122,12 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     ui->pButtonUseUnload->setChecked(machineParam.useUnloadHead);
     if(machineParam.useUnloadHead)
     {
-        ui->pButtonUseUnload->setText("Don't use\nunload palett");
+        ui->pButtonUseUnload->setText(tr("Don't use\nunload palett"));
         ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt.png"));
     }
     else
     {
-        ui->pButtonUseUnload->setText("Use\nunload palett");
+        ui->pButtonUseUnload->setText(tr("Use\nunload palett"));
         ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt3.png"));
     }
 
@@ -155,6 +156,12 @@ void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect, QStri
     ui->listWidgetStyle->setCurrentRow(curSelect);
     ui->listWidgetIcons->addItems(iconList);
     ui->listWidgetIcons->setCurrentRow(iconSel);
+}
+
+void GeneralSettingDialog::setLangList(QStringList langList, int curSelect)
+{
+    ui->comboBoxLang->addItems(langList);
+    ui->comboBoxLang->setCurrentIndex(curSelect);
 }
 
 void GeneralSettingDialog::setEmailSettings(EmailSettings emailSett)
@@ -240,12 +247,12 @@ void GeneralSettingDialog::lockUnlockEmail()
         if(ui->pButtonLockUnlockEmail->isChecked()){
             ui->emailSettingWidget->setEnabled(true);
             ui->checkBoxMailSendEnable->setEnabled(true);
-            ui->pButtonLockUnlockEmail->setText("Lock");
+            ui->pButtonLockUnlockEmail->setText(tr("Lock"));
         }
         else{
             ui->emailSettingWidget->setEnabled(false);
             ui->checkBoxMailSendEnable->setEnabled(false);
-            ui->pButtonLockUnlockEmail->setText("Unlock");
+            ui->pButtonLockUnlockEmail->setText(tr("Unlock"));
         }
     }
 #ifndef DEBUG_BUILD
@@ -399,18 +406,23 @@ void GeneralSettingDialog::iconChanged(int index)
     emit this->iconsChangedIndex(index);
 }
 
+void GeneralSettingDialog::langChanged(int index)
+{
+    emit this->langChangedIndex(index);
+}
+
 void GeneralSettingDialog::changeDirection()
 {
     if(ui->pButtonDirection->isChecked())
     {
         emit this->directionChanged(1);
-        ui->pButtonDirection->setText("Direction\nanticlockwise");
+        ui->pButtonDirection->setText(tr("Direction\nanticlockwise"));
         ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateLeft.png"));
     }
     else
     {
         emit this->directionChanged(-1);
-        ui->pButtonDirection->setText("Direction\nclockwise");
+        ui->pButtonDirection->setText(tr("Direction\nclockwise"));
         ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateRight.png"));
     }
     QByteArray cmdArr;
@@ -434,12 +446,12 @@ void GeneralSettingDialog::changeCyclesState()
 
     if(ui->pButtonCyclesEnable->isChecked())
     {
-        ui->pButtonCyclesEnable->setText("Disable\ncycles");
+        ui->pButtonCyclesEnable->setText(tr("Disable\ncycles"));
         ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cyclesDis.png"));
     }
     else
     {
-        ui->pButtonCyclesEnable->setText("Enable\ncycles");
+        ui->pButtonCyclesEnable->setText(tr("Enable\ncycles"));
         ui->pButtonCyclesEnable->setIcon(QIcon(pathIcon+"/cycles.png"));
     }
     QByteArray cmdArr;
@@ -461,12 +473,12 @@ void GeneralSettingDialog::useUnloadStateChanged()
     if(ui->pButtonUseUnload->isChecked())
     {
 
-        ui->pButtonUseUnload->setText("Don't use\nunload palett");
+        ui->pButtonUseUnload->setText(tr("Don't use\nunload palett"));
         ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt.png"));
     }
     else
     {
-        ui->pButtonUseUnload->setText("Use\nunload palett");
+        ui->pButtonUseUnload->setText(tr("Use\nunload palett"));
         ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt3.png"));
     }
 }
@@ -516,12 +528,12 @@ void GeneralSettingDialog::warningTimeChanged(double arg1)
 
 void GeneralSettingDialog::showPortInfo(ComSettings comSett)
 {
-    ui->lPortName->setText(QString("Port name: %1").arg(comSett.name));
-    ui->lBaudRate->setText(QString("Baud rate: %1").arg(comSett.baudRate));
-    ui->lDataBits->setText(QString("Data bits: %1").arg(comSett.stringDataBits));
-    ui->lFlowControl->setText(QString("Flow control: %1").arg(comSett.stringFlowControl));
-    ui->lParity->setText(QString("Parity: %1").arg(comSett.stringParity));
-    ui->lStopBits->setText(QString("Stop bits: %1").arg(comSett.stringStopBits));
+    ui->lPortName->setText(QString(tr("Port name: %1")).arg(comSett.name));
+    ui->lBaudRate->setText(QString(tr("Baud rate: %1")).arg(comSett.baudRate));
+    ui->lDataBits->setText(QString(tr("Data bits: %1")).arg(comSett.stringDataBits));
+    ui->lFlowControl->setText(QString(tr("Flow control: %1")).arg(comSett.stringFlowControl));
+    ui->lParity->setText(QString(tr("Parity: %1")).arg(comSett.stringParity));
+    ui->lStopBits->setText(QString(tr("Stop bits: %1")).arg(comSett.stringStopBits));
 }
 
 bool GeneralSettingDialog::event(QEvent *e)
@@ -582,7 +594,14 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ev->accept();
     acceptOnDeactilationEn = true;
     acceptEnable = true;
+}
 
+void GeneralSettingDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
 }
 
 void GeneralSettingDialog::on_pButtonHeadsActivation_clicked()

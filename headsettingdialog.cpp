@@ -526,6 +526,13 @@ void SettingDialog::showEvent(QShowEvent *ev)
     ev->accept();
 }
 
+void SettingDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}
 
 void SettingDialog::on_toolButtonPlast_clicked()
 {
@@ -655,9 +662,9 @@ void SettingDialog::on_toolButtonPressure_clicked()
 void SettingDialog::on_toolButtonHoldOn_clicked()
 {
     if(ui->toolButtonHoldOn->isChecked())
-        ui->toolButtonHoldOn->setText("Hold off");
+        ui->toolButtonHoldOn->setText(tr("Hold off"));
     else
-        ui->toolButtonHoldOn->setText("Hold on");
+        ui->toolButtonHoldOn->setText(tr("Hold on"));
     QByteArray cmdArr;
     uint16_t data;
     if(ui->toolButtonHoldOn->isChecked())

@@ -151,167 +151,172 @@
         <translation>Тема іконок:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="209"/>
+        <location filename="../generalsettingdialog.ui" line="193"/>
+        <source>Language:</source>
+        <translation>Мова:</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.ui" line="223"/>
         <source>General</source>
         <translation>Основні</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="221"/>
+        <location filename="../generalsettingdialog.ui" line="235"/>
         <source>Heads count 
 2..18</source>
         <translation>Кількість головок
 2..18</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="262"/>
+        <location filename="../generalsettingdialog.ui" line="276"/>
         <source>Use unload 
 palett</source>
         <translation>Станція вигрузки
 активна</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="291"/>
+        <location filename="../generalsettingdialog.ui" line="305"/>
         <source>Warning time
 0.5..5.0 s</source>
         <translation>Час звучання сигналу
 попередження 0,5..5 с</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="345"/>
+        <location filename="../generalsettingdialog.ui" line="359"/>
         <source>Macine type:</source>
         <translation>Тип машини:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="377"/>
+        <location filename="../generalsettingdialog.ui" line="391"/>
         <source>Main servo
 type:</source>
         <translation>Тип головного
 сервоприводу:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="398"/>
-        <location filename="../generalsettingdialog.ui" line="668"/>
+        <location filename="../generalsettingdialog.ui" line="412"/>
+        <location filename="../generalsettingdialog.ui" line="682"/>
         <source>ESTUN</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="403"/>
-        <location filename="../generalsettingdialog.ui" line="673"/>
+        <location filename="../generalsettingdialog.ui" line="417"/>
+        <location filename="../generalsettingdialog.ui" line="687"/>
         <source>DELTA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="408"/>
-        <location filename="../generalsettingdialog.ui" line="678"/>
+        <location filename="../generalsettingdialog.ui" line="422"/>
+        <location filename="../generalsettingdialog.ui" line="692"/>
         <source>KINCO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="413"/>
-        <location filename="../generalsettingdialog.ui" line="683"/>
+        <location filename="../generalsettingdialog.ui" line="427"/>
+        <location filename="../generalsettingdialog.ui" line="697"/>
         <source>AKD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="427"/>
+        <location filename="../generalsettingdialog.ui" line="441"/>
         <source>HMI connected</source>
         <translation>Підєднано HMI</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="440"/>
+        <location filename="../generalsettingdialog.ui" line="454"/>
         <source>Keypad connected</source>
         <translation>Підєднано клавіатури</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="447"/>
+        <location filename="../generalsettingdialog.ui" line="461"/>
         <source>Lift
 type:</source>
         <translation>Тип ліфта:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="468"/>
-        <location filename="../generalsettingdialog.ui" line="512"/>
-        <location filename="../generalsettingdialog.ui" line="556"/>
-        <location filename="../generalsettingdialog.ui" line="590"/>
-        <location filename="../generalsettingdialog.ui" line="629"/>
+        <location filename="../generalsettingdialog.ui" line="482"/>
+        <location filename="../generalsettingdialog.ui" line="526"/>
+        <location filename="../generalsettingdialog.ui" line="570"/>
+        <location filename="../generalsettingdialog.ui" line="604"/>
+        <location filename="../generalsettingdialog.ui" line="643"/>
         <source>AIR</source>
         <translation>Повітря</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="473"/>
-        <location filename="../generalsettingdialog.ui" line="517"/>
-        <location filename="../generalsettingdialog.ui" line="561"/>
-        <location filename="../generalsettingdialog.ui" line="595"/>
-        <location filename="../generalsettingdialog.ui" line="634"/>
+        <location filename="../generalsettingdialog.ui" line="487"/>
+        <location filename="../generalsettingdialog.ui" line="531"/>
+        <location filename="../generalsettingdialog.ui" line="575"/>
+        <location filename="../generalsettingdialog.ui" line="609"/>
+        <location filename="../generalsettingdialog.ui" line="648"/>
         <source>AC motor</source>
         <translation>AC двигун</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="478"/>
+        <location filename="../generalsettingdialog.ui" line="492"/>
         <source>Servo: Cam</source>
         <translation>Серво кулачок</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="483"/>
+        <location filename="../generalsettingdialog.ui" line="497"/>
         <source>Servo: Screw</source>
         <translation>Серво гвинт</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="491"/>
+        <location filename="../generalsettingdialog.ui" line="505"/>
         <source>Indexer
 type:</source>
         <translation>Тип
 індексера:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="522"/>
-        <location filename="../generalsettingdialog.ui" line="600"/>
-        <location filename="../generalsettingdialog.ui" line="639"/>
+        <location filename="../generalsettingdialog.ui" line="536"/>
+        <location filename="../generalsettingdialog.ui" line="614"/>
+        <location filename="../generalsettingdialog.ui" line="653"/>
         <source>Servo motor</source>
         <translation>Серво двигун</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="530"/>
+        <location filename="../generalsettingdialog.ui" line="544"/>
         <source>Lock
 type:</source>
         <translation>Тип
 замка:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="551"/>
+        <location filename="../generalsettingdialog.ui" line="565"/>
         <source>None</source>
         <translation>Немає</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="569"/>
+        <location filename="../generalsettingdialog.ui" line="583"/>
         <source>Carriage
 type:</source>
         <translation>Тип
 каретки:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="608"/>
+        <location filename="../generalsettingdialog.ui" line="622"/>
         <source>SqFl
 type:</source>
         <translation>Тип
 ракеля:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="647"/>
+        <location filename="../generalsettingdialog.ui" line="661"/>
         <source>Head servo
 type:</source>
         <translation>Тип серво
 голівки:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="691"/>
+        <location filename="../generalsettingdialog.ui" line="705"/>
         <source>Head
 Max range:</source>
         <translation>Макс. відстань
 руху голівки:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="718"/>
+        <location filename="../generalsettingdialog.ui" line="732"/>
         <source>Indexer
 Screw pitch</source>
         <translation>Крок різьби
@@ -319,7 +324,7 @@ Screw pitch</source>
 індексера</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="745"/>
+        <location filename="../generalsettingdialog.ui" line="759"/>
         <source>Lift
 Gear ratio</source>
         <translation>Передача 
@@ -327,14 +332,15 @@ Gear ratio</source>
 ліфта</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="779"/>
+        <location filename="../generalsettingdialog.ui" line="793"/>
         <source>Direction
 clock</source>
         <translation>Змінити 
 напрям руху</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="806"/>
+        <location filename="../generalsettingdialog.ui" line="820"/>
+        <location filename="../generalsettingdialog.cpp" line="95"/>
         <source>Cycles
 Disable</source>
         <translation>Ввімкнути 
@@ -342,7 +348,7 @@ Disable</source>
 друк</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="833"/>
+        <location filename="../generalsettingdialog.ui" line="847"/>
         <source>Heads
 activation</source>
         <translation>Активація 
@@ -351,96 +357,185 @@ activation</source>
 голівок</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="896"/>
+        <location filename="../generalsettingdialog.ui" line="910"/>
         <source>Users setup</source>
         <translation>Налаштування 
 корустувачів 
 машини</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="938"/>
+        <location filename="../generalsettingdialog.ui" line="952"/>
         <source>SERVICE</source>
         <translation>Сервісний режим</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="970"/>
+        <location filename="../generalsettingdialog.ui" line="984"/>
         <source>Mail setup</source>
         <translation>Налаштування eMail</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="981"/>
+        <location filename="../generalsettingdialog.ui" line="995"/>
         <source>Enable mail sending</source>
         <translation>Відправляти листи</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1007"/>
+        <location filename="../generalsettingdialog.ui" line="1021"/>
+        <location filename="../generalsettingdialog.cpp" line="255"/>
         <source>Unlock</source>
         <translation>Розблокувати</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1024"/>
+        <location filename="../generalsettingdialog.ui" line="1038"/>
         <source>Receiving email adress:</source>
         <translation>Адреса отримувача:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1044"/>
+        <location filename="../generalsettingdialog.ui" line="1058"/>
         <source>Sending email password:</source>
         <translation>Пароль відправника:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1057"/>
+        <location filename="../generalsettingdialog.ui" line="1071"/>
         <source>Show</source>
         <translation>Показати пароль</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1086"/>
+        <location filename="../generalsettingdialog.ui" line="1100"/>
         <source>Email subject:</source>
         <translation>Тема (заголовок) листа:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1106"/>
+        <location filename="../generalsettingdialog.ui" line="1120"/>
         <source>Sending email adress:</source>
         <translation>Адреса відправника:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1132"/>
+        <location filename="../generalsettingdialog.ui" line="1146"/>
         <source>Serial Port</source>
         <translation>Порт обміну</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1140"/>
+        <location filename="../generalsettingdialog.ui" line="1154"/>
         <source>Port name: </source>
         <translation>Ім&apos;я порту:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1147"/>
+        <location filename="../generalsettingdialog.ui" line="1161"/>
         <source>Baud rate:</source>
         <translation>Швидкість передачі:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1154"/>
+        <location filename="../generalsettingdialog.ui" line="1168"/>
         <source>Data bits:</source>
         <translation>Кількість біт:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1161"/>
+        <location filename="../generalsettingdialog.ui" line="1175"/>
         <source>Parity:</source>
         <translation>Перевірка парності:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1168"/>
+        <location filename="../generalsettingdialog.ui" line="1182"/>
         <source>Stop bits:</source>
         <translation>Кількість стоп біт:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1175"/>
+        <location filename="../generalsettingdialog.ui" line="1189"/>
         <source>Flow control:</source>
         <translation>Контроль потоку:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1190"/>
+        <location filename="../generalsettingdialog.ui" line="1204"/>
         <source>Change</source>
         <translation>Змініти</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="83"/>
+        <location filename="../generalsettingdialog.cpp" line="425"/>
+        <source>Direction
+clockwise</source>
+        <translation>За годинниковою
+стрілкою</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="89"/>
+        <location filename="../generalsettingdialog.cpp" line="419"/>
+        <source>Direction
+anticlockwise</source>
+        <translation>Проти годинникової
+стрілки</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="101"/>
+        <source>Cycles
+Enable</source>
+        <translation>Поетапний
+друк</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="125"/>
+        <location filename="../generalsettingdialog.cpp" line="476"/>
+        <source>Don&apos;t use
+unload palett</source>
+        <translation>Без станції
+вигрузки</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="130"/>
+        <location filename="../generalsettingdialog.cpp" line="481"/>
+        <source>Use
+unload palett</source>
+        <translation>З станцією 
+вигрузки</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="250"/>
+        <source>Lock</source>
+        <translation>Заблокувати</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="449"/>
+        <source>Disable
+cycles</source>
+        <translation>Поетапний
+друк вимк</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="454"/>
+        <source>Enable
+cycles</source>
+        <translation>Поетапний
+друк ввімк</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="531"/>
+        <source>Port name: %1</source>
+        <translation>Ім&apos;я порту: %1</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="532"/>
+        <source>Baud rate: %1</source>
+        <translation>Швидкість обміну: %1</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="533"/>
+        <source>Data bits: %1</source>
+        <translation>Кількість біт: %1</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="534"/>
+        <source>Flow control: %1</source>
+        <translation>Контроль потоку: %1</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="535"/>
+        <source>Parity: %1</source>
+        <translation>Парність: %1</translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.cpp" line="536"/>
+        <source>Stop bits: %1</source>
+        <translation>Стоп біти: %1</translation>
     </message>
 </context>
 <context>
@@ -459,6 +554,11 @@ activation</source>
         <location filename="../headactivationdialog.ui" line="57"/>
         <source>OK</source>
         <translation>ОК</translation>
+    </message>
+    <message>
+        <location filename="../headactivationdialog.cpp" line="18"/>
+        <source>Head </source>
+        <translation>Голівка </translation>
     </message>
 </context>
 <context>
@@ -614,6 +714,7 @@ activation</source>
     </message>
     <message>
         <location filename="../indexerwidget.ui" line="48"/>
+        <location filename="../indexerwidget.cpp" line="147"/>
         <source>Lock</source>
         <translation>Замнути</translation>
     </message>
@@ -624,6 +725,7 @@ activation</source>
     </message>
     <message>
         <location filename="../indexerwidget.ui" line="109"/>
+        <location filename="../indexerwidget.cpp" line="213"/>
         <source>Auto</source>
         <translation>Друк 
 авто</translation>
@@ -631,8 +733,7 @@ activation</source>
     <message>
         <location filename="../indexerwidget.ui" line="155"/>
         <source>Home</source>
-        <translation>В нульову
- позицію</translation>
+        <translation>в 0 позицію</translation>
     </message>
     <message>
         <location filename="../indexerwidget.ui" line="184"/>
@@ -641,9 +742,11 @@ activation</source>
     </message>
     <message>
         <location filename="../indexerwidget.ui" line="213"/>
+        <location filename="../indexerwidget.cpp" line="215"/>
+        <location filename="../indexerwidget.cpp" line="248"/>
+        <location filename="../indexerwidget.cpp" line="424"/>
         <source>Print Manual</source>
-        <translation>Запуск
-покроково</translation>
+        <translation>Друк</translation>
     </message>
     <message>
         <location filename="../indexerwidget.ui" line="272"/>
@@ -652,6 +755,7 @@ activation</source>
     </message>
     <message>
         <location filename="../indexerwidget.ui" line="298"/>
+        <location filename="../indexerwidget.cpp" line="316"/>
         <source>Up</source>
         <translation>Вверх</translation>
     </message>
@@ -659,6 +763,44 @@ activation</source>
         <location filename="../indexerwidget.ui" line="327"/>
         <source>Right</source>
         <translation>Вправо</translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.cpp" line="142"/>
+        <source>Unlock</source>
+        <translation>Розблокувати</translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.cpp" line="171"/>
+        <source>Move full</source>
+        <translation>Крок</translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.cpp" line="179"/>
+        <source>Move half</source>
+        <translation>Півкрок</translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.cpp" line="205"/>
+        <source>Manual</source>
+        <translation>Покроково</translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.cpp" line="207"/>
+        <location filename="../indexerwidget.cpp" line="243"/>
+        <location filename="../indexerwidget.cpp" line="419"/>
+        <source>Print Auto</source>
+        <translation>Авто друк</translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.cpp" line="234"/>
+        <location filename="../indexerwidget.cpp" line="411"/>
+        <source>Stop</source>
+        <translation>Зупинити</translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.cpp" line="311"/>
+        <source>Down</source>
+        <translation>Вниз</translation>
     </message>
 </context>
 <context>
@@ -710,6 +852,27 @@ Label3</source>
         <location filename="../infowidget.ui" line="382"/>
         <source>DZ/H: 0</source>
         <translation>Од./год.: 0</translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="67"/>
+        <source>Printed: </source>
+        <translation>Надруковано: </translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="71"/>
+        <source>R/H:</source>
+        <translation>од./год.:</translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="78"/>
+        <source>Total: </source>
+        <translation>Загалом: </translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="271"/>
+        <source>
+Please press Reset button.</source>
+        <translation>Натисніть кнопку перезппустити.</translation>
     </message>
 </context>
 <context>
@@ -1211,6 +1374,7 @@ Lock
     </message>
     <message>
         <location filename="../headsettingdialog.ui" line="659"/>
+        <location filename="../headsettingdialog.cpp" line="667"/>
         <source>Hold on</source>
         <translation>Затримка</translation>
     </message>
@@ -1410,6 +1574,11 @@ Sensor</source>
         <location filename="../headsettingdialog.ui" line="2059"/>
         <source>OK</source>
         <translation>ОК</translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.cpp" line="665"/>
+        <source>Hold off</source>
+        <translation>Звільнити</translation>
     </message>
 </context>
 <context>

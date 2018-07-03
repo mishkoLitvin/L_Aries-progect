@@ -64,18 +64,18 @@ void InfoWidget::setRegisterPointer(Register *regPtr)
 
 void InfoWidget::setPrinted(int val)
 {
-    ui->labelPrinted->setText("Printed: " + QString::number(val));
+    ui->labelPrinted->setText(tr("Printed: ") + QString::number(val));
 
     QTime curTime = QTime::currentTime();
     if((val>1)&((lastTime.secsTo(curTime))>0))
-        ui->labelDZH->setText("R/H:"+QString::number(3600000/lastTime.msecsTo(curTime)));
+        ui->labelDZH->setText(tr("R/H:")+QString::number(3600000/lastTime.msecsTo(curTime)));
     lastTime = curTime;
 
 }
 
 void InfoWidget::setTotal(int val)
 {
-    ui->labelTotal->setText("Total: " + QString::number(val));
+    ui->labelTotal->setText(tr("Total: ") + QString::number(val));
 }
 
 void InfoWidget::setIconFolder(QString path)
@@ -268,5 +268,13 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
                             msgStrRow2 = "Head "+errMasages->value("HEAD/err"+QString::number(errMessage-2001),"").toString();
                         }
 
-    ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+"\nPlease press Reset button.");
+    ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+tr("\nPlease press Reset button."));
+}
+
+void InfoWidget::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
 }

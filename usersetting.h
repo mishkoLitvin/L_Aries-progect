@@ -42,7 +42,7 @@ private slots:
 
 protected:
     void showEvent(QShowEvent *ev);
-
+    void changeEvent(QEvent *event);
 };
 
 #endif // USERSETTING_H

@@ -34,6 +34,9 @@ public:
     void setErrorText(MachineSettings::MachineParameters machineParameters, uint16_t val);
 
 
+protected:
+    void changeEvent(QEvent *event);
+
 private:
     Ui::InfoWidget *ui;
     QImage imageHome, imageLock, imageUp, imageArrows, imageEmerg, imageWarning, imageStopHand;

@@ -116,11 +116,12 @@ private:
 
     uint8_t serviceCounter;
 
-    QTranslator *translator;
+    QTranslator translator;
 
 
 private slots:
     void zeroStart();
+    void headsInit();
     void watchDogTimeout();
     void headSettingRequest(int index);
     void indexerLiftSettingRequest();
@@ -148,6 +149,7 @@ private slots:
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
     void getVeiwSettings(int stSheetIndex);
+    void getLangFile(int langIndex);
     void serviceStateChange();
     void exitProgram(bool restart = false);
     void saveJob();
@@ -165,7 +167,7 @@ protected:
     virtual void resizeEvent(QResizeEvent *e);
     void showEvent(QShowEvent *ev);
     bool eventFilter(QObject *obj, QEvent *ev);
-
+    void changeEvent(QEvent *event);
 };
 
 #endif // MAINWINDOW_H

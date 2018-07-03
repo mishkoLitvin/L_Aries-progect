@@ -38,3 +38,11 @@ void LogoDialog::showEvent(QShowEvent *ev)
     timer->start();
     ev->accept();
 }
+
+void LogoDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}

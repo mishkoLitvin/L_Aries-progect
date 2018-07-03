@@ -31,6 +31,7 @@ protected:
     void showEvent(QShowEvent *ev);
 
 
+    void changeEvent(QEvent *event);
 };
 
 #endif // LOGODIALOG_H
