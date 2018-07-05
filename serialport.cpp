@@ -96,6 +96,32 @@ void SerialPort::closeSerialPort()
 
 }
 
+void SerialPort::sendProgram(QByteArray programArr)
+{
+    uint32_t i;
+    for(i = 0;i<programArr.length();)
+    {
+        this->sendData(programArr.mid(i, 16), true, true);
+        i+= 16;
+        if(i&0x80)
+            emit this->proramProgres(i);
+    }
+
+    if(i<programArr.length())
+    {
+        QByteArray last;
+        last.clear();
+        last.append(programArr.mid(i, programArr.length()-1-i));
+        for(;last.length()<16;)
+        {
+            last.append((char)0xFF);
+            i++;
+        }
+        this->sendData(last, true, true);
+    }
+    emit this->proramProgres(i);
+}
+
 void SerialPort::readData()
 {
     static QByteArray data = 0;
@@ -106,12 +132,12 @@ void SerialPort::readData()
     {
         bool ok;
         modData8.all = data.mid(0,6).toHex().toLong(&ok, 16);
-        if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
-        {
-            qDebug()<<"CRC Err!!!";
-            data.remove(0,1);
-        }
-        else
+//        if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
+//        {
+//            qDebug()<<"CRC Err!!!";
+//            data.remove(0,1);
+//        }
+//        else
         {
 //            qDebug()<<"Got data:"<<data.mid(0,6).toHex().toUpper();
             emit this->working();

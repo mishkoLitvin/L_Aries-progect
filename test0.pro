@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     exitdialog.cpp \
     cyclesdialog.cpp \
     udpsocket.cpp \
-    headactivationdialog.cpp
+    headactivationdialog.cpp \
+    reprogramdialog.cpp
 
 unix:SOURCES += mailSrc/emailaddress.cpp \
     mailSrc/mimeattachment.cpp \
@@ -75,7 +76,8 @@ HEADERS  += mainwindow.h \
     exitdialog.h \
     cyclesdialog.h \
     udpsocket.h \
-    headactivationdialog.h
+    headactivationdialog.h \
+    reprogramdialog.h
 
 unix:HEADERS  += mailSrc/emailaddress.h \
     mailSrc/mimeattachment.h \
@@ -109,7 +111,8 @@ FORMS    += mainwindow.ui \
     maintancewidget.ui \
     exitdialog.ui \
     cyclesdialog.ui \
-    headactivationdialog.ui
+    headactivationdialog.ui \
+    reprogramdialog.ui
 
 RESOURCES += \
     icons.qrc

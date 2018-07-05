@@ -268,7 +268,7 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
                             msgStrRow2 = "Head "+errMasages->value("HEAD/err"+QString::number(errMessage-2001),"").toString();
                         }
 
-    ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+tr("\nPlease press Reset button."));
+    ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+"\n"+tr("\nPlease press Reset button."));
 }
 
 void InfoWidget::changeEvent(QEvent* event)
@@ -276,5 +276,33 @@ void InfoWidget::changeEvent(QEvent* event)
     if(event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        ui->labelHome->setPixmap(QPixmap::fromImage(imageHome.scaled(ui->labelIndexerHalf->size(),
+                                                                     Qt::KeepAspectRatio,
+                                                                     Qt::SmoothTransformation)));
+        ui->labelLock->setPixmap(QPixmap::fromImage(imageLock.scaled(ui->labelIndexerHalf->size(),
+                                                                     Qt::KeepAspectRatio,
+                                                                     Qt::SmoothTransformation)));
+        ui->labelLiftUp->setPixmap(QPixmap::fromImage(imageUp.scaled(ui->labelIndexerHalf->size(),
+                                                                     Qt::KeepAspectRatio,
+                                                                     Qt::SmoothTransformation)));
+        ui->labelIndexerHalf->setPixmap(QPixmap::fromImage(imageArrows.scaled(ui->labelIndexerHalf->size(),
+                                                                              Qt::KeepAspectRatio,
+                                                                              Qt::SmoothTransformation)));
+        ui->labelWarning->setPixmap(QPixmap::fromImage(imageWarning.scaled(ui->labelIndexerHalf->size(),
+                                                                           Qt::KeepAspectRatio,
+                                                                           Qt::SmoothTransformation)));
+        ui->labelEmergency->setPixmap(QPixmap::fromImage(imageEmerg.scaled(ui->labelIndexerHalf->size(),
+                                                                           Qt::KeepAspectRatio,
+                                                                           Qt::SmoothTransformation)));
+        ui->labelStopHand->setPixmap(QPixmap::fromImage(imageStopHand.scaled(ui->labelIndexerHalf->size(),
+                                                                             Qt::KeepAspectRatio,
+                                                                             Qt::SmoothTransformation)));
+        ui->labelHome->setGraphicsEffect(effect[0]);
+        ui->labelLock->setGraphicsEffect(effect[1]);
+        ui->labelLiftUp->setGraphicsEffect(effect[2]);
+        ui->labelIndexerHalf->setGraphicsEffect(effect[3]);
+        ui->labelWarning->setGraphicsEffect(effect[4]);
+        ui->labelEmergency->setGraphicsEffect(effect[5]);
+        ui->labelStopHand->setGraphicsEffect(effect[6]);
     }
 }

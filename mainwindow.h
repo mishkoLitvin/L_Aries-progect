@@ -42,7 +42,7 @@
 #include "cyclesdialog.h"
 #include "udpsocket.h"
 #include "headactivationdialog.h"
-
+#include "reprogramdialog.h"
 
 #include "settings.h"
 
@@ -85,6 +85,7 @@ private:
     MaintanceDialog* maintanceDialog;
     CyclesDialog* cycleDialog;
     HeadActivationDialog *headActDialog;
+    ReprogramDialog *reprogramDialog;
 
     SerialPort *comPort;
     UdpSocket *udpHandler;

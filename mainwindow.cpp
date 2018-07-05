@@ -151,6 +151,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(comPort, SIGNAL(working()), watchDog, SLOT(start()));
     this->zeroStart();
 
+    reprogramDialog = new ReprogramDialog(this);
+    connect(reprogramDialog, SIGNAL(programArrReady(QByteArray)), comPort, SLOT(sendProgram(QByteArray)));
+    connect(comPort, SIGNAL(proramProgres(int)), reprogramDialog, SLOT(setProgress(int)));
 
 }
 
@@ -942,7 +945,7 @@ void MainWindow::exitProgram(bool restart)
     settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCyclesAll);
 
     settings->sync();
-    if(this->exitCode != ExitDialog::Continue)
+    if((this->exitCode != ExitDialog::Continue)&(this->exitCode != ExitDialog::ReprogramMachine))
     {
         comPort->closeSerialPort();
         QProgressDialog *pDialog = new QProgressDialog("Wait for machine shutdown.", "Cancel", 0, 30);
@@ -966,9 +969,6 @@ void MainWindow::exitProgram(bool restart)
             if(!pDialog->wasCanceled())
                 this->close();
             break;
-        case ExitDialog::ReprogramMachine:
-            qDebug()<<"Here will be function to call reprogram dialog";
-            break;
         case ExitDialog::Shutdown:
             qDebug()<<"System call to halt";
             this->close();
@@ -984,6 +984,20 @@ void MainWindow::exitProgram(bool restart)
             break;
         }
     }
+    else
+        if(exitCode == ExitDialog::ReprogramMachine)
+        {
+            ComSettings comSett = settings->value("COM_SETTING").value<ComSettings>();
+            comSett.stringBaudRate = "19200";
+            comSett.stringParity = "None";
+            comSett.stringStopBits = "1";
+            comSett.stringDataBits = "5";
+            comPort->openSerialPort(comSett);
+
+            reprogramDialog->show();
+
+            qDebug()<<"Here will be function to call reprogram dialog";
+        }
 }
 
 void MainWindow::saveJob()
