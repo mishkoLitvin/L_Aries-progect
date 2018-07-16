@@ -421,4 +421,10 @@ void CyclesDialog::saveValues()
     }
 }
 
-
+void CyclesDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}

@@ -634,7 +634,7 @@
               </size>
              </property>
              <property name="checkable">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="toolButtonStyle">
               <enum>Qt::ToolButtonTextUnderIcon</enum>

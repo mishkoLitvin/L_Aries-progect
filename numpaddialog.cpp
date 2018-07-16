@@ -87,6 +87,14 @@ void NumpadDialog::backspace()
     ui->lineValue->setText(ui->lineValue->text().mid(0, ui->lineValue->text().length() - 1));
 }
 
+void NumpadDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}
+
 NumpadButton::NumpadButton(unsigned int inputNumber, QString name)
 {
     index = inputNumber;

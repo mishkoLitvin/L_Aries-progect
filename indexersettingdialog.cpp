@@ -336,8 +336,15 @@ void IndexerSettingDialog::showEvent(QShowEvent *ev)
     ui->dSpinBoxLiftAccel->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
     ui->spinBoxLiftSpeed->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
 
-
     ev->accept();
+}
+
+void IndexerSettingDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
 }
 
 bool IndexerSettingDialog::event(QEvent *e)

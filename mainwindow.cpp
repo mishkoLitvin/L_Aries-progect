@@ -25,11 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     settings = new QSettings("./settings.ini", QSettings::IniFormat);
 
-    setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
+    this->getLangFile(settings->value("STYLE/LANG_SEL_INDEX", 0).toInt());
+    this->setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
                                           +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
     ui->widgetHeads->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
-
-
     headsCount = settings->value(QString("HEAD/HEADS_COUNT"), 1).toInt();
 
     comPort = new SerialPort(settings->value("COM_SETTING").value<ComSettings>(),this);
@@ -39,21 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timerMain = new QTimer(this);
     connect(timerMain, SIGNAL(timeout()), this, SLOT(indexerStepFinish()));
-
-//    QByteArray passwordBArr;
-//    passwordBArr.append("666");
-//    uint16_t temp =  CrcCalc::CalculateCRC16(0xFFFF, passwordBArr);
-//    settings->setValue("PASSWORDS/PASSWORD_USERS", temp);
-//    qDebug() << temp;
-//    int i;
-
-//    QStringList stList;
-//    stList.append("Blue");
-//    stList.append("Red");
-//    stList.append("Green");
-//    settings->setValue("STYLE/STYLE_LIST", stList);
-//    settings->setValue("STYLE/STYLE_SEL_INDEX", 0);
-
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
@@ -90,6 +74,8 @@ MainWindow::MainWindow(QWidget *parent) :
                                        settings->value("STYLE/STYLE_SEL_INDEX").toInt(),
                                        settings->value("STYLE/ICON_LIST").value<QStringList>(),
                                        settings->value("STYLE/ICON_SEL_INDEX").toInt());
+    generalSettingDialog->setLangList(settings->value("STYLE/LANG_LIST").value<QStringList>(),
+                                      settings->value("STYLE/LANG_SEL_INDEX").toInt());
     generalSettingDialog->showPortInfo(settings->value("COM_SETTING").value<ComSettings>());
     connect(ui->pButtonSetting, SIGNAL(clicked(bool)), this,  SLOT(generalSettingDialogRequest()));
     connect(generalSettingDialog, SIGNAL(machineParamChanged(QByteArray)), this, SLOT(getMachineParam(QByteArray)));
@@ -98,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(serviceSettingRequest()), this, SLOT(serviceStateChange()));
     connect(generalSettingDialog, SIGNAL(styleChangedIndex(int)), this, SLOT(getVeiwSettings(int)));
     connect(generalSettingDialog, SIGNAL(iconsChangedIndex(int)), this, SLOT(setIconFolder(int)));
+    connect(generalSettingDialog, SIGNAL(langChangedIndex(int)), this, SLOT(getLangFile(int)));
     connect(generalSettingDialog, SIGNAL(usersSettingRequest()), usersSettingDialog, SLOT(show()));
     connect(generalSettingDialog, SIGNAL(directionChanged(int)), this, SLOT(getDirection(int)));
     connect(generalSettingDialog, SIGNAL(unloadStateChanged(bool)), this, SLOT(setUnloadState(bool)));
@@ -112,48 +99,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
 
-    if(this->machineSettings.machineParam.useUnloadHead)
-        headsCount+=2;
-    else
-        headsCount+=1;
-
-    headActDialog = new HeadActivationDialog(headsCount, this);
-    headActDialog->setHeadActivState(settings->value("HEAD/ACTIVATION", 0).toInt());
-    connect(generalSettingDialog, SIGNAL(headActivationRequest()), headActDialog, SLOT(show()));
-    connect(headActDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getHeadActivCommand(QByteArray)));
-
-    int i;
-    for(i = 0; i<headsCount; i++)
-    {
-        headButton.append(new HeadForm(ui->widgetHeads));
-        headButton[i]->setIndex(i);
-        if(i==0)
-        {
-            headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
-            connect(headButton[i], SIGNAL(loadStateChanged(LoadState)), this, SLOT(getLoadState(LoadState)));
-        }
-        else
-            if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
-                headButton[i]->setHeadformType(HeadForm::HeadRemoving);
-            else
-                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
-        HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
-
-        if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
-                     |((i != headsCount)&(!machineSettings.machineParam.useUnloadHead))))
-        {
-            headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
-            if(i<(headsCount)/4)
-                headButton[i]->setIndexLabelPosition(HeadForm::AtRightUp);
-            if((i>=(headsCount)/4)&(i<(headsCount)/2))
-                headButton[i]->setIndexLabelPosition(HeadForm::AtRightDown);
-            if((i>=(headsCount)/2)&(i<(3*headsCount)/4))
-                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftDown);
-            if((i>=(3*headsCount)/4)&(i<(headsCount)))
-                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
-            connect(headSettButton[i-1], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
-        }
-    }
+    this->headsInit();
 
     infoWidget = new InfoWidget(ui->widgetHeads);
 
@@ -174,8 +120,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     registers = new Register(headsCount);
     comPort->setRegisterPointer(this->registers);
+    infoWidget->setRegisterPointer(this->registers);
     registers->setMasterReg(this->machineSettings);
     registers->setIndexLiftReg(this->indexerLiftSettings);
+
+    int i;
     for(i = 0; i < this->headsCount; i++)
     {
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
@@ -190,13 +139,21 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonCyclesSetup, SIGNAL(clicked(bool)), cycleDialog, SLOT(show()));
     connect(cycleDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getCyclesCommand(QByteArray)));
 
-    this->zeroStart();
     ui->widgetHeads->installEventFilter(this);
     ui->dSpinBoxLiftOffcet->children()[0]->installEventFilter(this);
     connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
     ui->dSpinBoxStepDelay->children()[0]->installEventFilter(this);
     connect(ui->dSpinBoxStepDelay, SIGNAL(valueChanged(double)), this, SLOT(getStepDelayTime(double)));
 
+    watchDog = new QTimer(this);
+    watchDog->setInterval(1000);
+    connect(watchDog, SIGNAL(timeout()), this, SLOT(watchDogTimeout()));
+    connect(comPort, SIGNAL(working()), watchDog, SLOT(start()));
+    this->zeroStart();
+
+    reprogramDialog = new ReprogramDialog(this);
+    connect(reprogramDialog, SIGNAL(programArrReady(QByteArray)), comPort, SLOT(sendProgram(QByteArray)));
+    connect(comPort, SIGNAL(proramProgres(int)), reprogramDialog, SLOT(setProgress(int)));
 
 }
 
@@ -417,7 +374,7 @@ void MainWindow::getSerialData(ModData modData)
 {
     int i;
     QByteArray bArr;
-
+    watchDog->start();
     if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
     {
         switch (modData.fileds.adress) {
@@ -435,13 +392,12 @@ void MainWindow::getSerialData(ModData modData)
                 break;
             case Register::masterReg_EKR:
                 infoWidget->setIndicatorState(modData.fileds.data);
-                indexer->setWidgetState(modData.fileds.data);
+                indexer->setState(modData.fileds.data);
                 bArr.append((char)MachineSettings::MasterDevice);
                 bArr.append((char)Register::masterReg_EKR);
                 bArr.append((char)(modData.fileds.data>>8));
                 bArr.append((char)(modData.fileds.data&0x00FF));
                 udpHandler->sendData(bArr);
-                qDebug()<<"Indicator: "<<modData.fileds.data;
                 if(modData.fileds.data == 0x0800)
                     this->indexerStepFinish();
                 break;
@@ -452,6 +408,9 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_paletStHigh:
                 for(i = 16; i<headsCount; i++)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh)&(1<<(i-16)));
+            break;
+            case Register::masterReg_ERROR_MESSAGE:
+                infoWidget->setErrorText(this->machineSettings.machineParam, 0);
             break;
             default:
                 break;
@@ -539,8 +498,11 @@ void MainWindow::getSerialData(ModData modData)
             headSettings.headParam.dwellSQTime = modData.fileds.data;
             break;
         case Register::headReg_ON:
+//            qDebug()<<"Reg head ON got: "<<modData.fileds.data;
+
             headSettings.headParam.headOnType = (HeadSetting::HeadOnType)modData.fileds.data;
             headSettings.headParam.powerOn = modData.fileds.data;
+
             break;
         case Register::REG_SHUTTLE_REAR_POS:
             headSettings.headParam.heatLimit = modData.fileds.data;
@@ -587,8 +549,9 @@ void MainWindow::getSerialData(ModData modData)
         settings->setValue(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM"), headSettings.headParam.toByteArray());
         if((i<headsCount)&(modData.fileds.registerNo==Register::headReg_ON))
         {
+//            qDebug()<<"ON to head set: "<<headSettings.headParam.headOnType;
             if(headActDialog->getHeadActivAtIndex(i))
-                switch ((HeadSetting::HeadOnType)headSettings.headParam.headOnType)
+                switch ((HeadSetting::HeadOnType)(headSettings.headParam.headOnType&0x0F))
                 {
                 case HeadSetting::PrintHeadOn:
                     headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
@@ -907,6 +870,17 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
     ui->widgetLiftOffcet->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
 }
 
+void MainWindow::getLangFile(int langIndex)
+{
+    settings->setValue("STYLE/LANG_SEL_INDEX", langIndex);
+    qApp->removeTranslator(&translator);
+    translator.load(settings->value("STYLE/LANG_PATH").toStringList()[langIndex]);
+    ui->retranslateUi(this);
+    qDebug()<<"translator"
+           <<settings->value("STYLE/LANG_PATH").toStringList()[langIndex]
+              <<qApp->installTranslator(&translator);
+}
+
 void MainWindow::serviceStateChange()
 {
     QByteArray passwordBArr;
@@ -970,7 +944,7 @@ void MainWindow::exitProgram(bool restart)
     settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCyclesAll);
 
     settings->sync();
-    if(this->exitCode != ExitDialog::Continue)
+    if((this->exitCode != ExitDialog::Continue)&(this->exitCode != ExitDialog::ReprogramMachine))
     {
         comPort->closeSerialPort();
         QProgressDialog *pDialog = new QProgressDialog("Wait for machine shutdown.", "Cancel", 0, 30);
@@ -994,9 +968,6 @@ void MainWindow::exitProgram(bool restart)
             if(!pDialog->wasCanceled())
                 this->close();
             break;
-        case ExitDialog::ReprogramMachine:
-            qDebug()<<"Here will be function to call reprogram dialog";
-            break;
         case ExitDialog::Shutdown:
             qDebug()<<"System call to halt";
             this->close();
@@ -1012,6 +983,20 @@ void MainWindow::exitProgram(bool restart)
             break;
         }
     }
+    else
+        if(exitCode == ExitDialog::ReprogramMachine)
+        {
+            ComSettings comSett = settings->value("COM_SETTING").value<ComSettings>();
+            comSett.stringBaudRate = "19200";
+            comSett.stringParity = "None";
+            comSett.stringStopBits = "1";
+            comSett.stringDataBits = "5";
+            comPort->openSerialPort(comSett);
+
+            reprogramDialog->show();
+
+            qDebug()<<"Here will be function to call reprogram dialog";
+        }
 }
 
 void MainWindow::saveJob()
@@ -1089,12 +1074,18 @@ void MainWindow::setHeadsPosition()
 
     int direction = machineSettings.machineParam.direction;
 
-    for(i = 0;
-        ((i<headsCount)) ;
-        i++)
+    for(i = 0; i<headsCount; i++)
     {
-        sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
-        cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.+direction*3.1415926/headsCount);
+        sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.
+                      +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+        cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.
+                      +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+//        if(this->machineSettings.machineParam.useUnloadHead)
+//            sinCoef+=direction*3.1415926/headsCount;
+
+//        sinCoef = sin(sinCoef);
+//        cosCoef = cos(sinCoef);
+
 
         headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
 
@@ -1156,7 +1147,10 @@ void MainWindow::indexerStepFinish()
        infoWidget->setTotal(ragAllCount);
        ragSessionCount++;
        infoWidget->setPrinted(ragSessionCount);
+       ragAtHeadCount--;
     }
+    if(headButton[0]->getRagState() != HeadForm::shirtOff)
+        ragAtHeadCount++;
 
     if(!indexer->getIsAutoPrint())
     {
@@ -1170,7 +1164,24 @@ void MainWindow::indexerStepFinish()
     }
     infoWidget->setPrinted(ragSessionCount);
     infoWidget->setTotal(ragAllCount);
-    qDebug()<<"indexer all count:"<<indexerCyclesSession<<indexerCyclesAll;
+    QByteArray bArr;
+    bArr.resize(14);
+    bArr[0] = 0;
+    bArr[1] = 20;
+    static QTime lastTime;
+    QTime curTime = QTime::currentTime();
+    uint32_t dph = 0;
+    if(((lastTime.secsTo(curTime))>0))
+        dph = 3600000/lastTime.msecsTo(curTime);
+    lastTime = curTime;
+    int i;
+    for(i = 0; i<4; i++)
+    {
+        bArr[2+i] = (char)(ragSessionCount>>(i*8));
+        bArr[6+i] = (char)(ragAtHeadCount>>(i*8));
+        bArr[10+i] = (char)(dph>>(i*8));
+    }
+    udpHandler->sendData(bArr);
 }
 
 void MainWindow::startPrintProcess(bool autoPrint)
@@ -1190,30 +1201,33 @@ void MainWindow::maintanceWorkSlot(bool enable)
 
 void MainWindow::setIconFolder(int index)
 {
+    QStringList list = settings->value("STYLE/ICON_PATH").value<QStringList>();
+    if(list.length()>index)
+    {
+        QString path = list[index];
+        settings->setValue("STYLE/ICON_SEL_INDEX", index);
 
-    QString path = settings->value("STYLE/ICON_PATH").value<QStringList>().at(index);
-    settings->setValue("STYLE/ICON_SEL_INDEX", index);
-
-    ui->pButtonExit->setIcon(QIcon(path+"/exit.png"));
-    ui->pButtonSetting->setIcon(QIcon(path+"/settings.png"));
-    ui->pButtonLoadJob->setIcon(QIcon(path+"/load.png"));
-    ui->pButtonSaveJob->setIcon(QIcon(path+"/save.png"));
-    ui->pButtonMaintance->setIcon(QIcon(path+"/warning.png"));
-    ui->pButtonCyclesSetup->setIcon(QIcon(path+"/cycles.png"));
-
-
-    indexer->setIconFolder(path);
-    headSettingDialog->setIconFolder(path);
-    generalSettingDialog->setIconFolder(path);
+        ui->pButtonExit->setIcon(QIcon(path+"/exit.png"));
+        ui->pButtonSetting->setIcon(QIcon(path+"/settings.png"));
+        ui->pButtonLoadJob->setIcon(QIcon(path+"/load.png"));
+        ui->pButtonSaveJob->setIcon(QIcon(path+"/save.png"));
+        ui->pButtonMaintance->setIcon(QIcon(path+"/warning.png"));
+        ui->pButtonCyclesSetup->setIcon(QIcon(path+"/cycles.png"));
 
 
-    int i;
-    for(i = 0; i<headButton.length(); i++)
-        headButton[i]->setIconPath(path);
-    for(i = 0; i<headSettButton.length(); i++)
-        headSettButton[i]->setIconPath(path+"/settings.png");
+        indexer->setIconFolder(path);
+        headSettingDialog->setIconFolder(path);
+        generalSettingDialog->setIconFolder(path);
 
-    infoWidget->setIconFolder(path);
+
+        int i;
+        for(i = 0; i<headButton.length(); i++)
+            headButton[i]->setIconPath(path);
+        for(i = 0; i<headSettButton.length(); i++)
+            headSettButton[i]->setIconPath(path+"/settings.png");
+
+        infoWidget->setIconFolder(path);
+    }
 }
 
 void MainWindow::userLogin()
@@ -1272,7 +1286,6 @@ void MainWindow::userLogin()
 
 void MainWindow::zeroStart()
 {
-
     needCompleteReset = true;
     this->resetMachine();
     MachineSettings::serviceWidgetsEn = false;
@@ -1339,6 +1352,62 @@ void MainWindow::zeroStart()
                                          );
     ui->widgetStepDelay->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
 
+    watchDog->start();
+
+}
+
+void MainWindow::headsInit()
+{
+    if(this->machineSettings.machineParam.useUnloadHead)
+        headsCount+=2;
+    else
+        headsCount+=1;
+
+    headActDialog = new HeadActivationDialog(headsCount, this);
+    headActDialog->setHeadActivState(settings->value("HEAD/ACTIVATION", 0).toInt());
+    connect(generalSettingDialog, SIGNAL(headActivationRequest()), headActDialog, SLOT(show()));
+    connect(headActDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getHeadActivCommand(QByteArray)));
+
+    int i;
+    for(i = 0; i<headsCount; i++)
+    {
+        headButton.append(new HeadForm(ui->widgetHeads));
+        headButton[i]->setIndex(i);
+        if(i==0)
+        {
+            headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
+            connect(headButton[i], SIGNAL(loadStateChanged(LoadState)), this, SLOT(getLoadState(LoadState)));
+        }
+        else
+            if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
+                headButton[i]->setHeadformType(HeadForm::HeadRemoving);
+            else
+                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+        HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
+
+        if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
+                     |((i != headsCount)&(!machineSettings.machineParam.useUnloadHead))))
+        {
+            headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
+            if(i<(headsCount)/4)
+                headButton[i]->setIndexLabelPosition(HeadForm::AtRightUp);
+            if((i>=(headsCount)/4)&(i<(headsCount)/2))
+                headButton[i]->setIndexLabelPosition(HeadForm::AtRightDown);
+            if((i>=(headsCount)/2)&(i<(3*headsCount)/4))
+                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftDown);
+            if((i>=(3*headsCount)/4)&(i<(headsCount)))
+                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
+            connect(headSettButton[i-1], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
+        }
+    }
+}
+
+void MainWindow::watchDogTimeout()
+{
+//    qDebug()<<"WatchDog handler call";
+//    needCompleteReset = true;
+//    indexer->setState(0x0);
+//    infoWidget->setIndicatorState(0x704);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)
@@ -1349,10 +1418,10 @@ void MainWindow::resizeEvent(QResizeEvent *e)
 
 void MainWindow::showEvent(QShowEvent *ev)
 {
-    this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
     this->setHeadsPosition();
     maintanceDialog->check(indexerCyclesAll);
     ui->pButtonCyclesSetup->setVisible(this->machineSettings.machineParam.lastRevWarm.field.revolver);
+    this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
 
     ev->accept();
 }
@@ -1374,5 +1443,13 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
         qobject_cast<QDoubleSpinBox*>(obj->parent())->clearFocus();
     }
     return false;
+}
 
+void MainWindow::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QMainWindow::changeEvent(event);
 }

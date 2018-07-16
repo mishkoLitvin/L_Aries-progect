@@ -77,6 +77,7 @@ private:
 protected:
     bool event(QEvent *e);
     void showEvent(QShowEvent *ev);
+    void changeEvent(QEvent *event);
 };
 
 #endif // HEADACTIVATIONDIALOG_H

@@ -55,6 +55,9 @@ signals:
     void continueRequest();
     void maintanceWorkEnable(bool enabled);
 
+protected:
+    void changeEvent(QEvent *event);
+
 private:
     Ui::MaintanceDialog *ui;
 

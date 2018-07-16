@@ -45,6 +45,9 @@ InfoWidget::InfoWidget(QWidget *parent) :
         effect[i]->setOpacity(0.1);
     }
 
+    errMasages = new QSettings("messages.ini", QSettings::IniFormat, this);
+
+    errMasages->setValue("HEAD/err"+QString::number(0), QString("err"));
 //    ui->labelHome->pixmap()->setMask();
 
 }
@@ -54,20 +57,25 @@ InfoWidget::~InfoWidget()
     delete ui;
 }
 
+void InfoWidget::setRegisterPointer(Register *regPtr)
+{
+    this->localRegisters = regPtr;
+}
+
 void InfoWidget::setPrinted(int val)
 {
-    ui->labelPrinted->setText("Printed: " + QString::number(val));
+    ui->labelPrinted->setText(tr("Printed: ") + QString::number(val));
 
     QTime curTime = QTime::currentTime();
     if((val>1)&((lastTime.secsTo(curTime))>0))
-        ui->labelDZH->setText("R/H:"+QString::number(3600000/lastTime.msecsTo(curTime)));
+        ui->labelDZH->setText(tr("R/H:")+QString::number(3600000/lastTime.msecsTo(curTime)));
     lastTime = curTime;
 
 }
 
 void InfoWidget::setTotal(int val)
 {
-    ui->labelTotal->setText("Total: " + QString::number(val));
+    ui->labelTotal->setText(tr("Total: ") + QString::number(val));
 }
 
 void InfoWidget::setIconFolder(QString path)
@@ -103,7 +111,6 @@ void InfoWidget::setIconFolder(QString path)
     ui->labelStopHand->setPixmap(QPixmap::fromImage(imageStopHand.scaled(ui->labelIndexerHalf->size(),
                                                                          Qt::KeepAspectRatio,
                                                                          Qt::SmoothTransformation)));
-
     ui->labelHome->setGraphicsEffect(effect[0]);
     ui->labelLock->setGraphicsEffect(effect[1]);
     ui->labelLiftUp->setGraphicsEffect(effect[2]);
@@ -115,7 +122,9 @@ void InfoWidget::setIconFolder(QString path)
 
 void InfoWidget::setIndicatorState(u_int16_t state)
 {
-    effect[0]->setOpacity(1);
+//    effect[0]->setOpacity(1);
+
+
 
     switch ((u_int8_t)(state>>8)) {
     case 0:
@@ -123,6 +132,7 @@ void InfoWidget::setIndicatorState(u_int16_t state)
         effect[0]->setOpacity(0.9);
         effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[1]->setOpacity(0.9);
+        ui->labelInfo->setText(tr("Machine need reset.\nPlease press reset button"));
         break;
     case 1:
         effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
@@ -135,6 +145,7 @@ void InfoWidget::setIndicatorState(u_int16_t state)
         effect[0]->setOpacity(0.9);
         effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[1]->setOpacity(0.9);
+        ui->labelInfo->setText(tr("Machine must be homed.\nPlease press home button"));
         break;
     case 3:
         effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
@@ -144,6 +155,7 @@ void InfoWidget::setIndicatorState(u_int16_t state)
         effect[0]->setOpacity(0.1);
         effect[1]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
         effect[1]->setOpacity(0.9);
+        ui->labelInfo->setText(tr("Machine must be locked.\nPlease press lock button"));
         break;
     case 5:
         effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
@@ -162,8 +174,12 @@ void InfoWidget::setIndicatorState(u_int16_t state)
         effect[2]->setOpacity(0.1);
         effect[3]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[3]->setOpacity(0.1);
+        ui->labelInfo->setText(tr("Machine ready to work.\nPlease press print button\n to start printing"));
+
         break;
     case 8:
+        ui->labelInfo->setText(tr("Machine is printing."));
+
         break;
     case 9:
         effect[2]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
@@ -186,7 +202,116 @@ void InfoWidget::setIndicatorState(u_int16_t state)
     effect[5]->setOpacity((state&0x1)+0.1);
     effect[6]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
     effect[6]->setOpacity(((state&0x2)>>1)+0.1);
+}
+
+void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParameters, uint16_t val)
+{
+    val++;
+    uint16_t errDev;
+    errDev = this->localRegisters->readReg(MachineSettings::MasterDevice,
+                                      Register::masterReg_DEVERR);
+    qDebug()<<"ERRRRR";
+
+    uint16_t errMessage;
+    errMessage = this->localRegisters->readReg(MachineSettings::MasterDevice,
+                                          Register::masterReg_ERROR_MESSAGE);
+    uint16_t err;
+    err = this->localRegisters->readReg(MachineSettings::MasterDevice,
+                                   Register::masterReg_ERR);
 
 
+    QString msgStrRow1, msgStrRow2;
 
+    msgStrRow1 = "Error! At ";
+    switch (errDev) {
+    case 1:
+        msgStrRow1+="indexed";
+        break;
+    case 2:
+        msgStrRow1+="lift";
+        break;
+    default:
+        if(errDev>2)
+        {
+            msgStrRow1+="head["+QString::number(errDev-2)+"]";
+        }
+        break;
+    }
+    msgStrRow1+= " - cmd:"+QString::number((err>>8)&0xFF)
+            +" st:"+QString::number((err)&0xFF);
+
+
+    if(errMessage<16)
+    {
+        qDebug()<<"Head servo";
+        msgStrRow2 = "Head servo drive "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage),"").toString();
+    }
+    else
+        if((errMessage>=16)&(errMessage<32))
+        {
+            qDebug()<<"SQ_FL";
+            msgStrRow2 = "Head SQ/FL drive "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage-16),"").toString();
+        }
+        else
+            if(errMessage == 32)
+                msgStrRow2 = "Head "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage),"").toString();
+            else
+                if((errMessage>=100)&(errMessage<1001))
+                {
+                    qDebug()<<"Main servo";
+                    if(machineParameters.indexeLiftType.field.indexerType == 0)
+                        msgStrRow2 = errMasages->value("MAIN_ESTUN/err"+QString::number(errMessage-100),"").toString();
+                    if(machineParameters.indexeLiftType.field.indexerType == 1)
+                        msgStrRow2 = errMasages->value("MAIN_DELTA/err"+QString::number(errMessage-100),"").toString();
+                }
+                else
+                    if((errMessage>=1001)&(errMessage<2001))
+                    {
+                        qDebug()<<"Machine error";
+                        msgStrRow2 = errMasages->value("MACHINE/err"+QString::number(errMessage-1001),"").toString();
+                    }
+                    else
+                        if(errMessage>=2001)
+                        {
+                            qDebug()<<"Head error";
+                            msgStrRow2 = "Head "+errMasages->value("HEAD/err"+QString::number(errMessage-2001),"").toString();
+                        }
+
+    ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+"\n"+tr("\nPlease press Reset button."));
+}
+
+void InfoWidget::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+        ui->labelHome->setPixmap(QPixmap::fromImage(imageHome.scaled(ui->labelIndexerHalf->size(),
+                                                                     Qt::KeepAspectRatio,
+                                                                     Qt::SmoothTransformation)));
+        ui->labelLock->setPixmap(QPixmap::fromImage(imageLock.scaled(ui->labelIndexerHalf->size(),
+                                                                     Qt::KeepAspectRatio,
+                                                                     Qt::SmoothTransformation)));
+        ui->labelLiftUp->setPixmap(QPixmap::fromImage(imageUp.scaled(ui->labelIndexerHalf->size(),
+                                                                     Qt::KeepAspectRatio,
+                                                                     Qt::SmoothTransformation)));
+        ui->labelIndexerHalf->setPixmap(QPixmap::fromImage(imageArrows.scaled(ui->labelIndexerHalf->size(),
+                                                                              Qt::KeepAspectRatio,
+                                                                              Qt::SmoothTransformation)));
+        ui->labelWarning->setPixmap(QPixmap::fromImage(imageWarning.scaled(ui->labelIndexerHalf->size(),
+                                                                           Qt::KeepAspectRatio,
+                                                                           Qt::SmoothTransformation)));
+        ui->labelEmergency->setPixmap(QPixmap::fromImage(imageEmerg.scaled(ui->labelIndexerHalf->size(),
+                                                                           Qt::KeepAspectRatio,
+                                                                           Qt::SmoothTransformation)));
+        ui->labelStopHand->setPixmap(QPixmap::fromImage(imageStopHand.scaled(ui->labelIndexerHalf->size(),
+                                                                             Qt::KeepAspectRatio,
+                                                                             Qt::SmoothTransformation)));
+        ui->labelHome->setGraphicsEffect(effect[0]);
+        ui->labelLock->setGraphicsEffect(effect[1]);
+        ui->labelLiftUp->setGraphicsEffect(effect[2]);
+        ui->labelIndexerHalf->setGraphicsEffect(effect[3]);
+        ui->labelWarning->setGraphicsEffect(effect[4]);
+        ui->labelEmergency->setGraphicsEffect(effect[5]);
+        ui->labelStopHand->setGraphicsEffect(effect[6]);
+    }
 }

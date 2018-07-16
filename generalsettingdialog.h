@@ -60,6 +60,7 @@ public:
     void setFocusLossAccept(bool flag);
     void setPasswords(uint16_t serialPass, uint16_t mailPass, uint16_t userPass);
     void setStyleList(QStringList stList, int curSelect, QStringList iconList, int iconSel);
+    void setLangList(QStringList langList, int curSelect);
     void showPortInfo(ComSettings comSett);
 
 signals:
@@ -68,6 +69,7 @@ signals:
     void serialPortSettingsDialogRequested();
     void styleChangedIndex(int index);
     void iconsChangedIndex(int index);
+    void langChangedIndex(int index);
     void serviceSettingRequest();
     void headActivationRequest();
     void usersSettingRequest();
@@ -105,6 +107,7 @@ private slots:
     void userSettingClicked();
     void styleChanged(int index);
     void iconChanged(int index);
+    void langChanged(int index);
     void changeDirection();
     void changeCyclesState();
     void useUnloadStateChanged();
@@ -117,6 +120,7 @@ protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);
     void showEvent(QShowEvent *ev);
+    void changeEvent(QEvent *event);
 };
 
 #endif // GENERALSETTINGDIALOG_H

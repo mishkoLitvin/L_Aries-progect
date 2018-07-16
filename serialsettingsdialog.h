@@ -133,6 +133,9 @@ public:
 signals:
     void serialSettingAccepted(ComSettings comSett);
 
+protected:
+    void changeEvent(QEvent *event);
+
 private slots:
     void showPortInfo(int idx);
     void apply();

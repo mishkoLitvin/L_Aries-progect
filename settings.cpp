@@ -539,8 +539,8 @@ void Register::setMasterReg(MachineSettings mSett)
 //    this->masterReg.field.masterReg_EKR;
 //    this->masterReg.field.masterReg_ACTIVHEAD_L;
 //    this->masterReg.field.masterReg_ACTIVHEAD_H;
-//    this->masterReg.field.masterReg_DEVERR;
-//    this->masterReg.field.masterReg_ERR;
+    this->masterReg.field.masterReg_DEVERR = 0;
+    this->masterReg.field.masterReg_ERR = 0;
 //    this->masterReg.field.masterReg_KODH;
 //    this->masterReg.field.masterReg_KODL;
 //    this->masterReg.field.masterReg_DATH;
@@ -554,7 +554,7 @@ void Register::setMasterReg(MachineSettings mSett)
 //    this->masterReg.field.masterReg_HRW1;
 //    this->masterReg.field.masterReg_KOD_ON2;
 //    this->masterReg.field.masterReg_KOD_ON3;
-//    this->masterReg.field.masterReg_ERROR_MESSAGE;
+    this->masterReg.field.masterReg_ERROR_MESSAGE = 0;
 //    this->masterReg.field.masterReg_DEV_INF_L;
 }
 

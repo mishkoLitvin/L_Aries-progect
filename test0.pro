@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     exitdialog.cpp \
     cyclesdialog.cpp \
     udpsocket.cpp \
-    headactivationdialog.cpp
+    headactivationdialog.cpp \
+    reprogramdialog.cpp
 
 unix:SOURCES += mailSrc/emailaddress.cpp \
     mailSrc/mimeattachment.cpp \
@@ -75,7 +76,8 @@ HEADERS  += mainwindow.h \
     exitdialog.h \
     cyclesdialog.h \
     udpsocket.h \
-    headactivationdialog.h
+    headactivationdialog.h \
+    reprogramdialog.h
 
 unix:HEADERS  += mailSrc/emailaddress.h \
     mailSrc/mimeattachment.h \
@@ -109,10 +111,15 @@ FORMS    += mainwindow.ui \
     maintancewidget.ui \
     exitdialog.ui \
     cyclesdialog.ui \
-    headactivationdialog.ui
+    headactivationdialog.ui \
+    reprogramdialog.ui
 
 RESOURCES += \
     icons.qrc
+
+TRANSLATIONS += lang/l_EN.ts \
+lang/l_UA.ts \
+lang/l_RU.ts \
 
 win32:SMTP_LIBRARY_LOCATION = C:\Users\T\Dropbox\SharedProgects\NewProjects\buildsWin\build-SMTPEmailRelease
 win32:CONFIG(release, debug|release): LIBS += -L$$SMTP_LIBRARY_LOCATION/release/ -lSMTPEmail

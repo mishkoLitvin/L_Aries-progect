@@ -21,6 +21,8 @@
 #include <QTime>
 #include <QTimer>
 #include <QDate>
+#include <QStringList>
+#include <QTranslator>
 
 #include "headform.h"
 #include "headsettingdialog.h"
@@ -40,7 +42,7 @@
 #include "cyclesdialog.h"
 #include "udpsocket.h"
 #include "headactivationdialog.h"
-
+#include "reprogramdialog.h"
 
 #include "settings.h"
 
@@ -83,11 +85,13 @@ private:
     MaintanceDialog* maintanceDialog;
     CyclesDialog* cycleDialog;
     HeadActivationDialog *headActDialog;
+    ReprogramDialog *reprogramDialog;
 
     SerialPort *comPort;
     UdpSocket *udpHandler;
 
     QTimer *timerMain;
+    QTimer *watchDog;
 
     QTime timeProgramStart;
     QTime timeProgramEnd;
@@ -113,9 +117,13 @@ private:
 
     uint8_t serviceCounter;
 
+    QTranslator translator;
+
 
 private slots:
     void zeroStart();
+    void headsInit();
+    void watchDogTimeout();
     void headSettingRequest(int index);
     void indexerLiftSettingRequest();
     void generalSettingDialogRequest();
@@ -142,6 +150,7 @@ private slots:
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
     void getVeiwSettings(int stSheetIndex);
+    void getLangFile(int langIndex);
     void serviceStateChange();
     void exitProgram(bool restart = false);
     void saveJob();
@@ -159,7 +168,7 @@ protected:
     virtual void resizeEvent(QResizeEvent *e);
     void showEvent(QShowEvent *ev);
     bool eventFilter(QObject *obj, QEvent *ev);
-
+    void changeEvent(QEvent *event);
 };
 
 #endif // MAINWINDOW_H

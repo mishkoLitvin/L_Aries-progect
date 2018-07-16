@@ -65,6 +65,8 @@ private slots:
 
 signals:
     void keyClicked();
+protected:
+    void changeEvent(QEvent *event);
 };
 
 #endif // KEYBOARDDIALOG_H

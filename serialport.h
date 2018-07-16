@@ -59,6 +59,8 @@ public slots:
     void openSerialPort(ComSettings cSett);
     void closeSerialPort();
 
+    void sendProgram(QByteArray programArr);
+
     void sendData(QByteArray data, bool send = false, bool halfByte = false);
     void sendModData(uint8_t dev, uint8_t place, uint16_t data);
     void setupPort();
@@ -75,6 +77,8 @@ signals:
     void dataReady(QByteArray data);
     void dataReady(ModData modData);
     void serialSettingAccepted(ComSettings seittngs);
+    void working();
+    void proramProgres(int progres);
 };
 
 #endif // SERIALPORT_H

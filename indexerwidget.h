@@ -31,7 +31,7 @@ public:
 public slots:
     void printFinish();
     void printStart();
-    void setWidgetState(u_int16_t state);
+    void setState(u_int16_t state);
 
 
 signals:
@@ -68,8 +68,8 @@ private:
     MachineSettings::MachineState machineState;
 
 protected:
-   virtual void resizeEvent(QResizeEvent *e);
-
+    virtual void resizeEvent(QResizeEvent *e);
+    void changeEvent(QEvent *event);
 };
 
 #endif // INDEXERWIDGET_H

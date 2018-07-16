@@ -75,6 +75,9 @@ signals:
     void maintanceClosed(QList<MaintanceElement> elemList);
     void tutorialRequest(int troubleIndex);
 
+protected:
+    void changeEvent(QEvent *event);
+
 private:
     Ui::MaintanceWidget *ui;
 

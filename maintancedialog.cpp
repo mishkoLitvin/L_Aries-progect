@@ -244,5 +244,12 @@ void MaintanceDialog::openDialog()
             if(MaintanceDialog::execute(unsolvedList[0], this))
                 this->solveItem(0);
     }
+}
 
+void MaintanceDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
 }

@@ -15,7 +15,7 @@ HeadActivationDialog::HeadActivationDialog(int headCount, QWidget *parent) :
     int i;
     for(i = 0; i<this->headCount; i++)
     {
-        checkBoxList.append(new CheckBoxIndexed(i+1,"Head "+QString::number(i+1),this));
+        checkBoxList.append(new CheckBoxIndexed(i+1,tr("Head ")+QString::number(i+1),this));
         ui->gridLayout->addWidget(checkBoxList[i],
                                   i-(headCount/2*(i/(headCount/2))),
                                   i/(headCount/2));
@@ -167,4 +167,12 @@ void HeadActivationDialog::showEvent(QShowEvent *ev)
     ui->pushButtonCancel->setEnabled(true);
 
     ev->accept();
+}
+
+void HeadActivationDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
 }

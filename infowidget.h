@@ -7,6 +7,9 @@
 #include <QGraphicsEffect>
 #include <QDebug>
 #include <QTime>
+#include <QSettings>
+
+#include "settings.h"
 
 namespace Ui {
 class InfoWidget;
@@ -19,12 +22,20 @@ class InfoWidget : public QFrame
 public:
     explicit InfoWidget(QWidget *parent = 0);
     ~InfoWidget();
+
+    void setRegisterPointer(Register* regPtr);
+
     void setPrinted(int val);
     void setTotal(int val);
 
     void setIconFolder(QString path);
     void setIndicatorState(u_int16_t state);
 
+    void setErrorText(MachineSettings::MachineParameters machineParameters, uint16_t val);
+
+
+protected:
+    void changeEvent(QEvent *event);
 
 private:
     Ui::InfoWidget *ui;
@@ -33,7 +44,8 @@ private:
     QTime lastTime;
 
     QGraphicsOpacityEffect* effect[7];
-
+    Register *localRegisters;
+    QSettings *errMasages;
 
 
 

@@ -47,6 +47,8 @@ private:
     bool acceptOnDeactilationEn;
     bool acceptEnable;
 
+    HeadSetting headSettings;
+
 private slots:
     void accept();
     void reject();
@@ -105,13 +107,13 @@ private slots:
     void dSpinBoxStandbyTimeQ_valueChanged(double arg1);
     void dSpinBoxWarmFlashTimeQ_valueChanged(double arg1);
 
+    void rButtonTime1_clicked();
 
 protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);
     void showEvent(QShowEvent *ev);
-
-
+    void changeEvent(QEvent *event);
 };
 
 

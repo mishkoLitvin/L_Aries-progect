@@ -40,6 +40,9 @@ public:
 
     static double getValue(QWidget *parent = 0, QString windowTitle = "Numpad");
 
+protected:
+    void changeEvent(QEvent *event);
+
 private slots:
     void appendToLineEdit(int number);
     void submitValue();

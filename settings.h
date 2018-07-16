@@ -19,6 +19,7 @@ public:
     };
 
     enum {
+        HeadOn = 0x01,
         HeadSpeedRear = 0x02,
         HeadSpeedFront = 0x03,
         HeadFlDwellTime = 0x04,

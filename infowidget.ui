@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>200</height>
+    <height>205</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -155,7 +155,7 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>Initialisation</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

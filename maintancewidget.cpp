@@ -52,3 +52,11 @@ void MaintanceWidget::callTutorial()
     int trIndex = ui->listWidget->currentRow();
     emit this->tutorialRequest(trIndex);
 }
+
+void MaintanceWidget::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}

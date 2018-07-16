@@ -53,6 +53,7 @@ private:
 protected:
     void showEvent(QShowEvent *ev);
     bool eventFilter(QObject *watched, QEvent *event);
+    void changeEvent(QEvent *event);
 
 private slots:
     void on_pButtonOK_clicked();

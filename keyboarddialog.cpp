@@ -189,3 +189,11 @@ void KeyboardButton::setCharacter(QString str)
 {
     this->character = str;
 }
+
+void KeyboardDialog::changeEvent(QEvent* event)
+{
+    if(event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+}

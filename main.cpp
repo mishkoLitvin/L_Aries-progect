@@ -12,7 +12,9 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     ExitDialog::ExitCode eCode = ExitDialog::Continue;
-    while ((eCode == ExitDialog::Continue)|(eCode == ExitDialog::RestartProgram|(eCode ==ExitDialog::RestartMachine))) {
+//    LogoDialog lD;
+//    lD.exec();
+    while ((eCode == ExitDialog::Continue)|((eCode == ExitDialog::RestartProgram)|(eCode ==ExitDialog::RestartMachine))) {
         MainWindow w;
         w.show();
         w.masterCodeCheck();

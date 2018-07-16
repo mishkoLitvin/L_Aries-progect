@@ -50,6 +50,7 @@ private:
 
 protected:
     void showEvent(QShowEvent *ev);
+    void changeEvent(QEvent *event);
 };
 
 #endif // EXITDIALOG_H
