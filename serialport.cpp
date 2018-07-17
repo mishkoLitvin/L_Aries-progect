@@ -125,7 +125,7 @@ void SerialPort::sendProgram(QByteArray programArr)
 void SerialPort::readData()
 {
     static QByteArray data = 0;
-    static bool firstByte = true;
+    static bool firstByte = false;
     data.append(serial->readAll());
 
     while(data.length()>5)
@@ -139,14 +139,14 @@ void SerialPort::readData()
         }
         else
         {
-//            qDebug()<<"Got data:"<<data.mid(0,6).toHex().toUpper();
+            qDebug()<<"Got  data:"<<data.mid(0,6).toHex().toUpper()<<initApp<<replyCnt;
             emit this->working();
             if(modData8.fileds.rwBit)
             {
-                qDebug()<<"write:"
-                       <<modData8.fileds.adress
-                      <<modData8.fileds.registerNo
-                     <<modData8.fileds.data;
+//                qDebug()<<"write:"
+//                       <<modData8.fileds.adress
+//                      <<modData8.fileds.registerNo
+//                     <<modData8.fileds.data;
                 this->sendData(data.mid(0,6), true);
                 registers->writeReg(modData8.fileds.adress,
                                     modData8.fileds.registerNo,
@@ -156,7 +156,10 @@ void SerialPort::readData()
                 if((modData8.fileds.adress == 0)
                         &(modData8.fileds.registerNo == 34)
                         &(modData8.fileds.data == 65535))
+                {
+                    dataToSendBuff.clear();
                     initApp = true;
+                }
             }
             else
             {
@@ -276,12 +279,13 @@ void SerialPort::readData()
 
                     if((dataToSendBuff.length()>5))
                     {
-//                        qDebug()<<"read request:"<<modData8.bits.adress<<modData8.bits.registerNo<<modData8.bits.data
-//                            <<"\t\trequest send:"<<0<< 2<< (uint16_t)dataToSendBuff[0]<< (uint16_t)dataToSendBuff[1];
+                        qDebug()<<"read request:"<<modData8.bits.adress<<modData8.bits.registerNo<<modData8.bits.data
+                            <<"\t\trequest send:"<<0<< 2<< (uint16_t)dataToSendBuff[0]<< (uint16_t)dataToSendBuff[1];
                         this->sendModData(0, 2, ((uint16_t)(((uint16_t)(dataToSendBuff[0]<<8))|dataToSendBuff[1])));
                     }
                     else
                         this->sendModData(0, 2, 0);
+//                        this->sendData(data.mid(0,6), true);
 
                 }
                 else
@@ -341,9 +345,10 @@ void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
     {
         if(send)
         {
-//            qDebug()<<"send data:"<<data.toHex().toUpper();
+
             serial->write(data);
             serial->waitForBytesWritten(-1);
+//            qDebug()<<"Send data:"<<data.toHex().toUpper();
         }
         else
         {

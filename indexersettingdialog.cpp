@@ -279,7 +279,9 @@ void IndexerSettingDialog::eventFilterSetup()
 
 bool IndexerSettingDialog::eventFilter(QObject *watched, QEvent *event)
 {
-    if((event->type()==QEvent::MouseButtonDblClick)|((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease)))
+    if((event->type()==QEvent::MouseButtonDblClick)
+            |((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease))
+            |((QApplication::platformName() == "linuxfb")&(event->type()==QEvent::MouseButtonRelease)))
     {
         acceptOnDeactilationEn = false;
         qobject_cast<QDoubleSpinBox*>(watched->parent())->setValue(NumpadDialog::getValue(this));

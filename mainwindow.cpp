@@ -447,7 +447,7 @@ void MainWindow::getSerialData(ModData modData)
             default:
                 break;
             }
-            settings->setValue(QString("INDEXER_PARAMS"), indexerLiftSettings.indexerParam.toByteArray());
+//            settings->setValue(QString("INDEXER_PARAMS"), indexerLiftSettings.indexerParam.toByteArray());
             break;
 
         case IndexerLiftSettings::LiftDevice:
@@ -473,7 +473,7 @@ void MainWindow::getSerialData(ModData modData)
                 break;
             }
             break;
-            settings->setValue(QString("INDEXER_PARAMS"), indexerLiftSettings.indexerParam.toByteArray());
+//            settings->setValue(QString("INDEXER_PARAMS"), indexerLiftSettings.indexerParam.toByteArray());
 
         default:
             break;
@@ -546,7 +546,7 @@ void MainWindow::getSerialData(ModData modData)
         default:
             break;
         }
-        settings->setValue(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM"), headSettings.headParam.toByteArray());
+//        settings->setValue(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM"), headSettings.headParam.toByteArray());
         if((i<headsCount)&(modData.fileds.registerNo==Register::headReg_ON))
         {
 //            qDebug()<<"ON to head set: "<<headSettings.headParam.headOnType;
@@ -1311,7 +1311,11 @@ void MainWindow::zeroStart()
     ui->widgetTopMenu->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
 
     ui->labelPalet->setStyleSheet("QLabel{font: 12px bold italic large \"Serif\"}");
+
+    disconnect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
     ui->dSpinBoxLiftOffcet->setValue(1.18-this->indexerLiftSettings.liftParam.distance/100.);
+    connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
+
     ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
                                           "padding-top: 0px;"
                                           "border-style: none;"
