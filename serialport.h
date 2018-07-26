@@ -6,10 +6,13 @@
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include <QMessageBox>
+#include <QThread>
+#include <QProgressDialog>
 
 #include "serialsettingsdialog.h"
 #include "settings.h"
 #include "crc16.h"
+#include "reprogramdialog.h"
 
 
 typedef union ModData_{
@@ -59,7 +62,7 @@ public slots:
     void openSerialPort(ComSettings cSett);
     void closeSerialPort();
 
-    void sendProgram(QByteArray programArr);
+    void sendProgram(ReprogramDialog::BoardType type, QByteArray programArr);
 
     void sendData(QByteArray data, bool send = false, bool halfByte = false);
     void sendModData(uint8_t dev, uint8_t place, uint16_t data);

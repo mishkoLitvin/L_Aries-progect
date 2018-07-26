@@ -22,7 +22,6 @@ IndexerSettingDialog::IndexerSettingDialog(QWidget *parent) :
 
     acceptOnDeactilationEn = true;
 
-
 }
 
 IndexerSettingDialog::~IndexerSettingDialog()
@@ -30,9 +29,67 @@ IndexerSettingDialog::~IndexerSettingDialog()
     delete ui;
 }
 
-void IndexerSettingDialog::setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam)
+void IndexerSettingDialog::setRegisters(Register *reg)
 {
-    this->disconnectAll();
+    this->registers = reg;
+}
+
+void IndexerSettingDialog::setIndexerSetting(bool disconnect)
+{
+    if(disconnect)
+        this->disconnectAll();
+    ui->dSpinBoxIndexAccel->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                        Register::indexerReg_ACC)/*/10.*/);
+    ui->dSpinBoxIndexAccelRet->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                           Register::indexerReg_RACC)/*/10*/);
+    ui->dSpinBoxIndexDistance->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                           Register::indexerReg_DIST)/10.);
+    ui->spinBoxIndexDistanceOffcet->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                                Register::indexerReg_DIST_OFFSET));
+    ui->spinBoxIndexHomeOffset->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                            Register::indexerReg_HOME_OFFSET));
+    ui->spinBoxIndexSpeed->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                       Register::indexerReg_SPEED));
+    ui->spinBoxindexSpeedRet->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                          Register::indexerReg_RSPEED));
+    if(disconnect)
+        this->connectAll();
+    else
+    {
+        acceptEnable = true;
+        this->accept();
+    }
+}
+
+void IndexerSettingDialog::setLiftSetting(bool disconnect)
+{
+    if(disconnect)
+        this->disconnectAll();
+    ui->dSpinBoxLiftAccel->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                       Register::liftReg_ACC)/*/10.*/);
+    ui->dSpinBoxLiftDownDelay->setValue(registers->readReg(IndexerLiftSettings::LiftDevice,
+                                                           Register::liftReg_DOWN_DELAY)/10.);
+    ui->dSpinBoxLiftUpDelay->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                         Register::indexerliftReg_UP_DELAY)/10.);
+    ui->dSpinBoxLiftDistance->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                          Register::liftReg_DIST)/100.);
+    ui->spinBoxLiftHomeOffset->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                           Register::liftReg_HOME_OFFSET));
+    ui->spinBoxLiftSpeed->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                      Register::liftReg_SPEED));
+    if(disconnect)
+        this->connectAll();
+    else
+    {
+        acceptEnable = true;
+        this->accept();
+    }
+}
+
+void IndexerSettingDialog::setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam, bool disconnect)
+{
+    if(disconnect)
+        this->disconnectAll();
     ui->dSpinBoxIndexAccel->setValue(indexParam.acceleration/*/10.*/);
     ui->dSpinBoxIndexAccelRet->setValue(indexParam.accelerationRet/*/10*/);
     ui->dSpinBoxIndexDistance->setValue(indexParam.distance/10.);
@@ -40,19 +97,32 @@ void IndexerSettingDialog::setIndexerSetting(IndexerLiftSettings::IndexParameter
     ui->spinBoxIndexHomeOffset->setValue(indexParam.homeOffset);
     ui->spinBoxIndexSpeed->setValue(indexParam.speed);
     ui->spinBoxindexSpeedRet->setValue(indexParam.speedRet);
-    this->connectAll();
+    if(disconnect)
+        this->connectAll();
+    else
+    {
+        acceptEnable = true;
+        this->accept();
+    }
 }
 
-void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters liftParam)
+void IndexerSettingDialog::setLiftSetting(IndexerLiftSettings::LiftParameters liftParam, bool disconnect)
 {
-    this->disconnectAll();
+    if(disconnect)
+        this->disconnectAll();
     ui->dSpinBoxLiftAccel->setValue(liftParam.acceleration/*/10.*/);
     ui->dSpinBoxLiftDownDelay->setValue(liftParam.delayDown/10.);
     ui->dSpinBoxLiftUpDelay->setValue(liftParam.delayUp/10.);
     ui->dSpinBoxLiftDistance->setValue(liftParam.distance/100.);
     ui->spinBoxLiftHomeOffset->setValue(liftParam.homeOffcet);
     ui->spinBoxLiftSpeed->setValue(liftParam.speed);
-    this->connectAll();
+    if(disconnect)
+        this->connectAll();
+    else
+    {
+        acceptEnable = true;
+        this->accept();
+    }
 }
 
 void IndexerSettingDialog::setLiftDistance(float distance, int gearRatio)
@@ -101,6 +171,11 @@ void IndexerSettingDialog::setLiftDistance(float distance, int gearRatio)
 float IndexerSettingDialog::getLiftDistance()
 {
     return ui->dSpinBoxLiftDistance->value();
+}
+
+void IndexerSettingDialog::setLiftGearRatio(uint32_t gearRatio)
+{
+    this->liftGearRatio = gearRatio;
 }
 
 void IndexerSettingDialog::connectAll()
@@ -500,6 +575,32 @@ void IndexerSettingDialog::dSpinBoxLiftDistance_valueChanged(double arg1)
     cmdArr.append((char)(data>>8));
     cmdArr.append((char)(data&0x00FF));
     emit this->sendCommand(cmdArr);
+
+    uint32_t liftPulseDist = Register::calcLiftPulse(this->liftGearRatio, arg1*100);
+
+    cmdArr.clear();
+    cmdArr.append((char)IndexerLiftSettings::LiftDevice);
+    cmdArr.append((char)Register::liftReg_DIST_PULSE_L);
+    data = ((uint16_t)(liftPulseDist&0x0000FFFF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+
+    cmdArr.clear();
+    cmdArr.append((char)IndexerLiftSettings::LiftDevice);
+    cmdArr.append((char)Register::liftReg_DIST_PULSE_H);
+    data = ((uint16_t)((liftPulseDist>>16)&0x0000FFFF));
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append((char)(data>>8));
+    cmdArr.append((char)(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+
+    emit this->liftDistanceChanged(arg1);
 }
 
 void IndexerSettingDialog::spinBoxLiftHomeOffset_valueChanged(double arg1)

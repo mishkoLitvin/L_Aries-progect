@@ -38,8 +38,6 @@ HeadActivationDialog::~HeadActivationDialog()
 
 void HeadActivationDialog::setHeadActivState(uint32_t state)
 {
-    qDebug()<<"setHeadActivState"<<state;
-
     int i;
     this->headActivState = state;
     for(i = 0; i< checkBoxList.length(); i++)

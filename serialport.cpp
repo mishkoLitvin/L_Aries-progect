@@ -96,29 +96,91 @@ void SerialPort::closeSerialPort()
 
 }
 
-void SerialPort::sendProgram(QByteArray programArr)
+void SerialPort::sendProgram(ReprogramDialog::BoardType type, QByteArray programArr)
 {
-    uint32_t i;
-    for(i = 0;i<programArr.length();)
+    int32_t i;
+    QByteArray cmdArr;
+    if((type == ReprogramDialog::Master_ATXmega)|(type == ReprogramDialog::Master_ATmega))
     {
-        this->sendData(programArr.mid(i, 16), true, true);
-        i+= 16;
-        if(i&0x80)
-            emit this->proramProgres(i);
+        cmdArr.clear();
+        cmdArr.append(0x75);// "u"
+        cmdArr.append(0x64);// "d"
+        this->sendData(cmdArr, true, true);
+        QThread::msleep(500);
+        cmdArr.clear();
+        cmdArr.append(0x75);// "u"
+        cmdArr.append(0x77);// "w"
+        this->sendData(cmdArr, true, true);
+    }
+    else
+    {
+        cmdArr.clear();
+        cmdArr.append(0x75);// "u"
+        cmdArr.append(0x78);// "x"
+        cmdArr.append(0x75);// "u"
+        cmdArr.append(0x64);// "d"
+        this->sendData(cmdArr, true, true);
+        QThread::msleep(500);
+        cmdArr.clear();
+        cmdArr.append(0x75);// "u"
+        cmdArr.append(0x78);// "x"
+        cmdArr.append(0x75);// "u"
+        cmdArr.append(0x77);// "w"
+        this->sendData(cmdArr, true, true);
     }
 
+//    cmdArr.clear();
+//    cmdArr.append(0x23);
+//    this->sendData(cmdArr, true, true);
+
+    for(i = 0;i<programArr.length();)
+    {
+        if((type == ReprogramDialog::Master_ATXmega)|(type == ReprogramDialog::Heads_ATXmega))
+        {
+            cmdArr.clear();
+            cmdArr.append(0x23);
+            cmdArr.append(programArr.mid(i, 512));
+            this->sendData(cmdArr, true, true);
+            i+= 512; //correct with processor type
+        }
+        else
+        {
+            this->sendData(cmdArr, true, true);
+            this->sendData(programArr.mid(i, 256), true, true);
+            i+= 256; //correct with processor type
+        }
+//        qDebug()<<i<<cmdArr.toHex();
+        QThread::msleep(500);
+    }
+    qDebug()<<"Start last";
     if(i<programArr.length())
     {
         QByteArray last;
         last.clear();
         last.append(programArr.mid(i, programArr.length()-1-i));
-        for(;last.length()<16;)
-        {
-            last.append((char)0xFF);
-            i++;
-        }
-        this->sendData(last, true, true);
+        if((type == ReprogramDialog::Master_ATXmega)|(type == ReprogramDialog::Heads_ATXmega))
+            for(;last.length()<512;)
+            {
+                last.append((char)0xFF);
+                i++;
+            }
+        else
+            for(;last.length()<256;)
+            {
+                last.append((char)0xFF);
+                i++;
+            }
+        cmdArr.clear();
+        cmdArr.append(0x23);
+        cmdArr.append(last);
+        this->sendData(cmdArr, true, true);
     }
+    cmdArr.clear();
+    QThread::msleep(500);
+    cmdArr.append(0xFF);
+    cmdArr.append(0xFF);
+    this->sendData(cmdArr, true, true);
+
     emit this->proramProgres(i);
 }
 
@@ -127,7 +189,7 @@ void SerialPort::readData()
     static QByteArray data = 0;
     static bool firstByte = false;
     data.append(serial->readAll());
-
+//    qDebug()<<"Got w check"<<data.toHex().toUpper();
     while(data.length()>5)
     {
         bool ok;
@@ -293,8 +355,10 @@ void SerialPort::readData()
 //                    qDebug()<<"read reg:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data
 //                        <<"\t\treg send:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<registers->readReg(modData8.fileds.adress,
 //                                                                                                                  modData8.fileds.registerNo);
-                    this->sendModData(modData8.bits.adress, modData8.bits.registerNo, registers->readReg(modData8.fileds.adress,
-                                                                                                         modData8.fileds.registerNo));
+                    this->sendModData(modData8.bits.adress,
+                                      modData8.bits.registerNo,
+                                      registers->readReg(modData8.fileds.adress,
+                                                         modData8.fileds.registerNo));
                 }
             }
             data.remove(0,6);
@@ -340,6 +404,7 @@ void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
         }
         serial->write(dataToSend);
         serial->waitForBytesWritten(-1);
+        qDebug()<<"send half "<<dataToSend.length();
     }
     else
     {

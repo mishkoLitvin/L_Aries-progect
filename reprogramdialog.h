@@ -21,8 +21,15 @@ public:
     explicit ReprogramDialog(QWidget *parent = 0);
     ~ReprogramDialog();
 
+    typedef enum BoardType_{
+        Master_ATXmega,
+        Heads_ATXmega,
+        Master_ATmega,
+        Heads_ATmega
+    }BoardType;
+
 signals:
-    void programArrReady(QByteArray progArr);
+    void programArrReady(ReprogramDialog::BoardType type, QByteArray progArr);
 
 public slots:
     void setProgress(int progress);

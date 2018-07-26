@@ -144,6 +144,7 @@ private slots:
     void setUnloadState(bool state);
     void getLiftParam(QByteArray liftParamArr);
     void getLiftOffcet(double arg1);
+    void getLiftDistance(float distance);
     void getIndexLiftSettComm(QByteArray commandArr);
     void getIndexLiftCommand(QByteArray commandArr);
     void getMachineCommand(QByteArray commandArr);
@@ -161,6 +162,7 @@ private slots:
     void stopPrintProcess();
     void maintanceWorkSlot(bool enable);
     void setIconFolder(int index);
+    void setBackGround(bool enable, bool request = false);
 
 
 

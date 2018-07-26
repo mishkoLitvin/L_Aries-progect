@@ -561,7 +561,7 @@ void Register::setMasterReg(MachineSettings mSett)
 void Register::setHeadReg(int index, HeadSetting hSett)
 {
 //    this->headRegList[index].field.REG_DEV_INF_H;
-    this->headRegList[index].field.headReg_ON = hSett.headParam.powerOn;
+    this->headRegList[index].field.headReg_ON = hSett.headParam.headOnType;
     this->headRegList[index].field.headReg_RSPD = hSett.headParam.speedRear;
     this->headRegList[index].field.headReg_FSPD = hSett.headParam.speedFront;
     this->headRegList[index].field.headReg_FLDWE = hSett.headParam.dwellFLTime;

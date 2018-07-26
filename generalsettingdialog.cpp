@@ -150,12 +150,13 @@ void GeneralSettingDialog::setPasswords(uint16_t serialPass, uint16_t mailPass, 
     this->usersPassword = userPass;
 }
 
-void GeneralSettingDialog::setStyleList(QStringList stList, int curSelect, QStringList iconList, int iconSel)
+void GeneralSettingDialog::setStyle(QStringList stList, int curSelect, QStringList iconList, int iconSel, bool backGrEn)
 {
     ui->listWidgetStyle->addItems(stList);
     ui->listWidgetStyle->setCurrentRow(curSelect);
     ui->listWidgetIcons->addItems(iconList);
     ui->listWidgetIcons->setCurrentRow(iconSel);
+    ui->checkBoxUseBackgr->setChecked(backGrEn);
 }
 
 void GeneralSettingDialog::setLangList(QStringList langList, int curSelect)
@@ -607,4 +608,15 @@ void GeneralSettingDialog::changeEvent(QEvent* event)
 void GeneralSettingDialog::on_pButtonHeadsActivation_clicked()
 {
     emit this->headActivationRequest();
+}
+
+void GeneralSettingDialog::on_checkBoxUseBackgr_clicked()
+{
+    ui->pButtonSelectImg->setEnabled(ui->checkBoxUseBackgr->isChecked());
+    emit this->imageRequest(ui->checkBoxUseBackgr->isChecked(), false);
+}
+
+void GeneralSettingDialog::on_pButtonSelectImg_clicked()
+{
+    emit this->imageRequest(ui->checkBoxUseBackgr->isChecked(), true);
 }

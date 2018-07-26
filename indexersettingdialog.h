@@ -10,6 +10,7 @@
 #include "settings.h"
 #include "numpaddialog.h"
 
+
 #include "crc16.h"
 
 namespace Ui {
@@ -23,16 +24,21 @@ class IndexerSettingDialog : public QWidget
 public:
     explicit IndexerSettingDialog(QWidget *parent = 0);
     ~IndexerSettingDialog();
-    void setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam);
-    void setLiftSetting(IndexerLiftSettings::LiftParameters liftParam);
-    void setLiftDistance(float distance, int gearRatio);
+    void setRegisters(Register *reg);
+    void setIndexerSetting(bool disconnect = true);
+    void setLiftSetting(bool disconnect = true);
+    void setIndexerSetting(IndexerLiftSettings::IndexParameters indexParam, bool disconnect = true);
+    void setLiftSetting(IndexerLiftSettings::LiftParameters liftParam, bool disconnect = true);
+    void setLiftDistance(float distance, int liftGearRatio);
     float getLiftDistance();
+    void setLiftGearRatio(uint32_t liftGearRatio);
 
 
 signals:
     void indexerParamChanged(QByteArray indexParamArr);
     void liftParamChanged(QByteArray liftParamArr);
     void sendCommand(QByteArray command);
+    void liftDistanceChanged(float distance);
 
 
 private:
@@ -40,6 +46,8 @@ private:
 
     bool acceptOnDeactilationEn;
     bool acceptEnable;
+    uint32_t liftGearRatio;
+    Register *registers;
 
 private slots:
 

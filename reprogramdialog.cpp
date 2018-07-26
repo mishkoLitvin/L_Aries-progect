@@ -39,11 +39,27 @@ void ReprogramDialog::on_pushButtonErase_clicked()
 {
     int i;
     programArr.clear();
-    for(i = 0; i<0xFFFF; i++)
+    programArr.resize(0x2000);
+    programArr.fill((char)0xFF, 0x2000);
+//    for(i = 0; i<0xFFFF; i++)
+//    {
+//        programArr.append((char)0x00);
+//    }
+    if(ui->radioButtonATXmega->isChecked())
     {
-        programArr.append((char)0x00);
+        if(ui->radioButtonMaster->isChecked())
+            emit this->programArrReady(Master_ATXmega, programArr);
+        if(ui->radioButtonHeads->isChecked())
+            emit this->programArrReady(Heads_ATXmega, programArr);
     }
-    emit this->programArrReady(programArr);
+    else
+    {
+        if(ui->radioButtonMaster->isChecked())
+            emit this->programArrReady(Master_ATmega, programArr);
+        if(ui->radioButtonHeads->isChecked())
+            emit this->programArrReady(Heads_ATmega, programArr);
+    }
+
 }
 
 void ReprogramDialog::on_pushButtonWrite_clicked()
@@ -62,7 +78,6 @@ void ReprogramDialog::on_pushButtonWrite_clicked()
         tempReadLine.clear();
         tempAppendLine.clear();
         tempReadLine = inFile.readLine();
-        qDebug()<<tempReadLine.mid(0, 1);
         if((tempReadLine.mid(0, 1) != ":")|(tempReadLine.length()>100))
         {
             qDebug()<<"RRRRRRRRRRRR";
@@ -73,7 +88,8 @@ void ReprogramDialog::on_pushButtonWrite_clicked()
         addr = tempReadLine.mid(3,4).toInt(&ok, 16);
         recType = tempReadLine.mid(7,2).toInt(&ok, 16);
         tempBArr = QByteArray::fromHex(tempReadLine.mid(9,len*2).toLatin1());
-        programArr.append(tempBArr);
+        if(recType == 0)
+            programArr.append(tempBArr);
     }
     inFile.close();
 
@@ -86,6 +102,21 @@ void ReprogramDialog::on_pushButtonWrite_clicked()
         msgBox.exec();
     }
     else
-        emit this->programArrReady(programArr);
+    {
+        if(ui->radioButtonATXmega->isChecked())
+        {
+            if(ui->radioButtonMaster->isChecked())
+                emit this->programArrReady(Master_ATXmega, programArr);
+            if(ui->radioButtonHeads->isChecked())
+                emit this->programArrReady(Heads_ATXmega, programArr);
+        }
+        else
+        {
+            if(ui->radioButtonMaster->isChecked())
+                emit this->programArrReady(Master_ATmega, programArr);
+            if(ui->radioButtonHeads->isChecked())
+                emit this->programArrReady(Heads_ATmega, programArr);
+        }
+    }
 }
 

@@ -59,7 +59,7 @@ public:
     void setMachineSetting(MachineSettings::MachineParameters machineParam);
     void setFocusLossAccept(bool flag);
     void setPasswords(uint16_t serialPass, uint16_t mailPass, uint16_t userPass);
-    void setStyleList(QStringList stList, int curSelect, QStringList iconList, int iconSel);
+    void setStyle(QStringList stList, int curSelect, QStringList iconList, int iconSel, bool backGrEn);
     void setLangList(QStringList langList, int curSelect);
     void showPortInfo(ComSettings comSett);
 
@@ -76,7 +76,7 @@ signals:
     void directionChanged(int dir);
     void unloadStateChanged(bool state);
     void sendCommand(QByteArray command);
-
+    void imageRequest(bool enable, bool req = false);
 
 private:
     Ui::GeneralSettingDialog *ui;
@@ -115,6 +115,8 @@ private slots:
     void machineTypeChanget(int index);
     void warningTimeChanged(double arg1);
     void on_pButtonHeadsActivation_clicked();
+    void on_checkBoxUseBackgr_clicked();
+    void on_pButtonSelectImg_clicked();
 
 protected:
     bool event(QEvent *e);

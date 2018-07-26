@@ -405,6 +405,12 @@ void IndexerWidget::setState(u_int16_t state)
     ui->pButtonMoveUp->setEnabled((hb == 7)|(hb == 9));
     ui->pButtonHome->setEnabled(hb == 2);
 
+    if(hb == 4)
+    {
+        ui->pButtonLock->setChecked(false);
+        ui->pButtonLock->setText(tr("Lock"));
+        ui->pButtonLock->setIcon(QIcon(pathIcon+"/lock.png"));
+    }
     if(hb == 8)
     {
         ui->pButtonPrint->setChecked(true);

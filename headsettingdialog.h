@@ -14,6 +14,7 @@
 #include "settings.h"
 #include "numpaddialog.h"
 
+
 #include "crc16.h"
 
 namespace Ui {
@@ -28,6 +29,8 @@ public:
     explicit SettingDialog(HeadSetting hSttg, int index = 0, QWidget *parent = 0);
     ~SettingDialog();
 
+    void setRegisters(Register *reg);
+    void setHeadParams(int index = 0, bool disconnect = true);
     void setHeadParams(HeadSetting hSttg, int index = 0, bool disconnect = true);
     void setIconFolder(QString path);
 
@@ -48,6 +51,8 @@ private:
     bool acceptEnable;
 
     HeadSetting headSettings;
+
+    Register *registers;
 
 private slots:
     void accept();
