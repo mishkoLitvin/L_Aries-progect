@@ -155,8 +155,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(reprogramDialog, SIGNAL(programArrReady(ReprogramDialog::BoardType, QByteArray)), comPort, SLOT(sendProgram(ReprogramDialog::BoardType, QByteArray)));
     connect(comPort, SIGNAL(proramProgres(int)), reprogramDialog, SLOT(setProgress(int)));
 
-
-
 }
 
 MainWindow::~MainWindow()
@@ -195,6 +193,7 @@ void MainWindow::masterCodeCheck()
                 break;
             case QMessageBox::No:
                 this->close();
+                settings->setValue("PROGRAM/FINISH", true);
                 exit(0);
                 break;
             }
@@ -254,6 +253,7 @@ void MainWindow::masterCodeCheck()
 
             if(exitFlag)
             {
+                settings->setValue("PROGRAM/FINISH", true);
                 this->close();
                 exit(0);
             }
@@ -333,15 +333,15 @@ void MainWindow::resetMachine()
 
         comPort->openSerialPort(comSett);
 
-        bArr.append((char)(0x75));//"u"
-        bArr.append((char)(0x78));//"x"
-        bArr.append((char)(0x75));//"u"
-        bArr.append((char)(0x72));//"r"
+        bArr.append(static_cast<char>(0x75));//"u"
+        bArr.append(static_cast<char>(0x78));//"x"
+        bArr.append(static_cast<char>(0x75));//"u"
+        bArr.append(static_cast<char>(0x72));//"r"
         comPort->sendData(bArr, false, true);
         QThread::msleep(500);
         bArr.clear();
-        bArr.append((char)(0x75));//"u"
-        bArr.append((char)(0x72));//"r"
+        bArr.append(static_cast<char>(0x75));//"u"
+        bArr.append(static_cast<char>(0x72));//"r"
         comPort->sendData(bArr, false, true);
         QThread::msleep(500);
 
@@ -358,15 +358,15 @@ void MainWindow::resetMachine()
         data = 1;
         bArr.append(MachineSettings::MasterDevice);
         bArr.append(MachineSettings::MasterLastButton);
-        bArr[2] = ((char)(data>>8));
-        bArr[3] = ((char)(data&0x00FF));
+        bArr[2] = (static_cast<char>(data>>8));
+        bArr[3] = (static_cast<char>(data&0x00FF));
         data = CrcCalc::CalculateCRC16(bArr);
-        bArr[4] = ((char)(data>>8));
-        bArr[5] = ((char)(data&0x00FF));
+        bArr[4] = (static_cast<char>(data>>8));
+        bArr[5] = (static_cast<char>(data&0x00FF));
         comPort->sendData(bArr);
         bArr.clear();
-        bArr.append((char)MachineSettings::MasterDevice);
-        bArr.append((char)MachineSettings::MasterMachineType);
+        bArr.append(static_cast<char>(MachineSettings::MasterDevice));
+        bArr.append(static_cast<char>(MachineSettings::MasterMachineType));
     }
 }
 
@@ -393,10 +393,10 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_EKR:
                 infoWidget->setIndicatorState(modData.fileds.data);
                 indexer->setState(modData.fileds.data);
-                bArr.append((char)MachineSettings::MasterDevice);
-                bArr.append((char)Register::masterReg_EKR);
-                bArr.append((char)(modData.fileds.data>>8));
-                bArr.append((char)(modData.fileds.data&0x00FF));
+                bArr.append(static_cast<char>(MachineSettings::MasterDevice));
+                bArr.append(static_cast<char>(Register::masterReg_EKR));
+                bArr.append(static_cast<char>(modData.fileds.data>>8));
+                bArr.append(static_cast<char>(modData.fileds.data&0x00FF));
                 udpHandler->sendData(bArr);
                 if(modData.fileds.data == 0x0800)
                     this->indexerStepFinish();
@@ -605,10 +605,9 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 
 void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 {
-
+    qDebug()<<index;
     int cnt;
-    index++;
-    HeadSetting hStt;
+//    index++;
     headSettings.fromByteArray(hParamArr);
 
     for(cnt = 1; cnt<headsCount; cnt++)
@@ -617,11 +616,8 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
         {
             settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
 
-            qDebug()<<cnt;
             HeadSetting::setHeadOn_OffStateInd(cnt, static_cast<bool>(hParamArr[2]&0x01));
 
-//            headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM")).value<QByteArray>());
-//            headSettingDialog->setHeadParams(headSettings, cnt);
             uint16_t t_headOn = ((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0]));
 
             if(t_headOn != registers->readReg((HeadSetting::HeadDeviceAdrOffcet+cnt)&0x00FF,
@@ -629,21 +625,19 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
             {
                 QByteArray cmdArr;
                 uint16_t data = cnt+500;
-                cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-                cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-                cmdArr.append((char)(data>>8));
-                cmdArr.append((char)(data&0x00FF));
+                cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+                cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+                cmdArr.append(static_cast<char>(data>>8));
+                cmdArr.append(static_cast<char>(data&0x00FF));
                 data = CrcCalc::CalculateCRC16(cmdArr);
-                cmdArr.append((char)(data>>8));
-                cmdArr.append((char)(data&0x00FF));
+                cmdArr.append(static_cast<char>(data>>8));
+                cmdArr.append(static_cast<char>(data&0x00FF));
                 comPort->sendData(cmdArr);
             }
 
-            registers->setHeadReg(cnt, headSettings);
-            headSettingDialog->setHeadParams(cnt, false);
             settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
-            if((bool)t_headOn>0)
-                switch ((HeadSetting::HeadOnType)(t_headOn))
+            if(static_cast<bool>(t_headOn)>0)
+                switch (static_cast<HeadSetting::HeadOnType>(t_headOn))
                 {
                 case HeadSetting::PrintHeadOn:
                     headButton[cnt]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
@@ -671,26 +665,44 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
     QByteArray cmdArr;
     int data;
 
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
-    cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
-    cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
+    uint8_t dev, addr;
+    for(dev = 1; dev<headsCount; dev++)
+        for(addr = Register::headReg_REG_DEV_INF_H; addr<Register::headReg_REG_DEV_INF_L; addr++)
+            if(((dev<headsCount-1)|(!this->machineSettings.machineParam.useUnloadHead))&(dev != index))
+            {
+                data = registers->readReg(HeadSetting::HeadDeviceAdrOffcet+index, addr);
+                if(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+dev, addr) != data)
+                {
+                    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+dev)&0x00FF));
+                    cmdArr.append(static_cast<char>(addr&0x00FF));
+                    cmdArr.append(static_cast<char>(data>>8));
+                    cmdArr.append(static_cast<char>(data&0x00FF));
+                    data = CrcCalc::CalculateCRC16(cmdArr);
+                    cmdArr.append(static_cast<char>(data>>8));
+                    cmdArr.append(static_cast<char>(data&0x00FF));
+                    comPort->sendData(cmdArr);
+                    cmdArr.clear();
+                }
+            }
+
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadStateLo&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateLo()>>8));
+    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateLo()&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     comPort->sendData(cmdArr);
     cmdArr.clear();
 
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
-    cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
-    cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadStateHi&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateHi()>>8));
+    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateHi()&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     comPort->sendData(cmdArr);
-
-
 }
 
 void MainWindow::getHeadCommand(int index, QByteArray commandArr)
@@ -713,13 +725,13 @@ void MainWindow::getLoadState(LoadState stase)
 {
     QByteArray cmdArr;
     int data;
-    cmdArr.append((char)((IndexerLiftSettings::IndexerDevice)&0x00FF));
-    cmdArr.append((char)(IndexerLiftSettings::LoadHeadState&0x00FF));
-    cmdArr.append((char)(stase>>8));
-    cmdArr.append((char)(stase&0x00FF));
+    cmdArr.append(static_cast<char>((IndexerLiftSettings::IndexerDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::LoadHeadState&0x00FF));
+    cmdArr.append(static_cast<char>(stase>>8));
+    cmdArr.append(static_cast<char>(stase&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     comPort->sendData(cmdArr);
 }
 
@@ -811,13 +823,13 @@ void MainWindow::getStepDelayTime(double arg1)
     settings->setValue(QString("MACHINE_PARAMS"), this->machineSettings.machineParam.toByteArray());
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-    cmdArr.append((char)(IndexerLiftSettings::IndexStepTimeDelay&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexerDevice&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexStepTimeDelay&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     comPort->sendData(cmdArr);
 }
 
@@ -965,10 +977,12 @@ void MainWindow::exitProgram(bool restart)
 
         switch (this->exitCode) {
         case ExitDialog::ExitFromProgram:
+            settings->setValue("PROGRAM/FINISH", true);
             this->close();
             break;
         case ExitDialog::RestartProgram:
             pDialog->setValue(0);
+            settings->setValue("PROGRAM/FINISH", true);
             for (int i = pDialog->minimum(); i <= pDialog->maximum(); i++)
             {
                 pDialog->setValue(i);
@@ -980,6 +994,7 @@ void MainWindow::exitProgram(bool restart)
                 this->close();
             break;
         case ExitDialog::Shutdown:
+            settings->setValue("PROGRAM/FINISH", true);
             if(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable)
                 mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
                                         "Worker: " + this->userName + ".\n"
@@ -990,6 +1005,7 @@ void MainWindow::exitProgram(bool restart)
                                         "Machine printed " + QString::number(ragSessionCount) + " items this session"
                                         " and " + QString::number(ragAllCount) + " items in total.\n"
                                         "\nHave a great day!" );
+
             qDebug()<<"System call to halt";
             this->close();
             break;
@@ -1239,9 +1255,9 @@ void MainWindow::indexerStepFinish()
     int i;
     for(i = 0; i<4; i++)
     {
-        bArr[2+i] = (char)(ragSessionCount>>(i*8));
-        bArr[6+i] = (char)(ragAtHeadCount>>(i*8));
-        bArr[10+i] = (char)(dph>>(i*8));
+        bArr[2+i] = static_cast<char>(ragSessionCount>>(i*8));
+        bArr[6+i] = static_cast<char>(ragAtHeadCount>>(i*8));
+        bArr[10+i] = static_cast<char>(dph>>(i*8));
     }
     udpHandler->sendData(bArr);
 }
@@ -1388,6 +1404,21 @@ void MainWindow::userLogin()
 
 void MainWindow::zeroStart()
 {
+    if(!settings->value("PROGRAM/FINISH", false).toBool())
+    {
+        QMessageBox msgBox;
+        msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+        msgBox.setText(tr("Exit incorrect"));
+        msgBox.setInformativeText(tr("Machine shutdown during\n"
+                                     " the last session is incorrect.\n"
+                                     "Use the Exit menu to prevent errors.\n"));
+        msgBox.setWindowTitle(tr("Exit error"));
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+    }
+    settings->setValue("PROGRAM/FINISH", false);
+
     if(((!QSslSocket::supportsSsl())|
             (!(QSslSocket::sslLibraryBuildVersionString() == QSslSocket::sslLibraryVersionString())))
             &(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable))

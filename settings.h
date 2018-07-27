@@ -677,7 +677,7 @@ public:
     };
 
     enum HeadRegNom{
-        REG_DEV_INF_H,
+        headReg_REG_DEV_INF_H,
         headReg_ON,
         headReg_SPD_REAR,
         headReg_SPD_FRONT,
@@ -720,7 +720,7 @@ public:
         REG_HMI_DATA,
         headReg_REVOLVER_STR_L,
         headReg_REVOLVER_STR_H,
-        REG_DEV_INF_L,
+        headReg_REG_DEV_INF_L,
     };
 
 

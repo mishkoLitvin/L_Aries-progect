@@ -168,9 +168,6 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
     ui->dSpinBoxDryingRangeIR->setValue(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
                                                            Register::headReg_RANGE_1)/10.);
 
-
-
-
     acceptOnDeactilationEn = true;
     if(disconnect)
         this->connectAll();
@@ -224,9 +221,6 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
     ui->dSpinBoxHeatTime1IR->setValue(hSttg.headParam.heatTime1/10.);
     ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
     ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.heatLimit/10.);
-
-
-
 
     acceptOnDeactilationEn = true;
     if(disconnect)
