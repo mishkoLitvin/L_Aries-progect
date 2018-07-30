@@ -66,6 +66,7 @@ public slots:
 
     void sendData(QByteArray data, bool send = false, bool halfByte = false);
     void sendModData(uint8_t dev, uint8_t place, uint16_t data);
+    void sendReg(uint8_t dev, uint8_t place);
     void setupPort();
     void setComParams(ComSettings sett);
     void setStyleSheet(QString stSheet);

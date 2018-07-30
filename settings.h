@@ -362,7 +362,7 @@ public:
 class Register{
 
 public:
-    Register(uint8_t headCount);
+    Register(uint16_t headCount);
 
     typedef union MasterReg_{
         struct reg{

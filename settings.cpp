@@ -443,13 +443,13 @@ void MachineSettings::setIndexLiftType(uint16_t val)
     MachineSettings::indexerLiftTypeStat = val;
 }
 
-Register::Register(uint8_t headCount)
+Register::Register(uint16_t headCount)
 {
     masterRegPtr = &(masterReg.memBeg);
     indexerRegPtr = &(indexerReg.memBeg);
     liftRegPtr = &(liftReg.memBeg);
 
-    unsigned int i;
+    uint16_t i;
     for(i = 0; i<headCount; i++)
     {
         headRegList.append(*(new HeadReg));
@@ -518,49 +518,49 @@ uint16_t Register::readReg(uint8_t dev, uint8_t place)
 void Register::setMasterReg(MachineSettings mSett)
 {
     this->machineSettings = mSett;
-//    this->masterReg.field.masterReg_DEV_INF_H;
+    this->masterReg.field.masterReg_DEV_INF_H = 0;
     this->masterReg.field.masterReg_SIZE = mSett.machineParam.headCount;
-//    this->masterReg.field.masterReg_PRZ;
-//    this->masterReg.field.masterReg_STA;
-//    this->masterReg.field.masterheadReg;
-//    this->masterReg.field.masterReg_LAM;
-//    this->masterReg.field.masterReg_TOTALH;
-//    this->masterReg.field.masterReg_TOTALL;
-//    this->masterReg.field.masterheadReg1;
-//    this->masterReg.field.masterReg_PAL;
-//    this->masterReg.field.masterReg_INPUT;
-//    this->masterReg.field.masterReg_REMAINH;
-//    this->masterReg.field.masterReg_REMAINL;
-//    this->masterReg.field.masterReg_SPEED;
-//    this->masterReg.field.masterReg_PRINTEDH;
-//    this->masterReg.field.masterReg_PRINTEDL;
+    this->masterReg.field.masterReg_PRZ = 0;
+    this->masterReg.field.masterReg_STA = 0;
+    this->masterReg.field.masterheadReg = 0;
+    this->masterReg.field.masterReg_LAM = 0;
+    this->masterReg.field.masterReg_TOTALH = 0;
+    this->masterReg.field.masterReg_TOTALL = 0;
+    this->masterReg.field.masterheadReg1 = 0;
+    this->masterReg.field.masterReg_PAL = 0;
+    this->masterReg.field.masterReg_INPUT = 0;
+    this->masterReg.field.masterReg_REMAINH = 0;
+    this->masterReg.field.masterReg_REMAINL = 0;
+    this->masterReg.field.masterReg_SPEED = 0;
+    this->masterReg.field.masterReg_PRINTEDH = 0;
+    this->masterReg.field.masterReg_PRINTEDL = 0;
     this->masterReg.field.masterReg_MACHINE_TYPE = mSett.machineParam.machineType;
-//    this->masterReg.field.masterReg_PAL1;
-//    this->masterReg.field.masterReg_EKR;
-//    this->masterReg.field.masterReg_ACTIVHEAD_L;
-//    this->masterReg.field.masterReg_ACTIVHEAD_H;
+    this->masterReg.field.masterReg_PAL1 = 0;
+    this->masterReg.field.masterReg_EKR = 0;
+    this->masterReg.field.masterReg_ACTIVHEAD_L = 0;
+    this->masterReg.field.masterReg_ACTIVHEAD_H = 0;
     this->masterReg.field.masterReg_DEVERR = 0;
     this->masterReg.field.masterReg_ERR = 0;
-//    this->masterReg.field.masterReg_KODH;
-//    this->masterReg.field.masterReg_KODL;
-//    this->masterReg.field.masterReg_DATH;
-//    this->masterReg.field.masterReg_DATL;
-//    this->masterReg.field.masterReg_KOD_ON;
+    this->masterReg.field.masterReg_KODH = 0;
+    this->masterReg.field.masterReg_KODL = 0;
+    this->masterReg.field.masterReg_DATH = 0;
+    this->masterReg.field.masterReg_DATL = 0;
+    this->masterReg.field.masterReg_KOD_ON = 0;
     this->masterReg.field.masterReg_DAT = (uint16_t)(((uint16_t)((QDate::currentDate().year()-2000)<<9))
                                                      |((uint16_t)(QDate::currentDate().month()<<5)
                                                        |(uint16_t)(QDate::currentDate().day())));
-//    this->masterReg.field.REG_KOD_WPISZ;
-//    this->masterReg.field.masterReg_HRW;
-//    this->masterReg.field.masterReg_HRW1;
-//    this->masterReg.field.masterReg_KOD_ON2;
-//    this->masterReg.field.masterReg_KOD_ON3;
+    this->masterReg.field.REG_KOD_WPISZ = 0;
+    this->masterReg.field.masterReg_HRW = 0;
+    this->masterReg.field.masterReg_HRW1 = 0;
+    this->masterReg.field.masterReg_KOD_ON2 = 0;
+    this->masterReg.field.masterReg_KOD_ON3 = 0;
     this->masterReg.field.masterReg_ERROR_MESSAGE = 0;
-//    this->masterReg.field.masterReg_DEV_INF_L;
+    this->masterReg.field.masterReg_DEV_INF_L = 0;
 }
 
 void Register::setHeadReg(int index, HeadSetting hSett)
 {
-//    this->headRegList[index].field.REG_DEV_INF_H;
+    this->headRegList[index].field.REG_DEV_INF_H = 0;
     this->headRegList[index].field.headReg_ON = hSett.headParam.headOnType;
     this->headRegList[index].field.headReg_RSPD = hSett.headParam.speedRear;
     this->headRegList[index].field.headReg_FSPD = hSett.headParam.speedFront;
@@ -570,107 +570,107 @@ void Register::setHeadReg(int index, HeadSetting hSett)
     this->headRegList[index].field.headReg_RW1_TIME = hSett.headParam.heatTime1Q;
     this->headRegList[index].field.headReg_RW2_TIME = hSett.headParam.heatTime2Q;
     this->headRegList[index].field.headReg_RW3_TIME = 0;
-//    this->headRegList[index].field.headReg_REG_INP;
-//    this->headRegList[index].field.headReg_ROZ;
-//    this->headRegList[index].field.headReg_STAN;
-//    this->headRegList[index].field.REG_KEY;
+    this->headRegList[index].field.headReg_REG_INP = 0;
+    this->headRegList[index].field.headReg_ROZ = 0;
+    this->headRegList[index].field.headReg_STAN = 0;
+    this->headRegList[index].field.REG_KEY = 0;
     this->headRegList[index].field.headReg_SBSTR = hSett.headParam.stroksSBCount;
-//    this->headRegList[index].field.REG_LED;
+    this->headRegList[index].field.REG_LED = 0;
     this->headRegList[index].field.headRegIsHeat = 0;
-//    this->headRegList[index].field.headReg_R;
-//    this->headRegList[index].field.headReg_G;
-//    this->headRegList[index].field.headReg_B;
+    this->headRegList[index].field.headReg_R = 0;
+    this->headRegList[index].field.headReg_G = 0;
+    this->headRegList[index].field.headReg_B = 0;
     this->headRegList[index].field.REG_SERVO_HOLD = 0;
     this->headRegList[index].field.REG_SHUTTLE_REAR_POS = hSett.headParam.heatLimit;
-//    this->headRegList[index].field.headReg_RANGE_1;
-//    this->headRegList[index].field.headReg_RANGE_2;
+    this->headRegList[index].field.headReg_RANGE_1 = hSett.headParam.limitFront;
+    this->headRegList[index].field.headReg_RANGE_2 = hSett.headParam.limitRear;
     this->headRegList[index].field.REG_TEMP_SET = hSett.headParam.temperatureSetQ;
     this->headRegList[index].field.REG_SENSOR_TIME = hSett.headParam.heatTime1Q;
     this->headRegList[index].field.REG_STANDBY_POWER = hSett.headParam.standbyPowerQ;
     this->headRegList[index].field.REG_STANDBY_TIME = hSett.headParam.standbyTimeQ;
     this->headRegList[index].field.headReg_CONFIG = 0x00;
     this->headRegList[index].field.REG_RW_POWER = hSett.headParam.dryPowerQ;
-//    this->headRegList[index].field.REG_TEMP_MEAS;
+    this->headRegList[index].field.REG_TEMP_MEAS = 0;
     this->headRegList[index].field.headReg_WARM_PAL_TIME = hSett.headParam.warmFlashTimeQ;
     this->headRegList[index].field.headReg_WARM_FLASH_TIME = hSett.headParam.warmFlashTimeQ;
-//    this->headRegList[index].field.headReg_MACHINE_TYPE;
-//    this->headRegList[index].field.headReg_PRESSURE_1;
-//    this->headRegList[index].field.headReg_PRESSURE_2;
-//    this->headRegList[index].field.headReg_PRESSURE_3;
-//    this->headRegList[index].field.headReg_PRESSURE_4;
-//    this->headRegList[index].field.headReg_PRESSURE_5;
-//    this->headRegList[index].field.headReg_ERROR_MESSAGE;
-//    this->headRegList[index].field.REG_HMI_DATA;
-//    this->headRegList[index].field.REV_STR1;
-//    this->headRegList[index].field.REV_STR2;
-//    this->headRegList[index].field.REG_DEV_INF_L;
+    this->headRegList[index].field.headReg_MACHINE_TYPE = 0;
+    this->headRegList[index].field.headReg_PRESSURE_1 = 0;
+    this->headRegList[index].field.headReg_PRESSURE_2 = 0;
+    this->headRegList[index].field.headReg_PRESSURE_3 = 0;
+    this->headRegList[index].field.headReg_PRESSURE_4 = 0;
+    this->headRegList[index].field.headReg_PRESSURE_5 = 0;
+    this->headRegList[index].field.headReg_ERROR_MESSAGE = 0;
+    this->headRegList[index].field.REG_HMI_DATA = 0;
+    this->headRegList[index].field.headReg_REVOLVER_STR_L = 0;
+    this->headRegList[index].field.headReg_REVOLVER_STR_H = 0;
+    this->headRegList[index].field.REG_DEV_INF_L = 0;
 }
 
 void Register::setIndexLiftReg(IndexerLiftSettings iLSett)
 {
     this->indexerLiftSettings = iLSett;
-//    this->indexerReg.field.masterReg_DEV_INF_H;
+    this->indexerReg.field.masterReg_DEV_INF_H = 0;
     this->indexerReg.field.indexerReg_HOME_OFF = iLSett.indexerParam.homeOffset;
     this->indexerReg.field.indexerReg_DIST_OFF = iLSett.indexerParam.distOffcet;
     this->indexerReg.field.indexerReg_MAX_SPEED = iLSett.indexerParam.speed;
     this->indexerReg.field.indexerReg_DIR = this->machineSettings.machineParam.direction;
-//    this->indexerReg.field.indexerReg_CYCLE_DWELL;
+    this->indexerReg.field.indexerReg_CYCLE_DWELL = 0;
     this->indexerReg.field.indexerliftReg_UP_DELAY = iLSett.liftParam.delayUp;
     this->indexerReg.field.indexerReg_DIST = iLSett.indexerParam.distance;
-//    this->indexerReg.field.indexerReg_TM;
+    this->indexerReg.field.indexerReg_TM = 0;
     this->indexerReg.field.indexerReg_ACC = iLSett.indexerParam.acceleration;
     this->indexerReg.field.indexerReg_RACC = iLSett.indexerParam.accelerationRet;
     this->indexerReg.field.indexerReg_RSPEED = iLSett.indexerParam.speedRet;
-//    this->indexerReg.field.indexerReg_WARN;
+    this->indexerReg.field.indexerReg_WARN = 0;
     this->indexerReg.field.liftReg_HOME_OFF = iLSett.liftParam.homeOffcet;
     this->indexerReg.field.liftReg_DIST = iLSett.liftParam.distance;
     this->indexerReg.field.liftReg_SPEED = iLSett.liftParam.speed;
     this->indexerReg.field.liftReg_ACC = iLSett.liftParam.acceleration;
-//    this->indexerReg.field.indexerReg_HRW_TIME_1;
-//    this->indexerReg.field.indexerReg_HRW_TIME_2;
-//    this->indexerReg.field.indexerReg_HRW_TIME_3;
-//    this->indexerReg.field.indexerReg_HRW_TIME_4;
-//    this->indexerReg.field.indexerReg_MODE;
+    this->indexerReg.field.indexerReg_HRW_TIME_1 = 0;
+    this->indexerReg.field.indexerReg_HRW_TIME_2 = 0;
+    this->indexerReg.field.indexerReg_HRW_TIME_3 = 0;
+    this->indexerReg.field.indexerReg_HRW_TIME_4 = 0;
+    this->indexerReg.field.indexerReg_MODE = 0;
     this->indexerReg.field.indexerReg_LOAD = 0;
-//    this->indexerReg.field.indexerReg_WARM_CYCLES;
-//    this->indexerReg.field.indexerReg_WARM_TEMP;
-//    this->indexerReg.field.indexerReg_WARM_TIME;
+    this->indexerReg.field.indexerReg_WARM_CYCLES = 0;
+    this->indexerReg.field.indexerReg_WARM_TEMP = 0;
+    this->indexerReg.field.indexerReg_WARM_TIME = 0;
     this->indexerReg.field.indexerReg_SKOK_SR = 10;
-//    this->indexerReg.field.indexerReg_DEV_INF_L;
+    this->indexerReg.field.indexerReg_DEV_INF_L = 0;
 
 
-//    this->liftReg.field.liftReg_SEQU1_L;
-//    this->liftReg.field.liftReg_SEQU1_H;
-//    this->liftReg.field.liftReg_SEQU2_L;
-//    this->liftReg.field.liftReg_SEQU2_H;
-//    this->liftReg.field.liftReg_SEQU3_L;
-//    this->liftReg.field.liftReg_SEQU3_H;
-//    this->liftReg.field.liftReg_SEQU4_L;
-//    this->liftReg.field.liftReg_SEQU4_H;
-//    this->liftReg.field.liftReg_SEQU5_L;
-//    this->liftReg.field.liftReg_SEQU5_H;
-//    this->liftReg.field.liftReg_SEQU6_L;
-//    this->liftReg.field.liftReg_SEQU6_H;
-//    this->liftReg.field.liftReg_SEQU7_L;
-//    this->liftReg.field.liftReg_SEQU7_H;
-//    this->liftReg.field.liftReg_SEQU8_L;
-//    this->liftReg.field.liftReg_SEQU8_H;
+    this->liftReg.field.liftReg_SEQU1_L = 0;
+    this->liftReg.field.liftReg_SEQU1_H = 0;
+    this->liftReg.field.liftReg_SEQU2_L = 0;
+    this->liftReg.field.liftReg_SEQU2_H = 0;
+    this->liftReg.field.liftReg_SEQU3_L = 0;
+    this->liftReg.field.liftReg_SEQU3_H = 0;
+    this->liftReg.field.liftReg_SEQU4_L = 0;
+    this->liftReg.field.liftReg_SEQU4_H = 0;
+    this->liftReg.field.liftReg_SEQU5_L = 0;
+    this->liftReg.field.liftReg_SEQU5_H = 0;
+    this->liftReg.field.liftReg_SEQU6_L = 0;
+    this->liftReg.field.liftReg_SEQU6_H = 0;
+    this->liftReg.field.liftReg_SEQU7_L = 0;
+    this->liftReg.field.liftReg_SEQU7_H = 0;
+    this->liftReg.field.liftReg_SEQU8_L = 0;
+    this->liftReg.field.liftReg_SEQU8_H = 0;
     uint32_t liftPulseDist = Register::calcLiftPulse(this->machineSettings.machineParam.liftGearRatio,
                                                      this->indexerLiftSettings.liftParam.distance);
     this->liftReg.field.liftReg_DIST_PULSE_L = ((uint16_t)(liftPulseDist&0x0000FFFF));
     this->liftReg.field.liftReg_DIST_PULSE_H = ((uint16_t)((liftPulseDist>>16)&0x0000FFFF));
-//    this->liftReg.field.REG_TEMP_UNIT;
-//    this->liftReg.field.REG_GET_ZERO_OFF_CONTACT;
-//    this->liftReg.field.REG_SKIPC_H;
-//    this->liftReg.field.REG_SKIPC_L;
+    this->liftReg.field.REG_TEMP_UNIT = 0;
+    this->liftReg.field.REG_GET_ZERO_OFF_CONTACT = 0;
+    this->liftReg.field.REG_SKIPC_H = 0;
+    this->liftReg.field.REG_SKIPC_L = 0;
     this->liftReg.field.liftReg_DOWN_DELAY = iLSett.liftParam.delayDown;
-//    this->liftReg.field.REG_PCB35_STAN;
-//    this->liftReg.field.REG_PCB35_ROZ;
-//    this->liftReg.field.REG_PCB35_SELECT;
-//    this->liftReg.field.REG_PCB35_HEAT;
-//    this->liftReg.field.REG_PCB35_ERR_DEV;
-//    this->liftReg.field.REG_PCB35_MACHINE_TYPE;
-    //    this->liftReg.field.REG_PCB35_ERR_MESSAGE;
+    this->liftReg.field.REG_PCB35_STAN = 0;
+    this->liftReg.field.REG_PCB35_ROZ = 0;
+    this->liftReg.field.REG_PCB35_SELECT = 0;
+    this->liftReg.field.REG_PCB35_HEAT = 0;
+    this->liftReg.field.REG_PCB35_ERR_DEV = 0;
+    this->liftReg.field.REG_PCB35_MACHINE_TYPE = 0;
+    this->liftReg.field.REG_PCB35_ERR_MESSAGE = 0;
 }
 
 uint32_t Register::calcLiftPulse(uint16_t gearRatio, uint16_t liftDist)

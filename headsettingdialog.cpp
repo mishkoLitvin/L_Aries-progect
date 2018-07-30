@@ -621,13 +621,13 @@ void SettingDialog::on_toolButtonFL_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::FL+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -636,13 +636,13 @@ void SettingDialog::on_toolButtonMoveRear_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::MoveRear+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -651,13 +651,13 @@ void SettingDialog::on_toolButtonFL_SQup_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::SQ_FL+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -666,13 +666,13 @@ void SettingDialog::on_toolButtonMoveFront_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::MoveFront+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -681,13 +681,13 @@ void SettingDialog::on_toolButtonMTPMove_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::MPT_Move+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -696,13 +696,13 @@ void SettingDialog::on_toolButtonSQ_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data= HeadSetting::SQ+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -711,13 +711,13 @@ void SettingDialog::on_toolButtonMoveTest_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::MoveTest+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -726,13 +726,13 @@ void SettingDialog::on_toolButtonPressure_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::PressureSQ+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -748,13 +748,13 @@ void SettingDialog::on_toolButtonHoldOn_clicked()
         data = HeadSetting::Hold_On+((this->index-1)<<5);
     else
         data = HeadSetting::Hold_Off+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -763,13 +763,13 @@ void SettingDialog::on_toolButtonFL_SQ_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::SQ_FL+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -778,13 +778,13 @@ void SettingDialog::on_toolButtonStepBack_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::Stepback+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 
     cmdArr.clear();
@@ -792,13 +792,13 @@ void SettingDialog::on_toolButtonStepBack_clicked()
         data = (~((1<<8)<<3))&this->headSettings.headParam.headOnType;
     else
         data = ((1<<8)<<3)|this->headSettings.headParam.headOnType;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadOn&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -807,13 +807,13 @@ void SettingDialog::on_toolButtonIndexHere_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::IndexHere+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 
 
@@ -829,13 +829,13 @@ void SettingDialog::on_toolButtonPressureAir_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::AirRelease+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -844,13 +844,13 @@ void SettingDialog::on_toolButtonQuartzPreheat_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::Preheat+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -859,13 +859,13 @@ void SettingDialog::on_toolButtonQuartzTest_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::HeatTest+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -874,13 +874,13 @@ void SettingDialog::on_toolButtonQuartzStepBack_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::Stepback+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -889,13 +889,13 @@ void SettingDialog::on_toolButtonQuartzWarming_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = HeadSetting::WarmFlash+((this->index-1)<<5);
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -905,24 +905,24 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
 
     QByteArray cmdArr;
     int data;
-//    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterHeadStateLo&0x00FF));
-//    cmdArr.append((char)(HeadSetting::getHeadStateLo()>>8));
-//    cmdArr.append((char)(HeadSetting::getHeadStateLo()&0x00FF));
+//    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+//    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadStateLo&0x00FF));
+//    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateLo()>>8));
+//    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateLo()&0x00FF));
 //    data = CrcCalc::CalculateCRC16(cmdArr);
-//    cmdArr.append((char)(data>>8));
-//    cmdArr.append((char)(data&0x00FF));
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
 //    emit this->sendCommand(this->index, cmdArr);
 
 //    cmdArr.clear();
 
-//    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-//    cmdArr.append((char)(MachineSettings::MasterHeadStateHi&0x00FF));
-//    cmdArr.append((char)(HeadSetting::getHeadStateHi()>>8));
-//    cmdArr.append((char)(HeadSetting::getHeadStateHi()&0x00FF));
+//    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+//    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadStateHi&0x00FF));
+//    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateHi()>>8));
+//    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateHi()&0x00FF));
 //    data = CrcCalc::CalculateCRC16(cmdArr);
-//    cmdArr.append((char)(data>>8));
-//    cmdArr.append((char)(data&0x00FF));
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
 //    emit this->sendCommand(this->index, cmdArr);
 
     if(ui->pButtonHeadOnOff->isChecked())
@@ -936,13 +936,13 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
     cmdArr.clear();
 
     data = this->index+500;
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 
 
@@ -993,13 +993,13 @@ void SettingDialog::tabWidget_currentChanged(int index)
 {
     QByteArray cmdArr;
     int data = index*2+HeadSetting::PrintHeadOff+ui->pButtonHeadOnOff->isChecked();
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadPowerOn&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadPowerOn&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1007,13 +1007,13 @@ void SettingDialog::spinBoxRearSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadSpeedRear&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadSpeedRear&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1021,13 +1021,13 @@ void SettingDialog::dSpinBoxRearRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadRangeLimit1&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadRangeLimit1&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1035,13 +1035,13 @@ void SettingDialog::spinBoxFrontSpeed_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadSpeedFront&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadSpeedFront&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1049,13 +1049,13 @@ void SettingDialog::dSpinBoxFrontRange_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadRangeLimit2&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadRangeLimit2&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1063,13 +1063,13 @@ void SettingDialog::spinBoxStrokCount_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadStroksCount&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadStroksCount&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1077,13 +1077,13 @@ void SettingDialog::spinBoxSBStrokCount_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadSBStroksCount&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadSBStroksCount&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1091,13 +1091,13 @@ void SettingDialog::dSpinBoxHeatTime1Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashTime1Q&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1105,13 +1105,13 @@ void SettingDialog::dSpinBoxHeatTime2Q_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashTime2Q&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashTime2Q&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1119,13 +1119,13 @@ void SettingDialog::spinBoxDryPowerQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashPowerWtoutIR&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashPowerWtoutIR&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1133,13 +1133,13 @@ void SettingDialog::dSpinBoxStepbackDryTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashTimeStBy&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1147,13 +1147,13 @@ void SettingDialog::dSpinBoxTemperatureSetQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadHeatTemper&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadHeatTemper&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1161,13 +1161,13 @@ void SettingDialog::dSpinBoxDryTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashTime1Q&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashTime1Q&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1175,13 +1175,13 @@ void SettingDialog::spinBoxStandbyPowerQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashPowerStBy&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashPowerStBy&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1189,13 +1189,13 @@ void SettingDialog::dSpinBoxStandbyTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashTimeStBy&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashTimeStBy&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1203,13 +1203,13 @@ void SettingDialog::dSpinBoxWarmFlashTimeQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlashWarmTime&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlashWarmTime&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1217,13 +1217,13 @@ void SettingDialog::dSpinBoxHeatTime1IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadHeatTime1IR&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadHeatTime1IR&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1231,13 +1231,13 @@ void SettingDialog::dSpinBoxHeatTime2IR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadHeatTime2IR&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadHeatTime2IR&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1245,13 +1245,13 @@ void SettingDialog::dSpinBoxDryingRangeIR_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadHeatDryRange&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadHeatDryRange&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1259,13 +1259,13 @@ void SettingDialog::dSpinBoxFlDwellTime_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadFlDwellTime&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadFlDwellTime&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1273,13 +1273,13 @@ void SettingDialog::dSpinBoxSqDwellTime_valueChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadSqDwellTime&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadSqDwellTime&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }
 
@@ -1292,12 +1292,12 @@ void SettingDialog::rButtonTime1_clicked()
         data = (~((1<<8)<<1))&this->headSettings.headParam.headOnType;
     else
         data = ((1<<8)<<1)|this->headSettings.headParam.headOnType;
-    cmdArr.append((char)((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
-    cmdArr.append((char)(HeadSetting::HeadOn&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
 }

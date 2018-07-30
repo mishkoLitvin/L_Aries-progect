@@ -263,11 +263,11 @@ void MainWindow::masterCodeCheck()
 
 void MainWindow::headSettingRequest(int index)
 {
-        headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
-        headSettingDialog->setHeadParams(index);
-        headSettingDialog->move(this->pos().x()+this->width()-headSettingDialog->width()-30,
-                                   this->pos().y()+10);
-        headSettingDialog->show();
+    headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM")).value<QByteArray>());
+    headSettingDialog->setHeadParams(index);
+    headSettingDialog->move(this->pos().x()+this->width()-headSettingDialog->width()-30,
+                            this->pos().y()+10);
+    headSettingDialog->show();
 }
 
 void MainWindow::indexerLiftSettingRequest()
@@ -908,9 +908,6 @@ void MainWindow::getLangFile(int langIndex)
     qApp->removeTranslator(&translator);
     translator.load(settings->value("STYLE/LANG_PATH").toStringList()[langIndex]);
     ui->retranslateUi(this);
-    qDebug()<<"translator"
-           <<settings->value("STYLE/LANG_PATH").toStringList()[langIndex]
-              <<qApp->installTranslator(&translator);
 }
 
 void MainWindow::serviceStateChange()
@@ -961,8 +958,6 @@ void MainWindow::exitProgram(bool restart)
     timeWorking.setHMS(0,0,0);
     timeWorking = timeWorking.addMSecs(timeProgramStart.msecsTo(timeProgramEnd));
 
-    qDebug()<<"mail: "<<settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable;
-
     settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
     settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCyclesAll);
 
@@ -1006,11 +1001,9 @@ void MainWindow::exitProgram(bool restart)
                                         " and " + QString::number(ragAllCount) + " items in total.\n"
                                         "\nHave a great day!" );
 
-            qDebug()<<"System call to halt";
             this->close();
             break;
         case ExitDialog::RestartMachine:
-            qDebug()<<"System call to restart";
             if(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable)
                 mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
                                         "Machine restarting\n"
@@ -1024,7 +1017,6 @@ void MainWindow::exitProgram(bool restart)
             this->close();
             break;
         case ExitDialog::ServiceMode:
-            qDebug()<<"Service mode. Comunication is disabled";
             break;
         default:
             break;
@@ -1072,6 +1064,8 @@ void MainWindow::loadJob()
     this->machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
     generalSettingDialog->setMachineSetting(this->machineSettings.machineParam);
 
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::WarningTime);
+    comPort->sendReg(MachineSettings::MasterDevice, MachineSettings::MasterHeadCount);
 
     indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
                                       settings->value("LIFT_PARAMS").value<QByteArray>());
@@ -1079,23 +1073,55 @@ void MainWindow::loadJob()
     registers->setMasterReg(this->machineSettings);
     registers->setIndexLiftReg(this->indexerLiftSettings);
     indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam, false);
-    indexerLiftSetDialog->setLiftSetting(false);
+    indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam, false);
 
-    int i;
+    indexerLiftSetDialog->setLiftDistance(indexerLiftSettings.indexerParam.distance/100.f,
+                                          this->machineSettings.machineParam.liftGearRatio);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexDistance);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexHomeOffset);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexDistOffcet);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeed);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAcceleration);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeedRet);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAccelerationRet);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayDown);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayUp);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftHomeOffcet);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftSpeed);
+    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftAcceleration);
+
+    uint8_t i;
 
     for(i = 0; i < this->headsCount; i++)
     {
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
         registers->setHeadReg(i, headSettings);
         headSettingDialog->setHeadParams(headSettings.headParam, i, false);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedRear);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadRangeLimit1);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedFront);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadRangeLimit2);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadStroksCount);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSBStroksCount);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime1Q);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime2Q);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashPowerWtoutIR);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTimeStBy);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTemper);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime1Q);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashPowerStBy);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashWarmTime);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTime1IR);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTime2IR);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatDryRange);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlDwellTime);
+        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSqDwellTime);
     }
 
     for(i = 0; i<headsCount; i++)
         {
         if(i==0)
-        {
             headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
-        }
         else
             if((i==headsCount - 1)&(machineSettings.machineParam.useUnloadHead))
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);

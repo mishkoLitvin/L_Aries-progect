@@ -427,17 +427,32 @@ void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
 void SerialPort::sendModData(uint8_t dev, uint8_t place, uint16_t data)
 {
     QByteArray dataArr;
-    dataArr.append(dev);
-    dataArr.append(place);
-    dataArr.append((char)((data>>8)&0x00FF));
-    dataArr.append((char)(data&0x00FF));
+    dataArr.append(static_cast<char>(dev));
+    dataArr.append(static_cast<char>(place));
+    dataArr.append(static_cast<char>((data>>8)&0x00FF));
+    dataArr.append(static_cast<char>(data&0x00FF));
     uint16_t crc;
     crc = CrcCalc::CalculateCRC16(dataArr);
-    dataArr.append((char)((crc>>8)&0x00FF));
-    dataArr.append((char)(crc&0x00FF));
+    dataArr.append(static_cast<char>((crc>>8)&0x00FF));
+    dataArr.append(static_cast<char>(crc&0x00FF));
     serial->write(dataArr);
     serial->waitForBytesWritten(-1);
-//    qDebug()<<"send mod data:"<<dataArr.toHex().toUpper();
+    //    qDebug()<<"send mod data:"<<dataArr.toHex().toUpper();
+}
+
+void SerialPort::sendReg(uint8_t dev, uint8_t place)
+{
+    uint16_t data;
+    data = registers->readReg(dev, place);
+    QByteArray dataArr;
+    dataArr.append(static_cast<char>(dev));
+    dataArr.append(static_cast<char>(place));
+    dataArr.append(static_cast<char>((data>>8)&0x00FF));
+    dataArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(dataArr);
+    dataArr.append(static_cast<char>((data>>8)&0x00FF));
+    dataArr.append(static_cast<char>(data&0x00FF));
+    this->sendData(dataArr);
 }
 
 void SerialPort::setupPort()

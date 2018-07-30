@@ -102,7 +102,7 @@ private:
     bool logedInIndexer;
     bool logedInGeneral;
     bool logedInService;
-    int headsCount;
+    uint16_t headsCount;
     bool needCompleteReset;
 
     int indexerCyclesSession;
