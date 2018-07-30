@@ -57,20 +57,31 @@ int MailSender::sendMessage(QString message, QString subject)
     this->message.addPart(&(this->messageText));
 
     if (!smtp->connectToHost()) {
-        qDebug() << "Failed to connect to host!" << endl;
+        QMessageBox msgBox;
+        msgBox.setText(tr("E-mail error.\n"
+                          "Failed connect to host!"));
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
         return -1;
     }
 
     if (!smtp->login()) {
-        qDebug() << "Failed to login!" << endl;
+        QMessageBox msgBox;
+        msgBox.setText(tr("E-mail error.\n"
+                          "Failed to login."));
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
         return -2;
     }
 
     if (!smtp->sendMail(this->message)) {
-        qDebug() << "Failed to send mail!" << endl;
+        QMessageBox msgBox;
+        msgBox.setText(tr("E-mail error.\n"
+                          "Failed to send mail."));
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
         return -3;
     }
-
     smtp->quit();
     return 0;
 }

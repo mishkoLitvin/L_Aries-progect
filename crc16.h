@@ -75,10 +75,10 @@ public:
         uint32_t mask=0x7FFF;
         uint32_t out;
         uint32_t inp = 0;
-        inp = ((((uint32_t)inpArr[0])<<24)&0xFF000000)
-                |((((uint32_t)inpArr[1])<<16)&0x00FF0000)
-                |((((uint32_t)inpArr[2])<<8)&0x0000FF00)
-                |(((uint32_t)inpArr[3])&0x000000FF);
+        inp = (((static_cast<uint32_t>(inpArr[0]))<<24)&0xFF000000)
+                |(((static_cast<uint32_t>(inpArr[1]))<<16)&0x00FF0000)
+                |(((static_cast<uint32_t>(inpArr[2]))<<8)&0x0000FF00)
+                |((static_cast<uint32_t>(inpArr[3]))&0x000000FF);
 //        qDebug()<<"input:"<<inp;
         out = inp & mask;
         uint32_t jed=0x80000000;
@@ -96,7 +96,7 @@ public:
             jed = jed>>1;
             out = inp&mask;
         }
-        return (uint16_t)inp;
+        return static_cast<uint16_t>(inp);
     }
 };
 

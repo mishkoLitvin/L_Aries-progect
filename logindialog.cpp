@@ -31,6 +31,7 @@ void LoginDialog::loginAccepted()
 
 bool LoginDialog::eventFilter(QObject *watched, QEvent *event)
 {
+    Q_UNUSED(watched);
     if((event->type()==QEvent::MouseButtonDblClick)
             |((QApplication::platformName() == "eglfs")&(event->type()==QEvent::MouseButtonRelease))
             |((QApplication::platformName() == "linuxfb")&(event->type()==QEvent::MouseButtonRelease)))

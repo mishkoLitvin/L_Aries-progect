@@ -152,7 +152,6 @@ void SerialPort::sendProgram(ReprogramDialog::BoardType type, QByteArray program
 //        qDebug()<<i<<cmdArr.toHex();
         QThread::msleep(500);
     }
-    qDebug()<<"Start last";
     if(i<programArr.length())
     {
         QByteArray last;
@@ -161,13 +160,13 @@ void SerialPort::sendProgram(ReprogramDialog::BoardType type, QByteArray program
         if((type == ReprogramDialog::Master_ATXmega)|(type == ReprogramDialog::Heads_ATXmega))
             for(;last.length()<512;)
             {
-                last.append((char)0xFF);
+                last.append(static_cast<char>(0xFF));
                 i++;
             }
         else
             for(;last.length()<256;)
             {
-                last.append((char)0xFF);
+                last.append(static_cast<char>(0xFF));
                 i++;
             }
         cmdArr.clear();
@@ -177,8 +176,8 @@ void SerialPort::sendProgram(ReprogramDialog::BoardType type, QByteArray program
     }
     cmdArr.clear();
     QThread::msleep(500);
-    cmdArr.append(0xFF);
-    cmdArr.append(0xFF);
+    cmdArr.append(static_cast<char>(0xFF));
+    cmdArr.append(static_cast<char>(0xFF));
     this->sendData(cmdArr, true, true);
 
     emit this->proramProgres(i);
@@ -196,7 +195,6 @@ void SerialPort::readData()
         modData8.all = data.mid(0,6).toHex().toLong(&ok, 16);
         if((CrcCalc::CalculateCRC16(data.mid(0,4)) != modData8.fileds.crc16Val))
         {
-            qDebug()<<"CRC Err!!!";
             data.remove(0,1);
         }
         else
@@ -251,85 +249,85 @@ void SerialPort::readData()
                         case 0:
                             bArr.clear();
                             data = registers->readReg(MachineSettings::MasterDevice, Register::masterReg_DAT);
-                            bArr.append(MachineSettings::MasterDevice);
-                            bArr.append(Register::masterReg_DAT);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(MachineSettings::MasterDevice));
+                            bArr.append(static_cast<char>(Register::masterReg_DAT));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             break;
                         case 3:
                             bArr.clear();
-                            bArr.append((char)MachineSettings::MasterDevice);
-                            bArr.append((char)MachineSettings::MasterMachineType);
+                            bArr.append(static_cast<char>(MachineSettings::MasterDevice));
+                            bArr.append(static_cast<char>(MachineSettings::MasterMachineType));
                             data = MachineSettings::getHeadMaxRange();
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             break;
                         case 6:
                             bArr.clear();
-                            bArr.append((char)MachineSettings::MasterDevice);
-                            bArr.append((char)MachineSettings::MasterMachineType);
+                            bArr.append(static_cast<char>(MachineSettings::MasterDevice));
+                            bArr.append(static_cast<char>(MachineSettings::MasterMachineType));
                             data = MachineSettings::getHeadType();
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             break;
                         case 9:
                             bArr.clear();
-                            bArr.append((char)MachineSettings::MasterDevice);
-                            bArr.append((char)MachineSettings::MasterMachineType);
+                            bArr.append(static_cast<char>(MachineSettings::MasterDevice));
+                            bArr.append(static_cast<char>(MachineSettings::MasterMachineType));
                             data = MachineSettings::getIndexLiftType();
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             break;
                         case 12:
                             bArr.clear();
-                            bArr.append((char)IndexerLiftSettings::IndexerDevice);
-                            bArr.append((char)Register::indexerReg_SKOK_SR);
+                            bArr.append(static_cast<char>(IndexerLiftSettings::IndexerDevice));
+                            bArr.append(static_cast<char>(Register::indexerReg_SKOK_SR));
                             data = registers->readReg(IndexerLiftSettings::IndexerDevice, Register::indexerReg_SKOK_SR);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             break;
                         case 15:
                             bArr.clear();
-                            bArr.append((char)IndexerLiftSettings::LiftDevice);
-                            bArr.append((char)Register::liftReg_DIST_PULSE_L);
+                            bArr.append(static_cast<char>(IndexerLiftSettings::LiftDevice));
+                            bArr.append(static_cast<char>(Register::liftReg_DIST_PULSE_L));
                             data = registers->readReg(IndexerLiftSettings::LiftDevice, Register::liftReg_DIST_PULSE_L);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             break;
                         case 18:
                             bArr.clear();
-                            bArr.append((char)IndexerLiftSettings::LiftDevice);
-                            bArr.append((char)Register::liftReg_DIST_PULSE_H);
+                            bArr.append(static_cast<char>(IndexerLiftSettings::LiftDevice));
+                            bArr.append(static_cast<char>(Register::liftReg_DIST_PULSE_H));
                             data = registers->readReg(IndexerLiftSettings::LiftDevice, Register::liftReg_DIST_PULSE_H);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             data = CrcCalc::CalculateCRC16(bArr);
-                            bArr.append((char)(data>>8));
-                            bArr.append((char)(data&0x00FF));
+                            bArr.append(static_cast<char>(data>>8));
+                            bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             this->initApp = false;
                             break;

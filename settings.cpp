@@ -491,7 +491,7 @@ void Register::writeReg(uint8_t dev, uint8_t place, uint16_t data)
 
 uint16_t Register::readReg(uint8_t dev, uint8_t place)
 {
-    uint16_t data;
+    uint16_t data = 0x0000;
     if(dev<=HeadSetting::HeadDeviceAdrOffcet)
         switch (dev) {
         case MachineSettings::MasterDevice:
@@ -546,9 +546,9 @@ void Register::setMasterReg(MachineSettings mSett)
     this->masterReg.field.masterReg_DATH = 0;
     this->masterReg.field.masterReg_DATL = 0;
     this->masterReg.field.masterReg_KOD_ON = 0;
-    this->masterReg.field.masterReg_DAT = (uint16_t)(((uint16_t)((QDate::currentDate().year()-2000)<<9))
-                                                     |((uint16_t)(QDate::currentDate().month()<<5)
-                                                       |(uint16_t)(QDate::currentDate().day())));
+    this->masterReg.field.masterReg_DAT = static_cast<uint16_t>((static_cast<uint16_t>((QDate::currentDate().year()-2000)<<9))
+                                                     |(static_cast<uint16_t>(QDate::currentDate().month()<<5)
+                                                       |static_cast<uint16_t>(QDate::currentDate().day())));
     this->masterReg.field.REG_KOD_WPISZ = 0;
     this->masterReg.field.masterReg_HRW = 0;
     this->masterReg.field.masterReg_HRW1 = 0;
@@ -679,7 +679,7 @@ uint32_t Register::calcLiftPulse(uint16_t gearRatio, uint16_t liftDist)
     double P = 15./25.4;
     double PULSE = 10000;
     double a, b, cosa, sina, sinb, r1;
-    r1 = ((double)liftDist/100.) + (75./25.4);
+    r1 = (static_cast<double>(liftDist/100.)) + (75./25.4);
     cosa = (R * R + P * P - r1 * r1) / (2 * R * P);
     a = acos(cosa);
     sina = sin(a);

@@ -176,7 +176,7 @@ void MaintanceDialog::check(int cyclesCount)
                 &(cyclesCount<(maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount-1)))
         {
 //            emit this->stopRequest();
-            maintanceList[i].troubleType = (int)Warning;
+            maintanceList[i].troubleType = static_cast<int>(Warning);
             this->maintanceHaveWarning = true;
             bool service = false;
 
@@ -192,7 +192,7 @@ void MaintanceDialog::check(int cyclesCount)
         else
             if(cyclesCount == (maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount))
             {
-                maintanceList[i].troubleType = (int)Critical;
+                maintanceList[i].troubleType = static_cast<int>(Critical);
                 bool service = false;
 //                MaintanceDialog::execute(maintanceList[i], this);
                 this->maintanceHaveWork = true;
@@ -215,7 +215,6 @@ void MaintanceDialog::check(int cyclesCount)
                     settings->setValue("UNSOLVED_ELEMENTS_COUNT", unsolvedList.length());
                     settings->setValue("UNSOLVED_ELEMENTS_LIST", QVariant::fromValue(unsolvedListIndex));
                     emit this->maintanceWorkEnable(true);
-                    qDebug()<<"Maintanance unsolved: "<<unsolvedListIndex;
                 }
 
             }

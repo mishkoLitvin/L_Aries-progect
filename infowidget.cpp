@@ -126,7 +126,7 @@ void InfoWidget::setIndicatorState(u_int16_t state)
 
 
 
-    switch ((u_int8_t)(state>>8)) {
+    switch (static_cast<u_int8_t>(state>>8)) {
     case 0:
         effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[0]->setOpacity(0.9);
@@ -210,7 +210,6 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
     uint16_t errDev;
     errDev = this->localRegisters->readReg(MachineSettings::MasterDevice,
                                       Register::masterReg_DEVERR);
-    qDebug()<<"ERRRRR";
 
     uint16_t errMessage;
     errMessage = this->localRegisters->readReg(MachineSettings::MasterDevice,
@@ -243,13 +242,11 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
 
     if(errMessage<16)
     {
-        qDebug()<<"Head servo";
         msgStrRow2 = "Head servo drive "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage),"").toString();
     }
     else
         if((errMessage>=16)&(errMessage<32))
         {
-            qDebug()<<"SQ_FL";
             msgStrRow2 = "Head SQ/FL drive "+errMasages->value("HEAD_SERVO/err"+QString::number(errMessage-16),"").toString();
         }
         else
@@ -258,7 +255,6 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
             else
                 if((errMessage>=100)&(errMessage<1001))
                 {
-                    qDebug()<<"Main servo";
                     if(machineParameters.indexeLiftType.field.indexerType == 0)
                         msgStrRow2 = errMasages->value("MAIN_ESTUN/err"+QString::number(errMessage-100),"").toString();
                     if(machineParameters.indexeLiftType.field.indexerType == 1)
@@ -267,17 +263,15 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
                 else
                     if((errMessage>=1001)&(errMessage<2001))
                     {
-                        qDebug()<<"Machine error";
                         msgStrRow2 = errMasages->value("MACHINE/err"+QString::number(errMessage-1001),"").toString();
                     }
                     else
                         if(errMessage>=2001)
                         {
-                            qDebug()<<"Head error";
                             msgStrRow2 = "Head "+errMasages->value("HEAD/err"+QString::number(errMessage-2001),"").toString();
                         }
-
-    ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+"\n"+tr("\nPlease press Reset button."));
+    if(errMessage!=0)
+        ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+"\n"+tr("\nPlease press Reset button."));
 }
 
 void InfoWidget::changeEvent(QEvent* event)

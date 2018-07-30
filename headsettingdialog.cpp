@@ -114,7 +114,6 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
 
     tempVar = registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
                                  Register::headReg_ON);
-    qDebug()<<tempVar;
     ui->pButtonHeadOnOff->setChecked(((tempVar&0x00FF)==2)|
                                      ((tempVar&0x00FF)==4)|
                                      ((tempVar&0x00FF)==6)|
@@ -175,7 +174,6 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
     {
         acceptEnable = true;
         this->accept();
-        qDebug()<<"gogogogo";
     }
 }
 

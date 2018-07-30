@@ -15,7 +15,6 @@ ReprogramDialog::~ReprogramDialog()
 
 void ReprogramDialog::setProgress(int progress)
 {
-    qDebug()<<progress<<programArr.length();
     ui->progressBar->setValue(progress/programArr.length()*100+1);
     if(progress >= programArr.length())
     {
@@ -37,14 +36,9 @@ void ReprogramDialog::on_pushButtonOpenFile_clicked()
 
 void ReprogramDialog::on_pushButtonErase_clicked()
 {
-    int i;
     programArr.clear();
     programArr.resize(0x2000);
-    programArr.fill((char)0xFF, 0x2000);
-//    for(i = 0; i<0xFFFF; i++)
-//    {
-//        programArr.append((char)0x00);
-//    }
+    programArr.fill(static_cast<char>(0xFF), 0x2000);
     if(ui->radioButtonATXmega->isChecked())
     {
         if(ui->radioButtonMaster->isChecked())
@@ -80,7 +74,6 @@ void ReprogramDialog::on_pushButtonWrite_clicked()
         tempReadLine = inFile.readLine();
         if((tempReadLine.mid(0, 1) != ":")|(tempReadLine.length()>100))
         {
-            qDebug()<<"RRRRRRRRRRRR";
             errFlag = true;
             break;
         }

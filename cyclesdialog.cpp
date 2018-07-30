@@ -129,41 +129,39 @@ void CyclesDialog::on_pButtonOK_clicked()
 {
     this->saveValues();
     headStateList.clear();
-    int i, j;
+    uint8_t i, j;
     QByteArray cmdArr;
     uint16_t data;
     for(i = 0; i < cycleValues.length(); i++)
     {
         headStateList << 0;
-        headStateList[i] |= (uint32_t)((bool)(cycleState&(1<<i)));
-        qDebug()<<headStateList[i];
+        headStateList[i] |= static_cast<uint32_t>(static_cast<bool>(cycleState&(1<<i)));
         for(j = 1; j<headCount; j++)
         {
-            headStateList[i] |= (((uint32_t)((bool)(cycleValues[i][j]>0)))<<j);
+            headStateList[i] |= ((static_cast<uint32_t>(static_cast<bool>(cycleValues[i][j]>0)))<<j);
         }
         cmdArr.clear();
         data = (headStateList[i]&0x0000FFFF);
         cmdArr.append(IndexerLiftSettings::LiftDevice);
         cmdArr.append(Register::liftReg_SEQU1_L+i*2);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         data = CrcCalc::CalculateCRC16(cmdArr);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         emit this->sendCommand(cmdArr);
 
         cmdArr.clear();
         data = ((headStateList[i]>>16)&0x0000FFFF);
         cmdArr.append(IndexerLiftSettings::LiftDevice);
         cmdArr.append(Register::liftReg_SEQU1_H+i*2);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         data = CrcCalc::CalculateCRC16(cmdArr);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         emit this->sendCommand(cmdArr);
     }
-    qDebug()<<"Head state list:"<<headStateList;
 
     headStrokList.clear();
     uint32_t temp32;
@@ -178,25 +176,24 @@ void CyclesDialog::on_pButtonOK_clicked()
         data = (temp32&0x0000FFFF);
         cmdArr.append(HeadSetting::HeadDeviceAdrOffcet+j);
         cmdArr.append(Register::headReg_REVOLVER_STR_L);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         data = CrcCalc::CalculateCRC16(cmdArr);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         emit this->sendCommand(cmdArr);
 
         cmdArr.clear();
         data = ((temp32>>16)&0x0000FFFF);
         cmdArr.append(HeadSetting::HeadDeviceAdrOffcet+j);
         cmdArr.append(Register::headReg_REVOLVER_STR_H);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         data = CrcCalc::CalculateCRC16(cmdArr);
-        cmdArr.append((char)(data>>8));
-        cmdArr.append((char)(data&0x00FF));
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
         emit this->sendCommand(cmdArr);
     }
-    qDebug()<<"Head strok list:"<<headStrokList;
     this->accept();
 }
 

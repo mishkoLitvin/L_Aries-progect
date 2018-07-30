@@ -82,7 +82,6 @@ bool UserSettingDialog::getLoginWindowEnable()
 
 void UserSettingDialog::tableCellActivated(int row, int col)
 {
-    qDebug()<<row<<col;
     tableRowSelected = row;
     tableColnumSelected = col;
     if(col != 0)

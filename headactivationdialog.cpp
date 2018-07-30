@@ -69,11 +69,11 @@ void HeadActivationDialog::pushButtonOK_clicked()
         data = 1;
         bArr.append(MachineSettings::MasterDevice);
         bArr.append(MachineSettings::MasterLastButton);
-        bArr[2] = ((char)(data>>8));
-        bArr[3] = ((char)(data&0x00FF));
+        bArr[2] = (static_cast<char>(data>>8));
+        bArr[3] = (static_cast<char>(data&0x00FF));
         data = CrcCalc::CalculateCRC16(bArr);
-        bArr[4] = ((char)(data>>8));
-        bArr[5] = ((char)(data&0x00FF));
+        bArr[4] = (static_cast<char>(data>>8));
+        bArr[5] = (static_cast<char>(data&0x00FF));
         emit this->sendCommand(bArr);
     }
     this->needSendReset = false;
@@ -95,7 +95,6 @@ void HeadActivationDialog::headStateChanged(int index)
     this->needSendReset = true;
 
     int i;
-    qDebug()<<"headActivState index b"<<index;
     headActivState = 0xFFFFFFFF;
     for(i = 0; i<checkBoxList.length(); i++)
     {
@@ -104,41 +103,40 @@ void HeadActivationDialog::headStateChanged(int index)
         else
             headActivState |= (1<<(i));
     }
-    qDebug()<<"headActivState a"<<QString::number(headActivState, 2);
 
     QByteArray cmdArr;
     uint16_t data;
-    cmdArr.append((char)MachineSettings::MasterDevice);
-    cmdArr.append((char)Register::masterReg_ACTIVHEAD_L);
-    data = ((uint16_t)(headActivState&0x0000FFFF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice));
+    cmdArr.append(static_cast<char>(Register::masterReg_ACTIVHEAD_L));
+    data = (static_cast<uint16_t>(headActivState&0x0000FFFF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 
     cmdArr.clear();
-    cmdArr.append((char)MachineSettings::MasterDevice);
-    cmdArr.append((char)Register::masterReg_ACTIVHEAD_H);
-    data = ((uint16_t)((headActivState>>16)&0x0000FFFF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice));
+    cmdArr.append(static_cast<char>(Register::masterReg_ACTIVHEAD_H));
+    data = (static_cast<uint16_t>((headActivState>>16)&0x0000FFFF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 
 
     cmdArr.clear();
     data = index+500;
-    cmdArr.append((char)((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 
 }

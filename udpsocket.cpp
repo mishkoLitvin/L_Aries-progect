@@ -39,7 +39,7 @@ void UdpSocket::startUdp(bool isMaster)
                 }
                 if((i != (myIP.toIPv4Address()&0xFF))&this->search)
                 {
-                    this->udpAdr.setAddress(((myIP.toIPv4Address())&((quint32)0xFFFFFF00))|(i));
+                    this->udpAdr.setAddress(((myIP.toIPv4Address())&(static_cast<quint32>(0xFFFFFF00)))|(i));
                     this->startTransmit("UUUUUU");
                     QThread::usleep(1600);
                     this->reciveData();
@@ -61,7 +61,6 @@ void UdpSocket::startUdp(bool isMaster)
             msgBox.setIcon(QMessageBox::Warning);
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.exec();
-            qDebug()<<"Exit";
             this->startUdp();
         }
     }
@@ -113,7 +112,7 @@ void UdpSocket::reciveData()
     while (udp->hasPendingDatagrams())
     {
         tempData.resize(udp->pendingDatagramSize());
-        udp->readDatagram(tempData.data(), (qint64)tempData.size(), &senderIP, &senderPort);
+        udp->readDatagram(tempData.data(), static_cast<qint64>(tempData.size()), &senderIP, &senderPort);
         inData.append(tempData);
     }
 

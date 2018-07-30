@@ -14,7 +14,7 @@ NumpadDialog::NumpadDialog(QWidget *parent, QString windowTitle) :
     QPushButton *enterButton = new QPushButton("Enter");
     ui->layoutButtons->addWidget(enterButton, 3, 3);
     connect(enterButton, SIGNAL(clicked(bool)), this, SLOT(submitValue()));
-    int k;
+    u_int16_t k;
 
     buttons[0] = new NumpadButton(0, QString::number(0));
     ui->layoutButtons->addWidget(buttons[0], 3, 0);

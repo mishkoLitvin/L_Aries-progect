@@ -428,14 +428,14 @@ void GeneralSettingDialog::changeDirection()
     }
     QByteArray cmdArr;
     int data;
-    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
     data = IndexerLiftSettings::IndexDirChange;
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 }
 
@@ -457,14 +457,14 @@ void GeneralSettingDialog::changeCyclesState()
     }
     QByteArray cmdArr;
     int data;
-    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-    cmdArr.append((char)(IndexerLiftSettings::IndexLastRevolvWarm&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexerDevice&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexLastRevolvWarm&0x00FF));
     data = this->machineParamGl.lastRevWarm.all;
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 }
 
@@ -488,13 +488,13 @@ void GeneralSettingDialog::headCountChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1;
-    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterHeadCount&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadCount&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 }
 
@@ -503,13 +503,13 @@ void GeneralSettingDialog::machineTypeChanget(int index)
     MachineSettings mStt;
     QByteArray cmdArr;
     int data = mStt.machineTypeData[index];
-    cmdArr.append((char)(MachineSettings::MasterDevice&0x00FF));
-    cmdArr.append((char)(MachineSettings::MasterMachineType&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterMachineType&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 }
 
@@ -517,13 +517,13 @@ void GeneralSettingDialog::warningTimeChanged(double arg1)
 {
     QByteArray cmdArr;
     int data = arg1*10;
-    cmdArr.append((char)(IndexerLiftSettings::IndexerDevice&0x00FF));
-    cmdArr.append((char)(IndexerLiftSettings::WarningTime&0x00FF));
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexerDevice&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::WarningTime&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append((char)(data>>8));
-    cmdArr.append((char)(data&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 }
 
