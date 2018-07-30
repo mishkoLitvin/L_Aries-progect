@@ -114,11 +114,10 @@ private:
     bool autoPrintEnabled;
     QString userName;
     Register *registers;
-
     uint8_t serviceCounter;
-
     QTranslator translator;
 
+    QStringList headStylesStr;
 
 private slots:
     void zeroStart();

@@ -94,6 +94,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pButtonSaveJob, SIGNAL(clicked(bool)), this, SLOT(saveJob()));
     connect(ui->pButtonLoadJob, SIGNAL(clicked(bool)), this, SLOT(loadJob()));
 
+    int i;
+
+    for(i = 0; i<7; i++)
+        headStylesStr.append(settings->value("STYLE/HEAD_STYLES_"+QString::number(i)).toString());
+
     this->headsInit();
 
     infoWidget = new InfoWidget(ui->widgetHeads);
@@ -122,7 +127,6 @@ MainWindow::MainWindow(QWidget *parent) :
     indexerLiftSetDialog->setRegisters(this->registers);
     headSettingDialog->setRegisters(this->registers);
 
-    int i;
     for(i = 0; i < this->headsCount; i++)
     {
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
@@ -542,26 +546,26 @@ void MainWindow::getSerialData(ModData modData)
                 switch ((HeadSetting::HeadOnType)(headSettings.headParam.headOnType&0x0F))
                 {
                 case HeadSetting::PrintHeadOn:
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[1]);
                     break;
                 case HeadSetting::QuartzHeadOn:
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[2]);
                     break;
                 case HeadSetting::InfraRedHeadOn:
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[3]);
                     break;
                 case HeadSetting::PrintHeadOff:
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A4ADC4, stop: 0.7 #A4ADC4, stop: 0.9 #04589D,stop: 1.0 #011D36);");
+                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[4]);
                     break;
                 case HeadSetting::QuartzHeadOff:
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #B8A6C4, stop: 0.7 #B8A6C4, stop: 0.9 #562773,stop: 1.0 #14043C);");
+                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[5]);
                     break;
                 case HeadSetting::InfraRedHeadOff:
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DEA8AB, stop: 0.7 #DEA8AB, stop: 0.9 #A91349,stop: 1.0 #681030);");
+                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[6]);
                     break;
                 }
             else
-                headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+                headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[0]);
         }
     }
 }
@@ -579,26 +583,26 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
         switch ((HeadSetting::HeadOnType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0]))))
         {
         case HeadSetting::PrintHeadOn:
-            headButton[index]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+            headButton[index]->setPixmap(headButton[index]->getRagState(),headStylesStr[1]);
             break;
         case HeadSetting::QuartzHeadOn:
-            headButton[index]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+            headButton[index]->setPixmap(headButton[index]->getRagState(),headStylesStr[2]);
             break;
         case HeadSetting::InfraRedHeadOn:
-            headButton[index]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+            headButton[index]->setPixmap(headButton[index]->getRagState(),headStylesStr[3]);
             break;
         case HeadSetting::PrintHeadOff:
-            headButton[index]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A4ADC4, stop: 0.7 #A4ADC4, stop: 0.9 #04589D,stop: 1.0 #011D36);");
+            headButton[index]->setPixmap(headButton[index]->getRagState(),headStylesStr[4]);
             break;
         case HeadSetting::QuartzHeadOff:
-            headButton[index]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #B8A6C4, stop: 0.7 #B8A6C4, stop: 0.9 #562773,stop: 1.0 #14043C);");
+            headButton[index]->setPixmap(headButton[index]->getRagState(),headStylesStr[5]);
             break;
         case HeadSetting::InfraRedHeadOff:
-            headButton[index]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DEA8AB, stop: 0.7 #DEA8AB, stop: 0.9 #A91349,stop: 1.0 #681030);");
+            headButton[index]->setPixmap(headButton[index]->getRagState(),headStylesStr[6]);
             break;
         }
     else
-        headButton[index]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+        headButton[index]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
 
 
 }
@@ -638,26 +642,26 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
                 switch (static_cast<HeadSetting::HeadOnType>(t_headOn))
                 {
                 case HeadSetting::PrintHeadOn:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[1]);
                     break;
                 case HeadSetting::QuartzHeadOn:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[2]);
                     break;
                 case HeadSetting::InfraRedHeadOn:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[3]);
                     break;
                 case HeadSetting::PrintHeadOff:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A4ADC4, stop: 0.7 #A4ADC4, stop: 0.9 #04589D,stop: 1.0 #011D36);");
+                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[4]);
                     break;
                 case HeadSetting::QuartzHeadOff:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #B8A6C4, stop: 0.7 #B8A6C4, stop: 0.9 #562773,stop: 1.0 #14043C);");
+                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[5]);
                     break;
                 case HeadSetting::InfraRedHeadOff:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DEA8AB, stop: 0.7 #DEA8AB, stop: 0.9 #A91349,stop: 1.0 #681030);");
+                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[6]);
                     break;
                 }
             else
-                headButton[cnt]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+                headButton[cnt]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
         }
     }
     QByteArray cmdArr;
@@ -1128,27 +1132,27 @@ void MainWindow::loadJob()
                     headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
                     switch (headSettings.headParam.headOnType&0x00FF) {
                     case HeadSetting::PrintHeadOn:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #046DC4, stop: 0.8 #04589D,stop: 1.0 #011D36);");
+                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[1]);
                         break;
                     case HeadSetting::QuartzHeadOn:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #8826C4, stop: 0.8 #562773,stop: 1.0 #14043C);");
+                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[2]);
                         break;
                     case HeadSetting::InfraRedHeadOn:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DE083B, stop: 0.8 #A91349,stop: 1.0 #681030);");
+                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[3]);
                         break;
                     case HeadSetting::PrintHeadOff:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #A4ADC4, stop: 0.7 #A4ADC4, stop: 0.9 #04589D,stop: 1.0 #011D36);");
+                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[4]);
                         break;
                     case HeadSetting::QuartzHeadOff:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #B8A6C4, stop: 0.7 #B8A6C4, stop: 0.9 #562773,stop: 1.0 #14043C);");
+                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[5]);
                         break;
                     case HeadSetting::InfraRedHeadOff:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DEA8AB, stop: 0.7 #DEA8AB, stop: 0.9 #A91349,stop: 1.0 #681030);");
+                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[6]);
                         break;
                     }
                 }
                 else
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[0]);
     }
 
 }
@@ -1552,7 +1556,7 @@ void MainWindow::headsInit()
             if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
-                headButton[i]->setPixmap(HeadForm::shirtOff,"background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #758491, stop: 0.8 #3E5468,stop: 1.0 #1D3D59);");
+                headButton[i]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
         HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
 
         if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
