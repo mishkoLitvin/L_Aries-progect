@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QMouseEvent>
 #include <QDebug>
+#include <QGraphicsEffect>
 
 class HeadSettingButton : public QPushButton{
     Q_OBJECT
@@ -70,6 +71,7 @@ public:
     void setPixmap(HeadformState state);
     void setRagOn(bool state);
     void setIconPath(QString path);
+    void setRagColor(QColor color);
 
     HeadformState getRagState();
     void setHeadformType(HeadformType type);
@@ -85,7 +87,7 @@ private:
     Ui::HeadForm *ui;
     QLabel *labelIndex;
     QImage pixShirtShow, pixShirtHide, pixShirtAnimate;
-
+    QGraphicsColorizeEffect *graphEffect;
     QString pathImage;
 
     int index;

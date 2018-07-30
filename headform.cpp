@@ -19,12 +19,14 @@ HeadForm::HeadForm(QWidget *parent) :
     pixShirtHide.load(":/new/icons/icons/Base/blank.png");
     pixShirtAnimate.load(":/new/icons/icons/Base/tt3.png");
 
+    graphEffect = new QGraphicsColorizeEffect();
 
     labelIndex = new QLabel(this);
     labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
     labelIndex->resize(25,25);
     labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
+
 }
 
 HeadForm::~HeadForm()
@@ -63,9 +65,6 @@ void HeadForm::setIndex(int i)
         labelIndex->resize(15,25);
     labelIndex->setText(QString::number(i));
 }
-
-
-
 
 void HeadForm::setIndexLabelPosition(HeadForm::SettBtnPos position)
 {
@@ -128,6 +127,12 @@ void HeadForm::setIconPath(QString path)
     pixShirtHide.load(path+"/blank.png");
     pixShirtAnimate.load(path+"/tt3.png");
     this->setPixmap(shirtOff);
+}
+
+void HeadForm::setRagColor(QColor color)
+{
+    ui->label->setGraphicsEffect(graphEffect);
+    graphEffect->setColor(color);
 }
 
 HeadForm::HeadformState HeadForm::getRagState()

@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QByteArray>
 #include <QLineEdit>
+#include <QColorDialog>
 
 #include "settings.h"
 #include "numpaddialog.h"
@@ -40,7 +41,7 @@ signals:
     void changeNumber(int newIndex);
     void sendCommand(int index, QByteArray command);
     void setParamsToAll(int index, QByteArray hParamArr);
-
+    void colorChanged(int index, QColor col);
 
 private:
     Ui::SettingDialog *ui;

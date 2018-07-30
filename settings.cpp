@@ -31,6 +31,8 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
     this->headParam.standbyTimeQ = ((0x00FF&((uint16_t)hParamArr[40]))<<8)|(0x00FF&((uint16_t)hParamArr[39]));
     this->headParam.standbyPowerQ = ((0x00FF&((uint16_t)hParamArr[42]))<<8)|(0x00FF&((uint16_t)hParamArr[41]));
     this->headParam.warmFlashTimeQ = ((0x00FF&((uint16_t)hParamArr[44]))<<8)|(0x00FF&((uint16_t)hParamArr[43]));
+    this->headParam.inkColor = ((0x00FF&((uint32_t)hParamArr[48]))<<24)|((0x00FF&((uint32_t)hParamArr[47]))<<16)
+            |((0x00FF&((uint32_t)hParamArr[46]))<<8)|(0x00FF&((uint32_t)hParamArr[45]));
 
 }
 
@@ -59,6 +61,7 @@ HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters 
     hp.standbyTimeQ = hParam.standbyTimeQ;
     hp.standbyPowerQ = hParam.standbyPowerQ;
     hp.warmFlashTimeQ = hParam.warmFlashTimeQ;
+    hp.inkColor = hParam.inkColor;
     return hp;
 }
 
@@ -111,7 +114,10 @@ QByteArray HeadSetting::HeadParameters_::toByteArray()
     bArr[42] = static_cast<char>(((this->standbyPowerQ&0xFF00)>>8)&0x00FF);
     bArr[43] = static_cast<char>(this->warmFlashTimeQ&0x00FF);
     bArr[44] = static_cast<char>(((this->warmFlashTimeQ&0xFF00)>>8)&0x00FF);
-
+    bArr[45] = static_cast<char>(this->inkColor&0x000000FF);
+    bArr[46] = static_cast<char>(((this->inkColor&0x0000FF00)>>8)&0x00FF);
+    bArr[47] = static_cast<char>(((this->inkColor&0x00FF0000)>>16)&0x00FF);
+    bArr[48] = static_cast<char>(((this->inkColor&0xFF000000)>>24)&0x00FF);
     return bArr;
 }
 
@@ -139,7 +145,7 @@ HeadSetting::HeadSetting(HeadParameters hParam)
     this->headParam.standbyTimeQ = hParam.standbyTimeQ;
     this->headParam.standbyPowerQ = hParam.standbyPowerQ;
     this->headParam.warmFlashTimeQ = hParam.warmFlashTimeQ;
-
+    this->headParam.inkColor = hParam.inkColor;
 }
 
 HeadSetting::HeadSetting()
@@ -166,6 +172,7 @@ HeadSetting::HeadSetting()
     this->headParam.standbyTimeQ = 0;
     this->headParam.standbyPowerQ = 0;
     this->headParam.warmFlashTimeQ = 0;
+    this->headParam.inkColor = 0;
 }
 
 HeadSetting::~HeadSetting()
@@ -577,9 +584,9 @@ void Register::setHeadReg(int index, HeadSetting hSett)
     this->headRegList[index].field.headReg_SBSTR = hSett.headParam.stroksSBCount;
     this->headRegList[index].field.REG_LED = 0;
     this->headRegList[index].field.headRegIsHeat = 0;
-    this->headRegList[index].field.headReg_R = 0;
-    this->headRegList[index].field.headReg_G = 0;
-    this->headRegList[index].field.headReg_B = 0;
+    this->headRegList[index].field.headReg_R = static_cast<uint8_t>(hSett.headParam.inkColor>>16);
+    this->headRegList[index].field.headReg_G = static_cast<uint8_t>(hSett.headParam.inkColor>>8);
+    this->headRegList[index].field.headReg_B = static_cast<uint8_t>(hSett.headParam.inkColor);
     this->headRegList[index].field.REG_SERVO_HOLD = 0;
     this->headRegList[index].field.REG_SHUTTLE_REAR_POS = hSett.headParam.heatLimit;
     this->headRegList[index].field.headReg_RANGE_1 = hSett.headParam.limitFront;

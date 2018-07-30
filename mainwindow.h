@@ -130,6 +130,7 @@ private slots:
     void resetMachine();
     void getSerialData(ModData modData);
     void getUdpData(QByteArray data);
+    void getHeadColor(int index, QColor color);
     void getHeadParam(int index, QByteArray hParamArr);
     void getAllHeadParam(int index, QByteArray hParamArr);
     void getHeadCommand(int index, QByteArray commandArr);

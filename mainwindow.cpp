@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(headSettingDialog, SIGNAL(changeNumber(int)), this, SLOT(changeHeadNo(int)));
     connect(headSettingDialog, SIGNAL(setParamsToAll(int,QByteArray)), this, SLOT(getAllHeadParam(int,QByteArray)));
     connect(headSettingDialog, SIGNAL(sendCommand(int,QByteArray)), this, SLOT(getHeadCommand(int,QByteArray)));
+    connect(headSettingDialog, SIGNAL(colorChanged(int, QColor)), this, SLOT(getHeadColor(int, QColor)));
     headSettingDialog->setStyleSheet(this->styleSheet());
 
     indexer = new IndexerWidget(this);
@@ -573,6 +574,11 @@ void MainWindow::getSerialData(ModData modData)
 void MainWindow::getUdpData(QByteArray data)
 {
     indexer->clickButton(data);
+}
+
+void MainWindow::getHeadColor(int index, QColor color)
+{
+    headButton[index]->setRagColor(color);
 }
 
 void MainWindow::getHeadParam(int index, QByteArray hParamArr)

@@ -78,6 +78,7 @@ public:
         uint16_t standbyTimeQ;
         uint16_t standbyPowerQ;
         uint16_t warmFlashTimeQ;
+        uint32_t inkColor;
 
         QByteArray toByteArray();
     }HeadParameters;

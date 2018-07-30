@@ -819,7 +819,12 @@ void SettingDialog::on_toolButtonIndexHere_clicked()
 
 void SettingDialog::on_toolButtonInkColor_clicked()
 {
-
+    QColor col;
+    col.setRed(registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_R));
+    col.setGreen(registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G));
+    col.setBlue(registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B));
+    col = QColorDialog::getColor(col, this, "Select color..");
+    emit this->colorChanged(this->index, col);
 }
 
 void SettingDialog::on_toolButtonPressureAir_clicked()
