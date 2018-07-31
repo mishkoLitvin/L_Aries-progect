@@ -261,7 +261,6 @@ void SettingDialog::accept()
             hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
         else
             hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
-        qDebug()<<hSttg.headParam.headOnType;
         hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
 
         hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
@@ -284,7 +283,11 @@ void SettingDialog::accept()
         hSttg.headParam.standbyTimeQ = ui->dSpinBoxStandbyTimeQ->value()*10;
         hSttg.headParam.standbyPowerQ = ui->spinBoxStandbyPowerQ->value();
         hSttg.headParam.warmFlashTimeQ = ui->dSpinBoxWarmFlashTimeQ->value()*10;
-
+        hSttg.headParam.inkColor = 0;
+        hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_R));
+        hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G)<<8);
+        hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B)<<16);
+        qDebug()<<headSettings.headParam.inkColor;
         emit this->accept(this->index, hSttg.headParam.toByteArray());
         this->hide();
     }
@@ -813,8 +816,6 @@ void SettingDialog::on_toolButtonIndexHere_clicked()
     cmdArr.append(static_cast<char>(data>>8));
     cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
-
-
 }
 
 void SettingDialog::on_toolButtonInkColor_clicked()
@@ -824,6 +825,9 @@ void SettingDialog::on_toolButtonInkColor_clicked()
     col.setGreen(registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G));
     col.setBlue(registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B));
     col = QColorDialog::getColor(col, this, "Select color..");
+    registers->writeReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_R, col.red());
+    registers->writeReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G, col.green());
+    registers->writeReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B, col.blue());
     emit this->colorChanged(this->index, col);
 }
 

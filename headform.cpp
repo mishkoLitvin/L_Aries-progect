@@ -25,8 +25,18 @@ HeadForm::HeadForm(QWidget *parent) :
     labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
 
     labelIndex->resize(25,25);
-    labelIndex->move(ui->label->width()-labelIndex->width(),this->height()-labelIndex->height()-10);
+    labelIndex->move(ui->graphicsView->width()-labelIndex->width(),this->height()-labelIndex->height()/*-10*/);
 
+    grScene = new QGraphicsScene();
+    grScene->setBackgroundBrush(QBrush(Qt::transparent));
+    ui->graphicsView->setScene(grScene);
+    ui->graphicsView->setStyleSheet("border-style: none;");
+
+    grSize.setCoords(0,0,ui->graphicsView->width(), ui->graphicsView->height());
+    QBrush grBrash;
+    grRectBkgrItem = grScene->addRect(grSize, QPen(QColor(Qt::transparent),0),grBrash);
+
+    grPixLogoItem = grScene->addPixmap(QPixmap::fromImage(pixShirtHide));
 }
 
 HeadForm::~HeadForm()
@@ -44,12 +54,14 @@ void HeadForm::setHeadformType(HeadForm::HeadformType type)
     case HeadPutingOn:
         this->headformType = HeadPutingOn;
         labelIndex->hide();
-        ui->label->setStyleSheet("* {background-color: #009900}");
+        ui->graphicsView->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DD00FF66, stop: 0.8 #DD008822,stop: 1.0 #DD003300); border-style: none;");
+//        grRectBkgrItem->setBrush(QBrush("#009900"));
         break;
     case HeadRemoving:
         this->headformType = HeadRemoving;
         labelIndex->hide();
-        ui->label->setStyleSheet("background-color: #990000");
+        ui->graphicsView->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DDCC3311, stop: 0.8 #DDAA220F,stop: 1.0 #DD331100); border-style: none;");
+//        grRectBkgrItem->setBrush(QBrush("#990000"));
         break;
     };
 }
@@ -70,16 +82,16 @@ void HeadForm::setIndexLabelPosition(HeadForm::SettBtnPos position)
 {
     switch (position) {
     case AtRightUp:
-        labelIndex->move(this->width()-11-labelIndex->width(), 11);
+        labelIndex->move(this->width()-4-labelIndex->width(), 4);
         break;
     case AtRightDown:
-        labelIndex->move(this->width()-11-labelIndex->width(),ui->label->height()+11-labelIndex->height());
+        labelIndex->move(this->width()-4-labelIndex->width(),ui->graphicsView->height()+4-labelIndex->height());
         break;
     case AtLeftUp:
-        labelIndex->move(11,11);
+        labelIndex->move(4,4);
         break;
     case AtLeftDown:
-        labelIndex->move(11, ui->label->height()+11-labelIndex->height());
+        labelIndex->move(4, ui->graphicsView->height()+4-labelIndex->height());
         break;
     }
 
@@ -89,18 +101,18 @@ void HeadForm::setPixmap(HeadformState state, QString stStr)
 {
     switch(state){
     case shirtOff:
-        ui->label->setPixmap(QPixmap::fromImage(pixShirtHide.scaled(ui->label->size(), Qt::KeepAspectRatio)));
-        ui->label->setStyleSheet(stStr);
+        ui->graphicsView->setStyleSheet(stStr+" border-style: none;");
+        grPixLogoItem->setPixmap(QPixmap::fromImage(pixShirtHide.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio)));
         headformState = shirtOff;
         break;
     case shirtOn:
-        ui->label->setPixmap(QPixmap::fromImage(pixShirtShow.scaled(ui->label->size(), Qt::KeepAspectRatio)));
-        ui->label->setStyleSheet(stStr);
+        ui->graphicsView->setStyleSheet(stStr+" border-style: none;");
+        grPixLogoItem->setPixmap(QPixmap::fromImage(pixShirtShow.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio)));
         headformState = shirtOn;
         break;
     case shirtProcessing:
-        ui->label->setPixmap(QPixmap::fromImage(pixShirtAnimate.scaled(ui->label->size(), Qt::KeepAspectRatio)));
-        ui->label->setStyleSheet(stStr);
+        ui->graphicsView->setStyleSheet(stStr+" border-style: none;");
+        grPixLogoItem->setPixmap(QPixmap::fromImage(pixShirtAnimate.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio)));
         headformState = shirtProcessing;
         break;
     }
@@ -108,7 +120,7 @@ void HeadForm::setPixmap(HeadformState state, QString stStr)
 
 void HeadForm::setPixmap(HeadForm::HeadformState state)
 {
-    this->setPixmap(state, ui->label->styleSheet());
+    this->setPixmap(state, ui->graphicsView->styleSheet());
 }
 
 void HeadForm::setRagOn(bool state)
@@ -131,7 +143,7 @@ void HeadForm::setIconPath(QString path)
 
 void HeadForm::setRagColor(QColor color)
 {
-    ui->label->setGraphicsEffect(graphEffect);
+    grPixLogoItem->setGraphicsEffect(graphEffect);
     graphEffect->setColor(color);
 }
 
@@ -142,7 +154,7 @@ HeadForm::HeadformState HeadForm::getRagState()
 
 QSize HeadForm::getLabelSize()
 {
-    return ui->label->size();
+    return ui->graphicsView->size();
 }
 
 
@@ -153,17 +165,17 @@ void HeadForm::mousePressEvent(QMouseEvent *event)
         if(this->headformType == HeadProcessing)
         {
             if(this->headformState == shirtOff)
-                this->setPixmap(shirtOn, ui->label->styleSheet());
+                this->setPixmap(shirtOn, ui->graphicsView->styleSheet());
             else
-                this->setPixmap(shirtOff, ui->label->styleSheet());
+                this->setPixmap(shirtOff, ui->graphicsView->styleSheet());
         }
         else
         {
             switch(headformState)
             {
-            case shirtOff: this->setPixmap(shirtOn, ui->label->styleSheet()); break;
-            case shirtOn: this->setPixmap(shirtProcessing, ui->label->styleSheet()); break;
-            case shirtProcessing: this->setPixmap(shirtOff, ui->label->styleSheet()); break;
+            case shirtOff: this->setPixmap(shirtOn, ui->graphicsView->styleSheet()); break;
+            case shirtOn: this->setPixmap(shirtProcessing, ui->graphicsView->styleSheet()); break;
+            case shirtProcessing: this->setPixmap(shirtOff, ui->graphicsView->styleSheet()); break;
             }
         }
         if(headformType == HeadPutingOn)

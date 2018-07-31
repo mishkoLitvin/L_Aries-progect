@@ -8,6 +8,9 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QGraphicsEffect>
+#include <QGraphicsScene>
+#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 
 class HeadSettingButton : public QPushButton{
     Q_OBJECT
@@ -94,7 +97,10 @@ private:
     HeadformState headformState;
     HeadformType headformType;
 
-
+    QGraphicsScene *grScene;
+    QGraphicsPixmapItem *grPixLogoItem;
+    QGraphicsRectItem *grRectBkgrItem;
+    QRect grSize;
 protected:
     void mousePressEvent(QMouseEvent *event);
 };

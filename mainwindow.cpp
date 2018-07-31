@@ -1136,7 +1136,8 @@ void MainWindow::loadJob()
                         (registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==6))
                 {
                     headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
-                    switch (headSettings.headParam.headOnType&0x00FF) {
+                    switch (headSettings.headParam.headOnType&0x00FF)
+                    {
                     case HeadSetting::PrintHeadOn:
                         headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[1]);
                         break;
@@ -1346,9 +1347,6 @@ void MainWindow::setBackGround(bool enable, bool request)
     {
         this->setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
                                                     +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
-//        ui->widgetLiftOffcet->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
-//        ui->widgetStepDelay->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
-
     }
     else
     {
@@ -1528,8 +1526,6 @@ void MainWindow::zeroStart()
     ui->dSpinBoxStepDelay->setStyleSheet(ui->dSpinBoxLiftOffcet->styleSheet());
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
 
-    this->setBackGround(settings->value("STYLE/IMAGE_EN", false).toBool());
-
     timeProgramStart = QTime::currentTime();
 
     watchDog->start();
@@ -1562,7 +1558,15 @@ void MainWindow::headsInit()
             if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
+            {
                 headButton[i]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
+                QColor col;
+                headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
+                col.setRed((headSettings.headParam.inkColor&0x000000FF)>>0);
+                col.setGreen((headSettings.headParam.inkColor&0x0000FF00)>>8);
+                col.setBlue((headSettings.headParam.inkColor&0x00FF0000)>>16);
+                headButton[i]->setRagColor(col);
+            }
         HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
 
         if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
@@ -1602,6 +1606,7 @@ void MainWindow::showEvent(QShowEvent *ev)
     maintanceDialog->check(indexerCyclesAll);
     ui->pButtonCyclesSetup->setVisible(this->machineSettings.machineParam.lastRevWarm.field.revolver);
     this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
+    this->setBackGround(settings->value("STYLE/IMAGE_EN", false).toBool());
     this->resetMachine();
     ev->accept();
 }

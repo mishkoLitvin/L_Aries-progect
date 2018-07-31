@@ -5,8 +5,8 @@ uint32_t HeadSetting::headStateAll;
 
 void HeadSetting::fromByteArray(QByteArray hParamArr)
 {
-    if(hParamArr.length()!=45)
-        hParamArr.resize(45);
+    if(hParamArr.length()!=49)
+        hParamArr.resize(49);
 
     this->headParam.headOnType = (HeadSetting::HeadOnType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0])));;
     this->headParam.powerOn = ((uint8_t)hParamArr[2]);
@@ -584,9 +584,9 @@ void Register::setHeadReg(int index, HeadSetting hSett)
     this->headRegList[index].field.headReg_SBSTR = hSett.headParam.stroksSBCount;
     this->headRegList[index].field.REG_LED = 0;
     this->headRegList[index].field.headRegIsHeat = 0;
-    this->headRegList[index].field.headReg_R = static_cast<uint8_t>(hSett.headParam.inkColor>>16);
+    this->headRegList[index].field.headReg_R = static_cast<uint8_t>(hSett.headParam.inkColor);
     this->headRegList[index].field.headReg_G = static_cast<uint8_t>(hSett.headParam.inkColor>>8);
-    this->headRegList[index].field.headReg_B = static_cast<uint8_t>(hSett.headParam.inkColor);
+    this->headRegList[index].field.headReg_B = static_cast<uint8_t>(hSett.headParam.inkColor>>16);
     this->headRegList[index].field.REG_SERVO_HOLD = 0;
     this->headRegList[index].field.REG_SHUTTLE_REAR_POS = hSett.headParam.heatLimit;
     this->headRegList[index].field.headReg_RANGE_1 = hSett.headParam.limitFront;

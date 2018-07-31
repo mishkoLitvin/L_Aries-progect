@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>82</width>
-    <height>82</height>
+    <width>76</width>
+    <height>76</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>75</width>
+    <height>75</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>76</width>
+    <height>76</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -17,28 +29,31 @@
    <locale language="English" country="UnitedStates"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="QLabel" name="label">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
+    <widget class="QGraphicsView" name="graphicsView">
+     <property name="maximumSize">
       <size>
-       <width>64</width>
-       <height>64</height>
+       <width>111</width>
+       <height>111</height>
       </size>
      </property>
-     <property name="baseSize">
-      <size>
-       <width>64</width>
-       <height>64</height>
-      </size>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
-     <property name="text">
-      <string>TextLabel</string>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
     </widget>
    </item>
