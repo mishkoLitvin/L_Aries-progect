@@ -1184,23 +1184,13 @@ void MainWindow::setHeadsPosition()
 
     int direction = machineSettings.machineParam.direction;
 
+    int headsPrintCount = (this->headsCount-6)/2;
+
     for(i = 0; i<headsCount; i++)
     {
-        sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.
-                      +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
-        cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.
-                      +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
-//        if(this->machineSettings.machineParam.useUnloadHead)
-//            sinCoef+=direction*3.1415926/headsCount;
-
-//        sinCoef = sin(sinCoef);
-//        cosCoef = cos(sinCoef);
-
-
         headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
 
-        if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
-                     |(!machineSettings.machineParam.useUnloadHead)))
+        if((i > 0)&(i < headsPrintCount*2+3))
         {
             headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
                     y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
