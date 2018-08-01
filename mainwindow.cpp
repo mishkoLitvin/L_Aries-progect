@@ -886,25 +886,42 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
     generalSettingDialog->setStyleSheet(this->styleSheet());
     comPort->setStyleSheet(this->styleSheet());
     ui->labelPalet->setStyleSheet("QLabel{padding-bottom: 0px; font: 16px bold italic large \"Serif\"}");
-    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
-                                          "border-style: none;"
+    ui->widgetStepDelay->resize(130,150);
+    ui->widgetLiftOffcet->resize(130,150);
+    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 100px;"
                                           "padding-top: 0px;"
-                                          "font: 20px bold italic large \"Serif\"}"
+                                          "border-style: none;"
+                                          "font: 16px bold italic large \"Serif\"}"
                                           "QDoubleSpinBox::up-button {"
-                                          "width: 45px;"
-                                          "height: 55px;"
+                                          "height: 50px;"
+                                          "width: 55px;"
                                           "subcontrol-origin: content;"
-                                          "subcontrol-position: right;"
+                                          "subcontrol-position: top left;"
                                           "}"
                                           "QDoubleSpinBox::down-button {"
-                                          "width: 45px;"
-                                          "height: 55px;"
+                                          "height: 50px;"
+                                          "width: 55px;"
                                           "subcontrol-origin: content;"
-                                          "subcontrol-position: left;"
+                                          "subcontrol-position: bottom left;"
                                           "}"
                                           );
     ui->widgetLiftOffcet->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
-    ui->dSpinBoxStepDelay->setStyleSheet(ui->dSpinBoxLiftOffcet->styleSheet());
+    ui->dSpinBoxStepDelay->setStyleSheet("QDoubleSpinBox{min-height: 100px;"
+                                         "padding-top: 0px;"
+                                         "border-style: none;"
+                                         "font: 16px bold italic large \"Serif\"}"
+                                         "QDoubleSpinBox::up-button {"
+                                         "height: 50px;"
+                                         "width: 45px;"
+                                         "subcontrol-origin: content;"
+                                         "subcontrol-position: top right;"
+                                         "}"
+                                         "QDoubleSpinBox::down-button {"
+                                         "height: 50px;"
+                                         "width: 45px;"
+                                         "subcontrol-origin: content;"
+                                         "subcontrol-position: bottom right;"
+                                         "}");
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
 
     this->setBackGround(settings->value("STYLE/IMAGE_EN", false).toBool());
@@ -1171,69 +1188,52 @@ void MainWindow::setHeadsPosition()
     areaW = ui->widgetHeads->width();
 
     int i;
-    float sinCoef, cosCoef, R, x0_hb, y0_hb, x0_sb, y0_sb;
-    if(areaH<areaW)
-        R = areaH/2-headButton[0]->height()/2-headSettButton[0]->height()/2-10;
-    else
-        R = areaW/2-headButton[0]->width()/2-headSettButton[0]->width()/2-10;
+    float y_offset, x0_hb, y0_hb, x0_sb, y0_sb;
+
+    y_offset = infoWidget->height()/2;
 
     x0_hb = ui->widgetHeads->width()/2-headButton[0]->width()/2;
-    y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/2+headSettButton[0]->width()/2;
+    y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/2;
     x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
-    y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
+    y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2;
 
     int direction = machineSettings.machineParam.direction;
 
-    int headsPrintCount = (this->headsCount-6)/2;
+    int headsPrintCount = (this->headsCount)/2;
+
+    qDebug()<<headSettButton.length()<<headsCount;
 
     for(i = 0; i<headsCount; i++)
     {
-        headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
-
-        if((i > 0)&(i < headsPrintCount*2+3))
+        if(i<headsCount/2)
         {
-            headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
-                    y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
-            if(direction == 1)
-            {
-                if(i<(headsCount)/4)
-                    headButton[i]->setIndexLabelPosition(HeadForm::AtRightUp);
-                else
-                    if(i<(headsCount)/2)
-                        headButton[i]->setIndexLabelPosition(HeadForm::AtRightDown);
-                    else
-                        if(i<(3*headsCount)/4)
-                            headButton[i]->setIndexLabelPosition(HeadForm::AtLeftDown);
-                        else
-                            if(i<(headsCount))
-                                headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
-            }
-            else
-            {
-                if(i<(headsCount)/4)
-                    headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
-                else
-                    if(i<(headsCount)/2)
-                        headButton[i]->setIndexLabelPosition(HeadForm::AtLeftDown);
-                    else
-                        if(i<(3*headsCount)/4)
-                            headButton[i]->setIndexLabelPosition(HeadForm::AtRightDown);
-                        else
-                            if(i<(headsCount))
-                                headButton[i]->setIndexLabelPosition(HeadForm::AtRightUp);
-            }
+            headButton[i]->move((i+1)*(2*x0_hb)/headsPrintCount,
+                                y0_hb-y_offset-headButton[i]->height()/2);
+            if(i!=0)
+                headSettButton[i-1]->move((i+1)*(2*x0_hb)/headsPrintCount+headButton[i]->width()/2-headSettButton[i]->width()/2,
+                                          y0_hb-y_offset-headButton[i]->height()/2-headSettButton[i]->height()-20);
+        }
+        else
+        {
+            headButton[i]->move(2*x0_hb-(i+1-headsCount/2)*(2*x0_hb)/headsPrintCount,
+                                y0_hb+y_offset+headButton[0]->height());
+            if(i<headSettButton.length()+1)
+                headSettButton[i-1]->move(2*x0_hb-(i+1-headsCount/2)*(2*x0_hb)/headsPrintCount+headButton[0]->width()/2-headSettButton[0]->width()/2,
+                                          y0_hb+y_offset+headButton[0]->height()*2+20);
+
         }
     }
+
 
     ui->widgetTopMenu->move(ui->widgetHeads->pos());
     ui->widgetTopMenu->resize(ui->widgetHeads->width()-18, 65);
 
     infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
 
-    ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
-                                 infoWidget->pos().y()-ui->widgetLiftOffcet->height());
-    ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
-                                 infoWidget->pos().y()+infoWidget->height()+6);
+    ui->widgetLiftOffcet->move(infoWidget->pos().x()-ui->widgetLiftOffcet->width(),
+                                 infoWidget->pos().y()+infoWidget->height()/2-ui->widgetLiftOffcet->height()/2);
+    ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width(),
+                                 infoWidget->pos().y()+infoWidget->height()/2-ui->widgetStepDelay->height()/2);
 }
 
 void MainWindow::indexerStepFinish()
@@ -1492,28 +1492,44 @@ void MainWindow::zeroStart()
     ui->dSpinBoxLiftOffcet->setValue(1.18-this->indexerLiftSettings.liftParam.distance/100.);
     connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
     ui->dSpinBoxStepDelay->setValue(this->machineSettings.machineParam.stepTimeDelay/10.);
-
-    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
+    ui->widgetStepDelay->resize(130,150);
+    ui->widgetLiftOffcet->resize(130,150);
+    ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 100px;"
                                           "padding-top: 0px;"
                                           "border-style: none;"
                                           "font: 16px bold italic large \"Serif\"}"
                                           "QDoubleSpinBox::up-button {"
-                                          "width: 45px;"
-                                          "height: 55px;"
+                                          "height: 50px;"
+                                          "width: 55px;"
                                           "subcontrol-origin: content;"
-                                          "subcontrol-position: right;"
+                                          "subcontrol-position: top left;"
                                           "}"
                                           "QDoubleSpinBox::down-button {"
-                                          "width: 45px;"
                                           "height: 50px;"
+                                          "width: 55px;"
                                           "subcontrol-origin: content;"
-                                          "subcontrol-position: left;"
+                                          "subcontrol-position: bottom left;"
                                           "}"
                                           );
     ui->widgetLiftOffcet->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
 
     ui->labelDelay->setStyleSheet("QLabel{padding-bottom: 0px; font: 12px bold italic large \"Serif\"}");
-    ui->dSpinBoxStepDelay->setStyleSheet(ui->dSpinBoxLiftOffcet->styleSheet());
+    ui->dSpinBoxStepDelay->setStyleSheet("QDoubleSpinBox{min-height: 100px;"
+                                         "padding-top: 0px;"
+                                         "border-style: none;"
+                                         "font: 16px bold italic large \"Serif\"}"
+                                         "QDoubleSpinBox::up-button {"
+                                         "height: 50px;"
+                                         "width: 55px;"
+                                         "subcontrol-origin: content;"
+                                         "subcontrol-position: top right;"
+                                         "}"
+                                         "QDoubleSpinBox::down-button {"
+                                         "height: 50px;"
+                                         "width: 55px;"
+                                         "subcontrol-origin: content;"
+                                         "subcontrol-position: bottom right;"
+                                         "}");
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
 
     timeProgramStart = QTime::currentTime();
@@ -1524,10 +1540,10 @@ void MainWindow::zeroStart()
 
 void MainWindow::headsInit()
 {
-    if(this->machineSettings.machineParam.useUnloadHead)
-        headsCount+=2;
-    else
-        headsCount+=1;
+//    if(this->machineSettings.machineParam.useUnloadHead)
+//        headsCount+=2;
+//    else
+//        headsCount+=1;
 
     headActDialog = new HeadActivationDialog(headsCount, this);
     headActDialog->setHeadActivState(settings->value("HEAD/ACTIVATION", 0).toInt());
@@ -1545,7 +1561,7 @@ void MainWindow::headsInit()
             connect(headButton[i], SIGNAL(loadStateChanged(LoadState)), this, SLOT(getLoadState(LoadState)));
         }
         else
-            if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
+            if((i==headsCount - 2)&(this->machineSettings.machineParam.useUnloadHead))
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
             {
@@ -1559,8 +1575,7 @@ void MainWindow::headsInit()
             }
         HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
 
-        if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
-                     |((i != headsCount)&(!machineSettings.machineParam.useUnloadHead))))
+        if((i != 0)&(i<headsCount-2))
         {
             headSettButton.append(new HeadSettingButton(i, ui->widgetHeads));
             if(i<(headsCount)/4)
