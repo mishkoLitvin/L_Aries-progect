@@ -303,23 +303,12 @@ void MainWindow::changeHeadNo(int index)
 {
     if(index<1)
     {
-        if(this->machineSettings.machineParam.useUnloadHead)
-            index = headsCount - 2;
-        else
-            index = headsCount - 1;
+        index = headsCount - 3;
     }
     else
     {
-        if(this->machineSettings.machineParam.useUnloadHead)
-        {
-            if(index > headsCount-2)
-                index = 1;
-        }
-        else
-        {
-            if(index > headsCount-1)
-                index = 1;
-        }
+        if(index > headsCount-3)
+            index = 1;
     }
     this->headSettingRequest(index);
 }
@@ -790,9 +779,7 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
     MachineSettings mSett;
     mSett.fromByteArray(machineParamArr);
     ui->pButtonCyclesSetup->setVisible(mSett.machineParam.lastRevWarm.field.revolver);
-    if(((this->headsCount-2 != mSett.machineParam.headCount)&(mSett.machineParam.useUnloadHead))
-            |((this->headsCount-1 != mSett.machineParam.headCount)&(!mSett.machineParam.useUnloadHead))
-            |(mSett.machineParam.useUnloadHead != this->machineSettings.machineParam.useUnloadHead))
+    if(this->headsCount-2 != mSett.machineParam.headCount)
     {
         QMessageBox msgBox;
         msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
@@ -851,11 +838,11 @@ void MainWindow::setUnloadState(bool state)
 {
     if(state)
     {
-        headButton[headsCount - 1]->setHeadformType(HeadForm::HeadProcessing);
+        headButton[headsCount - 2]->setHeadformType(HeadForm::HeadProcessing);
     }
     else
     {
-        headButton[headsCount - 1]->setHeadformType(HeadForm::HeadRemoving);
+        headButton[headsCount - 2]->setHeadformType(HeadForm::HeadRemoving);
 
     }
 }
@@ -1145,7 +1132,7 @@ void MainWindow::loadJob()
         if(i==0)
             headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
         else
-            if((i==headsCount - 1)&(machineSettings.machineParam.useUnloadHead))
+            if(i==headsCount - 2)
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
                 if((registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==2)|
@@ -1201,27 +1188,60 @@ void MainWindow::setHeadsPosition()
 
     int headsPrintCount = (this->headsCount)/2;
 
-    qDebug()<<headSettButton.length()<<headsCount;
+    qDebug()<<headSettButton.length()<<headsCount<<headsPrintCount;
 
     for(i = 0; i<headsCount; i++)
     {
-        if(i<headsCount/2)
-        {
-            headButton[i]->move((i+1)*(2*x0_hb)/headsPrintCount,
-                                y0_hb-y_offset-headButton[i]->height()/2);
-            if(i!=0)
-                headSettButton[i-1]->move((i+1)*(2*x0_hb)/headsPrintCount+headButton[i]->width()/2-headSettButton[i]->width()/2,
-                                          y0_hb-y_offset-headButton[i]->height()/2-headSettButton[i]->height()-20);
-        }
+        if(i == 0)
+            headButton[i]->move((2*x0_hb)/headsPrintCount,
+                                y0_hb-headButton[i]->height());
         else
-        {
-            headButton[i]->move(2*x0_hb-(i+1-headsCount/2)*(2*x0_hb)/headsPrintCount,
-                                y0_hb+y_offset+headButton[0]->height());
-            if(i<headSettButton.length()+1)
-                headSettButton[i-1]->move(2*x0_hb-(i+1-headsCount/2)*(2*x0_hb)/headsPrintCount+headButton[0]->width()/2-headSettButton[0]->width()/2,
-                                          y0_hb+y_offset+headButton[0]->height()*2+20);
+            if((i>(this->headsCount-6)/2)&(i<=(this->headsCount-6)/2+3))
+            {
+                switch (i-(this->headsCount-6)/2-1) {
+                case 0:
+                    headButton[i]->move((i+1)*(2*x0_hb)/headsPrintCount,
+                                        y0_hb-headButton[i]->height());
+                    break;
+                case 1:
+                    headButton[i]->move((i+1)*(2*x0_hb)/headsPrintCount-headButton[i]->width()*0.5,
+                                        y0_hb+headButton[i]->height()*0.25);
+                    break;
+                case 2:
+                    headButton[i]->move((i-1)*(2*x0_hb)/headsPrintCount,
+                                        y0_hb+headButton[i]->height()*1.5);
+                    break;
+                default:
+                    break;
+                }
 
-        }
+            }
+            else
+                if(i<headsCount/2)
+                {
+                    headButton[i]->move((i+1)*(2*x0_hb)/headsPrintCount,
+                                        y0_hb-y_offset-headButton[i]->height()/2);
+                    headSettButton[i-1]->move((i+1)*(2*x0_hb)/headsPrintCount+headButton[i]->width()/2-headSettButton[i]->width()/2,
+                                              y0_hb-y_offset-headButton[i]->height()/2-headSettButton[i]->height()-20);
+                }
+                else
+                    if((i>=headsCount/2)&(i<(this->headsCount-2)))
+                    {
+                        headButton[i]->move(2*x0_hb-(i+1-headsCount/2)*(2*x0_hb)/headsPrintCount,
+                                            y0_hb+y_offset+headButton[0]->height());
+                        if(i<headSettButton.length()+1)
+                            headSettButton[i-1]->move(2*x0_hb-(i+1-headsCount/2)*(2*x0_hb)/headsPrintCount+headButton[0]->width()/2-headSettButton[0]->width()/2,
+                                    y0_hb+y_offset+headButton[0]->height()*2+20);
+                    }
+                    else
+                    {
+                        if(i == (this->headsCount-1))
+                            headButton[i]->move((2*x0_hb)/headsPrintCount,
+                                                y0_hb+headButton[i]->height()*1.5);
+                        if(i == (this->headsCount-2))
+                            headButton[i]->move(x0_hb/headsPrintCount-headButton[i]->width()*0.25,
+                                                y0_hb+headButton[i]->height()*0.25);
+                    }
     }
 
 
@@ -1241,7 +1261,7 @@ void MainWindow::indexerStepFinish()
     indexerCyclesAll++;
     indexerCyclesSession++;
 
-    if(headButton[headButton.length()-1]->getRagState() == HeadForm::shirtOn)
+    if(headButton[headButton.length()-2]->getRagState() == HeadForm::shirtOn)
     {
        ragAllCount++;
        infoWidget->setTotal(ragAllCount);
@@ -1540,11 +1560,6 @@ void MainWindow::zeroStart()
 
 void MainWindow::headsInit()
 {
-//    if(this->machineSettings.machineParam.useUnloadHead)
-//        headsCount+=2;
-//    else
-//        headsCount+=1;
-
     headActDialog = new HeadActivationDialog(headsCount, this);
     headActDialog->setHeadActivState(settings->value("HEAD/ACTIVATION", 0).toInt());
     connect(generalSettingDialog, SIGNAL(headActivationRequest()), headActDialog, SLOT(show()));
@@ -1561,18 +1576,21 @@ void MainWindow::headsInit()
             connect(headButton[i], SIGNAL(loadStateChanged(LoadState)), this, SLOT(getLoadState(LoadState)));
         }
         else
-            if((i==headsCount - 2)&(this->machineSettings.machineParam.useUnloadHead))
+            if(i==headsCount - 1)
                 headButton[i]->setHeadformType(HeadForm::HeadRemoving);
             else
-            {
-                headButton[i]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
-                QColor col;
-                headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
-                col.setRed((headSettings.headParam.inkColor&0x000000FF)>>0);
-                col.setGreen((headSettings.headParam.inkColor&0x0000FF00)>>8);
-                col.setBlue((headSettings.headParam.inkColor&0x00FF0000)>>16);
-                headButton[i]->setRagColor(col);
-            }
+                if(i==headsCount - 2)
+                    headButton[i]->setHeadformType(HeadForm::HeadRemoving);
+                else
+                {
+                    headButton[i]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
+                    QColor col;
+                    headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
+                    col.setRed((headSettings.headParam.inkColor&0x000000FF)>>0);
+                    col.setGreen((headSettings.headParam.inkColor&0x0000FF00)>>8);
+                    col.setBlue((headSettings.headParam.inkColor&0x00FF0000)>>16);
+                    headButton[i]->setRagColor(col);
+                }
         HeadSetting::setHeadOn_OffStateInd(i, static_cast<bool>(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>()[2]&0x01));
 
         if((i != 0)&(i<headsCount-2))
