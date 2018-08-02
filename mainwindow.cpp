@@ -910,7 +910,8 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
                                          "subcontrol-position: bottom right;"
                                          "}");
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
-
+    ui->scrollArea->setStyleSheet("QScrollArea{border-style: none;}");
+    ui->widgetHeads->setStyleSheet("QWidget{border-style: none;}");
     this->setBackGround(settings->value("STYLE/IMAGE_EN", false).toBool());
 }
 
@@ -1174,21 +1175,27 @@ void MainWindow::setHeadsPosition()
     areaH = ui->widgetHeads->height();
     areaW = ui->widgetHeads->width();
 
+    int headsPrintCount = (this->headsCount)/2;
+
+    if(areaW<(headsPrintCount+2)*(headButton[0]->width()+20))
+    {
+        ui->widgetHeads->resize((headsPrintCount+2)*(headButton[0]->width()+20), ui->widgetHeads->height());
+        areaW = ui->widgetHeads->width();
+    }
+
     int i;
     float y_offset, x0_hb, y0_hb, x0_sb, y0_sb;
 
     y_offset = infoWidget->height()/2;
 
     x0_hb = ui->widgetHeads->width()/2-headButton[0]->width()/2;
-    y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/2;
+    y0_hb = ui->widgetHeads->height()/2-headButton[0]->height()/*/2*/;
     x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2;
 
     int direction = machineSettings.machineParam.direction;
 
-    int headsPrintCount = (this->headsCount)/2;
 
-    qDebug()<<headSettButton.length()<<headsCount<<headsPrintCount;
 
     for(i = 0; i<headsCount; i++)
     {
@@ -1202,14 +1209,20 @@ void MainWindow::setHeadsPosition()
                 case 0:
                     headButton[i]->move((i+1)*(2*x0_hb)/headsPrintCount,
                                         y0_hb-headButton[i]->height());
+                    headSettButton[i-1]->move((i+1)*(2*x0_hb)/headsPrintCount+headButton[i]->width()/2,
+                                              y0_hb-headButton[i]->height()-headSettButton[i]->height()*1.5);
                     break;
                 case 1:
                     headButton[i]->move((i+1)*(2*x0_hb)/headsPrintCount-headButton[i]->width()*0.5,
                                         y0_hb+headButton[i]->height()*0.25);
+                    headSettButton[i-1]->move((i+1)*(2*x0_hb)/headsPrintCount+headButton[i]->width()*0.5,
+                                              y0_hb+headSettButton[i]->height()*0.5);
                     break;
                 case 2:
                     headButton[i]->move((i-1)*(2*x0_hb)/headsPrintCount,
                                         y0_hb+headButton[i]->height()*1.5);
+                    headSettButton[i-1]->move((i-1)*(2*x0_hb)/headsPrintCount+headButton[i]->width()/2,
+                                              y0_hb+headButton[i]->height()*2+headSettButton[i]->height()*1.5);
                     break;
                 default:
                     break;
@@ -1248,7 +1261,7 @@ void MainWindow::setHeadsPosition()
     ui->widgetTopMenu->move(ui->widgetHeads->pos());
     ui->widgetTopMenu->resize(ui->widgetHeads->width()-18, 65);
 
-    infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
+    infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, y0_hb-infoWidget->height()/4);
 
     ui->widgetLiftOffcet->move(infoWidget->pos().x()-ui->widgetLiftOffcet->width(),
                                  infoWidget->pos().y()+infoWidget->height()/2-ui->widgetLiftOffcet->height()/2);
@@ -1551,7 +1564,8 @@ void MainWindow::zeroStart()
                                          "subcontrol-position: bottom right;"
                                          "}");
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
-
+    ui->scrollArea->setStyleSheet("QScrollArea{border-style: none;}");
+    ui->widgetHeads->setStyleSheet("QWidget{border-style: none;}");
     timeProgramStart = QTime::currentTime();
 
     watchDog->start();
