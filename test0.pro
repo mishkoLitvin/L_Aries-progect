@@ -16,6 +16,8 @@ TEMPLATE = app
 #PKGCONFIG += openssl
 #win32:LIBS+=C:\Users\T\Dropbox\ANATOL_SharedFolder\Windows_version\SMTPEmail.dll
 
+QT
+
 SOURCES += main.cpp\
         mainwindow.cpp \
     headform.cpp \

@@ -9,30 +9,30 @@ void HeadSetting::fromByteArray(QByteArray hParamArr)
         hParamArr.resize(49);
 
     this->headParam.headOnType = (HeadSetting::HeadOnType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0])));;
-    this->headParam.powerOn = ((uint8_t)hParamArr[2]);
-    this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[4]))<<8)|(0x00FF&((uint16_t)hParamArr[3]));
-    this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[6]))<<8)|(0x00FF&((uint16_t)hParamArr[5]));
-    this->headParam.limitRear = ((0x00FF&((uint16_t)hParamArr[8]))<<8)|(0x00FF&((uint16_t)hParamArr[7]));
-    this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[10]))<<8)|(0x00FF&((uint16_t)hParamArr[9]));
-    this->headParam.stroksCount = ((0x00FF&((uint16_t)hParamArr[12]))<<8)|(0x00FF&((uint16_t)hParamArr[11]));
-    this->headParam.stroksSBCount = ((0x00FF&((uint16_t)hParamArr[14]))<<8)|(0x00FF&((uint16_t)hParamArr[13]));
-    this->headParam.dwellFLTime = ((0x00FF&((uint16_t)hParamArr[16]))<<8)|(0x00FF&((uint16_t)hParamArr[15]));
-    this->headParam.dwellSQTime = ((0x00FF&((uint16_t)hParamArr[18]))<<8)|(0x00FF&((uint16_t)hParamArr[17]));
-    this->headParam.heatTime1 = ((0x00FF&((uint16_t)hParamArr[20]))<<8)|(0x00FF&((uint16_t)hParamArr[19]));
-    this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[22]))<<8)|(0x00FF&((uint16_t)hParamArr[21]));
-    this->headParam.heatPower = ((0x00FF&((uint16_t)hParamArr[24]))<<8)|(0x00FF&((uint16_t)hParamArr[23]));
-    this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[26]))<<8)|(0x00FF&((uint16_t)hParamArr[25]));
-    this->headParam.heatTime1Q = ((0x00FF&((uint16_t)hParamArr[28]))<<8)|(0x00FF&((uint16_t)hParamArr[27]));
-    this->headParam.heatTime2Q = ((0x00FF&((uint16_t)hParamArr[30]))<<8)|(0x00FF&((uint16_t)hParamArr[29]));
-    this->headParam.dryPowerQ = ((0x00FF&((uint16_t)hParamArr[32]))<<8)|(0x00FF&((uint16_t)hParamArr[31]));
-    this->headParam.stepbackDryTimeQ = ((0x00FF&((uint16_t)hParamArr[34]))<<8)|(0x00FF&((uint16_t)hParamArr[33]));
-    this->headParam.temperatureSetQ = ((0x00FF&((uint16_t)hParamArr[36]))<<8)|(0x00FF&((uint16_t)hParamArr[35]));
-    this->headParam.dryTimeQ = ((0x00FF&((uint16_t)hParamArr[38]))<<8)|(0x00FF&((uint16_t)hParamArr[37]));
-    this->headParam.standbyTimeQ = ((0x00FF&((uint16_t)hParamArr[40]))<<8)|(0x00FF&((uint16_t)hParamArr[39]));
-    this->headParam.standbyPowerQ = ((0x00FF&((uint16_t)hParamArr[42]))<<8)|(0x00FF&((uint16_t)hParamArr[41]));
-    this->headParam.warmFlashTimeQ = ((0x00FF&((uint16_t)hParamArr[44]))<<8)|(0x00FF&((uint16_t)hParamArr[43]));
-    this->headParam.inkColor = ((0x00FF&((uint32_t)hParamArr[48]))<<24)|((0x00FF&((uint32_t)hParamArr[47]))<<16)
-            |((0x00FF&((uint32_t)hParamArr[46]))<<8)|(0x00FF&((uint32_t)hParamArr[45]));
+    this->headParam.powerOn = ((0x00FF&((uint16_t)hParamArr[3]))<<8)|(0x00FF&((uint16_t)hParamArr[2]));
+    this->headParam.speedRear = ((0x00FF&((uint16_t)hParamArr[5]))<<8)|(0x00FF&((uint16_t)hParamArr[4]));
+    this->headParam.speedFront = ((0x00FF&((uint16_t)hParamArr[7]))<<8)|(0x00FF&((uint16_t)hParamArr[6]));
+    this->headParam.limitRear = ((0x00FF&((uint16_t)hParamArr[9]))<<8)|(0x00FF&((uint16_t)hParamArr[8]));
+    this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[11]))<<8)|(0x00FF&((uint16_t)hParamArr[10]));
+    this->headParam.stroksCount = ((0x00FF&((uint16_t)hParamArr[13]))<<8)|(0x00FF&((uint16_t)hParamArr[12]));
+    this->headParam.stroksSBCount = ((0x00FF&((uint16_t)hParamArr[15]))<<8)|(0x00FF&((uint16_t)hParamArr[14]));
+    this->headParam.dwellFLTime = ((0x00FF&((uint16_t)hParamArr[17]))<<8)|(0x00FF&((uint16_t)hParamArr[16]));
+    this->headParam.dwellSQTime = ((0x00FF&((uint16_t)hParamArr[19]))<<8)|(0x00FF&((uint16_t)hParamArr[18]));
+    this->headParam.heatTime1 = ((0x00FF&((uint16_t)hParamArr[21]))<<8)|(0x00FF&((uint16_t)hParamArr[20]));
+    this->headParam.heatTime2 = ((0x00FF&((uint16_t)hParamArr[23]))<<8)|(0x00FF&((uint16_t)hParamArr[22]));
+    this->headParam.heatPower = ((0x00FF&((uint16_t)hParamArr[25]))<<8)|(0x00FF&((uint16_t)hParamArr[24]));
+    this->headParam.limitFront = ((0x00FF&((uint16_t)hParamArr[27]))<<8)|(0x00FF&((uint16_t)hParamArr[26]));
+    this->headParam.heatTime1Q = ((0x00FF&((uint16_t)hParamArr[29]))<<8)|(0x00FF&((uint16_t)hParamArr[28]));
+    this->headParam.heatTime2Q = ((0x00FF&((uint16_t)hParamArr[31]))<<8)|(0x00FF&((uint16_t)hParamArr[30]));
+    this->headParam.dryPowerQ = ((0x00FF&((uint16_t)hParamArr[33]))<<8)|(0x00FF&((uint16_t)hParamArr[32]));
+    this->headParam.stepbackDryTimeQ = ((0x00FF&((uint16_t)hParamArr[35]))<<8)|(0x00FF&((uint16_t)hParamArr[34]));
+    this->headParam.temperatureSetQ = ((0x00FF&((uint16_t)hParamArr[37]))<<8)|(0x00FF&((uint16_t)hParamArr[36]));
+    this->headParam.dryTimeQ = ((0x00FF&((uint16_t)hParamArr[39]))<<8)|(0x00FF&((uint16_t)hParamArr[38]));
+    this->headParam.standbyTimeQ = ((0x00FF&((uint16_t)hParamArr[41]))<<8)|(0x00FF&((uint16_t)hParamArr[40]));
+    this->headParam.standbyPowerQ = ((0x00FF&((uint16_t)hParamArr[43]))<<8)|(0x00FF&((uint16_t)hParamArr[42]));
+    this->headParam.warmFlashTimeQ = ((0x00FF&((uint16_t)hParamArr[45]))<<8)|(0x00FF&((uint16_t)hParamArr[44]));
+    this->headParam.inkColor = ((0x00FF&((uint32_t)hParamArr[49]))<<24)|((0x00FF&((uint32_t)hParamArr[48]))<<16)
+            |((0x00FF&((uint32_t)hParamArr[47]))<<8)|(0x00FF&((uint32_t)hParamArr[46]));
 
 }
 
@@ -68,56 +68,57 @@ HeadSetting::HeadParameters HeadSetting::operator =(HeadSetting::HeadParameters 
 QByteArray HeadSetting::HeadParameters_::toByteArray()
 {
     QByteArray bArr;
-    bArr.resize(45);
+    bArr.resize(50);
     bArr[0] = static_cast<char>(this->headOnType&0x00FF);
     bArr[1] = static_cast<char>(((this->headOnType&0xFF00)>>8)&0x00FF);
-    bArr[2] = static_cast<char>(this->powerOn);
-    bArr[3] = static_cast<char>(this->speedRear&0x00FF);
-    bArr[4] = static_cast<char>(((this->speedRear&0xFF00)>>8)&0x00FF);
-    bArr[5] = static_cast<char>(this->speedFront&0x00FF);
-    bArr[6] = static_cast<char>(((this->speedFront&0xFF00)>>8)&0x00FF);
-    bArr[7] = static_cast<char>(this->limitRear&0x00FF);
-    bArr[8] = static_cast<char>(((this->limitRear&0xFF00)>>8)&0x00FF);
-    bArr[9] = static_cast<char>(this->limitFront&0x00FF);
-    bArr[10] = static_cast<char>(((this->limitFront&0xFF00)>>8)&0x00FF);
-    bArr[11] = static_cast<char>(this->stroksCount&0x00FF);
-    bArr[12] = static_cast<char>(((this->stroksCount&0xFF00)>>8)&0x00FF);
-    bArr[13] = static_cast<char>(this->stroksSBCount&0x00FF);
-    bArr[14] = static_cast<char>(((this->stroksSBCount&0xFF00)>>8)&0x00FF);
-    bArr[15] = static_cast<char>(this->dwellFLTime&0x00FF);
-    bArr[16] = static_cast<char>(((this->dwellFLTime&0xFF00)>>8)&0x00FF);
-    bArr[17] = static_cast<char>(this->dwellSQTime&0x00FF);
-    bArr[18] = static_cast<char>(((this->dwellSQTime&0xFF00)>>8)&0x00FF);
-    bArr[19] = static_cast<char>(this->heatTime1&0x00FF);
-    bArr[20] = static_cast<char>(((this->heatTime1&0xFF00)>>8)&0x00FF);
-    bArr[21] = static_cast<char>(this->heatTime2&0x00FF);
-    bArr[22] = static_cast<char>(((this->heatTime2&0xFF00)>>8)&0x00FF);
-    bArr[23] = static_cast<char>(this->heatPower&0x00FF);
-    bArr[24] = static_cast<char>(((this->heatPower&0xFF00)>>8)&0x00FF);
-    bArr[25] = static_cast<char>(this->limitFront&0x00FF);
-    bArr[26] = static_cast<char>(((this->limitFront&0xFF00)>>8)&0x00FF);
-    bArr[27] = static_cast<char>(this->heatTime1Q&0x00FF);
-    bArr[28] = static_cast<char>(((this->heatTime1Q&0xFF00)>>8)&0x00FF);
-    bArr[29] = static_cast<char>(this->heatTime2Q&0x00FF);
-    bArr[30] = static_cast<char>(((this->heatTime2Q&0xFF00)>>8)&0x00FF);
-    bArr[31] = static_cast<char>(this->dryPowerQ&0x00FF);
-    bArr[32] = static_cast<char>(((this->dryPowerQ&0xFF00)>>8)&0x00FF);
-    bArr[33] = static_cast<char>(this->stepbackDryTimeQ&0x00FF);
-    bArr[34] = static_cast<char>(((this->stepbackDryTimeQ&0xFF00)>>8)&0x00FF);
-    bArr[35] = static_cast<char>(this->temperatureSetQ&0x00FF);
-    bArr[36] = static_cast<char>(((this->temperatureSetQ&0xFF00)>>8)&0x00FF);
-    bArr[37] = static_cast<char>(this->dryTimeQ&0x00FF);
-    bArr[38] = static_cast<char>(((this->dryTimeQ&0xFF00)>>8)&0x00FF);
-    bArr[39] = static_cast<char>(this->standbyTimeQ&0x00FF);
-    bArr[40] = static_cast<char>(((this->standbyTimeQ&0xFF00)>>8)&0x00FF);
-    bArr[41] = static_cast<char>(this->standbyPowerQ&0x00FF);
-    bArr[42] = static_cast<char>(((this->standbyPowerQ&0xFF00)>>8)&0x00FF);
-    bArr[43] = static_cast<char>(this->warmFlashTimeQ&0x00FF);
-    bArr[44] = static_cast<char>(((this->warmFlashTimeQ&0xFF00)>>8)&0x00FF);
-    bArr[45] = static_cast<char>(this->inkColor&0x000000FF);
-    bArr[46] = static_cast<char>(((this->inkColor&0x0000FF00)>>8)&0x00FF);
-    bArr[47] = static_cast<char>(((this->inkColor&0x00FF0000)>>16)&0x00FF);
-    bArr[48] = static_cast<char>(((this->inkColor&0xFF000000)>>24)&0x00FF);
+    bArr[2] = static_cast<char>(this->powerOn&0x00FF);
+    bArr[3] = static_cast<char>(((this->powerOn&0xFF00)>>8)&0x00FF);
+    bArr[4] = static_cast<char>(this->speedRear&0x00FF);
+    bArr[5] = static_cast<char>(((this->speedRear&0xFF00)>>8)&0x00FF);
+    bArr[6] = static_cast<char>(this->speedFront&0x00FF);
+    bArr[7] = static_cast<char>(((this->speedFront&0xFF00)>>8)&0x00FF);
+    bArr[8] = static_cast<char>(this->limitRear&0x00FF);
+    bArr[9] = static_cast<char>(((this->limitRear&0xFF00)>>8)&0x00FF);
+    bArr[10] = static_cast<char>(this->limitFront&0x00FF);
+    bArr[11] = static_cast<char>(((this->limitFront&0xFF00)>>8)&0x00FF);
+    bArr[12] = static_cast<char>(this->stroksCount&0x00FF);
+    bArr[13] = static_cast<char>(((this->stroksCount&0xFF00)>>8)&0x00FF);
+    bArr[14] = static_cast<char>(this->stroksSBCount&0x00FF);
+    bArr[15] = static_cast<char>(((this->stroksSBCount&0xFF00)>>8)&0x00FF);
+    bArr[16] = static_cast<char>(this->dwellFLTime&0x00FF);
+    bArr[17] = static_cast<char>(((this->dwellFLTime&0xFF00)>>8)&0x00FF);
+    bArr[18] = static_cast<char>(this->dwellSQTime&0x00FF);
+    bArr[19] = static_cast<char>(((this->dwellSQTime&0xFF00)>>8)&0x00FF);
+    bArr[20] = static_cast<char>(this->heatTime1&0x00FF);
+    bArr[21] = static_cast<char>(((this->heatTime1&0xFF00)>>8)&0x00FF);
+    bArr[22] = static_cast<char>(this->heatTime2&0x00FF);
+    bArr[23] = static_cast<char>(((this->heatTime2&0xFF00)>>8)&0x00FF);
+    bArr[24] = static_cast<char>(this->heatPower&0x00FF);
+    bArr[25] = static_cast<char>(((this->heatPower&0xFF00)>>8)&0x00FF);
+    bArr[26] = static_cast<char>(this->limitFront&0x00FF);
+    bArr[27] = static_cast<char>(((this->limitFront&0xFF00)>>8)&0x00FF);
+    bArr[28] = static_cast<char>(this->heatTime1Q&0x00FF);
+    bArr[29] = static_cast<char>(((this->heatTime1Q&0xFF00)>>8)&0x00FF);
+    bArr[30] = static_cast<char>(this->heatTime2Q&0x00FF);
+    bArr[31] = static_cast<char>(((this->heatTime2Q&0xFF00)>>8)&0x00FF);
+    bArr[32] = static_cast<char>(this->dryPowerQ&0x00FF);
+    bArr[33] = static_cast<char>(((this->dryPowerQ&0xFF00)>>8)&0x00FF);
+    bArr[34] = static_cast<char>(this->stepbackDryTimeQ&0x00FF);
+    bArr[35] = static_cast<char>(((this->stepbackDryTimeQ&0xFF00)>>8)&0x00FF);
+    bArr[36] = static_cast<char>(this->temperatureSetQ&0x00FF);
+    bArr[37] = static_cast<char>(((this->temperatureSetQ&0xFF00)>>8)&0x00FF);
+    bArr[38] = static_cast<char>(this->dryTimeQ&0x00FF);
+    bArr[39] = static_cast<char>(((this->dryTimeQ&0xFF00)>>8)&0x00FF);
+    bArr[40] = static_cast<char>(this->standbyTimeQ&0x00FF);
+    bArr[41] = static_cast<char>(((this->standbyTimeQ&0xFF00)>>8)&0x00FF);
+    bArr[42] = static_cast<char>(this->standbyPowerQ&0x00FF);
+    bArr[43] = static_cast<char>(((this->standbyPowerQ&0xFF00)>>8)&0x00FF);
+    bArr[44] = static_cast<char>(this->warmFlashTimeQ&0x00FF);
+    bArr[45] = static_cast<char>(((this->warmFlashTimeQ&0xFF00)>>8)&0x00FF);
+    bArr[46] = static_cast<char>(this->inkColor&0x000000FF);
+    bArr[47] = static_cast<char>(((this->inkColor&0x0000FF00)>>8)&0x00FF);
+    bArr[48] = static_cast<char>(((this->inkColor&0x00FF0000)>>16)&0x00FF);
+    bArr[49] = static_cast<char>(((this->inkColor&0xFF000000)>>24)&0x00FF);
     return bArr;
 }
 
@@ -305,6 +306,7 @@ MachineSettings::MachineType MachineSettings::machineTypeStat;
 uint16_t MachineSettings::headMaxRangeStat;
 uint16_t MachineSettings::headTypeStat;
 uint16_t MachineSettings::indexerLiftTypeStat;
+uint32_t MachineSettings::headPalStateStat;
 
 QByteArray MachineSettings::MachineParameters_::toByteArray()
 {
@@ -435,6 +437,16 @@ uint16_t MachineSettings::getIndexLiftType()
     return MachineSettings::indexerLiftTypeStat;
 }
 
+uint16_t MachineSettings::getHeadPalStateLo()
+{
+    return static_cast<uint16_t>(MachineSettings::headPalStateStat&0x00FF);
+}
+
+uint16_t MachineSettings::getHeadPalStateHi()
+{
+    return static_cast<uint16_t>((MachineSettings::headPalStateStat>>8)&0x00FF);
+}
+
 void MachineSettings::setHeadMaxRange(uint16_t val)
 {
     MachineSettings::headMaxRangeStat = val;
@@ -448,6 +460,24 @@ void MachineSettings::setHeadType(uint16_t val)
 void MachineSettings::setIndexLiftType(uint16_t val)
 {
     MachineSettings::indexerLiftTypeStat = val;
+}
+
+void MachineSettings::setHeadPalStateLo(uint16_t val)
+{
+    MachineSettings::headPalStateStat &= 0xFF00;
+    MachineSettings::headPalStateStat |= val;
+}
+
+void MachineSettings::setHeadPalStateHi(uint16_t val)
+{
+    MachineSettings::headPalStateStat &= 0x00FF;
+    MachineSettings::headPalStateStat |= ((val<<8)&0xFF00);
+}
+
+void MachineSettings::setHeadPalStateIndex(int index, bool state)
+{
+    MachineSettings::headPalStateStat &= (~(1<<index));
+    MachineSettings::headPalStateStat |= ((static_cast<uint32_t>(state)<<index)&(1<<index));
 }
 
 Register::Register(uint16_t headCount)

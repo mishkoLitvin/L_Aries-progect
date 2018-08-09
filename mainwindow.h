@@ -136,7 +136,7 @@ private slots:
     void getHeadCommand(int index, QByteArray commandArr);
     void getHeadActivCommand(QByteArray commandArr);
     void getCyclesCommand(QByteArray commandArr);
-    void getLoadState(LoadState stase);
+    void getLoadState(int index, LoadState state);
     void getIndexerParam(QByteArray indexerParamArr);
     void getMachineParam(QByteArray machineParamArr);
     void getStepDelayTime(double arg1);
@@ -163,8 +163,6 @@ private slots:
     void maintanceWorkSlot(bool enable);
     void setIconFolder(int index);
     void setBackGround(bool enable, bool request = false);
-
-
 
 protected:
     virtual void resizeEvent(QResizeEvent *e);

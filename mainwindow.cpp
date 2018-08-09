@@ -409,10 +409,12 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_paletStLow:
                 for(i = 1; (i<16)&(i<headsCount); i++)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));
+                MachineSettings::setHeadPalStateLo(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow));
             break;
             case Register::masterReg_paletStHigh:
                 for(i = 16; i<headsCount; i++)
                     headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh)&(1<<(i-16)));
+                MachineSettings::setHeadPalStateHi(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh));
             break;
             case Register::masterReg_ERROR_MESSAGE:
                 infoWidget->setErrorText(this->machineSettings.machineParam, 0);
@@ -586,7 +588,7 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
     HeadSetting::setHeadOn_OffStateInd(index, static_cast<bool>(hParamArr[2]));
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
     if(headActDialog->getHeadActivAtIndex(index))
-        switch ((HeadSetting::HeadOnType)(((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0]))))
+        switch ((HeadSetting::HeadOnType)(static_cast<uint8_t>(hParamArr[0])))
         {
         case HeadSetting::PrintHeadOn:
             headButton[index]->setPixmap(headButton[index]->getRagState(),headStylesStr[1]);
@@ -645,7 +647,7 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 
             settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
             if(static_cast<bool>(t_headOn)>0)
-                switch (static_cast<HeadSetting::HeadOnType>(t_headOn))
+                switch (static_cast<HeadSetting::HeadOnType>(t_headOn&0x00FF))
                 {
                 case HeadSetting::PrintHeadOn:
                     headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[1]);
@@ -729,18 +731,46 @@ void MainWindow::getCyclesCommand(QByteArray commandArr)
     comPort->sendData(commandArr);
 }
 
-void MainWindow::getLoadState(LoadState stase)
+void MainWindow::getLoadState(int index, LoadState state)
 {
+    qDebug()<<"got state"<<index<<state;
     QByteArray cmdArr;
     int data;
-    cmdArr.append(static_cast<char>((IndexerLiftSettings::IndexerDevice)&0x00FF));
-    cmdArr.append(static_cast<char>(IndexerLiftSettings::LoadHeadState&0x00FF));
-    cmdArr.append(static_cast<char>(stase>>8));
-    cmdArr.append(static_cast<char>(stase&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append(static_cast<char>(data>>8));
-    cmdArr.append(static_cast<char>(data&0x00FF));
-    comPort->sendData(cmdArr);
+    if(index == 0)
+    {
+        cmdArr.clear();
+        cmdArr.append(static_cast<char>((IndexerLiftSettings::IndexerDevice)&0x00FF));
+        cmdArr.append(static_cast<char>(IndexerLiftSettings::LoadHeadState&0x00FF));
+        cmdArr.append(static_cast<char>(state>>8));
+        cmdArr.append(static_cast<char>(state&0x00FF));
+        data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
+        comPort->sendData(cmdArr);
+    }
+    else
+    {
+        MachineSettings::setHeadPalStateIndex(index, static_cast<bool>(state == LoadOne));
+        cmdArr.clear();
+        cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+        cmdArr.append(static_cast<char>(MachineSettings::MasterPaletStateLo&0x00FF));
+        cmdArr.append(static_cast<char>(MachineSettings::getHeadPalStateLo()>>8));
+        cmdArr.append(static_cast<char>(MachineSettings::getHeadPalStateLo()&0x00FF));
+        data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
+        comPort->sendData(cmdArr);
+
+        cmdArr.clear();
+        cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+        cmdArr.append(static_cast<char>(MachineSettings::MasterPaletStateHi&0x00FF));
+        cmdArr.append(static_cast<char>(MachineSettings::getHeadPalStateHi()>>8));
+        cmdArr.append(static_cast<char>(MachineSettings::getHeadPalStateHi()&0x00FF));
+        data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
+        comPort->sendData(cmdArr);
+    }
 }
 
 void MainWindow::getIndexerParam(QByteArray indexerParamArr)
@@ -1542,10 +1572,10 @@ void MainWindow::headsInit()
     {
         headButton.append(new HeadForm(ui->widgetHeads));
         headButton[i]->setIndex(i);
+        connect(headButton[i], SIGNAL(loadStateChanged(int, LoadState)), this, SLOT(getLoadState(int, LoadState)));
         if(i==0)
         {
             headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
-            connect(headButton[i], SIGNAL(loadStateChanged(LoadState)), this, SLOT(getLoadState(LoadState)));
         }
         else
             if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))

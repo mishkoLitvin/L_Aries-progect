@@ -84,7 +84,7 @@ public:
 
 signals:
     void settingButtonCliced(int index);
-    void loadStateChanged(LoadState state);
+    void loadStateChanged(int index, LoadState state);
 
 private:
     Ui::HeadForm *ui;

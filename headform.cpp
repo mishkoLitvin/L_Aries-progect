@@ -76,6 +76,7 @@ void HeadForm::setIndex(int i)
     if(i<10)
         labelIndex->resize(15,25);
     labelIndex->setText(QString::number(i));
+    this->index = i;
 }
 
 void HeadForm::setIndexLabelPosition(HeadForm::SettBtnPos position)
@@ -178,14 +179,12 @@ void HeadForm::mousePressEvent(QMouseEvent *event)
             case shirtProcessing: this->setPixmap(shirtOff, ui->graphicsView->styleSheet()); break;
             }
         }
-        if(headformType == HeadPutingOn)
+
+        switch(headformState)
         {
-            switch(headformState)
-            {
-            case shirtOff: emit this->loadStateChanged(LoadClean); break;
-            case shirtOn: emit this->loadStateChanged(LoadOne); break;
-            case shirtProcessing: emit this->loadStateChanged(LoadAuto); break;
-            }
+        case shirtOff:          emit this->loadStateChanged(this->index, LoadClean); break;
+        case shirtOn:           emit this->loadStateChanged(this->index, LoadOne); break;
+        case shirtProcessing:   emit this->loadStateChanged(this->index, LoadAuto); break;
         }
     }
 

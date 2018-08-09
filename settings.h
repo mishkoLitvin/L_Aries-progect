@@ -55,8 +55,8 @@ public:
     }HeadOnType;
 
     typedef struct HeadParameters_{
-        HeadOnType headOnType;
-        uint8_t powerOn;
+        uint16_t headOnType;
+        uint16_t powerOn;
         uint16_t speedRear;
         uint16_t speedFront;
         uint16_t stroksCount;
@@ -150,6 +150,8 @@ public:
         MasterIndexLiftCommand = 0x0004,
         MasterHeadStateLo = 0x0005,
         MasterHeadStateHi = 0x0009,
+        MasterPaletStateLo = 0x000A,
+        MasterPaletStateHi = 0x0012,
         MasterMachineType = 0x0011
     };
 
@@ -254,13 +256,21 @@ private:
     static uint16_t headMaxRangeStat;
     static uint16_t headTypeStat;
     static uint16_t indexerLiftTypeStat;
+    static uint32_t headPalStateStat;
 public:
     static uint16_t getHeadMaxRange();
     static uint16_t getHeadType();
     static uint16_t getIndexLiftType();
+    static uint16_t getHeadPalStateLo();
+    static uint16_t getHeadPalStateHi();
+
     static void setHeadMaxRange(uint16_t val);
     static void setHeadType(uint16_t val);
     static void setIndexLiftType(uint16_t val);
+    static void setHeadPalStateLo(uint16_t val);
+    static void setHeadPalStateHi(uint16_t val);
+    static void setHeadPalStateIndex(int index, bool state);
+
     //end of mustwrited code.
     //=================================================================================
 

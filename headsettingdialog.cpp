@@ -123,6 +123,17 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
     ui->tabWidget->setCurrentIndex(((tempVar&0x00FF)-HeadSetting::PrintHeadOff
                                     -ui->pButtonHeadOnOff->isChecked())/2);
     ui->lcdNumberHeadNo->display(index);
+    ui->toolButtonPlast->setChecked((tempVar&(1<<8)));
+    if(tempVar&(1<<8))
+        ui->toolButtonPlast->setText("Set\nplast");
+    else
+        ui->toolButtonPlast->setText("Set\nwater");
+
+    ui->toolButtonStepBack->setChecked((tempVar&(1<<11))>>11);
+    if(tempVar&(1<<11))
+        ui->toolButtonStepBack->setText("Turn OFF\nstep back");
+    else
+        ui->toolButtonStepBack->setText("Turn ON\nstep back");
 
     ui->spinBoxRearSpeed->setValue(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
                                                       Register::headReg_SPD_REAR));
@@ -258,11 +269,14 @@ void SettingDialog::accept()
     {
         HeadSetting hSttg;
         if(ui->pButtonHeadOnOff->isChecked())
-            hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
+            hSttg.headParam.headOnType = (ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn)|
+                    (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                        HeadSetting::HeadOn)&0xFF00);
         else
-            hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
+            hSttg.headParam.headOnType = (ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff)|
+                    (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                        HeadSetting::HeadOn)&0xFF00);
         hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-
         hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
         hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
         hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
@@ -287,7 +301,6 @@ void SettingDialog::accept()
         hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_R));
         hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G)<<8);
         hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B)<<16);
-        qDebug()<<headSettings.headParam.inkColor;
         emit this->accept(this->index, hSttg.headParam.toByteArray());
         this->hide();
     }
@@ -614,7 +627,29 @@ void SettingDialog::changeEvent(QEvent* event)
 
 void SettingDialog::on_toolButtonPlast_clicked()
 {
+    QByteArray cmdArr;
+    uint16_t data;
+    if(ui->toolButtonPlast->isChecked())
+    {
+        data = (1<<8)|registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                              HeadSetting::HeadOn);
+        ui->toolButtonPlast->setText("Set\nplast");
+    }
+    else
+    {
+        data = (~(1<<8))&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                         HeadSetting::HeadOn);
+        ui->toolButtonPlast->setText("Set\nwater");
+    }
 
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonFL_clicked()
@@ -778,21 +813,32 @@ void SettingDialog::on_toolButtonStepBack_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    data = HeadSetting::Stepback+((this->index-1)<<5);
-    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
-    cmdArr.append(static_cast<char>(data>>8));
-    cmdArr.append(static_cast<char>(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(cmdArr);
-    cmdArr.append(static_cast<char>(data>>8));
-    cmdArr.append(static_cast<char>(data&0x00FF));
-    emit this->sendCommand(this->index, cmdArr);
+//    data = HeadSetting::Stepback+((this->index-1)<<5);
+//    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+//    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
+//    data = CrcCalc::CalculateCRC16(cmdArr);
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
+//    emit this->sendCommand(this->index, cmdArr);
 
     cmdArr.clear();
+
+    qDebug()<<"at in"<<((1<<11)&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                  HeadSetting::HeadOn));
     if(ui->toolButtonStepBack->isChecked())
-        data = (~((1<<8)<<3))&this->headSettings.headParam.headOnType;
+    {
+        data = (1<<11)|registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                              HeadSetting::HeadOn);
+        ui->toolButtonStepBack->setText("Turn OFF\nstep back");
+    }
     else
-        data = ((1<<8)<<3)|this->headSettings.headParam.headOnType;
+    {
+        data = (~(1<<11))&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                         HeadSetting::HeadOn);
+        ui->toolButtonStepBack->setText("Turn ON\nstep back");
+    }
     cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
     cmdArr.append(static_cast<char>(data>>8));
@@ -801,6 +847,9 @@ void SettingDialog::on_toolButtonStepBack_clicked()
     cmdArr.append(static_cast<char>(data>>8));
     cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
+    qDebug()<<"at out"<<((1<<11)&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                  HeadSetting::HeadOn));
+
 }
 
 void SettingDialog::on_toolButtonIndexHere_clicked()
@@ -935,11 +984,15 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
     if(ui->pButtonHeadOnOff->isChecked())
         registers->writeReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
                             Register::headReg_ON,
-                            ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
+                            (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                               Register::headReg_ON)&0xFF00)
+                            |ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
     else
         registers->writeReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
                             Register::headReg_ON,
-                            ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
+                            (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                               Register::headReg_ON)&0xFF00)
+                            |ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
     cmdArr.clear();
 
     data = this->index+500;
@@ -960,9 +1013,13 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
     HeadSetting hSttg;
 
     if(ui->pButtonHeadOnOff->isChecked())
-        hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
+        hSttg.headParam.headOnType = (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                         Register::headReg_ON)&0xFF00)
+                                      |(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
     else
-        hSttg.headParam.headOnType = (HeadSetting::HeadOnType)(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
+        hSttg.headParam.headOnType = (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                         Register::headReg_ON)&0xFF00)
+                                      |(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
 
     hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
 

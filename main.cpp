@@ -31,7 +31,11 @@ int main(int argc, char *argv[])
 //            QProcess proc;
 //            proc.startDetached("reboot");
 //        }
-
+//        if(eCode ==ExitDialog::ExitFromProgram)
+//        {
+//            QProcess proc;
+//            proc.startDetached("chvt 7");
+//        }
         qDebug()<<"Exit code:"<<w.exitCode;
     }
 
