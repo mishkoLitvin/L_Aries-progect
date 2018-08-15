@@ -390,6 +390,7 @@ void IndexerWidget::setState(u_int16_t state)
     ui->pButtonMoveRight->setEnabled((hb == 7)|(hb == 11)|(hb == 10));
     ui->pButtonMoveUp->setEnabled((hb == 7)|(hb == 9));
     ui->pButtonHome->setEnabled(hb == 2);
+    ui->pButtonAir->setEnabled((hb == 7));
 
     if(hb == 4)
     {
@@ -424,6 +425,9 @@ void IndexerWidget::resizeEvent(QResizeEvent *e)
     pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
     e->accept();
+    ui->pButtonAir->setVisible((MachineSettings::machineTypeStat == MachineSettings::TitanAAA)|
+                               (MachineSettings::machineTypeStat == MachineSettings::TitanASA)|
+                               (MachineSettings::machineTypeStat == MachineSettings::TitanASE));
 }
 
 void IndexerWidget::changeEvent(QEvent* event)
@@ -432,4 +436,19 @@ void IndexerWidget::changeEvent(QEvent* event)
     {
         ui->retranslateUi(this);
     }
+}
+
+void IndexerWidget::on_pButtonAir_clicked()
+{
+    QByteArray cmdArr;
+    uint16_t data;
+    data = IndexerLiftSettings::AirRelease;
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(cmdArr);
 }

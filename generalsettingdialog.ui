@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>570</width>
-    <height>703</height>
+    <width>450</width>
+    <height>657</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>582</width>
+    <width>450</width>
     <height>16777215</height>
    </size>
   </property>
@@ -26,7 +26,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -267,8 +267,14 @@
        <string>General</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_9">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,20,2,10,1">
+        <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,1,2,10,1">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
@@ -395,6 +401,18 @@ palett</string>
          <item>
           <widget class="QWidget" name="widgetServiceSettings" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="leftMargin">
+             <number>5</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_8">
               <item>
@@ -429,6 +447,246 @@ palett</string>
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>Lift
+Gear ratio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string>Lift
+type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="comboBoxLiftT">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>AIR</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>AC motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Servo: Cam</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Servo: Screw</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Indexer
+type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="3">
+               <widget class="QComboBox" name="comboBoxIndexerT">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>AIR</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>AC motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Servo motor</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Carriage
+type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QComboBox" name="comboBoxCarriageT">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>AIR</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>AC motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Servo motor</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>SqFl
+type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QComboBox" name="comboBoxSqFlT">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>AIR</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>AC motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Servo motor</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QDoubleSpinBox" name="dSpinBoxLiftGear">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <property name="decimals">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="4">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Lock
+type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="5">
+               <widget class="QComboBox" name="comboBoxLockT">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>None</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>AIR</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>AC motor</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QCheckBox" name="checkBoxKeyPadConnected">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>Keypad connected</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_9">
                 <property name="text">
@@ -473,233 +731,7 @@ type:</string>
                 </item>
                </widget>
               </item>
-              <item row="0" column="2" colspan="2">
-               <widget class="QCheckBox" name="checkBoxHMIConnected">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>HMI connected</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4" colspan="2">
-               <widget class="QCheckBox" name="checkBoxKeyPadConnected">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Keypad connected</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_6">
-                <property name="text">
-                 <string>Lift
-type:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="comboBoxLiftT">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>AIR</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>AC motor</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Servo: Cam</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Servo: Screw</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_7">
-                <property name="text">
-                 <string>Indexer
-type:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="3">
-               <widget class="QComboBox" name="comboBoxIndexerT">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>AIR</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>AC motor</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Servo motor</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="1" column="4">
-               <widget class="QLabel" name="label_8">
-                <property name="text">
-                 <string>Lock
-type:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="5">
-               <widget class="QComboBox" name="comboBoxLockT">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>None</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>AIR</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>AC motor</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>Carriage
-type:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QComboBox" name="comboBoxCarriageT">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>AIR</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>AC motor</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Servo motor</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QLabel" name="label_4">
-                <property name="text">
-                 <string>SqFl
-type:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="3">
-               <widget class="QComboBox" name="comboBoxSqFlT">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>AIR</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>AC motor</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Servo motor</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="2" column="4">
+              <item row="3" column="4">
                <widget class="QLabel" name="label_5">
                 <property name="text">
                  <string>Head servo
@@ -707,7 +739,7 @@ type:</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="5">
+              <item row="3" column="5">
                <widget class="QComboBox" name="comboBoxHeadServoT">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -743,7 +775,7 @@ type:</string>
                 </item>
                </widget>
               </item>
-              <item row="3" column="0">
+              <item row="2" column="4">
                <widget class="QLabel" name="label_10">
                 <property name="text">
                  <string>Head
@@ -751,7 +783,7 @@ Max range:</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
+              <item row="2" column="5">
                <widget class="QDoubleSpinBox" name="dSpinBoxHeadMaxRange">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -770,7 +802,7 @@ Max range:</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="2">
+              <item row="1" column="0">
                <widget class="QLabel" name="label_11">
                 <property name="text">
                  <string>Indexer
@@ -778,7 +810,7 @@ Screw pitch</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="3">
+              <item row="1" column="1">
                <widget class="QDoubleSpinBox" name="dSpinBoxIndexerScrew">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -797,30 +829,16 @@ Screw pitch</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="4">
-               <widget class="QLabel" name="label_12">
-                <property name="text">
-                 <string>Lift
-Gear ratio</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="5">
-               <widget class="QDoubleSpinBox" name="dSpinBoxLiftGear">
+              <item row="0" column="5">
+               <widget class="QCheckBox" name="checkBoxHMIConnected">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <property name="decimals">
-                 <number>0</number>
+                <property name="text">
+                 <string>HMI connected</string>
                 </property>
                </widget>
               </item>
@@ -843,8 +861,8 @@ clock</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>50</width>
-               <height>50</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="checkable">
@@ -870,8 +888,8 @@ Disable</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>50</width>
-               <height>50</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="checkable">
@@ -897,8 +915,8 @@ activation</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>50</width>
-               <height>50</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="checkable">
@@ -959,8 +977,8 @@ activation</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>50</width>
-               <height>50</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="checkable">
@@ -1233,6 +1251,19 @@ activation</string>
             <string>Flow control:</string>
            </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>

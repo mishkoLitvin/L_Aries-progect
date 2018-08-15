@@ -16,7 +16,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     usersSettingDialog = new UserSettingDialog(this);
 
-    settings = new QSettings("./settings.ini", QSettings::IniFormat);
+    settings = new QSettings("./settingsPATH.ini", QSettings::IniFormat);
+    QString setPath = settings->value("LAST_PATH", "./settings.ini").toString();
+    delete settings;
+    settings = new QSettings(setPath, QSettings::IniFormat);
 
     this->getLangFile(settings->value("STYLE/LANG_SEL_INDEX", 0).toInt());
     this->setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
@@ -28,9 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     comPort->setStyleSheet(this->styleSheet());
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
     connect(comPort, SIGNAL(dataReady(ModData)), this, SLOT(getSerialData(ModData)));
-
-    timerMain = new QTimer(this);
-    connect(timerMain, SIGNAL(timeout()), this, SLOT(indexerStepFinish()));
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
@@ -150,9 +150,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->dSpinBoxStepDelay, SIGNAL(valueChanged(double)), this, SLOT(getStepDelayTime(double)));
 
     watchDog = new QTimer(this);
-    watchDog->setInterval(1000);
+    watchDog->setInterval(10000);
     connect(watchDog, SIGNAL(timeout()), this, SLOT(watchDogTimeout()));
     connect(comPort, SIGNAL(working()), watchDog, SLOT(start()));
+
+    updateTime = new QTimer(this);
+    connect(updateTime, SIGNAL(timeout()), this, SLOT(updateTimeSlot()));
 
     this->zeroStart();
 
@@ -733,7 +736,6 @@ void MainWindow::getCyclesCommand(QByteArray commandArr)
 
 void MainWindow::getLoadState(int index, LoadState state)
 {
-    qDebug()<<"got state"<<index<<state;
     QByteArray cmdArr;
     int data;
     if(index == 0)
@@ -874,6 +876,7 @@ void MainWindow::getStepDelayTime(double arg1)
 void MainWindow::getDirection(int direction)
 {
     machineSettings.machineParam.direction = direction;
+    settings->setValue(QString("MACHINE_PARAMS"), this->machineSettings.machineParam.toByteArray());
     this->setHeadsPosition();
 }
 
@@ -936,6 +939,8 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
     ui->widgetLiftOffcet->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
     ui->dSpinBoxStepDelay->setStyleSheet(ui->dSpinBoxLiftOffcet->styleSheet());
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
+
+    ui->labelTime->setStyleSheet("font: 28px; font-style:italic; font-family: \"Courier\"");
 
     this->setBackGround(settings->value("STYLE/IMAGE_EN", false).toBool());
 }
@@ -1076,9 +1081,14 @@ void MainWindow::exitProgram(bool restart)
 void MainWindow::saveJob()
 {
     QString saveFileName = KeyboardDialog::getText(this, "Enter job name");
-    saveFileName = QDir::homePath()+"/jobs/"+saveFileName+".ini";
+    saveFileName = "./jobs/"+saveFileName+".ini";
     //QFileDialog::getSaveFileName(this, "Save job...",".","Setting file(*.ini)");
     QFile::copy(settings->fileName(), saveFileName);
+    delete settings;
+    settings = new QSettings("./settingsPATH.ini", QSettings::IniFormat);
+    settings->setValue("LAST_PATH", saveFileName);
+    delete settings;
+    settings = new QSettings(saveFileName, QSettings::IniFormat);
 }
 
 void MainWindow::loadJob()
@@ -1087,7 +1097,10 @@ void MainWindow::loadJob()
     int t_RAG_ALL_CNT = settings->value("RAG_ALL_CNT", 0).toInt();
 
     delete settings;
-    QString openFileName = QFileDialog::getOpenFileName(this, "Open job...",QDir::homePath()+"/jobs/","Setting file(*.ini)");
+    QString openFileName = QFileDialog::getOpenFileName(this, "Open job...","./jobs/","Setting file(*.ini)");
+    settings = new QSettings("./settingsPATH.ini", QSettings::IniFormat);
+    settings->setValue("LAST_PATH", openFileName);
+    delete settings;
     settings = new QSettings(openFileName, QSettings::IniFormat);
 
     settings->setValue("INDEXER_ALL_CNT", t_INDEXER_ALL_CNT);
@@ -1131,7 +1144,7 @@ void MainWindow::loadJob()
     {
         headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
         registers->setHeadReg(i, headSettings);
-        headSettingDialog->setHeadParams(headSettings.headParam, i, false);
+//        headSettingDialog->setHeadParams(headSettings.headParam, i, false);
         comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedRear);
         comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadRangeLimit1);
         comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedFront);
@@ -1212,6 +1225,15 @@ void MainWindow::setHeadsPosition()
     x0_sb = ui->widgetHeads->width()/2-headSettButton[0]->width()/2;
     y0_sb = ui->widgetHeads->height()/2-headSettButton[0]->height()/2+headSettButton[0]->width()/2;
 
+    if(x0_hb<y0_hb)
+        y0_hb = x0_hb;
+    else
+        x0_hb = y0_hb;
+    if(x0_sb<y0_sb)
+        y0_sb = x0_sb;
+    else
+        x0_sb = y0_sb;
+
     int direction = machineSettings.machineParam.direction;
 
     for(i = 0; i<headsCount; i++)
@@ -1261,12 +1283,20 @@ void MainWindow::setHeadsPosition()
     ui->widgetTopMenu->move(ui->widgetHeads->pos());
     ui->widgetTopMenu->resize(ui->widgetHeads->width()-18, 65);
 
-    infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
+
+
+    infoWidget->move(x0_sb-infoWidget->width()/2+headButton[0]->width()/3, y0_hb+18-infoWidget->height()/2);
 
     ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
                                  infoWidget->pos().y()-ui->widgetLiftOffcet->height());
     ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
                                  infoWidget->pos().y()+infoWidget->height()+6);
+//    infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
+
+//    ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
+//                                 infoWidget->pos().y()-ui->widgetLiftOffcet->height());
+//    ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
+//                                 infoWidget->pos().y()+infoWidget->height()+6);
 }
 
 void MainWindow::indexerStepFinish()
@@ -1398,6 +1428,12 @@ void MainWindow::setBackGround(bool enable, bool request)
 //        ui->widgetLiftOffcet->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
 //        ui->widgetStepDelay->setStyleSheet("border-style: none; background-color: rgba(255, 255, 255, 0);");
     }
+}
+
+void MainWindow::updateTimeSlot()
+{
+    ui->labelTime->setText(QTime::currentTime().toString("HH:mm"));
+    ui->labelDate->setText(QDate::currentDate().toString("ddd, dd/MM/yyyy"));
 }
 
 void MainWindow::userLogin()
@@ -1548,11 +1584,15 @@ void MainWindow::zeroStart()
     ui->labelDelay->setStyleSheet("QLabel{padding-bottom: 0px; font: 12px bold italic large \"Serif\"}");
     ui->dSpinBoxStepDelay->setStyleSheet(ui->dSpinBoxLiftOffcet->styleSheet());
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
+    ui->labelTime->setStyleSheet("font: 28px; font-style:italic; font-family:\"Linux Libertine Mono O\"");
+    ui->labelDate->setStyleSheet("font: 13px; font-style:italic; font-family:\"Linux Libertine Mono O\"");
+
 
     timeProgramStart = QTime::currentTime();
-
+    ui->labelTime->setText(timeProgramStart.toString("HH:mm"));
+    ui->labelDate->setText(QDate::currentDate().toString("ddd, dd/MM/yyyy"));
     watchDog->start();
-
+    updateTime->start(30000);
 }
 
 void MainWindow::headsInit()
@@ -1611,10 +1651,10 @@ void MainWindow::headsInit()
 
 void MainWindow::watchDogTimeout()
 {
-//    qDebug()<<"WatchDog handler call";
-//    needCompleteReset = true;
-//    indexer->setState(0x0);
-//    infoWidget->setIndicatorState(0x704);
+    qDebug()<<"WatchDog handler call";
+    needCompleteReset = true;
+    indexer->setState(0x0);
+    infoWidget->setIndicatorState(0x704);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e)

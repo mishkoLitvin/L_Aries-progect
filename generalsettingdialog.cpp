@@ -77,15 +77,15 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     machineParamGl = machineParam;
     ui->spinBoxHeadsCount->setValue(machineParam.headCount);
     ui->dSpinBoxWarningTime->setValue(machineParam.warningTime/10.);
+    qDebug()<<machineParam.direction;
     if(machineParam.direction == -1)
     {
-        ui->pButtonDirection->setChecked(true);
+        ui->pButtonDirection->setChecked(false);
         ui->pButtonDirection->setText(tr("Direction\nclockwise"));
-
     }
     else
     {
-        ui->pButtonDirection->setChecked(false);
+        ui->pButtonDirection->setChecked(true);
         ui->pButtonDirection->setText(tr("Direction\nanticlockwise"));
     }
 
@@ -214,9 +214,9 @@ void GeneralSettingDialog::accept()
         MachineSettings::setIndexLiftType(machineParams.indexeLiftType.all);
         //    ===============================================
         if(ui->pButtonDirection->isChecked())
-            machineParams.direction = -1;
-        else
             machineParams.direction = 1;
+        else
+            machineParams.direction = -1;
         acceptEnable = false;
         this->hide();
         emit this->machineParamChanged(machineParams.toByteArray());
@@ -589,12 +589,14 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->pButtonUseUnload->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
     ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
-//    ui->labelH2->setVisible(MachineSettings::getServiceWidgEn());
-//    ui->comboBoxMacineType->setVisible(MachineSettings::getServiceWidgEn());
     ui->widgetServiceSettings->setVisible(MachineSettings::getServiceWidgEn());
     ev->accept();
     acceptOnDeactilationEn = true;
     acceptEnable = true;
+//    if(!MachineSettings::getServiceWidgEn())
+//        this->setMaximumSize(400, 703);
+//    else
+//        this->setMaximumSize(600, 703);
 }
 
 void GeneralSettingDialog::changeEvent(QEvent* event)

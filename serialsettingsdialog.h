@@ -78,7 +78,6 @@ struct ComSettings {
     bool localEchoEnabled;
 
     ComSettings operator =(ComSettings nSett);
-
 };
 
 Q_DECLARE_METATYPE(ComSettings);

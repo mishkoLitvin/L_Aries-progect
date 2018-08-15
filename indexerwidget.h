@@ -55,6 +55,8 @@ private slots:
     void settingPButtonClicSlot();
 
 
+    void on_pButtonAir_clicked();
+
 private:
     Ui::IndexerWidget *ui;
 

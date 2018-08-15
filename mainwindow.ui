@@ -37,8 +37,8 @@
         <widget class="QWidget" name="widgetLiftOffcet" native="true">
          <property name="geometry">
           <rect>
-           <x>9</x>
-           <y>87</y>
+           <x>10</x>
+           <y>150</y>
            <width>161</width>
            <height>70</height>
           </rect>
@@ -126,8 +126,8 @@
         <widget class="QWidget" name="widgetStepDelay" native="true">
          <property name="geometry">
           <rect>
-           <x>9</x>
-           <y>183</y>
+           <x>10</x>
+           <y>230</y>
            <width>161</width>
            <height>70</height>
           </rect>
@@ -249,6 +249,37 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="2,1,5">
+            <item>
+             <widget class="QLabel" name="labelTime">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelDate">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
           <item>
            <spacer name="horizontalSpacer_4">
             <property name="orientation">

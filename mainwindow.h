@@ -90,8 +90,8 @@ private:
     SerialPort *comPort;
     UdpSocket *udpHandler;
 
-    QTimer *timerMain;
     QTimer *watchDog;
+    QTimer *updateTime;
 
     QTime timeProgramStart;
     QTime timeProgramEnd;
@@ -163,6 +163,7 @@ private slots:
     void maintanceWorkSlot(bool enable);
     void setIconFolder(int index);
     void setBackGround(bool enable, bool request = false);
+    void updateTimeSlot();
 
 protected:
     virtual void resizeEvent(QResizeEvent *e);
