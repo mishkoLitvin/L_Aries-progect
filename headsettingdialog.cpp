@@ -38,6 +38,10 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
                                      (hSttg.headParam.powerOn==8)|
                                      (hSttg.headParam.powerOn==10)|
                                      (hSttg.headParam.powerOn==12));
+    if(ui->pButtonHeadOnOff->isChecked())
+        ui->pButtonHeadOnOff->setText(tr("Turn\nOFF"));
+    else
+        ui->pButtonHeadOnOff->setText(tr("Turn\nON"));
     ui->tabWidget->setCurrentIndex((hSttg.headParam.headOnType
                                     -HeadSetting::PrintHeadOff
                                     -ui->pButtonHeadOnOff->isChecked())/2);
@@ -120,20 +124,28 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
                                      ((tempVar&0x00FF)==8)|
                                      ((tempVar&0x00FF)==10)|
                                      ((tempVar&0x00FF)==12));
+    if(ui->pButtonHeadOnOff->isChecked())
+        ui->pButtonHeadOnOff->setText(tr("Turn\nOFF"));
+    else
+        ui->pButtonHeadOnOff->setText(tr("Turn\nON"));
+
+
     ui->tabWidget->setCurrentIndex(((tempVar&0x00FF)-HeadSetting::PrintHeadOff
                                     -ui->pButtonHeadOnOff->isChecked())/2);
     ui->lcdNumberHeadNo->display(index);
     ui->toolButtonPlast->setChecked((tempVar&(1<<8)));
     if(tempVar&(1<<8))
-        ui->toolButtonPlast->setText("Set\nplast");
+        ui->toolButtonPlast->setText(tr("Set\nplast"));
     else
-        ui->toolButtonPlast->setText("Set\nwater");
+        ui->toolButtonPlast->setText(tr("Set\nwater"));
 
     ui->toolButtonStepBack->setChecked((tempVar&(1<<11))>>11);
     if(tempVar&(1<<11))
-        ui->toolButtonStepBack->setText("Turn OFF\nstep back");
+        ui->toolButtonStepBack->setText(tr("Turn OFF\nstep back"));
     else
-        ui->toolButtonStepBack->setText("Turn ON\nstep back");
+        ui->toolButtonStepBack->setText(tr("Turn ON\nstep back"));
+    ui->toolButtonQuartzStepBack->setChecked(ui->toolButtonStepBack->isChecked());
+    ui->toolButtonQuartzStepBack->setText(ui->toolButtonStepBack->text());
 
     ui->spinBoxRearSpeed->setValue(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
                                                       Register::headReg_SPD_REAR));
@@ -203,6 +215,10 @@ void SettingDialog::setHeadParams(HeadSetting hSttg, int index, bool disconnect)
                                      (hSttg.headParam.headOnType==8)|
                                      (hSttg.headParam.headOnType==10)|
                                      (hSttg.headParam.headOnType==12));
+    if(ui->pButtonHeadOnOff->isChecked())
+        ui->pButtonHeadOnOff->setText(tr("Turn\nOFF"));
+    else
+        ui->pButtonHeadOnOff->setText(tr("Turn\nON"));
     ui->tabWidget->setCurrentIndex((hSttg.headParam.headOnType
                                     -HeadSetting::PrintHeadOff
                                     -ui->pButtonHeadOnOff->isChecked())/2);
@@ -252,7 +268,11 @@ void SettingDialog::setIconFolder(QString path)
     ui->toolButtonMoveTest->setIcon(QIcon(path+"/arrows/arrowLR2.png"));
     ui->toolButtonMTPMove->setIcon(QIcon(path+"/arrows/arrowUD.png"));
     ui->toolButtonPlast->setIcon(QIcon(path+"/Bucket.png"));
+    ui->toolButtonStepBack->setIcon(QIcon(path+"/step.png"));
+    ui->toolButtonQuartzStepBack->setIcon(QIcon(path+"/step.png"));
 
+
+    ui->pButtonHeadOnOff->setIcon(QIcon(path+"/on.png"));
     ui->pushButtonOK->setIcon(QIcon(path+"/check.png"));
     ui->pushButtonCancel->setIcon(QIcon(path+"/multip.png"));
     ui->pushButtonCopyToAll->setIcon(QIcon(path+"/copy.png"));
@@ -614,6 +634,8 @@ void SettingDialog::showEvent(QShowEvent *ev)
     ui->widgetQuartzWithoutTempSensor->setVisible(!withTemperatureSensor);
     ui->widgetQuartzWithTempSensor->setVisible(withTemperatureSensor);
 
+    ui->pushButtonCopyToAll->setEnabled(MachineSettings::getMachineIdle());
+
     ev->accept();
 }
 
@@ -633,13 +655,13 @@ void SettingDialog::on_toolButtonPlast_clicked()
     {
         data = (1<<8)|registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
                                               HeadSetting::HeadOn);
-        ui->toolButtonPlast->setText("Set\nplast");
+        ui->toolButtonPlast->setText(tr("Set\nplast"));
     }
     else
     {
         data = (~(1<<8))&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
                                          HeadSetting::HeadOn);
-        ui->toolButtonPlast->setText("Set\nwater");
+        ui->toolButtonPlast->setText(tr("Set\nwater"));
     }
 
     cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
@@ -825,20 +847,21 @@ void SettingDialog::on_toolButtonStepBack_clicked()
 
     cmdArr.clear();
 
-    qDebug()<<"at in"<<((1<<11)&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
-                                                  HeadSetting::HeadOn));
     if(ui->toolButtonStepBack->isChecked())
     {
         data = (1<<11)|registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
                                               HeadSetting::HeadOn);
-        ui->toolButtonStepBack->setText("Turn OFF\nstep back");
+        ui->toolButtonStepBack->setText(tr("Turn OFF\nstep back"));
     }
     else
     {
         data = (~(1<<11))&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
                                                          HeadSetting::HeadOn);
-        ui->toolButtonStepBack->setText("Turn ON\nstep back");
+        ui->toolButtonStepBack->setText(tr("Turn ON\nstep back"));
     }
+    ui->toolButtonQuartzStepBack->setChecked(ui->toolButtonStepBack->isChecked());
+    ui->toolButtonQuartzStepBack->setText(ui->toolButtonStepBack->text());
+
     cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
     cmdArr.append(static_cast<char>(data>>8));
@@ -847,8 +870,17 @@ void SettingDialog::on_toolButtonStepBack_clicked()
     cmdArr.append(static_cast<char>(data>>8));
     cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
-    qDebug()<<"at out"<<((1<<11)&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
-                                                  HeadSetting::HeadOn));
+
+    cmdArr.clear();
+    data = HeadSetting::Stepback+((this->index-1)<<5);
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
 }
 
 void SettingDialog::on_toolButtonIndexHere_clicked()
@@ -930,6 +962,31 @@ void SettingDialog::on_toolButtonQuartzStepBack_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
+    if(ui->toolButtonQuartzStepBack->isChecked())
+    {
+        data = (1<<11)|registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                              HeadSetting::HeadOn);
+        ui->toolButtonQuartzStepBack->setText(tr("Turn OFF\nstep back"));
+    }
+    else
+    {
+        data = (~(1<<11))&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                         HeadSetting::HeadOn);
+        ui->toolButtonQuartzStepBack->setText(tr("Turn ON\nstep back"));
+    }
+    ui->toolButtonStepBack->setChecked(ui->toolButtonQuartzStepBack->isChecked());
+    ui->toolButtonStepBack->setText(ui->toolButtonQuartzStepBack->text());
+
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+
+    cmdArr.clear();
     data = HeadSetting::Stepback+((this->index-1)<<5);
     cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
     cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
@@ -962,6 +1019,10 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
 
     QByteArray cmdArr;
     int data;
+    if(ui->pButtonHeadOnOff->isChecked())
+        ui->pButtonHeadOnOff->setText(tr("Turn\nOFF"));
+    else
+        ui->pButtonHeadOnOff->setText(tr("Turn\nON"));
 //    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
 //    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadStateLo&0x00FF));
 //    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateLo()>>8));
@@ -996,7 +1057,7 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
                             |ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
     cmdArr.clear();
 
-    data = this->index+500;
+    data = this->index+HeadSetting::Head_OnOff;
     cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
     cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append(static_cast<char>(data>>8));
@@ -1036,6 +1097,7 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
 //        break;
 //    }
 
+    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
     hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
     hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
     hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
@@ -1044,12 +1106,23 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
     hSttg.headParam.stroksSBCount = ui->spinBoxSBStrokCount->value();
     hSttg.headParam.dwellFLTime = ui->dSpinBoxFlDwellTime->value();
     hSttg.headParam.dwellSQTime = ui->dSpinBoxSqDwellTime->value();
-    hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1Q->value()*10;
-    hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2Q->value()*10;
-    hSttg.headParam.heatPower = ui->spinBoxDryPowerQ->value();
     hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
     hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-    hSttg.headParam.limitFront = ui->dSpinBoxDryingRangeIR->value()*10;
+    hSttg.headParam.heatLimit = ui->dSpinBoxDryingRangeIR->value()*10;
+    hSttg.headParam.heatTime1Q = ui->dSpinBoxHeatTime1Q->value()*10;
+    hSttg.headParam.heatTime2Q = ui->dSpinBoxHeatTime2Q->value()*10;
+    hSttg.headParam.dryPowerQ = ui->spinBoxDryPowerQ->value();
+    hSttg.headParam.stepbackDryTimeQ = ui->dSpinBoxStepbackDryTimeQ->value()*10;
+    hSttg.headParam.temperatureSetQ = ui->dSpinBoxTemperatureSetQ->value();
+    hSttg.headParam.dryTimeQ = ui->dSpinBoxDryTimeQ->value()*10;
+    hSttg.headParam.standbyTimeQ = ui->dSpinBoxStandbyTimeQ->value()*10;
+    hSttg.headParam.standbyPowerQ = ui->spinBoxStandbyPowerQ->value();
+    hSttg.headParam.warmFlashTimeQ = ui->dSpinBoxWarmFlashTimeQ->value()*10;
+    hSttg.headParam.inkColor = 0;
+    hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_R));
+    hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G)<<8);
+    hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B)<<16);
+
 
     emit this->setParamsToAll(this->index, hSttg.headParam.toByteArray());
 }

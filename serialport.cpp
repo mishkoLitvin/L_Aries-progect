@@ -199,7 +199,7 @@ void SerialPort::readData()
         }
         else
         {
-            qDebug()<<"Got  data:"<<data.mid(0,6).toHex().toUpper()<<initApp<<replyCnt;
+//            qDebug()<<"Got  data:"<<data.mid(0,6).toHex().toUpper()<<initApp<<replyCnt;
             emit this->working();
             if(modData8.fileds.rwBit)
             {
@@ -416,7 +416,7 @@ void SerialPort::sendData(QByteArray data, bool send, bool halfByte)
         else
         {
             dataToSendBuff.append(data);
-            qDebug()<<"buff:"<<dataToSendBuff.length()<<dataToSendBuff.toHex();
+//            qDebug()<<"buff:"<<dataToSendBuff.length()<<dataToSendBuff.toHex();
         }
     }
 //

@@ -126,104 +126,104 @@
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="47"/>
+        <location filename="../generalsettingdialog.ui" line="1311"/>
         <source>Cancel</source>
         <translation>Відміна</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="66"/>
+        <location filename="../generalsettingdialog.ui" line="1330"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="107"/>
+        <location filename="../generalsettingdialog.ui" line="52"/>
         <source>Veiw</source>
         <translation>Вигляд</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="115"/>
+        <location filename="../generalsettingdialog.ui" line="69"/>
         <source>Theme:</source>
         <translation>Тема програми:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="166"/>
+        <location filename="../generalsettingdialog.ui" line="129"/>
         <source>Icons:</source>
         <translation>Тема іконок:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="193"/>
+        <location filename="../generalsettingdialog.ui" line="224"/>
         <source>Language:</source>
         <translation>Мова:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="223"/>
+        <location filename="../generalsettingdialog.ui" line="267"/>
         <source>General</source>
         <translation>Основні</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="235"/>
+        <location filename="../generalsettingdialog.ui" line="285"/>
         <source>Heads count 
 2..18</source>
         <translation>Кількість головок
 2..18</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="276"/>
+        <location filename="../generalsettingdialog.ui" line="326"/>
         <source>Use unload 
 palett</source>
         <translation>Станція вигрузки
 активна</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="305"/>
+        <location filename="../generalsettingdialog.ui" line="355"/>
         <source>Warning time
 0.5..5.0 s</source>
         <translation>Час звучання сигналу
 попередження 0,5..5 с</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="359"/>
+        <location filename="../generalsettingdialog.ui" line="421"/>
         <source>Macine type:</source>
         <translation>Тип машини:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="391"/>
+        <location filename="../generalsettingdialog.ui" line="693"/>
         <source>Main servo
 type:</source>
         <translation>Тип головного
 сервоприводу:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="412"/>
-        <location filename="../generalsettingdialog.ui" line="682"/>
+        <location filename="../generalsettingdialog.ui" line="714"/>
+        <location filename="../generalsettingdialog.ui" line="758"/>
         <source>ESTUN</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="417"/>
-        <location filename="../generalsettingdialog.ui" line="687"/>
+        <location filename="../generalsettingdialog.ui" line="719"/>
+        <location filename="../generalsettingdialog.ui" line="763"/>
         <source>DELTA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="422"/>
-        <location filename="../generalsettingdialog.ui" line="692"/>
+        <location filename="../generalsettingdialog.ui" line="724"/>
+        <location filename="../generalsettingdialog.ui" line="768"/>
         <source>KINCO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="427"/>
-        <location filename="../generalsettingdialog.ui" line="697"/>
+        <location filename="../generalsettingdialog.ui" line="729"/>
+        <location filename="../generalsettingdialog.ui" line="773"/>
         <source>AKD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="441"/>
+        <location filename="../generalsettingdialog.ui" line="841"/>
         <source>HMI connected</source>
         <translation>Підєднано HMI</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="454"/>
+        <location filename="../generalsettingdialog.ui" line="686"/>
         <source>Keypad connected</source>
         <translation>Підєднано клавіатури</translation>
     </message>
@@ -236,18 +236,18 @@ type:</source>
     <message>
         <location filename="../generalsettingdialog.ui" line="482"/>
         <location filename="../generalsettingdialog.ui" line="526"/>
-        <location filename="../generalsettingdialog.ui" line="570"/>
+        <location filename="../generalsettingdialog.ui" line="565"/>
         <location filename="../generalsettingdialog.ui" line="604"/>
-        <location filename="../generalsettingdialog.ui" line="643"/>
+        <location filename="../generalsettingdialog.ui" line="667"/>
         <source>AIR</source>
         <translation>Повітря</translation>
     </message>
     <message>
         <location filename="../generalsettingdialog.ui" line="487"/>
         <location filename="../generalsettingdialog.ui" line="531"/>
-        <location filename="../generalsettingdialog.ui" line="575"/>
+        <location filename="../generalsettingdialog.ui" line="570"/>
         <location filename="../generalsettingdialog.ui" line="609"/>
-        <location filename="../generalsettingdialog.ui" line="648"/>
+        <location filename="../generalsettingdialog.ui" line="672"/>
         <source>AC motor</source>
         <translation>AC двигун</translation>
     </message>
@@ -270,53 +270,53 @@ type:</source>
     </message>
     <message>
         <location filename="../generalsettingdialog.ui" line="536"/>
+        <location filename="../generalsettingdialog.ui" line="575"/>
         <location filename="../generalsettingdialog.ui" line="614"/>
-        <location filename="../generalsettingdialog.ui" line="653"/>
         <source>Servo motor</source>
         <translation>Серво двигун</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="544"/>
+        <location filename="../generalsettingdialog.ui" line="641"/>
         <source>Lock
 type:</source>
         <translation>Тип
 замка:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="565"/>
+        <location filename="../generalsettingdialog.ui" line="662"/>
         <source>None</source>
         <translation>Немає</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="583"/>
+        <location filename="../generalsettingdialog.ui" line="544"/>
         <source>Carriage
 type:</source>
         <translation>Тип
 каретки:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="622"/>
+        <location filename="../generalsettingdialog.ui" line="583"/>
         <source>SqFl
 type:</source>
         <translation>Тип
 ракеля:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="661"/>
+        <location filename="../generalsettingdialog.ui" line="737"/>
         <source>Head servo
 type:</source>
         <translation>Тип серво
 голівки:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="705"/>
+        <location filename="../generalsettingdialog.ui" line="781"/>
         <source>Head
 Max range:</source>
         <translation>Макс. відстань
 руху голівки:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="732"/>
+        <location filename="../generalsettingdialog.ui" line="808"/>
         <source>Indexer
 Screw pitch</source>
         <translation>Крок різьби
@@ -324,7 +324,7 @@ Screw pitch</source>
 індексера</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="759"/>
+        <location filename="../generalsettingdialog.ui" line="453"/>
         <source>Lift
 Gear ratio</source>
         <translation>Передача 
@@ -332,14 +332,24 @@ Gear ratio</source>
 ліфта</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="793"/>
+        <location filename="../generalsettingdialog.ui" line="179"/>
+        <source>Use background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.ui" line="195"/>
+        <source>Select image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../generalsettingdialog.ui" line="855"/>
         <source>Direction
 clock</source>
         <translation>Змінити 
 напрям руху</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="820"/>
+        <location filename="../generalsettingdialog.ui" line="882"/>
         <location filename="../generalsettingdialog.cpp" line="95"/>
         <source>Cycles
 Disable</source>
@@ -348,7 +358,7 @@ Disable</source>
 друк</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="847"/>
+        <location filename="../generalsettingdialog.ui" line="909"/>
         <source>Heads
 activation</source>
         <translation>Активація 
@@ -357,101 +367,101 @@ activation</source>
 голівок</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="910"/>
+        <location filename="../generalsettingdialog.ui" line="972"/>
         <source>Users setup</source>
         <translation>Налаштування 
 корустувачів 
 машини</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="952"/>
+        <location filename="../generalsettingdialog.ui" line="1014"/>
         <source>SERVICE</source>
         <translation>Сервісний режим</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="984"/>
+        <location filename="../generalsettingdialog.ui" line="1046"/>
         <source>Mail setup</source>
         <translation>Налаштування eMail</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="995"/>
+        <location filename="../generalsettingdialog.ui" line="1057"/>
         <source>Enable mail sending</source>
         <translation>Відправляти листи</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1021"/>
-        <location filename="../generalsettingdialog.cpp" line="255"/>
+        <location filename="../generalsettingdialog.ui" line="1083"/>
+        <location filename="../generalsettingdialog.cpp" line="256"/>
         <source>Unlock</source>
         <translation>Розблокувати</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1038"/>
+        <location filename="../generalsettingdialog.ui" line="1100"/>
         <source>Receiving email adress:</source>
         <translation>Адреса отримувача:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1058"/>
+        <location filename="../generalsettingdialog.ui" line="1120"/>
         <source>Sending email password:</source>
         <translation>Пароль відправника:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1071"/>
+        <location filename="../generalsettingdialog.ui" line="1133"/>
         <source>Show</source>
         <translation>Показати пароль</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1100"/>
+        <location filename="../generalsettingdialog.ui" line="1162"/>
         <source>Email subject:</source>
         <translation>Тема (заголовок) листа:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1120"/>
+        <location filename="../generalsettingdialog.ui" line="1182"/>
         <source>Sending email adress:</source>
         <translation>Адреса відправника:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1146"/>
+        <location filename="../generalsettingdialog.ui" line="1208"/>
         <source>Serial Port</source>
         <translation>Порт обміну</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1154"/>
+        <location filename="../generalsettingdialog.ui" line="1216"/>
         <source>Port name: </source>
         <translation>Ім&apos;я порту:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1161"/>
+        <location filename="../generalsettingdialog.ui" line="1223"/>
         <source>Baud rate:</source>
         <translation>Швидкість передачі:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1168"/>
+        <location filename="../generalsettingdialog.ui" line="1230"/>
         <source>Data bits:</source>
         <translation>Кількість біт:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1175"/>
+        <location filename="../generalsettingdialog.ui" line="1237"/>
         <source>Parity:</source>
         <translation>Перевірка парності:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1182"/>
+        <location filename="../generalsettingdialog.ui" line="1244"/>
         <source>Stop bits:</source>
         <translation>Кількість стоп біт:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1189"/>
+        <location filename="../generalsettingdialog.ui" line="1251"/>
         <source>Flow control:</source>
         <translation>Контроль потоку:</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.ui" line="1204"/>
+        <location filename="../generalsettingdialog.ui" line="1279"/>
         <source>Change</source>
         <translation>Змініти</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="83"/>
-        <location filename="../generalsettingdialog.cpp" line="425"/>
+        <location filename="../generalsettingdialog.cpp" line="84"/>
+        <location filename="../generalsettingdialog.cpp" line="426"/>
         <source>Direction
 clockwise</source>
         <translation>За годинниковою
@@ -459,7 +469,7 @@ clockwise</source>
     </message>
     <message>
         <location filename="../generalsettingdialog.cpp" line="89"/>
-        <location filename="../generalsettingdialog.cpp" line="419"/>
+        <location filename="../generalsettingdialog.cpp" line="420"/>
         <source>Direction
 anticlockwise</source>
         <translation>Проти годинникової
@@ -474,7 +484,7 @@ Enable</source>
     </message>
     <message>
         <location filename="../generalsettingdialog.cpp" line="125"/>
-        <location filename="../generalsettingdialog.cpp" line="476"/>
+        <location filename="../generalsettingdialog.cpp" line="477"/>
         <source>Don&apos;t use
 unload palett</source>
         <translation>Без станції
@@ -482,58 +492,58 @@ unload palett</source>
     </message>
     <message>
         <location filename="../generalsettingdialog.cpp" line="130"/>
-        <location filename="../generalsettingdialog.cpp" line="481"/>
+        <location filename="../generalsettingdialog.cpp" line="482"/>
         <source>Use
 unload palett</source>
         <translation>З станцією 
 вигрузки</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="250"/>
+        <location filename="../generalsettingdialog.cpp" line="251"/>
         <source>Lock</source>
         <translation>Заблокувати</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="449"/>
+        <location filename="../generalsettingdialog.cpp" line="450"/>
         <source>Disable
 cycles</source>
         <translation>Поетапний
 друк вимк</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="454"/>
+        <location filename="../generalsettingdialog.cpp" line="455"/>
         <source>Enable
 cycles</source>
         <translation>Поетапний
 друк ввімк</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="531"/>
+        <location filename="../generalsettingdialog.cpp" line="532"/>
         <source>Port name: %1</source>
         <translation>Ім&apos;я порту: %1</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="532"/>
+        <location filename="../generalsettingdialog.cpp" line="533"/>
         <source>Baud rate: %1</source>
         <translation>Швидкість обміну: %1</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="533"/>
+        <location filename="../generalsettingdialog.cpp" line="534"/>
         <source>Data bits: %1</source>
         <translation>Кількість біт: %1</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="534"/>
+        <location filename="../generalsettingdialog.cpp" line="535"/>
         <source>Flow control: %1</source>
         <translation>Контроль потоку: %1</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="535"/>
+        <location filename="../generalsettingdialog.cpp" line="536"/>
         <source>Parity: %1</source>
         <translation>Парність: %1</translation>
     </message>
     <message>
-        <location filename="../generalsettingdialog.cpp" line="536"/>
+        <location filename="../generalsettingdialog.cpp" line="537"/>
         <source>Stop bits: %1</source>
         <translation>Стоп біти: %1</translation>
     </message>
@@ -564,13 +574,8 @@ cycles</source>
 <context>
     <name>HeadForm</name>
     <message>
-        <location filename="../headform.ui" line="14"/>
+        <location filename="../headform.ui" line="26"/>
         <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../headform.ui" line="41"/>
-        <source>TextLabel</source>
         <translation></translation>
     </message>
 </context>
@@ -714,91 +719,97 @@ cycles</source>
     </message>
     <message>
         <location filename="../indexerwidget.ui" line="48"/>
-        <location filename="../indexerwidget.cpp" line="147"/>
+        <source>Air</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../indexerwidget.ui" line="80"/>
+        <location filename="../indexerwidget.cpp" line="145"/>
+        <location filename="../indexerwidget.cpp" line="398"/>
         <source>Lock</source>
         <translation>Замнути</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="80"/>
+        <location filename="../indexerwidget.ui" line="112"/>
         <source>Move Half</source>
         <translation>Півкрок</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="109"/>
-        <location filename="../indexerwidget.cpp" line="213"/>
+        <location filename="../indexerwidget.ui" line="141"/>
+        <location filename="../indexerwidget.cpp" line="207"/>
         <source>Auto</source>
         <translation>Друк 
 авто</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="155"/>
+        <location filename="../indexerwidget.ui" line="187"/>
         <source>Home</source>
         <translation>в 0 позицію</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="184"/>
+        <location filename="../indexerwidget.ui" line="216"/>
         <source>Reset</source>
         <translation>Перезапустити</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="213"/>
-        <location filename="../indexerwidget.cpp" line="215"/>
-        <location filename="../indexerwidget.cpp" line="248"/>
-        <location filename="../indexerwidget.cpp" line="424"/>
+        <location filename="../indexerwidget.ui" line="245"/>
+        <location filename="../indexerwidget.cpp" line="209"/>
+        <location filename="../indexerwidget.cpp" line="240"/>
+        <location filename="../indexerwidget.cpp" line="417"/>
         <source>Print Manual</source>
         <translation>Друк</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="272"/>
+        <location filename="../indexerwidget.ui" line="304"/>
         <source>Left</source>
         <translation>Вліво</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="298"/>
-        <location filename="../indexerwidget.cpp" line="316"/>
+        <location filename="../indexerwidget.ui" line="330"/>
+        <location filename="../indexerwidget.cpp" line="304"/>
         <source>Up</source>
         <translation>Вверх</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.ui" line="327"/>
+        <location filename="../indexerwidget.ui" line="359"/>
         <source>Right</source>
         <translation>Вправо</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.cpp" line="142"/>
+        <location filename="../indexerwidget.cpp" line="140"/>
         <source>Unlock</source>
         <translation>Розблокувати</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.cpp" line="171"/>
+        <location filename="../indexerwidget.cpp" line="167"/>
         <source>Move full</source>
         <translation>Крок</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.cpp" line="179"/>
+        <location filename="../indexerwidget.cpp" line="175"/>
         <source>Move half</source>
         <translation>Півкрок</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.cpp" line="205"/>
+        <location filename="../indexerwidget.cpp" line="199"/>
         <source>Manual</source>
         <translation>Покроково</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.cpp" line="207"/>
-        <location filename="../indexerwidget.cpp" line="243"/>
-        <location filename="../indexerwidget.cpp" line="419"/>
+        <location filename="../indexerwidget.cpp" line="201"/>
+        <location filename="../indexerwidget.cpp" line="235"/>
+        <location filename="../indexerwidget.cpp" line="412"/>
         <source>Print Auto</source>
         <translation>Авто друк</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.cpp" line="234"/>
-        <location filename="../indexerwidget.cpp" line="411"/>
+        <location filename="../indexerwidget.cpp" line="226"/>
+        <location filename="../indexerwidget.cpp" line="404"/>
         <source>Stop</source>
         <translation>Зупинити</translation>
     </message>
     <message>
-        <location filename="../indexerwidget.cpp" line="311"/>
+        <location filename="../indexerwidget.cpp" line="299"/>
         <source>Down</source>
         <translation>Вниз</translation>
     </message>
@@ -827,29 +838,27 @@ cycles</source>
     </message>
     <message>
         <location filename="../infowidget.ui" line="158"/>
-        <source>TextLabel1
-Label2
-Label3</source>
-        <translation></translation>
+        <source>Initialisation</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../infowidget.ui" line="197"/>
-        <location filename="../infowidget.ui" line="216"/>
-        <location filename="../infowidget.ui" line="235"/>
-        <location filename="../infowidget.ui" line="254"/>
-        <location filename="../infowidget.ui" line="273"/>
-        <location filename="../infowidget.ui" line="292"/>
-        <location filename="../infowidget.ui" line="311"/>
+        <location filename="../infowidget.ui" line="195"/>
+        <location filename="../infowidget.ui" line="214"/>
+        <location filename="../infowidget.ui" line="233"/>
+        <location filename="../infowidget.ui" line="252"/>
+        <location filename="../infowidget.ui" line="271"/>
+        <location filename="../infowidget.ui" line="290"/>
+        <location filename="../infowidget.ui" line="309"/>
         <source>1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../infowidget.ui" line="339"/>
+        <location filename="../infowidget.ui" line="337"/>
         <source>Total: 0</source>
         <translation>Загалом: 0</translation>
     </message>
     <message>
-        <location filename="../infowidget.ui" line="382"/>
+        <location filename="../infowidget.ui" line="380"/>
         <source>DZ/H: 0</source>
         <translation>Од./год.: 0</translation>
     </message>
@@ -869,7 +878,37 @@ Label3</source>
         <translation>Загалом: </translation>
     </message>
     <message>
-        <location filename="../infowidget.cpp" line="271"/>
+        <location filename="../infowidget.cpp" line="135"/>
+        <source>Machine need reset.
+Please press reset button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="148"/>
+        <source>Machine must be homed.
+Please press home button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="158"/>
+        <source>Machine must be locked.
+Please press lock button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="177"/>
+        <source>Machine ready to work.
+Please press print button
+ to start printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="181"/>
+        <source>Machine is printing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../infowidget.cpp" line="274"/>
         <source>
 Please press Reset button.</source>
         <translation>Натисніть кнопку перезппустити.</translation>
@@ -945,6 +984,27 @@ Lock
     </message>
 </context>
 <context>
+    <name>MailSender</name>
+    <message>
+        <location filename="../mailsender.cpp" line="61"/>
+        <source>E-mail error.
+Failed connect to host!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mailsender.cpp" line="70"/>
+        <source>E-mail error.
+Failed to login.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mailsender.cpp" line="79"/>
+        <source>E-mail error.
+Failed to send mail.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -952,54 +1012,172 @@ Lock
         <translation>Головне вікно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="77"/>
+        <location filename="../mainwindow.ui" line="83"/>
         <source>Palet distance:</source>
         <translation>Відстань до палет:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="108"/>
+        <location filename="../mainwindow.ui" line="114"/>
         <source> inch</source>
         <translation>дюйм</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="172"/>
+        <location filename="../mainwindow.ui" line="178"/>
         <source>Delay before step:</source>
         <translation>Затримка перед кроком:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="203"/>
+        <location filename="../mainwindow.ui" line="209"/>
         <source>s</source>
         <translation>с</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="255"/>
+        <location filename="../mainwindow.ui" line="257"/>
+        <location filename="../mainwindow.ui" line="264"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="452"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="281"/>
+        <location filename="../mainwindow.ui" line="490"/>
         <source>Load</source>
         <translation>Завантажити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="307"/>
+        <location filename="../mainwindow.ui" line="541"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="343"/>
+        <location filename="../mainwindow.ui" line="305"/>
         <source>Cycles</source>
         <translation>Етапи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="363"/>
+        <location filename="../mainwindow.ui" line="325"/>
         <source>Maintenance</source>
         <translation>Обслуговування</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="429"/>
+        <location filename="../mainwindow.ui" line="401"/>
         <source>Exit</source>
         <translation>Вихід</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="194"/>
+        <source>You mast enter a master code!
+ Please contact manufacturer to get a next one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="195"/>
+        <source>To enter code press &quot;Yes&quot; 
+To exit from program press &quot;No&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="197"/>
+        <location filename="../mainwindow.cpp" line="227"/>
+        <source>Master code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="224"/>
+        <source>Wrong master code!
+ Please contact manufacturer to get a next one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="225"/>
+        <source>To try typing again press &quot;Yes&quot; 
+To exit press &quot;No&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="875"/>
+        <source>Heads count changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="876"/>
+        <source>To apply count changing please restart a program
+Press OK to exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="878"/>
+        <source>Info</source>
+        <translation type="unfinished">Інформація</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1027"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1028"/>
+        <source>Password</source>
+        <translation type="unfinished">Пароль</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1534"/>
+        <source>Wrong user password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1535"/>
+        <source>To try login again press &quot;Yes&quot; 
+To exit press &quot;No&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1537"/>
+        <source>Login</source>
+        <translation type="unfinished">Імя користувача</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1562"/>
+        <source>Default_user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1572"/>
+        <source>Exit incorrect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1573"/>
+        <source>Machine shutdown during
+ the last session is incorrect.
+Use the Exit menu to prevent errors.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1576"/>
+        <source>Exit error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1589"/>
+        <source>Wrong ssl library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1590"/>
+        <source>E-mail will not be sended
+to continue press &quot;Yes&quot; 
+To exit press &quot;No&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1593"/>
+        <source>E-mail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1078,27 +1256,75 @@ Lock
     </message>
 </context>
 <context>
+    <name>ReprogramDialog</name>
+    <message>
+        <location filename="../reprogramdialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="22"/>
+        <source>File name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="38"/>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="71"/>
+        <source>Master</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="93"/>
+        <source>Heads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="118"/>
+        <source>ATXmega processor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="140"/>
+        <source>ATmega processor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="192"/>
+        <source>Erase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../reprogramdialog.ui" line="216"/>
+        <source>Write</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SerialPort</name>
     <message>
         <location filename="../serialport.cpp" line="59"/>
-        <location filename="../serialport.cpp" line="368"/>
+        <location filename="../serialport.cpp" line="477"/>
         <source>Connected to %1 : %2, %3, %4, %5, %6</source>
         <translation>Зєднано до %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
         <location filename="../serialport.cpp" line="63"/>
-        <location filename="../serialport.cpp" line="372"/>
+        <location filename="../serialport.cpp" line="481"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
         <location filename="../serialport.cpp" line="68"/>
-        <location filename="../serialport.cpp" line="374"/>
+        <location filename="../serialport.cpp" line="483"/>
         <source>Open error</source>
         <translation>Помилка відкривання</translation>
     </message>
     <message>
-        <location filename="../serialport.cpp" line="278"/>
+        <location filename="../serialport.cpp" line="370"/>
         <source>Critical Error</source>
         <translation>Критична помилка</translation>
     </message>
@@ -1294,289 +1520,341 @@ Lock
 /ВИКЛ</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="72"/>
+        <location filename="../headsettingdialog.ui" line="88"/>
         <source>Head №</source>
         <translation>№ головки:</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="102"/>
+        <location filename="../headsettingdialog.ui" line="118"/>
         <source>&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="139"/>
+        <location filename="../headsettingdialog.ui" line="155"/>
         <source>&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="175"/>
+        <location filename="../headsettingdialog.ui" line="191"/>
         <source>Print</source>
         <translation>Друк</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="193"/>
+        <location filename="../headsettingdialog.ui" line="209"/>
         <source>Rear speed
  (5..100)%</source>
         <translation>Швидкість назад
 (5..100)%</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="247"/>
+        <location filename="../headsettingdialog.ui" line="263"/>
         <source>Front speed
  (5..100)%</source>
         <translation>Швидкість вперед
 (5..100)%</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="299"/>
+        <location filename="../headsettingdialog.ui" line="315"/>
         <source>Range limit 1 
 (0..30) inch</source>
         <translation>Границя друку 1
 (0..30) дюймів</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="350"/>
+        <location filename="../headsettingdialog.ui" line="366"/>
         <source>Range limit 2
  (0..30) inch</source>
         <translation>Границя друку 2
 (0..30) дюймів</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="399"/>
+        <location filename="../headsettingdialog.ui" line="415"/>
         <source>Strok count (1..10)</source>
         <translation>К-сть строк (1..10)</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="452"/>
+        <location filename="../headsettingdialog.ui" line="468"/>
         <source>SB strok count (0..10)</source>
         <translation>К-сть строк у КН(0..10)</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="503"/>
+        <location filename="../headsettingdialog.ui" line="519"/>
         <source>Fl dwell time
 (0.0..3.0)s</source>
         <translation>Затримка флутбара
 (0..3) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="560"/>
+        <location filename="../headsettingdialog.ui" line="576"/>
         <source>SQ dwell time
 (0.0..3.0)s</source>
         <translation>Затримка сквіджу
 (0..3) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="624"/>
+        <location filename="../headsettingdialog.ui" line="640"/>
         <source>Step back</source>
         <translation>Режим
 крок назад
 (КР)</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="659"/>
-        <location filename="../headsettingdialog.cpp" line="667"/>
+        <location filename="../headsettingdialog.ui" line="675"/>
+        <location filename="../headsettingdialog.cpp" line="800"/>
         <source>Hold on</source>
         <translation>Затримка</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="694"/>
+        <location filename="../headsettingdialog.ui" line="710"/>
         <source>Index here</source>
         <translation>Індексер 
 сюди</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="726"/>
+        <location filename="../headsettingdialog.ui" line="742"/>
         <source>MPT 
 move</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="779"/>
+        <location filename="../headsettingdialog.ui" line="795"/>
         <source>Plast</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="811"/>
+        <location filename="../headsettingdialog.ui" line="830"/>
         <source>Ink color</source>
         <translation>Колір</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="843"/>
         <source>Pressure SQ</source>
-        <translation>Тиск сквізера</translation>
+        <translation type="vanished">Тиск сквізера</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="871"/>
+        <location filename="../headsettingdialog.ui" line="862"/>
+        <source>Press SQ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.ui" line="890"/>
         <source>Air pressure</source>
         <translation>Тиск повітря</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="916"/>
+        <location filename="../headsettingdialog.ui" line="935"/>
         <source>FL</source>
         <translation>Флутбар</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="948"/>
+        <location filename="../headsettingdialog.ui" line="967"/>
         <source>FL/SQ up</source>
         <translation>Флутбар/
 сквізер
 вверх</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="980"/>
+        <location filename="../headsettingdialog.ui" line="999"/>
         <source>SQ</source>
         <translation>Сквізер</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1012"/>
+        <location filename="../headsettingdialog.ui" line="1031"/>
         <source>FL/SQ</source>
         <translation>Флутбар/
 сквізер</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1061"/>
+        <location filename="../headsettingdialog.ui" line="1080"/>
         <source>Rear</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1093"/>
+        <location filename="../headsettingdialog.ui" line="1112"/>
         <source>Front</source>
         <translation>Вперед</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1125"/>
-        <location filename="../headsettingdialog.ui" line="1667"/>
+        <location filename="../headsettingdialog.ui" line="1144"/>
+        <location filename="../headsettingdialog.ui" line="1686"/>
         <source>Test</source>
         <translation>Тест</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1167"/>
+        <location filename="../headsettingdialog.ui" line="1186"/>
         <source>Quartz</source>
         <translation>Сушка</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1186"/>
+        <location filename="../headsettingdialog.ui" line="1205"/>
         <source>Heat time 1
  (0,1..10)s</source>
         <translation>Час нагріву 1
 (0,1..10) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1245"/>
+        <location filename="../headsettingdialog.ui" line="1264"/>
         <source>Heat time 2 
 (0,1..10)s</source>
         <translation>Час нагріву 2
 (0,1..10) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1301"/>
+        <location filename="../headsettingdialog.ui" line="1320"/>
         <source>Dry power 
 (0..100)%</source>
         <translation>Потужність
 (0..100)%</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1344"/>
+        <location filename="../headsettingdialog.ui" line="1363"/>
         <source>Step back dry time 
 (0,1..10)s</source>
         <translation>Час нагріву у КР
 (0,1..10) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1399"/>
+        <location filename="../headsettingdialog.ui" line="1418"/>
         <source>Temperature set 
 (32..374)F</source>
         <translation>Температура (32..374) Ф</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1448"/>
+        <location filename="../headsettingdialog.ui" line="1467"/>
         <source>Dry time
  (0,1..10)s</source>
         <translation>Час сушки
 (0,1..10) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1497"/>
+        <location filename="../headsettingdialog.ui" line="1516"/>
         <source>Standby power
  (0..100)%</source>
         <translation>Пот-сть самостійно
 (0..100)%</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1540"/>
+        <location filename="../headsettingdialog.ui" line="1559"/>
         <source>Standby time 
 (0,0..10.0)s</source>
         <translation>Час самостійно
 (0..10) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1591"/>
+        <location filename="../headsettingdialog.ui" line="1610"/>
         <source>Temp
 Sensor</source>
         <translation>Датчик температури</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1611"/>
+        <location filename="../headsettingdialog.ui" line="1630"/>
         <source>Step Back</source>
         <translation>Режим
 крок назад</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1639"/>
+        <location filename="../headsettingdialog.ui" line="1658"/>
         <source>Preheat</source>
         <translation>Попередній 
 нагрів</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1714"/>
+        <location filename="../headsettingdialog.ui" line="1733"/>
         <source>Warming</source>
         <translation>Прогрів</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1743"/>
+        <location filename="../headsettingdialog.ui" line="1762"/>
         <source>Warm flash time 
 (1..30)min</source>
         <translation>Час прогріву
 (1..30) хв</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1804"/>
+        <location filename="../headsettingdialog.ui" line="1823"/>
         <source>Infra red</source>
         <translation>Сушка ІЧ</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1842"/>
+        <location filename="../headsettingdialog.ui" line="1861"/>
         <source>Heat time 1 (0,1..10)s</source>
         <translation>Час нагріву 1 (0,1..10) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1884"/>
+        <location filename="../headsettingdialog.ui" line="1903"/>
         <source>Heat time 2 (0,1..10)s</source>
         <translation>Час нагріву 2 (0,1..10) с</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="1939"/>
+        <location filename="../headsettingdialog.ui" line="1958"/>
         <source>Drying range (0..30) inch</source>
         <translation>Діапазон сушки
 (0..30) дюймів</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="2012"/>
+        <location filename="../headsettingdialog.ui" line="2031"/>
         <source>Copy to all</source>
         <translation>Для всіх</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="2042"/>
+        <location filename="../headsettingdialog.ui" line="2061"/>
         <source>Cancel</source>
         <translation>Відміна</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.ui" line="2059"/>
+        <location filename="../headsettingdialog.ui" line="2078"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../headsettingdialog.cpp" line="665"/>
+        <location filename="../headsettingdialog.cpp" line="42"/>
+        <location filename="../headsettingdialog.cpp" line="128"/>
+        <location filename="../headsettingdialog.cpp" line="219"/>
+        <location filename="../headsettingdialog.cpp" line="1021"/>
+        <source>Turn
+OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.cpp" line="44"/>
+        <location filename="../headsettingdialog.cpp" line="130"/>
+        <location filename="../headsettingdialog.cpp" line="221"/>
+        <location filename="../headsettingdialog.cpp" line="1023"/>
+        <source>Turn
+ON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.cpp" line="138"/>
+        <location filename="../headsettingdialog.cpp" line="656"/>
+        <source>Set
+plast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.cpp" line="140"/>
+        <location filename="../headsettingdialog.cpp" line="662"/>
+        <source>Set
+water</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.cpp" line="144"/>
+        <location filename="../headsettingdialog.cpp" line="852"/>
+        <location filename="../headsettingdialog.cpp" line="967"/>
+        <source>Turn OFF
+step back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.cpp" line="146"/>
+        <location filename="../headsettingdialog.cpp" line="858"/>
+        <location filename="../headsettingdialog.cpp" line="973"/>
+        <source>Turn ON
+step back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../headsettingdialog.cpp" line="798"/>
         <source>Hold off</source>
         <translation>Звільнити</translation>
     </message>

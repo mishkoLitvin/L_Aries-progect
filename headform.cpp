@@ -1,4 +1,5 @@
 #include "headform.h"
+#include "headform.h"
 #include "ui_headform.h"
 
 #include <QBitmap>
@@ -23,9 +24,16 @@ HeadForm::HeadForm(QWidget *parent) :
 
     labelIndex = new QLabel(this);
     labelIndex->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 20px bold italic large \"Times New Roman\"");
-
     labelIndex->resize(25,25);
     labelIndex->move(ui->graphicsView->width()-labelIndex->width(),this->height()-labelIndex->height()/*-10*/);
+
+    labelStrokCnt = new QLabel(this);
+    labelStrokCnt->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 16px bold italic large \"Times New Roman\"");
+    labelStrokCnt->resize(35,25);
+
+    labelStBkStr = new QLabel(this);
+    labelStBkStr->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white; font: 16px bold italic large \"Times New Roman\"");
+    labelStBkStr->resize(35,25);
 
     grScene = new QGraphicsScene();
     grScene->setBackgroundBrush(QBrush(Qt::transparent));
@@ -55,13 +63,17 @@ void HeadForm::setHeadformType(HeadForm::HeadformType type)
         this->headformType = HeadPutingOn;
         labelIndex->hide();
         ui->graphicsView->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DD00FF66, stop: 0.8 #DD008822,stop: 1.0 #DD003300); border-style: none;");
-//        grRectBkgrItem->setBrush(QBrush("#009900"));
+        labelStrokCnt->setVisible(false);
+        labelStBkStr->setVisible(false);
+
         break;
     case HeadRemoving:
         this->headformType = HeadRemoving;
         labelIndex->hide();
         ui->graphicsView->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DDCC3311, stop: 0.8 #DDAA220F,stop: 1.0 #DD331100); border-style: none;");
-//        grRectBkgrItem->setBrush(QBrush("#990000"));
+        labelStrokCnt->setVisible(false);
+        labelStBkStr->setVisible(false);
+
         break;
     };
 }
@@ -81,18 +93,29 @@ void HeadForm::setIndex(int i)
 
 void HeadForm::setIndexLabelPosition(HeadForm::SettBtnPos position)
 {
+    this->labelPos = position;
     switch (position) {
     case AtRightUp:
         labelIndex->move(this->width()-4-labelIndex->width(), 4);
+        labelStrokCnt->move(this->width()-4-labelStrokCnt->width(), 4+labelIndex->height());
+        labelStBkStr->move(this->width()-4-labelStrokCnt->width(), 4+labelIndex->height()+labelStrokCnt->height());
         break;
     case AtRightDown:
         labelIndex->move(this->width()-4-labelIndex->width(),ui->graphicsView->height()+4-labelIndex->height());
+        labelStrokCnt->move(this->width()-4-labelStrokCnt->width(),
+                            ui->graphicsView->height()+4-labelIndex->height()-labelStrokCnt->height());
+        labelStBkStr->move(this->width()-4-labelStrokCnt->width(),
+                            ui->graphicsView->height()+4-labelIndex->height()-labelStrokCnt->height()-labelStrokCnt->height());
         break;
     case AtLeftUp:
         labelIndex->move(4,4);
+        labelStrokCnt->move(4,4+labelIndex->height());
+        labelStBkStr->move(4,4+labelIndex->height()+labelStrokCnt->height());
         break;
     case AtLeftDown:
         labelIndex->move(4, ui->graphicsView->height()+4-labelIndex->height());
+        labelStrokCnt->move(4, ui->graphicsView->height()+4-labelIndex->height()-labelStrokCnt->height());
+        labelStBkStr->move(4, ui->graphicsView->height()+4-labelIndex->height()-labelStrokCnt->height()-labelStrokCnt->height());
         break;
     }
 
@@ -146,6 +169,42 @@ void HeadForm::setRagColor(QColor color)
 {
     grPixLogoItem->setGraphicsEffect(graphEffect);
     graphEffect->setColor(color);
+}
+
+void HeadForm::setStrokCount(int val)
+{
+    labelStrokCnt->resize(35,25);
+    if(val != 0)
+        labelStrokCnt->setText("St:"+QString::number(val));
+    this->setIndexLabelPosition(this->labelPos);
+}
+
+void HeadForm::setDryPower(int val)
+{
+    if(val!=100)
+        labelStrokCnt->resize(48,25);
+    else
+        labelStrokCnt->resize(58,25);
+    labelStrokCnt->setText("UV:"+QString::number(val));
+    this->setStepBkStrCnt(0);
+    this->setIndexLabelPosition(this->labelPos);
+}
+
+void HeadForm::setOff()
+{
+    labelStrokCnt->setText("OFF");
+    setStepBkStrCnt(0);
+}
+
+void HeadForm::setStepBkStrCnt(int val)
+{
+    if(val != 0)
+    {
+        labelStBkStr->setText("Bk:"+QString::number(val));
+        labelStBkStr->setVisible(true);
+    }
+    else
+        labelStBkStr->setVisible(false);
 }
 
 HeadForm::HeadformState HeadForm::getRagState()

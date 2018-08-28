@@ -224,7 +224,6 @@ void GeneralSettingDialog::accept()
     else
         acceptEnable = true;
 
-
 }
 
 void GeneralSettingDialog::reject()
@@ -369,7 +368,6 @@ void GeneralSettingDialog::changeServiceStateClicked()
         this->hide();
         this->show();
     }
-
 }
 
 void GeneralSettingDialog::userSettingClicked()
@@ -584,6 +582,10 @@ bool GeneralSettingDialog::eventFilter(QObject *watched, QEvent *event)
 
 void GeneralSettingDialog::showEvent(QShowEvent *ev)
 {
+    if(!MachineSettings::getServiceWidgEn())
+        this->setMaximumSize(400, 703);
+    else
+        this->setMaximumSize(600, 703);
     ui->spinBoxHeadsCount->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->pButtonUseUnload->setVisible(MachineSettings::getServiceWidgEn());
@@ -593,10 +595,6 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ev->accept();
     acceptOnDeactilationEn = true;
     acceptEnable = true;
-//    if(!MachineSettings::getServiceWidgEn())
-//        this->setMaximumSize(400, 703);
-//    else
-//        this->setMaximumSize(600, 703);
 }
 
 void GeneralSettingDialog::changeEvent(QEvent* event)

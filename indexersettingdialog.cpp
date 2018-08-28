@@ -44,10 +44,10 @@ void IndexerSettingDialog::setIndexerSetting(bool disconnect)
                                                            Register::indexerReg_RACC)/*/10*/);
     ui->dSpinBoxIndexDistance->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
                                                            Register::indexerReg_DIST)/10.);
-    ui->spinBoxIndexDistanceOffcet->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
-                                                                Register::indexerReg_DIST_OFFSET));
-    ui->spinBoxIndexHomeOffset->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
-                                                            Register::indexerReg_HOME_OFFSET));
+    ui->spinBoxIndexDistanceOffcet->setValue(static_cast<int16_t>(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                                Register::indexerReg_DIST_OFFSET)));
+    ui->spinBoxIndexHomeOffset->setValue(static_cast<int16_t>(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                            Register::indexerReg_HOME_OFFSET)));
     ui->spinBoxIndexSpeed->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
                                                        Register::indexerReg_SPEED));
     ui->spinBoxindexSpeedRet->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
@@ -73,8 +73,8 @@ void IndexerSettingDialog::setLiftSetting(bool disconnect)
                                                          Register::indexerliftReg_UP_DELAY)/10.);
     ui->dSpinBoxLiftDistance->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
                                                           Register::liftReg_DIST)/100.);
-    ui->spinBoxLiftHomeOffset->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
-                                                           Register::liftReg_HOME_OFFSET));
+    ui->spinBoxLiftHomeOffset->setValue(static_cast<int16_t>(registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                                           Register::liftReg_HOME_OFFSET)));
     ui->spinBoxLiftSpeed->setValue(registers->readReg(IndexerLiftSettings::IndexerDevice,
                                                       Register::liftReg_SPEED));
     if(disconnect)
@@ -378,9 +378,13 @@ void IndexerSettingDialog::showEvent(QShowEvent *ev)
     ui->spinBoxIndexHomeOffset->setVisible(MachineSettings::getServiceWidgEn()
                                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
     ui->dSpinBoxLiftDistance->setVisible(MachineSettings::getServiceWidgEn()
-                                         &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+                                         &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                                         &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                                         &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->spinBoxLiftHomeOffset->setVisible(MachineSettings::getServiceWidgEn()
-                                          &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+                                          &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                                          &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                                          &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn()
                             &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
     ui->labelH2->setVisible(MachineSettings::getServiceWidgEn()
@@ -388,30 +392,46 @@ void IndexerSettingDialog::showEvent(QShowEvent *ev)
     ui->labelH3->setVisible(MachineSettings::getServiceWidgEn()
                             &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
     ui->labelH4->setVisible(MachineSettings::getServiceWidgEn()
-                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->labelH5->setVisible(MachineSettings::getServiceWidgEn()
-                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                            &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->pButtonIndexHome->setVisible(MachineSettings::getServiceWidgEn()
                                      &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
     ui->pButtonIndexMove->setVisible(MachineSettings::getServiceWidgEn()
                                      &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
     ui->pButtonLiftHome->setVisible(MachineSettings::getServiceWidgEn()
-                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->pButtonLiftMove->setVisible(MachineSettings::getServiceWidgEn()
-                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA)));
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                                    &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
 
     ui->labelS1->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
     ui->labelS2->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
-    ui->labelS3->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->labelS3->setVisible((!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                             &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                             &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->labelA1->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
     ui->labelA2->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
-    ui->labelA3->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->labelA3->setVisible((!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                             &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                             &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->dSpinBoxIndexAccel->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
     ui->dSpinBoxIndexAccelRet->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
     ui->spinBoxIndexSpeed->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
     ui->spinBoxindexSpeedRet->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
-    ui->dSpinBoxLiftAccel->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
-    ui->spinBoxLiftSpeed->setVisible(!(MachineSettings::getMachineType() == MachineSettings::TitanAAA));
+    ui->dSpinBoxLiftAccel->setVisible((!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                                      &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                                      &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
+    ui->spinBoxLiftSpeed->setVisible((!(MachineSettings::getMachineType() == MachineSettings::TitanAAA))
+                                     &(!(MachineSettings::getMachineType() == MachineSettings::TitanASA))
+                                     &(!(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
 
     ev->accept();
 }

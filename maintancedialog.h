@@ -35,6 +35,7 @@ public:
     void setTrableInfo(QString info = "trouble info");
     void setMachineInfo(QString info = "machine info");
     void setMaintanceType(MaintanceType mType = Warning);
+    QList <MaintanceElement> getUnsolvedList();
 
     static bool execute(QWidget *parent = 0,
                         MaintanceType mType = Warning,
@@ -49,6 +50,7 @@ public:
 public slots:
     void openMaintanceList();
     void openDialog();
+    void solveItem(int index);
 
 signals:
     void stopRequest();
@@ -75,7 +77,6 @@ private:
 private slots:
     void acceptSlot();
     void rejectSlot();
-    void solveItem(int index);
 };
 
 #endif // MAINTANCEDIALOG_H

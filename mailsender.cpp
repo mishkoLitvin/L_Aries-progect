@@ -8,8 +8,13 @@ MailSender::MailSender(QObject *parent) : QObject(parent)
 
     senderAddr = new EmailAddress();
     recipientAddr = new EmailAddress();
-    this->message.setSender(this->senderAddr);
-    this->message.addRecipient(this->recipientAddr);
+
+    messageText = new MimeText();
+    message = new MimeMessage();
+    this->message->setContent(this->messageText);
+
+    this->message->setSender(this->senderAddr);
+    this->message->addRecipient(this->recipientAddr);
 
     this->setRecipientMailAdress();
     this->setRecipientName();
@@ -50,12 +55,19 @@ void MailSender::setSenderName(QString name)
     this->senderAddr->setName(name);
 }
 
-int MailSender::sendMessage(QString message, QString subject)
+int MailSender::sendMessage(QString messageStr, QString subject, bool clear)
 {
-    this->messageText.setText(message);
-    this->message.setSubject(subject);
-    this->message.addPart(&(this->messageText));
+    if(clear)
+    {
+        delete  messageText;
+        messageText = new MimeText(messageStr);
+    }
 
+    this->messageText->setText(messageStr);
+    this->message->setContent(this->messageText);
+
+    this->message->setSubject(subject);
+//    this->message.addPart(&(this->messageText));
     if (!smtp->connectToHost()) {
         QMessageBox msgBox;
         msgBox.setText(tr("E-mail error.\n"
@@ -74,7 +86,7 @@ int MailSender::sendMessage(QString message, QString subject)
         return -2;
     }
 
-    if (!smtp->sendMail(this->message)) {
+    if (!smtp->sendMail(*(this->message))) {
         QMessageBox msgBox;
         msgBox.setText(tr("E-mail error.\n"
                           "Failed to send mail."));
@@ -86,7 +98,7 @@ int MailSender::sendMessage(QString message, QString subject)
     return 0;
 }
 
-int MailSender::sendMessage(QString message)
+int MailSender::sendMessage(QString message, bool clear)
 {
-    return this->sendMessage(message, this->messageSubject);
+    return this->sendMessage(message, this->messageSubject, clear);
 }

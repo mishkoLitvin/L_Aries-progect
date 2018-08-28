@@ -59,14 +59,25 @@ public:
     {
         HeadPutingOn,
         HeadRemoving,
-        HeadProcessing}
-    HeadformType;
+        HeadProcessing
+    }HeadformType;
 
     HeadForm(QWidget *parent = 0);
     ~HeadForm();
 
-    typedef enum HeadformState_ {shirtOn, shirtOff, shirtProcessing} HeadformState;
-    typedef enum SettBtnPos_ {AtLeftUp, AtLeftDown, AtRightUp, AtRightDown } SettBtnPos;
+    typedef enum HeadformState_
+    {
+        shirtOn,
+        shirtOff,
+        shirtProcessing
+    }HeadformState;
+    typedef enum SettBtnPos_
+    {
+        AtLeftUp,
+        AtLeftDown,
+        AtRightUp,
+        AtRightDown
+    }SettBtnPos;
 
     void setIndex(int i);
     void setIndexLabelPosition(SettBtnPos position );
@@ -75,6 +86,10 @@ public:
     void setRagOn(bool state);
     void setIconPath(QString path);
     void setRagColor(QColor color);
+    void setStrokCount(int val);
+    void setStepBkStrCnt(int val);
+    void setDryPower(int val);
+    void setOff();
 
     HeadformState getRagState();
     void setHeadformType(HeadformType type);
@@ -88,7 +103,7 @@ signals:
 
 private:
     Ui::HeadForm *ui;
-    QLabel *labelIndex;
+    QLabel *labelIndex, *labelStrokCnt, *labelStBkStr;
     QImage pixShirtShow, pixShirtHide, pixShirtAnimate;
     QGraphicsColorizeEffect *graphEffect;
     QString pathImage;
@@ -101,6 +116,8 @@ private:
     QGraphicsPixmapItem *grPixLogoItem;
     QGraphicsRectItem *grRectBkgrItem;
     QRect grSize;
+    HeadForm::SettBtnPos labelPos;
+
 protected:
     void mousePressEvent(QMouseEvent *event);
 };

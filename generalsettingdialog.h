@@ -15,11 +15,11 @@
 #include "serialsettingsdialog.h"
 
 struct EmailSettings{
-    QString senderAdress;
-    QString senderPassword;
-    QString receiverAdress;
-    QString emailSubject;
-    bool mailEnable;
+    QString senderAdress = "sender@server.com";
+    QString senderPassword = "sender_PSW";
+    QString receiverAdress = "receiver@server.com";
+    QString emailSubject = "Subject";
+    bool mailEnable = false;
 };
 
 Q_DECLARE_METATYPE(EmailSettings)

@@ -271,7 +271,12 @@ void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParamete
                             msgStrRow2 = "Head "+errMasages->value("HEAD/err"+QString::number(errMessage-2001),"").toString();
                         }
     if(errMessage!=0)
-        ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+"\n"+tr("\nPlease press Reset button."));
+        ui->labelInfo->setText(msgStrRow1+"\n"+msgStrRow2+tr("\nPlease press Reset button."));
+}
+
+void InfoWidget::setText(QString text)
+{
+    ui->labelInfo->setText(text);
 }
 
 void InfoWidget::changeEvent(QEvent* event)

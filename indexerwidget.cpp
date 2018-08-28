@@ -370,6 +370,9 @@ void IndexerWidget::settingPButtonClicSlot()
 void IndexerWidget::setState(u_int16_t state)
 {
     uint8_t hb = ((state>>8)&0x00FF);
+
+    MachineSettings::setMachineIdle(hb == 7);
+
     ui->pButtonReset->setVisible((hb == 0)|(hb == 17)|(hb == 18));
     ui->pButtonHome->setVisible(hb == 2);
 
@@ -418,6 +421,19 @@ void IndexerWidget::setState(u_int16_t state)
             ui->pButtonPrint->setIcon(QIcon(pathIcon+"/playP.png"));
         }
     }
+}
+
+void IndexerWidget::resetWidget()
+{
+    ui->pButtonPrint->setChecked(false);
+    ui->pButtonPrint->setText(tr("Print Auto"));
+    ui->pButtonPrint->setIcon(QIcon(pathIcon+"/play.png"));
+    ui->pButtonMoveUp->setChecked(false);
+    ui->pButtonMoveUp->setText(tr("Up"));
+    ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowUPart.png"));
+    ui->pButtonAuto->setChecked(false);
+    ui->pButtonAuto->setText(tr("Auto"));
+    ui->pButtonAuto->setIcon(QIcon(pathIcon+"/play.png"));
 }
 
 void IndexerWidget::resizeEvent(QResizeEvent *e)

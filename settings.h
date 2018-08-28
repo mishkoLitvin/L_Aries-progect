@@ -85,6 +85,8 @@ public:
 
     typedef enum HeadCommandsEn_{
         Idle = 0,
+        Head_OnOff = 0x01F4,
+        ChangeRagState = 0x0190,
         MoveRear = 0x0672,
         MoveFront,
         MoveTest,
@@ -241,6 +243,7 @@ public:
 
     static bool serviceWidgetsEn;
     static MachineType machineTypeStat;
+    static bool machineIdle;
 
 public:
     static bool getServiceWidgEn();
@@ -248,6 +251,9 @@ public:
 
     static MachineType getMachineType();
     static void setMachineType(MachineType mType);
+
+    static bool getMachineIdle();
+    static void setMachineIdle(bool idle);
 
     //=================================================================================
     //this part of code is mustwrited becose machine will not start without this data

@@ -64,17 +64,17 @@ QT_USE_NAMESPACE
 QT_BEGIN_NAMESPACE
 
 struct ComSettings {
-    QString name;
-    qint32 baudRate;
-    QString stringBaudRate;
-    QSerialPort::DataBits dataBits;
-    QString stringDataBits;
-    QSerialPort::Parity parity;
-    QString stringParity;
-    QSerialPort::StopBits stopBits;
-    QString stringStopBits;
-    QSerialPort::FlowControl flowControl;
-    QString stringFlowControl;
+    QString name = "/dev/ttyS0";
+    qint32 baudRate = 38400;
+    QString stringBaudRate = "38400";
+    QSerialPort::DataBits dataBits = QSerialPort::Data8;
+    QString stringDataBits = "8";
+    QSerialPort::Parity parity = QSerialPort::OddParity;
+    QString stringParity = "Odd";
+    QSerialPort::StopBits stopBits = QSerialPort::OneStop;
+    QString stringStopBits = "1";
+    QSerialPort::FlowControl flowControl = QSerialPort::NoFlowControl;
+    QString stringFlowControl = "None";
     bool localEchoEnabled;
 
     ComSettings operator =(ComSettings nSett);

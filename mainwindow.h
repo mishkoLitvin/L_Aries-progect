@@ -83,6 +83,7 @@ private:
     MailSender *mailSender;
     UserSettingDialog *usersSettingDialog;
     MaintanceDialog* maintanceDialog;
+    MaintanceWidget* maintanceWidget;
     CyclesDialog* cycleDialog;
     HeadActivationDialog *headActDialog;
     ReprogramDialog *reprogramDialog;
@@ -114,7 +115,6 @@ private:
     bool autoPrintEnabled;
     QString userName;
     Register *registers;
-    uint8_t serviceCounter;
     QTranslator translator;
 
     QStringList headStylesStr;
@@ -161,6 +161,7 @@ private slots:
     void startPrintProcess(bool autoPrint);
     void stopPrintProcess();
     void maintanceWorkSlot(bool enable);
+    void showMaintananceWidget();
     void setIconFolder(int index);
     void setBackGround(bool enable, bool request = false);
     void updateTimeSlot();

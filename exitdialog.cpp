@@ -13,12 +13,18 @@ ExitDialog::~ExitDialog()
     delete ui;
 }
 
-ExitDialog::ExitCode ExitDialog::tryExit(QWidget *parent)
+ExitDialog::ExitCode ExitDialog::tryExit(QWidget *parent, bool logOutEn)
 {
     ExitDialog dialog(parent);
+    dialog.setLogOutEn(logOutEn);
     dialog.move(parent->width()/2-dialog.width()/2, parent->height()/2-dialog.height()/2);
     dialog.exec();
     return dialog.exitCode;
+}
+
+void ExitDialog::setLogOutEn(bool en)
+{
+    ui->pButtonLogOut->setVisible(en);
 }
 
 void ExitDialog::on_pButtonTurnOff_clicked()
@@ -57,11 +63,18 @@ void ExitDialog::on_pButtonReprogram_clicked()
     this->accept();
 }
 
-void ExitDialog::on_pushButton_clicked()
+void ExitDialog::on_pushButtonCancel_clicked()
 {
     this->exitCode = Continue;
     this->accept();
 }
+
+void ExitDialog::on_pButtonLogOut_clicked()
+{
+    this->exitCode = LogOut;
+    this->accept();
+}
+
 
 void ExitDialog::showEvent(QShowEvent *ev)
 {
@@ -76,3 +89,4 @@ void ExitDialog::changeEvent(QEvent* event)
         ui->retranslateUi(this);
     }
 }
+

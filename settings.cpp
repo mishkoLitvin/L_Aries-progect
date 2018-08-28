@@ -303,6 +303,7 @@ void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifPa
 
 bool MachineSettings::serviceWidgetsEn;
 MachineSettings::MachineType MachineSettings::machineTypeStat;
+bool MachineSettings::machineIdle;
 uint16_t MachineSettings::headMaxRangeStat;
 uint16_t MachineSettings::headTypeStat;
 uint16_t MachineSettings::indexerLiftTypeStat;
@@ -420,6 +421,16 @@ MachineSettings::MachineType MachineSettings::getMachineType()
 void MachineSettings::setMachineType(MachineSettings::MachineType mType)
 {
     MachineSettings::machineTypeStat = mType;
+}
+
+bool MachineSettings::getMachineIdle()
+{
+    return MachineSettings::machineIdle;
+}
+
+void MachineSettings::setMachineIdle(bool idle)
+{
+    MachineSettings::machineIdle = idle;
 }
 
 uint16_t MachineSettings::getHeadMaxRange()

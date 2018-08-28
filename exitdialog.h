@@ -20,6 +20,7 @@ public:
 
     typedef enum ExitCode_{
         Continue,
+        LogOut,
         Shutdown,
         ExitFromProgram,
         ReprogramMachine,
@@ -28,7 +29,8 @@ public:
         RestartMachine
     }ExitCode;
 
-    static ExitCode tryExit(QWidget *parent);
+    static ExitCode tryExit(QWidget *parent, bool logOutEn = false);
+    void setLogOutEn(bool en);
 
 private:
     ExitCode exitCode;
@@ -40,10 +42,10 @@ private slots:
     void on_pButtonServiceMode_clicked();
     void on_pButtonExitApp_clicked();
     void on_pButtonReprogram_clicked();
+    void on_pButtonLogOut_clicked();
 
+    void on_pushButtonCancel_clicked();
 
-
-    void on_pushButton_clicked();
 
 private:
     Ui::ExitDialog *ui;

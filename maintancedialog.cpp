@@ -112,6 +112,11 @@ void MaintanceDialog::setMaintanceType(MaintanceDialog::MaintanceType mType)
         ui->labelIcon->setStyleSheet("background-color: red");
 }
 
+QList<MaintanceElement> MaintanceDialog::getUnsolvedList()
+{
+    return this->unsolvedList;
+}
+
 void MaintanceDialog::acceptSlot()
 {
     doItNow = true;
@@ -231,8 +236,9 @@ void MaintanceDialog::check(int cyclesCount)
 
 void MaintanceDialog::openMaintanceList()
 {
-    maintanceWidget->setElemets(this->unsolvedList);
-    maintanceWidget->show();
+//    maintanceWidget->setElemets(this->unsolvedList);
+//    maintanceWidget->show();
+//    this->show();
 }
 
 void MaintanceDialog::openDialog()

@@ -13,15 +13,15 @@ class MailSender : public QObject
 public:
     explicit MailSender(QObject *parent = 0);
 
-    int sendMessage(QString message, QString subject);
-    int sendMessage(QString message);
+    int sendMessage(QString messageStr, QString subject, bool clear = true);
+    int sendMessage(QString message, bool clear = true);
 
 private:
     SmtpClient *smtp;
-    MimeMessage message;
+    MimeMessage *message;
     EmailAddress *senderAddr;
     EmailAddress *recipientAddr;
-    MimeText messageText;
+    MimeText *messageText;
     QString messageSubject;
 
 
