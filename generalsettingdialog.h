@@ -121,6 +121,8 @@ private slots:
 
     void on_pButtonWarming_clicked();
 
+    void on_pButtonCounters_clicked();
+
 protected:
     bool event(QEvent *e);
     bool eventFilter(QObject *watched, QEvent *event);

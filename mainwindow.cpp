@@ -431,6 +431,9 @@ void MainWindow::getSerialData(ModData modData)
                 indexer->setState(modData.fileds.data);
                 ui->pButtonLoadJob->setEnabled(MachineSettings::getMachineIdle());
                 ui->pButtonSaveJob->setEnabled(MachineSettings::getMachineIdle());
+                ui->pButtonExit->setEnabled(MachineSettings::getMachineIdle());
+                ui->pButtonSetting->setEnabled(MachineSettings::getMachineIdle());
+                ui->pButtonWarming->setEnabled(MachineSettings::getMachineIdle());
                 bArr.append(static_cast<char>(MachineSettings::MasterDevice));
                 bArr.append(static_cast<char>(Register::masterReg_EKR));
                 bArr.append(static_cast<char>(modData.fileds.data>>8));
@@ -1029,6 +1032,9 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
                                           "subcontrol-position: left;"
                                           "}"
                                           );
+    ui->widgetHeads->setStyleSheet("#widgetHeads{"
+                                   "background-color: rgba(255, 255, 255, 0);"
+                                   "border-style: none;}");
     ui->widgetLiftOffcet->setStyleSheet("border-style: outset; background-color: rgba(255, 255, 255, 0);");
     ui->dSpinBoxStepDelay->setStyleSheet(ui->dSpinBoxLiftOffcet->styleSheet());
     ui->widgetStepDelay->setStyleSheet(ui->widgetLiftOffcet->styleSheet());
@@ -1882,6 +1888,7 @@ void MainWindow::on_pButtonWarming_clicked()
             headSettButton[i]->setVisible(true);
     }
     machineSettings.machineParam.lastRevWarm.field.warm = ui->pButtonWarming->isChecked();
+
     QByteArray cmdArr;
     int data;
     cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexerDevice&0x00FF));

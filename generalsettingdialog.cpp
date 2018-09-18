@@ -650,3 +650,8 @@ void GeneralSettingDialog::on_pButtonWarming_clicked()
     emit this->warmingStateChanged(ui->pButtonWarming->isChecked());
 
 }
+
+void GeneralSettingDialog::on_pButtonCounters_clicked()
+{
+
+}

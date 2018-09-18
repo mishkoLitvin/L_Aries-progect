@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>450</width>
-    <height>657</height>
+    <height>648</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -853,8 +853,8 @@ Screw pitch</string>
             <widget class="QToolButton" name="pButtonDirection">
              <property name="minimumSize">
               <size>
-               <width>80</width>
-               <height>70</height>
+               <width>65</width>
+               <height>65</height>
               </size>
              </property>
              <property name="text">
@@ -867,8 +867,8 @@ clock</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>35</width>
-               <height>35</height>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="checkable">
@@ -886,8 +886,8 @@ clock</string>
             <widget class="QToolButton" name="pButtonCyclesEnable">
              <property name="minimumSize">
               <size>
-               <width>80</width>
-               <height>70</height>
+               <width>65</width>
+               <height>65</height>
               </size>
              </property>
              <property name="text">
@@ -900,8 +900,8 @@ Disable</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>35</width>
-               <height>35</height>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="checkable">
@@ -919,8 +919,8 @@ Disable</string>
             <widget class="QToolButton" name="pButtonWarming">
              <property name="minimumSize">
               <size>
-               <width>80</width>
-               <height>70</height>
+               <width>65</width>
+               <height>65</height>
               </size>
              </property>
              <property name="text">
@@ -933,8 +933,8 @@ Disable</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>35</width>
-               <height>35</height>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="checkable">
@@ -949,16 +949,16 @@ Disable</string>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="pButtonHeadsActivation">
+            <widget class="QToolButton" name="pButtonCounters">
              <property name="minimumSize">
               <size>
-               <width>80</width>
-               <height>70</height>
+               <width>65</width>
+               <height>65</height>
               </size>
              </property>
              <property name="text">
-              <string>Heads
-activation</string>
+              <string>Set
+Counters</string>
              </property>
              <property name="icon">
               <iconset>
@@ -966,15 +966,15 @@ activation</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>35</width>
-               <height>35</height>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="checkable">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="checked">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="toolButtonStyle">
               <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -1052,6 +1052,39 @@ activation</string>
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QToolButton" name="pButtonHeadsActivation">
+             <property name="minimumSize">
+              <size>
+               <width>65</width>
+               <height>65</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Heads
+activation</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/new/icons/icons/rotateRight.png</normaloff>:/new/icons/icons/rotateRight.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QToolButton" name="pButtonServiceState">
