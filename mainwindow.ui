@@ -327,6 +327,35 @@
            </widget>
           </item>
           <item>
+           <widget class="QToolButton" name="pButtonWarming">
+            <property name="minimumSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Warming</string>
+            </property>
+            <property name="icon">
+             <iconset resource="icons.qrc">
+              <normaloff>:/new/icons/icons/Base/warmingOn.png</normaloff>:/new/icons/icons/Base/warmingOn.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pButtonMaintance">
             <property name="text">
              <string>Maintenance</string>
@@ -363,7 +392,7 @@
          </spacer>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="layoutIndexer"/>
+         <layout class="QHBoxLayout" name="layoutIndexer"/>
         </item>
         <item>
          <spacer name="horizontalSpacer_2">

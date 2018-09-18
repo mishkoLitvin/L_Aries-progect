@@ -20,7 +20,7 @@ HeadActivationDialog::HeadActivationDialog(int headCount, QWidget *parent) :
                                   i-(headCount/2*(i/(headCount/2))),
                                   i/(headCount/2));
 
-        checkBoxList[i]->setStyleSheet(this->styleSheet()+
+        checkBoxList[+i]->setStyleSheet(this->styleSheet()+
                                        "QCheckBox{border: 1px solid; border-radius: 3px;}"
                                        "QCheckBox::indicator{width: 55px;height: 55px;}"
                                        "QCheckBox::indicator::unchecked {image: url(:/new/icons/icons/Base/uncheck.png);}"
@@ -139,6 +139,7 @@ void HeadActivationDialog::headStateChanged(int index)
     cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(cmdArr);
 
+    emit this->headStateChangedSignal(index, checkBoxList[index]->isChecked());
 }
 
 bool HeadActivationDialog::event(QEvent *e)

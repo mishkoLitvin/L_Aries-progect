@@ -59,6 +59,7 @@ public:
 
 signals:
     void sendCommand(QByteArray cmd);
+    void headStateChangedSignal(int index, bool state);
 
 private slots:
     void pushButtonOK_clicked();

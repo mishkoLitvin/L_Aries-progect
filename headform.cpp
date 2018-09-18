@@ -16,9 +16,13 @@ HeadForm::HeadForm(QWidget *parent) :
 
     this->headformType = HeadProcessing;
 
-    pixShirtShow.load(":/new/icons/icons/Base/tt.png");
-    pixShirtHide.load(":/new/icons/icons/Base/blank.png");
-    pixShirtAnimate.load(":/new/icons/icons/Base/tt3.png");
+    imgShirtShow.load(":/new/icons/icons/Base/tt.png");
+    imgShirtHide.load(":/new/icons/icons/Base/blank.png");
+    imgShirtAnimate.load(":/new/icons/icons/Base/tt3.png");
+
+    pixShirtShow = QPixmap::fromImage(imgShirtShow.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+    pixShirtHide = QPixmap::fromImage(imgShirtHide.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+    pixShirtAnimate = QPixmap::fromImage(imgShirtAnimate.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
 
     graphEffect = new QGraphicsColorizeEffect();
 
@@ -44,7 +48,7 @@ HeadForm::HeadForm(QWidget *parent) :
     QBrush grBrash;
     grRectBkgrItem = grScene->addRect(grSize, QPen(QColor(Qt::transparent),0),grBrash);
 
-    grPixLogoItem = grScene->addPixmap(QPixmap::fromImage(pixShirtHide));
+    grPixLogoItem = grScene->addPixmap(QPixmap::fromImage(imgShirtHide));
 }
 
 HeadForm::~HeadForm()
@@ -126,17 +130,17 @@ void HeadForm::setPixmap(HeadformState state, QString stStr)
     switch(state){
     case shirtOff:
         ui->graphicsView->setStyleSheet(stStr+" border-style: none;");
-        grPixLogoItem->setPixmap(QPixmap::fromImage(pixShirtHide.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio)));
+        grPixLogoItem->setPixmap(pixShirtHide);
         headformState = shirtOff;
         break;
     case shirtOn:
         ui->graphicsView->setStyleSheet(stStr+" border-style: none;");
-        grPixLogoItem->setPixmap(QPixmap::fromImage(pixShirtShow.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio)));
+        grPixLogoItem->setPixmap(pixShirtShow);
         headformState = shirtOn;
         break;
     case shirtProcessing:
         ui->graphicsView->setStyleSheet(stStr+" border-style: none;");
-        grPixLogoItem->setPixmap(QPixmap::fromImage(pixShirtAnimate.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio)));
+        grPixLogoItem->setPixmap(pixShirtAnimate);
         headformState = shirtProcessing;
         break;
     }
@@ -159,9 +163,14 @@ void HeadForm::setRagOn(bool state)
 void HeadForm::setIconPath(QString path)
 {
     pathImage = path;
-    pixShirtShow.load(path+"/tt.png");
-    pixShirtHide.load(path+"/blank.png");
-    pixShirtAnimate.load(path+"/tt3.png");
+    imgShirtShow.load(path+"/tt.png");
+    imgShirtHide.load(path+"/blank.png");
+    imgShirtAnimate.load(path+"/tt3.png");
+
+    pixShirtShow = QPixmap::fromImage(imgShirtShow.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+    pixShirtHide = QPixmap::fromImage(imgShirtHide.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+    pixShirtAnimate = QPixmap::fromImage(imgShirtAnimate.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+
     this->setPixmap(shirtOff);
 }
 

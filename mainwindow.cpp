@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QString setPath = settings->value("LAST_PATH", "./settings.ini").toString();
     delete settings;
     settings = new QSettings(setPath, QSettings::IniFormat);
-    qDebug()<<settings->fileName();
 
     this->getLangFile(settings->value("STYLE/LANG_SEL_INDEX", -1).toInt());
     this->setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
@@ -48,6 +47,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->layoutIndexer->addWidget(indexer);
     connect(indexer, SIGNAL(startPrint(bool)), this, SLOT(startPrintProcess(bool)));
     connect(indexer, SIGNAL(stopPrint()), this, SLOT(stopPrintProcess()));
+
+    warming = new WarmingWidget(this);
+    ui->layoutIndexer->addWidget(warming);
+    warming->setVisible(false);
+    connect(warming, SIGNAL(sendCommand(QByteArray)), this, SLOT(getWarmingCommand(QByteArray)));
 
     indexerLiftSetDialog = new IndexerSettingDialog();
     indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS", QVariant::fromValue(this->indexerLiftSettings.indexerParam.toByteArray())).value<QByteArray>(),
@@ -86,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(unloadStateChanged(bool)), this, SLOT(setUnloadState(bool)));
     connect(generalSettingDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getMachineCommand(QByteArray)));
     connect(generalSettingDialog, SIGNAL(imageRequest(bool, bool)), this, SLOT(setBackGround(bool,bool)));
-
+    connect(generalSettingDialog, SIGNAL(warmingStateChanged(bool)), this, SLOT(getWarmingEnable(bool)));
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS", QVariant::fromValue(EmailSettings())).value<EmailSettings>().senderAdress);
@@ -104,7 +108,6 @@ MainWindow::MainWindow(QWidget *parent) :
     stList.append("background-color:#8888AA;"); stList.append("background-color:#AA88AA;"); stList.append("background-color:#AA8888;");
     for(i = 0; i<7; i++)
         headStylesStr.append(settings->value("STYLE/HEAD_STYLES_"+QString::number(i), stList[i]).toString());
-    qDebug()<<headStylesStr;
     this->headsInit();
 
     infoWidget = new InfoWidget(ui->widgetHeads);
@@ -137,6 +140,7 @@ MainWindow::MainWindow(QWidget *parent) :
     infoWidget->setRegisterPointer(this->registers);
     indexerLiftSetDialog->setRegisters(this->registers);
     headSettingDialog->setRegisters(this->registers);
+    warming->setRegisters(this->registers);
 
     for(i = 0; i < this->headsCount; i++)
     {
@@ -172,7 +176,7 @@ MainWindow::MainWindow(QWidget *parent) :
     reprogramDialog = new ReprogramDialog(this);
     connect(reprogramDialog, SIGNAL(programArrReady(ReprogramDialog::BoardType, QByteArray)), comPort, SLOT(sendProgram(ReprogramDialog::BoardType, QByteArray)));
     connect(comPort, SIGNAL(proramProgres(int)), reprogramDialog, SLOT(setProgress(int)));
-
+    connect(reprogramDialog, SIGNAL(reprogramDialogFinished()), this, SLOT(watchDogTimeout()));
 }
 
 MainWindow::~MainWindow()
@@ -322,7 +326,6 @@ void MainWindow::generalSettingDialogRequest()
         generalSettingDialog->move(this->pos().x()+this->width()-400,
                                    this->pos().y()+10);
     }
-
     generalSettingDialog->show();
 
 }
@@ -414,13 +417,13 @@ void MainWindow::getSerialData(ModData modData)
         case MachineSettings::MasterDevice:
             switch (modData.fileds.registerNo) {
             case Register::masterReg_ACTIVHEAD_L:
-//                headActDialog->setHeadActivState((headActDialog->getHeadActivState()|0x0000FFFF)
-//                                                 &(modData.fileds.data|0xFFFF0000));
+                headActDialog->setHeadActivState((headActDialog->getHeadActivState()|0x0000FFFF)
+                                                 &(modData.fileds.data|0xFFFF0000));
                 break;
             case Register::masterReg_ACTIVHEAD_H:
-//                headActDialog->setHeadActivState(((uint32_t)registers->readReg(MachineSettings::MasterDevice, Register::masterReg_ACTIVHEAD_L))
-//                                                 |(((uint32_t)registers->readReg(MachineSettings::MasterDevice, Register::masterReg_ACTIVHEAD_H)<<16)&0xFFFF0000));
-//                settings->setValue("HEAD/ACTIVATION", headActDialog->getHeadActivState());
+                headActDialog->setHeadActivState(((uint32_t)registers->readReg(MachineSettings::MasterDevice, Register::masterReg_ACTIVHEAD_L))
+                                                 |(((uint32_t)registers->readReg(MachineSettings::MasterDevice, Register::masterReg_ACTIVHEAD_H)<<16)&0xFFFF0000));
+                settings->setValue("HEAD/ACTIVATION", headActDialog->getHeadActivState());
 //                qDebug()<<"Heads activation:"<<headActDialog->getHeadActivState();
                 break;
             case Register::masterReg_EKR:
@@ -615,6 +618,7 @@ void MainWindow::getSerialData(ModData modData)
                 }
             else
                 headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[0]);
+            headSettButton[i]->setEnabled(headActDialog->getHeadActivAtIndex(i));
         }
     }
 }
@@ -664,7 +668,7 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
         }
     else
         headButton[index]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
-
+    headSettButton[index-1]->setEnabled(headActDialog->getHeadActivAtIndex(index));
 
 }
 
@@ -677,7 +681,7 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
     {
         if((cnt<headsCount-1)|(!this->machineSettings.machineParam.useUnloadHead))
         {
-            settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
+//            settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
 
             HeadSetting::setHeadOn_OffStateInd(cnt, static_cast<bool>(hParamArr[2]&0x01));
 
@@ -697,7 +701,6 @@ void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
                 cmdArr.append(static_cast<char>(data&0x00FF));
                 comPort->sendData(cmdArr);
             }
-            qDebug()<<headSettings.headParam.dryPowerQ;
             settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
             if(static_cast<bool>(t_headOn)>0)
                 switch (static_cast<HeadSetting::HeadOnType>(t_headOn&0x00FF))
@@ -783,6 +786,12 @@ void MainWindow::getHeadActivCommand(QByteArray commandArr)
 {
     comPort->sendData(commandArr);
     settings->setValue("HEAD/ACTIVATION", headActDialog->getHeadActivState());
+}
+
+void MainWindow::getHeadActiveState(int index, bool state)
+{
+    headSettButton[index-1]->setEnabled(state);
+    headSettButton[index-1]->setEnabled(headActDialog->getHeadActivAtIndex(index));
 }
 
 void MainWindow::getCyclesCommand(QByteArray commandArr)
@@ -885,6 +894,21 @@ void MainWindow::getMachineCommand(QByteArray commandArr)
     comPort->sendData(commandArr);
 }
 
+void MainWindow::getWarmingCommand(QByteArray commandArr)
+{
+    comPort->sendData(commandArr);
+}
+
+void MainWindow::getWarmingEnable(bool enable)
+{
+    ui->pButtonWarming->setVisible(enable);
+    if(!enable)
+    {
+        indexer->setVisible(true);
+        warming->setVisible(false);
+    }
+}
+
 void MainWindow::getMachineParam(QByteArray machineParamArr)
 {
     settings->setValue("MACHINE_PARAMS", machineParamArr);
@@ -913,8 +937,8 @@ void MainWindow::getMachineParam(QByteArray machineParamArr)
 //            this->setHeadsPosition();
             break;
         case QMessageBox::Discard:
-            machineParamArr[0] = headsCount&0x00FF;
-            machineParamArr[1] = (headsCount>>8)&0x00FF;
+            machineParamArr[0] = static_cast<char>(headsCount&0x00FF);
+            machineParamArr[1] = static_cast<char>((headsCount>>8)&0x00FF);
             settings->setValue("MACHINE_PARAMS", machineParamArr);
             break;
         }
@@ -1028,27 +1052,35 @@ void MainWindow::getLangFile(int langIndex)
 
 void MainWindow::serviceStateChange()
 {
-    QByteArray passwordBArr;
-    if(!logedInService){
-        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
-    }
-    if(logedInService || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL", 19442)))
+    if(!MachineSettings::getServiceWidgEn())
     {
-        MachineSettings::setServiceWidgEn(true);
-        logedInService = true;
-        machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
-        generalSettingDialog->setMachineSetting(machineSettings.machineParam);
+        QByteArray passwordBArr;
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
+
+        if(logedInService || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == settings->value("PASSWORDS/PASSWORD_GENERAL", 19442)))
+        {
+            MachineSettings::setServiceWidgEn(true);
+            machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
+            generalSettingDialog->setMachineSetting(machineSettings.machineParam);
+        }
+        else
+        {
+            MachineSettings::setServiceWidgEn(false);
+            QMessageBox msgBox;
+            msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
+            msgBox.setText(tr("Wrong password!"));
+            msgBox.setWindowTitle(tr("Password"));
+            msgBox.exec();
+        }
     }
     else
-    {
         MachineSettings::setServiceWidgEn(false);
-        QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
-        msgBox.setText(tr("Wrong password!"));
-        msgBox.setWindowTitle(tr("Password"));
-        msgBox.exec();
-    }
     this->generalSettingDialogRequest();
+    indexer->setSettingEnable(MachineSettings::getServiceWidgEn());
+}
+
+void MainWindow::warmingStateChange(bool state)
+{
 }
 
 void MainWindow::exitProgram(bool restart)
@@ -1153,6 +1185,9 @@ void MainWindow::exitProgram(bool restart)
         switch (exitCode) {
         case ExitDialog::ReprogramMachine:
         {
+            watchDog->stop();
+            indexer->setState(0x0);
+            infoWidget->setIndicatorState(0x704);
             ComSettings comSett = settings->value("COM_SETTING", QVariant::fromValue(ComSettings())).value<ComSettings>();
             comSett.stringBaudRate = "19200";
             comSett.stringParity = "None";
@@ -1228,16 +1263,12 @@ void MainWindow::loadJob()
 
     indexerLiftSetDialog->setLiftDistance(indexerLiftSettings.indexerParam.distance/100.f,
                                           this->machineSettings.machineParam.liftGearRatio);
-//    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexDistance);
-//    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexHomeOffset);
-//    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexDistOffcet);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeed);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAcceleration);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeedRet);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAccelerationRet);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayDown);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayUp);
-//    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftHomeOffcet);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftSpeed);
     comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftAcceleration);
 
@@ -1400,12 +1431,6 @@ void MainWindow::setHeadsPosition()
                                  infoWidget->pos().y()-ui->widgetLiftOffcet->height());
     ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
                                  infoWidget->pos().y()+infoWidget->height()+6);
-//    infoWidget->move(ui->widgetHeads->width()/2-infoWidget->width()/2, ui->widgetHeads->height()/2+18-infoWidget->height()/2);
-
-//    ui->widgetLiftOffcet->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
-//                                 infoWidget->pos().y()-ui->widgetLiftOffcet->height());
-//    ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
-//                                 infoWidget->pos().y()+infoWidget->height()+6);
 }
 
 void MainWindow::indexerStepFinish()
@@ -1483,6 +1508,7 @@ void MainWindow::setIconFolder(int index)
     if(list.length()>index)
     {
         QString path = list[index];
+        this->pathIcon = path;
         settings->setValue("STYLE/ICON_SEL_INDEX", index);
 
         ui->pButtonExit->setIcon(QIcon(path+"/exit.png"));
@@ -1492,8 +1518,8 @@ void MainWindow::setIconFolder(int index)
         ui->pButtonMaintance->setIcon(QIcon(path+"/warning.png"));
         ui->pButtonCyclesSetup->setIcon(QIcon(path+"/cycles.png"));
 
-
         indexer->setIconFolder(path);
+        warming->setIconFolder(path);
         headSettingDialog->setIconFolder(path);
         generalSettingDialog->setIconFolder(path);
 
@@ -1505,6 +1531,17 @@ void MainWindow::setIconFolder(int index)
             headSettButton[i]->setIconPath(path+"/settings.png");
 
         infoWidget->setIconFolder(path);
+
+        if(ui->pButtonWarming->isChecked())
+        {
+            ui->pButtonWarming->setText(tr("Disable\nwarming"));
+            ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOff.png"));
+        }
+        else
+        {
+            ui->pButtonWarming->setText(tr("Enable\nwarming"));
+            ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOn.png"));
+        }
     }
 }
 
@@ -1650,8 +1687,9 @@ void MainWindow::zeroStart()
 
     needCompleteReset = true;
 
-    MachineSettings::serviceWidgetsEn = false;
+    MachineSettings::serviceWidgetsEnStat = false;
     this->exitCode = ExitDialog::Continue;
+    indexer->setSettingEnable(false);
 
     logedInHeadSettings = false;
     logedInIndexer = false;
@@ -1703,11 +1741,15 @@ void MainWindow::zeroStart()
     ui->labelDate->setStyleSheet("font: 13px; font-style:italic; font-family:\"Linux Libertine Mono O\"");
     ui->labelUserName->setStyleSheet("font: 13px; font-style:italic; font-family:\"Linux Libertine Mono O\"");
 
+    ui->pButtonWarming->setVisible(machineSettings.machineParam.lastRevWarm.field.warm);
+    ui->pButtonWarming->setChecked(false);
+    ui->pButtonWarming->setText(tr("Enable\nwarming"));
+    ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOn.png"));
 
     timeProgramStart = QTime::currentTime();
     ui->labelTime->setText(timeProgramStart.toString("HH:mm"));
     ui->labelDate->setText(QDate::currentDate().toString("ddd, dd/MM/yyyy"));
-    watchDog->start();
+//    watchDog->start();
     updateTime->start(30000);
 }
 
@@ -1718,10 +1760,11 @@ void MainWindow::headsInit()
     else
         headsCount+=1;
 
-    headActDialog = new HeadActivationDialog(headsCount, this);
+    headActDialog = new HeadActivationDialog(headsCount-this->machineSettings.machineParam.useUnloadHead, this);
     headActDialog->setHeadActivState(settings->value("HEAD/ACTIVATION", 0).toInt());
     connect(generalSettingDialog, SIGNAL(headActivationRequest()), headActDialog, SLOT(show()));
     connect(headActDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getHeadActivCommand(QByteArray)));
+    connect(headActDialog, SIGNAL(headStateChangedSignal(int, bool)), this, SLOT(getHeadActiveState(int, bool)));
 
     int i;
     for(i = 0; i<headsCount; i++)
@@ -1763,6 +1806,7 @@ void MainWindow::headsInit()
             if((i>=(3*headsCount)/4)&(i<(headsCount)))
                 headButton[i]->setIndexLabelPosition(HeadForm::AtLeftUp);
             connect(headSettButton[i-1], SIGNAL(settingButtonCliced(int)), this, SLOT(headSettingRequest(int)));
+            headSettButton[i-1]->setEnabled(headActDialog->getHeadActivAtIndex(i));
         }
     }
 }
@@ -1813,4 +1857,40 @@ void MainWindow::changeEvent(QEvent* event)
         ui->retranslateUi(this);
     }
     QMainWindow::changeEvent(event);
+}
+
+void MainWindow::on_pButtonWarming_clicked()
+{
+    if(ui->pButtonWarming->isChecked())
+    {
+        indexer->setVisible(false);
+        warming->setVisible(true);
+        ui->pButtonWarming->setText(tr("Disable\nwarming"));
+        ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOff.png"));
+        int i;
+        for(i = 0; i<headSettButton.length(); i++)
+            headSettButton[i]->setVisible(false);
+    }
+    else
+    {
+        warming->setVisible(false);
+        indexer->setVisible(true);
+        ui->pButtonWarming->setText(tr("Enable\nwarming"));
+        ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOn.png"));
+        int i;
+        for(i = 0; i<headSettButton.length(); i++)
+            headSettButton[i]->setVisible(true);
+    }
+    machineSettings.machineParam.lastRevWarm.field.warm = ui->pButtonWarming->isChecked();
+    QByteArray cmdArr;
+    int data;
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexerDevice&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexLastRevolvWarm&0x00FF));
+    data = machineSettings.machineParam.lastRevWarm.all;
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
 }

@@ -113,3 +113,9 @@ void ReprogramDialog::on_pushButtonWrite_clicked()
     }
 }
 
+
+void ReprogramDialog::on_pushButtonCancel_clicked()
+{
+    emit this->reprogramDialogFinished();
+    this->hide();
+}

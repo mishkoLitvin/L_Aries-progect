@@ -12,16 +12,15 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     ExitDialog::ExitCode eCode = ExitDialog::Continue;
-//    LogoDialog lD;
-//    lD.exec();
+
     while ((eCode == ExitDialog::Continue)|((eCode == ExitDialog::RestartProgram)|(eCode ==ExitDialog::RestartMachine))) {
         MainWindow w;
-        w.show();
         w.masterCodeCheck();
         w.userLogin();
+        w.show();
+
         res = a.exec();
         eCode = w.exitCode;
-//#ifdef DEBUG
 //        if(eCode ==ExitDialog::Shutdown)
 //        {
 //            QProcess proc;
@@ -35,7 +34,7 @@ int main(int argc, char *argv[])
 //        if(eCode ==ExitDialog::ExitFromProgram)
 //        {
 //            QProcess proc;
-//            proc.startDetached("./chDisp");
+//            proc.startDetached("chvt 7");
 //        }
     }
 

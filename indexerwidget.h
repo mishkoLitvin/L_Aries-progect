@@ -27,6 +27,7 @@ public:
     bool getIsAutoPrint();
     void setIconFolder(QString path);
     void clickButton(QByteArray data);
+    void setSettingEnable(bool enable);
 
 public slots:
     void printFinish();

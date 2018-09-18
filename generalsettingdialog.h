@@ -77,6 +77,7 @@ signals:
     void unloadStateChanged(bool state);
     void sendCommand(QByteArray command);
     void imageRequest(bool enable, bool req = false);
+    void warmingStateChanged(bool enable);
 
 private:
     Ui::GeneralSettingDialog *ui;
@@ -117,6 +118,8 @@ private slots:
     void on_pButtonHeadsActivation_clicked();
     void on_checkBoxUseBackgr_clicked();
     void on_pButtonSelectImg_clicked();
+
+    void on_pButtonWarming_clicked();
 
 protected:
     bool event(QEvent *e);

@@ -30,6 +30,7 @@ public:
 
 signals:
     void programArrReady(ReprogramDialog::BoardType type, QByteArray progArr);
+    void reprogramDialogFinished();
 
 public slots:
     void setProgress(int progress);
@@ -38,6 +39,7 @@ private slots:
     void on_pushButtonOpenFile_clicked();
     void on_pushButtonErase_clicked();
     void on_pushButtonWrite_clicked();
+    void on_pushButtonCancel_clicked();
 
 private:
     Ui::ReprogramDialog *ui;

@@ -189,7 +189,8 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
                                                          Register::headReg_RW2_TIME)/10.);
     ui->dSpinBoxDryingRangeIR->setValue(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
                                                            Register::headReg_RANGE_1)/10.);
-
+    ui->checkBoxQuartzTempSensor->setChecked(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
+                                                                Register::headReg_CONFIG)&0x01);
     acceptOnDeactilationEn = true;
     if(disconnect)
         this->connectAll();
@@ -280,7 +281,6 @@ void SettingDialog::setIconFolder(QString path)
     ui->tabWidget->setTabIcon(0, QIcon(path+"/brush.png"));
     ui->tabWidget->setTabIcon(1, QIcon(path+"/lamp.png"));
     ui->tabWidget->setTabIcon(2, QIcon(path+"/heat.png"));
-
 }
 
 void SettingDialog::accept()
@@ -553,8 +553,22 @@ void SettingDialog::eventFilterSetup()
 void SettingDialog::temperatureSensoreChanged(bool tempSens)
 {
     this->withTemperatureSensor = tempSens;
-    this->hide();
-    this->show();
+    QByteArray cmdArr;
+    uint16_t data;
+    if(tempSens)
+        data = registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index, Register::headReg_CONFIG)|0x01;
+    else
+        data = registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index, Register::headReg_CONFIG)&(0xFE);
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(Register::headReg_CONFIG&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+    ui->widgetQuartzWithoutTempSensor->setVisible(!withTemperatureSensor);
+    ui->widgetQuartzWithTempSensor->setVisible(withTemperatureSensor);
 }
 
 bool SettingDialog::event(QEvent *e)

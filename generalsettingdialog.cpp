@@ -77,7 +77,6 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     machineParamGl = machineParam;
     ui->spinBoxHeadsCount->setValue(machineParam.headCount);
     ui->dSpinBoxWarningTime->setValue(machineParam.warningTime/10.);
-    qDebug()<<machineParam.direction;
     if(machineParam.direction == -1)
     {
         ui->pButtonDirection->setChecked(false);
@@ -129,6 +128,18 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     {
         ui->pButtonUseUnload->setText(tr("Use\nunload palett"));
         ui->pButtonUseUnload->setIcon(QIcon(pathIcon+"/tt3.png"));
+    }
+
+    ui->pButtonWarming->setChecked(machineParam.lastRevWarm.field.warm);
+    if(machineParam.lastRevWarm.field.warm)
+    {
+        ui->pButtonWarming->setText(tr("Disable\nwarming"));
+        ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOff.png"));
+    }
+    else
+    {
+        ui->pButtonWarming->setText(tr("Enable\nwarming"));
+        ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOn.png"));
     }
 
 //    =============================================
@@ -218,6 +229,7 @@ void GeneralSettingDialog::accept()
         else
             machineParams.direction = -1;
         acceptEnable = false;
+        machineParams.lastRevWarm = machineParamGl.lastRevWarm;
         this->hide();
         emit this->machineParamChanged(machineParams.toByteArray());
     }
@@ -236,36 +248,34 @@ void GeneralSettingDialog::lockUnlockEmail()
 {
     acceptOnDeactilationEn = false;
     QByteArray passwordBArr;
-#ifndef DEBUG_BUILD
-    if(!logedInMail){
-        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
-    }
-    if(logedInMail || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->mailPassword))
-#endif
+    if(ui->pButtonLockUnlockEmail->isChecked())
     {
-        logedInMail = true;
-        if(ui->pButtonLockUnlockEmail->isChecked()){
+        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
+        if(CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->mailPassword)
+        {
             ui->emailSettingWidget->setEnabled(true);
             ui->checkBoxMailSendEnable->setEnabled(true);
             ui->pButtonLockUnlockEmail->setText(tr("Lock"));
         }
-        else{
+        else
+        {
+            ui->pButtonLockUnlockEmail->setChecked(false);
             ui->emailSettingWidget->setEnabled(false);
             ui->checkBoxMailSendEnable->setEnabled(false);
             ui->pButtonLockUnlockEmail->setText(tr("Unlock"));
+            QMessageBox msgBox;
+            msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
+            msgBox.setText("Wrong password!");
+            msgBox.setWindowTitle("Password");
+            msgBox.exec();
         }
     }
-#ifndef DEBUG_BUILD
     else
     {
-        ui->pButtonLockUnlockEmail->setChecked(false);
-        QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
-        msgBox.setText("Wrong password!");
-        msgBox.setWindowTitle("Password");
-        msgBox.exec();
+        ui->emailSettingWidget->setEnabled(false);
+        ui->checkBoxMailSendEnable->setEnabled(false);
+        ui->pButtonLockUnlockEmail->setText(tr("Unlock"));
     }
-#endif
     acceptOnDeactilationEn = true;
 
 
@@ -355,35 +365,26 @@ void GeneralSettingDialog::changeSerialPortSettingsClicked()
 
 void GeneralSettingDialog::changeServiceStateClicked()
 {
-    acceptOnDeactilationEn = false;
     if(ui->pButtonServiceState->isChecked())
     {
         emit this->serviceSettingRequest();
         this->hide();
-        this->show();
+        ui->pButtonServiceState->setText("DISABLE\nSERVICE");
     }
     else
     {
-        MachineSettings::setServiceWidgEn(false);
+        emit this->serviceSettingRequest();
         this->hide();
-        this->show();
+        ui->pButtonServiceState->setText("ENABLE\nSERVICE");
     }
 }
 
 void GeneralSettingDialog::userSettingClicked()
 {
     QByteArray passwordBArr;
-#ifndef DEBUG_BUILD
-    if(!logedInUserSett){
-        passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
-    }
-    if(logedInUserSett || (CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->usersPassword))
-#endif
-    {
-        logedInUserSett = true;
+    passwordBArr.append(QString::number(NumpadDialog::getValue(this, "Password")));
+    if((CrcCalc::CalculateCRC16(0xFFFF, passwordBArr) == this->usersPassword))
         emit this->usersSettingRequest();
-    }
-#ifndef DEBUG_BUILD
     else
     {
         QMessageBox msgBox;
@@ -392,7 +393,6 @@ void GeneralSettingDialog::userSettingClicked()
         msgBox.setWindowTitle("Password");
         msgBox.exec();
     }
-#endif
 }
 
 void GeneralSettingDialog::styleChanged(int index)
@@ -439,7 +439,6 @@ void GeneralSettingDialog::changeDirection()
 
 void GeneralSettingDialog::changeCyclesState()
 {
-    this->machineParamGl.lastRevWarm.all = 0;
     this->machineParamGl.lastRevWarm.field.revolver = ui->pButtonCyclesEnable->isChecked();
     this->machineParamGl.lastRevWarm.field.last = ui->pButtonCyclesEnable->isChecked();
 
@@ -498,17 +497,17 @@ void GeneralSettingDialog::headCountChanged(double arg1)
 
 void GeneralSettingDialog::machineTypeChanget(int index)
 {
-    MachineSettings mStt;
-    QByteArray cmdArr;
-    int data = mStt.machineTypeData[index];
-    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
-    cmdArr.append(static_cast<char>(MachineSettings::MasterMachineType&0x00FF));
-    cmdArr.append(static_cast<char>(data>>8));
-    cmdArr.append(static_cast<char>(data&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append(static_cast<char>(data>>8));
-    cmdArr.append(static_cast<char>(data&0x00FF));
-    emit this->sendCommand(cmdArr);
+//    MachineSettings mStt;
+//    QByteArray cmdArr;
+//    int data = mStt.machineTypeData[index];
+//    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+//    cmdArr.append(static_cast<char>(MachineSettings::MasterMachineType&0x00FF));
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
+//    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
+//    emit this->sendCommand(cmdArr);
 }
 
 void GeneralSettingDialog::warningTimeChanged(double arg1)
@@ -590,6 +589,7 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->pButtonUseUnload->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
+    ui->tabWidget->setTabEnabled(2, MachineSettings::getServiceWidgEn());
     ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
     ui->widgetServiceSettings->setVisible(MachineSettings::getServiceWidgEn());
     ev->accept();
@@ -619,4 +619,34 @@ void GeneralSettingDialog::on_checkBoxUseBackgr_clicked()
 void GeneralSettingDialog::on_pButtonSelectImg_clicked()
 {
     emit this->imageRequest(ui->checkBoxUseBackgr->isChecked(), true);
+}
+
+void GeneralSettingDialog::on_pButtonWarming_clicked()
+{
+    this->machineParamGl.lastRevWarm.field.warm = ui->pButtonWarming->isChecked();
+    this->machineParamGl.lastRevWarm.field.warm = ui->pButtonWarming->isChecked();
+
+    if(ui->pButtonWarming->isChecked())
+    {
+        ui->pButtonWarming->setText(tr("Disable\nwarming"));
+        ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOff.png"));
+    }
+    else
+    {
+        ui->pButtonWarming->setText(tr("Enable\nwarming"));
+        ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOn.png"));
+        QByteArray cmdArr;
+        int data;
+        cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexerDevice&0x00FF));
+        cmdArr.append(static_cast<char>(IndexerLiftSettings::IndexLastRevolvWarm&0x00FF));
+        data = this->machineParamGl.lastRevWarm.all;
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
+        data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+        cmdArr.append(static_cast<char>(data>>8));
+        cmdArr.append(static_cast<char>(data&0x00FF));
+        emit this->sendCommand(cmdArr);
+    }
+    emit this->warmingStateChanged(ui->pButtonWarming->isChecked());
+
 }

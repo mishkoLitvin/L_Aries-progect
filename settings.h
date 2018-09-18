@@ -7,10 +7,11 @@
 #include <QDate>
 #include "math.h"
 
+#ifdef Q_OS_LINUX
 typedef u_int32_t uint32_t;
 typedef u_int16_t uint16_t;
 typedef u_int8_t uint8_t;
-
+#endif
 
 class HeadSetting{
 public:
@@ -241,7 +242,7 @@ public:
 
     void fromByteArray(QByteArray machineParamArray);
 
-    static bool serviceWidgetsEn;
+    static bool serviceWidgetsEnStat;
     static MachineType machineTypeStat;
     static bool machineIdle;
 
@@ -306,6 +307,10 @@ public:
         IndexSpeedRet = 0x0D,
         WarningTime = 0x0E,
 
+        WarmingTime = 0x22,
+        WarmingTemp = 0x21,
+        WarmingCycles = 0x20,
+
         LiftHomeOffcet = 0x15,
         LiftDistance = 0x16,
         LiftSpeed = 0x17,
@@ -360,7 +365,7 @@ public:
         LiftMoveHome = 0x00B8,
         LiftMoveEnd = 0x00B9,
         IndexDirChange = 0x005D,
-
+        WarmStart_Stop = 0x001F,
     }IndexerCommandsEn;
 
 
@@ -581,6 +586,7 @@ public:
     void setHeadReg(int index, HeadSetting hSett);
     void setIndexLiftReg(IndexerLiftSettings iLSett);
     static uint32_t calcLiftPulse(uint16_t gearRatio, uint16_t liftDist = 118);
+    uint16_t headRegListLen;
 
     enum MasterRegNom{
         masterReg_DEV_INF_H,

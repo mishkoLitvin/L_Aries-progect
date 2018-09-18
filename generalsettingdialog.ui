@@ -851,6 +851,12 @@ Screw pitch</string>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
             <widget class="QToolButton" name="pButtonDirection">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>70</height>
+              </size>
+             </property>
              <property name="text">
               <string>Direction
 clock</string>
@@ -861,8 +867,8 @@ clock</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>35</width>
+               <height>35</height>
               </size>
              </property>
              <property name="checkable">
@@ -878,6 +884,12 @@ clock</string>
            </item>
            <item>
             <widget class="QToolButton" name="pButtonCyclesEnable">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>70</height>
+              </size>
+             </property>
              <property name="text">
               <string>Cycles
 Disable</string>
@@ -888,8 +900,41 @@ Disable</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>35</width>
+               <height>35</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="pButtonWarming">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Warming
+Disable</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/new/icons/icons/rotateRight.png</normaloff>:/new/icons/icons/rotateRight.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>35</width>
+               <height>35</height>
               </size>
              </property>
              <property name="checkable">
@@ -905,6 +950,12 @@ Disable</string>
            </item>
            <item>
             <widget class="QToolButton" name="pButtonHeadsActivation">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>70</height>
+              </size>
+             </property>
              <property name="text">
               <string>Heads
 activation</string>
@@ -915,8 +966,8 @@ activation</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>35</width>
+               <height>35</height>
               </size>
              </property>
              <property name="checkable">
@@ -965,7 +1016,7 @@ activation</string>
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>65</height>
+               <height>70</height>
               </size>
              </property>
              <property name="text">
@@ -977,8 +1028,8 @@ activation</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>35</width>
+               <height>35</height>
               </size>
              </property>
              <property name="checkable">
@@ -1007,11 +1058,12 @@ activation</string>
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>65</height>
+               <height>70</height>
               </size>
              </property>
              <property name="text">
-              <string>SERVICE</string>
+              <string>ENABLE
+SERVICE</string>
              </property>
              <property name="icon">
               <iconset resource="icons.qrc">
@@ -1019,8 +1071,8 @@ activation</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>35</width>
+               <height>35</height>
               </size>
              </property>
              <property name="checkable">

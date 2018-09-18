@@ -27,6 +27,7 @@
 #include "headform.h"
 #include "headsettingdialog.h"
 #include "indexerwidget.h"
+#include "warmingwidget.h"
 #include "indexersettingdialog.h"
 #include "generalsettingdialog.h"
 #include "numpaddialog.h"
@@ -80,6 +81,7 @@ private:
     IndexerSettingDialog *indexerLiftSetDialog;
     SerialSettingsDialog *serialSettingsDialog;
     IndexerWidget *indexer;
+    WarmingWidget *warming;
     MailSender *mailSender;
     UserSettingDialog *usersSettingDialog;
     MaintanceDialog* maintanceDialog;
@@ -117,6 +119,8 @@ private:
     Register *registers;
     QTranslator translator;
 
+    QString pathIcon;
+
     QStringList headStylesStr;
 
 private slots:
@@ -135,6 +139,7 @@ private slots:
     void getAllHeadParam(int index, QByteArray hParamArr);
     void getHeadCommand(int index, QByteArray commandArr);
     void getHeadActivCommand(QByteArray commandArr);
+    void getHeadActiveState(int index, bool state);
     void getCyclesCommand(QByteArray commandArr);
     void getLoadState(int index, LoadState state);
     void getIndexerParam(QByteArray indexerParamArr);
@@ -148,11 +153,14 @@ private slots:
     void getIndexLiftSettComm(QByteArray commandArr);
     void getIndexLiftCommand(QByteArray commandArr);
     void getMachineCommand(QByteArray commandArr);
+    void getWarmingCommand(QByteArray commandArr);
+    void getWarmingEnable(bool enable);
     void getSerialSetting(ComSettings comSett);
     void getEmailSettings(EmailSettings emailSett);
     void getVeiwSettings(int stSheetIndex);
     void getLangFile(int langIndex);
     void serviceStateChange();
+    void warmingStateChange(bool state);
     void exitProgram(bool restart = false);
     void saveJob();
     void loadJob();
@@ -165,6 +173,8 @@ private slots:
     void setIconFolder(int index);
     void setBackGround(bool enable, bool request = false);
     void updateTimeSlot();
+
+    void on_pButtonWarming_clicked();
 
 protected:
     virtual void resizeEvent(QResizeEvent *e);

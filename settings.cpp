@@ -301,7 +301,7 @@ void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifPa
 }
 
 
-bool MachineSettings::serviceWidgetsEn;
+bool MachineSettings::serviceWidgetsEnStat;
 MachineSettings::MachineType MachineSettings::machineTypeStat;
 bool MachineSettings::machineIdle;
 uint16_t MachineSettings::headMaxRangeStat;
@@ -404,13 +404,13 @@ void MachineSettings::fromByteArray(QByteArray machineParamArray)
 bool MachineSettings::getServiceWidgEn()
 {
     MachineSettings stt;
-    return stt.serviceWidgetsEn;
+    return stt.serviceWidgetsEnStat;
 }
 
 void MachineSettings::setServiceWidgEn(bool servEn)
 {
-    MachineSettings stt;
-    stt.serviceWidgetsEn = servEn;
+    qDebug()<<"service changed"<<servEn;
+    MachineSettings::serviceWidgetsEnStat = servEn;
 }
 
 MachineSettings::MachineType MachineSettings::getMachineType()
@@ -496,7 +496,7 @@ Register::Register(uint16_t headCount)
     masterRegPtr = &(masterReg.memBeg);
     indexerRegPtr = &(indexerReg.memBeg);
     liftRegPtr = &(liftReg.memBeg);
-
+    this->headRegListLen = headCount;
     uint16_t i;
     for(i = 0; i<headCount; i++)
     {

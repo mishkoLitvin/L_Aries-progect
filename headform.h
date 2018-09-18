@@ -104,7 +104,8 @@ signals:
 private:
     Ui::HeadForm *ui;
     QLabel *labelIndex, *labelStrokCnt, *labelStBkStr;
-    QImage pixShirtShow, pixShirtHide, pixShirtAnimate;
+    QImage imgShirtShow, imgShirtHide, imgShirtAnimate;
+    QPixmap pixShirtShow, pixShirtHide, pixShirtAnimate;
     QGraphicsColorizeEffect *graphEffect;
     QString pathImage;
 

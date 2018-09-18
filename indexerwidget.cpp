@@ -120,6 +120,11 @@ void IndexerWidget::clickButton(QByteArray data)
     }
 }
 
+void IndexerWidget::setSettingEnable(bool enable)
+{
+    pButtonSets->setVisible(enable);
+}
+
 void IndexerWidget::on_pButtonLock_clicked()
 {
     QByteArray bArr;
@@ -444,6 +449,7 @@ void IndexerWidget::resizeEvent(QResizeEvent *e)
     ui->pButtonAir->setVisible((MachineSettings::machineTypeStat == MachineSettings::TitanAAA)|
                                (MachineSettings::machineTypeStat == MachineSettings::TitanASA)|
                                (MachineSettings::machineTypeStat == MachineSettings::TitanASE));
+
 }
 
 void IndexerWidget::changeEvent(QEvent* event)
