@@ -77,8 +77,12 @@ void NumpadDialog::appendZero()
 
 void NumpadDialog::addDot()
 {
-    if(!ui->lineValue->text().isEmpty() && !ui->lineValue->text().contains('.')){
-        ui->lineValue->insert(".");
+    if(!ui->lineValue->text().contains('.'))
+    {
+        if(!ui->lineValue->text().isEmpty())
+            ui->lineValue->insert(".");
+        else
+            ui->lineValue->insert("0.");
     }
 }
 

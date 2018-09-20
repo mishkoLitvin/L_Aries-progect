@@ -1755,7 +1755,7 @@ void MainWindow::zeroStart()
     timeProgramStart = QTime::currentTime();
     ui->labelTime->setText(timeProgramStart.toString("HH:mm"));
     ui->labelDate->setText(QDate::currentDate().toString("ddd, dd/MM/yyyy"));
-//    watchDog->start();
+    watchDog->start();
     updateTime->start(30000);
 }
 
