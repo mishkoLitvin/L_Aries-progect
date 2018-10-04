@@ -32,7 +32,7 @@ public:
 public slots:
     void printFinish();
     void printStart();
-    void setState(u_int16_t state);
+    void setState(uint16_t state);
     void resetWidget();
 
 signals:
@@ -57,6 +57,8 @@ private slots:
 
 
     void on_pButtonAir_clicked();
+
+    void on_pButtonSkip_clicked();
 
 private:
     Ui::IndexerWidget *ui;

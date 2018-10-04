@@ -176,7 +176,7 @@ void MaintanceDialog::check(int cyclesCount)
     int i;
     for(i = 0; i<maintanceList.length(); i++)
     {
-        if((cyclesCount==(maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount
+        if((cyclesCount>=(maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount
                           -settings->value("WARNING_CYCLES_COUNT", 50).toInt()))
                 &(cyclesCount<(maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount-1)))
         {

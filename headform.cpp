@@ -63,16 +63,16 @@ void HeadForm::setHeadformType(HeadForm::HeadformType type)
     case HeadProcessing:
         this->headformType = HeadProcessing;
         break;
-    case HeadPutingOn:
-        this->headformType = HeadPutingOn;
+    case HeadLoad:
+        this->headformType = HeadLoad;
         labelIndex->hide();
         ui->graphicsView->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DD00FF66, stop: 0.8 #DD008822,stop: 1.0 #DD003300); border-style: none;");
         labelStrokCnt->setVisible(false);
         labelStBkStr->setVisible(false);
 
         break;
-    case HeadRemoving:
-        this->headformType = HeadRemoving;
+    case HeadUnload:
+        this->headformType = HeadUnload;
         labelIndex->hide();
         ui->graphicsView->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #DDCC3311, stop: 0.8 #DDAA220F,stop: 1.0 #DD331100); border-style: none;");
         labelStrokCnt->setVisible(false);
@@ -231,7 +231,7 @@ void HeadForm::mousePressEvent(QMouseEvent *event)
 {
     if(event->type() == QMouseEvent::MouseButtonPress)
     {
-        if(this->headformType == HeadProcessing)
+        if(this->headformType != HeadLoad)
         {
             if(this->headformState == shirtOff)
                 this->setPixmap(shirtOn, ui->graphicsView->styleSheet());

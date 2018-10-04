@@ -49,7 +49,7 @@ InfoWidget::InfoWidget(QWidget *parent) :
 
     errMasages->setValue("HEAD/err"+QString::number(0), QString("err"));
 //    ui->labelHome->pixmap()->setMask();
-
+    this->remainCnt = 0;
 }
 
 InfoWidget::~InfoWidget()
@@ -64,18 +64,32 @@ void InfoWidget::setRegisterPointer(Register *regPtr)
 
 void InfoWidget::setPrinted(int val)
 {
+    printCnt = val;
     ui->labelPrinted->setText(tr("Printed: ") + QString::number(val));
+
+    if((this->remainCnt != 0)&((this->remainCnt - val)>=0))
+        ui->labelRemain->setText(tr("Remaining: ")+QString::number(this->remainCnt - val));
 
     QTime curTime = QTime::currentTime();
     if((val>1)&((lastTime.secsTo(curTime))>0))
         ui->labelDZH->setText(tr("R/H:")+QString::number(3600000/lastTime.msecsTo(curTime)));
     lastTime = curTime;
-
 }
 
 void InfoWidget::setTotal(int val)
 {
     ui->labelTotal->setText(tr("Total: ") + QString::number(val));
+}
+
+void InfoWidget::setRemaining(int val)
+{
+    this->remainCnt = val+this->printCnt;
+    ui->labelRemain->setText("Remaining: "+QString::number(val));
+}
+
+void InfoWidget::setSkipped(int val)
+{
+    ui->labelSkipedShirts->setText("Skiped shirts: "+QString::number(val));
 }
 
 void InfoWidget::setIconFolder(QString path)
@@ -120,13 +134,9 @@ void InfoWidget::setIconFolder(QString path)
     ui->labelStopHand->setGraphicsEffect(effect[6]);
 }
 
-void InfoWidget::setIndicatorState(u_int16_t state)
+void InfoWidget::setIndicatorState(uint16_t state)
 {
-//    effect[0]->setOpacity(1);
-
-
-
-    switch (static_cast<u_int8_t>(state>>8)) {
+    switch (static_cast<uint8_t>(state>>8)) {
     case 0:
         effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
         effect[0]->setOpacity(0.9);
@@ -192,6 +202,20 @@ void InfoWidget::setIndicatorState(u_int16_t state)
     case 11:
         effect[3]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
         effect[3]->setOpacity(0.9);
+        break;
+    case 17:
+        effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[0]->setOpacity(0.9);
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        ui->labelInfo->setText(tr("Machine need reset.\nEmergency stop pressed.\nPlease release Estop and press reset button"));
+        break;
+    case 18:
+        effect[0]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[0]->setOpacity(0.9);
+        effect[1]->setOpacityMask(QBrush(Qt::blue, Qt::SolidPattern));
+        effect[1]->setOpacity(0.9);
+        ui->labelInfo->setText(tr("Machine need reset.\nSafety bar is open.\nPlease close bar and press reset button"));
         break;
     default:
         break;

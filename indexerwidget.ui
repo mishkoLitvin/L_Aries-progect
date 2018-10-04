@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>790</width>
-    <height>128</height>
+    <width>886</width>
+    <height>110</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="10,1">
+  <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="10,1,0">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
@@ -391,6 +391,35 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item>
+    <widget class="QToolButton" name="pButtonSkip">
+     <property name="minimumSize">
+      <size>
+       <width>90</width>
+       <height>90</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>SKIP</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/new/icons/icons/playP.png</normaloff>:/new/icons/icons/playP.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>60</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="toolButtonStyle">
+      <enum>Qt::ToolButtonTextUnderIcon</enum>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -1,6 +1,7 @@
 #include "generalsettingdialog.h"
 #include "ui_generalsettingdialog.h"
 #include "crc16.h"
+#include "generalsettingdialog.h"
 
 GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     QDialog(parent),
@@ -42,6 +43,9 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     connect(ui->comboBoxMacineType, SIGNAL(currentIndexChanged(int)), this, SLOT(machineTypeChanget(int)));
     connect(ui->pButtonCyclesEnable, SIGNAL(clicked(bool)), this, SLOT(changeCyclesState()));
 
+    ui->widgetServiceSettings->setVisible(false);
+    this->setMaximumSize(400, 700);
+    this->resize(this->maximumSize());
 }
 
 GeneralSettingDialog::~GeneralSettingDialog()
@@ -61,13 +65,15 @@ void GeneralSettingDialog::setIconFolder(QString path)
         ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateLeft.png"));
     ui->pButtonServiceState->setIcon(QIcon(pathIcon+"/maintanse.png"));
     ui->pButtonUserSetup->setIcon(QIcon(pathIcon+"/user.png"));
-
+    ui->pButtonCounters->setIcon(QIcon(pathIcon+"/counter.png"));
 
 
     ui->tabWidget->setTabIcon(0, QIcon(pathIcon+"/color.png"));
     ui->tabWidget->setTabIcon(1, QIcon(pathIcon+"/stopHand.png"));
     ui->tabWidget->setTabIcon(2, QIcon(pathIcon+"/mail.png"));
     ui->tabWidget->setTabIcon(3, QIcon(pathIcon+"/connect.png"));
+
+
 
 
 }
@@ -141,6 +147,14 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
         ui->pButtonWarming->setText(tr("Enable\nwarming"));
         ui->pButtonWarming->setIcon(QIcon(pathIcon+"/warmingOn.png"));
     }
+
+    ui->pButtonShowSkip->setChecked(MachineSettings::getSoftwartSkipEn());
+    if(ui->pButtonShowSkip->isChecked())
+    {
+        ui->pButtonShowSkip->setText(tr("Hide skip\nbutton"));
+    }
+    else
+        ui->pButtonShowSkip->setText(tr("Show skip\nbutton"));
 
 //    =============================================
     MachineSettings::setHeadMaxRange(machineParam.headMaxRange);
@@ -376,7 +390,10 @@ void GeneralSettingDialog::changeServiceStateClicked()
         emit this->serviceSettingRequest();
         this->hide();
         ui->pButtonServiceState->setText("ENABLE\nSERVICE");
+        ui->widgetServiceSettings->setVisible(false);
+        this->setMaximumSize(400, 700);
     }
+
 }
 
 void GeneralSettingDialog::userSettingClicked()
@@ -579,12 +596,8 @@ bool GeneralSettingDialog::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-void GeneralSettingDialog::showEvent(QShowEvent *ev)
+void GeneralSettingDialog::manualShow()
 {
-    if(!MachineSettings::getServiceWidgEn())
-        this->setMaximumSize(400, 703);
-    else
-        this->setMaximumSize(600, 703);
     ui->spinBoxHeadsCount->setVisible(MachineSettings::getServiceWidgEn());
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->pButtonUseUnload->setVisible(MachineSettings::getServiceWidgEn());
@@ -592,9 +605,16 @@ void GeneralSettingDialog::showEvent(QShowEvent *ev)
     ui->tabWidget->setTabEnabled(2, MachineSettings::getServiceWidgEn());
     ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
     ui->widgetServiceSettings->setVisible(MachineSettings::getServiceWidgEn());
-    ev->accept();
+
+    this->manualResize();
+    this->show();
+}
+
+void GeneralSettingDialog::showEvent(QShowEvent *ev)
+{
     acceptOnDeactilationEn = true;
     acceptEnable = true;
+    ev->accept();
 }
 
 void GeneralSettingDialog::changeEvent(QEvent* event)
@@ -653,5 +673,30 @@ void GeneralSettingDialog::on_pButtonWarming_clicked()
 
 void GeneralSettingDialog::on_pButtonCounters_clicked()
 {
+    emit this->countersDialogRequest();
+}
 
+void GeneralSettingDialog::manualResize()
+{
+    if(ui->widgetServiceSettings->isHidden())
+    {
+        this->setMaximumSize(500, 703);
+    }
+    else
+    {
+        this->setMaximumSize(700, 703);
+    }
+    this->resize(this->maximumSize());
+}
+
+void GeneralSettingDialog::on_pButtonShowSkip_clicked()
+{
+    MachineSettings::setSoftwartSkipEn(ui->pButtonShowSkip->isChecked());
+    if(ui->pButtonShowSkip->isChecked())
+    {
+        ui->pButtonShowSkip->setText(tr("Hide skip\nbutton"));
+    }
+    else
+        ui->pButtonShowSkip->setText(tr("Show skip\nbutton"));
+    emit this->skipStateChanged();
 }

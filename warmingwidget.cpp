@@ -31,6 +31,13 @@ void WarmingWidget::setRegisters(Register *reg)
     this->registers = reg;
 }
 
+void WarmingWidget::resetWidget()
+{
+    ui->toolButton->setChecked(false);
+    ui->toolButton->setText(tr("Start"));
+    ui->toolButton->setIcon(QIcon(pathIcon+"/play.png"));
+}
+
 void WarmingWidget::on_toolButton_clicked()
 {
     QByteArray bArr;
@@ -38,14 +45,16 @@ void WarmingWidget::on_toolButton_clicked()
     bArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
     bArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
 
-    data = IndexerLiftSettings::WarmStart_Stop;
+
     if(ui->toolButton->isChecked())
     {
+        data = IndexerLiftSettings::WarmStart_Stop;
         ui->toolButton->setText(tr("Stop"));
         ui->toolButton->setIcon(QIcon(pathIcon+"/stop.png"));
     }
     else
     {
+        data = IndexerLiftSettings::PrintStop;
         ui->toolButton->setText(tr("Start"));
         ui->toolButton->setIcon(QIcon(pathIcon+"/play.png"));
     }

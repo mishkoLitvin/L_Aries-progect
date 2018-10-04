@@ -24,8 +24,6 @@ SerialPort::SerialPort(ComSettings settings, QObject *parent):QObject(parent)
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
 
     connect(settingsComDialog, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
-
-//    this->openSerialPort();
 }
 
 void SerialPort::setRegisterPointer(Register *regPtr)
@@ -203,11 +201,12 @@ void SerialPort::readData()
             emit this->working();
             if(modData8.fileds.rwBit)
             {
-//                qDebug()<<"write:"
-//                       <<modData8.fileds.adress
-//                      <<modData8.fileds.registerNo
-//                     <<modData8.fileds.data;
+                qDebug()<<"write reg:"
+                       <<modData8.fileds.adress
+                      <<modData8.fileds.registerNo
+                     <<modData8.fileds.data;
                 this->sendData(data.mid(0,6), true);
+
                 registers->writeReg(modData8.fileds.adress,
                                     modData8.fileds.registerNo,
                                     modData8.fileds.data);
@@ -330,7 +329,9 @@ void SerialPort::readData()
                             bArr.append(static_cast<char>(data&0x00FF));
                             this->sendData(bArr);
                             this->initApp = false;
+                            emit this->initFinihed();
                             break;
+
                         }
                     }
                     //end of mustwrited code.
@@ -350,9 +351,9 @@ void SerialPort::readData()
                 }
                 else
                 {
-//                    qDebug()<<"read reg:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data
-//                        <<"\t\treg send:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<registers->readReg(modData8.fileds.adress,
-//                                                                                                                  modData8.fileds.registerNo);
+                    qDebug()<<"read reg:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data
+                        <<"\t\treg send:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<registers->readReg(modData8.fileds.adress,
+                                                                                                                  modData8.fileds.registerNo);
                     this->sendModData(modData8.bits.adress,
                                       modData8.bits.registerNo,
                                       registers->readReg(modData8.fileds.adress,

@@ -30,7 +30,7 @@ typedef union ModData_{
         uint8_t adress:7;
         uint8_t rwBit_:1;
     }fileds;
-    u_int64_t all:48;
+    uint64_t all:48;
 }ModData;
 
 class SerialPort : public QObject
@@ -82,6 +82,7 @@ signals:
     void dataReady(ModData modData);
     void serialSettingAccepted(ComSettings seittngs);
     void working();
+    void initFinihed();
     void proramProgres(int progres);
 };
 

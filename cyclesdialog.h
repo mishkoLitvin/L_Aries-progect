@@ -32,6 +32,9 @@ public:
 
     ~CyclesDialog();
 
+    void setDirection(int direction);
+    void setUnloadUseState(bool state);
+
 signals:
     void sendCommand(QByteArray cndArr);
 
@@ -44,6 +47,8 @@ private:
     int lastCycleSel;
     QList<int*> cycleValues;
     int cycleState;
+    int direction;
+    bool useUnloadHead;
 
     QSettings *cycleSettings;
 

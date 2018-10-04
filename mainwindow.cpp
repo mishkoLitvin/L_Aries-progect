@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     comPort->setStyleSheet(this->styleSheet());
     connect(comPort, SIGNAL(serialSettingAccepted(ComSettings)), this, SLOT(getSerialSetting(ComSettings)));
     connect(comPort, SIGNAL(dataReady(ModData)), this, SLOT(getSerialData(ModData)));
+    connect(comPort, SIGNAL(initFinihed()), this, SLOT(setHeadsPosition()));
 
     headSettingDialog = new SettingDialog(headSettings);
     connect(headSettingDialog, SIGNAL(accept(int,QByteArray)), this, SLOT(getHeadParam(int,QByteArray)));
@@ -90,7 +91,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, SIGNAL(unloadStateChanged(bool)), this, SLOT(setUnloadState(bool)));
     connect(generalSettingDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getMachineCommand(QByteArray)));
     connect(generalSettingDialog, SIGNAL(imageRequest(bool, bool)), this, SLOT(setBackGround(bool,bool)));
-    connect(generalSettingDialog, SIGNAL(warmingStateChanged(bool)), this, SLOT(getWarmingEnable(bool)));
+    connect(generalSettingDialog, &GeneralSettingDialog::warmingStateChanged, this, &MainWindow::getWarmingEnable);
+    connect(generalSettingDialog, &GeneralSettingDialog::skipStateChanged, this, &MainWindow::skipStateUpdate);
+    MachineSettings::setSoftwartSkipEn(settings->value("PROGRAM/SOFT_SKIP", false).toBool());
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS", QVariant::fromValue(EmailSettings())).value<EmailSettings>().senderAdress);
@@ -113,9 +116,13 @@ MainWindow::MainWindow(QWidget *parent) :
     infoWidget = new InfoWidget(ui->widgetHeads);
 
     if((QApplication::platformName() != "eglfs")&(QApplication::platformName() != "linuxfb"))
-        this->resize(QSize(1024, 650));
+        this->resize(QSize(1024, 768));
     else
         this->setWindowState(Qt::WindowMaximized);
+
+    cycleDialog = new CyclesDialog(this->headsCount, this);
+    connect(ui->pButtonCyclesSetup, SIGNAL(clicked(bool)), cycleDialog, SLOT(show()));
+    connect(cycleDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getCyclesCommand(QByteArray)));
 
     this->setHeadsPosition();
 
@@ -152,10 +159,6 @@ MainWindow::MainWindow(QWidget *parent) :
     udpHandler->startUdp(true);
     connect(udpHandler, SIGNAL(dataReady(QByteArray)), this, SLOT(getUdpData(QByteArray)));
 
-    cycleDialog = new CyclesDialog(this->headsCount, this);
-    connect(ui->pButtonCyclesSetup, SIGNAL(clicked(bool)), cycleDialog, SLOT(show()));
-    connect(cycleDialog, SIGNAL(sendCommand(QByteArray)), this, SLOT(getCyclesCommand(QByteArray)));
-
     ui->widgetHeads->installEventFilter(this);
     ui->dSpinBoxLiftOffcet->children()[0]->installEventFilter(this);
     connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
@@ -174,9 +177,18 @@ MainWindow::MainWindow(QWidget *parent) :
     this->zeroStart();
 
     reprogramDialog = new ReprogramDialog(this);
-    connect(reprogramDialog, SIGNAL(programArrReady(ReprogramDialog::BoardType, QByteArray)), comPort, SLOT(sendProgram(ReprogramDialog::BoardType, QByteArray)));
-    connect(comPort, SIGNAL(proramProgres(int)), reprogramDialog, SLOT(setProgress(int)));
-    connect(reprogramDialog, SIGNAL(reprogramDialogFinished()), this, SLOT(watchDogTimeout()));
+    connect(reprogramDialog, &ReprogramDialog::programArrReady, comPort, &SerialPort::sendProgram);
+    connect(comPort, &SerialPort::proramProgres, reprogramDialog, &ReprogramDialog::setProgress);
+    connect(reprogramDialog, &ReprogramDialog::reprogramDialogFinished, this, &MainWindow::watchDogTimeout);
+
+    counterDialog = new CountersDialog(this);
+    counterDialog->setRemaining(settings->value("COUNTERS/REMAINING", 0).toInt());
+    infoWidget->setRemaining(0);
+    connect(counterDialog, &CountersDialog::resetRemaining, this, &MainWindow::resetRemainingRequest);
+    connect(counterDialog, &CountersDialog::resetSkipped, this, &MainWindow::resetSkippedRequest);
+    connect(counterDialog, &CountersDialog::remainingValChanged, this, &MainWindow::remainingValChangedRequest);
+    connect(generalSettingDialog, &GeneralSettingDialog::countersDialogRequest, this, &MainWindow::counterDialogRequest);
+
 }
 
 MainWindow::~MainWindow()
@@ -313,21 +325,9 @@ void MainWindow::generalSettingDialogRequest()
     generalSettingDialog->showPortInfo(settings->value("COM_SETTING", QVariant::fromValue(ComSettings())).value<ComSettings>());
     generalSettingDialog->setMachineSetting(machineSettings.machineParam);
 
-
-    if(MachineSettings::getServiceWidgEn())
-    {
-        generalSettingDialog->setMaximumSize(700, 725);
-        generalSettingDialog->move(this->pos().x()+this->width()-725,
-                                   this->pos().y()+10);
-    }
-    else
-    {
-        generalSettingDialog->setMaximumSize(400, 725);
-        generalSettingDialog->move(this->pos().x()+this->width()-400,
-                                   this->pos().y()+10);
-    }
-    generalSettingDialog->show();
-
+    generalSettingDialog->manualShow();
+    generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->size().width(),
+                               this->pos().y()+10);
 }
 
 void MainWindow::changeHeadNo(int index)
@@ -410,6 +410,9 @@ void MainWindow::getSerialData(ModData modData)
 {
     int i;
     QByteArray bArr;
+    uint8_t hb;
+    bool idle;
+
     watchDog->start();
     if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
     {
@@ -429,35 +432,44 @@ void MainWindow::getSerialData(ModData modData)
             case Register::masterReg_EKR:
                 infoWidget->setIndicatorState(modData.fileds.data);
                 indexer->setState(modData.fileds.data);
-                ui->pButtonLoadJob->setEnabled(MachineSettings::getMachineIdle());
-                ui->pButtonSaveJob->setEnabled(MachineSettings::getMachineIdle());
-                ui->pButtonExit->setEnabled(MachineSettings::getMachineIdle());
-                ui->pButtonSetting->setEnabled(MachineSettings::getMachineIdle());
-                ui->pButtonWarming->setEnabled(MachineSettings::getMachineIdle());
-                bArr.append(static_cast<char>(MachineSettings::MasterDevice));
-                bArr.append(static_cast<char>(Register::masterReg_EKR));
-                bArr.append(static_cast<char>(modData.fileds.data>>8));
-                bArr.append(static_cast<char>(modData.fileds.data&0x00FF));
-                udpHandler->sendData(bArr);
+                hb = ((modData.fileds.data>>8)&0x00FF);
+                if((((hb == 0)|(hb == 17)|(hb == 18)|(hb == 2)))&(ui->pButtonWarming->isChecked()))
+                    ui->pButtonWarming->click();
+                if((hb == 7)&(ui->pButtonWarming->isChecked()))
+                    warming->resetWidget();
+                idle = MachineSettings::getMachineIdle();
+                ui->pButtonLoadJob->setEnabled(idle);
+                ui->pButtonSaveJob->setEnabled(idle);
+                ui->pButtonExit->setEnabled(idle);
+                ui->pButtonSetting->setEnabled(idle);
+                ui->pButtonWarming->setEnabled(idle);
                 if(modData.fileds.data == 0x0800)
                     this->indexerStepFinish();
                 break;
             case Register::masterReg_paletStLow:
-                for(i = 1; (i<16)&(i<headsCount); i++)
-                {
-                    if( static_cast<bool>(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i)) !=
-                            (headButton[i]->getRagState() == HeadForm::shirtOn) )
-                        headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow)&(1<<i));
-                }
                 MachineSettings::setHeadPalStateLo(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow));
-            break;
+                break;
             case Register::masterReg_paletStHigh:
-                for(i = 16; i<headsCount; i++)
-                    if( static_cast<bool>(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh)&(1<<i)) !=
-                            (headButton[i]->getRagState() == HeadForm::shirtOn) )
-                        headButton[i]->setRagOn(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh)&(1<<(i-16)));
                 MachineSettings::setHeadPalStateHi(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh));
+                if(machineSettings.machineParam.direction == 1)
+                {
+                    for(i = 1; (i<32)&(i<headsCount); i++)
+                        if( static_cast<bool>(MachineSettings::getHeadPalState())&(1<<i) !=
+                                (headButton[headsCount-i]->getRagState() == HeadForm::shirtOn))
+                            headButton[headsCount-i]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
+                }
+                else
+                {
+                    for(i = 1; (i<32)&(i<headsCount); i++)
+                        if( static_cast<bool>(MachineSettings::getHeadPalState())&(1<<i) !=
+                                (headButton[i]->getRagState() == HeadForm::shirtOn))
+                            headButton[i]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
+                }
             break;
+            case Register::REG_SKIPC_H:
+                infoWidget->setSkipped((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_L))&0x0000FFFF)|
+                                       ((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_H))<<16)&0xFFFF0000));
+                break;
             case Register::masterReg_ERROR_MESSAGE:
                 infoWidget->setErrorText(this->machineSettings.machineParam, 0);
             break;
@@ -490,6 +502,13 @@ void MainWindow::getSerialData(ModData modData)
                 break;
             case Register::indexerliftReg_UP_DELAY:
                 indexerLiftSettings.liftParam.delayUp = modData.fileds.data; //FUCKING DISASTER!!!!!!!!
+                break;
+            case Register::indexerReg_DIR:
+                if(modData.fileds.data == 0)
+                    machineSettings.machineParam.direction = -1;
+                else
+                    machineSettings.machineParam.direction = 1;
+                settings->setValue("MACHINE_PARAMS", machineSettings.machineParam.toByteArray());
                 break;
             default:
                 break;
@@ -526,6 +545,7 @@ void MainWindow::getSerialData(ModData modData)
     {
         int i;
         i = modData.fileds.adress - HeadSetting::HeadDeviceAdrOffcet;
+
         switch (modData.fileds.registerNo) {
         case Register::REG_RW_POWER:
             headSettings.headParam.dryPowerQ = modData.fileds.data;
@@ -589,6 +609,7 @@ void MainWindow::getSerialData(ModData modData)
         default:
             break;
         }
+
         if((i<headsCount)&(modData.fileds.registerNo==Register::headReg_ON))
         {
             if(headActDialog->getHeadActivAtIndex(i))
@@ -621,7 +642,8 @@ void MainWindow::getSerialData(ModData modData)
                 }
             else
                 headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[0]);
-            headSettButton[i]->setEnabled(headActDialog->getHeadActivAtIndex(i));
+            if((i<headSettButton.length()))
+                headSettButton[i]->setEnabled(headActDialog->getHeadActivAtIndex(i));
         }
     }
 }
@@ -820,9 +842,14 @@ void MainWindow::getLoadState(int index, LoadState state)
     }
     else
     {
+        qDebug()<<index<<headsCount+1-index<<this->machineSettings.machineParam.useUnloadHead;
         MachineSettings::setHeadPalStateIndex(index, static_cast<bool>(state == LoadOne));
         cmdArr.clear();
-        data = index+HeadSetting::ChangeRagState;
+        if(machineSettings.machineParam.direction == 1)
+            data = (headsCount+this->machineSettings.machineParam.useUnloadHead-index)+HeadSetting::ChangeRagState;
+        else
+            data = index+HeadSetting::ChangeRagState;
+
         cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
         cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
         cmdArr.append(static_cast<char>(data>>8));
@@ -971,6 +998,7 @@ void MainWindow::getStepDelayTime(double arg1)
 
 void MainWindow::getDirection(int direction)
 {
+    qDebug()<<direction;
     machineSettings.machineParam.direction = direction;
     settings->setValue(QString("MACHINE_PARAMS"), this->machineSettings.machineParam.toByteArray());
     this->setHeadsPosition();
@@ -984,7 +1012,7 @@ void MainWindow::setUnloadState(bool state)
     }
     else
     {
-        headButton[headsCount - 1]->setHeadformType(HeadForm::HeadRemoving);
+        headButton[headsCount - 1]->setHeadformType(HeadForm::HeadUnload);
 
     }
 }
@@ -1013,6 +1041,7 @@ void MainWindow::getVeiwSettings(int stSheetIndex)
     headSettingDialog->setStyleSheet(this->styleSheet());
     indexerLiftSetDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setStyleSheet(this->styleSheet());
+    counterDialog->setStyleSheet(this->styleSheet());
     comPort->setStyleSheet(this->styleSheet());
     ui->labelPalet->setStyleSheet("QLabel{padding-bottom: 0px; font: 16px bold italic large \"Serif\"}");
     ui->dSpinBoxLiftOffcet->setStyleSheet("QDoubleSpinBox{min-height: 50px;"
@@ -1309,10 +1338,10 @@ void MainWindow::loadJob()
     for(i = 0; i<headsCount; i++)
         {
         if(i==0)
-            headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
+            headButton[i]->setHeadformType(HeadForm::HeadLoad);
         else
             if((i==headsCount - 1)&(machineSettings.machineParam.useUnloadHead))
-                headButton[i]->setHeadformType(HeadForm::HeadRemoving);
+                headButton[i]->setHeadformType(HeadForm::HeadUnload);
             else
                 if((registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==2)|
                         (registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==4)|
@@ -1360,7 +1389,7 @@ void MainWindow::setHeadsPosition()
     areaW = ui->widgetHeads->width();
 
     int i;
-    float sinCoef, cosCoef, R, x0_hb, y0_hb, x0_sb, y0_sb;
+    float sinCoefHeads, cosCoefHeads, sinCoefSett, cosCoefSett, R, x0_hb, y0_hb, x0_sb, y0_sb;
     if(areaH<areaW)
         R = areaH/2-headButton[0]->height()/2-headSettButton[0]->height()/2-10;
     else
@@ -1381,20 +1410,26 @@ void MainWindow::setHeadsPosition()
         x0_sb = y0_sb;
 
     int direction = machineSettings.machineParam.direction;
+    cycleDialog->setDirection(direction);
+    cycleDialog->setUnloadUseState(this->machineSettings.machineParam.useUnloadHead);
 
     for(i = 0; i<headsCount; i++)
     {
-        sinCoef = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.
+        sinCoefHeads = sin(direction*2.*3.1415926*i/headsCount+3.1415926/2.
                       +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
-        cosCoef = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.
+        cosCoefHeads = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.
                       +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
-        headButton[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
+//        sinCoefSett = sin(2.*3.1415926*i/headsCount+3.1415926/2.
+//                      +3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+//        cosCoefSett = cos(2.*3.1415926*i/headsCount+3.1415926/2.
+//                      +3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+        headButton[i]->move(x0_hb+(R)*cosCoefHeads, y0_hb+(R)*sinCoefHeads);
 
         if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
                      |(!machineSettings.machineParam.useUnloadHead)))
         {
-            headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoef,
-                    y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoef);
+            headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoefHeads,
+                    y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoefHeads);
             if(direction == 1)
             {
                 if(i<(headsCount)/4)
@@ -1437,6 +1472,7 @@ void MainWindow::setHeadsPosition()
                                  infoWidget->pos().y()-ui->widgetLiftOffcet->height());
     ui->widgetStepDelay->move(infoWidget->pos().x()+infoWidget->width()/2-ui->widgetLiftOffcet->width()/2,
                                  infoWidget->pos().y()+infoWidget->height()+6);
+
 }
 
 void MainWindow::indexerStepFinish()
@@ -1454,12 +1490,16 @@ void MainWindow::indexerStepFinish()
     }
     if(headButton[0]->getRagState() != HeadForm::shirtOff)
         ragAtHeadCount++;
+    if(headButton[0]->getRagState() == HeadForm::shirtOn)
+        headButton[0]->setPixmap(HeadForm::shirtOn);
 
-    if(!indexer->getIsAutoPrint())
+    if(!static_cast<bool>(ragAllCount%100))
     {
-        if(ragAtHeadCount > 0)
-            indexer->printFinish();
+        settings->setValue("COUNTERS/RAG_ALL_CNT", ragAllCount);
+        settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCyclesAll);
     }
+
+
     maintanceDialog->check(indexerCyclesAll);
     if(ragAtHeadCount == 0)
     {
@@ -1477,14 +1517,6 @@ void MainWindow::indexerStepFinish()
     if(((lastTime.secsTo(curTime))>0))
         dph = 3600000/lastTime.msecsTo(curTime);
     lastTime = curTime;
-    int i;
-    for(i = 0; i<4; i++)
-    {
-        bArr[2+i] = static_cast<char>(ragSessionCount>>(i*8));
-        bArr[6+i] = static_cast<char>(ragAtHeadCount>>(i*8));
-        bArr[10+i] = static_cast<char>(dph>>(i*8));
-    }
-    udpHandler->sendData(bArr);
 }
 
 void MainWindow::startPrintProcess(bool autoPrint)
@@ -1595,6 +1627,118 @@ void MainWindow::updateTimeSlot()
     ui->labelDate->setText(QDate::currentDate().toString("ddd, dd/MM/yyyy"));
 }
 
+void MainWindow::resetSkippedRequest()
+{
+    QByteArray cmdArr;
+    uint16_t data = 0;
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::LiftDevice&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::SkipCntLo&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+
+    cmdArr.clear();
+    data = 0;
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::LiftDevice&0x00FF));
+    cmdArr.append(static_cast<char>(IndexerLiftSettings::SkipCntHi&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+}
+
+void MainWindow::resetRemainingRequest()
+{
+    int val = settings->value("COUNTERS/REMAINING", 0).toInt();
+
+    QByteArray cmdArr;
+    uint16_t data = static_cast<uint16_t>(val&0x0000FFFF);
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterRemainLo&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+
+    cmdArr.clear();
+    data = static_cast<uint16_t>((val>>16)&0x0000FFFF);
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterRemainHi&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+
+    cmdArr.clear();
+    data = 0;
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterPrintedLo&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+
+    cmdArr.clear();
+    data = 0;
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterPrintedHi&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+}
+
+void MainWindow::remainingValChangedRequest(int val)
+{
+    settings->setValue("COUNTERS/REMAINING", val);
+    infoWidget->setRemaining(val);
+    QByteArray cmdArr;
+    uint16_t data = static_cast<uint16_t>(val&0x0000FFFF);
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterRemainLo&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+
+    cmdArr.clear();
+    data = static_cast<uint16_t>((val>>16)&0x0000FFFF);
+    cmdArr.append(static_cast<char>(MachineSettings::MasterDevice&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterRemainHi&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    comPort->sendData(cmdArr);
+}
+
+void MainWindow::counterDialogRequest()
+{
+    counterDialog->show();
+    counterDialog->move(this->width()-80-counterDialog->width(), 90);
+}
+
+void MainWindow::skipStateUpdate()
+{
+    settings->setValue("PROGRAM/SOFT_SKIP", MachineSettings::getSoftwartSkipEn());
+}
+
 void MainWindow::userLogin()
 {
     if(usersSettingDialog->getLoginWindowEnable())
@@ -1693,7 +1837,7 @@ void MainWindow::zeroStart()
 
     needCompleteReset = true;
 
-    MachineSettings::serviceWidgetsEnStat = false;
+    MachineSettings::setServiceWidgEn(false);
     this->exitCode = ExitDialog::Continue;
     indexer->setSettingEnable(false);
 
@@ -1780,11 +1924,11 @@ void MainWindow::headsInit()
         connect(headButton[i], SIGNAL(loadStateChanged(int, LoadState)), this, SLOT(getLoadState(int, LoadState)));
         if(i==0)
         {
-            headButton[i]->setHeadformType(HeadForm::HeadPutingOn);
+            headButton[i]->setHeadformType(HeadForm::HeadLoad);
         }
         else
             if((i==headsCount - 1)&(this->machineSettings.machineParam.useUnloadHead))
-                headButton[i]->setHeadformType(HeadForm::HeadRemoving);
+                headButton[i]->setHeadformType(HeadForm::HeadUnload);
             else
             {
                 headButton[i]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
@@ -1820,8 +1964,12 @@ void MainWindow::headsInit()
 void MainWindow::watchDogTimeout()
 {
     needCompleteReset = true;
+    int i;
+    for(i = 0; i<headButton.length(); i++)
+        headButton[i]->setPixmap(HeadForm::shirtOff);
     indexer->resetWidget();
     indexer->setState(0x0);
+    ui->pButtonExit->setEnabled(true);
     infoWidget->setIndicatorState(0x704);
     infoWidget->setText(tr("Lost communication.\nPlease press reset button."));
 }
@@ -1839,7 +1987,9 @@ void MainWindow::showEvent(QShowEvent *ev)
     ui->pButtonCyclesSetup->setVisible(this->machineSettings.machineParam.lastRevWarm.field.revolver);
     this->setIconFolder(settings->value("STYLE/ICON_SEL_INDEX").toInt());
     this->setBackGround(settings->value("STYLE/IMAGE_EN", false).toBool());
+
     this->resetMachine();
+
     ev->accept();
 }
 

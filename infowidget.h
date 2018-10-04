@@ -27,9 +27,11 @@ public:
 
     void setPrinted(int val);
     void setTotal(int val);
+    void setRemaining(int val);
+    void setSkipped(int val);
 
     void setIconFolder(QString path);
-    void setIndicatorState(u_int16_t state);
+    void setIndicatorState(uint16_t state);
 
     void setErrorText(MachineSettings::MachineParameters machineParameters, uint16_t val);
     void setText(QString text);
@@ -48,6 +50,7 @@ private:
     Register *localRegisters;
     QSettings *errMasages;
 
+    int remainCnt, printCnt;
 
 
 };

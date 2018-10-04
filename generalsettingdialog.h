@@ -62,6 +62,9 @@ public:
     void setStyle(QStringList stList, int curSelect, QStringList iconList, int iconSel, bool backGrEn);
     void setLangList(QStringList langList, int curSelect);
     void showPortInfo(ComSettings comSett);
+    void manualResize();
+    void manualShow();
+
 
 signals:
     void emailSettingsChanged(EmailSettings);
@@ -78,6 +81,8 @@ signals:
     void sendCommand(QByteArray command);
     void imageRequest(bool enable, bool req = false);
     void warmingStateChanged(bool enable);
+    void countersDialogRequest();
+    void skipStateChanged();
 
 private:
     Ui::GeneralSettingDialog *ui;
@@ -118,10 +123,10 @@ private slots:
     void on_pButtonHeadsActivation_clicked();
     void on_checkBoxUseBackgr_clicked();
     void on_pButtonSelectImg_clicked();
-
     void on_pButtonWarming_clicked();
-
     void on_pButtonCounters_clicked();
+
+    void on_pButtonShowSkip_clicked();
 
 protected:
     bool event(QEvent *e);

@@ -19,6 +19,8 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
 
     isAutoPrintEnable = false;
     machineState.all = 0x0000;
+
+    this->setState(0);
 }
 
 IndexerWidget::~IndexerWidget()
@@ -82,6 +84,7 @@ void IndexerWidget::setIconFolder(QString path)
         ui->pButtonMoveUp->setIcon(QIcon(pathIcon+"/arrows/arrowUPart.png"));
     pButtonSets->setIcon(QIcon(pathIcon+"/settings.png"));
 
+    ui->pButtonSkip->setIcon(QIcon(pathIcon+"/handNO.png"));
 }
 
 void IndexerWidget::clickButton(QByteArray data)
@@ -376,7 +379,7 @@ void IndexerWidget::setState(u_int16_t state)
 {
     uint8_t hb = ((state>>8)&0x00FF);
 
-    MachineSettings::setMachineIdle(hb == 7);
+    MachineSettings::setMachineIdle(hb != 8);
 
     ui->pButtonReset->setVisible((hb == 0)|(hb == 17)|(hb == 18));
     ui->pButtonHome->setVisible(hb == 2);
@@ -388,6 +391,7 @@ void IndexerWidget::setState(u_int16_t state)
     ui->pButtonMoveLeft->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
     ui->pButtonMoveRight->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
     ui->pButtonMoveUp->setVisible((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18));
+    ui->pButtonSkip->setVisible(((hb != 0)&(hb != 2)&(hb != 17)&(hb != 18))&MachineSettings::getSoftwartSkipEn());
 
     ui->pButtonReset->setEnabled((hb == 0)|(hb == 17)|(hb == 18));
     ui->pButtonPrint->setEnabled((hb == 7)|(hb == 8));
@@ -399,6 +403,7 @@ void IndexerWidget::setState(u_int16_t state)
     ui->pButtonMoveUp->setEnabled((hb == 7)|(hb == 9));
     ui->pButtonHome->setEnabled(hb == 2);
     ui->pButtonAir->setEnabled((hb == 7));
+    ui->pButtonSkip->setEnabled((hb == 8));
 
     if(hb == 4)
     {
@@ -446,9 +451,10 @@ void IndexerWidget::resizeEvent(QResizeEvent *e)
     pButtonSets->move(this->width() - pButtonSets->width(), 0);
 
     e->accept();
-    ui->pButtonAir->setVisible((MachineSettings::machineTypeStat == MachineSettings::TitanAAA)|
-                               (MachineSettings::machineTypeStat == MachineSettings::TitanASA)|
-                               (MachineSettings::machineTypeStat == MachineSettings::TitanASE));
+    ui->pButtonAir->setVisible(false);
+//                (MachineSettings::machineTypeStat == MachineSettings::TitanAAA)|
+//                (MachineSettings::machineTypeStat == MachineSettings::TitanASA)|
+//                (MachineSettings::machineTypeStat == MachineSettings::TitanASE));
 
 }
 
@@ -465,6 +471,21 @@ void IndexerWidget::on_pButtonAir_clicked()
     QByteArray cmdArr;
     uint16_t data;
     data = IndexerLiftSettings::AirRelease;
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(cmdArr);
+}
+
+void IndexerWidget::on_pButtonSkip_clicked()
+{
+    QByteArray cmdArr;
+    uint16_t data;
+    data = IndexerLiftSettings::SkipOne;
     cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
     cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append(static_cast<char>(data>>8));

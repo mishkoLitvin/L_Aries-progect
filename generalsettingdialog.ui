@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>648</height>
+    <width>527</width>
+    <height>651</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>450</width>
+    <width>35536</width>
     <height>16777215</height>
    </size>
   </property>
@@ -683,7 +683,8 @@ type:</string>
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Keypad connected</string>
+                 <string>Keypad
+connected</string>
                 </property>
                </widget>
               </item>
@@ -734,7 +735,8 @@ type:</string>
               <item row="3" column="4">
                <widget class="QLabel" name="label_5">
                 <property name="text">
-                 <string>Head servo
+                 <string>Head
+servo
 type:</string>
                 </property>
                </widget>
@@ -779,7 +781,8 @@ type:</string>
                <widget class="QLabel" name="label_10">
                 <property name="text">
                  <string>Head
-Max range:</string>
+Max
+ range:</string>
                 </property>
                </widget>
               </item>
@@ -838,7 +841,8 @@ Screw pitch</string>
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>HMI connected</string>
+                 <string>HMI 
+connected</string>
                 </property>
                </widget>
               </item>
@@ -959,6 +963,39 @@ Disable</string>
              <property name="text">
               <string>Set
 Counters</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/new/icons/icons/rotateRight.png</normaloff>:/new/icons/icons/rotateRight.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="pButtonShowSkip">
+             <property name="minimumSize">
+              <size>
+               <width>65</width>
+               <height>65</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Show skip
+button</string>
              </property>
              <property name="icon">
               <iconset>

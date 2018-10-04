@@ -155,7 +155,11 @@ public:
         MasterHeadStateHi = 0x0009,
         MasterPaletStateLo = 0x000A,
         MasterPaletStateHi = 0x0012,
-        MasterMachineType = 0x0011
+        MasterMachineType = 0x0011,
+        MasterRemainLo = 0x000D,
+        MasterRemainHi = 0x000C,
+        MasterPrintedLo = 0x0010,
+        MasterPrintedHi = 0x000F,
     };
 
     typedef union MachineState_{
@@ -241,14 +245,17 @@ public:
     MachineSettings();
 
     void fromByteArray(QByteArray machineParamArray);
-
+private:
     static bool serviceWidgetsEnStat;
+    static bool useSoftwareSkip;
     static MachineType machineTypeStat;
     static bool machineIdle;
 
 public:
     static bool getServiceWidgEn();
     static void setServiceWidgEn(bool servEn);
+    static bool getSoftwartSkipEn();
+    static void setSoftwartSkipEn(bool skipEn);
 
     static MachineType getMachineType();
     static void setMachineType(MachineType mType);
@@ -264,12 +271,14 @@ private:
     static uint16_t headTypeStat;
     static uint16_t indexerLiftTypeStat;
     static uint32_t headPalStateStat;
+
 public:
     static uint16_t getHeadMaxRange();
     static uint16_t getHeadType();
     static uint16_t getIndexLiftType();
     static uint16_t getHeadPalStateLo();
     static uint16_t getHeadPalStateHi();
+    static uint32_t getHeadPalState();
 
     static void setHeadMaxRange(uint16_t val);
     static void setHeadType(uint16_t val);
@@ -306,6 +315,9 @@ public:
         IndexAccelerationRet = 0x0B,
         IndexSpeedRet = 0x0D,
         WarningTime = 0x0E,
+
+        SkipCntLo = 0x1B,
+        SkipCntHi = 0x1A,
 
         WarmingTime = 0x22,
         WarmingTemp = 0x21,
@@ -366,6 +378,7 @@ public:
         LiftMoveEnd = 0x00B9,
         IndexDirChange = 0x005D,
         WarmStart_Stop = 0x001F,
+        SkipOne = 0x0070,
     }IndexerCommandsEn;
 
 

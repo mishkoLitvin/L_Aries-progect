@@ -57,8 +57,8 @@ class HeadForm : public QWidget
 public:
     typedef enum HeadformType_
     {
-        HeadPutingOn,
-        HeadRemoving,
+        HeadLoad,
+        HeadUnload,
         HeadProcessing
     }HeadformType;
 

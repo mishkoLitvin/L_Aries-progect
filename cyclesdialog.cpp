@@ -85,6 +85,16 @@ CyclesDialog::~CyclesDialog()
     delete ui;
 }
 
+void CyclesDialog::setDirection(int direction)
+{
+    this->direction = direction;
+}
+
+void CyclesDialog::setUnloadUseState(bool state)
+{
+    this->useUnloadHead = state;
+}
+
 void CyclesDialog::showEvent(QShowEvent *ev)
 {
     float sinCoef, cosCoef;
@@ -100,12 +110,30 @@ void CyclesDialog::showEvent(QShowEvent *ev)
     int i;
     for(i = 0; i<headCount; i++)
     {
-        sinCoef = sin(2.*3.1415926*i/headCount+3.1415926/2.+3.1415926/headCount);
-        cosCoef = cos(2.*3.1415926*i/headCount+3.1415926/2.+3.1415926/headCount);
+        sinCoef = sin(direction*2.*3.1415926*i/headCount+3.1415926/2.
+                      +direction*3.1415926/headCount*(this->useUnloadHead));
+        cosCoef = cos(direction*2.*3.1415926*i/headCount+3.1415926/2.
+                      +direction*3.1415926/headCount*(this->useUnloadHead));
 
         spinBoxList[i]->move(x0_hb+(R)*cosCoef, y0_hb+(R)*sinCoef);
         labelList[i]->move(x0_hb+(R)*cosCoef, y0_hb-3+(R)*sinCoef);
     }
+
+    spinBoxList[0]->setVisible(false);
+    labelList[0]->resize(spinBoxList[0]->size().height(), spinBoxList[0]->size().height());
+    labelList[0]->setText("LOAD");
+    labelList[0]->setAlignment(Qt::AlignCenter);
+    labelList[0]->setStyleSheet("background-color: #00DD33");
+
+    if(this->useUnloadHead)
+    {
+        spinBoxList[spinBoxList.length()-1]->setVisible(false);
+        labelList[labelList.length()-1]->resize(spinBoxList[spinBoxList.length()-1]->size().height(), spinBoxList[spinBoxList.length()-1]->size().height());
+        labelList[labelList.length()-1]->setText("UNLOAD");
+        labelList[labelList.length()-1]->setAlignment(Qt::AlignCenter);
+        labelList[labelList.length()-1]->setStyleSheet("background-color: #DD3300");
+    }
+
     if(QApplication::platformName() != "eglfs")
         this->resize(QSize(1024, 768));
     else

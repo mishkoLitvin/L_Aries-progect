@@ -44,6 +44,7 @@
 #include "udpsocket.h"
 #include "headactivationdialog.h"
 #include "reprogramdialog.h"
+#include "countersdialog.h"
 
 #include "settings.h"
 
@@ -89,6 +90,7 @@ private:
     CyclesDialog* cycleDialog;
     HeadActivationDialog *headActDialog;
     ReprogramDialog *reprogramDialog;
+    CountersDialog *counterDialog;
 
     SerialPort *comPort;
     UdpSocket *udpHandler;
@@ -173,6 +175,11 @@ private slots:
     void setIconFolder(int index);
     void setBackGround(bool enable, bool request = false);
     void updateTimeSlot();
+    void resetSkippedRequest();
+    void resetRemainingRequest();
+    void remainingValChangedRequest(int val);
+    void counterDialogRequest();
+    void skipStateUpdate();
 
     void on_pButtonWarming_clicked();
 

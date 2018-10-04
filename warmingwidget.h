@@ -22,6 +22,7 @@ public:
 
     void setIconFolder(QString path);
     void setRegisters(Register *reg);
+    void resetWidget();
 
 signals:
     void sendCommand(QByteArray);

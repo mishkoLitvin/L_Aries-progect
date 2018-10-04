@@ -302,6 +302,7 @@ void IndexerLiftSettings::fromByteArray(QByteArray indParamArr, QByteArray lifPa
 
 
 bool MachineSettings::serviceWidgetsEnStat;
+bool MachineSettings::useSoftwareSkip;
 MachineSettings::MachineType MachineSettings::machineTypeStat;
 bool MachineSettings::machineIdle;
 uint16_t MachineSettings::headMaxRangeStat;
@@ -403,14 +404,23 @@ void MachineSettings::fromByteArray(QByteArray machineParamArray)
 
 bool MachineSettings::getServiceWidgEn()
 {
-    MachineSettings stt;
-    return stt.serviceWidgetsEnStat;
+//    MachineSettings stt;
+    return MachineSettings::serviceWidgetsEnStat;
 }
 
 void MachineSettings::setServiceWidgEn(bool servEn)
 {
-    qDebug()<<"service changed"<<servEn;
     MachineSettings::serviceWidgetsEnStat = servEn;
+}
+
+bool MachineSettings::getSoftwartSkipEn()
+{
+    return MachineSettings::useSoftwareSkip;
+}
+
+void MachineSettings::setSoftwartSkipEn(bool skipEn)
+{
+    MachineSettings::useSoftwareSkip = skipEn;
 }
 
 MachineSettings::MachineType MachineSettings::getMachineType()
@@ -450,12 +460,17 @@ uint16_t MachineSettings::getIndexLiftType()
 
 uint16_t MachineSettings::getHeadPalStateLo()
 {
-    return static_cast<uint16_t>(MachineSettings::headPalStateStat&0x00FF);
+    return static_cast<uint16_t>(MachineSettings::headPalStateStat&0xFFFF);
 }
 
 uint16_t MachineSettings::getHeadPalStateHi()
 {
-    return static_cast<uint16_t>((MachineSettings::headPalStateStat>>8)&0x00FF);
+    return static_cast<uint16_t>((MachineSettings::headPalStateStat>>16)&0xFFFF);
+}
+
+uint32_t MachineSettings::getHeadPalState()
+{
+    return static_cast<uint32_t>(MachineSettings::headPalStateStat);
 }
 
 void MachineSettings::setHeadMaxRange(uint16_t val)
@@ -475,14 +490,14 @@ void MachineSettings::setIndexLiftType(uint16_t val)
 
 void MachineSettings::setHeadPalStateLo(uint16_t val)
 {
-    MachineSettings::headPalStateStat &= 0xFF00;
+    MachineSettings::headPalStateStat &= 0xFFFF0000;
     MachineSettings::headPalStateStat |= val;
 }
 
 void MachineSettings::setHeadPalStateHi(uint16_t val)
 {
-    MachineSettings::headPalStateStat &= 0x00FF;
-    MachineSettings::headPalStateStat |= ((val<<8)&0xFF00);
+    MachineSettings::headPalStateStat &= 0x0000FFFF;
+    MachineSettings::headPalStateStat |= ((val<<16)&0xFFFF0000);
 }
 
 void MachineSettings::setHeadPalStateIndex(int index, bool state)
@@ -532,7 +547,9 @@ void Register::writeReg(uint8_t dev, uint8_t place, uint16_t data)
     {
         int i = dev - HeadSetting::HeadDeviceAdrOffcet;
         if((i<headRegPtrList.length())&(place<44))
+        {
             *(headRegPtrList[i]+place) = data;
+        }
     }
 
 }
