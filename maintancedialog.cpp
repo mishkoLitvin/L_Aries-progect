@@ -139,11 +139,11 @@ void MaintanceDialog::solveItem(int index)
     maintanceList[unsolvedListIndex[index]].lastCount = this->lastCyclesCount;
     unsolvedListIndex.removeAt(index);
 
-
     settings->setValue("UNSOLVED_ELEMENTS_LIST", QVariant::fromValue(unsolvedListIndex));
 
     if(unsolvedList.length() == 0)
         emit this->maintanceWorkEnable(false);
+
 }
 
 bool MaintanceDialog::execute(QWidget *parent,
@@ -176,53 +176,23 @@ void MaintanceDialog::check(int cyclesCount)
     int i;
     for(i = 0; i<maintanceList.length(); i++)
     {
-        if((cyclesCount>=(maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount
-                          -settings->value("WARNING_CYCLES_COUNT", 50).toInt()))
-                &(cyclesCount<(maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount-1)))
+        if((cyclesCount >= (maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount))
+                &(!(unsolvedListIndex.contains(i))))
         {
-//            emit this->stopRequest();
-            maintanceList[i].troubleType = static_cast<int>(Warning);
-            this->maintanceHaveWarning = true;
-            bool service = false;
-
-            if(service)
-            {
-                emit this->stopRequest();
-                settings->setValue("ELEMENT_"+QString::number(i)+"/LAST_COUNT", cyclesCount);
-                maintanceList[i].lastCount = cyclesCount;
-            }
-//            else
-//                emit this->continueRequest();
+            maintanceList[i].troubleType = static_cast<int>(Critical);
+            this->maintanceHaveWork = true;
+            settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/TROUBLE_INDEX", maintanceList[i].troubleIndex);
+            settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/NAME", maintanceList[i].troubleName);
+            settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/TROUBLE_INFO", maintanceList[i].troubleInfo);
+            settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/MACHINE_INFO", maintanceList[i].machineInfo);
+            settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/LAST_COUNT", maintanceList[i].lastCount);
+            settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/REPEAT_COUNT", maintanceList[i].repeatCyclesCount);
+            unsolvedList.append(maintanceList[i]);
+            unsolvedListIndex.append(i);
+            settings->setValue("UNSOLVED_ELEMENTS_COUNT", unsolvedList.length());
+            settings->setValue("UNSOLVED_ELEMENTS_LIST", QVariant::fromValue(unsolvedListIndex));
+            emit this->maintanceWorkEnable(true);
         }
-        else
-            if(cyclesCount == (maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount))
-            {
-                maintanceList[i].troubleType = static_cast<int>(Critical);
-                bool service = false;
-//                MaintanceDialog::execute(maintanceList[i], this);
-                this->maintanceHaveWork = true;
-                if(service)
-                {
-                    emit this->stopRequest();
-                    settings->setValue("ELEMENT_"+QString::number(i)+"/LAST_COUNT", cyclesCount);
-                    maintanceList[i].lastCount = cyclesCount;
-                }
-                else
-                {
-                    settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/TROUBLE_INDEX", maintanceList[i].troubleIndex);
-                    settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/NAME", maintanceList[i].troubleName);
-                    settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/TROUBLE_INFO", maintanceList[i].troubleInfo);
-                    settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/MACHINE_INFO", maintanceList[i].machineInfo);
-                    settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/LAST_COUNT", maintanceList[i].lastCount);
-                    settings->setValue("UNSLOVED/ELEMENT_"+QString::number(unsolvedList.length())+"/REPEAT_COUNT", maintanceList[i].repeatCyclesCount);
-                    unsolvedList.append(maintanceList[i]);
-                    unsolvedListIndex.append(i);
-                    settings->setValue("UNSOLVED_ELEMENTS_COUNT", unsolvedList.length());
-                    settings->setValue("UNSOLVED_ELEMENTS_LIST", QVariant::fromValue(unsolvedListIndex));
-                    emit this->maintanceWorkEnable(true);
-                }
-
-            }
         if((cyclesCount > (maintanceList[i].lastCount+maintanceList[i].repeatCyclesCount))|
                 (unsolvedList.length() > 0))
         {
@@ -236,9 +206,7 @@ void MaintanceDialog::check(int cyclesCount)
 
 void MaintanceDialog::openMaintanceList()
 {
-//    maintanceWidget->setElemets(this->unsolvedList);
-//    maintanceWidget->show();
-//    this->show();
+
 }
 
 void MaintanceDialog::openDialog()
