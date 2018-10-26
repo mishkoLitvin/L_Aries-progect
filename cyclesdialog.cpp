@@ -194,7 +194,7 @@ void CyclesDialog::on_pButtonOK_clicked()
     headStrokList.clear();
     uint32_t temp32;
 
-    for(j = 1; j<headCount; j++)
+    for(j = 1; j<headCount-this->useUnloadHead; j++)
     {
         temp32 = 0;
         for(i = 0; i < cycleValues.length(); i++)

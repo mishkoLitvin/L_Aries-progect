@@ -64,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     generalSettingDialog = new GeneralSettingDialog();
     machineSettings.fromByteArray(settings->value("MACHINE_PARAMS", machineSettings.machineParam.toByteArray()).value<QByteArray>());
-    generalSettingDialog->setMachineSetting(machineSettings.machineParam);
     generalSettingDialog->setEmailSettings(settings->value("EMAIL_SETTINGS").value<EmailSettings>());
     generalSettingDialog->setStyleSheet(this->styleSheet());
     generalSettingDialog->setPasswords(settings->value("PASSWORDS/PASSWORD_SERIAL", 35142).toInt(),
@@ -94,6 +93,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(generalSettingDialog, &GeneralSettingDialog::warmingStateChanged, this, &MainWindow::getWarmingEnable);
     connect(generalSettingDialog, &GeneralSettingDialog::skipStateChanged, this, &MainWindow::skipStateUpdate);
     MachineSettings::setSoftwartSkipEn(settings->value("PROGRAM/SOFT_SKIP", false).toBool());
+    MachineSettings::setHeadMaxRange(machineSettings.machineParam.headMaxRange);
+    MachineSettings::setHeadType(machineSettings.machineParam.headType.all);
+    MachineSettings::setIndexLiftType(machineSettings.machineParam.indexeLiftType.all);
+    indexerLiftSetDialog->setLiftGearRatio(this->machineSettings.machineParam.liftGearRatio);
 
     mailSender = new MailSender(this);
     mailSender->setSenderMailAdress(settings->value("EMAIL_SETTINGS", QVariant::fromValue(EmailSettings())).value<EmailSettings>().senderAdress);
@@ -144,6 +147,7 @@ MainWindow::MainWindow(QWidget *parent) :
     registers->setMasterReg(this->machineSettings);
     registers->setIndexLiftReg(this->indexerLiftSettings);
     comPort->setRegisterPointer(this->registers);
+    generalSettingDialog->setRegisterPointer(this->registers);
     infoWidget->setRegisterPointer(this->registers);
     indexerLiftSetDialog->setRegisters(this->registers);
     headSettingDialog->setRegisters(this->registers);
@@ -188,6 +192,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(counterDialog, &CountersDialog::resetSkipped, this, &MainWindow::resetSkippedRequest);
     connect(counterDialog, &CountersDialog::remainingValChanged, this, &MainWindow::remainingValChangedRequest);
     connect(generalSettingDialog, &GeneralSettingDialog::countersDialogRequest, this, &MainWindow::counterDialogRequest);
+    counterDialog->hide();
 
 }
 
@@ -303,6 +308,7 @@ void MainWindow::headSettingRequest(int index)
     headSettingDialog->move(this->pos().x()+this->width()-headSettingDialog->width()-30,
                             this->pos().y()+10);
     headSettingDialog->show();
+    this->lastOpened = headSettingDialog;
 }
 
 void MainWindow::indexerLiftSettingRequest()
@@ -312,6 +318,7 @@ void MainWindow::indexerLiftSettingRequest()
     indexerLiftSetDialog->show();
     indexerLiftSetDialog->move(this->pos().x()+this->width()-indexerLiftSetDialog->width(),
                                this->pos().y()+10/*+this->height()-indexerLiftSetDialog->height()*/);
+    this->lastOpened = indexerLiftSetDialog;
 }
 
 void MainWindow::generalSettingDialogRequest()
@@ -328,6 +335,7 @@ void MainWindow::generalSettingDialogRequest()
     generalSettingDialog->manualShow();
     generalSettingDialog->move(this->pos().x()+this->width()-generalSettingDialog->size().width(),
                                this->pos().y()+10);
+    this->lastOpened = generalSettingDialog;
 }
 
 void MainWindow::changeHeadNo(int index)
@@ -448,28 +456,38 @@ void MainWindow::getSerialData(ModData modData)
                 break;
             case Register::masterReg_paletStLow:
                 MachineSettings::setHeadPalStateLo(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStLow));
+                if(machineSettings.machineParam.direction == 1)
+                {
+                    for(i = 1; (i<32)&(i<headsCount); i++)
+                        if((static_cast<bool>(MachineSettings::getHeadPalState()&(1<<i))) !=
+                                static_cast<bool>(headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->getRagState() == HeadForm::shirtOn))
+                            headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
+                }
+                else
+                {
+                    for(i = 1; (i<32)&(i<headsCount); i++)
+                        if( (static_cast<bool>(MachineSettings::getHeadPalState()&(1<<i))) !=
+                                (headButton[i]->getRagState() == HeadForm::shirtOn))
+                            headButton[i]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
+                }
                 break;
             case Register::masterReg_paletStHigh:
                 MachineSettings::setHeadPalStateHi(registers->readReg(MachineSettings::MasterDevice, Register::masterReg_paletStHigh));
                 if(machineSettings.machineParam.direction == 1)
                 {
                     for(i = 1; (i<32)&(i<headsCount); i++)
-                        if( static_cast<bool>(MachineSettings::getHeadPalState())&(1<<i) !=
-                                (headButton[headsCount-i]->getRagState() == HeadForm::shirtOn))
-                            headButton[headsCount-i]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
+                        if( (static_cast<bool>(MachineSettings::getHeadPalState()&(1<<i))) !=
+                                (headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->getRagState() == HeadForm::shirtOn))
+                            headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
                 }
                 else
                 {
                     for(i = 1; (i<32)&(i<headsCount); i++)
-                        if( static_cast<bool>(MachineSettings::getHeadPalState())&(1<<i) !=
+                        if( (static_cast<bool>(MachineSettings::getHeadPalState()&(1<<i))) !=
                                 (headButton[i]->getRagState() == HeadForm::shirtOn))
                             headButton[i]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
                 }
             break;
-            case Register::REG_SKIPC_H:
-                infoWidget->setSkipped((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_L))&0x0000FFFF)|
-                                       ((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_H))<<16)&0xFFFF0000));
-                break;
             case Register::masterReg_ERROR_MESSAGE:
                 infoWidget->setErrorText(this->machineSettings.machineParam, 0);
             break;
@@ -510,6 +528,21 @@ void MainWindow::getSerialData(ModData modData)
                     machineSettings.machineParam.direction = 1;
                 settings->setValue("MACHINE_PARAMS", machineSettings.machineParam.toByteArray());
                 break;
+            case Register::liftReg_ACC:
+                indexerLiftSettings.liftParam.acceleration = modData.fileds.data;
+                break;
+            case Register::liftReg_DIST:
+                indexerLiftSettings.liftParam.distance = modData.fileds.data;
+                disconnect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
+                ui->dSpinBoxLiftOffcet->setValue(1.18-modData.fileds.data/100.);
+                connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
+                break;
+            case Register::liftReg_HOME_OFFSET:
+                indexerLiftSettings.liftParam.homeOffcet = static_cast<int16_t>(modData.fileds.data);
+                break;
+            case Register::liftReg_SPEED:
+                indexerLiftSettings.liftParam.speed = modData.fileds.data;
+                break;
             default:
                 break;
             }
@@ -517,20 +550,17 @@ void MainWindow::getSerialData(ModData modData)
 
         case IndexerLiftSettings::LiftDevice:
             switch (modData.fileds.registerNo) {
-            case Register::liftReg_ACC:
-                indexerLiftSettings.liftParam.acceleration = modData.fileds.data;
-                break;
+
             case Register::liftReg_DOWN_DELAY:
                 indexerLiftSettings.liftParam.delayDown = modData.fileds.data;
                 break;
-            case Register::liftReg_DIST:
-                indexerLiftSettings.liftParam.distance = modData.fileds.data;
+            case Register::REG_SKIPC_H:
+                infoWidget->setSkipped((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_L))&0x0000FFFF)|
+                                       ((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_H))<<16)&0xFFFF0000));
                 break;
-            case Register::liftReg_HOME_OFFSET:
-                indexerLiftSettings.liftParam.homeOffcet = static_cast<int16_t>(modData.fileds.data);
-                break;
-            case Register::liftReg_SPEED:
-                indexerLiftSettings.liftParam.speed = modData.fileds.data;
+            case Register::REG_SKIPC_L:
+                infoWidget->setSkipped((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_L))&0x0000FFFF)|
+                                       ((static_cast<uint32_t>(registers->readReg(IndexerLiftSettings::LiftDevice, Register::REG_SKIPC_H))<<16)&0xFFFF0000));
                 break;
             default:
                 break;
@@ -545,7 +575,8 @@ void MainWindow::getSerialData(ModData modData)
     {
         int i;
         i = modData.fileds.adress - HeadSetting::HeadDeviceAdrOffcet;
-
+        if(machineSettings.machineParam.direction == 1)
+            i = headsCount-machineSettings.machineParam.useUnloadHead - i;
         switch (modData.fileds.registerNo) {
         case Register::REG_RW_POWER:
             headSettings.headParam.dryPowerQ = modData.fileds.data;
@@ -557,13 +588,19 @@ void MainWindow::getSerialData(ModData modData)
             break;
         case Register::headReg_FLDWE:
             headSettings.headParam.dwellFLTime = modData.fileds.data;
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::headReg_SQDWE:
             headSettings.headParam.dwellSQTime = modData.fileds.data;
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::headReg_ON:
             headSettings.headParam.headOnType = (HeadSetting::HeadOnType)modData.fileds.data;
             headSettings.headParam.powerOn = modData.fileds.data;
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::REG_SHUTTLE_REAR_POS:
             headSettings.headParam.heatLimit = modData.fileds.data;
@@ -576,15 +613,23 @@ void MainWindow::getSerialData(ModData modData)
             break;
         case Register::headReg_RANGE_1:
             headSettings.headParam.limitFront = modData.fileds.data;
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::headReg_RANGE_2:
             headSettings.headParam.limitRear = modData.fileds.data;
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::headReg_SPD_FRONT:
             headSettings.headParam.speedFront = modData.fileds.data;
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::headReg_SPD_REAR:
             headSettings.headParam.speedRear = modData.fileds.data;
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::REG_STANDBY_POWER:
             headSettings.headParam.standbyPowerQ = modData.fileds.data;
@@ -595,10 +640,15 @@ void MainWindow::getSerialData(ModData modData)
         case Register::headReg_STR_COUNT:
             headSettings.headParam.stroksCount = modData.fileds.data;
             headButton[i]->setStrokCount(headSettings.headParam.stroksCount);
+            if(this->lastOpened == headSettingDialog)
+                headSettingDialog->setHeadParams(i);
             break;
         case Register::headReg_StBk_STR_COUNT:
             headSettings.headParam.stroksSBCount = modData.fileds.data;
             headButton[i]->setStepBkStrCnt(headSettings.headParam.stroksSBCount);
+            break;
+        case Register::REG_TEMP_MEAS:
+            headButton[i]->setTemperature(modData.fileds.data);
             break;
         case Register::REG_TEMP_SET:
             headSettings.headParam.temperatureSetQ = modData.fileds.data;
@@ -609,6 +659,8 @@ void MainWindow::getSerialData(ModData modData)
         default:
             break;
         }
+
+
 
         if((i<headsCount)&(modData.fileds.registerNo==Register::headReg_ON))
         {
@@ -655,6 +707,8 @@ void MainWindow::getUdpData(QByteArray data)
 
 void MainWindow::getHeadColor(int index, QColor color)
 {
+    if(machineSettings.machineParam.direction == 1)
+        index = headsCount-machineSettings.machineParam.useUnloadHead - index;
     headButton[index]->setRagColor(color);
 }
 
@@ -663,6 +717,10 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
     headSettings.fromByteArray(hParamArr);
     HeadSetting::setHeadOn_OffStateInd(index, static_cast<bool>(hParamArr[2]));
     settings->setValue(QString("HEAD/HEAD_"+QString::number(index)+"_PARAM"), hParamArr);
+    if(machineSettings.machineParam.direction == 1)
+        index = headsCount-machineSettings.machineParam.useUnloadHead - index;
+//    qDebug()<<machineSettings.machineParam.direction<<index<<headsCount<<machineSettings.machineParam.useUnloadHead;
+
     if(headActDialog->getHeadActivAtIndex(index))
         switch ((HeadSetting::HeadOnType)(static_cast<uint8_t>(hParamArr[0])))
         {
@@ -699,107 +757,47 @@ void MainWindow::getHeadParam(int index, QByteArray hParamArr)
 
 void MainWindow::getAllHeadParam(int index, QByteArray hParamArr)
 {
-    int cnt;
-    headSettings.fromByteArray(hParamArr);
+    headSettings.fromByteArray(hParamArr);            
 
-    for(cnt = 1; cnt<headsCount; cnt++)
+    uint8_t dev;
+    for(dev = 1; dev<headsCount; dev++)
     {
-        if((cnt<headsCount-1)|(!this->machineSettings.machineParam.useUnloadHead))
+        if(((dev<headsCount-1)|(!this->machineSettings.machineParam.useUnloadHead))&(dev != index))
         {
-//            settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
-
-            HeadSetting::setHeadOn_OffStateInd(cnt, static_cast<bool>(hParamArr[2]&0x01));
-
-            uint16_t t_headOn = ((0x00FF&((uint16_t)hParamArr[1]))<<8)|(0x00FF&((uint16_t)hParamArr[0]));
-
-            if(t_headOn != registers->readReg((HeadSetting::HeadDeviceAdrOffcet+cnt)&0x00FF,
-                                               Register::headReg_ON))
+            if((headSettings.headParam.headOnType == HeadSetting::PrintHeadOn)|
+                    (headSettings.headParam.headOnType == HeadSetting::PrintHeadOff))
             {
-                QByteArray cmdArr;
-                uint16_t data = cnt+500;
-                cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
-                cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
-                cmdArr.append(static_cast<char>(data>>8));
-                cmdArr.append(static_cast<char>(data&0x00FF));
-                data = CrcCalc::CalculateCRC16(cmdArr);
-                cmdArr.append(static_cast<char>(data>>8));
-                cmdArr.append(static_cast<char>(data&0x00FF));
-                comPort->sendData(cmdArr);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadSpeedRear);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadRangeLimit1);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadSpeedFront);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadRangeLimit2);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadStroksCount);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadSBStroksCount);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlDwellTime);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadSqDwellTime);
             }
-            settings->setValue(QString("HEAD/HEAD_"+QString::number(cnt)+"_PARAM"), hParamArr);
-            if(static_cast<bool>(t_headOn)>0)
-                switch (static_cast<HeadSetting::HeadOnType>(t_headOn&0x00FF))
-                {
-                case HeadSetting::PrintHeadOn:
-                    headButton[cnt]->setPixmap(headButton[cnt]->getRagState(),headStylesStr[1]);
-                    headButton[cnt]->setStrokCount(headSettings.headParam.stroksCount);
-                    headButton[cnt]->setStepBkStrCnt(headSettings.headParam.stroksSBCount);
-                    break;
-                case HeadSetting::QuartzHeadOn:
-                    headButton[cnt]->setPixmap(headButton[cnt]->getRagState(),headStylesStr[2]);
-                    headButton[cnt]->setDryPower(headSettings.headParam.dryPowerQ);
-                    break;
-                case HeadSetting::InfraRedHeadOn:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[3]);
-                    break;
-                case HeadSetting::PrintHeadOff:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[4]);
-                    headButton[cnt]->setOff();
-                    break;
-                case HeadSetting::QuartzHeadOff:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[5]);
-                    headButton[cnt]->setOff();
-                    break;
-                case HeadSetting::InfraRedHeadOff:
-                    headButton[cnt]->setPixmap(headButton[index]->getRagState(),headStylesStr[6]);
-                    headButton[cnt]->setOff();
-                    break;
-                }
-            else
-                headButton[cnt]->setPixmap(HeadForm::shirtOff,headStylesStr[0]);
+            if((headSettings.headParam.headOnType == HeadSetting::QuartzHeadOn)|
+                    (headSettings.headParam.headOnType == HeadSetting::QuartzHeadOff))
+            {
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlashTime1Q);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlashTime2Q);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlashPowerWtoutIR);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlashTimeStBy);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadHeatTemper);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlashTime1Q);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlashPowerStBy);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadFlashWarmTime);
+            }
+            if((headSettings.headParam.headOnType == HeadSetting::InfraRedHeadOn)|
+                    (headSettings.headParam.headOnType == HeadSetting::InfraRedHeadOff))
+            {
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadHeatTime1IR);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadHeatTime2IR);
+                comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+dev, HeadSetting::HeadHeatDryRange);
+            }
+            settings->setValue(QString("HEAD/HEAD_"+QString::number(dev)+"_PARAM"), hParamArr);
         }
     }
-    QByteArray cmdArr;
-    int data;
-
-    uint8_t dev, addr;
-    for(dev = 1; dev<headsCount; dev++)
-        for(addr = Register::headReg_REG_DEV_INF_H; addr<Register::headReg_REG_DEV_INF_L; addr++)
-            if(((dev<headsCount-1)|(!this->machineSettings.machineParam.useUnloadHead))&(dev != index))
-            {
-                data = registers->readReg(HeadSetting::HeadDeviceAdrOffcet+index, addr);
-                if(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+dev, addr) != data)
-                {
-                    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+dev)&0x00FF));
-                    cmdArr.append(static_cast<char>(addr&0x00FF));
-                    cmdArr.append(static_cast<char>(data>>8));
-                    cmdArr.append(static_cast<char>(data&0x00FF));
-                    data = CrcCalc::CalculateCRC16(cmdArr);
-                    cmdArr.append(static_cast<char>(data>>8));
-                    cmdArr.append(static_cast<char>(data&0x00FF));
-                    comPort->sendData(cmdArr);
-                    cmdArr.clear();
-                }
-            }
-
-    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadStateLo&0x00FF));
-    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateLo()>>8));
-    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateLo()&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append(static_cast<char>(data>>8));
-    cmdArr.append(static_cast<char>(data&0x00FF));
-    comPort->sendData(cmdArr);
-    cmdArr.clear();
-
-    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
-    cmdArr.append(static_cast<char>(MachineSettings::MasterHeadStateHi&0x00FF));
-    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateHi()>>8));
-    cmdArr.append(static_cast<char>(HeadSetting::getHeadStateHi()&0x00FF));
-    data = CrcCalc::CalculateCRC16(0xFFFF, cmdArr);
-    cmdArr.append(static_cast<char>(data>>8));
-    cmdArr.append(static_cast<char>(data&0x00FF));
-    comPort->sendData(cmdArr);
 }
 
 void MainWindow::getHeadCommand(int index, QByteArray commandArr)
@@ -842,13 +840,17 @@ void MainWindow::getLoadState(int index, LoadState state)
     }
     else
     {
-        qDebug()<<index<<headsCount+1-index<<this->machineSettings.machineParam.useUnloadHead;
+        qDebug()<<index
+               <<headsCount+1-index
+              <<this->machineSettings.machineParam.useUnloadHead
+             <<headsCount-this->machineSettings.machineParam.useUnloadHead-index;
         MachineSettings::setHeadPalStateIndex(index, static_cast<bool>(state == LoadOne));
         cmdArr.clear();
         if(machineSettings.machineParam.direction == 1)
-            data = (headsCount+this->machineSettings.machineParam.useUnloadHead-index)+HeadSetting::ChangeRagState;
+            data = (headsCount-index)+HeadSetting::ChangeRagState;
         else
             data = index+HeadSetting::ChangeRagState;
+        qDebug()<<"sends"<<data-HeadSetting::ChangeRagState;
 
         cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
         cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
@@ -998,7 +1000,6 @@ void MainWindow::getStepDelayTime(double arg1)
 
 void MainWindow::getDirection(int direction)
 {
-    qDebug()<<direction;
     machineSettings.machineParam.direction = direction;
     settings->setValue(QString("MACHINE_PARAMS"), this->machineSettings.machineParam.toByteArray());
     this->setHeadsPosition();
@@ -1133,123 +1134,126 @@ void MainWindow::exitProgram(bool restart)
     settings->setValue("COUNTERS/INDEXER_ALL_CNT", indexerCyclesAll);
 
     settings->sync();
-    if((this->exitCode != ExitDialog::Continue)
-            &(this->exitCode != ExitDialog::ReprogramMachine)
-              &(this->exitCode != ExitDialog::LogOut))
+    if(this->exitCode == ExitDialog::RestartProgram)
     {
-        comPort->closeSerialPort();
+        if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
+            mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
+                                    "Machine restarting\n"
+                                    "Worker: " + this->userName + ".\n"
+                                    "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
+                                    "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
+                                    "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
+                                    "Machine printed " + QString::number(ragSessionCount) + " items this session"
+                                    " and " + QString::number(ragAllCount) + " items in total.\n"
+                                    "\nHave a great day!" );
         QProgressDialog *pDialog = new QProgressDialog("Wait for machine shutdown.", "Cancel", 0, 30);
         pDialog->setWindowModality(Qt::WindowModal);
         pDialog->setStyleSheet(this->styleSheet());
         pDialog->setAutoClose(true);
-        watchDog->stop();
-
-        switch (this->exitCode) {
-        case ExitDialog::ExitFromProgram:
-            settings->setValue("PROGRAM/FINISH", true);
-            if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
-                mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
-                                        "Worker: " + this->userName + ".\n"
-                                        "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
-                                        "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
-                                        "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
-                                        "Machine printed " + QString::number(ragSessionCount) + " items this session"
-                                        " and " + QString::number(ragAllCount) + " items in total.\n"
-                                        "\nHave a great day!" );
-
-            this->close();
-            break;
-        case ExitDialog::RestartProgram:
-            if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
-                mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
-                                        "Machine restarting\n"
-                                        "Worker: " + this->userName + ".\n"
-                                        "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
-                                        "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
-                                        "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
-                                        "Machine printed " + QString::number(ragSessionCount) + " items this session"
-                                        " and " + QString::number(ragAllCount) + " items in total.\n"
-                                        "\nHave a great day!" );
-
-            pDialog->setValue(0);
-            settings->setValue("PROGRAM/FINISH", true);
-            for (int i = pDialog->minimum(); i <= pDialog->maximum(); i++)
-            {
-                pDialog->setValue(i);
-                QThread::msleep(250);
-                if(pDialog->wasCanceled())
-                    break;
-            }
-            if(!pDialog->wasCanceled())
-                this->close();
-            break;
-        case ExitDialog::Shutdown:
-            settings->setValue("PROGRAM/FINISH", true);
-            if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
-                mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
-                                        "Worker: " + this->userName + ".\n"
-                                        "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
-                                        "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
-                                        "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
-                                        "Machine printed " + QString::number(ragSessionCount) + " items this session"
-                                        " and " + QString::number(ragAllCount) + " items in total.\n"
-                                        "\nHave a great day!" );
-
-            this->close();
-            break;
-        case ExitDialog::RestartMachine:
-            if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
-                mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
-                                        "Machine restarting\n"
-                                        "Worker: " + this->userName + ".\n"
-                                        "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
-                                        "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
-                                        "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
-                                        "Machine printed " + QString::number(ragSessionCount) + " items this session"
-                                        " and " + QString::number(ragAllCount) + " items in total.\n"
-                                        "\nHave a great day!" );
-            this->close();
-            break;
-        case ExitDialog::ServiceMode:
-            break;
-        default:
-            break;
+        pDialog->setValue(0);
+        settings->setValue("PROGRAM/FINISH", true);
+        for (int i = pDialog->minimum(); i <= pDialog->maximum(); i++)
+        {
+            pDialog->setValue(i);
+            QThread::msleep(250);
+            if(pDialog->wasCanceled())
+                break;
         }
+        if(!pDialog->wasCanceled())
+            this->close();
     }
     else
-        switch (exitCode) {
-        case ExitDialog::ReprogramMachine:
+        if((this->exitCode != ExitDialog::Continue)
+                &(this->exitCode != ExitDialog::ReprogramMachine)
+                &(this->exitCode != ExitDialog::LogOut))
         {
+            comPort->closeSerialPort();
+
             watchDog->stop();
-            indexer->setState(0x0);
-            infoWidget->setIndicatorState(0x704);
-            ComSettings comSett = settings->value("COM_SETTING", QVariant::fromValue(ComSettings())).value<ComSettings>();
-            comSett.stringBaudRate = "19200";
-            comSett.stringParity = "None";
-            comSett.stringStopBits = "1";
-            comSett.stringDataBits = "5";
-            comPort->openSerialPort(comSett);
-            reprogramDialog->show();
-            break;
-        }
-        case ExitDialog::LogOut:
-        {
-            if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
-                mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
-                                        "User changed.\n"
+
+            switch (this->exitCode) {
+            case ExitDialog::ExitFromProgram:
+                settings->setValue("PROGRAM/FINISH", true);
+                if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
+                    mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
                                         "Worker: " + this->userName + ".\n"
                                         "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
                                         "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
                                         "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
                                         "Machine printed " + QString::number(ragSessionCount) + " items this session"
                                         " and " + QString::number(ragAllCount) + " items in total.\n"
-                                        "\nHave a great day!", true);
-            timeProgramStart = QTime::currentTime();
-            ragSessionCount = 0;
-            this->userLogin();
-            break;
+                                        "\nHave a great day!" );
+
+                this->close();
+                break;
+
+            case ExitDialog::Shutdown:
+                settings->setValue("PROGRAM/FINISH", true);
+                if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
+                    mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
+                                        "Worker: " + this->userName + ".\n"
+                                        "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
+                                        "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
+                                        "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
+                                        "Machine printed " + QString::number(ragSessionCount) + " items this session"
+                                        " and " + QString::number(ragAllCount) + " items in total.\n"
+                                        "\nHave a great day!" );
+
+                this->close();
+                break;
+            case ExitDialog::RestartMachine:
+                if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
+                    mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
+                                        "Machine restarting\n"
+                                        "Worker: " + this->userName + ".\n"
+                                        "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
+                                        "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
+                                        "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
+                                        "Machine printed " + QString::number(ragSessionCount) + " items this session"
+                                        " and " + QString::number(ragAllCount) + " items in total.\n"
+                                        "\nHave a great day!" );
+                this->close();
+                break;
+            case ExitDialog::ServiceMode:
+                break;
+            default:
+                break;
+            }
         }
-        }
+        else
+            switch (exitCode) {
+            case ExitDialog::ReprogramMachine:
+            {
+                watchDog->stop();
+                indexer->setState(0x0);
+                infoWidget->setIndicatorState(0x704);
+                ComSettings comSett = settings->value("COM_SETTING", QVariant::fromValue(ComSettings())).value<ComSettings>();
+                comSett.stringBaudRate = "19200";
+                comSett.stringParity = "None";
+                comSett.stringStopBits = "1";
+                comSett.stringDataBits = "5";
+                comPort->openSerialPort(comSett);
+                reprogramDialog->show();
+                break;
+            }
+            case ExitDialog::LogOut:
+            {
+                if(settings->value("EMAIL_SETTINGS", false).value<EmailSettings>().mailEnable)
+                    mailSender->sendMessage("Hi!\nThis is LiQt Machine Interface\n"
+                                            "User changed.\n"
+                                            "Worker: " + this->userName + ".\n"
+                                            "Program start time is " + timeProgramStart.toString("H:mm:ss") + ".\n"
+                                            "Program finish time is " + timeProgramEnd.toString("H:mm:ss") + ".\n"
+                                            "Total work time is " + timeWorking.toString("H:mm:ss") + ".\n"
+                                            "Machine printed " + QString::number(ragSessionCount) + " items this session"
+                                            " and " + QString::number(ragAllCount) + " items in total.\n"
+                                            "\nHave a great day!", true);
+                timeProgramStart = QTime::currentTime();
+                ragSessionCount = 0;
+                this->userLogin();
+                break;
+            }
+            }
 }
 
 void MainWindow::saveJob()
@@ -1269,115 +1273,120 @@ void MainWindow::loadJob()
 {
     int t_INDEXER_ALL_CNT = settings->value("INDEXER_ALL_CNT", 0).toInt();
     int t_RAG_ALL_CNT = settings->value("RAG_ALL_CNT", 0).toInt();
+    int t_HEAD_COUNT = this->machineSettings.machineParam.headCount;
 
-    delete settings;
     QString openFileName = QFileDialog::getOpenFileName(this, "Open job...","./jobs/","Setting file(*.ini)");
-    settings = new QSettings("./settingsPATH.ini", QSettings::IniFormat);
-    settings->setValue("LAST_PATH", openFileName);
-    delete settings;
-    settings = new QSettings(openFileName, QSettings::IniFormat);
-
-    settings->setValue("INDEXER_ALL_CNT", t_INDEXER_ALL_CNT);
-    settings->setValue("RAG_ALL_CNT", t_RAG_ALL_CNT);
-
-    this->getLangFile(settings->value("STYLE/LANG_SEL_INDEX", 0).toInt());
-    this->setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
-                                          +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
-    this->machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
-    generalSettingDialog->setMachineSetting(this->machineSettings.machineParam);
-
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::WarningTime);
-
-    indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
-                                      settings->value("LIFT_PARAMS").value<QByteArray>());
-
-    registers->setMasterReg(this->machineSettings);
-    registers->setIndexLiftReg(this->indexerLiftSettings);
-    indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam, false);
-    indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam, false);
-
-    indexerLiftSetDialog->setLiftDistance(indexerLiftSettings.indexerParam.distance/100.f,
-                                          this->machineSettings.machineParam.liftGearRatio);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeed);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAcceleration);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeedRet);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAccelerationRet);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayDown);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayUp);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftSpeed);
-    comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftAcceleration);
-
-    uint8_t i;
-
-    for(i = 0; i < this->headsCount; i++)
+    if(!openFileName.isEmpty())
     {
-        headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
-        registers->setHeadReg(i, headSettings);
-//        headSettingDialog->setHeadParams(headSettings.headParam, i, false);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedRear);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadRangeLimit1);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedFront);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadRangeLimit2);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadStroksCount);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSBStroksCount);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime1Q);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime2Q);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashPowerWtoutIR);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTimeStBy);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTemper);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime1Q);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashPowerStBy);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashWarmTime);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTime1IR);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTime2IR);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatDryRange);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlDwellTime);
-        comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSqDwellTime);
-    }
+        delete settings;
+        settings = new QSettings("./settingsPATH.ini", QSettings::IniFormat);
+        settings->setValue("LAST_PATH", openFileName);
+        delete settings;
+        settings = new QSettings(openFileName, QSettings::IniFormat);
 
-    for(i = 0; i<headsCount; i++)
+        settings->setValue("INDEXER_ALL_CNT", t_INDEXER_ALL_CNT);
+        settings->setValue("RAG_ALL_CNT", t_RAG_ALL_CNT);
+
+        this->getLangFile(settings->value("STYLE/LANG_SEL_INDEX", 0).toInt());
+        this->setStyleSheet(settings->value(QString("STYLE/STYLE_SHEET_"
+                                                    +QString::number(settings->value("STYLE/STYLE_SEL_INDEX").toInt()))).toString());
+        this->machineSettings.fromByteArray(settings->value("MACHINE_PARAMS").value<QByteArray>());
+        this->machineSettings.machineParam.headCount = t_HEAD_COUNT;
+        generalSettingDialog->setMachineSetting(this->machineSettings.machineParam);
+
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::WarningTime);
+
+        indexerLiftSettings.fromByteArray(settings->value("INDEXER_PARAMS").value<QByteArray>(),
+                                          settings->value("LIFT_PARAMS").value<QByteArray>());
+
+        registers->setMasterReg(this->machineSettings);
+        registers->setIndexLiftReg(this->indexerLiftSettings);
+        indexerLiftSetDialog->setIndexerSetting(indexerLiftSettings.indexerParam, false);
+        indexerLiftSetDialog->setLiftSetting(indexerLiftSettings.liftParam, false);
+
+        indexerLiftSetDialog->setLiftDistance(indexerLiftSettings.indexerParam.distance/100.f,
+                                              this->machineSettings.machineParam.liftGearRatio);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeed);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAcceleration);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexSpeedRet);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::IndexAccelerationRet);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayDown);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftDelayUp);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftSpeed);
+        comPort->sendReg(IndexerLiftSettings::IndexerDevice, IndexerLiftSettings::LiftAcceleration);
+
+        uint8_t i;
+
+        for(i = 1; i < this->headsCount-this->machineSettings.machineParam.useUnloadHead; i++)
         {
-        if(i==0)
-            headButton[i]->setHeadformType(HeadForm::HeadLoad);
-        else
-            if((i==headsCount - 1)&(machineSettings.machineParam.useUnloadHead))
-                headButton[i]->setHeadformType(HeadForm::HeadUnload);
+            headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
+            registers->setHeadReg(i, headSettings);
+            //        headSettingDialog->setHeadParams(headSettings.headParam, i, false);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedRear);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadRangeLimit1);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSpeedFront);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadRangeLimit2);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadStroksCount);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSBStroksCount);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime1Q);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime2Q);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashPowerWtoutIR);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTimeStBy);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTemper);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashTime1Q);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashPowerStBy);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlashWarmTime);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTime1IR);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatTime2IR);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadHeatDryRange);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadFlDwellTime);
+            comPort->sendReg(HeadSetting::HeadDeviceAdrOffcet+i, HeadSetting::HeadSqDwellTime);
+        }
+
+        for(i = 0; i<headsCount; i++)
+        {
+            if(i==0)
+                headButton[i]->setHeadformType(HeadForm::HeadLoad);
             else
-                if((registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==2)|
-                        (registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==4)|
-                        (registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==6))
-                {
-                    headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
-                    switch (headSettings.headParam.headOnType&0x00FF)
-                    {
-                    case HeadSetting::PrintHeadOn:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[1]);
-                        headButton[i]->setStrokCount(headSettings.headParam.stroksCount);
-                        headButton[i]->setStepBkStrCnt(headSettings.headParam.stroksSBCount);
-                        break;
-                    case HeadSetting::QuartzHeadOn:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[2]);
-                        headButton[i]->setDryPower(headSettings.headParam.dryPowerQ);
-                        break;
-                    case HeadSetting::InfraRedHeadOn:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[3]);
-                        break;
-                    case HeadSetting::PrintHeadOff:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[4]);
-                        headButton[i]->setOff();
-                        break;
-                    case HeadSetting::QuartzHeadOff:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[5]);
-                        headButton[i]->setOff();
-                        break;
-                    case HeadSetting::InfraRedHeadOff:
-                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[6]);
-                        headButton[i]->setOff();
-                        break;
-                    }
-                }
+                if((i==headsCount - 1)&(machineSettings.machineParam.useUnloadHead))
+                    headButton[i]->setHeadformType(HeadForm::HeadUnload);
                 else
-                    headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[0]);
+                    if((registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==2)|
+                            (registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==4)|
+                            (registers->readReg(HeadSetting::HeadDeviceAdrOffcet+i, Register::headReg_ON)==6))
+                    {
+                        headSettings.fromByteArray(settings->value(QString("HEAD/HEAD_"+QString::number(i)+"_PARAM")).value<QByteArray>());
+                        switch (headSettings.headParam.headOnType&0x00FF)
+                        {
+                        case HeadSetting::PrintHeadOn:
+                            headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[1]);
+                            headButton[i]->setStrokCount(headSettings.headParam.stroksCount);
+                            headButton[i]->setStepBkStrCnt(headSettings.headParam.stroksSBCount);
+                            break;
+                        case HeadSetting::QuartzHeadOn:
+                            headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[2]);
+                            headButton[i]->setDryPower(headSettings.headParam.dryPowerQ);
+                            break;
+                        case HeadSetting::InfraRedHeadOn:
+                            headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[3]);
+                            break;
+                        case HeadSetting::PrintHeadOff:
+                            headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[4]);
+                            headButton[i]->setOff();
+                            break;
+                        case HeadSetting::QuartzHeadOff:
+                            headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[5]);
+                            headButton[i]->setOff();
+                            break;
+                        case HeadSetting::InfraRedHeadOff:
+                            headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[6]);
+                            headButton[i]->setOff();
+                            break;
+                        }
+                    }
+                    else
+                        headButton[i]->setPixmap(headButton[i]->getRagState(),headStylesStr[0]);
+        }
     }
 
 }
@@ -1419,17 +1428,17 @@ void MainWindow::setHeadsPosition()
                       +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
         cosCoefHeads = cos(direction*2.*3.1415926*i/headsCount+3.1415926/2.
                       +direction*3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
-//        sinCoefSett = sin(2.*3.1415926*i/headsCount+3.1415926/2.
-//                      +3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
-//        cosCoefSett = cos(2.*3.1415926*i/headsCount+3.1415926/2.
-//                      +3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+        sinCoefSett = sin(-2.*3.1415926*i/headsCount+3.1415926/2.
+                      -3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
+        cosCoefSett = cos(-2.*3.1415926*i/headsCount+3.1415926/2.
+                      -3.1415926/headsCount*this->machineSettings.machineParam.useUnloadHead);
         headButton[i]->move(x0_hb+(R)*cosCoefHeads, y0_hb+(R)*sinCoefHeads);
 
         if((i != 0)&(((i != headsCount-1)&(machineSettings.machineParam.useUnloadHead))
                      |(!machineSettings.machineParam.useUnloadHead)))
         {
-            headSettButton[i-1]->move(x0_sb+(R+headButton[i]->width()/2+headSettButton[i-1]->width()/2)*cosCoefHeads,
-                    y0_sb+(R+headButton[i]->height()/2+headSettButton[i-1]->width()/2)*sinCoefHeads);
+            headSettButton[i-1]->move(x0_sb+(R+13+headButton[i]->width()/2+headSettButton[0]->width()/2)*cosCoefSett,
+                    y0_sb+(R+13+headButton[i]->height()/2+headSettButton[0]->width()/2)*sinCoefSett);
             if(direction == 1)
             {
                 if(i<(headsCount)/4)
@@ -1491,7 +1500,7 @@ void MainWindow::indexerStepFinish()
     if(headButton[0]->getRagState() != HeadForm::shirtOff)
         ragAtHeadCount++;
     if(headButton[0]->getRagState() == HeadForm::shirtOn)
-        headButton[0]->setPixmap(HeadForm::shirtOn);
+        headButton[0]->setPixmap(HeadForm::shirtOff);
 
     if(!static_cast<bool>(ragAllCount%100))
     {
@@ -1731,7 +1740,9 @@ void MainWindow::remainingValChangedRequest(int val)
 void MainWindow::counterDialogRequest()
 {
     counterDialog->show();
-    counterDialog->move(this->width()-80-counterDialog->width(), 90);
+    counterDialog->move(ui->widgetHeads->width()-counterDialog->width(), 90);
+
+    this->lastOpened = counterDialog;
 }
 
 void MainWindow::skipStateUpdate()
@@ -1811,29 +1822,30 @@ void MainWindow::zeroStart()
     }
     settings->setValue("PROGRAM/FINISH", false);
 
-    if(((!QSslSocket::supportsSsl())|
-            (!(QSslSocket::sslLibraryBuildVersionString() == QSslSocket::sslLibraryVersionString())))
-            &(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable))
-    {
-        QMessageBox msgBox;
-        msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
-        msgBox.setText(tr("Wrong ssl library."));
-        msgBox.setInformativeText(tr("E-mail will not be sended\n"
-                                  "to continue press \"Yes\" \n"
-                                  "To exit press \"No\"."));
-        msgBox.setWindowTitle(tr("E-mail"));
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-        int ret = msgBox.exec();
-        switch (ret)
-        {
-        case QMessageBox::Yes:
-            break;
-        case QMessageBox::No:
-            this->exitProgram(false);
-            break;
-        }
-    }
+    qDebug()<<(!QSslSocket::supportsSsl())<<QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
+//    if(((!QSslSocket::supportsSsl())|
+//            (!(QSslSocket::sslLibraryBuildVersionString() == QSslSocket::sslLibraryVersionString())))
+//            &(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable))
+//    {
+//        QMessageBox msgBox;
+//        msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+//        msgBox.setText(tr("Wrong ssl library."));
+//        msgBox.setInformativeText(tr("E-mail will not be sended\n"
+//                                  "to continue press \"Yes\" \n"
+//                                  "To exit press \"No\"."));
+//        msgBox.setWindowTitle(tr("E-mail"));
+//        msgBox.setIcon(QMessageBox::Warning);
+//        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+//        int ret = msgBox.exec();
+//        switch (ret)
+//        {
+//        case QMessageBox::Yes:
+//            break;
+//        case QMessageBox::No:
+//            this->exitProgram(false);
+//            break;
+//        }
+//    }
 
     needCompleteReset = true;
 
@@ -2013,6 +2025,16 @@ void MainWindow::changeEvent(QEvent* event)
         ui->retranslateUi(this);
     }
     QMainWindow::changeEvent(event);
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *ev)
+{
+    if(this->lastOpened != 0)
+    {
+        this->lastOpened->hide();
+        this->lastOpened = 0;
+    }
+
 }
 
 void MainWindow::on_pButtonWarming_clicked()

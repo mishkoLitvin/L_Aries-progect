@@ -1,5 +1,6 @@
 #include "serialport.h"
 
+#define DEBUG_EN true
 
 
 SerialPort::SerialPort(QObject *parent):QObject(parent)
@@ -201,10 +202,11 @@ void SerialPort::readData()
             emit this->working();
             if(modData8.fileds.rwBit)
             {
-                qDebug()<<"write reg:"
-                       <<modData8.fileds.adress
-                      <<modData8.fileds.registerNo
-                     <<modData8.fileds.data;
+                if(DEBUG_EN)
+                    qDebug()<<"write reg:"
+                           <<modData8.fileds.adress
+                          <<modData8.fileds.registerNo
+                         <<modData8.fileds.data;
                 this->sendData(data.mid(0,6), true);
 
                 registers->writeReg(modData8.fileds.adress,
@@ -243,7 +245,7 @@ void SerialPort::readData()
                     {
                         QByteArray bArr;
                         int data;
-                        qDebug()<<"\t\t\t\t"<<initApp<<replyCnt;
+//                        qDebug()<<"\t\t\t\t"<<initApp<<replyCnt;
                         switch(replyCnt){
                         case 0:
                             bArr.clear();
@@ -340,8 +342,9 @@ void SerialPort::readData()
 
                     if((dataToSendBuff.length()>5))
                     {
-                        qDebug()<<"read request:"<<modData8.bits.adress<<modData8.bits.registerNo<<modData8.bits.data
-                            <<"\t\trequest send:"<<0<< 2<< (uint16_t)dataToSendBuff[0]<< (uint16_t)dataToSendBuff[1];
+                        if(DEBUG_EN)
+                            qDebug()<<"read request:"<<modData8.bits.adress<<modData8.bits.registerNo<<modData8.bits.data
+                                   <<"\t\trequest send:"<<0<< 2<< (uint16_t)dataToSendBuff[0]<< (uint16_t)dataToSendBuff[1];
                         this->sendModData(0, 2, ((uint16_t)(((uint16_t)(dataToSendBuff[0]<<8))|dataToSendBuff[1])));
                     }
                     else
@@ -351,9 +354,10 @@ void SerialPort::readData()
                 }
                 else
                 {
-                    qDebug()<<"read reg:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data
-                        <<"\t\treg send:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<registers->readReg(modData8.fileds.adress,
-                                                                                                                  modData8.fileds.registerNo);
+                    if(DEBUG_EN)
+                        qDebug()<<"read reg:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<modData8.fileds.data
+                               <<"\t\treg send:"<<modData8.fileds.adress<<modData8.fileds.registerNo<<registers->readReg(modData8.fileds.adress,
+                                                                                                                         modData8.fileds.registerNo);
                     this->sendModData(modData8.bits.adress,
                                       modData8.bits.registerNo,
                                       registers->readReg(modData8.fileds.adress,

@@ -70,10 +70,7 @@ SettingDialog::SettingDialog(HeadSetting hSttg, int index, QWidget *parent) :
     ui->dSpinBoxHeatTime2IR->setValue(hSttg.headParam.heatTime2/10.);
     ui->dSpinBoxDryingRangeIR->setValue(hSttg.headParam.heatLimit/10.);
 
-//    this->installEventFilter(this);
-
     connect(ui->pushButtonOK, SIGNAL(clicked(bool)), this, SLOT(accept()));
-    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonHeadNoInc, SIGNAL(clicked(bool)), this, SLOT(pButtonIncClkd()));
     connect(ui->pButtonHeadNoDec, SIGNAL(clicked(bool)), this, SLOT(pButtonDecClkd()));
     connect(ui->rButtonTime1, SIGNAL(clicked(bool)), this, SLOT(rButtonTime1_clicked()));
@@ -129,9 +126,14 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
     else
         ui->pButtonHeadOnOff->setText(tr("Turn\nON"));
 
+    uint8_t selTab = ((tempVar&0x00FF)-HeadSetting::PrintHeadOff
+                      -ui->pButtonHeadOnOff->isChecked())/2;
+    ui->tabWidget->setCurrentIndex(selTab);
 
-    ui->tabWidget->setCurrentIndex(((tempVar&0x00FF)-HeadSetting::PrintHeadOff
-                                    -ui->pButtonHeadOnOff->isChecked())/2);
+    ui->tabWidget->setTabEnabled(0, selTab == 0);
+    ui->tabWidget->setTabEnabled(1, selTab == 1);
+    ui->tabWidget->setTabEnabled(2, selTab == 2);
+
     ui->lcdNumberHeadNo->display(index);
     ui->toolButtonPlast->setChecked((tempVar&(1<<8)));
     if(tempVar&(1<<8))
@@ -144,8 +146,19 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
         ui->toolButtonStepBack->setText(tr("Turn OFF\nstep back"));
     else
         ui->toolButtonStepBack->setText(tr("Turn ON\nstep back"));
+
+    tempVar = registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                 Register::indexerReg_TM);
+    ui->toolButtonMTPMove->setChecked(tempVar&(0x01));
+    if(tempVar&(0x01))
+        ui->toolButtonMTPMove->setText(tr("Turn OFF\nMTP"));
+    else
+        ui->toolButtonMTPMove->setText(tr("Turn ON\nMTP"));
+
     ui->toolButtonQuartzStepBack->setChecked(ui->toolButtonStepBack->isChecked());
     ui->toolButtonQuartzStepBack->setText(ui->toolButtonStepBack->text());
+    ui->toolButtonIRStepBack->setChecked(ui->toolButtonStepBack->isChecked());
+    ui->toolButtonIRStepBack->setText(ui->toolButtonStepBack->text());
 
     ui->spinBoxRearSpeed->setValue(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
                                                       Register::headReg_SPD_REAR));
@@ -191,6 +204,10 @@ void SettingDialog::setHeadParams(int index, bool disconnect)
                                                            Register::headReg_RANGE_1)/10.);
     ui->checkBoxQuartzTempSensor->setChecked(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
                                                                 Register::headReg_CONFIG)&0x01);
+    ui->spinBoxSpeedIR->setValue(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,
+                                                      Register::headReg_SPD_REAR)*4);
+    if((selTab == 2)&(registers->readReg(HeadSetting::HeadDeviceAdrOffcet+this->index,Register::headReg_SPD_REAR)>25))
+        this->spinBoxSpeedIR_valueChanged(100);
     acceptOnDeactilationEn = true;
     if(disconnect)
         this->connectAll();
@@ -262,20 +279,22 @@ void SettingDialog::setIconFolder(QString path)
 {
     ui->toolButtonFL->setIcon(QIcon(path+"/sqfl_up.png"));
     ui->toolButtonFL_SQup->setIcon(QIcon(path+"/sqfl_middle.png"));
+    ui->toolButtonFL_SQ->setIcon(QIcon(path+"/arrowUD.png"));
     ui->toolButtonSQ->setIcon(QIcon(path+"/sqfl_down.png"));
     ui->toolButtonHoldOn->setIcon(QIcon(path+"/handNO.png"));
     ui->toolButtonMoveFront->setIcon(QIcon(path+"/arrows/arrowDL.png"));
     ui->toolButtonMoveRear->setIcon(QIcon(path+"/arrows/arrowUR.png"));
     ui->toolButtonMoveTest->setIcon(QIcon(path+"/arrows/arrowLR2.png"));
+    ui->toolButtonQuartzTest->setIcon(QIcon(path+"/arrows/arrowLR2.png"));
+    ui->toolButtonIRTest->setIcon(QIcon(path+"/arrows/arrowLR2.png"));
     ui->toolButtonMTPMove->setIcon(QIcon(path+"/arrows/arrowUD.png"));
     ui->toolButtonPlast->setIcon(QIcon(path+"/Bucket.png"));
     ui->toolButtonStepBack->setIcon(QIcon(path+"/step.png"));
     ui->toolButtonQuartzStepBack->setIcon(QIcon(path+"/step.png"));
-
+    ui->toolButtonIRStepBack->setIcon(QIcon(path+"/step.png"));
 
     ui->pButtonHeadOnOff->setIcon(QIcon(path+"/on.png"));
     ui->pushButtonOK->setIcon(QIcon(path+"/check.png"));
-    ui->pushButtonCancel->setIcon(QIcon(path+"/multip.png"));
     ui->pushButtonCopyToAll->setIcon(QIcon(path+"/copy.png"));
 
     ui->tabWidget->setTabIcon(0, QIcon(path+"/brush.png"));
@@ -371,6 +390,7 @@ void SettingDialog::connectAll()
     connect(ui->dSpinBoxStandbyTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxStandbyTimeQ_valueChanged(double)));
     connect(ui->spinBoxStandbyPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStandbyPowerQ_valueChanged(double)));
     connect(ui->dSpinBoxWarmFlashTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxWarmFlashTimeQ_valueChanged(double)));
+    connect(ui->spinBoxSpeedIR, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSpeedIR_valueChanged(double)));
 }
 
 void SettingDialog::disconnectAll()
@@ -396,6 +416,8 @@ void SettingDialog::disconnectAll()
     disconnect(ui->dSpinBoxStandbyTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxStandbyTimeQ_valueChanged(double)));
     disconnect(ui->spinBoxStandbyPowerQ, SIGNAL(valueChanged(double)), this, SLOT(spinBoxStandbyPowerQ_valueChanged(double)));
     disconnect(ui->dSpinBoxWarmFlashTimeQ, SIGNAL(valueChanged(double)), this, SLOT(dSpinBoxWarmFlashTimeQ_valueChanged(double)));
+    disconnect(ui->spinBoxSpeedIR, SIGNAL(valueChanged(double)), this, SLOT(spinBoxSpeedIR_valueChanged(double)));
+
 }
 
 void SettingDialog::eventFilterSetup()
@@ -548,6 +570,13 @@ void SettingDialog::eventFilterSetup()
         if(cast)
             cast->installEventFilter(this);
     }
+    objList = ui->spinBoxSpeedIR->children();
+    for(int i = 0; i < objList.length(); i++)
+    {
+        QLineEdit *cast = qobject_cast<QLineEdit*>(objList[i]);
+        if(cast)
+            cast->installEventFilter(this);
+    }
 }
 
 void SettingDialog::temperatureSensoreChanged(bool tempSens)
@@ -573,9 +602,10 @@ void SettingDialog::temperatureSensoreChanged(bool tempSens)
 
 bool SettingDialog::event(QEvent *e)
 {
-    if((e->type()==QEvent::WindowDeactivate)
-            |((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave))
-            |((QApplication::platformName() == "linuxfb")&(e->type()==QEvent::Leave)))
+//    if((e->type()==QEvent::WindowDeactivate)
+//            |((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave))
+//            |((QApplication::platformName() == "linuxfb")&(e->type()==QEvent::Leave)))
+    if(e->type()==QEvent::HideToParent)
     {
         if(acceptOnDeactilationEn)
             this->accept();
@@ -610,6 +640,9 @@ void SettingDialog::showEvent(QShowEvent *ev)
                                         |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
                                         |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
     ui->spinBoxRearSpeed->setVisible(!((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
+                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
+                                       |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
+    ui->spinBoxSpeedIR->setVisible(!((MachineSettings::getMachineType() == MachineSettings::TitanAAA)
                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASA)
                                        |(MachineSettings::getMachineType() == MachineSettings::TitanASE)));
 
@@ -761,6 +794,21 @@ void SettingDialog::on_toolButtonMTPMove_clicked()
     cmdArr.append(static_cast<char>(data>>8));
     cmdArr.append(static_cast<char>(data&0x00FF));
     emit this->sendCommand(this->index, cmdArr);
+
+    if(ui->toolButtonMTPMove->isChecked())
+        ui->toolButtonMTPMove->setText(tr("Turn OFF\nMTP"));
+    else
+        ui->toolButtonMTPMove->setText(tr("Turn ON\nMTP"));
+
+    registers->writeReg(IndexerLiftSettings::IndexerDevice,
+                        Register::indexerReg_TM,
+                        registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                           Register::indexerReg_TM)&0xFFFE);
+    registers->writeReg(IndexerLiftSettings::IndexerDevice,
+                        Register::indexerReg_TM,
+                        registers->readReg(IndexerLiftSettings::IndexerDevice,
+                                           Register::indexerReg_TM)
+                        |ui->toolButtonMTPMove->isChecked());
 }
 
 void SettingDialog::on_toolButtonSQ_clicked()
@@ -834,7 +882,7 @@ void SettingDialog::on_toolButtonFL_SQ_clicked()
 {
     QByteArray cmdArr;
     uint16_t data;
-    data = HeadSetting::SQ_FL+((this->index-1)<<5);
+    data = HeadSetting::SQ_FL_UpDown+((this->index-1)<<5);
     cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
     cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append(static_cast<char>(data>>8));
@@ -875,6 +923,8 @@ void SettingDialog::on_toolButtonStepBack_clicked()
     }
     ui->toolButtonQuartzStepBack->setChecked(ui->toolButtonStepBack->isChecked());
     ui->toolButtonQuartzStepBack->setText(ui->toolButtonStepBack->text());
+    ui->toolButtonIRStepBack->setChecked(ui->toolButtonStepBack->isChecked());
+    ui->toolButtonIRStepBack->setText(ui->toolButtonStepBack->text());
 
     cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
@@ -990,6 +1040,8 @@ void SettingDialog::on_toolButtonQuartzStepBack_clicked()
     }
     ui->toolButtonStepBack->setChecked(ui->toolButtonQuartzStepBack->isChecked());
     ui->toolButtonStepBack->setText(ui->toolButtonQuartzStepBack->text());
+    ui->toolButtonIRStepBack->setChecked(ui->toolButtonQuartzStepBack->isChecked());
+    ui->toolButtonIRStepBack->setText(ui->toolButtonQuartzStepBack->text());
 
     cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
@@ -1086,59 +1138,60 @@ void SettingDialog::on_pButtonHeadOnOff_clicked()
 
 void SettingDialog::on_pushButtonCopyToAll_clicked()
 {
-    HeadSetting hSttg;
+    QMessageBox msgBox;
+    msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
+    msgBox.setText(tr("You want copy parameters to all heads?"));
+    msgBox.setInformativeText(tr("To enter code press \"Yes\" \n"
+                              "To exit from program press \"No\"."));
+    msgBox.setWindowTitle(tr("Master code"));
+    msgBox.setIcon(QMessageBox::Question);
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    int ret = msgBox.exec();
 
-    if(ui->pButtonHeadOnOff->isChecked())
-        hSttg.headParam.headOnType = (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
-                                                         Register::headReg_ON)&0xFF00)
-                                      |(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
-    else
-        hSttg.headParam.headOnType = (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
-                                                         Register::headReg_ON)&0xFF00)
-                                      |(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
+    if(ret == QMessageBox::Yes)
+    {
+        HeadSetting hSttg;
 
-    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
+        if(ui->pButtonHeadOnOff->isChecked())
+            hSttg.headParam.headOnType = (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                             Register::headReg_ON)&0xFF00)
+                    |(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn);
+        else
+            hSttg.headParam.headOnType = (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                             Register::headReg_ON)&0xFF00)
+                    |(ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOff);
 
-//    switch (ui->tabWidget->currentIndex()*2+HeadSetting::PrintHeadOn) {
-//    case (HeadSetting::PrintHeadOn):
-//        hSttg.headParam.headOnType = (uint8_t)(1+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-//        break;
-//    case (HeadSetting::QuartzHeadOn):
-//        hSttg.headParam.powerOn = (uint8_t)(3+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-//        break;
-//    case (HeadSetting::InfraRedHeadOn):
-//        hSttg.headParam.powerOn = (uint8_t)(5+(uint8_t)ui->pButtonHeadOnOff->isChecked());
-//        break;
-//    }
+        hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
 
-    hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
-    hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
-    hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
-    hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
-    hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
-    hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
-    hSttg.headParam.stroksSBCount = ui->spinBoxSBStrokCount->value();
-    hSttg.headParam.dwellFLTime = ui->dSpinBoxFlDwellTime->value();
-    hSttg.headParam.dwellSQTime = ui->dSpinBoxSqDwellTime->value();
-    hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
-    hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
-    hSttg.headParam.heatLimit = ui->dSpinBoxDryingRangeIR->value()*10;
-    hSttg.headParam.heatTime1Q = ui->dSpinBoxHeatTime1Q->value()*10;
-    hSttg.headParam.heatTime2Q = ui->dSpinBoxHeatTime2Q->value()*10;
-    hSttg.headParam.dryPowerQ = ui->spinBoxDryPowerQ->value();
-    hSttg.headParam.stepbackDryTimeQ = ui->dSpinBoxStepbackDryTimeQ->value()*10;
-    hSttg.headParam.temperatureSetQ = ui->dSpinBoxTemperatureSetQ->value();
-    hSttg.headParam.dryTimeQ = ui->dSpinBoxDryTimeQ->value()*10;
-    hSttg.headParam.standbyTimeQ = ui->dSpinBoxStandbyTimeQ->value()*10;
-    hSttg.headParam.standbyPowerQ = ui->spinBoxStandbyPowerQ->value();
-    hSttg.headParam.warmFlashTimeQ = ui->dSpinBoxWarmFlashTimeQ->value()*10;
-    hSttg.headParam.inkColor = 0;
-    hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_R));
-    hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G)<<8);
-    hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B)<<16);
+        hSttg.headParam.powerOn = ui->pButtonHeadOnOff->isChecked();
+        hSttg.headParam.speedRear = ui->spinBoxRearSpeed->value();
+        hSttg.headParam.speedFront = ui->spinBoxFrontSpeed->value();
+        hSttg.headParam.limitFront = ui->dSpinBoxFrontRange->value()*10;
+        hSttg.headParam.limitRear = ui->dSpinBoxRearRange->value()*10;
+        hSttg.headParam.stroksCount = ui->spinBoxStrokCount->value();
+        hSttg.headParam.stroksSBCount = ui->spinBoxSBStrokCount->value();
+        hSttg.headParam.dwellFLTime = ui->dSpinBoxFlDwellTime->value();
+        hSttg.headParam.dwellSQTime = ui->dSpinBoxSqDwellTime->value();
+        hSttg.headParam.heatTime1 = ui->dSpinBoxHeatTime1IR->value()*10;
+        hSttg.headParam.heatTime2 = ui->dSpinBoxHeatTime2IR->value()*10;
+        hSttg.headParam.heatLimit = ui->dSpinBoxDryingRangeIR->value()*10;
+        hSttg.headParam.heatTime1Q = ui->dSpinBoxHeatTime1Q->value()*10;
+        hSttg.headParam.heatTime2Q = ui->dSpinBoxHeatTime2Q->value()*10;
+        hSttg.headParam.dryPowerQ = ui->spinBoxDryPowerQ->value();
+        hSttg.headParam.stepbackDryTimeQ = ui->dSpinBoxStepbackDryTimeQ->value()*10;
+        hSttg.headParam.temperatureSetQ = ui->dSpinBoxTemperatureSetQ->value();
+        hSttg.headParam.dryTimeQ = ui->dSpinBoxDryTimeQ->value()*10;
+        hSttg.headParam.standbyTimeQ = ui->dSpinBoxStandbyTimeQ->value()*10;
+        hSttg.headParam.standbyPowerQ = ui->spinBoxStandbyPowerQ->value();
+        hSttg.headParam.warmFlashTimeQ = ui->dSpinBoxWarmFlashTimeQ->value()*10;
+        hSttg.headParam.inkColor = 0;
+        hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_R));
+        hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_G)<<8);
+        hSttg.headParam.inkColor |= (registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index), Register::headReg_B)<<16);
 
 
-    emit this->setParamsToAll(this->index, hSttg.headParam.toByteArray());
+        emit this->setParamsToAll(this->index, hSttg.headParam.toByteArray());
+    }
 }
 
 void SettingDialog::tabWidget_currentChanged(int index)
@@ -1298,7 +1351,7 @@ void SettingDialog::dSpinBoxStepbackDryTimeQ_valueChanged(double arg1)
 void SettingDialog::dSpinBoxTemperatureSetQ_valueChanged(double arg1)
 {
     QByteArray cmdArr;
-    int data = arg1*10;
+    int data = arg1;
     cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append(static_cast<char>(HeadSetting::HeadHeatTemper&0x00FF));
     cmdArr.append(static_cast<char>(data>>8));
@@ -1441,11 +1494,110 @@ void SettingDialog::rButtonTime1_clicked()
     QByteArray cmdArr;
     int data;
     if(ui->rButtonTime1->isChecked())
-        data = (~((1<<8)<<1))&this->headSettings.headParam.headOnType;
+        data = HeadSetting::TimeSelect_1+((this->index-1)<<5);
     else
-        data = ((1<<8)<<1)|this->headSettings.headParam.headOnType;
+        data = HeadSetting::TimeSelect_2+((this->index-1)<<5);
+//        data = (~((1<<8)<<1))&this->headSettings.headParam.headOnType;
+//    else
+//        data = ((1<<8)<<1)|this->headSettings.headParam.headOnType;
+//    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+//    cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::spinBoxSpeedIR_valueChanged(double arg1)
+{
+    QByteArray cmdArr;
+    int data = arg1/4;
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadSpeedRear&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+
+    cmdArr.clear();
+    data = arg1/4;
+    cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
+    cmdArr.append(static_cast<char>(HeadSetting::HeadSpeedFront&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_toolButtonIRStepBack_clicked()
+{
+    QByteArray cmdArr;
+    uint16_t data;
+//    data = HeadSetting::Stepback+((this->index-1)<<5);
+//    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+//    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
+//    data = CrcCalc::CalculateCRC16(cmdArr);
+//    cmdArr.append(static_cast<char>(data>>8));
+//    cmdArr.append(static_cast<char>(data&0x00FF));
+//    emit this->sendCommand(this->index, cmdArr);
+
+    cmdArr.clear();
+
+    if(ui->toolButtonIRStepBack->isChecked())
+    {
+        data = (1<<11)|registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                              HeadSetting::HeadOn);
+        ui->toolButtonIRStepBack->setText(tr("Turn OFF\nstep back"));
+    }
+    else
+    {
+        data = (~(1<<11))&registers->readReg((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF,
+                                                         HeadSetting::HeadOn);
+        ui->toolButtonIRStepBack->setText(tr("Turn ON\nstep back"));
+    }
+    ui->toolButtonStepBack->setChecked(ui->toolButtonIRStepBack->isChecked());
+    ui->toolButtonStepBack->setText(ui->toolButtonIRStepBack->text());
+    ui->toolButtonQuartzStepBack->setChecked(ui->toolButtonIRStepBack->isChecked());
+    ui->toolButtonQuartzStepBack->setText(ui->toolButtonIRStepBack->text());
+
     cmdArr.append(static_cast<char>((HeadSetting::HeadDeviceAdrOffcet+this->index)&0x00FF));
     cmdArr.append(static_cast<char>(HeadSetting::HeadOn&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+
+    cmdArr.clear();
+    data = HeadSetting::Stepback+((this->index-1)<<5);
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    data = CrcCalc::CalculateCRC16(cmdArr);
+    cmdArr.append(static_cast<char>(data>>8));
+    cmdArr.append(static_cast<char>(data&0x00FF));
+    emit this->sendCommand(this->index, cmdArr);
+}
+
+void SettingDialog::on_toolButtonIRTest_clicked()
+{
+    QByteArray cmdArr;
+    uint16_t data;
+    data = HeadSetting::HeatTest+((this->index-1)<<5);
+    cmdArr.append(static_cast<char>((MachineSettings::MasterDevice)&0x00FF));
+    cmdArr.append(static_cast<char>(MachineSettings::MasterLastButton&0x00FF));
     cmdArr.append(static_cast<char>(data>>8));
     cmdArr.append(static_cast<char>(data&0x00FF));
     data = CrcCalc::CalculateCRC16(cmdArr);

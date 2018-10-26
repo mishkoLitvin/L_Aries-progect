@@ -18,7 +18,6 @@ IndexerSettingDialog::IndexerSettingDialog(QWidget *parent) :
     this->eventFilterSetup();
 
     connect(ui->pButtonOK, SIGNAL(clicked(bool)), this, SLOT(accept()));
-    connect(ui->pButtonCancel, SIGNAL(clicked(bool)), this, SLOT(reject()));
 
     acceptOnDeactilationEn = true;
 

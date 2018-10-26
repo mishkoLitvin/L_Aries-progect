@@ -1,7 +1,7 @@
 #ifndef GENERALSETTINGDIALOG_H
 #define GENERALSETTINGDIALOG_H
 
-#include <QDialog>
+#include <QWidget>
 #include <QString>
 #include <QDebug>
 #include <QByteArray>
@@ -47,7 +47,7 @@ namespace Ui {
 class GeneralSettingDialog;
 }
 
-class GeneralSettingDialog : public QDialog
+class GeneralSettingDialog : public QWidget
 {
     Q_OBJECT
 
@@ -64,6 +64,7 @@ public:
     void showPortInfo(ComSettings comSett);
     void manualResize();
     void manualShow();
+    void setRegisterPointer(Register *reg);
 
 
 signals:
@@ -101,6 +102,7 @@ private:
 
     QIcon directionIcon;
     QString pathIcon;
+    Register* registers;
 
 private slots:
     void accept();

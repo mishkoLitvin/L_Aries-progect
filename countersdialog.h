@@ -1,7 +1,7 @@
 #ifndef COUNTERSDIALOG_H
 #define COUNTERSDIALOG_H
 
-#include <QDialog>
+#include <QWidget>
 #include <QShowEvent>
 
 #include "numpaddialog.h"
@@ -10,7 +10,7 @@ namespace Ui {
 class CountersDialog;
 }
 
-class CountersDialog : public QDialog
+class CountersDialog : public QWidget
 {
     Q_OBJECT
 
@@ -19,6 +19,7 @@ public:
     ~CountersDialog();
     
     void setRemaining(int val);
+    void hideRequest();
     
 signals:
     void resetSkipped();

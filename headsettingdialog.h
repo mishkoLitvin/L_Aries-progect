@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QFocusEvent>
 #include <QEvent>
+#include <QMouseEvent>
 #include <QApplicationStateChangeEvent>
 #include <QDebug>
 #include <QMessageBox>
@@ -112,8 +113,12 @@ private slots:
     void spinBoxStandbyPowerQ_valueChanged(double arg1);
     void dSpinBoxStandbyTimeQ_valueChanged(double arg1);
     void dSpinBoxWarmFlashTimeQ_valueChanged(double arg1);
-
     void rButtonTime1_clicked();
+    void spinBoxSpeedIR_valueChanged(double arg1);
+
+    void on_toolButtonIRStepBack_clicked();
+
+    void on_toolButtonIRTest_clicked();
 
 protected:
     bool event(QEvent *e);

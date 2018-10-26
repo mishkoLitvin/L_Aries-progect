@@ -9,13 +9,15 @@ IndexerWidget::IndexerWidget(QWidget *parent) :
 
     pButtonSets = new QPushButton(this);
 
-    pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
+//    pButtonSets->setStyleSheet("background-color: rgb(100,250,100);");
     pButtonSets->resize(50,50);
     pButtonSets->move(this->width() - pButtonSets->width(), 0);
-
+    pButtonSets->setIconSize(QSize(40,40));
     connect(pButtonSets, SIGNAL(clicked(bool)), this, SLOT(settingPButtonClicSlot()));
 
+
     pButtonSets->setIcon(QIcon(pathIcon+"/settings.png"));
+    pButtonSets->setVisible(true);
 
     isAutoPrintEnable = false;
     machineState.all = 0x0000;

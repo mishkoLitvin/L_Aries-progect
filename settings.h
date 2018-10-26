@@ -88,9 +88,11 @@ public:
         Idle = 0,
         Head_OnOff = 0x01F4,
         ChangeRagState = 0x0190,
+
         MoveRear = 0x0672,
         MoveFront,
         MoveTest,
+        SQ_FL_UpDown,
         SQ,
         FL,
         SQ_FL,
@@ -98,10 +100,10 @@ public:
         Hold_On,
         TeachPosition1,
         TeachPosition2,
-        SQ_FL_UpDown,
-        MPT_Move,
+        MPT_Move = 0x005E,
         PressureSQ = 0x005A,
         AirRelease = 0x005A,
+
         TimeSelect_1 = 0x025B,
         TimeSelect_2,
         TimeSelect_3,
@@ -112,7 +114,7 @@ public:
         SensorOn_Off,
         TemperatureUnit,
         WarmFlash,
-        HeatTest
+        HeatTest = 0x0674
     }HeadCommandsEn;
 
     typedef struct HeadComands_{
@@ -245,6 +247,7 @@ public:
     MachineSettings();
 
     void fromByteArray(QByteArray machineParamArray);
+
 private:
     static bool serviceWidgetsEnStat;
     static bool useSoftwareSkip;

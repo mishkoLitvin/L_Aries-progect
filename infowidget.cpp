@@ -221,11 +221,15 @@ void InfoWidget::setIndicatorState(uint16_t state)
         break;
     }
     effect[4]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
-    effect[4]->setOpacity(((state&0x4)>>2)+0.1);
+    effect[4]->setOpacity(((state&0x4)>>2)*0.8+0.1);
     effect[5]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
-    effect[5]->setOpacity((state&0x1)+0.1);
+    effect[5]->setOpacity((state&0x1)*0.8+0.1);
+    if((state&0x1))
+        ui->labelInfo->setText(tr("Emergency stop pressed. Please release E-stop to continue."));
     effect[6]->setOpacityMask(QBrush(Qt::red, Qt::SolidPattern));
-    effect[6]->setOpacity(((state&0x2)>>1)+0.1);
+    effect[6]->setOpacity(((state&0x2)>>1)*0.8+0.1);
+    if((state&0x2))
+        ui->labelInfo->setText(tr("Safety bar is open.\nPlease close bar to continue."));
 }
 
 void InfoWidget::setErrorText(MachineSettings::MachineParameters machineParameters, uint16_t val)

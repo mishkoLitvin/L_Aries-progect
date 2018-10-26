@@ -199,6 +199,16 @@ void HeadForm::setDryPower(int val)
     this->setIndexLabelPosition(this->labelPos);
 }
 
+void HeadForm::setTemperature(int val)
+{
+    if(val<100)
+        labelStrokCnt->resize(48,25);
+    else
+        labelStrokCnt->resize(62,25);
+    labelStrokCnt->setText("T="+QString::number(val));
+    this->setStepBkStrCnt(0);
+}
+
 void HeadForm::setOff()
 {
     labelStrokCnt->setText("OFF");

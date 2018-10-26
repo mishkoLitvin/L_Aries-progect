@@ -4,7 +4,7 @@
 #include "generalsettingdialog.h"
 
 GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::GeneralSettingDialog)
 {
     ui->setupUi(this);
@@ -28,7 +28,6 @@ GeneralSettingDialog::GeneralSettingDialog(QWidget *parent) :
     this->eventFilterSetup();
     connect(ui->pButtonLockUnlockEmail, SIGNAL(clicked(bool)), this, SLOT(lockUnlockEmail()));
     connect(ui->pButtonAccept, SIGNAL(clicked(bool)), this, SLOT(accept()));
-    connect(ui->pButtonReject, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(ui->pButtonShowPassword, SIGNAL(clicked(bool)), this, SLOT(hideShowPassword()));
     connect(ui->pButtonChangeSerialSettings, SIGNAL(clicked(bool)), this, SLOT(changeSerialPortSettingsClicked()));
     connect(ui->listWidgetStyle, SIGNAL(currentRowChanged(int)), this, SLOT(styleChanged(int)));
@@ -57,7 +56,6 @@ void GeneralSettingDialog::setIconFolder(QString path)
 {
     pathIcon = path;
     ui->pButtonAccept->setIcon(QIcon(pathIcon+"/check.png"));
-    ui->pButtonReject->setIcon(QIcon(pathIcon+"/multip.png"));
 
     if(ui->pButtonDirection->isChecked())
         ui->pButtonDirection->setIcon(QIcon(pathIcon+"/rotateRight.png"));
@@ -72,10 +70,6 @@ void GeneralSettingDialog::setIconFolder(QString path)
     ui->tabWidget->setTabIcon(1, QIcon(pathIcon+"/stopHand.png"));
     ui->tabWidget->setTabIcon(2, QIcon(pathIcon+"/mail.png"));
     ui->tabWidget->setTabIcon(3, QIcon(pathIcon+"/connect.png"));
-
-
-
-
 }
 
 void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters machineParam)
@@ -83,6 +77,7 @@ void GeneralSettingDialog::setMachineSetting(MachineSettings::MachineParameters 
     machineParamGl = machineParam;
     ui->spinBoxHeadsCount->setValue(machineParam.headCount);
     ui->dSpinBoxWarningTime->setValue(machineParam.warningTime/10.);
+    this->machineParamGl.lastRevWarm.all = registers->readReg(IndexerLiftSettings::IndexerDevice, Register::indexerReg_TM);
     if(machineParam.direction == -1)
     {
         ui->pButtonDirection->setChecked(false);
@@ -270,6 +265,8 @@ void GeneralSettingDialog::lockUnlockEmail()
             ui->emailSettingWidget->setEnabled(true);
             ui->checkBoxMailSendEnable->setEnabled(true);
             ui->pButtonLockUnlockEmail->setText(tr("Lock"));
+            ui->editSender->setEchoMode(QLineEdit::Normal);
+            ui->editReceiver->setEchoMode(QLineEdit::Normal);
         }
         else
         {
@@ -277,6 +274,8 @@ void GeneralSettingDialog::lockUnlockEmail()
             ui->emailSettingWidget->setEnabled(false);
             ui->checkBoxMailSendEnable->setEnabled(false);
             ui->pButtonLockUnlockEmail->setText(tr("Unlock"));
+            ui->editSender->setEchoMode(QLineEdit::Password);
+            ui->editReceiver->setEchoMode(QLineEdit::Password);
             QMessageBox msgBox;
             msgBox.setStyleSheet(this->styleSheet()+"QPushButton {min-width: 70px; min-height: 55px}");
             msgBox.setText("Wrong password!");
@@ -288,6 +287,11 @@ void GeneralSettingDialog::lockUnlockEmail()
     {
         ui->emailSettingWidget->setEnabled(false);
         ui->checkBoxMailSendEnable->setEnabled(false);
+        ui->editSender->setEchoMode(QLineEdit::Password);
+        ui->editPassword->setEchoMode(QLineEdit::Password);
+        ui->pButtonShowPassword->setChecked(false);
+        ui->pButtonShowPassword->setText(tr("Show"));
+        ui->editReceiver->setEchoMode(QLineEdit::Password);
         ui->pButtonLockUnlockEmail->setText(tr("Unlock"));
     }
     acceptOnDeactilationEn = true;
@@ -298,9 +302,15 @@ void GeneralSettingDialog::lockUnlockEmail()
 void GeneralSettingDialog::hideShowPassword()
 {
     if(ui->pButtonShowPassword->isChecked())
+    {
+        ui->pButtonShowPassword->setText(tr("Hide"));
         ui->editPassword->setEchoMode(QLineEdit::Normal);
+    }
     else
+    {
+        ui->pButtonShowPassword->setText(tr("Show"));
         ui->editPassword->setEchoMode(QLineEdit::Password);
+    }
 }
 
 void GeneralSettingDialog::eventFilterSetup()
@@ -553,13 +563,15 @@ void GeneralSettingDialog::showPortInfo(ComSettings comSett)
 
 bool GeneralSettingDialog::event(QEvent *e)
 {
-    if((e->type()==QEvent::WindowDeactivate)
-            |((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave))
-            |((QApplication::platformName() == "linuxfb")&(e->type()==QEvent::Leave)))
+//    if((e->type()==QEvent::WindowDeactivate)
+//            |((QApplication::platformName() == "eglfs")&(e->type()==QEvent::Leave))
+//            |((QApplication::platformName() == "linuxfb")&(e->type()==QEvent::Leave)))
+    if(e->type()==QEvent::HideToParent)
     {
         if(acceptOnDeactilationEn)
             this->accept();
     }
+//    qDebug()<<e->type();
     return QWidget::event(e);
 }
 
@@ -602,12 +614,17 @@ void GeneralSettingDialog::manualShow()
     ui->labelH1->setVisible(MachineSettings::getServiceWidgEn());
     ui->pButtonUseUnload->setVisible(MachineSettings::getServiceWidgEn());
     ui->tabWidget->setTabEnabled(3, MachineSettings::getServiceWidgEn());
-    ui->tabWidget->setTabEnabled(2, MachineSettings::getServiceWidgEn());
+//    ui->tabWidget->setTabEnabled(2, MachineSettings::getServiceWidgEn());
     ui->pButtonServiceState->setChecked(MachineSettings::getServiceWidgEn());
     ui->widgetServiceSettings->setVisible(MachineSettings::getServiceWidgEn());
 
     this->manualResize();
     this->show();
+}
+
+void GeneralSettingDialog::setRegisterPointer(Register *reg)
+{
+    this->registers = reg;
 }
 
 void GeneralSettingDialog::showEvent(QShowEvent *ev)
@@ -674,6 +691,7 @@ void GeneralSettingDialog::on_pButtonWarming_clicked()
 void GeneralSettingDialog::on_pButtonCounters_clicked()
 {
     emit this->countersDialogRequest();
+    this->accept();
 }
 
 void GeneralSettingDialog::manualResize()

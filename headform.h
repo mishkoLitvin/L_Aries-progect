@@ -19,9 +19,11 @@ public:
     {
         this->setParent(parent);
         this->index = inputNumber;
-        this->setStyleSheet("background-color: rgb(100,250,100);");
-        this->resize(40,40);
+        this->setStyleSheet("border-style: none;");
+        this->resize(45,45);
+        this->setIconSize(QSize(40, 40));
         connect(this, SIGNAL(clicked()), this, SLOT(thisClicked()));
+
     }
     void setIconPath(QString path)
     {
@@ -89,6 +91,7 @@ public:
     void setStrokCount(int val);
     void setStepBkStrCnt(int val);
     void setDryPower(int val);
+    void setTemperature(int val);
     void setOff();
 
     HeadformState getRagState();

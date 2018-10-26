@@ -2,7 +2,7 @@
 #include "ui_countersdialog.h"
 
 CountersDialog::CountersDialog(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::CountersDialog)
 {
     ui->setupUi(this);
@@ -24,6 +24,11 @@ void CountersDialog::setRemaining(int val)
     connect(ui->doubleSpinBoxRemain, SIGNAL(valueChanged(double)), this, SLOT(doubleSpinBoxRemain_valueChanged(double)));
 }
 
+void CountersDialog::hideRequest()
+{
+    this->hide();
+}
+
 bool CountersDialog::event(QEvent *e)
 {
     if((e->type()==QEvent::WindowDeactivate)
@@ -31,7 +36,7 @@ bool CountersDialog::event(QEvent *e)
             |((QApplication::platformName() == "linuxfb")&(e->type()==QEvent::Leave)))
     {
         if(acceptOnDeactilationEn)
-            this->accept();
+            this->hide();
     }
     return QWidget::event(e);
 }

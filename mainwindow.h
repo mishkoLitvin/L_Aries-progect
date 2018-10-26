@@ -69,6 +69,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    QWidget* lastOpened;
+
     QList<HeadForm*> headButton;
     QList<HeadSettingButton*> headSettButton;
     InfoWidget* infoWidget;
@@ -188,6 +190,7 @@ protected:
     void showEvent(QShowEvent *ev);
     bool eventFilter(QObject *obj, QEvent *ev);
     void changeEvent(QEvent *event);
+    void mousePressEvent(QMouseEvent *ev);
 };
 
 #endif // MAINWINDOW_H
