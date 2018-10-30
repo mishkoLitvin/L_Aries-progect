@@ -421,7 +421,6 @@ void MainWindow::getSerialData(ModData modData)
     uint8_t hb;
     bool idle;
 
-    watchDog->start();
     if(modData.fileds.adress<=HeadSetting::HeadDeviceAdrOffcet)
     {
         switch (modData.fileds.adress) {
@@ -460,8 +459,8 @@ void MainWindow::getSerialData(ModData modData)
                 {
                     for(i = 1; (i<32)&(i<headsCount); i++)
                         if((static_cast<bool>(MachineSettings::getHeadPalState()&(1<<i))) !=
-                                static_cast<bool>(headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->getRagState() == HeadForm::shirtOn))
-                            headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
+                                static_cast<bool>(headButton[headsCount-i]->getRagState() == HeadForm::shirtOn))
+                            headButton[headsCount-i]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
                 }
                 else
                 {
@@ -477,8 +476,8 @@ void MainWindow::getSerialData(ModData modData)
                 {
                     for(i = 1; (i<32)&(i<headsCount); i++)
                         if( (static_cast<bool>(MachineSettings::getHeadPalState()&(1<<i))) !=
-                                (headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->getRagState() == HeadForm::shirtOn))
-                            headButton[headsCount-i-machineSettings.machineParam.useUnloadHead]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
+                                (headButton[headsCount-i]->getRagState() == HeadForm::shirtOn))
+                            headButton[headsCount-i]->setRagOn(MachineSettings::getHeadPalState()&(1<<i));
                 }
                 else
                 {
@@ -528,19 +527,19 @@ void MainWindow::getSerialData(ModData modData)
                     machineSettings.machineParam.direction = 1;
                 settings->setValue("MACHINE_PARAMS", machineSettings.machineParam.toByteArray());
                 break;
-            case Register::liftReg_ACC:
+            case Register::liftReg_ACC://FUCKING DISASTER!!!!!!!!
                 indexerLiftSettings.liftParam.acceleration = modData.fileds.data;
                 break;
-            case Register::liftReg_DIST:
+            case Register::liftReg_DIST://FUCKING DISASTER!!!!!!!!
                 indexerLiftSettings.liftParam.distance = modData.fileds.data;
                 disconnect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
                 ui->dSpinBoxLiftOffcet->setValue(1.18-modData.fileds.data/100.);
                 connect(ui->dSpinBoxLiftOffcet, SIGNAL(valueChanged(double)), this, SLOT(getLiftOffcet(double)));
                 break;
-            case Register::liftReg_HOME_OFFSET:
+            case Register::liftReg_HOME_OFFSET://FUCKING DISASTER!!!!!!!!
                 indexerLiftSettings.liftParam.homeOffcet = static_cast<int16_t>(modData.fileds.data);
                 break;
-            case Register::liftReg_SPEED:
+            case Register::liftReg_SPEED://FUCKING DISASTER!!!!!!!!
                 indexerLiftSettings.liftParam.speed = modData.fileds.data;
                 break;
             default:
@@ -1510,22 +1509,8 @@ void MainWindow::indexerStepFinish()
 
 
     maintanceDialog->check(indexerCyclesAll);
-    if(ragAtHeadCount == 0)
-    {
-        indexer->printFinish();
-    }
     infoWidget->setPrinted(ragSessionCount);
     infoWidget->setTotal(ragAllCount);
-    QByteArray bArr;
-    bArr.resize(14);
-    bArr[0] = 0;
-    bArr[1] = 20;
-    static QTime lastTime;
-    QTime curTime = QTime::currentTime();
-    uint32_t dph = 0;
-    if(((lastTime.secsTo(curTime))>0))
-        dph = 3600000/lastTime.msecsTo(curTime);
-    lastTime = curTime;
 }
 
 void MainWindow::startPrintProcess(bool autoPrint)
@@ -1822,7 +1807,6 @@ void MainWindow::zeroStart()
     }
     settings->setValue("PROGRAM/FINISH", false);
 
-    qDebug()<<(!QSslSocket::supportsSsl())<<QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
 //    if(((!QSslSocket::supportsSsl())|
 //            (!(QSslSocket::sslLibraryBuildVersionString() == QSslSocket::sslLibraryVersionString())))
 //            &(settings->value("EMAIL_SETTINGS").value<EmailSettings>().mailEnable))

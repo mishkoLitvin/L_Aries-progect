@@ -69,6 +69,7 @@ private:
 
     bool isAutoPrintEnable;
     QString pathIcon;
+    QIcon iconPrint, iconPrintP, iconStop;
 
     MachineSettings::MachineState machineState;
 

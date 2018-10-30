@@ -1141,8 +1141,8 @@ void SettingDialog::on_pushButtonCopyToAll_clicked()
     QMessageBox msgBox;
     msgBox.setStyleSheet(this->styleSheet()+"*{color: white; font: 16px bold italic large}"+"QPushButton {min-width: 70px; min-height: 55px}");
     msgBox.setText(tr("You want copy parameters to all heads?"));
-    msgBox.setInformativeText(tr("To enter code press \"Yes\" \n"
-                              "To exit from program press \"No\"."));
+    msgBox.setInformativeText(tr("To copy parameters press \"Yes\" \n"
+                              "To cancel press \"No\"."));
     msgBox.setWindowTitle(tr("Master code"));
     msgBox.setIcon(QMessageBox::Question);
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);

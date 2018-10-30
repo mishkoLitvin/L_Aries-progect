@@ -1,6 +1,6 @@
 #include "serialport.h"
 
-#define DEBUG_EN true
+#define DEBUG_EN false
 
 
 SerialPort::SerialPort(QObject *parent):QObject(parent)
