@@ -1,0 +1,325 @@
+\hypertarget{classIndexerLiftSettings}{}\subsection{Indexer\+Lift\+Settings Class Reference}
+\label{classIndexerLiftSettings}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+
+
+{\ttfamily \#include $<$settings.\+h$>$}
+
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structIndexerLiftSettings_1_1IndexParameters__}{Index\+Parameters\+\_\+}}
+\item 
+struct \mbox{\hyperlink{structIndexerLiftSettings_1_1LiftParameters__}{Lift\+Parameters\+\_\+}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913}{Devices}} \{
+\begin{DoxyCompactItemize} \item\mbox{\hyperlink{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913a39a548178de68c2a3e7658fb85a56106}{Lift\+Device}} = 0x0002, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913af9df5c0187f5e281e965ff067ec76581}{Indexer\+Device}} = 0x0001
+ \end{DoxyCompactItemize}\}
+\item 
+enum \mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2}{Indexer\+Lift\+Data\+Places}} \{ 
+\begin{DoxyCompactItemize}
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a151ea8edc8114bb78ece10e9858c3537}{Index\+Home\+Offset}} = 0x01, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a256876ab80cd7e9f9067f818b2b07dd0}{Index\+Dist\+Offcet}} = 0x02, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a8eea1737b7266266d501ed2cc273bd03}{Index\+Speed}} = 0x03, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a4a19a82f0e80f8dcde0783e22e2697d2}{Index\+Direction}} = 0x04, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ac1524a3717768f68bfdee53c0b6d9ad4}{Index\+Step\+Time\+Delay}} = 0x06, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a98a1621bf4c939ac36f37c30bed6da43}{Lift\+Delay\+Down}} = 0x1C, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ac0271452c6890ade65149a2613adbd58}{Lift\+Delay\+Up}} = 0x07, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2abe1bb0f5775199c03ab8dc8b5a51d0a9}{Index\+Distance}} = 0x08, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a66c5c7a90572973dee3606e62bae51da}{Index\+Last\+Revolv\+Warm}} = 0x09, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aac6ca5cd57cca87f10268db6527e8442}{Index\+Acceleration}} = 0x0A, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aa11ee9a20d44c72639f159fcc660f3f2}{Index\+Acceleration\+Ret}} = 0x0B, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aeacb918f16b01f08a3ce32715adcb530}{Index\+Speed\+Ret}} = 0x0D, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a5fb01934908f5879af2dd4b044943ce2}{Warning\+Time}} = 0x0E, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a8192201a86b56410dfd09fd2b9800fa1}{Lift\+Home\+Offcet}} = 0x15, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a2ba128cb6dfe2c80448c6578cc543872}{Lift\+Distance}} = 0x16, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ab38ed4c8a800ac897f0339f0aef56dcc}{Lift\+Speed}} = 0x17, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a864489dda212f5a39e7df91499450822}{Lift\+Acceleration}} = 0x18, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a3f25c659b07800fb5f565359ed27ba6a}{Load\+Head\+State}} = 0x1F
+ \end{DoxyCompactItemize}\}
+\item 
+enum \mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452}{Indexer\+Commands\+En\+\_\+}} \{ 
+\begin{DoxyCompactItemize}
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a8a5db6c30f6075cf5d320deee8d15fed}{Machine\+\_\+\+Reset}} = 0x0001, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a9ab75d3e05b86c537f251b62f539317b}{Machine\+\_\+\+Home}} = 0x0009, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a0df4113ba596d97fb0b3c7c0beee8e50}{Index\+Lock}} = 0x000A, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452ab7e7809b193ce7b9b4cc44aa1990972c}{Index\+Un\+Lock}} = 0x000A, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452afd53a7da44594fbce348e39b173d4e79}{Move\+Up\+\_\+\+Down}} = 0x0006, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a801b1e41af74addb06b4ff09b8d8cd53}{Move\+Left}} = 0x0005, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a661bb94b6f94ef440de35fa75caf31b4}{Move\+Right}} = 0x0007, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a4b674c236e8750e8251ae7c745778246}{Move\+Left\+Half}} = 0x0005, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a3cf954c86851ef8b0651e2ce819d0133}{Move\+Right\+Half}} = 0x0007, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a847b891eb365b54d93f042a382bb68bb}{Move\+Full\+\_\+\+Half}} = 0x0004, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a7817bc36050d9ab3837d3980c3571823}{Auto\+\_\+\+Manual}} = 0x0008, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a272ba966d584c46e633fbbffb34f9d6a}{Print\+Start}} = 0x000B, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a33952d02298706bf400ae5b63a11a8ec}{Print\+Stop}} = 0x000B, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452aa0e77b4e4baa11b333114b484c1e01b2}{Air\+Release}} = 0x005A, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a29a08ace010cd85dc1fdc0ff236b4a52}{Easy\+Setup}} = 0x08, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a6a15b2f6b11726fedaab365c734bb35c}{Index\+Move\+Home}} = 0x005B, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a4c1aee5c9ac7d395ea3de3101117609f}{Index\+Move\+End}} = 0x005C, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452af6bd0d1521e5060028d6d36f63c5b8e7}{Lift\+Move\+Home}} = 0x00B8, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452adfe78fdba789cb03023ba4d142e3efab}{Lift\+Move\+End}} = 0x00B9, 
+\item\mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a3a0d3424bd5c37e15efcbf4dbd26bbba}{Index\+Dir\+Change}} = 0x005D
+ \end{DoxyCompactItemize}
+ \}
+\item 
+typedef struct \mbox{\hyperlink{structIndexerLiftSettings_1_1LiftParameters__}{Indexer\+Lift\+Settings\+::\+Lift\+Parameters\+\_\+}} \mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Lift\+Parameters}}
+\item 
+typedef struct \mbox{\hyperlink{structIndexerLiftSettings_1_1IndexParameters__}{Indexer\+Lift\+Settings\+::\+Index\+Parameters\+\_\+}} \mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Index\+Parameters}}
+\item 
+typedef enum \mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452}{Indexer\+Lift\+Settings\+::\+Indexer\+Commands\+En\+\_\+}} \mbox{\hyperlink{classIndexerLiftSettings_ad0959473f792741cadaa262730f5a463}{Indexer\+Commands\+En}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classIndexerLiftSettings_aa334786f67544a57de7253b930eb3528}{Indexer\+Lift\+Settings}} (\mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Index\+Parameters}} ind\+Param, \mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Lift\+Parameters}} lif\+Param)
+\item 
+\mbox{\hyperlink{classIndexerLiftSettings_ad3adde70e8138f9f775ff9177ce290fe}{Indexer\+Lift\+Settings}} ()
+\item 
+void \mbox{\hyperlink{classIndexerLiftSettings_ade953aea43325531e7889e71d45d6e65}{from\+Byte\+Array}} (Q\+Byte\+Array ind\+Param\+Arr, Q\+Byte\+Array lif\+Param\+Arr)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Index\+Parameters}} \mbox{\hyperlink{classIndexerLiftSettings_a09875fa890744d5de30f06b2d580bb24}{indexer\+Param}}
+\item 
+\mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Lift\+Parameters}} \mbox{\hyperlink{classIndexerLiftSettings_ae9649b8642d20d02892fc4abaad687f7}{lift\+Param}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classIndexerLiftSettings_ad0959473f792741cadaa262730f5a463}\label{classIndexerLiftSettings_ad0959473f792741cadaa262730f5a463}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Commands\+En@{Indexer\+Commands\+En}}
+\index{Indexer\+Commands\+En@{Indexer\+Commands\+En}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452}{Indexer\+Lift\+Settings\+::\+Indexer\+Commands\+En\+\_\+}} \mbox{\hyperlink{classIndexerLiftSettings_ad0959473f792741cadaa262730f5a463}{Indexer\+Lift\+Settings\+::\texorpdfstring{Indexer\+Commands\+En}{IndexerCommandsEn}}}}
+
+\mbox{\Hypertarget{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}\label{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Parameters@{Index\+Parameters}}
+\index{Index\+Parameters@{Index\+Parameters}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structIndexerLiftSettings_1_1IndexParameters__}{Indexer\+Lift\+Settings\+::\+Index\+Parameters\+\_\+}} \mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Indexer\+Lift\+Settings\+::\texorpdfstring{Index\+Parameters}{IndexParameters}}}}
+
+\mbox{\Hypertarget{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}\label{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Parameters@{Lift\+Parameters}}
+\index{Lift\+Parameters@{Lift\+Parameters}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structIndexerLiftSettings_1_1LiftParameters__}{Indexer\+Lift\+Settings\+::\+Lift\+Parameters\+\_\+}} \mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Indexer\+Lift\+Settings\+::\texorpdfstring{Lift\+Parameters}{LiftParameters}}}}
+
+
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913}\label{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Devices@{Devices}}
+\index{Devices@{Devices}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913}{Indexer\+Lift\+Settings\+::\texorpdfstring{Devices}{Devices}}}} - enumerator which contain device addresses of lift and indexer. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Device@{Lift\+Device}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Device@{Lift\+Device}}}\mbox{\Hypertarget{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913a39a548178de68c2a3e7658fb85a56106}\label{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913a39a548178de68c2a3e7658fb85a56106}} 
+Lift\+Device&0x0002\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Indexer\+Device@{Indexer\+Device}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Device@{Indexer\+Device}}}\mbox{\Hypertarget{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913af9df5c0187f5e281e965ff067ec76581}\label{classIndexerLiftSettings_a3ab6e8bfdd1aaed688b1cca43dd7c913af9df5c0187f5e281e965ff067ec76581}} 
+Indexer\+Device&0x0001\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Commands\+En\+\_\+@{Indexer\+Commands\+En\+\_\+}}
+\index{Indexer\+Commands\+En\+\_\+@{Indexer\+Commands\+En\+\_\+}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452}{Indexer\+Lift\+Settings\+::\texorpdfstring{Indexer\+Commands\+En\+\_\+}{IndexerCommandsEn\_}}}} - enumerator, which written to create names of data what must be send to execute commands for indexer and lift device.
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Machine\+\_\+\+Reset@{Machine\+\_\+\+Reset}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Machine\+\_\+\+Reset@{Machine\+\_\+\+Reset}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a8a5db6c30f6075cf5d320deee8d15fed}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a8a5db6c30f6075cf5d320deee8d15fed}} 
+Machine\+\_\+\+Reset&0x0001\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Machine\+\_\+\+Home@{Machine\+\_\+\+Home}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Machine\+\_\+\+Home@{Machine\+\_\+\+Home}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a9ab75d3e05b86c537f251b62f539317b}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a9ab75d3e05b86c537f251b62f539317b}} 
+Machine\+\_\+\+Home&0x0009\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Lock@{Index\+Lock}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Lock@{Index\+Lock}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a0df4113ba596d97fb0b3c7c0beee8e50}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a0df4113ba596d97fb0b3c7c0beee8e50}} 
+Index\+Lock&0x000A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Un\+Lock@{Index\+Un\+Lock}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Un\+Lock@{Index\+Un\+Lock}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452ab7e7809b193ce7b9b4cc44aa1990972c}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452ab7e7809b193ce7b9b4cc44aa1990972c}} 
+Index\+Un\+Lock&0x000A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Up\+\_\+\+Down@{Move\+Up\+\_\+\+Down}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Move\+Up\+\_\+\+Down@{Move\+Up\+\_\+\+Down}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452afd53a7da44594fbce348e39b173d4e79}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452afd53a7da44594fbce348e39b173d4e79}} 
+Move\+Up\+\_\+\+Down&0x0006\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Left@{Move\+Left}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Move\+Left@{Move\+Left}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a801b1e41af74addb06b4ff09b8d8cd53}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a801b1e41af74addb06b4ff09b8d8cd53}} 
+Move\+Left&0x0005\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Right@{Move\+Right}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Move\+Right@{Move\+Right}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a661bb94b6f94ef440de35fa75caf31b4}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a661bb94b6f94ef440de35fa75caf31b4}} 
+Move\+Right&0x0007\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Left\+Half@{Move\+Left\+Half}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Move\+Left\+Half@{Move\+Left\+Half}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a4b674c236e8750e8251ae7c745778246}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a4b674c236e8750e8251ae7c745778246}} 
+Move\+Left\+Half&0x0005\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Right\+Half@{Move\+Right\+Half}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Move\+Right\+Half@{Move\+Right\+Half}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a3cf954c86851ef8b0651e2ce819d0133}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a3cf954c86851ef8b0651e2ce819d0133}} 
+Move\+Right\+Half&0x0007\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Full\+\_\+\+Half@{Move\+Full\+\_\+\+Half}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Move\+Full\+\_\+\+Half@{Move\+Full\+\_\+\+Half}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a847b891eb365b54d93f042a382bb68bb}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a847b891eb365b54d93f042a382bb68bb}} 
+Move\+Full\+\_\+\+Half&0x0004\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Auto\+\_\+\+Manual@{Auto\+\_\+\+Manual}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Auto\+\_\+\+Manual@{Auto\+\_\+\+Manual}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a7817bc36050d9ab3837d3980c3571823}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a7817bc36050d9ab3837d3980c3571823}} 
+Auto\+\_\+\+Manual&0x0008\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Print\+Start@{Print\+Start}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Print\+Start@{Print\+Start}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a272ba966d584c46e633fbbffb34f9d6a}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a272ba966d584c46e633fbbffb34f9d6a}} 
+Print\+Start&0x000B\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Print\+Stop@{Print\+Stop}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Print\+Stop@{Print\+Stop}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a33952d02298706bf400ae5b63a11a8ec}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a33952d02298706bf400ae5b63a11a8ec}} 
+Print\+Stop&0x000B\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Air\+Release@{Air\+Release}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Air\+Release@{Air\+Release}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452aa0e77b4e4baa11b333114b484c1e01b2}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452aa0e77b4e4baa11b333114b484c1e01b2}} 
+Air\+Release&0x005A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Easy\+Setup@{Easy\+Setup}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Easy\+Setup@{Easy\+Setup}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a29a08ace010cd85dc1fdc0ff236b4a52}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a29a08ace010cd85dc1fdc0ff236b4a52}} 
+Easy\+Setup&0x0008\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Move\+Home@{Index\+Move\+Home}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Move\+Home@{Index\+Move\+Home}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a6a15b2f6b11726fedaab365c734bb35c}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a6a15b2f6b11726fedaab365c734bb35c}} 
+Index\+Move\+Home&0x005B\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Move\+End@{Index\+Move\+End}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Move\+End@{Index\+Move\+End}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a4c1aee5c9ac7d395ea3de3101117609f}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a4c1aee5c9ac7d395ea3de3101117609f}} 
+Index\+Move\+End&0x005C\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Move\+Home@{Lift\+Move\+Home}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Move\+Home@{Lift\+Move\+Home}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452af6bd0d1521e5060028d6d36f63c5b8e7}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452af6bd0d1521e5060028d6d36f63c5b8e7}} 
+Lift\+Move\+Home&0x00B8\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Move\+End@{Lift\+Move\+End}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Move\+End@{Lift\+Move\+End}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452adfe78fdba789cb03023ba4d142e3efab}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452adfe78fdba789cb03023ba4d142e3efab}} 
+Lift\+Move\+End&0x00B9\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Dir\+Change@{Index\+Dir\+Change}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Dir\+Change@{Index\+Dir\+Change}}}\mbox{\Hypertarget{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a3a0d3424bd5c37e15efcbf4dbd26bbba}\label{classIndexerLiftSettings_a1cdeb18e15c35f26a2979194c6db9452a3a0d3424bd5c37e15efcbf4dbd26bbba}} 
+Index\+Dir\+Change&0x005D\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Lift\+Data\+Places@{Indexer\+Lift\+Data\+Places}}
+\index{Indexer\+Lift\+Data\+Places@{Indexer\+Lift\+Data\+Places}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2}{Indexer\+Lift\+Settings\+::\texorpdfstring{Indexer\+Lift\+Data\+Places}{IndexerLiftDataPlaces}}}} - Enumerator describe address of data places for indexer and lift device. Name of enumerator item describe parameter which are sends to PCB.
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Home\+Offset@{Index\+Home\+Offset}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Home\+Offset@{Index\+Home\+Offset}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a151ea8edc8114bb78ece10e9858c3537}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a151ea8edc8114bb78ece10e9858c3537}} 
+Index\+Home\+Offset&0x01\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Dist\+Offcet@{Index\+Dist\+Offcet}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Dist\+Offcet@{Index\+Dist\+Offcet}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a256876ab80cd7e9f9067f818b2b07dd0}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a256876ab80cd7e9f9067f818b2b07dd0}} 
+Index\+Dist\+Offcet&0x02\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Speed@{Index\+Speed}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Speed@{Index\+Speed}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a8eea1737b7266266d501ed2cc273bd03}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a8eea1737b7266266d501ed2cc273bd03}} 
+Index\+Speed&0x03\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Direction@{Index\+Direction}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Direction@{Index\+Direction}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a4a19a82f0e80f8dcde0783e22e2697d2}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a4a19a82f0e80f8dcde0783e22e2697d2}} 
+Index\+Direction&0x04\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Step\+Time\+Delay@{Index\+Step\+Time\+Delay}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Step\+Time\+Delay@{Index\+Step\+Time\+Delay}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ac1524a3717768f68bfdee53c0b6d9ad4}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ac1524a3717768f68bfdee53c0b6d9ad4}} 
+Index\+Step\+Time\+Delay&0x06\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Delay\+Down@{Lift\+Delay\+Down}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Delay\+Down@{Lift\+Delay\+Down}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a98a1621bf4c939ac36f37c30bed6da43}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a98a1621bf4c939ac36f37c30bed6da43}} 
+Lift\+Delay\+Down&0x1C\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Delay\+Up@{Lift\+Delay\+Up}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Delay\+Up@{Lift\+Delay\+Up}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ac0271452c6890ade65149a2613adbd58}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ac0271452c6890ade65149a2613adbd58}} 
+Lift\+Delay\+Up&0x07\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Distance@{Index\+Distance}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Distance@{Index\+Distance}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2abe1bb0f5775199c03ab8dc8b5a51d0a9}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2abe1bb0f5775199c03ab8dc8b5a51d0a9}} 
+Index\+Distance&0x08\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Last\+Revolv\+Warm@{Index\+Last\+Revolv\+Warm}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Last\+Revolv\+Warm@{Index\+Last\+Revolv\+Warm}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a66c5c7a90572973dee3606e62bae51da}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a66c5c7a90572973dee3606e62bae51da}} 
+Index\+Last\+Revolv\+Warm&0x09\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Acceleration@{Index\+Acceleration}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Acceleration@{Index\+Acceleration}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aac6ca5cd57cca87f10268db6527e8442}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aac6ca5cd57cca87f10268db6527e8442}} 
+Index\+Acceleration&0x0A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Acceleration\+Ret@{Index\+Acceleration\+Ret}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Acceleration\+Ret@{Index\+Acceleration\+Ret}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aa11ee9a20d44c72639f159fcc660f3f2}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aa11ee9a20d44c72639f159fcc660f3f2}} 
+Index\+Acceleration\+Ret&0x0B\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Speed\+Ret@{Index\+Speed\+Ret}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Index\+Speed\+Ret@{Index\+Speed\+Ret}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aeacb918f16b01f08a3ce32715adcb530}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2aeacb918f16b01f08a3ce32715adcb530}} 
+Index\+Speed\+Ret&0x0D\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Warning\+Time@{Warning\+Time}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Warning\+Time@{Warning\+Time}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a5fb01934908f5879af2dd4b044943ce2}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a5fb01934908f5879af2dd4b044943ce2}} 
+Warning\+Time&0x0E\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Home\+Offcet@{Lift\+Home\+Offcet}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Home\+Offcet@{Lift\+Home\+Offcet}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a8192201a86b56410dfd09fd2b9800fa1}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a8192201a86b56410dfd09fd2b9800fa1}} 
+Lift\+Home\+Offcet&0x15\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Distance@{Lift\+Distance}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Distance@{Lift\+Distance}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a2ba128cb6dfe2c80448c6578cc543872}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a2ba128cb6dfe2c80448c6578cc543872}} 
+Lift\+Distance&0x16\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Speed@{Lift\+Speed}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Speed@{Lift\+Speed}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ab38ed4c8a800ac897f0339f0aef56dcc}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2ab38ed4c8a800ac897f0339f0aef56dcc}} 
+Lift\+Speed&0x17\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lift\+Acceleration@{Lift\+Acceleration}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Lift\+Acceleration@{Lift\+Acceleration}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a864489dda212f5a39e7df91499450822}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a864489dda212f5a39e7df91499450822}} 
+Lift\+Acceleration&0x18\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Load\+Head\+State@{Load\+Head\+State}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Load\+Head\+State@{Load\+Head\+State}}}\mbox{\Hypertarget{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a3f25c659b07800fb5f565359ed27ba6a}\label{classIndexerLiftSettings_a116f9cef65d6fcc44ea04a2458ccd5a2a3f25c659b07800fb5f565359ed27ba6a}} 
+Load\+Head\+State&0x1F\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIndexerLiftSettings_aa334786f67544a57de7253b930eb3528}\label{classIndexerLiftSettings_aa334786f67544a57de7253b930eb3528}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily Indexer\+Lift\+Settings\+::\texorpdfstring{Indexer\+Lift\+Settings}{IndexerLiftSettings}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Indexer\+Lift\+Settings\+::\+Index\+Parameters}}}]{ind\+Param,  }\item[{\mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Indexer\+Lift\+Settings\+::\+Lift\+Parameters}}}]{lif\+Param }\end{DoxyParamCaption})} - class constructor with data initialization. Initialize \hyperlink{classIndexerLiftSettings_a09875fa890744d5de30f06b2d580bb24}{indexer\+Param} and \hyperlink{classIndexerLiftSettings_ae9649b8642d20d02892fc4abaad687f7}{lift\+Param} with given data.
+
+\mbox{\Hypertarget{classIndexerLiftSettings_ad3adde70e8138f9f775ff9177ce290fe}\label{classIndexerLiftSettings_ad3adde70e8138f9f775ff9177ce290fe}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily Indexer\+Lift\+Settings\+::\texorpdfstring{Indexer\+Lift\+Settings}{IndexerLiftSettings}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - empty class constructor. Initialize \hyperlink{classIndexerLiftSettings_a09875fa890744d5de30f06b2d580bb24}{indexer\+Param} and \hyperlink{classIndexerLiftSettings_ae9649b8642d20d02892fc4abaad687f7}{lift\+Param} with default parameters.
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classIndexerLiftSettings_ade953aea43325531e7889e71d45d6e65}\label{classIndexerLiftSettings_ade953aea43325531e7889e71d45d6e65}} \index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!from\+Byte\+Array@{from\+Byte\+Array}}\index{from\+Byte\+Array@{from\+Byte\+Array}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}{\footnotesize\ttfamily void Indexer\+Lift\+Settings\+::\texorpdfstring{from\+Byte\+Array}{fromByteArray} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{ind\+Param\+Arr,  }\item[{Q\+Byte\+Array}]{lif\+Param\+Arr }\end{DoxyParamCaption})} - fill fields of \hyperlink{classIndexerLiftSettings_a09875fa890744d5de30f06b2d580bb24}{indexer\+Param} and \hyperlink{classIndexerLiftSettings_ae9649b8642d20d02892fc4abaad687f7}{lift\+Param} with data parsed from given \mbox{\textit{Q\+Byte\+Array}'s}.
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classIndexerLiftSettings_a09875fa890744d5de30f06b2d580bb24}\label{classIndexerLiftSettings_a09875fa890744d5de30f06b2d580bb24}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!indexer\+Param@{indexer\+Param}}
+\index{indexer\+Param@{indexer\+Param}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Index\+Parameters}} Indexer\+Lift\+Settings\+::\texorpdfstring{indexer\+Param}{indexerParam}}
+
+\mbox{\Hypertarget{classIndexerLiftSettings_ae9649b8642d20d02892fc4abaad687f7}\label{classIndexerLiftSettings_ae9649b8642d20d02892fc4abaad687f7}} 
+\index{Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}!lift\+Param@{lift\+Param}}
+\index{lift\+Param@{lift\+Param}!Indexer\+Lift\+Settings@{Indexer\+Lift\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Lift\+Parameters}} Indexer\+Lift\+Settings\+::\texorpdfstring{lift\+Param}{liftParam}}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{settings_8h}{settings.\+h}}\item 
+\mbox{\hyperlink{settings_8cpp}{settings.\+cpp}}\end{DoxyCompactItemize}
+\newpage

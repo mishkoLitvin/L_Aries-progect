@@ -1,0 +1,171 @@
+\hypertarget{classSerialSettingsDialog}{}\subsection{Serial\+Settings\+Dialog Class Reference}
+\label{classSerialSettingsDialog}\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+
+The class is taken from standard Qt examples. 
+
+{\ttfamily \#include $<$serialsettingsdialog.\+h$>$}
+
+Inheritance diagram for Serial\+Settings\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSerialSettingsDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a814c12a68be8eb01d2a5fe6fd9f6aaa7}{serial\+Setting\+Accepted}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} com\+Sett)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSerialSettingsDialog_a5834dd80b40df594a5f93d664e1bba0a}{Serial\+Settings\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classSerialSettingsDialog_ab8729269713f620c51862acc0f41f1fb}{Serial\+Settings\+Dialog}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} n\+Sett, Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classSerialSettingsDialog_a46a36a5ef33433be4a79c5d8b2b455ab}{$\sim$\+Serial\+Settings\+Dialog}} ()
+\item 
+\mbox{\hyperlink{structComSettings}{Com\+Settings}} \mbox{\hyperlink{classSerialSettingsDialog_a79327698eb7a95ab3b714cb4ccbc3599}{settings}} () const
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a0b31ad48fd2fe7fd9cce0c63eda3efb4}{set\+Settings}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} n\+Sett)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a1222ce503cf2d974869a674f186e4a11}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a51bd57a094957fabb106e82b2a2fdcda}{show\+Port\+Info}} (int idx)
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a9172ba98481da3828d9825aa89fd2dd1}{apply}} ()
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_ab0238e08301e18f365ab2239f129d868}{reject}} ()
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a3a731f098e834b3d17bc5ec0c2da64a5}{check\+Custom\+Baud\+Rate\+Policy}} (int idx)
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a784ef564d042f439ad94a2694a1ecbaf}{check\+Custom\+Device\+Path\+Policy}} (int idx)
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a4b813dfa2e8318f4d086e718b441d12e}{fill\+Ports\+Parameters}} ()
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_a1b23a2eccc90ff6e9d50887e135584c8}{fill\+Ports\+Info}} ()
+\item 
+void \mbox{\hyperlink{classSerialSettingsDialog_ad41af1d1aba6bebce04969e141b914d4}{update\+Settings}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Serial\+Settings\+Dialog $\ast$ \mbox{\hyperlink{classSerialSettingsDialog_afc0d38e2824ab62ed7de597c97d012f7}{ui}}
+\item 
+bool \mbox{\hyperlink{classSerialSettingsDialog_ab87bf1b0042d98315035b07f4e340e0e}{accept\+On\+Deactilation\+En}}
+\item 
+\mbox{\hyperlink{structComSettings}{Com\+Settings}} \mbox{\hyperlink{classSerialSettingsDialog_ab24259a0385b292ff104425d97957482}{current\+Settings}}
+\item 
+Q\+Int\+Validator $\ast$ \mbox{\hyperlink{classSerialSettingsDialog_a0bd028bb39cf3db3b297a1899d3d835a}{int\+Validator}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSerialSettingsDialog_a5834dd80b40df594a5f93d664e1bba0a}\label{classSerialSettingsDialog_a5834dd80b40df594a5f93d664e1bba0a}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily Serial\+Settings\+Dialog\+::\texorpdfstring{Serial\+Settings\+Dialog()}{SerialSettingsDialog()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_ab8729269713f620c51862acc0f41f1fb}\label{classSerialSettingsDialog_ab8729269713f620c51862acc0f41f1fb}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily Serial\+Settings\+Dialog\+::\texorpdfstring{Serial\+Settings\+Dialog}{SerialSettingsDialog}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{n\+Sett,  }\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a46a36a5ef33433be4a79c5d8b2b455ab}\label{classSerialSettingsDialog_a46a36a5ef33433be4a79c5d8b2b455ab}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!````~Serial\+Settings\+Dialog@{$\sim$\+Serial\+Settings\+Dialog}}
+\index{````~Serial\+Settings\+Dialog@{$\sim$\+Serial\+Settings\+Dialog}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily Serial\+Settings\+Dialog\+::\texorpdfstring{$\sim$\+Serial\+Settings\+Dialog}{~SerialSettingsDialog} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSerialSettingsDialog_a9172ba98481da3828d9825aa89fd2dd1}\label{classSerialSettingsDialog_a9172ba98481da3828d9825aa89fd2dd1}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!apply@{apply}}
+\index{apply@{apply}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{apply}{apply} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a1222ce503cf2d974869a674f186e4a11}\label{classSerialSettingsDialog_a1222ce503cf2d974869a674f186e4a11}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a3a731f098e834b3d17bc5ec0c2da64a5}\label{classSerialSettingsDialog_a3a731f098e834b3d17bc5ec0c2da64a5}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!check\+Custom\+Baud\+Rate\+Policy@{check\+Custom\+Baud\+Rate\+Policy}}
+\index{check\+Custom\+Baud\+Rate\+Policy@{check\+Custom\+Baud\+Rate\+Policy}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{check\+Custom\+Baud\+Rate\+Policy}{checkCustomBaudRatePolicy} (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a784ef564d042f439ad94a2694a1ecbaf}\label{classSerialSettingsDialog_a784ef564d042f439ad94a2694a1ecbaf}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!check\+Custom\+Device\+Path\+Policy@{check\+Custom\+Device\+Path\+Policy}}
+\index{check\+Custom\+Device\+Path\+Policy@{check\+Custom\+Device\+Path\+Policy}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{check\+Custom\+Device\+Path\+Policy}{checkCustomDevicePathPolicy} (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a1b23a2eccc90ff6e9d50887e135584c8}\label{classSerialSettingsDialog_a1b23a2eccc90ff6e9d50887e135584c8}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!fill\+Ports\+Info@{fill\+Ports\+Info}}
+\index{fill\+Ports\+Info@{fill\+Ports\+Info}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{fill\+Ports\+Info}{fillPortsInfo} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a4b813dfa2e8318f4d086e718b441d12e}\label{classSerialSettingsDialog_a4b813dfa2e8318f4d086e718b441d12e}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!fill\+Ports\+Parameters@{fill\+Ports\+Parameters}}
+\index{fill\+Ports\+Parameters@{fill\+Ports\+Parameters}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{fill\+Ports\+Parameters}{fillPortsParameters} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_ab0238e08301e18f365ab2239f129d868}\label{classSerialSettingsDialog_ab0238e08301e18f365ab2239f129d868}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!reject@{reject}}
+\index{reject@{reject}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{reject}{reject} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a814c12a68be8eb01d2a5fe6fd9f6aaa7}\label{classSerialSettingsDialog_a814c12a68be8eb01d2a5fe6fd9f6aaa7}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!serial\+Setting\+Accepted@{serial\+Setting\+Accepted}}
+\index{serial\+Setting\+Accepted@{serial\+Setting\+Accepted}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{serial\+Setting\+Accepted}{serialSettingAccepted} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{com\+Sett }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a0b31ad48fd2fe7fd9cce0c63eda3efb4}\label{classSerialSettingsDialog_a0b31ad48fd2fe7fd9cce0c63eda3efb4}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!set\+Settings@{set\+Settings}}
+\index{set\+Settings@{set\+Settings}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{set\+Settings}{setSettings} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{n\+Sett }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a79327698eb7a95ab3b714cb4ccbc3599}\label{classSerialSettingsDialog_a79327698eb7a95ab3b714cb4ccbc3599}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!settings@{settings}}
+\index{settings@{settings}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structComSettings}{Com\+Settings}} Serial\+Settings\+Dialog\+::\texorpdfstring{settings}{settings} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a51bd57a094957fabb106e82b2a2fdcda}\label{classSerialSettingsDialog_a51bd57a094957fabb106e82b2a2fdcda}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!show\+Port\+Info@{show\+Port\+Info}}
+\index{show\+Port\+Info@{show\+Port\+Info}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{show\+Port\+Info}{showPortInfo} (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_ad41af1d1aba6bebce04969e141b914d4}\label{classSerialSettingsDialog_ad41af1d1aba6bebce04969e141b914d4}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!update\+Settings@{update\+Settings}}
+\index{update\+Settings@{update\+Settings}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily void Serial\+Settings\+Dialog\+::\texorpdfstring{update\+Settings}{updateSettings} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSerialSettingsDialog_ab87bf1b0042d98315035b07f4e340e0e}\label{classSerialSettingsDialog_ab87bf1b0042d98315035b07f4e340e0e}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}}
+\index{accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily bool Serial\+Settings\+Dialog\+::\texorpdfstring{accept\+On\+Deactilation\+En}{acceptOnDeactilationEn}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_ab24259a0385b292ff104425d97957482}\label{classSerialSettingsDialog_ab24259a0385b292ff104425d97957482}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!current\+Settings@{current\+Settings}}
+\index{current\+Settings@{current\+Settings}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structComSettings}{Com\+Settings}} Serial\+Settings\+Dialog\+::\texorpdfstring{current\+Settings}{currentSettings}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSerialSettingsDialog_a0bd028bb39cf3db3b297a1899d3d835a}\label{classSerialSettingsDialog_a0bd028bb39cf3db3b297a1899d3d835a}} 
+\index{Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}!int\+Validator@{int\+Validator}}
+\index{int\+Validator@{int\+Validator}!Serial\+Settings\+Dialog@{Serial\+Settings\+Dialog}}
+{\footnotesize\ttfamily Q\+Int\+Validator$\ast$ Serial\+Settings\+Dialog\+::\texorpdfstring{int\+Validator}{intValidator}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{serialsettingsdialog_8h}{serialsettingsdialog.\+h}}\item 
+\mbox{\hyperlink{serialsettingsdialog_8cpp}{serialsettingsdialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

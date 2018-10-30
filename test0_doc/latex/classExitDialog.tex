@@ -1,0 +1,205 @@
+\hypertarget{classExitDialog}{}\subsection{Exit\+Dialog Class Reference}
+\label{classExitDialog}\index{Exit\+Dialog@{Exit\+Dialog}}
+
+
+{\ttfamily \#include $<$exitdialog.\+h$>$}
+
+Inheritance diagram for Exit\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classExitDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}{Exit\+Code\+\_\+}} \{ \begin{DoxyParamCaption}
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba518a5489dfa28d18da63778459d52422}{Continue}}, }
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba0a0f0dc1154f9163e8ce72beea39ff29}{Log\+Out}}, }
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba2f33cdc04de1ce7953f7aa2abf1be566}{Shutdown}}, }
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcbacd982ca18a78d15196869e96823cd28d}{Exit\+From\+Program}}, }
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba7be72257e0efaee3c5e707be33bf2399}{Reprogram\+Machine}}, }
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcbae5cc24226e0defe8868759aa87d8c11f}{Service\+Mode}}, }
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba5232255eabee8632a156274e921ceb69}{Restart\+Program}}, }
+\item{ \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba6237a611a5ea7749a7f7a6d7b72a1906}{Restart\+Machine}}}
+\end{DoxyParamCaption}\}
+
+\item 
+typedef enum \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}{Exit\+Dialog\+::\+Exit\+Code\+\_\+}} \mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Code}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExitDialog_aa1b3d3b53b599a47b2c7d70d04ec4668}{Exit\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classExitDialog_ae009cbdbc1b06410845a1afe2d518149}{$\sim$\+Exit\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_ab44c70526c323e87ee0b3e9e3daad41a}{set\+Log\+Out\+En}} (bool en)
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Code}} \mbox{\hyperlink{classExitDialog_a8c287b8910a1e54c9fed6dd172fbd134}{try\+Exit}} (Q\+Widget $\ast$parent, bool log\+Out\+En=false)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classExitDialog_ad39269ff91b1b949ab12c8ecbcefa6f6}{show\+Event}} (Q\+Show\+Event $\ast$ev)
+\item 
+void \mbox{\hyperlink{classExitDialog_a460c6fce45208626b1ec54f7ed9e0629}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classExitDialog_a007aae536da00aa771afecec4222d54e}{on\+\_\+p\+Button\+Turn\+Off\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_a113e0571b5d73536f9d2c339963959f3}{on\+\_\+p\+Button\+Restart\+App\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_a6c464f98d852bc55a7c088b7e3da9d07}{on\+\_\+p\+Button\+Rastart\+All\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_a19cd3597771722ecdca6ce177c3d5406}{on\+\_\+p\+Button\+Service\+Mode\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_a57bfa16aefc0c094bb04f2fa5a1882c6}{on\+\_\+p\+Button\+Exit\+App\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_ab63b993dd9bc432cf549dd854050aa75}{on\+\_\+p\+Button\+Reprogram\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_a8032c8cae9a0c12dd976fa30426bb629}{on\+\_\+p\+Button\+Log\+Out\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classExitDialog_ad869a166c6bc6746f49b7ad311d7023a}{on\+\_\+push\+Button\+Cancel\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Code}} \mbox{\hyperlink{classExitDialog_adff4059e3ad467576437361b8f8518c0}{exit\+Code}}
+\item 
+Ui\+::\+Exit\+Dialog $\ast$ \mbox{\hyperlink{classExitDialog_a2d2914db33580192188032e15348594e}{ui}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Typedef Documentation} \mbox{\Hypertarget{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}\label{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}}  \index{Exit\+Dialog@{Exit\+Dialog}!Exit\+Code@{Exit\+Code}} \index{Exit\+Code@{Exit\+Code}!Exit\+Dialog@{Exit\+Dialog}}
+\paragraph{\texorpdfstring{Exit\+Code}{ExitCode}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}{Exit\+Dialog\+::\+Exit\+Code\+\_\+}} \mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Dialog\+::\+Exit\+Code}}} - type of variable which will be returned from function \mbox{\hyperlink{classExitDialog_a8c287b8910a1e54c9fed6dd172fbd134}{try\+Exit}}. Created just for good code look.
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!Exit\+Code\+\_\+@{Exit\+Code\+\_\+}}
+\index{Exit\+Code\+\_\+@{Exit\+Code\+\_\+}!Exit\+Dialog@{Exit\+Dialog}}
+\paragraph{\texorpdfstring{Exit\+Code\+\_\+}{ExitCode\_}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}{Exit\+Dialog\+::\+Exit\+Code\+\_\+}}} - created for \mbox{\hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}{Exit\+Dialog\+::\+Exit\+Code\+\_\+}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Continue@{Continue}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Continue@{Continue}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba518a5489dfa28d18da63778459d52422}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba518a5489dfa28d18da63778459d52422}} 
+Continue&Flag to continue work without any changes. \mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Code}}\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Log\+Out@{Log\+Out}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Log\+Out@{Log\+Out}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba0a0f0dc1154f9163e8ce72beea39ff29}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba0a0f0dc1154f9163e8ce72beea39ff29}} 
+Log\+Out&Flag to change user.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Shutdown@{Shutdown}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Shutdown@{Shutdown}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba2f33cdc04de1ce7953f7aa2abf1be566}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba2f33cdc04de1ce7953f7aa2abf1be566}} 
+Shutdown& Flag to exit from program and send shutdown signal to operating system.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Exit\+From\+Program@{Exit\+From\+Program}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Exit\+From\+Program@{Exit\+From\+Program}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcbacd982ca18a78d15196869e96823cd28d}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcbacd982ca18a78d15196869e96823cd28d}} 
+Exit\+From\+Program&Flag to exit from program and go to graphical user interface of operating system.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Reprogram\+Machine@{Reprogram\+Machine}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Reprogram\+Machine@{Reprogram\+Machine}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba7be72257e0efaee3c5e707be33bf2399}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba7be72257e0efaee3c5e707be33bf2399}} 
+Reprogram\+Machine&Send signal disconnect serial port and connect with other parameters.
+After that open {\mbox{\hyperlink{classReprogramDialog}{Reprogram\+Dialog}} class object (or create and open it).}\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Service\+Mode@{Service\+Mode}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Service\+Mode@{Service\+Mode}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcbae5cc24226e0defe8868759aa87d8c11f}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcbae5cc24226e0defe8868759aa87d8c11f}} 
+Service\+Mode&Flag to disconnect serial port connection (break data line between PC and master board) to give possibility press buttons without machine moving. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Restart\+Program@{Restart\+Program}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Restart\+Program@{Restart\+Program}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba5232255eabee8632a156274e921ceb69}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba5232255eabee8632a156274e921ceb69}} 
+Restart\+Program&Flag to re-initialization of program.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Restart\+Machine@{Restart\+Machine}!Exit\+Dialog@{Exit\+Dialog}}\index{Exit\+Dialog@{Exit\+Dialog}!Restart\+Machine@{Restart\+Machine}}}\mbox{\Hypertarget{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba6237a611a5ea7749a7f7a6d7b72a1906}\label{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcba6237a611a5ea7749a7f7a6d7b72a1906}} 
+Restart\+Machine&Flag to exit from program and send restart signal to operating system. After system restart program will start in usual mode.\\
+\hline
+
+\end{DoxyEnumFields}
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classExitDialog_aa1b3d3b53b599a47b2c7d70d04ec4668}\label{classExitDialog_aa1b3d3b53b599a47b2c7d70d04ec4668}} \index{Exit\+Dialog@{Exit\+Dialog}!Exit\+Dialog@{Exit\+Dialog}} \index{Exit\+Dialog@{Exit\+Dialog}!Exit\+Dialog@{Exit\+Dialog}}
+\paragraph{\texorpdfstring{Exit\+Dialog()}{ExitDialog()}}
+{\footnotesize\ttfamily Exit\+Dialog\+::\+Exit\+Dialog (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption}){\ttfamily [explicit]}}
+\mbox{\Hypertarget{classExitDialog_ae009cbdbc1b06410845a1afe2d518149}\label{classExitDialog_ae009cbdbc1b06410845a1afe2d518149}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!````~Exit\+Dialog@{$\sim$\+Exit\+Dialog}}
+\index{````~Exit\+Dialog@{$\sim$\+Exit\+Dialog}!Exit\+Dialog@{Exit\+Dialog}}
+\paragraph{\texorpdfstring{$\sim$\+Exit\+Dialog()}{~ExitDialog()}}
+{\footnotesize\ttfamily Exit\+Dialog\+::$\sim$\+Exit\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}\\
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExitDialog_a460c6fce45208626b1ec54f7ed9e0629}\label{classExitDialog_a460c6fce45208626b1ec54f7ed9e0629}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{change\+Event()}{changeEvent()} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - Reimplementation of default event for Q\+Dialog to enable user interface translation. Function called automatically.
+\begin{center}	\line(1,0){450} \end{center}
+All function in itemizer are called by click signals of appropriate buttons and assigns appropriate to button (function) name value (from \hyperlink{classExitDialog_ad0d825dce42ecd6e8827f1b6f7167dcb}{Exit\+Code\+\_\+} enumerator) to \hyperlink{classExitDialog_adff4059e3ad467576437361b8f8518c0}{exit\+Code} variable. That variable will return by \hyperlink{classExitDialog_a8c287b8910a1e54c9fed6dd172fbd134}{try\+Exit}(...) function.
+\begin{DoxyCompactItemize}
+\item \mbox{\Hypertarget{classExitDialog_a57bfa16aefc0c094bb04f2fa5a1882c6}\label{classExitDialog_a57bfa16aefc0c094bb04f2fa5a1882c6}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+p\+Button\+Exit\+App\+\_\+clicked@{on\+\_\+p\+Button\+Exit\+App\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Exit\+App\+\_\+clicked@{on\+\_\+p\+Button\+Exit\+App\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::on\+\_\+p\+Button\+Exit\+App\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\item \mbox{\Hypertarget{classExitDialog_a8032c8cae9a0c12dd976fa30426bb629}\label{classExitDialog_a8032c8cae9a0c12dd976fa30426bb629}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+p\+Button\+Log\+Out\+\_\+clicked@{on\+\_\+p\+Button\+Log\+Out\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Log\+Out\+\_\+clicked@{on\+\_\+p\+Button\+Log\+Out\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Log\+Out\+\_\+clicked}{on\_pButtonLogOut\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\item \mbox{\Hypertarget{classExitDialog_a6c464f98d852bc55a7c088b7e3da9d07}\label{classExitDialog_a6c464f98d852bc55a7c088b7e3da9d07}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+p\+Button\+Rastart\+All\+\_\+clicked@{on\+\_\+p\+Button\+Rastart\+All\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Rastart\+All\+\_\+clicked@{on\+\_\+p\+Button\+Rastart\+All\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Rastart\+All\+\_\+clicked}{on\_pButtonRastartAll\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\item \mbox{\Hypertarget{classExitDialog_ab63b993dd9bc432cf549dd854050aa75}\label{classExitDialog_ab63b993dd9bc432cf549dd854050aa75}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+p\+Button\+Reprogram\+\_\+clicked@{on\+\_\+p\+Button\+Reprogram\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Reprogram\+\_\+clicked@{on\+\_\+p\+Button\+Reprogram\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Reprogram\+\_\+clicked}{on\_pButtonReprogram\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\item \mbox{\Hypertarget{classExitDialog_a113e0571b5d73536f9d2c339963959f3}\label{classExitDialog_a113e0571b5d73536f9d2c339963959f3}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+p\+Button\+Restart\+App\+\_\+clicked@{on\+\_\+p\+Button\+Restart\+App\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Restart\+App\+\_\+clicked@{on\+\_\+p\+Button\+Restart\+App\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Restart\+App\+\_\+clicked}{on\_pButtonRestartApp\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\item \mbox{\Hypertarget{classExitDialog_a19cd3597771722ecdca6ce177c3d5406}\label{classExitDialog_a19cd3597771722ecdca6ce177c3d5406}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+p\+Button\+Service\+Mode\+\_\+clicked@{on\+\_\+p\+Button\+Service\+Mode\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Service\+Mode\+\_\+clicked@{on\+\_\+p\+Button\+Service\+Mode\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Service\+Mode\+\_\+clicked}{on\_pButtonServiceMode\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\item \mbox{\Hypertarget{classExitDialog_a007aae536da00aa771afecec4222d54e}\label{classExitDialog_a007aae536da00aa771afecec4222d54e}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+p\+Button\+Turn\+Off\+\_\+clicked@{on\+\_\+p\+Button\+Turn\+Off\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Turn\+Off\+\_\+clicked@{on\+\_\+p\+Button\+Turn\+Off\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Turn\+Off\+\_\+clicked}{on\_pButtonTurnOff\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\item \mbox{\Hypertarget{classExitDialog_ad869a166c6bc6746f49b7ad311d7023a}\label{classExitDialog_ad869a166c6bc6746f49b7ad311d7023a}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!on\+\_\+push\+Button\+Cancel\+\_\+clicked@{on\+\_\+push\+Button\+Cancel\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Cancel\+\_\+clicked@{on\+\_\+push\+Button\+Cancel\+\_\+clicked}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{on\+\_\+push\+Button\+Cancel\+\_\+clicked}{on\_pushButtonCancel\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\end{DoxyCompactItemize}
+\begin{center}	\line(1,0){450} \end{center}
+\mbox{\Hypertarget{classExitDialog_ab44c70526c323e87ee0b3e9e3daad41a}\label{classExitDialog_ab44c70526c323e87ee0b3e9e3daad41a}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!set\+Log\+Out\+En@{set\+Log\+Out\+En}}
+\index{set\+Log\+Out\+En@{set\+Log\+Out\+En}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{set\+Log\+Out\+En()}{setLogOutEn()} (\begin{DoxyParamCaption}\item[{bool}]{en }\end{DoxyParamCaption})}
+ - Function to enable or disable \textit{pButtonLogOut} at exit dialog. Call with \textit{true} value to show button and with \textit{false} to hide it.
+
+\mbox{\Hypertarget{classExitDialog_ad39269ff91b1b949ab12c8ecbcefa6f6}\label{classExitDialog_ad39269ff91b1b949ab12c8ecbcefa6f6}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily void Exit\+Dialog\+::\texorpdfstring{show\+Event()}{showEvent()} (\begin{DoxyParamCaption}\item[{Q\+Show\+Event $\ast$}]{ev }\end{DoxyParamCaption}){\ttfamily [protected]}} - Reimplementation of default event for Q\+Dialog. In this reimplementation added hiding (or showing) buttons, which are not available for all users. Function called automatically on every window call.
+
+\mbox{\Hypertarget{classExitDialog_a8c287b8910a1e54c9fed6dd172fbd134}\label{classExitDialog_a8c287b8910a1e54c9fed6dd172fbd134}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!try\+Exit@{try\+Exit}}
+\index{try\+Exit@{try\+Exit}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Dialog\+::\+Exit\+Code}} Exit\+Dialog\+::\texorpdfstring{try\+Exit}{tryExit} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent,  }\item[{bool}]{log\+Out\+En = {\ttfamily false} }\end{DoxyParamCaption}){\ttfamily [static]}} - static function to call exit dialog end get \hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Dialog\+::\+Exit\+Code}.
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classExitDialog_adff4059e3ad467576437361b8f8518c0}\label{classExitDialog_adff4059e3ad467576437361b8f8518c0}} 
+\index{Exit\+Dialog@{Exit\+Dialog}!exit\+Code@{exit\+Code}}
+\index{exit\+Code@{exit\+Code}!Exit\+Dialog@{Exit\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{\texorpdfstring{exit\+Code}{exitCode}}} Exit\+Dialog\+::exit\+Code{\ttfamily [private]}} 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{exitdialog_8h}{exitdialog.\+h}}\item 
+\mbox{\hyperlink{exitdialog_8cpp}{exitdialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

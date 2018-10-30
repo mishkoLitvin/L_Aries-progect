@@ -1,0 +1,38 @@
+\hypertarget{classCrcCalc}{}\subsection{Crc\+Calc Class Reference}
+\label{classCrcCalc}\index{Crc\+Calc@{Crc\+Calc}}
+{\ttfamily \#include $<$crc16.\+h$>$}\\
+Class contain two static function to calculate CRC16 value in two way: with or without CRC table.\\
+Functions are used without creating class object and are inline to optimize program.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCrcCalc_a9e3d8fbe834f69aeb8a21a16e26bfa1f}{Crc\+Calc}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classCrcCalc_af903157f70d448ef1dd660f8580ba0c6}{Calculate\+C\+R\+C16}} (\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} crc, Q\+Byte\+Array c\+\_\+ptr)
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classCrcCalc_aa4d7542b130a13fb3d675b885cfadbbd}{Calculate\+C\+R\+C16}} (Q\+Byte\+Array inp\+Arr)
+\end{DoxyCompactItemize}
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCrcCalc_af903157f70d448ef1dd660f8580ba0c6}\label{classCrcCalc_af903157f70d448ef1dd660f8580ba0c6}} 
+\index{Crc\+Calc@{Crc\+Calc}!Calculate\+C\+R\+C16@{Calculate\+C\+R\+C16}}
+\index{Calculate\+C\+R\+C16@{Calculate\+C\+R\+C16}!Crc\+Calc@{Crc\+Calc}}
+\paragraph{\texorpdfstring{Calculate\+C\+R\+C16()}{CalculateCRC16()}{\footnotesize\ttfamily [1/2]}}
+Calculate CRC without table. Used for communication between PC and machine master board.\\
+{\footnotesize\ttfamily static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Crc\+Calc\+::\+Calculate\+C\+R\+C16 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{crc,  }\item[{Q\+Byte\+Array}]{c\+\_\+ptr }\end{DoxyParamCaption}){\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{classCrcCalc_aa4d7542b130a13fb3d675b885cfadbbd}\label{classCrcCalc_aa4d7542b130a13fb3d675b885cfadbbd}} 
+\index{Crc\+Calc@{Crc\+Calc}!Calculate\+C\+R\+C16@{Calculate\+C\+R\+C16}}
+\index{Calculate\+C\+R\+C16@{Calculate\+C\+R\+C16}!Crc\+Calc@{Crc\+Calc}}
+\paragraph{\texorpdfstring{Calculate\+C\+R\+C16()}{CalculateCRC16()}{\footnotesize\ttfamily [2/2]}}
+Calculate CRC with written table. Can be used to communicate with HMI or other similar devices.\\
+{\footnotesize\ttfamily static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Crc\+Calc\+::\+Calculate\+C\+R\+C16 (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{inp\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{crc16_8h}{crc16.\+h}}\end{DoxyCompactItemize}
+\newpage

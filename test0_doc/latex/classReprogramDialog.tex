@@ -1,0 +1,160 @@
+\hypertarget{classReprogramDialog}{}\subsection{Reprogram\+Dialog Class Reference}
+\label{classReprogramDialog}\index{Reprogram\+Dialog@{Reprogram\+Dialog}}
+
+
+{\ttfamily \#include $<$reprogramdialog.\+h$>$}
+
+Inheritance diagram for Reprogram\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classReprogramDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4a}{Board\+Type\+\_\+}} \{
+\begin{DoxyCompactItemize} \item\mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aa384bf879731c24c01d00697b7f9daae9}{Master\+\_\+\+A\+T\+Xmega}}, 
+\item\mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aaa55ff2104b7e7442625068c67e776d7e}{Heads\+\_\+\+A\+T\+Xmega}}, 
+\item\mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aa2387446a69abe0ec84b008897037cb75}{Master\+\_\+\+A\+Tmega}}, 
+\item\mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aaf3e17588a0c29e9b10dda1f9e3df9f6c}{Heads\+\_\+\+A\+Tmega}}
+\end{DoxyCompactItemize}
+ \}
+\item 
+typedef enum \mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4a}{Reprogram\+Dialog\+::\+Board\+Type\+\_\+}} \mbox{\hyperlink{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}{Board\+Type}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classReprogramDialog_a8aae6616889329598369a881496598ff}{set\+Progress}} (int progress)
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classReprogramDialog_a8a1f5e9816d7832931dc1da19c57b3ba}{program\+Arr\+Ready}} (\mbox{\hyperlink{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}{Reprogram\+Dialog\+::\+Board\+Type}} type, Q\+Byte\+Array prog\+Arr)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classReprogramDialog_ac3f5b1fbef23169fc841a4108aecb834}{Reprogram\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classReprogramDialog_a5b8aa028f9c61b2c12c17242402c2199}{$\sim$\+Reprogram\+Dialog}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classReprogramDialog_a2b95a979bdf73a8c885446e483f272ac}{on\+\_\+push\+Button\+Open\+File\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classReprogramDialog_a0180445b000071fee4185f70a264a418}{on\+\_\+push\+Button\+Erase\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classReprogramDialog_a5db4a9ac21377a1a5f39c3eaa2a27a4e}{on\+\_\+push\+Button\+Write\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Reprogram\+Dialog $\ast$ \mbox{\hyperlink{classReprogramDialog_a0adb9c63d59d13d77203e334ec321b49}{ui}}
+\item 
+Q\+File \mbox{\hyperlink{classReprogramDialog_aeb56932944b2f861acffa0ab72a5a54f}{in\+File}}
+\item 
+Q\+String \mbox{\hyperlink{classReprogramDialog_ae56bcc760f9b1b305dc80756e7592ad7}{in\+File\+Name}}
+\item 
+Q\+Byte\+Array \mbox{\hyperlink{classReprogramDialog_ae9a10d87b7aa4dea0b6068ad6c336913}{program\+Arr}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}\label{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Board\+Type@{Board\+Type}}
+\index{Board\+Type@{Board\+Type}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4a}{Reprogram\+Dialog\+::\+Board\+Type\+\_\+}} \mbox{\hyperlink{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}{Reprogram\+Dialog\+::\texorpdfstring{Board\+Type}{BoardType}}}} - describe type of processor and type of device which will be reprogrammed by this module.
+
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4a}\label{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4a}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Board\+Type\+\_\+@{Board\+Type\+\_\+}}
+\index{Board\+Type\+\_\+@{Board\+Type\+\_\+}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4a}{Reprogram\+Dialog\+::\texorpdfstring{Board\+Type\+\_\+}{BoardType\_}}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+\_\+\+A\+T\+Xmega@{Master\+\_\+\+A\+T\+Xmega}!Reprogram\+Dialog@{Reprogram\+Dialog}}\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Master\+\_\+\+A\+T\+Xmega@{Master\+\_\+\+A\+T\+Xmega}}}\mbox{\Hypertarget{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aa384bf879731c24c01d00697b7f9daae9}\label{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aa384bf879731c24c01d00697b7f9daae9}} 
+Master\+\_\+\+A\+T\+Xmega&0x00\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Heads\+\_\+\+A\+T\+Xmega@{Heads\+\_\+\+A\+T\+Xmega}!Reprogram\+Dialog@{Reprogram\+Dialog}}\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Heads\+\_\+\+A\+T\+Xmega@{Heads\+\_\+\+A\+T\+Xmega}}}\mbox{\Hypertarget{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aaa55ff2104b7e7442625068c67e776d7e}\label{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aaa55ff2104b7e7442625068c67e776d7e}} 
+Heads\+\_\+\+A\+T\+Xmega& 0x01\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+\_\+\+A\+Tmega@{Master\+\_\+\+A\+Tmega}!Reprogram\+Dialog@{Reprogram\+Dialog}}\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Master\+\_\+\+A\+Tmega@{Master\+\_\+\+A\+Tmega}}}\mbox{\Hypertarget{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aa2387446a69abe0ec84b008897037cb75}\label{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aa2387446a69abe0ec84b008897037cb75}} 
+Master\+\_\+\+A\+Tmega&0x02\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Heads\+\_\+\+A\+Tmega@{Heads\+\_\+\+A\+Tmega}!Reprogram\+Dialog@{Reprogram\+Dialog}}\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Heads\+\_\+\+A\+Tmega@{Heads\+\_\+\+A\+Tmega}}}\mbox{\Hypertarget{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aaf3e17588a0c29e9b10dda1f9e3df9f6c}\label{classReprogramDialog_a068bfc2d12863d24912b9ead24679b4aaf3e17588a0c29e9b10dda1f9e3df9f6c}} 
+Heads\+\_\+\+A\+Tmega&0x03\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classReprogramDialog_ac3f5b1fbef23169fc841a4108aecb834}\label{classReprogramDialog_ac3f5b1fbef23169fc841a4108aecb834}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily Reprogram\+Dialog\+::\texorpdfstring{Reprogram\+Dialog}{ReprogramDialog} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - standard Q\+Widget constructor.
+
+\mbox{\Hypertarget{classReprogramDialog_a5b8aa028f9c61b2c12c17242402c2199}\label{classReprogramDialog_a5b8aa028f9c61b2c12c17242402c2199}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!````~Reprogram\+Dialog@{$\sim$\+Reprogram\+Dialog}}
+\index{````~Reprogram\+Dialog@{$\sim$\+Reprogram\+Dialog}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily Reprogram\+Dialog\+::\texorpdfstring{$\sim$\+Reprogram\+Dialog}{~ReprogramDialog} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard Q\+Widget destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classReprogramDialog_a0180445b000071fee4185f70a264a418}\label{classReprogramDialog_a0180445b000071fee4185f70a264a418}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!on\+\_\+push\+Button\+Erase\+\_\+clicked@{on\+\_\+push\+Button\+Erase\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Erase\+\_\+clicked@{on\+\_\+push\+Button\+Erase\+\_\+clicked}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily void Reprogram\+Dialog\+::\texorpdfstring{on\+\_\+push\+Button\+Erase\+\_\+clicked}{on\_pushButtonErase\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to emit \hyperlink{classReprogramDialog_a8a1f5e9816d7832931dc1da19c57b3ba}{program\+Arr\+Ready}(...) with \textit{prog\+Arr} filled with zeros. 
+
+\mbox{\Hypertarget{classReprogramDialog_a2b95a979bdf73a8c885446e483f272ac}\label{classReprogramDialog_a2b95a979bdf73a8c885446e483f272ac}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!on\+\_\+push\+Button\+Open\+File\+\_\+clicked@{on\+\_\+push\+Button\+Open\+File\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Open\+File\+\_\+clicked@{on\+\_\+push\+Button\+Open\+File\+\_\+clicked}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily void Reprogram\+Dialog\+::\texorpdfstring{on\+\_\+push\+Button\+Open\+File\+\_\+clicked}{on\_pushButtonOpenFile\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to open text-HEX file with program in Intel-hex format, set value of \hyperlink{classReprogramDialog_ae56bcc760f9b1b305dc80756e7592ad7}{in\+File\+Name} and set file name of \hyperlink{classReprogramDialog_aeb56932944b2f861acffa0ab72a5a54f}{in\+File}.
+
+\mbox{\Hypertarget{classReprogramDialog_a5db4a9ac21377a1a5f39c3eaa2a27a4e}\label{classReprogramDialog_a5db4a9ac21377a1a5f39c3eaa2a27a4e}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!on\+\_\+push\+Button\+Write\+\_\+clicked@{on\+\_\+push\+Button\+Write\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Write\+\_\+clicked@{on\+\_\+push\+Button\+Write\+\_\+clicked}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily void Reprogram\+Dialog\+::\texorpdfstring{on\+\_\+push\+Button\+Write\+\_\+clicked}{on\_pushButtonWrite\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function which used for open \hyperlink{classReprogramDialog_aeb56932944b2f861acffa0ab72a5a54f}{in\+File}, read text from it and fill \hyperlink{classReprogramDialog_ae9a10d87b7aa4dea0b6068ad6c336913}{program\+Arr} with hex data to write it into devices. After that function emit \hyperlink{classReprogramDialog_a8a1f5e9816d7832931dc1da19c57b3ba}{program\+Arr\+Ready}(...) signal with appropriate parameters. 
+
+\mbox{\Hypertarget{classReprogramDialog_a8a1f5e9816d7832931dc1da19c57b3ba}\label{classReprogramDialog_a8a1f5e9816d7832931dc1da19c57b3ba}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!program\+Arr\+Ready@{program\+Arr\+Ready}}
+\index{program\+Arr\+Ready@{program\+Arr\+Ready}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily void Reprogram\+Dialog\+::\texorpdfstring{program\+Arr\+Ready}{programArrReady} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}{Reprogram\+Dialog\+::\+Board\+Type}}}]{type,  }\item[{Q\+Byte\+Array}]{prog\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which emitted by \hyperlink{classReprogramDialog_a0180445b000071fee4185f70a264a418}{on\+\_\+push\+Button\+Erase\+\_\+clicked}(...) and \hyperlink{classReprogramDialog_a5db4a9ac21377a1a5f39c3eaa2a27a4e}{on\+\_\+push\+Button\+Write\+\_\+clicked}(...) functions and handle in parent object.
+
+\mbox{\Hypertarget{classReprogramDialog_a8aae6616889329598369a881496598ff}\label{classReprogramDialog_a8aae6616889329598369a881496598ff}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!set\+Progress@{set\+Progress}}
+\index{set\+Progress@{set\+Progress}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily void Reprogram\+Dialog\+::\texorpdfstring{set\+Progress}{setProgress} (\begin{DoxyParamCaption}\item[{int}]{progress }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to set value of programming process at dialog.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classReprogramDialog_aeb56932944b2f861acffa0ab72a5a54f}\label{classReprogramDialog_aeb56932944b2f861acffa0ab72a5a54f}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!in\+File@{in\+File}}
+\index{in\+File@{in\+File}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily Q\+File Reprogram\+Dialog\+::\texorpdfstring{in\+File}{inFile}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classReprogramDialog_ae56bcc760f9b1b305dc80756e7592ad7}\label{classReprogramDialog_ae56bcc760f9b1b305dc80756e7592ad7}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!in\+File\+Name@{in\+File\+Name}}
+\index{in\+File\+Name@{in\+File\+Name}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily Q\+String Reprogram\+Dialog\+::\texorpdfstring{in\+File\+Name}{inFileName}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classReprogramDialog_ae9a10d87b7aa4dea0b6068ad6c336913}\label{classReprogramDialog_ae9a10d87b7aa4dea0b6068ad6c336913}} 
+\index{Reprogram\+Dialog@{Reprogram\+Dialog}!program\+Arr@{program\+Arr}}
+\index{program\+Arr@{program\+Arr}!Reprogram\+Dialog@{Reprogram\+Dialog}}
+{\footnotesize\ttfamily Q\+Byte\+Array Reprogram\+Dialog\+::\texorpdfstring{program\+Arr}{programArr}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{reprogramdialog_8h}{reprogramdialog.\+h}}\item 
+\mbox{\hyperlink{reprogramdialog_8cpp}{reprogramdialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

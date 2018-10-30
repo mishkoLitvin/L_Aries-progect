@@ -1,0 +1,95 @@
+\hypertarget{classLoginDialog}{}\subsection{Login\+Dialog Class Reference}
+\label{classLoginDialog}\index{Login\+Dialog@{Login\+Dialog}}
+
+
+{\ttfamily \#include $<$logindialog.\+h$>$}
+
+Inheritance diagram for Login\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLoginDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLoginDialog_af231bf82d3c72985f62bb47067255f47}{Login\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classLoginDialog_aa5d012ebc424713ca0cbd82be1f81133}{$\sim$\+Login\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classLoginDialog_a821b2e18f35f4e4d250213a04c4077de}{set\+User\+Names}} (Q\+String\+List names)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \mbox{\hyperlink{classLoginDialog_ac3aff74cd5cb23bb5e269775fd7b7672}{user\+Name}}
+\item 
+Q\+String \mbox{\hyperlink{classLoginDialog_aabe40abeacdb2903b5fa9a61a8562201}{user\+Password}}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classLoginDialog_a3c1b6041fc659f3f409e129a5c4a7944}{event\+Filter}} (Q\+Object $\ast$watched, Q\+Event $\ast$event)
+\item 
+void \mbox{\hyperlink{classLoginDialog_a1256114f012018b32b37086f567ffc81}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classLoginDialog_a7e94645a64f9dd86f7e2bcd6f3dbf7fa}{login\+Accepted}} ()
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLoginDialog_af231bf82d3c72985f62bb47067255f47}\label{classLoginDialog_af231bf82d3c72985f62bb47067255f47}} 
+\index{Login\+Dialog@{Login\+Dialog}!Login\+Dialog@{Login\+Dialog}}
+\index{Login\+Dialog@{Login\+Dialog}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily Login\+Dialog\+::\texorpdfstring{Login\+Dialog()}{LoginDialog()} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - standard Q\+Dialog constructor. In constructor connected \textit{p\+Button\+Login} to \hyperlink{classLoginDialog_a7e94645a64f9dd86f7e2bcd6f3dbf7fa}{login\+Accepted}(...) function and installed \hyperlink{classLoginDialog_a3c1b6041fc659f3f409e129a5c4a7944}{event\+Filter} to \textit{line\+Edit\+Password}.
+
+\mbox{\Hypertarget{classLoginDialog_aa5d012ebc424713ca0cbd82be1f81133}\label{classLoginDialog_aa5d012ebc424713ca0cbd82be1f81133}} 
+\index{Login\+Dialog@{Login\+Dialog}!````~Login\+Dialog@{$\sim$\+Login\+Dialog}}
+\index{````~Login\+Dialog@{$\sim$\+Login\+Dialog}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily Login\+Dialog\+::\texorpdfstring{$\sim$\+Login\+Dialog()}{~LoginDialog()} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard destructor.
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLoginDialog_a1256114f012018b32b37086f567ffc81}\label{classLoginDialog_a1256114f012018b32b37086f567ffc81}} 
+\index{Login\+Dialog@{Login\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily void Login\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} - Reimplementation of default event for QWidget to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classLoginDialog_a3c1b6041fc659f3f409e129a5c4a7944}\label{classLoginDialog_a3c1b6041fc659f3f409e129a5c4a7944}} 
+\index{Login\+Dialog@{Login\+Dialog}!event\+Filter@{event\+Filter}}
+\index{event\+Filter@{event\+Filter}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily bool Login\+Dialog\+::\texorpdfstring{event\+Filter}{eventFilter} (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{watched,  }\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} - reimplementation of standard function to handle Q\+Event::Mouse\+Button\+Dbl\+Click or Q\+Event::Mouse\+Button\+Release events to call \hyperlink{classKeyboardDialog}{Keyboard\+Dialog} to enter data to
+\textit{line\+Edit\+Password}. 
+
+\mbox{\Hypertarget{classLoginDialog_a7e94645a64f9dd86f7e2bcd6f3dbf7fa}\label{classLoginDialog_a7e94645a64f9dd86f7e2bcd6f3dbf7fa}} 
+\index{Login\+Dialog@{Login\+Dialog}!login\+Accepted@{login\+Accepted}}
+\index{login\+Accepted@{login\+Accepted}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily void Login\+Dialog\+::\texorpdfstring{login\+Accepted}{loginAccepted} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function which called by \textit{p\+Button\+Login} button and save use name and password to \hyperlink{classLoginDialog_ac3aff74cd5cb23bb5e269775fd7b7672}{user\+Name} and \hyperlink{classLoginDialog_aabe40abeacdb2903b5fa9a61a8562201}{user\+Password} variables and call standard \textit{QDialog::accept()} function to exit from dialog. Parameters \hyperlink{classLoginDialog_ac3aff74cd5cb23bb5e269775fd7b7672}{user\+Name} and \hyperlink{classLoginDialog_aabe40abeacdb2903b5fa9a61a8562201}{user\+Password} are checked in \hyperlink{classMainWindow_a339962b149079e9cdb8928c5528113ea}{user\+Login}(...) function.
+
+\mbox{\Hypertarget{classLoginDialog_a821b2e18f35f4e4d250213a04c4077de}\label{classLoginDialog_a821b2e18f35f4e4d250213a04c4077de}} 
+\index{Login\+Dialog@{Login\+Dialog}!set\+User\+Names@{set\+User\+Names}}
+\index{set\+User\+Names@{set\+User\+Names}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily void Login\+Dialog\+::\texorpdfstring{set\+User\+Names}{setUserNames} (\begin{DoxyParamCaption}\item[{Q\+String\+List}]{names }\end{DoxyParamCaption})} - function used to fill \textit{listWidget} with \textit{names}. Used to give possibility select user name from list.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLoginDialog_ac3aff74cd5cb23bb5e269775fd7b7672}\label{classLoginDialog_ac3aff74cd5cb23bb5e269775fd7b7672}} 
+\index{Login\+Dialog@{Login\+Dialog}!user\+Name@{user\+Name}}
+\index{user\+Name@{user\+Name}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily Q\+String Login\+Dialog\+::\texorpdfstring{user\+Name}{userName}}
+
+\mbox{\Hypertarget{classLoginDialog_aabe40abeacdb2903b5fa9a61a8562201}\label{classLoginDialog_aabe40abeacdb2903b5fa9a61a8562201}} 
+\index{Login\+Dialog@{Login\+Dialog}!user\+Password@{user\+Password}}
+\index{user\+Password@{user\+Password}!Login\+Dialog@{Login\+Dialog}}
+{\footnotesize\ttfamily Q\+String Login\+Dialog\+::\texorpdfstring{user\+Password}{userPassword}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{logindialog_8h}{logindialog.\+h}}\item 
+\mbox{\hyperlink{logindialog_8cpp}{logindialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

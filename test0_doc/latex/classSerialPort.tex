@@ -1,0 +1,257 @@
+\hypertarget{classSerialPort}{}\subsection{Serial\+Port Class Reference}
+\label{classSerialPort}\index{Serial\+Port@{Serial\+Port}}
+
+
+{\ttfamily \#include $<$serialport.\+h$>$}
+
+Inheritance diagram for Serial\+Port\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSerialPort}
+\end{center}
+\end{figure}
+\subsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSerialPort_ab831db6582a7b576adf5059555e0297f}{open\+Serial\+Port}} ()
+\item 
+void \mbox{\hyperlink{classSerialPort_ac4f59ca6f1401ed8bbc6de3f99cfa411}{open\+Serial\+Port}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} c\+Sett)
+\item 
+void \mbox{\hyperlink{classSerialPort_a075482970cd99f66457eac471127a710}{close\+Serial\+Port}} ()
+\item 
+void \mbox{\hyperlink{classSerialPort_adc2e6d59b77389c9047aab5bb1ebd5dc}{send\+Program}} (\mbox{\hyperlink{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}{Reprogram\+Dialog\+::\+Board\+Type}} type, Q\+Byte\+Array program\+Arr)
+\item 
+void \mbox{\hyperlink{classSerialPort_a2616700b4daafeb521f222e7d846dc99}{send\+Data}} (Q\+Byte\+Array data, bool send=false, bool half\+Byte=false)
+\item 
+void \mbox{\hyperlink{classSerialPort_a412616b006e1b16efaf6ffd480cb9cc0}{send\+Mod\+Data}} (\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} dev, \mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} place, \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} data)
+\item 
+void \mbox{\hyperlink{classSerialPort_afe266bc6e1641be604b5d97c88910bc4}{send\+Reg}} (\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} dev, \mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} place)
+\item 
+void \mbox{\hyperlink{classSerialPort_adf0c6d9bd0a312ae0e921085497fa8b4}{setup\+Port}} ()
+\item 
+void \mbox{\hyperlink{classSerialPort_ab723ad9ecd8571d2156ad9b141cfd24e}{set\+Com\+Params}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} sett)
+\item 
+void \mbox{\hyperlink{classSerialPort_a7dbba05770c1fd93db1026c0e5cc12a7}{set\+Style\+Sheet}} (Q\+String st\+Sheet)
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSerialPort_a4653f9aa7114546faa5627ee5810a47d}{data\+Ready}} (Q\+Byte\+Array data)
+\item 
+void \mbox{\hyperlink{classSerialPort_aa958ae188335f80fd08ebad93e977134}{data\+Ready}} (\mbox{\hyperlink{serialport_8h_a2331c0232719069f0bce03c249d2eec6}{Mod\+Data}} mod\+Data)
+\item 
+void \mbox{\hyperlink{classSerialPort_a30f185f507d89b40a0204b6472da3217}{serial\+Setting\+Accepted}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} seittngs)
+\item 
+void \mbox{\hyperlink{classSerialPort_ae92426fd329e2a5ec42b0255c5dcbdc5}{working}} ()
+\item 
+void \mbox{\hyperlink{classSerialPort_a38b94a606dab2af9cbeac4f48ddd831c}{proram\+Progres}} (int progres)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSerialPort_ae68e4a28e607b4acbab2c2a894cb3e2b}{Serial\+Port}} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classSerialPort_aa9fb64a8aced84ab80eee65680298976}{Serial\+Port}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} settings, Q\+Object $\ast$parent=0)
+\item 
+void \mbox{\hyperlink{classSerialPort_a273c33e0eac534d7bdeafed79157e2e4}{set\+Register\+Pointer}} (\mbox{\hyperlink{classRegister}{Register}} $\ast$reg\+Ptr)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSerialPort_a0b8fe1371e829199856e8cae942de94e}{read\+Data}} ()
+\item 
+void \mbox{\hyperlink{classSerialPort_a307128aa2e5ad6b89e47898bff7a48e0}{handle\+Error}} (Q\+Serial\+Port\+::\+Serial\+Port\+Error error)
+\item 
+void \mbox{\hyperlink{classSerialPort_a9153ab33cbb73d5138b871e52c343e58}{show\+Status\+Message}} (const Q\+String \&message)
+\item 
+void \mbox{\hyperlink{classSerialPort_a39602f4cf8fe4570fa3b69d633534be5}{get\+Serial\+Setting}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} setting)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Byte\+Array \mbox{\hyperlink{classSerialPort_a8be1b40710483fea19e272b04568f14e}{data\+Transform}} (Q\+Byte\+Array data)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog}} $\ast$ \mbox{\hyperlink{classSerialPort_a9ab445f818748122d3368fd2e9dbbbea}{settings\+Com\+Dialog}}
+\item 
+Q\+Serial\+Port $\ast$ \mbox{\hyperlink{classSerialPort_a54120d9040537e637eae7e8c048dec31}{serial}}
+\item 
+\mbox{\hyperlink{classRegister}{Register}} $\ast$ \mbox{\hyperlink{classSerialPort_ab98c7d39235d59c2086d9f6e94c3ed4b}{registers}}
+\item 
+\mbox{\hyperlink{serialport_8h_a2331c0232719069f0bce03c249d2eec6}{Mod\+Data}} \mbox{\hyperlink{classSerialPort_a1fbdedb09ef8f5d7ecb4e43e848d025f}{mod\+Data8}}
+\item 
+Q\+Byte\+Array \mbox{\hyperlink{classSerialPort_abc55095109004eb5e21e923c25036549}{data\+To\+Send\+Buff}}
+\item 
+int \mbox{\hyperlink{classSerialPort_a97937bbe34853205cbd02fb5ff97653d}{reply\+Cnt}}
+\item 
+bool \mbox{\hyperlink{classSerialPort_adf375ee179fa4844cadf65645ee7ab2f}{init\+App}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSerialPort_ae68e4a28e607b4acbab2c2a894cb3e2b}\label{classSerialPort_ae68e4a28e607b4acbab2c2a894cb3e2b}} 
+\index{Serial\+Port@{Serial\+Port}!Serial\+Port@{Serial\+Port}}
+\index{Serial\+Port@{Serial\+Port}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily Serial\+Port\+::\texorpdfstring{Serial\+Port}{SerialPort}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - first variant of polymorphic constructor of class. Create Q\+Serial\+Port class object and \hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog} class object with default parameters.
+
+\mbox{\Hypertarget{classSerialPort_aa9fb64a8aced84ab80eee65680298976}\label{classSerialPort_aa9fb64a8aced84ab80eee65680298976}} 
+\index{Serial\+Port@{Serial\+Port}!Serial\+Port@{Serial\+Port}}
+\index{Serial\+Port@{Serial\+Port}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily Serial\+Port\+::\texorpdfstring{Serial\+Port()}{SerialPort()}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{settings,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - second variant of polymorphic constructor of class. Create Q\+Serial\+Port class object and \hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog} class object with given at \textit{settings} parameters.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSerialPort_a075482970cd99f66457eac471127a710}\label{classSerialPort_a075482970cd99f66457eac471127a710}} 
+\index{Serial\+Port@{Serial\+Port}!close\+Serial\+Port@{close\+Serial\+Port}}
+\index{close\+Serial\+Port@{close\+Serial\+Port}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{close\+Serial\+Port}{closeSerialPort} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to close \hyperlink{classSerialPort_a54120d9040537e637eae7e8c048dec31}{serial} port if it's open.
+
+\mbox{\Hypertarget{classSerialPort_a4653f9aa7114546faa5627ee5810a47d}\label{classSerialPort_a4653f9aa7114546faa5627ee5810a47d}} 
+\index{Serial\+Port@{Serial\+Port}!data\+Ready@{data\+Ready}}
+\index{data\+Ready@{data\+Ready}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{data\+Ready}{dataReady}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which emits by \hyperlink{classSerialPort_a0b8fe1371e829199856e8cae942de94e}{read\+Data}(...) function. Signal contain byte array with data after C\+R\+C check.
+
+\mbox{\Hypertarget{classSerialPort_aa958ae188335f80fd08ebad93e977134}\label{classSerialPort_aa958ae188335f80fd08ebad93e977134}} 
+\index{Serial\+Port@{Serial\+Port}!data\+Ready@{data\+Ready}}
+\index{data\+Ready@{data\+Ready}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{data\+Ready}{dataReady}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{serialport_8h_a2331c0232719069f0bce03c249d2eec6}{Mod\+Data}}}]{mod\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which emits by \hyperlink{classSerialPort_a0b8fe1371e829199856e8cae942de94e}{read\+Data}(...) function. Signal contain \textit{mod\+Data} after C\+R\+C check.
+
+\mbox{\Hypertarget{classSerialPort_a8be1b40710483fea19e272b04568f14e}\label{classSerialPort_a8be1b40710483fea19e272b04568f14e}} 
+\index{Serial\+Port@{Serial\+Port}!data\+Transform@{data\+Transform}}
+\index{data\+Transform@{data\+Transform}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily Q\+Byte\+Array Serial\+Port\+::\texorpdfstring{data\+Transform}{dataTransform} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}} - function to transform data from half-byte to full-byte array.
+
+\mbox{\Hypertarget{classSerialPort_a39602f4cf8fe4570fa3b69d633534be5}\label{classSerialPort_a39602f4cf8fe4570fa3b69d633534be5}} 
+\index{Serial\+Port@{Serial\+Port}!get\+Serial\+Setting@{get\+Serial\+Setting}}
+\index{get\+Serial\+Setting@{get\+Serial\+Setting}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{get\+Serial\+Setting}{getSerialSetting} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{setting }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to emit \hyperlink{classSerialPort_a30f185f507d89b40a0204b6472da3217}{serial\+Setting\+Accepted}(...) signal to save serial settings to hard drive. 
+
+\mbox{\Hypertarget{classSerialPort_a307128aa2e5ad6b89e47898bff7a48e0}\label{classSerialPort_a307128aa2e5ad6b89e47898bff7a48e0}} 
+\index{Serial\+Port@{Serial\+Port}!handle\+Error@{handle\+Error}}
+\index{handle\+Error@{handle\+Error}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{handle\+Error}{handleError} (\begin{DoxyParamCaption}\item[{Q\+Serial\+Port\+::\+Serial\+Port\+Error}]{error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - serial port errors handler. Used to show Q\+Message\+Box with error text.
+
+\mbox{\Hypertarget{classSerialPort_ab831db6582a7b576adf5059555e0297f}\label{classSerialPort_ab831db6582a7b576adf5059555e0297f}} 
+\index{Serial\+Port@{Serial\+Port}!open\+Serial\+Port@{open\+Serial\+Port}}
+\index{open\+Serial\+Port@{open\+Serial\+Port}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{open\+Serial\+Port}{openSerialPort}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to open serial port with \hyperlink{classSerialPort_a9ab445f818748122d3368fd2e9dbbbea}{settings\+Com\+Dialog}->\hyperlink{classSerialSettingsDialog_ab24259a0385b292ff104425d97957482}{current\+Settings} 
+
+\mbox{\Hypertarget{classSerialPort_ac4f59ca6f1401ed8bbc6de3f99cfa411}\label{classSerialPort_ac4f59ca6f1401ed8bbc6de3f99cfa411}} 
+\index{Serial\+Port@{Serial\+Port}!open\+Serial\+Port@{open\+Serial\+Port}}
+\index{open\+Serial\+Port@{open\+Serial\+Port}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{open\+Serial\+Port}{openSerialPort}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{c\+Sett }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to open serial port with settings given in \textit{c\+Sett} variable.
+
+\mbox{\Hypertarget{classSerialPort_a38b94a606dab2af9cbeac4f48ddd831c}\label{classSerialPort_a38b94a606dab2af9cbeac4f48ddd831c}} 
+\index{Serial\+Port@{Serial\+Port}!proram\+Progres@{proram\+Progres}}
+\index{proram\+Progres@{proram\+Progres}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{proram\+Progres}{proramProgres} (\begin{DoxyParamCaption}\item[{int}]{progres }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal to send process of reprogramming PCB's. 
+
+\mbox{\Hypertarget{classSerialPort_a0b8fe1371e829199856e8cae942de94e}\label{classSerialPort_a0b8fe1371e829199856e8cae942de94e}} 
+\index{Serial\+Port@{Serial\+Port}!read\+Data@{read\+Data}}
+\index{read\+Data@{read\+Data}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{read\+Data}{readData} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to get data from serial port, analyze that data and create reply to send that to master PCB. 
+
+\mbox{\Hypertarget{classSerialPort_a2616700b4daafeb521f222e7d846dc99}\label{classSerialPort_a2616700b4daafeb521f222e7d846dc99}} 
+\index{Serial\+Port@{Serial\+Port}!send\+Data@{send\+Data}}
+\index{send\+Data@{send\+Data}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{send\+Data}{sendData} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{data,  }\item[{bool}]{send = {\ttfamily false},  }\item[{bool}]{half\+Byte = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to send data to serial port. Function take \textit{data} to send it to \hyperlink{classSerialPort_a54120d9040537e637eae7e8c048dec31}{serial} port. Parameter \textit{send} describe way of data send: if \textit{true} than data sends immediately, if \textit{false} than data adding to \hyperlink{classSerialPort_abc55095109004eb5e21e923c25036549}{data\+To\+Send\+Buff} and send in it's turn. Parameter \textit{half\+Byte} specifies 	 requirement of data transformation - if \textit{true} data transform to half byte variant and sends after that, if \textit{false} data sends as it is.
+
+\mbox{\Hypertarget{classSerialPort_a412616b006e1b16efaf6ffd480cb9cc0}\label{classSerialPort_a412616b006e1b16efaf6ffd480cb9cc0}} 
+\index{Serial\+Port@{Serial\+Port}!send\+Mod\+Data@{send\+Mod\+Data}}
+\index{send\+Mod\+Data@{send\+Mod\+Data}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{send\+Mod\+Data}{sendModData} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}}}]{dev,  }\item[{\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}}}]{place,  }\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to send mod data to serial port. At function data gather to Q\+Byte\+Array and sends to serial port.
+
+\mbox{\Hypertarget{classSerialPort_adc2e6d59b77389c9047aab5bb1ebd5dc}\label{classSerialPort_adc2e6d59b77389c9047aab5bb1ebd5dc}} 
+\index{Serial\+Port@{Serial\+Port}!send\+Program@{send\+Program}}
+\index{send\+Program@{send\+Program}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{send\+Program}{sendProgram} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classReprogramDialog_a95e0c039a5de1ea8d3ad44a6ccf17b6a}{Reprogram\+Dialog\+::\+Board\+Type}}}]{type,  }\item[{Q\+Byte\+Array}]{program\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to send \textit{program\+Arr} to PCB. Parameter \textit{type} describe which commands will be sends to start reprogramming and size of memory page.
+
+\mbox{\Hypertarget{classSerialPort_afe266bc6e1641be604b5d97c88910bc4}\label{classSerialPort_afe266bc6e1641be604b5d97c88910bc4}} 
+\index{Serial\+Port@{Serial\+Port}!send\+Reg@{send\+Reg}}
+\index{send\+Reg@{send\+Reg}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{send\+Reg}{sendReg} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}}}]{dev,  }\item[{\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}}}]{place }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to send data from \hyperlink{classSerialPort_ab98c7d39235d59c2086d9f6e94c3ed4b}{registers} at \textit{dev} and \textit{place}. At function data gather to Q\+Byte\+Array and sends to serial port.
+
+\mbox{\Hypertarget{classSerialPort_a30f185f507d89b40a0204b6472da3217}\label{classSerialPort_a30f185f507d89b40a0204b6472da3217}} 
+\index{Serial\+Port@{Serial\+Port}!serial\+Setting\+Accepted@{serial\+Setting\+Accepted}}
+\index{serial\+Setting\+Accepted@{serial\+Setting\+Accepted}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{serial\+Setting\+Accepted}{serialSettingAccepted} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{seittngs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which handle in parent and used to save serial settings to hard drive.
+
+\mbox{\Hypertarget{classSerialPort_ab723ad9ecd8571d2156ad9b141cfd24e}\label{classSerialPort_ab723ad9ecd8571d2156ad9b141cfd24e}} 
+\index{Serial\+Port@{Serial\+Port}!set\+Com\+Params@{set\+Com\+Params}}
+\index{set\+Com\+Params@{set\+Com\+Params}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{set\+Com\+Params}{setComParams} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{sett }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to set parameters of \hyperlink{classSerialPort_a54120d9040537e637eae7e8c048dec31}{serial}. If serial port is open it will be closed before setting up parameters.
+
+\mbox{\Hypertarget{classSerialPort_a273c33e0eac534d7bdeafed79157e2e4}\label{classSerialPort_a273c33e0eac534d7bdeafed79157e2e4}} 
+\index{Serial\+Port@{Serial\+Port}!set\+Register\+Pointer@{set\+Register\+Pointer}}
+\index{set\+Register\+Pointer@{set\+Register\+Pointer}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{set\+Register\+Pointer}{setRegisterPointer} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRegister}{Register}} $\ast$}]{reg\+Ptr }\end{DoxyParamCaption})} - function to set pointer to \hyperlink{classRegister}{Register} class object. In a whole program used only one sample of class and pointer (\hyperlink{classSerialPort_ab98c7d39235d59c2086d9f6e94c3ed4b}{registers}) sets from parent object. 
+
+\mbox{\Hypertarget{classSerialPort_a7dbba05770c1fd93db1026c0e5cc12a7}\label{classSerialPort_a7dbba05770c1fd93db1026c0e5cc12a7}} 
+\index{Serial\+Port@{Serial\+Port}!set\+Style\+Sheet@{set\+Style\+Sheet}}
+\index{set\+Style\+Sheet@{set\+Style\+Sheet}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{set\+Style\+Sheet}{setStyleSheet} (\begin{DoxyParamCaption}\item[{Q\+String}]{st\+Sheet }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to set style sheet to \hyperlink{classSerialPort_a9ab445f818748122d3368fd2e9dbbbea}{settings\+Com\+Dialog}.
+
+\mbox{\Hypertarget{classSerialPort_adf0c6d9bd0a312ae0e921085497fa8b4}\label{classSerialPort_adf0c6d9bd0a312ae0e921085497fa8b4}} 
+\index{Serial\+Port@{Serial\+Port}!setup\+Port@{setup\+Port}}
+\index{setup\+Port@{setup\+Port}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{setup\+Port}{setupPort} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function to configure \hyperlink{classSerialPort_a54120d9040537e637eae7e8c048dec31}{serial} with  \hyperlink{classSerialPort_a9ab445f818748122d3368fd2e9dbbbea}{settings\+Com\+Dialog}.  If serial port is open it will be closed before setting up parameters. After setting serial port it will be open again.
+
+
+\mbox{\Hypertarget{classSerialPort_a9153ab33cbb73d5138b871e52c343e58}\label{classSerialPort_a9153ab33cbb73d5138b871e52c343e58}} 
+\index{Serial\+Port@{Serial\+Port}!show\+Status\+Message@{show\+Status\+Message}}
+\index{show\+Status\+Message@{show\+Status\+Message}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{show\+Status\+Message}{showStatusMessage} (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to send status messages from serial port to debug text thread.
+
+\mbox{\Hypertarget{classSerialPort_ae92426fd329e2a5ec42b0255c5dcbdc5}\label{classSerialPort_ae92426fd329e2a5ec42b0255c5dcbdc5}} 
+\index{Serial\+Port@{Serial\+Port}!working@{working}}
+\index{working@{working}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily void Serial\+Port\+::\texorpdfstring{working}{working} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal to update watch\+Dog timer at parent object.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSerialPort_abc55095109004eb5e21e923c25036549}\label{classSerialPort_abc55095109004eb5e21e923c25036549}} 
+\index{Serial\+Port@{Serial\+Port}!data\+To\+Send\+Buff@{data\+To\+Send\+Buff}}
+\index{data\+To\+Send\+Buff@{data\+To\+Send\+Buff}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily Q\+Byte\+Array Serial\+Port\+::\texorpdfstring{data\+To\+Send\+Buff}{dataToSendBuff}\hspace{0.3cm}{\ttfamily [private]}} - FIFO buffer variable, which contain data to send that to serial port.
+
+\mbox{\Hypertarget{classSerialPort_adf375ee179fa4844cadf65645ee7ab2f}\label{classSerialPort_adf375ee179fa4844cadf65645ee7ab2f}} 
+\index{Serial\+Port@{Serial\+Port}!init\+App@{init\+App}}
+\index{init\+App@{init\+App}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily bool Serial\+Port\+::\texorpdfstring{init\+App}{initApp}\hspace{0.3cm}{\ttfamily [private]}} - variable which contain info about state of program. If variable is \textit{true} at \hyperlink{classSerialPort_a0b8fe1371e829199856e8cae942de94e}{read\+Data}(...) function execute specific code, and after that variable sets to \textit{false}. 
+
+\mbox{\Hypertarget{classSerialPort_a1fbdedb09ef8f5d7ecb4e43e848d025f}\label{classSerialPort_a1fbdedb09ef8f5d7ecb4e43e848d025f}} 
+\index{Serial\+Port@{Serial\+Port}!mod\+Data8@{mod\+Data8}}
+\index{mod\+Data8@{mod\+Data8}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily \mbox{\hyperlink{serialport_8h_a2331c0232719069f0bce03c249d2eec6}{Mod\+Data}} Serial\+Port\+::\texorpdfstring{mod\+Data8}{modData8}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSerialPort_ab98c7d39235d59c2086d9f6e94c3ed4b}\label{classSerialPort_ab98c7d39235d59c2086d9f6e94c3ed4b}} 
+\index{Serial\+Port@{Serial\+Port}!registers@{registers}}
+\index{registers@{registers}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRegister}{Register}}$\ast$ Serial\+Port\+::\texorpdfstring{registers}{registers}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSerialPort_a97937bbe34853205cbd02fb5ff97653d}\label{classSerialPort_a97937bbe34853205cbd02fb5ff97653d}} 
+\index{Serial\+Port@{Serial\+Port}!reply\+Cnt@{reply\+Cnt}}
+\index{reply\+Cnt@{reply\+Cnt}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily int Serial\+Port\+::\texorpdfstring{reply\+Cnt}{replyCnt}\hspace{0.3cm}{\ttfamily [private]}} - counter for specific code.
+
+\mbox{\Hypertarget{classSerialPort_a54120d9040537e637eae7e8c048dec31}\label{classSerialPort_a54120d9040537e637eae7e8c048dec31}} 
+\index{Serial\+Port@{Serial\+Port}!serial@{serial}}
+\index{serial@{serial}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily Q\+Serial\+Port$\ast$ Serial\+Port\+::\texorpdfstring{serial}{serial}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSerialPort_a9ab445f818748122d3368fd2e9dbbbea}\label{classSerialPort_a9ab445f818748122d3368fd2e9dbbbea}} 
+\index{Serial\+Port@{Serial\+Port}!settings\+Com\+Dialog@{settings\+Com\+Dialog}}
+\index{settings\+Com\+Dialog@{settings\+Com\+Dialog}!Serial\+Port@{Serial\+Port}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog}}$\ast$ Serial\+Port\+::\texorpdfstring{settings\+Com\+Dialog}{settingsComDialog}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{serialport_8h}{serialport.\+h}}\item 
+\mbox{\hyperlink{serialport_8cpp}{serialport.\+cpp}}\end{DoxyCompactItemize}
+\newpage

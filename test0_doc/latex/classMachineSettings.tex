@@ -1,0 +1,424 @@
+\hypertarget{classMachineSettings}{}\subsection{Machine\+Settings Class Reference}
+\label{classMachineSettings}\index{Machine\+Settings@{Machine\+Settings}}
+
+
+{\ttfamily \#include $<$settings.\+h$>$}
+
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{unionMachineSettings_1_1LastRevolverWarm__}{Last\+Revolver\+Warm\+\_\+}}
+\item 
+union \mbox{\hyperlink{unionMachineSettings_1_1MachineHeadType__}{Machine\+Head\+Type\+\_\+}}
+\item 
+union \mbox{\hyperlink{unionMachineSettings_1_1MachineIndexLiftType__}{Machine\+Index\+Lift\+Type\+\_\+}}
+\item 
+struct \mbox{\hyperlink{structMachineSettings_1_1MachineParameters__}{Machine\+Parameters\+\_\+}}
+\item 
+union \mbox{\hyperlink{unionMachineSettings_1_1MachineState__}{Machine\+State\+\_\+}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classMachineSettings_ace5f0a84d32c0423bb62f068f102bf80}{Devices}} \{ \mbox{\hyperlink{classMachineSettings_ace5f0a84d32c0423bb62f068f102bf80aa0ef1af1f748dd75f12dd479a07ff628}{Master\+Device}} = 0x0000
+ \}
+\item 
+enum \mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbef}{Master\+Data\+Places}} \{ 
+\begin{DoxyCompactItemize}
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa5b952989bf58820434feab7ec0f0e84f}{Master\+Head\+Count}} = 0x0001, 
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa60c8ac4e12ef5ac9ecd807711ca296c3}{Master\+Last\+Button}} = 0x0003, 
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefad8ee6c0fdfad3e9effda8056da5e68a8}{Master\+Index\+Lift\+Command}} = 0x0004, 
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa03ad3d79f6edfe1a2477748d6a66386e}{Master\+Head\+State\+Lo}} = 0x0005, 
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa76129cc9720d12f63764b4089d638589}{Master\+Head\+State\+Hi}} = 0x0009, 
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefabc28c130aa7c10b12f97486f6d443b66}{Master\+Palet\+State\+Lo}} = 0x000A, 
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefaf61a688c14b1370c4630e7bacac34771}{Master\+Palet\+State\+Hi}} = 0x0012, 
+\item\mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefaf1538a4ff7b63f627657f5fc722a6d25}{Master\+Machine\+Type}} = 0x0011
+\end{DoxyCompactItemize}
+ \}
+\item 
+enum \mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459f}{Machine\+Type\+\_\+}} \{ 
+\begin{DoxyCompactItemize}
+\item\mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fa90d1454dea114dab1be411c61eb2506f}{Volt\+Servo}} = 0x0000, 
+\item\mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459facb1903efc2ca403d2b8bafad23ac475a}{Volt\+AC}}, 
+\item\mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fabbded889bc90d83b77be39316591c3e7}{Vector}}, 
+\item\mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459faabaa3c9e55c4ed04fbf1f544bbaf2ee3}{Titan\+A\+SE}}, 
+\item\mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fadc58b3fd25459977198f34e19e63c49a}{Titan\+A\+SA}}, 
+\item\mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459faddbd23233dca7bda197b435fedff8344}{Titan\+A\+AA}}
+\end{DoxyCompactItemize}
+ \}
+\item 
+typedef union \mbox{\hyperlink{unionMachineSettings_1_1MachineState__}{Machine\+Settings\+::\+Machine\+State\+\_\+}} \mbox{\hyperlink{classMachineSettings_a3d02f0565ba9c53dbb59d5d086208cad}{Machine\+State}}
+\item 
+typedef enum \mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459f}{Machine\+Settings\+::\+Machine\+Type\+\_\+}} \mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Type}}
+\item 
+typedef union \mbox{\hyperlink{unionMachineSettings_1_1MachineHeadType__}{Machine\+Settings\+::\+Machine\+Head\+Type\+\_\+}} \mbox{\hyperlink{classMachineSettings_ab7b6a5e7f8a67169e7c28067e7d4bbe9}{Machine\+Head\+Type}}
+\item 
+typedef union \mbox{\hyperlink{unionMachineSettings_1_1MachineIndexLiftType__}{Machine\+Settings\+::\+Machine\+Index\+Lift\+Type\+\_\+}} \mbox{\hyperlink{classMachineSettings_a0a3b23271b2f401ab585236bd8330a82}{Machine\+Index\+Lift\+Type}}
+\item 
+typedef union \mbox{\hyperlink{unionMachineSettings_1_1LastRevolverWarm__}{Machine\+Settings\+::\+Last\+Revolver\+Warm\+\_\+}} \mbox{\hyperlink{classMachineSettings_ad31cf583a3d6462e47d920209239ffe6}{Last\+Revolver\+Warm}}
+\item 
+typedef struct \mbox{\hyperlink{structMachineSettings_1_1MachineParameters__}{Machine\+Settings\+::\+Machine\+Parameters\+\_\+}} \mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Parameters}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMachineSettings_ab1b5f2057a07bb5bf20931cd9d5afb25}{Machine\+Settings}} (\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Parameters}} m\+Param)
+\item 
+\mbox{\hyperlink{classMachineSettings_a6ecb0fe6e75f5c33941cb08d467e834f}{Machine\+Settings}} ()
+\item 
+void \mbox{\hyperlink{classMachineSettings_ac28b9c28855fe22c85e95379eea9c252}{from\+Byte\+Array}} (Q\+Byte\+Array machine\+Param\+Array)
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classMachineSettings_aed23d5dfd20513c309956d187e0b7a3b}{get\+Service\+Widg\+En}} ()
+\item 
+static void \mbox{\hyperlink{classMachineSettings_a849f1eefa33684d98531d4052b9923e1}{set\+Service\+Widg\+En}} (bool serv\+En)
+\item 
+static \mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Type}} \mbox{\hyperlink{classMachineSettings_a0349f2cb52c9359909722942a831aeae}{get\+Machine\+Type}} ()
+\item 
+static void \mbox{\hyperlink{classMachineSettings_aba8aeb52eef51e98eedb65a52d22ab0f}{set\+Machine\+Type}} (\mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Type}} m\+Type)
+\item 
+static bool \mbox{\hyperlink{classMachineSettings_a232ca3eed7f64a1721e23f1bf3ad9243}{get\+Machine\+Idle}} ()
+\item 
+static void \mbox{\hyperlink{classMachineSettings_a81d10b1a8eef770d08c22df5796dbd8b}{set\+Machine\+Idle}} (bool idle)
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_a77384a60e0ded049aa4c4a5c0b5e193b}{get\+Head\+Max\+Range}} ()
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_a806a1562aea709bb99a614485ee5401e}{get\+Head\+Type}} ()
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_acb8ca9e673941dd7abb8c429e9525f2a}{get\+Index\+Lift\+Type}} ()
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_a8b0acb6f0ad4a795c8ea18338c035e14}{get\+Head\+Pal\+State\+Lo}} ()
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_aca60698179b068072b45bea26c919da9}{get\+Head\+Pal\+State\+Hi}} ()
+\item 
+static void \mbox{\hyperlink{classMachineSettings_a5ec4d87fc0832c6b79d5229085237252}{set\+Head\+Max\+Range}} (\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} val)
+\item 
+static void \mbox{\hyperlink{classMachineSettings_a33f6697feb74cab98d582f80bd4dd6a2}{set\+Head\+Type}} (\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} val)
+\item 
+static void \mbox{\hyperlink{classMachineSettings_a546ae7011ac82ecf38125c2ba534d327}{set\+Index\+Lift\+Type}} (\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} val)
+\item 
+static void \mbox{\hyperlink{classMachineSettings_ad1db42477cae871db33526bf828dd6a7}{set\+Head\+Pal\+State\+Lo}} (\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} val)
+\item 
+static void \mbox{\hyperlink{classMachineSettings_a8b1fe308c75ea1bafd283e0f97b87a93}{set\+Head\+Pal\+State\+Hi}} (\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} val)
+\item 
+static void \mbox{\hyperlink{classMachineSettings_aa568893fe06e0bc946dc7ceb33535aaa}{set\+Head\+Pal\+State\+Index}} (int index, bool state)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String\+List \mbox{\hyperlink{classMachineSettings_ad0e371856a610c685f0cde9f9cb2b5c5}{machine\+Type\+List}}
+\item 
+Q\+List$<$ int $>$ \mbox{\hyperlink{classMachineSettings_abe0a0868f7081db78076e61fd8793384}{machine\+Type\+Data}}
+\item 
+\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Parameters}} \mbox{\hyperlink{classMachineSettings_abca1961654d6dd586ec26990e5d49ed7}{machine\+Param}}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classMachineSettings_a9a8e6bc0e09fa8ac8e32e30cbbd5ef4c}{service\+Widgets\+En}}
+\item 
+static \mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Type}} \mbox{\hyperlink{classMachineSettings_ae3167629c7a8723b123ff5616fb284af}{machine\+Type\+Stat}}
+\item 
+static bool \mbox{\hyperlink{classMachineSettings_a8297d5ccf01292708bc4aae65180a54c}{machine\+Idle}}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_ab223e2bea0de3ab0c85452d124d2b434}{head\+Max\+Range\+Stat}}
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_a1cfa5a234b9cbce7c1e1b881992e1d2e}{head\+Type\+Stat}}
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMachineSettings_a358c9d4ed568f50c5279c7019c97ffc2}{indexer\+Lift\+Type\+Stat}}
+\item 
+static \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} \mbox{\hyperlink{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}{head\+Pal\+State\+Stat}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classMachineSettings_ad31cf583a3d6462e47d920209239ffe6}\label{classMachineSettings_ad31cf583a3d6462e47d920209239ffe6}} 
+\index{Machine\+Settings@{Machine\+Settings}!Last\+Revolver\+Warm@{Last\+Revolver\+Warm}}
+\index{Last\+Revolver\+Warm@{Last\+Revolver\+Warm}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily typedef union \mbox{\hyperlink{unionMachineSettings_1_1LastRevolverWarm__}{Machine\+Settings\+::\+Last\+Revolver\+Warm\+\_\+}} \mbox{\hyperlink{classMachineSettings_ad31cf583a3d6462e47d920209239ffe6}{Machine\+Settings\+::\texorpdfstring{Last\+Revolver\+Warm}{LastRevolverWarm}}}} - union of data fields to write to \hyperlink{structRegister_1_1IndexerReg___1_1reg_a9b0063135d16e0ea6f47284c361bfb03}{indexer\+Reg\+\_\+\+TM} by parameters names.
+
+\mbox{\Hypertarget{classMachineSettings_ab7b6a5e7f8a67169e7c28067e7d4bbe9}\label{classMachineSettings_ab7b6a5e7f8a67169e7c28067e7d4bbe9}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Head\+Type@{Machine\+Head\+Type}}
+\index{Machine\+Head\+Type@{Machine\+Head\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily typedef union \mbox{\hyperlink{unionMachineSettings_1_1MachineHeadType__}{Machine\+Settings\+::\+Machine\+Head\+Type\+\_\+}} \mbox{\hyperlink{classMachineSettings_ab7b6a5e7f8a67169e7c28067e7d4bbe9}{Machine\+Settings\+::\texorpdfstring{Machine\+Head\+Type}{MachineHeadType}}}} - union of data to declare parameters of head.
+
+\mbox{\Hypertarget{classMachineSettings_a0a3b23271b2f401ab585236bd8330a82}\label{classMachineSettings_a0a3b23271b2f401ab585236bd8330a82}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Index\+Lift\+Type@{Machine\+Index\+Lift\+Type}}
+\index{Machine\+Index\+Lift\+Type@{Machine\+Index\+Lift\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily typedef union \mbox{\hyperlink{unionMachineSettings_1_1MachineIndexLiftType__}{Machine\+Settings\+::\+Machine\+Index\+Lift\+Type\+\_\+}} \mbox{\hyperlink{classMachineSettings_a0a3b23271b2f401ab585236bd8330a82}{Machine\+Settings\+::\texorpdfstring{Machine\+Index\+Lift\+Type}{MachineIndexLiftType}}}} - union of data to declare parameters of lift.
+
+\mbox{\Hypertarget{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}\label{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Parameters@{Machine\+Parameters}}
+\index{Machine\+Parameters@{Machine\+Parameters}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structMachineSettings_1_1MachineParameters__}{Machine\+Settings\+::\+Machine\+Parameters\+\_\+}} \mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\texorpdfstring{Machine\+Parameters}{MachineParameters}}}} - structure  of data to save machine parameters to save it on hard drive.
+
+\mbox{\Hypertarget{classMachineSettings_a3d02f0565ba9c53dbb59d5d086208cad}\label{classMachineSettings_a3d02f0565ba9c53dbb59d5d086208cad}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+State@{Machine\+State}}
+\index{Machine\+State@{Machine\+State}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily typedef union \mbox{\hyperlink{unionMachineSettings_1_1MachineState__}{Machine\+Settings\+::\+Machine\+State\+\_\+}} \mbox{\hyperlink{classMachineSettings_a3d02f0565ba9c53dbb59d5d086208cad}{Machine\+Settings\+::\texorpdfstring{Machine\+State}{MachineState}}}} - union to save state of machine to use in program.
+
+\mbox{\Hypertarget{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}\label{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Type@{Machine\+Type}}
+\index{Machine\+Type@{Machine\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459f}{Machine\+Settings\+::\+Machine\+Type\+\_\+}} \mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Settings\+::\texorpdfstring{Machine\+Type}{MachineType}}}} - enumerator to save type of machine to hide or show widgets on dialogs.
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classMachineSettings_ace5f0a84d32c0423bb62f068f102bf80}\label{classMachineSettings_ace5f0a84d32c0423bb62f068f102bf80}} 
+\index{Machine\+Settings@{Machine\+Settings}!Devices@{Devices}}
+\index{Devices@{Devices}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classMachineSettings_ace5f0a84d32c0423bb62f068f102bf80}{Machine\+Settings\+::\texorpdfstring{Devices}{Devices}}}} - enumerator to declare address of devices to send data to appropriated fields.
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Device@{Master\+Device}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Device@{Master\+Device}}}\mbox{\Hypertarget{classMachineSettings_ace5f0a84d32c0423bb62f068f102bf80aa0ef1af1f748dd75f12dd479a07ff628}\label{classMachineSettings_ace5f0a84d32c0423bb62f068f102bf80aa0ef1af1f748dd75f12dd479a07ff628}} 
+Master\+Device&0x0000\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459f}\label{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459f}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Type\+\_\+@{Machine\+Type\+\_\+}}
+\index{Machine\+Type\+\_\+@{Machine\+Type\+\_\+}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459f}{Machine\+Settings\+::\texorpdfstring{Machine\+Type\+\_\+}{MachineType\_}}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Volt\+Servo@{Volt\+Servo}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Volt\+Servo@{Volt\+Servo}}}\mbox{\Hypertarget{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fa90d1454dea114dab1be411c61eb2506f}\label{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fa90d1454dea114dab1be411c61eb2506f}} 
+Volt\+Servo&0x0000\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Volt\+AC@{Volt\+AC}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Volt\+AC@{Volt\+AC}}}\mbox{\Hypertarget{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459facb1903efc2ca403d2b8bafad23ac475a}\label{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459facb1903efc2ca403d2b8bafad23ac475a}} 
+Volt\+AC&0x0001\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Vector@{Vector}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Vector@{Vector}}}\mbox{\Hypertarget{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fabbded889bc90d83b77be39316591c3e7}\label{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fabbded889bc90d83b77be39316591c3e7}} 
+Vector&0x0002\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Titan\+A\+SE@{Titan\+A\+SE}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Titan\+A\+SE@{Titan\+A\+SE}}}\mbox{\Hypertarget{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459faabaa3c9e55c4ed04fbf1f544bbaf2ee3}\label{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459faabaa3c9e55c4ed04fbf1f544bbaf2ee3}} 
+Titan\+A\+SE&0x0003\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Titan\+A\+SA@{Titan\+A\+SA}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Titan\+A\+SA@{Titan\+A\+SA}}}\mbox{\Hypertarget{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fadc58b3fd25459977198f34e19e63c49a}\label{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459fadc58b3fd25459977198f34e19e63c49a}} 
+Titan\+A\+SA&0x0004\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Titan\+A\+AA@{Titan\+A\+AA}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Titan\+A\+AA@{Titan\+A\+AA}}}\mbox{\Hypertarget{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459faddbd23233dca7bda197b435fedff8344}\label{classMachineSettings_a0feee7a1964811bb4a602e9cc3bf459faddbd23233dca7bda197b435fedff8344}} 
+Titan\+A\+AA&0x0005\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbef}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbef}} 
+\index{Machine\+Settings@{Machine\+Settings}!Master\+Data\+Places@{Master\+Data\+Places}}
+\index{Master\+Data\+Places@{Master\+Data\+Places}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbef}{Machine\+Settings\+::\texorpdfstring{Master\+Data\+Places}{MasterDataPlaces}}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Head\+Count@{Master\+Head\+Count}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Head\+Count@{Master\+Head\+Count}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa5b952989bf58820434feab7ec0f0e84f}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa5b952989bf58820434feab7ec0f0e84f}} 
+Master\+Head\+Count&0x0001\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Last\+Button@{Master\+Last\+Button}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Last\+Button@{Master\+Last\+Button}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa60c8ac4e12ef5ac9ecd807711ca296c3}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa60c8ac4e12ef5ac9ecd807711ca296c3}} 
+Master\+Last\+Button&0x0003\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Index\+Lift\+Command@{Master\+Index\+Lift\+Command}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Index\+Lift\+Command@{Master\+Index\+Lift\+Command}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefad8ee6c0fdfad3e9effda8056da5e68a8}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefad8ee6c0fdfad3e9effda8056da5e68a8}} 
+Master\+Index\+Lift\+Command&0x0004\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Head\+State\+Lo@{Master\+Head\+State\+Lo}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Head\+State\+Lo@{Master\+Head\+State\+Lo}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa03ad3d79f6edfe1a2477748d6a66386e}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa03ad3d79f6edfe1a2477748d6a66386e}} 
+Master\+Head\+State\+Lo&0x0005\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Head\+State\+Hi@{Master\+Head\+State\+Hi}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Head\+State\+Hi@{Master\+Head\+State\+Hi}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa76129cc9720d12f63764b4089d638589}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefa76129cc9720d12f63764b4089d638589}} 
+Master\+Head\+State\+Hi&0x0009\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Palet\+State\+Lo@{Master\+Palet\+State\+Lo}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Palet\+State\+Lo@{Master\+Palet\+State\+Lo}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefabc28c130aa7c10b12f97486f6d443b66}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefabc28c130aa7c10b12f97486f6d443b66}} 
+Master\+Palet\+State\+Lo&0x000A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Palet\+State\+Hi@{Master\+Palet\+State\+Hi}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Palet\+State\+Hi@{Master\+Palet\+State\+Hi}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefaf61a688c14b1370c4630e7bacac34771}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefaf61a688c14b1370c4630e7bacac34771}} 
+Master\+Palet\+State\+Hi&0x0012\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master\+Machine\+Type@{Master\+Machine\+Type}!Machine\+Settings@{Machine\+Settings}}\index{Machine\+Settings@{Machine\+Settings}!Master\+Machine\+Type@{Master\+Machine\+Type}}}\mbox{\Hypertarget{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefaf1538a4ff7b63f627657f5fc722a6d25}\label{classMachineSettings_a81ac5b64df7f302bae854ee794f9fbefaf1538a4ff7b63f627657f5fc722a6d25}} 
+Master\+Machine\+Type&0x0011\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMachineSettings_ab1b5f2057a07bb5bf20931cd9d5afb25}\label{classMachineSettings_ab1b5f2057a07bb5bf20931cd9d5afb25}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Settings@{Machine\+Settings}}
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily Machine\+Settings\+::\texorpdfstring{Machine\+Settings}{MachineSettings}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters}}}]{m\+Param }\end{DoxyParamCaption})} - constructor of class to initialize fields of structure with given in \textit{mParam} variable parameters. 
+
+\mbox{\Hypertarget{classMachineSettings_a6ecb0fe6e75f5c33941cb08d467e834f}\label{classMachineSettings_a6ecb0fe6e75f5c33941cb08d467e834f}} 
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Settings@{Machine\+Settings}}
+\index{Machine\+Settings@{Machine\+Settings}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily Machine\+Settings\+::\texorpdfstring{Machine\+Settings}{MachineSettings}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - constructor of class to initialize fields of structure with default parameters.
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMachineSettings_ac28b9c28855fe22c85e95379eea9c252}\label{classMachineSettings_ac28b9c28855fe22c85e95379eea9c252}} 
+\index{Machine\+Settings@{Machine\+Settings}!from\+Byte\+Array@{from\+Byte\+Array}}
+\index{from\+Byte\+Array@{from\+Byte\+Array}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{from\+Byte\+Array}{fromByteArray} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{machine\+Param\+Array }\end{DoxyParamCaption})} - function to fill appropriated fields of class with data given in \textit{machine\+Param\+Array}
+
+\mbox{\Hypertarget{classMachineSettings_a77384a60e0ded049aa4c4a5c0b5e193b}\label{classMachineSettings_a77384a60e0ded049aa4c4a5c0b5e193b}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Head\+Max\+Range@{get\+Head\+Max\+Range}}
+\index{get\+Head\+Max\+Range@{get\+Head\+Max\+Range}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{get\+Head\+Max\+Range}{getHeadMaxRange} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get value of \hyperlink{classMachineSettings_ab223e2bea0de3ab0c85452d124d2b434}{head\+Max\+Range\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_aca60698179b068072b45bea26c919da9}\label{classMachineSettings_aca60698179b068072b45bea26c919da9}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Head\+Pal\+State\+Hi@{get\+Head\+Pal\+State\+Hi}}
+\index{get\+Head\+Pal\+State\+Hi@{get\+Head\+Pal\+State\+Hi}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{get\+Head\+Pal\+State\+Hi}{getHeadPalStateHi} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get highest 16 bit of \hyperlink{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}{head\+Pal\+State\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a8b0acb6f0ad4a795c8ea18338c035e14}\label{classMachineSettings_a8b0acb6f0ad4a795c8ea18338c035e14}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Head\+Pal\+State\+Lo@{get\+Head\+Pal\+State\+Lo}}
+\index{get\+Head\+Pal\+State\+Lo@{get\+Head\+Pal\+State\+Lo}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{get\+Head\+Pal\+State\+Lo}{getHeadPalStateLo} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get lowest 16 bit of \hyperlink{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}{head\+Pal\+State\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a806a1562aea709bb99a614485ee5401e}\label{classMachineSettings_a806a1562aea709bb99a614485ee5401e}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Head\+Type@{get\+Head\+Type}}
+\index{get\+Head\+Type@{get\+Head\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{get\+Head\+Type}{getHeadType} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get value of \hyperlink{classMachineSettings_a1cfa5a234b9cbce7c1e1b881992e1d2e}{head\+Type\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_acb8ca9e673941dd7abb8c429e9525f2a}\label{classMachineSettings_acb8ca9e673941dd7abb8c429e9525f2a}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Index\+Lift\+Type@{get\+Index\+Lift\+Type}}
+\index{get\+Index\+Lift\+Type@{get\+Index\+Lift\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{get\+Index\+Lift\+Type}{getIndexLiftType}(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get value of \hyperlink{classMachineSettings_a358c9d4ed568f50c5279c7019c97ffc2}{indexer\+Lift\+Type\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a232ca3eed7f64a1721e23f1bf3ad9243}\label{classMachineSettings_a232ca3eed7f64a1721e23f1bf3ad9243}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Machine\+Idle@{get\+Machine\+Idle}}
+\index{get\+Machine\+Idle@{get\+Machine\+Idle}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily bool Machine\+Settings\+::\texorpdfstring{get\+Machine\+Idle}{getMachineIdle} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get value of \hyperlink{classMachineSettings_a8297d5ccf01292708bc4aae65180a54c}{machine\+Idle} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a0349f2cb52c9359909722942a831aeae}\label{classMachineSettings_a0349f2cb52c9359909722942a831aeae}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Machine\+Type@{get\+Machine\+Type}}
+\index{get\+Machine\+Type@{get\+Machine\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Settings\+::\+Machine\+Type}} Machine\+Settings\+::\texorpdfstring{get\+Machine\+Type}{getMachineType} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get value of \hyperlink{classMachineSettings_ae3167629c7a8723b123ff5616fb284af}{machine\+Type\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_aed23d5dfd20513c309956d187e0b7a3b}\label{classMachineSettings_aed23d5dfd20513c309956d187e0b7a3b}} 
+\index{Machine\+Settings@{Machine\+Settings}!get\+Service\+Widg\+En@{get\+Service\+Widg\+En}}
+\index{get\+Service\+Widg\+En@{get\+Service\+Widg\+En}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily bool Machine\+Settings\+::\texorpdfstring{get\+Service\+Widg\+En}{getServiceWidgEn} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get value of \hyperlink{classMachineSettings_a9a8e6bc0e09fa8ac8e32e30cbbd5ef4c}{service\+Widgets\+En} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a5ec4d87fc0832c6b79d5229085237252}\label{classMachineSettings_a5ec4d87fc0832c6b79d5229085237252}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Head\+Max\+Range@{set\+Head\+Max\+Range}}
+\index{set\+Head\+Max\+Range@{set\+Head\+Max\+Range}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Head\+Max\+Range}{setHeadMaxRange} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{val }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set value of \hyperlink{classMachineSettings_ab223e2bea0de3ab0c85452d124d2b434}{head\+Max\+Range\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a8b1fe308c75ea1bafd283e0f97b87a93}\label{classMachineSettings_a8b1fe308c75ea1bafd283e0f97b87a93}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Head\+Pal\+State\+Hi@{set\+Head\+Pal\+State\+Hi}}
+\index{set\+Head\+Pal\+State\+Hi@{set\+Head\+Pal\+State\+Hi}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Head\+Pal\+State\+Hi}{setHeadPalStateHi} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{val }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set highest 16 bit of \hyperlink{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}{head\+Pal\+State\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_aa568893fe06e0bc946dc7ceb33535aaa}\label{classMachineSettings_aa568893fe06e0bc946dc7ceb33535aaa}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Head\+Pal\+State\+Index@{set\+Head\+Pal\+State\+Index}}
+\index{set\+Head\+Pal\+State\+Index@{set\+Head\+Pal\+State\+Index}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Head\+Pal\+State\+Index}{setHeadPalStateIndex} (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{bool}]{state }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set one bit (value \textit{state}) of \hyperlink{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}{head\+Pal\+State\+Stat} variable at position given by \textit{index}.
+
+\mbox{\Hypertarget{classMachineSettings_ad1db42477cae871db33526bf828dd6a7}\label{classMachineSettings_ad1db42477cae871db33526bf828dd6a7}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Head\+Pal\+State\+Lo@{set\+Head\+Pal\+State\+Lo}}
+\index{set\+Head\+Pal\+State\+Lo@{set\+Head\+Pal\+State\+Lo}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Head\+Pal\+State\+Lo}{setHeadPalStateLo} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{val }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set lowest 16 bit of \hyperlink{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}{head\+Pal\+State\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a33f6697feb74cab98d582f80bd4dd6a2}\label{classMachineSettings_a33f6697feb74cab98d582f80bd4dd6a2}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Head\+Type@{set\+Head\+Type}}
+\index{set\+Head\+Type@{set\+Head\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Head\+Type}{setHeadType} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{val }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set value of \hyperlink{classMachineSettings_a1cfa5a234b9cbce7c1e1b881992e1d2e}{head\+Type\+Stat} variable.
+
+
+\mbox{\Hypertarget{classMachineSettings_a546ae7011ac82ecf38125c2ba534d327}\label{classMachineSettings_a546ae7011ac82ecf38125c2ba534d327}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Index\+Lift\+Type@{set\+Index\+Lift\+Type}}
+\index{set\+Index\+Lift\+Type@{set\+Index\+Lift\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Index\+Lift\+Type}{setIndexLiftType} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{val }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set value of \hyperlink{classMachineSettings_a358c9d4ed568f50c5279c7019c97ffc2}{indexer\+Lift\+Type\+Stat} variable.
+
+
+\mbox{\Hypertarget{classMachineSettings_a81d10b1a8eef770d08c22df5796dbd8b}\label{classMachineSettings_a81d10b1a8eef770d08c22df5796dbd8b}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Machine\+Idle@{set\+Machine\+Idle}}
+\index{set\+Machine\+Idle@{set\+Machine\+Idle}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Machine\+Idle}{setMachineIdle} (\begin{DoxyParamCaption}\item[{bool}]{idle }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set value of \hyperlink{classMachineSettings_a8297d5ccf01292708bc4aae65180a54c}{machine\+Idle} variable.
+
+\mbox{\Hypertarget{classMachineSettings_aba8aeb52eef51e98eedb65a52d22ab0f}\label{classMachineSettings_aba8aeb52eef51e98eedb65a52d22ab0f}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Machine\+Type@{set\+Machine\+Type}}
+\index{set\+Machine\+Type@{set\+Machine\+Type}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Machine\+Type}{setMachineType} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Settings\+::\+Machine\+Type}}}]{m\+Type }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set value of \hyperlink{classMachineSettings_ae3167629c7a8723b123ff5616fb284af}{machine\+Type\+Stat} variable.
+
+\mbox{\Hypertarget{classMachineSettings_a849f1eefa33684d98531d4052b9923e1}\label{classMachineSettings_a849f1eefa33684d98531d4052b9923e1}} 
+\index{Machine\+Settings@{Machine\+Settings}!set\+Service\+Widg\+En@{set\+Service\+Widg\+En}}
+\index{set\+Service\+Widg\+En@{set\+Service\+Widg\+En}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily void Machine\+Settings\+::\texorpdfstring{set\+Service\+Widg\+En}{setServiceWidgEn} (\begin{DoxyParamCaption}\item[{bool}]{serv\+En }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set value of \hyperlink{classMachineSettings_a9a8e6bc0e09fa8ac8e32e30cbbd5ef4c}{service\+Widgets\+En} variable.
+
+
+
+
+\subsubsection{Member Data Documentation}
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classMachineSettings_ab223e2bea0de3ab0c85452d124d2b434}\label{classMachineSettings_ab223e2bea0de3ab0c85452d124d2b434}} 
+\index{Machine\+Settings@{Machine\+Settings}!head\+Max\+Range\+Stat@{head\+Max\+Range\+Stat}}
+\index{head\+Max\+Range\+Stat@{head\+Max\+Range\+Stat}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{head\+Max\+Range\+Stat}{headMaxRangeStat}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\item\mbox{\Hypertarget{classMachineSettings_a1cfa5a234b9cbce7c1e1b881992e1d2e}\label{classMachineSettings_a1cfa5a234b9cbce7c1e1b881992e1d2e}} 
+\index{Machine\+Settings@{Machine\+Settings}!head\+Type\+Stat@{head\+Type\+Stat}}
+\index{head\+Type\+Stat@{head\+Type\+Stat}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{head\+Type\+Stat}{headTypeStat}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\item\mbox{\Hypertarget{classMachineSettings_a358c9d4ed568f50c5279c7019c97ffc2}\label{classMachineSettings_a358c9d4ed568f50c5279c7019c97ffc2}} 
+\index{Machine\+Settings@{Machine\+Settings}!indexer\+Lift\+Type\+Stat@{indexer\+Lift\+Type\+Stat}}
+\index{indexer\+Lift\+Type\+Stat@{indexer\+Lift\+Type\+Stat}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Machine\+Settings\+::\texorpdfstring{indexer\+Lift\+Type\+Stat}{indexerLiftTypeStat}{\ttfamily [static]}, {\ttfamily [private]}}
+
+- variables to describe types and parameters of machine parts.
+\end{DoxyCompactItemize}
+\mbox{\Hypertarget{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}\label{classMachineSettings_a1543a985ca7e47a2853dcfef75227a5a}} 
+\index{Machine\+Settings@{Machine\+Settings}!head\+Pal\+State\+Stat@{head\+Pal\+State\+Stat}}
+\index{head\+Pal\+State\+Stat@{head\+Pal\+State\+Stat}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} Machine\+Settings\+::\texorpdfstring{head\+Pal\+State\+Stat}{headPalStateStat}{\ttfamily [static]}, {\ttfamily [private]}} - variable to describe state of pallets. Position of bit describe pallet number, state of bit at position mean information about containing rag on pallet.
+
+\mbox{\Hypertarget{classMachineSettings_a8297d5ccf01292708bc4aae65180a54c}\label{classMachineSettings_a8297d5ccf01292708bc4aae65180a54c}} 
+\index{Machine\+Settings@{Machine\+Settings}!machine\+Idle@{machine\+Idle}}
+\index{machine\+Idle@{machine\+Idle}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily bool Machine\+Settings\+::\texorpdfstring{machine\+Idle}{machineIdle}{\ttfamily [static]}} - contain information about machine state. Get \textit{true} value when machine is ready to work, and \textit{false} in any other case.
+
+\mbox{\Hypertarget{classMachineSettings_abca1961654d6dd586ec26990e5d49ed7}\label{classMachineSettings_abca1961654d6dd586ec26990e5d49ed7}} 
+\index{Machine\+Settings@{Machine\+Settings}!machine\+Param@{machine\+Param}}
+\index{machine\+Param@{machine\+Param}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Parameters}} Machine\+Settings\+::\texorpdfstring{machine\+Param}{machineParam}} - structure to contain parameters of the whole machine.
+
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classMachineSettings_abe0a0868f7081db78076e61fd8793384}\label{classMachineSettings_abe0a0868f7081db78076e61fd8793384}} 
+\index{Machine\+Settings@{Machine\+Settings}!machine\+Type\+Data@{machine\+Type\+Data}}
+\index{machine\+Type\+Data@{machine\+Type\+Data}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily Q\+List$<$int$>$ Machine\+Settings\+::\texorpdfstring{machine\+Type\+Data}{machineTypeData}} 
+
+\item\mbox{\Hypertarget{classMachineSettings_ad0e371856a610c685f0cde9f9cb2b5c5}\label{classMachineSettings_ad0e371856a610c685f0cde9f9cb2b5c5}} 
+\index{Machine\+Settings@{Machine\+Settings}!machine\+Type\+List@{machine\+Type\+List}}
+\index{machine\+Type\+List@{machine\+Type\+List}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily Q\+String\+List Machine\+Settings\+::\texorpdfstring{machine\+Type\+List}{machineTypeList}}
+
+\item\mbox{\Hypertarget{classMachineSettings_ae3167629c7a8723b123ff5616fb284af}\label{classMachineSettings_ae3167629c7a8723b123ff5616fb284af}} 
+\index{Machine\+Settings@{Machine\+Settings}!machine\+Type\+Stat@{machine\+Type\+Stat}}
+\index{machine\+Type\+Stat@{machine\+Type\+Stat}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMachineSettings_af95330ff3a80de06fe956f5297ec0fc5}{Machine\+Settings\+::\+Machine\+Type}} Machine\+Settings\+::\texorpdfstring{machine\+Type\+Stat}{machineTypeStat}{\ttfamily [static]}}
+
+block of variables which are used for filling combo\+Box with machine types.
+\end{DoxyCompactItemize}
+\mbox{\Hypertarget{classMachineSettings_a9a8e6bc0e09fa8ac8e32e30cbbd5ef4c}\label{classMachineSettings_a9a8e6bc0e09fa8ac8e32e30cbbd5ef4c}} 
+\index{Machine\+Settings@{Machine\+Settings}!service\+Widgets\+En@{service\+Widgets\+En}}
+\index{service\+Widgets\+En@{service\+Widgets\+En}!Machine\+Settings@{Machine\+Settings}}
+{\footnotesize\ttfamily bool Machine\+Settings\+::\texorpdfstring{service\+Widgets\+En}{serviceWidgetsEn}{\ttfamily [static]}} - variable which used to describe state of service widgets and dialogs. Changing state need higher access privileges.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{settings_8h}{settings.\+h}}\item 
+\mbox{\hyperlink{settings_8cpp}{settings.\+cpp}}\end{DoxyCompactItemize}
+\newpage

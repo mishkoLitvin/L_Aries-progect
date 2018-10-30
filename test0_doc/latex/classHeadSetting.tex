@@ -1,0 +1,496 @@
+\hypertarget{classHeadSetting}{}\subsection{Head\+Setting Class Reference}
+\label{classHeadSetting}\index{Head\+Setting@{Head\+Setting}}
+
+
+{\ttfamily \#include $<$settings.\+h$>$}
+
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structHeadSetting_1_1HeadComands__}{Head\+Comands\+\_\+}}
+\item 
+struct \mbox{\hyperlink{structHeadSetting_1_1HeadParameters__}{Head\+Parameters\+\_\+}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ 
+\begin{DoxyCompactItemize}
+	\item\mbox{
+	\hyperlink{classHeadSetting_a26c38b767aa2b7ab7291ef630eec5caeab0f78d4b529a6847e567515aca117a0c}{Head\+Device\+Adr\+Offcet}} = 0x0002
+\end{DoxyCompactItemize}
+ \}
+\item 
+enum \{ 
+\begin{DoxyCompactItemize}
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aa7d44b6745f1db6d62ee634fb39051dd}{Head\+On}} = 0x01, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a0e44ce76891025c2b326675367082cc9}{Head\+Speed\+Rear}} = 0x02, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a2e5f2f0dba724f0715c87f46777633bd}{Head\+Speed\+Front}} = 0x03, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7eb5d5b1e85b9532bad9f8f3fd16bd34}{Head\+Fl\+Dwell\+Time}} = 0x04, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ab174598de937b97c20b86c74d19d8aae}{Head\+Sq\+Dwell\+Time}} = 0x05, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aca1ab3180a5e98e4eddfe21f1eb3405d}{Head\+Stroks\+Count}} = 0x06, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a07205ea7208f6366f78a2d31ab6e0f9a}{Head\+Flash\+Time1Q}} = 0x07, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a27abbc3575dd924d014bfe5969d58156}{Head\+Flash\+Time2Q}} = 0x08, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6a8b426de299d5ba820db429caba6f31}{Head\+S\+B\+Stroks\+Count}} = 0x0E, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32acc6942cb582ba862bd75c1ed499a5941}{Head\+Hold\+On\+Off}} = 0x14, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7c1406e9274cd587eab6956c0677d194}{Head\+Range\+Limit1}} = 0x16, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7be69001c09b87de316c340160cff80c}{Head\+Range\+Limit2}} = 0x17, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac0ccd3f62dd3b89815f6825ef6f7453c}{Head\+Heat\+Temper}} = 0x18, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac6f49cc16663fdfaefce810d20b98f6d}{Head\+Heat\+Time\+IR}} = 0x19, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a851c50261e22a531f1e6ce834e3313af}{Head\+Flash\+Power\+St\+By}} = 0x1A, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32afe71ff94e7a672c7a3e2eaadaa7675a0}{Head\+Flash\+Time\+St\+By}} = 0x1B, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aaf01e040d13fff0dabb8a193e9a7cf96}{Head\+Flash\+Power\+Wtout\+IR}} = 0x1D, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aaca3ad6e41eb1cc2ceeab06cafb25da7}{Head\+Heat\+Warm\+Time}} = 0x1F, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aa13d50d23c783e119c88b7fea0ee0ac8}{Head\+Flash\+Warm\+Time}} = 0x20, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac44c8ccfa822c07701e233877a911b24}{Head\+Head\+Type}} = 0x21, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6531411ce72b5da2041ac9247af86038}{Head\+Power\+On}} = 0x01, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac91c9da06ef3db0e017f428ea513dd72}{Head\+Heat\+Dry\+Range}}, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a29d2a6e6e8cb5c1b60eb10cae88f90a5}{Head\+Heat\+Time1\+IR}}, 
+\item\mbox{\hyperlink{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6e5c2056246cce850f12e45f0ef63c93}{Head\+Heat\+Time2\+IR}}
+\end{DoxyCompactItemize}
+ \}
+\item 
+enum
+ \mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0}{Head\+On\+Type\+\_\+}} \{ 
+ \begin{DoxyCompactItemize}
+\item\mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a3c93da953ba33b2131f863e845a89215}{Print\+Head\+Off}} = 0x0001, 
+\item\mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a3617aa5f657916e1773fc8084edaaf5b}{Print\+Head\+On}}, 
+\item\mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0ae32652cd3cb4bbbfb1e2306915dc9b44}{Quartz\+Head\+Off}}, 
+\item\mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0aa5ed02dcbd031c7fe574659e61729f30}{Quartz\+Head\+On}}, 
+\item\mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a669c51238be49f67fca28962971b82df}{Infra\+Red\+Head\+Off}}, 
+\item\mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a28d5853dfd8d6895dc6a3ba94d488d87}{Infra\+Red\+Head\+On}}
+\end{DoxyCompactItemize}
+ \}
+\item 
+enum \mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98}{Head\+Commands\+En\+\_\+}} \{
+ \begin{DoxyCompactItemize}
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a807730c1450b3dbd1ec13da66d9eca37}{Idle}} = 0, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a4c2566d20e72733843a1fcfe9dfe7662}{Head\+\_\+\+On\+Off}} = 0x01F4, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a80b6c7764296fa15d2f50291d9a9bdea}{Change\+Rag\+State}} = 0x0190, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aa029f529ce3770d57f987ab5f8cb2c90}{Move\+Rear}} = 0x0672, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a21100c255d7fa067bd7324568efe5aa7}{Move\+Front}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a36502fc5000f2998df6e195877b99221}{Move\+Test}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ab79f74e544b53ede28db1894c09c08a3}{SQ}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98adb216a868a62ef870ddca4c6f654b968}{FL}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a31241fce61b58699a2e160b9148770e3}{S\+Q\+\_\+\+FL}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a77ea8b6f36d043b7f75de1e12e974d49}{Hold\+\_\+\+Off}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aa7b607012f7fd3a5d4a7080d4e116961}{Hold\+\_\+\+On}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ada676d13dfb3b6a5c481e0374710de2e}{Teach\+Position1}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0d42a31cde1263c9ea2632cd54162bb9}{Teach\+Position2}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aab641e4cd153a874d5264c60c4950773}{S\+Q\+\_\+\+F\+L\+\_\+\+Up\+Down}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a6a402cbde9306530ec932ce63ee7b312}{M\+P\+T\+\_\+\+Move}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98abdf8b35e3521ec835379772bc543aea7}{Pressure\+SQ}} = 0x005A, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a2e294adfd581007ba872acd1e18be561}{Air\+Release}} = 0x005A, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aefadc4c4eee710a321bb18d814c339f6}{Time\+Select\+\_\+1}} = 0x025B, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98adb540dca49cd4f036178b2a30eeae925}{Time\+Select\+\_\+2}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a8ac6030561bfef6378ffeee681bfc88c}{Time\+Select\+\_\+3}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ac5d8c214421d9219d8e5ef647f5f6cb5}{Stepback}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0a76476b8e4b5a3f1fac33cb1f6586cb}{Plast\+\_\+water}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a11ec69d94930c5ffe295344a9c7029a7}{Preheat}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0499291c369829dacc7670073c48e8bf}{Index\+Here}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a3efa2ea7cfcf8e1957d03cd5c7d94c73}{Sensor\+On\+\_\+\+Off}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ae12b79aa3b79ec4532f8e495f39f7e32}{Temperature\+Unit}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ae97e894d0d329ba1d4b3f73574a7bc03}{Warm\+Flash}}, 
+\item\mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a820722173069b7b070743e1e0d699dfd}{Heat\+Test}}
+ \end{DoxyCompactItemize}
+ \}
+\item 
+typedef enum \mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0}{Head\+Setting\+::\+Head\+On\+Type\+\_\+}} \mbox{\hyperlink{classHeadSetting_adc03f84127a636868de8f79fb7b5046d}{Head\+On\+Type}}
+\item 
+typedef struct \mbox{\hyperlink{structHeadSetting_1_1HeadParameters__}{Head\+Setting\+::\+Head\+Parameters\+\_\+}} \mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Parameters}}
+\item 
+typedef enum \mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98}{Head\+Setting\+::\+Head\+Commands\+En\+\_\+}} \mbox{\hyperlink{classHeadSetting_afe9523cb7fbbae2db026b1fca4a02be3}{Head\+Commands\+En}}
+\item 
+typedef struct \mbox{\hyperlink{structHeadSetting_1_1HeadComands__}{Head\+Setting\+::\+Head\+Comands\+\_\+}} \mbox{\hyperlink{classHeadSetting_a53d6fb7e789941346f1fb2094317a78e}{Head\+Comands}}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHeadSetting_a14f70fd21c7b49f6ac0ebc71cef6583b}{from\+Byte\+Array}} (Q\+Byte\+Array h\+Param\+Arr)
+\item 
+\mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Parameters}} \mbox{\hyperlink{classHeadSetting_a63424c056f596a8d30a10247841056a5}{operator=}} (\mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Parameters}} h\+Param)
+\item 
+\mbox{\hyperlink{classHeadSetting_a917fa6a3f5a948babf7a4ac2da7ba665}{Head\+Setting}} (\mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Parameters}} h\+Param)
+\item 
+\mbox{\hyperlink{classHeadSetting_af36d589b132ae92d8288a0e896d5cfd5}{Head\+Setting}} ()
+\item 
+\mbox{\hyperlink{classHeadSetting_a0330e2d60a22fda9da5e85ce6a804ee3}{$\sim$\+Head\+Setting}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classHeadSetting_aefe83a9a9da6123bbe8ccd2df9258e3d}{get\+Head\+State\+Lo}} ()
+\item 
+static \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classHeadSetting_aa63ae6dc7f85ebb31c3245a69634857e}{get\+Head\+State\+Hi}} ()
+\item 
+static bool \mbox{\hyperlink{classHeadSetting_a356608c5e1fa48fdb3757b756a87de77}{get\+Head\+State\+At\+Index}} (\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} index)
+\item 
+static void \mbox{\hyperlink{classHeadSetting_a3559c23ea969b8dd8e42312b95362194}{set\+Head\+On\+\_\+\+Off\+State\+Ind}} (\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} index, bool state)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Parameters}} \mbox{\hyperlink{classHeadSetting_a842397f02022fd1d4217afb65beac990}{head\+Param}}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} \mbox{\hyperlink{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}{head\+State\+All}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classHeadSetting_a53d6fb7e789941346f1fb2094317a78e}\label{classHeadSetting_a53d6fb7e789941346f1fb2094317a78e}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+Comands@{Head\+Comands}}
+\index{Head\+Comands@{Head\+Comands}!Head\+Setting@{Head\+Setting}}
+\paragraph{\texorpdfstring{Head\+Comands}{HeadComands}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structHeadSetting_1_1HeadComands__}{Head\+Setting\+::\+Head\+Comands\+\_\+}} \mbox{\hyperlink{classHeadSetting_a53d6fb7e789941346f1fb2094317a78e}{Head\+Setting\+::\+Head\+Comands}}}
+
+\mbox{\Hypertarget{classHeadSetting_afe9523cb7fbbae2db026b1fca4a02be3}\label{classHeadSetting_afe9523cb7fbbae2db026b1fca4a02be3}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+Commands\+En@{Head\+Commands\+En}}
+\index{Head\+Commands\+En@{Head\+Commands\+En}!Head\+Setting@{Head\+Setting}}
+\paragraph{\texorpdfstring{Head\+Commands\+En}{HeadCommandsEn}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98}{Head\+Setting\+::\+Head\+Commands\+En\+\_\+}} \mbox{\hyperlink{classHeadSetting_afe9523cb7fbbae2db026b1fca4a02be3}{Head\+Setting\+::\+Head\+Commands\+En}}}
+
+\mbox{\Hypertarget{classHeadSetting_adc03f84127a636868de8f79fb7b5046d}\label{classHeadSetting_adc03f84127a636868de8f79fb7b5046d}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+On\+Type@{Head\+On\+Type}}
+\index{Head\+On\+Type@{Head\+On\+Type}!Head\+Setting@{Head\+Setting}}
+\paragraph{\texorpdfstring{Head\+On\+Type}{HeadOnType}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0}{Head\+Setting\+::\+Head\+On\+Type\+\_\+}} \mbox{\hyperlink{classHeadSetting_adc03f84127a636868de8f79fb7b5046d}{Head\+Setting\+::\+Head\+On\+Type}}}
+
+\mbox{\Hypertarget{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}\label{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+Parameters@{Head\+Parameters}}
+\index{Head\+Parameters@{Head\+Parameters}!Head\+Setting@{Head\+Setting}}
+\paragraph{\texorpdfstring{Head\+Parameters}{HeadParameters}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structHeadSetting_1_1HeadParameters__}{Head\+Setting\+::\+Head\+Parameters\+\_\+}} \mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Setting\+::\+Head\+Parameters}}}
+
+
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classHeadSetting_a26c38b767aa2b7ab7291ef630eec5cae}\label{classHeadSetting_a26c38b767aa2b7ab7291ef630eec5cae}} 
+{\footnotesize\ttfamily \texorpdfstring{anonymous enum}{anonymous enum}}\\
+Describe address of zero head. First head will have address 0x0003 and so on.
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Device\+Adr\+Offcet@{Head\+Device\+Adr\+Offcet}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Device\+Adr\+Offcet@{Head\+Device\+Adr\+Offcet}}}\mbox{\Hypertarget{classHeadSetting_a26c38b767aa2b7ab7291ef630eec5caeab0f78d4b529a6847e567515aca117a0c}\label{classHeadSetting_a26c38b767aa2b7ab7291ef630eec5caeab0f78d4b529a6847e567515aca117a0c}} 
+Head\+Device\+Adr\+Offcet&0x0002\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32}} 
+{\footnotesize\ttfamily \texorpdfstring{anonymous enum}{anonymous enum}}\\
+Describe address of data places for every head. Name of enumerator item describe parameter which are sends to head PCB. 
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+On@{Head\+On}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+On@{Head\+On}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aa7d44b6745f1db6d62ee634fb39051dd}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aa7d44b6745f1db6d62ee634fb39051dd}} 
+Head\+On&0x01\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Speed\+Rear@{Head\+Speed\+Rear}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Speed\+Rear@{Head\+Speed\+Rear}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a0e44ce76891025c2b326675367082cc9}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a0e44ce76891025c2b326675367082cc9}} 
+Head\+Speed\+Rear&0x02\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Speed\+Front@{Head\+Speed\+Front}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Speed\+Front@{Head\+Speed\+Front}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a2e5f2f0dba724f0715c87f46777633bd}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a2e5f2f0dba724f0715c87f46777633bd}} 
+Head\+Speed\+Front&0x03\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Fl\+Dwell\+Time@{Head\+Fl\+Dwell\+Time}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Fl\+Dwell\+Time@{Head\+Fl\+Dwell\+Time}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7eb5d5b1e85b9532bad9f8f3fd16bd34}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7eb5d5b1e85b9532bad9f8f3fd16bd34}} 
+Head\+Fl\+Dwell\+Time&0x04\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Sq\+Dwell\+Time@{Head\+Sq\+Dwell\+Time}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Sq\+Dwell\+Time@{Head\+Sq\+Dwell\+Time}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ab174598de937b97c20b86c74d19d8aae}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ab174598de937b97c20b86c74d19d8aae}} 
+Head\+Sq\+Dwell\+Time&0x05\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Stroks\+Count@{Head\+Stroks\+Count}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Stroks\+Count@{Head\+Stroks\+Count}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aca1ab3180a5e98e4eddfe21f1eb3405d}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aca1ab3180a5e98e4eddfe21f1eb3405d}} 
+Head\+Stroks\+Count&0x06\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Flash\+Time1Q@{Head\+Flash\+Time1Q}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Flash\+Time1Q@{Head\+Flash\+Time1Q}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a07205ea7208f6366f78a2d31ab6e0f9a}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a07205ea7208f6366f78a2d31ab6e0f9a}} 
+Head\+Flash\+Time1Q&0x07\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Flash\+Time2Q@{Head\+Flash\+Time2Q}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Flash\+Time2Q@{Head\+Flash\+Time2Q}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a27abbc3575dd924d014bfe5969d58156}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a27abbc3575dd924d014bfe5969d58156}} 
+Head\+Flash\+Time2Q&0x08\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+S\+B\+Stroks\+Count@{Head\+S\+B\+Stroks\+Count}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+S\+B\+Stroks\+Count@{Head\+S\+B\+Stroks\+Count}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6a8b426de299d5ba820db429caba6f31}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6a8b426de299d5ba820db429caba6f31}} 
+Head\+S\+B\+Stroks\+Count&0x0E\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Hold\+On\+Off@{Head\+Hold\+On\+Off}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Hold\+On\+Off@{Head\+Hold\+On\+Off}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32acc6942cb582ba862bd75c1ed499a5941}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32acc6942cb582ba862bd75c1ed499a5941}} 
+Head\+Hold\+On\+Off&0x14\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Range\+Limit1@{Head\+Range\+Limit1}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Range\+Limit1@{Head\+Range\+Limit1}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7c1406e9274cd587eab6956c0677d194}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7c1406e9274cd587eab6956c0677d194}} 
+Head\+Range\+Limit1&0x16\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Range\+Limit2@{Head\+Range\+Limit2}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Range\+Limit2@{Head\+Range\+Limit2}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7be69001c09b87de316c340160cff80c}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a7be69001c09b87de316c340160cff80c}} 
+Head\+Range\+Limit2&0x17\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Heat\+Temper@{Head\+Heat\+Temper}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Heat\+Temper@{Head\+Heat\+Temper}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac0ccd3f62dd3b89815f6825ef6f7453c}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac0ccd3f62dd3b89815f6825ef6f7453c}} 
+Head\+Heat\+Temper&0x18\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Heat\+Time\+IR@{Head\+Heat\+Time\+IR}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Heat\+Time\+IR@{Head\+Heat\+Time\+IR}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac6f49cc16663fdfaefce810d20b98f6d}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac6f49cc16663fdfaefce810d20b98f6d}} 
+Head\+Heat\+Time\+IR&0x19\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Flash\+Power\+St\+By@{Head\+Flash\+Power\+St\+By}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Flash\+Power\+St\+By@{Head\+Flash\+Power\+St\+By}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a851c50261e22a531f1e6ce834e3313af}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a851c50261e22a531f1e6ce834e3313af}} 
+Head\+Flash\+Power\+St\+By&0x1A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Flash\+Time\+St\+By@{Head\+Flash\+Time\+St\+By}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Flash\+Time\+St\+By@{Head\+Flash\+Time\+St\+By}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32afe71ff94e7a672c7a3e2eaadaa7675a0}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32afe71ff94e7a672c7a3e2eaadaa7675a0}} 
+Head\+Flash\+Time\+St\+By&0x1B\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Flash\+Power\+Wtout\+IR@{Head\+Flash\+Power\+Wtout\+IR}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Flash\+Power\+Wtout\+IR@{Head\+Flash\+Power\+Wtout\+IR}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aaf01e040d13fff0dabb8a193e9a7cf96}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aaf01e040d13fff0dabb8a193e9a7cf96}} 
+Head\+Flash\+Power\+Wtout\+IR&0x1D\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Heat\+Warm\+Time@{Head\+Heat\+Warm\+Time}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Heat\+Warm\+Time@{Head\+Heat\+Warm\+Time}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aaca3ad6e41eb1cc2ceeab06cafb25da7}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aaca3ad6e41eb1cc2ceeab06cafb25da7}} 
+Head\+Heat\+Warm\+Time&0x1F\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Flash\+Warm\+Time@{Head\+Flash\+Warm\+Time}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Flash\+Warm\+Time@{Head\+Flash\+Warm\+Time}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aa13d50d23c783e119c88b7fea0ee0ac8}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32aa13d50d23c783e119c88b7fea0ee0ac8}} 
+Head\+Flash\+Warm\+Time&0x20\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Head\+Type@{Head\+Head\+Type}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Head\+Type@{Head\+Head\+Type}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac44c8ccfa822c07701e233877a911b24}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac44c8ccfa822c07701e233877a911b24}} 
+Head\+Head\+Type&0x21\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Power\+On@{Head\+Power\+On}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Power\+On@{Head\+Power\+On}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6531411ce72b5da2041ac9247af86038}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6531411ce72b5da2041ac9247af86038}} 
+Head\+Power\+On&0x01\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Heat\+Dry\+Range@{Head\+Heat\+Dry\+Range}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Heat\+Dry\+Range@{Head\+Heat\+Dry\+Range}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac91c9da06ef3db0e017f428ea513dd72}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32ac91c9da06ef3db0e017f428ea513dd72}} 
+Head\+Heat\+Dry\+Range&ND\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Heat\+Time1\+IR@{Head\+Heat\+Time1\+IR}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Heat\+Time1\+IR@{Head\+Heat\+Time1\+IR}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a29d2a6e6e8cb5c1b60eb10cae88f90a5}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a29d2a6e6e8cb5c1b60eb10cae88f90a5}} 
+Head\+Heat\+Time1\+IR&ND\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Heat\+Time2\+IR@{Head\+Heat\+Time2\+IR}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+Heat\+Time2\+IR@{Head\+Heat\+Time2\+IR}}}\mbox{\Hypertarget{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6e5c2056246cce850f12e45f0ef63c93}\label{classHeadSetting_a937c9f57091b4015548d4d6cac973a32a6e5c2056246cce850f12e45f0ef63c93}} 
+Head\+Heat\+Time2\+IR&ND\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+Commands\+En\+\_\+@{Head\+Commands\+En\+\_\+}}
+\index{Head\+Commands\+En\+\_\+@{Head\+Commands\+En\+\_\+}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98}{Head\+Setting\+::\texorpdfstring{Head\+Commands\+En\+\_\+}{HeadCommandsEn\_}}}}\\
+Enumerator, which written to create names of data what must be send to execute commands for head. 
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Idle@{Idle}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Idle@{Idle}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a807730c1450b3dbd1ec13da66d9eca37}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a807730c1450b3dbd1ec13da66d9eca37}} 
+Idle&0\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+\_\+\+On\+Off@{Head\+\_\+\+On\+Off}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Head\+\_\+\+On\+Off@{Head\+\_\+\+On\+Off}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a4c2566d20e72733843a1fcfe9dfe7662}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a4c2566d20e72733843a1fcfe9dfe7662}} 
+Head\+\_\+\+On\+Off&0x01F4\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Change\+Rag\+State@{Change\+Rag\+State}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Change\+Rag\+State@{Change\+Rag\+State}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a80b6c7764296fa15d2f50291d9a9bdea}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a80b6c7764296fa15d2f50291d9a9bdea}} 
+Change\+Rag\+State&0x0190\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Rear@{Move\+Rear}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Move\+Rear@{Move\+Rear}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aa029f529ce3770d57f987ab5f8cb2c90}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aa029f529ce3770d57f987ab5f8cb2c90}} 
+Move\+Rear&0x0762\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Front@{Move\+Front}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Move\+Front@{Move\+Front}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a21100c255d7fa067bd7324568efe5aa7}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a21100c255d7fa067bd7324568efe5aa7}} 
+Move\+Front&0x0763\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Move\+Test@{Move\+Test}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Move\+Test@{Move\+Test}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a36502fc5000f2998df6e195877b99221}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a36502fc5000f2998df6e195877b99221}} 
+Move\+Test&0x0764\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SQ@{SQ}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!SQ@{SQ}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ab79f74e544b53ede28db1894c09c08a3}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ab79f74e544b53ede28db1894c09c08a3}} 
+SQ&0x0765\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FL@{FL}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!FL@{FL}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98adb216a868a62ef870ddca4c6f654b968}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98adb216a868a62ef870ddca4c6f654b968}} 
+FL&0x0766\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+Q\+\_\+\+FL@{S\+Q\+\_\+\+FL}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!S\+Q\+\_\+\+FL@{S\+Q\+\_\+\+FL}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a31241fce61b58699a2e160b9148770e3}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a31241fce61b58699a2e160b9148770e3}} 
+S\+Q\+\_\+\+FL&0x0767\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hold\+\_\+\+Off@{Hold\+\_\+\+Off}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Hold\+\_\+\+Off@{Hold\+\_\+\+Off}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a77ea8b6f36d043b7f75de1e12e974d49}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a77ea8b6f36d043b7f75de1e12e974d49}} 
+Hold\+\_\+\+Off&0x0768\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hold\+\_\+\+On@{Hold\+\_\+\+On}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Hold\+\_\+\+On@{Hold\+\_\+\+On}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aa7b607012f7fd3a5d4a7080d4e116961}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aa7b607012f7fd3a5d4a7080d4e116961}} 
+Hold\+\_\+\+On&0x0769\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Teach\+Position1@{Teach\+Position1}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Teach\+Position1@{Teach\+Position1}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ada676d13dfb3b6a5c481e0374710de2e}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ada676d13dfb3b6a5c481e0374710de2e}} 
+Teach\+Position1&0x076A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Teach\+Position2@{Teach\+Position2}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Teach\+Position2@{Teach\+Position2}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0d42a31cde1263c9ea2632cd54162bb9}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0d42a31cde1263c9ea2632cd54162bb9}} 
+Teach\+Position2&0x076B\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+Q\+\_\+\+F\+L\+\_\+\+Up\+Down@{S\+Q\+\_\+\+F\+L\+\_\+\+Up\+Down}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!S\+Q\+\_\+\+F\+L\+\_\+\+Up\+Down@{S\+Q\+\_\+\+F\+L\+\_\+\+Up\+Down}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aab641e4cd153a874d5264c60c4950773}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aab641e4cd153a874d5264c60c4950773}} 
+S\+Q\+\_\+\+F\+L\+\_\+\+Up\+Down&0x076C\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+P\+T\+\_\+\+Move@{M\+P\+T\+\_\+\+Move}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!M\+P\+T\+\_\+\+Move@{M\+P\+T\+\_\+\+Move}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a6a402cbde9306530ec932ce63ee7b312}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a6a402cbde9306530ec932ce63ee7b312}} 
+M\+P\+T\+\_\+\+Move&0x076D\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pressure\+SQ@{Pressure\+SQ}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Pressure\+SQ@{Pressure\+SQ}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98abdf8b35e3521ec835379772bc543aea7}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98abdf8b35e3521ec835379772bc543aea7}} 
+Pressure\+SQ&0x005A\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Air\+Release@{Air\+Release}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Air\+Release@{Air\+Release}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a2e294adfd581007ba872acd1e18be561}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a2e294adfd581007ba872acd1e18be561}} 
+Air\+Release&0x005B\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Time\+Select\+\_\+1@{Time\+Select\+\_\+1}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Time\+Select\+\_\+1@{Time\+Select\+\_\+1}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aefadc4c4eee710a321bb18d814c339f6}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98aefadc4c4eee710a321bb18d814c339f6}} 
+Time\+Select\+\_\+1&0x005C\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Time\+Select\+\_\+2@{Time\+Select\+\_\+2}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Time\+Select\+\_\+2@{Time\+Select\+\_\+2}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98adb540dca49cd4f036178b2a30eeae925}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98adb540dca49cd4f036178b2a30eeae925}} 
+Time\+Select\+\_\+2&0x005D\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Time\+Select\+\_\+3@{Time\+Select\+\_\+3}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Time\+Select\+\_\+3@{Time\+Select\+\_\+3}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a8ac6030561bfef6378ffeee681bfc88c}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a8ac6030561bfef6378ffeee681bfc88c}} 
+Time\+Select\+\_\+3&0x005E\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Stepback@{Stepback}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Stepback@{Stepback}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ac5d8c214421d9219d8e5ef647f5f6cb5}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ac5d8c214421d9219d8e5ef647f5f6cb5}} 
+Stepback&0x005F\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Plast\+\_\+water@{Plast\+\_\+water}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Plast\+\_\+water@{Plast\+\_\+water}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0a76476b8e4b5a3f1fac33cb1f6586cb}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0a76476b8e4b5a3f1fac33cb1f6586cb}} 
+Plast\+\_\+water&0x0060\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Preheat@{Preheat}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Preheat@{Preheat}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a11ec69d94930c5ffe295344a9c7029a7}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a11ec69d94930c5ffe295344a9c7029a7}} 
+Preheat&0x0061\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Index\+Here@{Index\+Here}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Index\+Here@{Index\+Here}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0499291c369829dacc7670073c48e8bf}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a0499291c369829dacc7670073c48e8bf}} 
+Index\+Here&0x0062\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Sensor\+On\+\_\+\+Off@{Sensor\+On\+\_\+\+Off}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Sensor\+On\+\_\+\+Off@{Sensor\+On\+\_\+\+Off}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a3efa2ea7cfcf8e1957d03cd5c7d94c73}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a3efa2ea7cfcf8e1957d03cd5c7d94c73}} 
+Sensor\+On\+\_\+\+Off&0x0063\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Temperature\+Unit@{Temperature\+Unit}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Temperature\+Unit@{Temperature\+Unit}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ae12b79aa3b79ec4532f8e495f39f7e32}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ae12b79aa3b79ec4532f8e495f39f7e32}} 
+Temperature\+Unit&0x0064\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Warm\+Flash@{Warm\+Flash}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Warm\+Flash@{Warm\+Flash}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ae97e894d0d329ba1d4b3f73574a7bc03}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98ae97e894d0d329ba1d4b3f73574a7bc03}} 
+Warm\+Flash&0x0065\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Heat\+Test@{Heat\+Test}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Heat\+Test@{Heat\+Test}}}\mbox{\Hypertarget{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a820722173069b7b070743e1e0d699dfd}\label{classHeadSetting_aa59726f2f3a2b18d1735f9983277da98a820722173069b7b070743e1e0d699dfd}} 
+Heat\+Test&0x0066\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0}\label{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+On\+Type\+\_\+@{Head\+On\+Type\+\_\+}}
+\index{Head\+On\+Type\+\_\+@{Head\+On\+Type\+\_\+}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0}{Head\+Setting\+::\texorpdfstring{Head\+On\+Type\+\_\+}{HeadOnType\_}}}}\\
+Enumerator describe data which put to \hyperlink{structHeadSetting_1_1HeadParameters___a1b4168f23638650bed9e7f529933a934}{head\+On\+Type} variable to set head type and head state.
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Print\+Head\+Off@{Print\+Head\+Off}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Print\+Head\+Off@{Print\+Head\+Off}}}\mbox{\Hypertarget{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a3c93da953ba33b2131f863e845a89215}\label{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a3c93da953ba33b2131f863e845a89215}} 
+Print\+Head\+Off&0x0001\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Print\+Head\+On@{Print\+Head\+On}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Print\+Head\+On@{Print\+Head\+On}}}\mbox{\Hypertarget{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a3617aa5f657916e1773fc8084edaaf5b}\label{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a3617aa5f657916e1773fc8084edaaf5b}} 
+Print\+Head\+On&0x0002\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Quartz\+Head\+Off@{Quartz\+Head\+Off}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Quartz\+Head\+Off@{Quartz\+Head\+Off}}}\mbox{\Hypertarget{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0ae32652cd3cb4bbbfb1e2306915dc9b44}\label{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0ae32652cd3cb4bbbfb1e2306915dc9b44}} 
+Quartz\+Head\+Off&0x0003\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Quartz\+Head\+On@{Quartz\+Head\+On}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Quartz\+Head\+On@{Quartz\+Head\+On}}}\mbox{\Hypertarget{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0aa5ed02dcbd031c7fe574659e61729f30}\label{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0aa5ed02dcbd031c7fe574659e61729f30}} 
+Quartz\+Head\+On&0x0004\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Infra\+Red\+Head\+Off@{Infra\+Red\+Head\+Off}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Infra\+Red\+Head\+Off@{Infra\+Red\+Head\+Off}}}\mbox{\Hypertarget{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a669c51238be49f67fca28962971b82df}\label{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a669c51238be49f67fca28962971b82df}} 
+Infra\+Red\+Head\+Off&0x0005\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Infra\+Red\+Head\+On@{Infra\+Red\+Head\+On}!Head\+Setting@{Head\+Setting}}\index{Head\+Setting@{Head\+Setting}!Infra\+Red\+Head\+On@{Infra\+Red\+Head\+On}}}\mbox{\Hypertarget{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a28d5853dfd8d6895dc6a3ba94d488d87}\label{classHeadSetting_a4b20eca534a73ccbb980a216ea17c2a0a28d5853dfd8d6895dc6a3ba94d488d87}} 
+Infra\+Red\+Head\+On&0x0006\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHeadSetting_a917fa6a3f5a948babf7a4ac2da7ba665}\label{classHeadSetting_a917fa6a3f5a948babf7a4ac2da7ba665}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+Setting@{Head\+Setting}}
+\index{Head\+Setting@{Head\+Setting}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily Head\+Setting\+::\+\texorpdfstring{Head\+Setting}{HeadSetting}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Parameters}}}]{h\+Param }\end{DoxyParamCaption})} - constructor of class. In this variant of constructor new object fields of \hyperlink{classHeadSetting_a842397f02022fd1d4217afb65beac990}{head\+Param} variable will fill with \textit{h\+Param} structure fields.
+
+\mbox{\Hypertarget{classHeadSetting_af36d589b132ae92d8288a0e896d5cfd5}\label{classHeadSetting_af36d589b132ae92d8288a0e896d5cfd5}} 
+\index{Head\+Setting@{Head\+Setting}!Head\+Setting@{Head\+Setting}}
+\index{Head\+Setting@{Head\+Setting}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily Head\+Setting\+::\+\texorpdfstring{Head\+Setting}{HeadSetting}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - constructor of class. In this variant of constructor new object fields of \hyperlink{classHeadSetting_a842397f02022fd1d4217afb65beac990}{head\+Param} variable will fill with default values.
+
+\mbox{\Hypertarget{classHeadSetting_a0330e2d60a22fda9da5e85ce6a804ee3}\label{classHeadSetting_a0330e2d60a22fda9da5e85ce6a804ee3}} 
+\index{Head\+Setting@{Head\+Setting}!````~Head\+Setting@{$\sim$\+Head\+Setting}}
+\index{````~Head\+Setting@{$\sim$\+Head\+Setting}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily Head\+Setting\+::\texorpdfstring{$\sim$\+Head\+Setting}{~HeadSetting} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard class destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHeadSetting_a14f70fd21c7b49f6ac0ebc71cef6583b}\label{classHeadSetting_a14f70fd21c7b49f6ac0ebc71cef6583b}} 
+\index{Head\+Setting@{Head\+Setting}!from\+Byte\+Array@{from\+Byte\+Array}}
+\index{from\+Byte\+Array@{from\+Byte\+Array}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily void Head\+Setting\+::\texorpdfstring{from\+Byte\+Array}{fromByteArray} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{h\+Param\+Arr }\end{DoxyParamCaption})} - function to fill fields of \hyperlink{classHeadSetting_a842397f02022fd1d4217afb65beac990}{head\+Param} variable with data obtained from \textit{{h\+Param\+Arr }} array.
+
+\mbox{\Hypertarget{classHeadSetting_a356608c5e1fa48fdb3757b756a87de77}\label{classHeadSetting_a356608c5e1fa48fdb3757b756a87de77}} 
+\index{Head\+Setting@{Head\+Setting}!get\+Head\+State\+At\+Index@{get\+Head\+State\+At\+Index}}
+\index{get\+Head\+State\+At\+Index@{get\+Head\+State\+At\+Index}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily bool Head\+Setting\+::\texorpdfstring{get\+Head\+State\+At\+Index}{getHeadStateAtIndex} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}}}]{index }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get state (on or off) of head. State is reading from \hyperlink{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}{head\+State\+All} variable. Parameter \textit{index} describe number of bit in \hyperlink{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}{head\+State\+All} which will be returned.
+
+\mbox{\Hypertarget{classHeadSetting_aa63ae6dc7f85ebb31c3245a69634857e}\label{classHeadSetting_aa63ae6dc7f85ebb31c3245a69634857e}} 
+\index{Head\+Setting@{Head\+Setting}!get\+Head\+State\+Hi@{get\+Head\+State\+Hi}}
+\index{get\+Head\+State\+Hi@{get\+Head\+State\+Hi}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Head\+Setting\+::\texorpdfstring{get\+Head\+State\+Hi}{getHeadStateHi} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}} - function to get two highest bytes of \hyperlink{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}{head\+State\+All} variable.
+
+\mbox{\Hypertarget{classHeadSetting_aefe83a9a9da6123bbe8ccd2df9258e3d}\label{classHeadSetting_aefe83a9a9da6123bbe8ccd2df9258e3d}} 
+\index{Head\+Setting@{Head\+Setting}!get\+Head\+State\+Lo@{get\+Head\+State\+Lo}}
+\index{get\+Head\+State\+Lo@{get\+Head\+State\+Lo}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Head\+Setting\+::\texorpdfstring{get\+Head\+State\+Lo}{getHeadStateLo} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [static]}}- function to get two lowest bytes of \hyperlink{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}{head\+State\+All} variable.
+
+\mbox{\Hypertarget{classHeadSetting_a63424c056f596a8d30a10247841056a5}\label{classHeadSetting_a63424c056f596a8d30a10247841056a5}} 
+\index{Head\+Setting@{Head\+Setting}!operator=@{operator=}}
+\index{operator=@{operator=}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Setting\+::\+Head\+Parameters}} Head\+Setting\+::\texorpdfstring{operator=}{operator=} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Setting\+::\+Head\+Parameters}}}]{h\+Param }\end{DoxyParamCaption})} - reimplementation of equality operator to copy \textit{h\+Param} fields to fields of \hyperlink{classHeadSetting_a842397f02022fd1d4217afb65beac990}{head\+Param} variable.
+
+\mbox{\Hypertarget{classHeadSetting_a3559c23ea969b8dd8e42312b95362194}\label{classHeadSetting_a3559c23ea969b8dd8e42312b95362194}} 
+\index{Head\+Setting@{Head\+Setting}!set\+Head\+On\+\_\+\+Off\+State\+Ind@{set\+Head\+On\+\_\+\+Off\+State\+Ind}}
+\index{set\+Head\+On\+\_\+\+Off\+State\+Ind@{set\+Head\+On\+\_\+\+Off\+State\+Ind}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily void Head\+Setting\+::\texorpdfstring{set\+Head\+On\+\_\+\+Off\+State\+Ind}{setHeadOn\_OffStateInd} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}}}]{index,  }\item[{bool}]{state }\end{DoxyParamCaption}){\ttfamily [static]}} - function to set one bit of \hyperlink{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}{head\+State\+All} to \textit{state} at \textit{index} position.
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classHeadSetting_a842397f02022fd1d4217afb65beac990}\label{classHeadSetting_a842397f02022fd1d4217afb65beac990}} 
+\index{Head\+Setting@{Head\+Setting}!head\+Param@{head\+Param}}
+\index{head\+Param@{head\+Param}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadSetting_ab604bc48df56fc11dd649357ae7b45b8}{Head\+Parameters}} Head\+Setting\+::\texorpdfstring{head\+Param}{headParam}}
+
+\mbox{\Hypertarget{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}\label{classHeadSetting_ab80c33d0484f96c53e92ce1842fd0b43}} 
+\index{Head\+Setting@{Head\+Setting}!head\+State\+All@{head\+State\+All}}
+\index{head\+State\+All@{head\+State\+All}!Head\+Setting@{Head\+Setting}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} Head\+Setting\+::\texorpdfstring{head\+State\+All}{headStateAll}{\ttfamily [static]}}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{settings_8h}{settings.\+h}}\item 
+\mbox{\hyperlink{settings_8cpp}{settings.\+cpp}}\end{DoxyCompactItemize}
+\newpage

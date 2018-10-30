@@ -1,0 +1,87 @@
+\hypertarget{unionModData__}{}\subsection{Mod\+Data\+\_\+ Union Reference}
+\label{unionModData__}\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+
+
+{\ttfamily \#include $<$serialport.\+h$>$}
+
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\_t}} \mbox{\hyperlink{unionModData___a806e3925e1b4722056cb8f0b46ab9407}{crc16Val}}:16\\
+\>\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\_t}} \mbox{\hyperlink{unionModData___a9da744053275e3ee8e1e8a64e8bed7c3}{data}}:16\\
+\>\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\_t}} \mbox{\hyperlink{unionModData___acf7fca8058f75c693373e96038158eb8}{registerNo}}:8\\
+\>\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\_t}} \mbox{\hyperlink{unionModData___afaeee3115b1424db2b572f644ca9d179}{adress}}:8\\
+\} \mbox{\hyperlink{unionModData___aa4dd5ccccd7727341bbc1c0027521a66}{bits}}\\
+
+\end{tabbing}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\_t}} \mbox{\hyperlink{unionModData___a806e3925e1b4722056cb8f0b46ab9407}{crc16Val}}:16\\
+\>\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\_t}} \mbox{\hyperlink{unionModData___a9da744053275e3ee8e1e8a64e8bed7c3}{data}}:16\\
+\>\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\_t}} \mbox{\hyperlink{unionModData___acf7fca8058f75c693373e96038158eb8}{registerNo}}:7\\
+\>\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\_t}} \mbox{\hyperlink{unionModData___ace1455957fe106915d531b3f37c991dd}{rwBit}}:1\\
+\>\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\_t}} \mbox{\hyperlink{unionModData___afaeee3115b1424db2b572f644ca9d179}{adress}}:7\\
+\>\mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\_t}} \mbox{\hyperlink{unionModData___aaff791ab397b823d20298f3ef7ae37a8}{rwBit\_}}:1\\
+\} \mbox{\hyperlink{unionModData___a64b11d6c2878de78325bf04f1e77dcf7}{fileds}}\\
+
+\end{tabbing}\item 
+u\+\_\+int64\+\_\+t \mbox{\hyperlink{unionModData___a5d5568437f4a29d0ff4e32bfcd7c5923}{all}}\+:48
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{unionModData___afaeee3115b1424db2b572f644ca9d179}\label{unionModData___afaeee3115b1424db2b572f644ca9d179}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!adress@{adress}}
+\index{adress@{adress}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} Mod\+Data\+\_\+\+::\texorpdfstring{adress}{adress}} - field of union which give access to data at position where address of sender/receiver device stored. Part of \hyperlink{unionModData___aa4dd5ccccd7727341bbc1c0027521a66}{bits} structure.
+
+\mbox{\Hypertarget{unionModData___a5d5568437f4a29d0ff4e32bfcd7c5923}\label{unionModData___a5d5568437f4a29d0ff4e32bfcd7c5923}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!all@{all}}
+\index{all@{all}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily u\+\_\+int64\+\_\+t Mod\+Data\+\_\+\+::\texorpdfstring{all}{all}} - field of union which give access to all data stored in union. Used to written data to union and have access to parts of data.
+
+\mbox{\Hypertarget{unionModData___aa4dd5ccccd7727341bbc1c0027521a66}\label{unionModData___aa4dd5ccccd7727341bbc1c0027521a66}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!bits@{bits}}
+\index{bits@{bits}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily struct \{ ... \}  Mod\+Data\+\_\+\+::\texorpdfstring{bits}{bits}} - structure (one of union fields) which used to have access to data in different places in data union.
+
+\mbox{\Hypertarget{unionModData___a806e3925e1b4722056cb8f0b46ab9407}\label{unionModData___a806e3925e1b4722056cb8f0b46ab9407}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!crc16\+Val@{crc16\+Val}}
+\index{crc16\+Val@{crc16\+Val}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Mod\+Data\+\_\+\+::\texorpdfstring{crc16\+Val}{crc16Val}} - field of union which give access to data at position where 2 bytes of data of package stored.
+
+\mbox{\Hypertarget{unionModData___a9da744053275e3ee8e1e8a64e8bed7c3}\label{unionModData___a9da744053275e3ee8e1e8a64e8bed7c3}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!data@{data}}
+\index{data@{data}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Mod\+Data\+\_\+\+::\texorpdfstring{data}{data}} - field of union which give access to data at position where control sum of package stored.
+
+\mbox{\Hypertarget{unionModData___a64b11d6c2878de78325bf04f1e77dcf7}\label{unionModData___a64b11d6c2878de78325bf04f1e77dcf7}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!fileds@{fileds}}
+\index{fileds@{fileds}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily struct \{ ... \}  Mod\+Data\+\_\+\+::\texorpdfstring{fileds}{fileds}} - structure (one of union fields) which used to access to data in different places in data union. Created to have possibility to access to \hyperlink{unionModData___ace1455957fe106915d531b3f37c991dd}{rwBit} (Used to check is got data must be written to appropriate place or it is data request).  
+
+\mbox{\Hypertarget{unionModData___acf7fca8058f75c693373e96038158eb8}\label{unionModData___acf7fca8058f75c693373e96038158eb8}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!register\+No@{register\+No}}
+\index{register\+No@{register\+No}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} Mod\+Data\+\_\+\+::\texorpdfstring{register\+No}{registerNo}} - field of union which give access to data at position where register address stored.
+
+\mbox{\Hypertarget{unionModData___ace1455957fe106915d531b3f37c991dd}\label{unionModData___ace1455957fe106915d531b3f37c991dd}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!rw\+Bit@{rw\+Bit}}
+\index{rw\+Bit@{rw\+Bit}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} Mod\+Data\+\_\+\+::\texorpdfstring{rw\+Bit}{rwBit}} - field of union (one bit) used to check is got data must be written to appropriate place or it is data request.
+
+\mbox{\Hypertarget{unionModData___aaff791ab397b823d20298f3ef7ae37a8}\label{unionModData___aaff791ab397b823d20298f3ef7ae37a8}} 
+\index{Mod\+Data\+\_\+@{Mod\+Data\+\_\+}!rw\+Bit\+\_\+@{rw\+Bit\+\_\+}}
+\index{rw\+Bit\+\_\+@{rw\+Bit\+\_\+}!Mod\+Data\+\_\+@{Mod\+Data\+\_\+}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a48091a1e52849b0871df2f7081be2e38}{uint8\+\_\+t}} Mod\+Data\+\_\+\+::\texorpdfstring{rw\+Bit\+\_\+}{rwBit\_}} - unused (reserved bit).
+
+
+
+The documentation for this union was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{serialport_8h}{serialport.\+h}}\end{DoxyCompactItemize}
+\newpage

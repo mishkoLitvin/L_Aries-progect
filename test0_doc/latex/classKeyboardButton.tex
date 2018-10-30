@@ -1,0 +1,80 @@
+\hypertarget{classKeyboardButton}{}\subsection{Keyboard\+Button Class Reference}
+\label{classKeyboardButton}\index{Keyboard\+Button@{Keyboard\+Button}}
+Reimplementation of class of QPushButton. Added \hyperlink{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}{character} variable and signal \hyperlink{classKeyboardButton_a6c6694c8330565de78f47f3c5fe11d06}{clicked}(...)
+
+{\ttfamily \#include $<$keyboarddialog.\+h$>$}
+
+Inheritance diagram for Keyboard\+Button\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classKeyboardButton}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classKeyboardButton_a6c6694c8330565de78f47f3c5fe11d06}{clicked}} (Q\+String \mbox{\hyperlink{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}{character}})
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classKeyboardButton_ac2eac39f778e78dad45bac730e6a30bd}{Keyboard\+Button}} (Q\+String \mbox{\hyperlink{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}{character}})
+\item 
+Q\+String \mbox{\hyperlink{classKeyboardButton_a44c7448a3bae4dbc1a3f4f7ecbaeafbd}{get\+Character}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardButton_aca3123dc3392dc90f631bf8004a71061}{set\+Character}} (Q\+String str)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classKeyboardButton_a518fc800cf7acf3b2a9614c7bfe74f93}{this\+Clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \mbox{\hyperlink{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}{character}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classKeyboardButton_ac2eac39f778e78dad45bac730e6a30bd}\label{classKeyboardButton_ac2eac39f778e78dad45bac730e6a30bd}} 
+\index{Keyboard\+Button@{Keyboard\+Button}!Keyboard\+Button@{Keyboard\+Button}}
+\index{Keyboard\+Button@{Keyboard\+Button}!Keyboard\+Button@{Keyboard\+Button}}
+{\footnotesize\ttfamily Keyboard\+Button\+::\texorpdfstring{Keyboard\+Button}{KeyboardButton} (\begin{DoxyParamCaption}\item[{Q\+String}]{character }\end{DoxyParamCaption})} - constructor of class with \hyperlink{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}{character} variable initialization. Value of parameter sets like a text on button.
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classKeyboardButton_a6c6694c8330565de78f47f3c5fe11d06}\label{classKeyboardButton_a6c6694c8330565de78f47f3c5fe11d06}} 
+\index{Keyboard\+Button@{Keyboard\+Button}!clicked@{clicked}}
+\index{clicked@{clicked}!Keyboard\+Button@{Keyboard\+Button}}
+{\footnotesize\ttfamily void Keyboard\+Button\+::\texorpdfstring{clicked}{clicked} (\begin{DoxyParamCaption}\item[{Q\+String}]{character }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which emit when button is clicked by \hyperlink{classKeyboardButton_a518fc800cf7acf3b2a9614c7bfe74f93}{this\+Clicked}(..) function.
+
+\mbox{\Hypertarget{classKeyboardButton_a44c7448a3bae4dbc1a3f4f7ecbaeafbd}\label{classKeyboardButton_a44c7448a3bae4dbc1a3f4f7ecbaeafbd}} 
+\index{Keyboard\+Button@{Keyboard\+Button}!get\+Character@{get\+Character}}
+\index{get\+Character@{get\+Character}!Keyboard\+Button@{Keyboard\+Button}}
+{\footnotesize\ttfamily Q\+String Keyboard\+Button\+::\texorpdfstring{get\+Character}{getCharacter} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function to get \hyperlink{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}{character} variable.
+
+\mbox{\Hypertarget{classKeyboardButton_aca3123dc3392dc90f631bf8004a71061}\label{classKeyboardButton_aca3123dc3392dc90f631bf8004a71061}} 
+\index{Keyboard\+Button@{Keyboard\+Button}!set\+Character@{set\+Character}}
+\index{set\+Character@{set\+Character}!Keyboard\+Button@{Keyboard\+Button}}
+{\footnotesize\ttfamily void Keyboard\+Button\+::\texorpdfstring{set\+Character}{setCharacter} (\begin{DoxyParamCaption}\item[{Q\+String}]{str }\end{DoxyParamCaption})} - function to set \hyperlink{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}{character} variable.
+
+\mbox{\Hypertarget{classKeyboardButton_a518fc800cf7acf3b2a9614c7bfe74f93}\label{classKeyboardButton_a518fc800cf7acf3b2a9614c7bfe74f93}} 
+\index{Keyboard\+Button@{Keyboard\+Button}!this\+Clicked@{this\+Clicked}}
+\index{this\+Clicked@{this\+Clicked}!Keyboard\+Button@{Keyboard\+Button}}
+{\footnotesize\ttfamily void Keyboard\+Button\+::\texorpdfstring{this\+Clicked}{thisClicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [slot]}} - function which called by standard \textit{Q\+Push\+Button::clicked()} signal and emit \hyperlink{classKeyboardButton_a6c6694c8330565de78f47f3c5fe11d06}{clicked}(...) signal.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}\label{classKeyboardButton_a8979a4765bd83241a9a253211ec03774}} 
+\index{Keyboard\+Button@{Keyboard\+Button}!character@{character}}
+\index{character@{character}!Keyboard\+Button@{Keyboard\+Button}}
+{\footnotesize\ttfamily Q\+String Keyboard\+Button\+::\texorpdfstring{character}{character}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{keyboarddialog_8h}{keyboarddialog.\+h}}\item 
+\mbox{\hyperlink{keyboarddialog_8cpp}{keyboarddialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

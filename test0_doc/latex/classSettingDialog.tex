@@ -1,0 +1,568 @@
+\hypertarget{classSettingDialog}{}\subsection{Setting\+Dialog Class Reference}
+\label{classSettingDialog}\index{Setting\+Dialog@{Setting\+Dialog}}
+
+
+{\ttfamily \#include $<$headsettingdialog.\+h$>$}
+
+Inheritance diagram for Setting\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSettingDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSettingDialog_abaf35d57bd061500e4d06c86bd9b7373}{accept}} (int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}, Q\+Byte\+Array h\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classSettingDialog_aaec8f3ce53ff211c0d2a3ebace6a4120}{change\+Number}} (int new\+Index)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a88624538f0c2940ca17787bc797d695f}{send\+Command}} (int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}, Q\+Byte\+Array command)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a3d2a5649a7c33127df571fef48c68744}{set\+Params\+To\+All}} (int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}, Q\+Byte\+Array h\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classSettingDialog_aa1a997bd3c53719f9d94a8c637d0a3e9}{color\+Changed}} (int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}, Q\+Color col)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSettingDialog_ab7c9f7de85d73ca64b847ca3a0cd422a}{Setting\+Dialog}} (\mbox{\hyperlink{classHeadSetting}{Head\+Setting}} h\+Sttg, int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}=0, Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classSettingDialog_a9bfa278550d23df3f5e944989b0b0f54}{$\sim$\+Setting\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a43114394546e14f2a5c140591708b53d}{set\+Registers}} (\mbox{\hyperlink{classRegister}{Register}} $\ast$reg)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a3ab742273bba41f566e2ec5e23e15adf}{set\+Head\+Params}} (int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}=0, bool disconnect=true)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a25e9a36fc58d6cc9ae3fa63ff323d139}{set\+Head\+Params}} (\mbox{\hyperlink{classHeadSetting}{Head\+Setting}} h\+Sttg, int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}=0, bool disconnect=true)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a47c392fce9b4379ee287f94ee13add91}{set\+Icon\+Folder}} (Q\+String path)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSettingDialog_a8946ea3396791c3bfdb0af9294432456}{event}} (Q\+Event $\ast$e)
+\item 
+bool \mbox{\hyperlink{classSettingDialog_aced29131c09a6a91867bd3d6b05f01dc}{event\+Filter}} (Q\+Object $\ast$watched, Q\+Event $\ast$\mbox{\hyperlink{classSettingDialog_a8946ea3396791c3bfdb0af9294432456}{event}})
+\item 
+void \mbox{\hyperlink{classSettingDialog_aaed08f2ad87702c7d6ff0a4a5df7e1e7}{show\+Event}} (Q\+Show\+Event $\ast$ev)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a7aa0c7f2703bd6d208570eb7ed98e47b}{change\+Event}} (Q\+Event $\ast$\mbox{\hyperlink{classSettingDialog_a8946ea3396791c3bfdb0af9294432456}{event}})
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSettingDialog_ac5caf772c1ad7d7607a164ad7f6fe647}{accept}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_aa2d0391c28612987805722038013f5a9}{reject}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a586eff422c5c347ee5ff3ffe71b5ba97}{p\+Button\+Inc\+Clkd}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a87b4aca2d528b1b8e943983efc9d9506}{p\+Button\+Dec\+Clkd}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_acd1bbe0b354633f39e4f0a15468098ad}{connect\+All}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a5d520fb11c481f648ed061cd700916fa}{disconnect\+All}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a01d7341608bd80021abd1a5892fdb131}{event\+Filter\+Setup}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a14896cba93080b0784380651579d809c}{temperature\+Sensore\+Changed}} (bool temp\+Sens)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a57173bd31c0554d31571332ceb175b3d}{on\+\_\+tool\+Button\+Plast\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a28734c990957727acebddabbe01fa442}{on\+\_\+tool\+Button\+F\+L\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a2622da82b9284689d035a96c2c3642f5}{on\+\_\+tool\+Button\+Move\+Rear\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_adf5bed0777bbaa36f25b9280528cf342}{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Qup\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a40bed1f6bde134fabcd9b39e4498cffb}{on\+\_\+tool\+Button\+Move\+Front\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a44def5923853f2e47dc2ad8247a62227}{on\+\_\+tool\+Button\+M\+T\+P\+Move\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a4c777f59dac2be7467f61d171b937a9f}{on\+\_\+tool\+Button\+S\+Q\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a9fd57e56c1364cb5107b314bec9d414d}{on\+\_\+tool\+Button\+Move\+Test\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a0745d27f5e4a4d24b0722123bc06d25e}{on\+\_\+tool\+Button\+Pressure\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_ac1ac55a6bfd2730cad20f4bcc2805049}{on\+\_\+tool\+Button\+Hold\+On\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a40f0ebcd38f004373ce6037a47f55da7}{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Q\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a24027ff6daaf9b3537de48ec915ad428}{on\+\_\+tool\+Button\+Step\+Back\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_ae6edcd6a2151ec8402904fd33cbd1a95}{on\+\_\+tool\+Button\+Index\+Here\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_aa4c4eae09fcec8ad3a2bb8615e314e39}{on\+\_\+tool\+Button\+Ink\+Color\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a08f91f306b9e5fbe3f24dea1bc8b7152}{on\+\_\+tool\+Button\+Pressure\+Air\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a0fd7b8d8b9d06ff10dd9136e699cb5f0}{on\+\_\+p\+Button\+Head\+On\+Off\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a2eb481548395d6d2459456076678bcf1}{on\+\_\+tool\+Button\+Quartz\+Preheat\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a4030986a71c3245c64458117b358f5cc}{on\+\_\+tool\+Button\+Quartz\+Test\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a7c13d35ab90a6bc7e77a7eb02e90df82}{on\+\_\+tool\+Button\+Quartz\+Step\+Back\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_af6128bbe3289b7033e27d0e2d439e24b}{on\+\_\+tool\+Button\+Quartz\+Warming\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a991a3f7add65873f5e790dbc5b2d98f7}{on\+\_\+push\+Button\+Copy\+To\+All\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classSettingDialog_a1e0138fa136b0723568b8ebed97fc6f6}{tab\+Widget\+\_\+current\+Changed}} (int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}})
+\item 
+void \mbox{\hyperlink{classSettingDialog_aa6602067bd18c4e6e845d0c217380120}{spin\+Box\+Rear\+Speed\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a8a2f78f4b1107c94a07880c93ecaebc4}{d\+Spin\+Box\+Rear\+Range\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a02039d7e4a584da46e7bf658b8ed78a7}{spin\+Box\+Front\+Speed\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a2943dbf41bfa2b9cee5ad661447ca9be}{d\+Spin\+Box\+Front\+Range\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a6cd6886cf912cfb5275754183334e70f}{spin\+Box\+Strok\+Count\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_abe2d0f0bf0ea4c12cdd18b4c63e18ef2}{spin\+Box\+S\+B\+Strok\+Count\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a14fb25d61fdf8e847806ae6ae0143979}{d\+Spin\+Box\+Heat\+Time1\+I\+R\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_ac43003a00b40d40c1d8518429234d52a}{d\+Spin\+Box\+Heat\+Time2\+I\+R\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a9ca34f0f0587dc274c346a0198e69332}{d\+Spin\+Box\+Drying\+Range\+I\+R\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a2ba1d0392bf7d998803541765f2114d7}{d\+Spin\+Box\+Fl\+Dwell\+Time\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a37e06665f728195a910d80f586cb8932}{d\+Spin\+Box\+Sq\+Dwell\+Time\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a2b0e2cfbda5f92f47197fd154e4a7641}{d\+Spin\+Box\+Heat\+Time1\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_ac3915bcd030a25082dab75845291c1e7}{d\+Spin\+Box\+Heat\+Time2\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a79c8072c55146ad38a739567b2233c1f}{spin\+Box\+Dry\+Power\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a94dab1fe735e3991220956b64c21219b}{d\+Spin\+Box\+Stepback\+Dry\+Time\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a373951de775a1b220c6d7d9abd59f76c}{d\+Spin\+Box\+Temperature\+Set\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_aa6079278861db915fe4a4d18b5008a6e}{d\+Spin\+Box\+Dry\+Time\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a453eecb0650ad29e6d14fb641ef79697}{spin\+Box\+Standby\+Power\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_af40ee40d8aff8550e5ffe2ccdac384ae}{d\+Spin\+Box\+Standby\+Time\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_af6f257e19ab8d0bc8f724c217c5039af}{d\+Spin\+Box\+Warm\+Flash\+Time\+Q\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classSettingDialog_a0670d5bdf419372d7c5e314b45064a85}{r\+Button\+Time1\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Setting\+Dialog $\ast$ \mbox{\hyperlink{classSettingDialog_a445c68adc5c9f920537e4637f9c7e55b}{ui}}
+\item 
+bool \mbox{\hyperlink{classSettingDialog_a92ac83de20616f1f67f369dec0afe5f0}{with\+Temperature\+Sensor}}
+\item 
+int \mbox{\hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index}}
+\item 
+bool \mbox{\hyperlink{classSettingDialog_a76fcfae71a48ee3d0ab4d7a28f850d1a}{accept\+On\+Deactilation\+En}}
+\item 
+bool \mbox{\hyperlink{classSettingDialog_a5091b6757e8f987f4bdf5de856b694f6}{accept\+Enable}}
+\item 
+\mbox{\hyperlink{classHeadSetting}{Head\+Setting}} \mbox{\hyperlink{classSettingDialog_ae53d3ff786571f3291668e3d90ad16cb}{head\+Settings}}
+\item 
+\mbox{\hyperlink{classRegister}{Register}} $\ast$ \mbox{\hyperlink{classSettingDialog_a66c450ef93bc3346d5b2fa08eb58d48f}{registers}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSettingDialog_ab7c9f7de85d73ca64b847ca3a0cd422a}\label{classSettingDialog_ab7c9f7de85d73ca64b847ca3a0cd422a}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!Setting\+Dialog@{Setting\+Dialog}}
+\index{Setting\+Dialog@{Setting\+Dialog}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily Setting\+Dialog\+::\texorpdfstring{Setting\+Dialog}{SettingDialog} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadSetting}{Head\+Setting}}}]{h\+Sttg,  }\item[{int}]{index = {\ttfamily 0},  }\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - class constructor. At constructor fields of dialog fill with parameters given at \textit{hSttg} and call \hyperlink{classSettingDialog_a01d7341608bd80021abd1a5892fdb131}{event\+Filter\+Setup}(...) function.
+
+\mbox{\Hypertarget{classSettingDialog_a9bfa278550d23df3f5e944989b0b0f54}\label{classSettingDialog_a9bfa278550d23df3f5e944989b0b0f54}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!````~Setting\+Dialog@{$\sim$\+Setting\+Dialog}}
+\index{````~Setting\+Dialog@{$\sim$\+Setting\+Dialog}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily Setting\+Dialog\+::\texorpdfstring{$\sim$\+Setting\+Dialog}{~SettingDialog} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSettingDialog_abaf35d57bd061500e4d06c86bd9b7373}\label{classSettingDialog_abaf35d57bd061500e4d06c86bd9b7373}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!accept@{accept}}
+\index{accept@{accept}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{accept}{accept}\hspace{0.1cm} (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Byte\+Array}]{h\+Param\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which emitted by \hyperlink{classSettingDialog_ac5caf772c1ad7d7607a164ad7f6fe647}{accept}(...) function and handled in parent object. Parameter \textit{index} contain information about head number, and \textit{h\+Param\+Arr} contain all head parameters. Parameters are save to hard drive at parent object.
+
+\mbox{\Hypertarget{classSettingDialog_ac5caf772c1ad7d7607a164ad7f6fe647}\label{classSettingDialog_ac5caf772c1ad7d7607a164ad7f6fe647}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!accept@{accept}}
+\index{accept@{accept}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{accept}{accept}\hspace{0.1cm} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to collect head parameters, put them to appropriate places at array and emit \hyperlink{classSettingDialog_abaf35d57bd061500e4d06c86bd9b7373}{accept}(...) signal.
+
+\mbox{\Hypertarget{classSettingDialog_a7aa0c7f2703bd6d208570eb7ed98e47b}\label{classSettingDialog_a7aa0c7f2703bd6d208570eb7ed98e47b}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}- reimplementation of default event of Q\+Dialog to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classSettingDialog_aaec8f3ce53ff211c0d2a3ebace6a4120}\label{classSettingDialog_aaec8f3ce53ff211c0d2a3ebace6a4120}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!change\+Number@{change\+Number}}
+\index{change\+Number@{change\+Number}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{change\+Number}{changeNumber} (\begin{DoxyParamCaption}\item[{int}]{new\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which handle at parent object and used for fast change of head number. Signal emits by \hyperlink{classSettingDialog_a586eff422c5c347ee5ff3ffe71b5ba97}{p\+Button\+Inc\+Clkd}(...) and \hyperlink{classSettingDialog_a87b4aca2d528b1b8e943983efc9d9506}{p\+Button\+Dec\+Clkd}(...) functions with appropriate value of parameter.
+
+\mbox{\Hypertarget{classSettingDialog_aa1a997bd3c53719f9d94a8c637d0a3e9}\label{classSettingDialog_aa1a997bd3c53719f9d94a8c637d0a3e9}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!color\+Changed@{color\+Changed}}
+\index{color\+Changed@{color\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{color\+Changed}{colorChanged} (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Color}]{col }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which emits by \hyperlink{classSettingDialog_aa4c4eae09fcec8ad3a2bb8615e314e39}{on\+\_\+tool\+Button\+Ink\+Color\+\_\+clicked}(...) function. Signal contain information about rag color on head.
+
+\mbox{\Hypertarget{classSettingDialog_acd1bbe0b354633f39e4f0a15468098ad}\label{classSettingDialog_acd1bbe0b354633f39e4f0a15468098ad}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!connect\+All@{connect\+All}}
+\index{connect\+All@{connect\+All}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{connect\+All}{connectAll} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to connect all fields of dialog to appropriate functions.
+
+\mbox{\Hypertarget{classSettingDialog_a5d520fb11c481f648ed061cd700916fa}\label{classSettingDialog_a5d520fb11c481f648ed061cd700916fa}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!disconnect\+All@{disconnect\+All}}
+\index{disconnect\+All@{disconnect\+All}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{disconnect\+All}{disconnectAll} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to disconnect all fields of dialog to appropriate functions.
+
+\begin{center}	\line(1,0){450} \end{center}
+All functions in next block used to send parameters to master PCB to configure machine. \\
+Functions used to get values from fields with head parameters, gather them into byte array and emit \hyperlink{classSettingDialog_a88624538f0c2940ca17787bc797d695f}{send\+Command}(...) signal with appropriate data.
+
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classSettingDialog_a9ca34f0f0587dc274c346a0198e69332}\label{classSettingDialog_a9ca34f0f0587dc274c346a0198e69332}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Drying\+Range\+I\+R\+\_\+value\+Changed@{d\+Spin\+Box\+Drying\+Range\+I\+R\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Drying\+Range\+I\+R\+\_\+value\+Changed@{d\+Spin\+Box\+Drying\+Range\+I\+R\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Drying\+Range\+I\+R\+\_\+value\+Changed}{dSpinBoxDryingRangeIR\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_aa6079278861db915fe4a4d18b5008a6e}\label{classSettingDialog_aa6079278861db915fe4a4d18b5008a6e}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Dry\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Dry\+Time\+Q\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Dry\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Dry\+Time\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Dry\+Time\+Q\+\_\+value\+Changed}{dSpinBoxDryTimeQ\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a2ba1d0392bf7d998803541765f2114d7}\label{classSettingDialog_a2ba1d0392bf7d998803541765f2114d7}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Fl\+Dwell\+Time\+\_\+value\+Changed@{d\+Spin\+Box\+Fl\+Dwell\+Time\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Fl\+Dwell\+Time\+\_\+value\+Changed@{d\+Spin\+Box\+Fl\+Dwell\+Time\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Fl\+Dwell\+Time\+\_\+value\+Changed}{dSpinBoxFlDwellTime\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a2943dbf41bfa2b9cee5ad661447ca9be}\label{classSettingDialog_a2943dbf41bfa2b9cee5ad661447ca9be}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Front\+Range\+\_\+value\+Changed@{d\+Spin\+Box\+Front\+Range\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Front\+Range\+\_\+value\+Changed@{d\+Spin\+Box\+Front\+Range\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Front\+Range\+\_\+value\+Changed}{dSpinBoxFrontRange\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a14fb25d61fdf8e847806ae6ae0143979}\label{classSettingDialog_a14fb25d61fdf8e847806ae6ae0143979}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Heat\+Time1\+I\+R\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time1\+I\+R\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Heat\+Time1\+I\+R\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time1\+I\+R\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Heat\+Time1\+I\+R\+\_\+value\+Changed}{dSpinBoxHeatTime1IR\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a2b0e2cfbda5f92f47197fd154e4a7641}\label{classSettingDialog_a2b0e2cfbda5f92f47197fd154e4a7641}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Heat\+Time1\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time1\+Q\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Heat\+Time1\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time1\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Heat\+Time1\+Q\+\_\+value\+Changed}{dSpinBoxHeatTime1Q\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_ac43003a00b40d40c1d8518429234d52a}\label{classSettingDialog_ac43003a00b40d40c1d8518429234d52a}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Heat\+Time2\+I\+R\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time2\+I\+R\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Heat\+Time2\+I\+R\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time2\+I\+R\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Heat\+Time2\+I\+R\+\_\+value\+Changed}{dSpinBoxHeatTime2IR\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_ac3915bcd030a25082dab75845291c1e7}\label{classSettingDialog_ac3915bcd030a25082dab75845291c1e7}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Heat\+Time2\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time2\+Q\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Heat\+Time2\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Heat\+Time2\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Heat\+Time2\+Q\+\_\+value\+Changed}{dSpinBoxHeatTime2Q\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a8a2f78f4b1107c94a07880c93ecaebc4}\label{classSettingDialog_a8a2f78f4b1107c94a07880c93ecaebc4}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Rear\+Range\+\_\+value\+Changed@{d\+Spin\+Box\+Rear\+Range\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Rear\+Range\+\_\+value\+Changed@{d\+Spin\+Box\+Rear\+Range\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Rear\+Range\+\_\+value\+Changed}{dSpinBoxRearRange\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a37e06665f728195a910d80f586cb8932}\label{classSettingDialog_a37e06665f728195a910d80f586cb8932}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Sq\+Dwell\+Time\+\_\+value\+Changed@{d\+Spin\+Box\+Sq\+Dwell\+Time\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Sq\+Dwell\+Time\+\_\+value\+Changed@{d\+Spin\+Box\+Sq\+Dwell\+Time\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Sq\+Dwell\+Time\+\_\+value\+Changed}{dSpinBoxSqDwellTime\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_af40ee40d8aff8550e5ffe2ccdac384ae}\label{classSettingDialog_af40ee40d8aff8550e5ffe2ccdac384ae}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Standby\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Standby\+Time\+Q\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Standby\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Standby\+Time\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Standby\+Time\+Q\+\_\+value\+Changed}{dSpinBoxStandbyTimeQ\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a94dab1fe735e3991220956b64c21219b}\label{classSettingDialog_a94dab1fe735e3991220956b64c21219b}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Stepback\+Dry\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Stepback\+Dry\+Time\+Q\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Stepback\+Dry\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Stepback\+Dry\+Time\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Stepback\+Dry\+Time\+Q\+\_\+value\+Changed}{dSpinBoxStepbackDryTimeQ\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a373951de775a1b220c6d7d9abd59f76c}\label{classSettingDialog_a373951de775a1b220c6d7d9abd59f76c}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Temperature\+Set\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Temperature\+Set\+Q\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Temperature\+Set\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Temperature\+Set\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Temperature\+Set\+Q\+\_\+value\+Changed}{dSpinBoxTemperatureSetQ\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_af6f257e19ab8d0bc8f724c217c5039af}\label{classSettingDialog_af6f257e19ab8d0bc8f724c217c5039af}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!d\+Spin\+Box\+Warm\+Flash\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Warm\+Flash\+Time\+Q\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Warm\+Flash\+Time\+Q\+\_\+value\+Changed@{d\+Spin\+Box\+Warm\+Flash\+Time\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Warm\+Flash\+Time\+Q\+\_\+value\+Changed}{dSpinBoxWarmFlashTimeQ\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a79c8072c55146ad38a739567b2233c1f}\label{classSettingDialog_a79c8072c55146ad38a739567b2233c1f}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!spin\+Box\+Dry\+Power\+Q\+\_\+value\+Changed@{spin\+Box\+Dry\+Power\+Q\+\_\+value\+Changed}}
+\index{spin\+Box\+Dry\+Power\+Q\+\_\+value\+Changed@{spin\+Box\+Dry\+Power\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Dry\+Power\+Q\+\_\+value\+Changed}{spinBoxDryPowerQ\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a02039d7e4a584da46e7bf658b8ed78a7}\label{classSettingDialog_a02039d7e4a584da46e7bf658b8ed78a7}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!spin\+Box\+Front\+Speed\+\_\+value\+Changed@{spin\+Box\+Front\+Speed\+\_\+value\+Changed}}
+\index{spin\+Box\+Front\+Speed\+\_\+value\+Changed@{spin\+Box\+Front\+Speed\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Front\+Speed\+\_\+value\+Changed}{spinBoxFrontSpeed\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_aa6602067bd18c4e6e845d0c217380120}\label{classSettingDialog_aa6602067bd18c4e6e845d0c217380120}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!spin\+Box\+Rear\+Speed\+\_\+value\+Changed@{spin\+Box\+Rear\+Speed\+\_\+value\+Changed}}
+\index{spin\+Box\+Rear\+Speed\+\_\+value\+Changed@{spin\+Box\+Rear\+Speed\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Rear\+Speed\+\_\+value\+Changed}{spinBoxRearSpeed\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_abe2d0f0bf0ea4c12cdd18b4c63e18ef2}\label{classSettingDialog_abe2d0f0bf0ea4c12cdd18b4c63e18ef2}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!spin\+Box\+S\+B\+Strok\+Count\+\_\+value\+Changed@{spin\+Box\+S\+B\+Strok\+Count\+\_\+value\+Changed}}
+\index{spin\+Box\+S\+B\+Strok\+Count\+\_\+value\+Changed@{spin\+Box\+S\+B\+Strok\+Count\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{spin\+Box\+S\+B\+Strok\+Count\+\_\+value\+Changed}{spinBoxSBStrokCount\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a453eecb0650ad29e6d14fb641ef79697}\label{classSettingDialog_a453eecb0650ad29e6d14fb641ef79697}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!spin\+Box\+Standby\+Power\+Q\+\_\+value\+Changed@{spin\+Box\+Standby\+Power\+Q\+\_\+value\+Changed}}
+\index{spin\+Box\+Standby\+Power\+Q\+\_\+value\+Changed@{spin\+Box\+Standby\+Power\+Q\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Standby\+Power\+Q\+\_\+value\+Changed}{spinBoxStandbyPowerQ\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a6cd6886cf912cfb5275754183334e70f}\label{classSettingDialog_a6cd6886cf912cfb5275754183334e70f}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!spin\+Box\+Strok\+Count\+\_\+value\+Changed@{spin\+Box\+Strok\+Count\+\_\+value\+Changed}}
+\index{spin\+Box\+Strok\+Count\+\_\+value\+Changed@{spin\+Box\+Strok\+Count\+\_\+value\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Strok\+Count\+\_\+value\+Changed}{spinBoxStrokCount\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\end{DoxyCompactItemize}
+\begin{center}	\line(1,0){450} \end{center}
+
+\mbox{\Hypertarget{classSettingDialog_a8946ea3396791c3bfdb0af9294432456}\label{classSettingDialog_a8946ea3396791c3bfdb0af9294432456}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!event@{event}}
+\index{event@{event}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily bool Setting\+Dialog\+::\texorpdfstring{event}{event} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} -  reimplementation of standard function to handle \textit{QEvent::WindowDeactivate}
+or \textit{QEvent::Leave} for automatic invoke of \hyperlink{classSettingDialog_ac5caf772c1ad7d7607a164ad7f6fe647}{accept}(...) function on window deactivation.
+
+\mbox{\Hypertarget{classSettingDialog_aced29131c09a6a91867bd3d6b05f01dc}\label{classSettingDialog_aced29131c09a6a91867bd3d6b05f01dc}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!event\+Filter@{event\+Filter}}
+\index{event\+Filter@{event\+Filter}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily bool Setting\+Dialog\+::\texorpdfstring{event\+Filter}{eventFilter} (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{watched,  }\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} - reimplementation of standard function to handle \textit{QEvent:: MouseButtonDblClick} or \textit{QEvent::MouseButtonRelease} events to call \hyperlink{classNumpadDialog}{Numpad\+Dialog} or \hyperlink{classKeyboardDialog}{Keyboard\+Dialog} to enter data to appropriate widgets. Widgets which will call this function are defined in \hyperlink{classSettingDialog_a01d7341608bd80021abd1a5892fdb131}{event\+Filter\+Setup}(...) function. 
+
+\mbox{\Hypertarget{classSettingDialog_a01d7341608bd80021abd1a5892fdb131}\label{classSettingDialog_a01d7341608bd80021abd1a5892fdb131}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!event\+Filter\+Setup@{event\+Filter\+Setup}}
+\index{event\+Filter\+Setup@{event\+Filter\+Setup}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{event\+Filter\+Setup}{eventFilterSetup} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to configure widgets on
+dialog to use \hyperlink{classSettingDialog_aced29131c09a6a91867bd3d6b05f01dc}{event\+Filter}(...)
+
+\mbox{\Hypertarget{classSettingDialog_a0fd7b8d8b9d06ff10dd9136e699cb5f0}\label{classSettingDialog_a0fd7b8d8b9d06ff10dd9136e699cb5f0}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+p\+Button\+Head\+On\+Off\+\_\+clicked@{on\+\_\+p\+Button\+Head\+On\+Off\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Head\+On\+Off\+\_\+clicked@{on\+\_\+p\+Button\+Head\+On\+Off\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Head\+On\+Off\+\_\+clicked}{on\_pButtonHeadOnOff\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to handle \textit{clicked()} signal from \textit{p\+Button\+Head\+On\+Off} button. Used to send command to turn on/off print head.
+
+\mbox{\Hypertarget{classSettingDialog_a991a3f7add65873f5e790dbc5b2d98f7}\label{classSettingDialog_a991a3f7add65873f5e790dbc5b2d98f7}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+push\+Button\+Copy\+To\+All\+\_\+clicked@{on\+\_\+push\+Button\+Copy\+To\+All\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Copy\+To\+All\+\_\+clicked@{on\+\_\+push\+Button\+Copy\+To\+All\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+push\+Button\+Copy\+To\+All\+\_\+clicked}{on\_pushButtonCopyToAll\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to emit \hyperlink{classSettingDialog_a3d2a5649a7c33127df571fef48c68744}{set\+Params\+To\+All} signal. Before emitting signal function collect parameters and send data in signal parameters.
+
+\begin{center}	\line(1,0){450} \end{center}
+All functions in next block used to send button codes to master PCB. \\
+Function emit \hyperlink{classSettingDialog_a88624538f0c2940ca17787bc797d695f}{send\+Command}(...) signal with appropriate data. 
+
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classSettingDialog_a28734c990957727acebddabbe01fa442}\label{classSettingDialog_a28734c990957727acebddabbe01fa442}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+F\+L\+\_\+clicked@{on\+\_\+tool\+Button\+F\+L\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+F\+L\+\_\+clicked@{on\+\_\+tool\+Button\+F\+L\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+F\+L\+\_\+clicked}{on\_toolButtonFL\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a40f0ebcd38f004373ce6037a47f55da7}\label{classSettingDialog_a40f0ebcd38f004373ce6037a47f55da7}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Q\+\_\+clicked@{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Q\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Q\+\_\+clicked@{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Q\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Q\+\_\+clicked}{on\_toolButtonFL\_SQ\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_adf5bed0777bbaa36f25b9280528cf342}\label{classSettingDialog_adf5bed0777bbaa36f25b9280528cf342}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Qup\+\_\+clicked@{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Qup\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Qup\+\_\+clicked@{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Qup\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+F\+L\+\_\+\+S\+Qup\+\_\+clicked}{on\_toolButtonFL\_SQup\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_ac1ac55a6bfd2730cad20f4bcc2805049}\label{classSettingDialog_ac1ac55a6bfd2730cad20f4bcc2805049}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Hold\+On\+\_\+clicked@{on\+\_\+tool\+Button\+Hold\+On\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Hold\+On\+\_\+clicked@{on\+\_\+tool\+Button\+Hold\+On\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Hold\+On\+\_\+clicked}{on\_toolButtonHoldOn\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_ae6edcd6a2151ec8402904fd33cbd1a95}\label{classSettingDialog_ae6edcd6a2151ec8402904fd33cbd1a95}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Index\+Here\+\_\+clicked@{on\+\_\+tool\+Button\+Index\+Here\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Index\+Here\+\_\+clicked@{on\+\_\+tool\+Button\+Index\+Here\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Index\+Here\+\_\+clicked}{on\_toolButtonIndexHere\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_aa4c4eae09fcec8ad3a2bb8615e314e39}\label{classSettingDialog_aa4c4eae09fcec8ad3a2bb8615e314e39}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Ink\+Color\+\_\+clicked@{on\+\_\+tool\+Button\+Ink\+Color\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Ink\+Color\+\_\+clicked@{on\+\_\+tool\+Button\+Ink\+Color\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Ink\+Color\+\_\+clicked}{on\_toolButtonInkColor\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a40bed1f6bde134fabcd9b39e4498cffb}\label{classSettingDialog_a40bed1f6bde134fabcd9b39e4498cffb}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Move\+Front\+\_\+clicked@{on\+\_\+tool\+Button\+Move\+Front\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Move\+Front\+\_\+clicked@{on\+\_\+tool\+Button\+Move\+Front\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Move\+Front\+\_\+clicked}{on\_toolButtonMoveFront\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a2622da82b9284689d035a96c2c3642f5}\label{classSettingDialog_a2622da82b9284689d035a96c2c3642f5}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Move\+Rear\+\_\+clicked@{on\+\_\+tool\+Button\+Move\+Rear\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Move\+Rear\+\_\+clicked@{on\+\_\+tool\+Button\+Move\+Rear\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Move\+Rear\+\_\+clicked}{on\_toolButtonMoveRear\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a9fd57e56c1364cb5107b314bec9d414d}\label{classSettingDialog_a9fd57e56c1364cb5107b314bec9d414d}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Move\+Test\+\_\+clicked@{on\+\_\+tool\+Button\+Move\+Test\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Move\+Test\+\_\+clicked@{on\+\_\+tool\+Button\+Move\+Test\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Move\+Test\+\_\+clicked}{on\_toolButtonMoveTest\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a44def5923853f2e47dc2ad8247a62227}\label{classSettingDialog_a44def5923853f2e47dc2ad8247a62227}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+M\+T\+P\+Move\+\_\+clicked@{on\+\_\+tool\+Button\+M\+T\+P\+Move\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+M\+T\+P\+Move\+\_\+clicked@{on\+\_\+tool\+Button\+M\+T\+P\+Move\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+M\+T\+P\+Move\+\_\+clicked}{on\_toolButtonMTPMove\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a57173bd31c0554d31571332ceb175b3d}\label{classSettingDialog_a57173bd31c0554d31571332ceb175b3d}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Plast\+\_\+clicked@{on\+\_\+tool\+Button\+Plast\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Plast\+\_\+clicked@{on\+\_\+tool\+Button\+Plast\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Plast\+\_\+clicked}{on\_toolButtonPlast\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a0745d27f5e4a4d24b0722123bc06d25e}\label{classSettingDialog_a0745d27f5e4a4d24b0722123bc06d25e}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Pressure\+\_\+clicked@{on\+\_\+tool\+Button\+Pressure\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Pressure\+\_\+clicked@{on\+\_\+tool\+Button\+Pressure\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Pressure\+\_\+clicked}{on\_toolButtonPressure\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a08f91f306b9e5fbe3f24dea1bc8b7152}\label{classSettingDialog_a08f91f306b9e5fbe3f24dea1bc8b7152}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Pressure\+Air\+\_\+clicked@{on\+\_\+tool\+Button\+Pressure\+Air\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Pressure\+Air\+\_\+clicked@{on\+\_\+tool\+Button\+Pressure\+Air\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Pressure\+Air\+\_\+clicked}{on\_toolButtonPressureAir\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a2eb481548395d6d2459456076678bcf1}\label{classSettingDialog_a2eb481548395d6d2459456076678bcf1}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Quartz\+Preheat\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Preheat\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Quartz\+Preheat\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Preheat\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Quartz\+Preheat\+\_\+clicked}{on\_toolButtonQuartzPreheat\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a7c13d35ab90a6bc7e77a7eb02e90df82}\label{classSettingDialog_a7c13d35ab90a6bc7e77a7eb02e90df82}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Quartz\+Step\+Back\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Step\+Back\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Quartz\+Step\+Back\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Step\+Back\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Quartz\+Step\+Back\+\_\+clicked}{on\_toolButtonQuartzStepBack\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a4030986a71c3245c64458117b358f5cc}\label{classSettingDialog_a4030986a71c3245c64458117b358f5cc}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Quartz\+Test\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Test\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Quartz\+Test\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Test\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Quartz\+Test\+\_\+clicked}{on\_toolButtonQuartzTest\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_af6128bbe3289b7033e27d0e2d439e24b}\label{classSettingDialog_af6128bbe3289b7033e27d0e2d439e24b}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Quartz\+Warming\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Warming\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Quartz\+Warming\+\_\+clicked@{on\+\_\+tool\+Button\+Quartz\+Warming\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Quartz\+Warming\+\_\+clicked}{on\_toolButtonQuartzWarming\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a4c777f59dac2be7467f61d171b937a9f}\label{classSettingDialog_a4c777f59dac2be7467f61d171b937a9f}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+S\+Q\+\_\+clicked@{on\+\_\+tool\+Button\+S\+Q\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+S\+Q\+\_\+clicked@{on\+\_\+tool\+Button\+S\+Q\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+S\+Q\+\_\+clicked}{on\_toolButtonSQ\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classSettingDialog_a24027ff6daaf9b3537de48ec915ad428}\label{classSettingDialog_a24027ff6daaf9b3537de48ec915ad428}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!on\+\_\+tool\+Button\+Step\+Back\+\_\+clicked@{on\+\_\+tool\+Button\+Step\+Back\+\_\+clicked}}
+\index{on\+\_\+tool\+Button\+Step\+Back\+\_\+clicked@{on\+\_\+tool\+Button\+Step\+Back\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{on\+\_\+tool\+Button\+Step\+Back\+\_\+clicked}{on\_toolButtonStepBack\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+\end{DoxyCompactItemize}
+\begin{center}	\line(1,0){450} \end{center}
+
+\mbox{\Hypertarget{classSettingDialog_a87b4aca2d528b1b8e943983efc9d9506}\label{classSettingDialog_a87b4aca2d528b1b8e943983efc9d9506}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!p\+Button\+Dec\+Clkd@{p\+Button\+Dec\+Clkd}}
+\index{p\+Button\+Dec\+Clkd@{p\+Button\+Dec\+Clkd}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{p\+Button\+Dec\+Clkd}{pButtonDecClkd} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to emit \hyperlink{classSettingDialog_aaec8f3ce53ff211c0d2a3ebace6a4120}{change\+Number}(...) signal with  \hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index} decreased by 1. 
+
+\mbox{\Hypertarget{classSettingDialog_a586eff422c5c347ee5ff3ffe71b5ba97}\label{classSettingDialog_a586eff422c5c347ee5ff3ffe71b5ba97}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!p\+Button\+Inc\+Clkd@{p\+Button\+Inc\+Clkd}}
+\index{p\+Button\+Inc\+Clkd@{p\+Button\+Inc\+Clkd}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{p\+Button\+Inc\+Clkd}{pButtonIncClkd} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to emit \hyperlink{classSettingDialog_aaec8f3ce53ff211c0d2a3ebace6a4120}{change\+Number}(...) signal with  \hyperlink{classSettingDialog_a293670a08207442bb9ab04a734b70d33}{index} increased by 1.
+
+\mbox{\Hypertarget{classSettingDialog_a0670d5bdf419372d7c5e314b45064a85}\label{classSettingDialog_a0670d5bdf419372d7c5e314b45064a85}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!r\+Button\+Time1\+\_\+clicked@{r\+Button\+Time1\+\_\+clicked}}
+\index{r\+Button\+Time1\+\_\+clicked@{r\+Button\+Time1\+\_\+clicked}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{r\+Button\+Time1\+\_\+clicked}{rButtonTime1\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSettingDialog_aa2d0391c28612987805722038013f5a9}\label{classSettingDialog_aa2d0391c28612987805722038013f5a9}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!reject@{reject}}
+\index{reject@{reject}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{reject}{reject} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSettingDialog_a88624538f0c2940ca17787bc797d695f}\label{classSettingDialog_a88624538f0c2940ca17787bc797d695f}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!send\+Command@{send\+Command}}
+\index{send\+Command@{send\+Command}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{send\+Command}{sendCommand} (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Byte\+Array}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classSettingDialog_a3ab742273bba41f566e2ec5e23e15adf}\label{classSettingDialog_a3ab742273bba41f566e2ec5e23e15adf}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!set\+Head\+Params@{set\+Head\+Params}}
+\index{set\+Head\+Params@{set\+Head\+Params}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{set\+Head\+Params}{setHeadParams}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{int}]{index = {\ttfamily 0},  }\item[{bool}]{disconnect = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSettingDialog_a25e9a36fc58d6cc9ae3fa63ff323d139}\label{classSettingDialog_a25e9a36fc58d6cc9ae3fa63ff323d139}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!set\+Head\+Params@{set\+Head\+Params}}
+\index{set\+Head\+Params@{set\+Head\+Params}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{set\+Head\+Params}{setHeadParams}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadSetting}{Head\+Setting}}}]{h\+Sttg,  }\item[{int}]{index = {\ttfamily 0},  }\item[{bool}]{disconnect = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSettingDialog_a47c392fce9b4379ee287f94ee13add91}\label{classSettingDialog_a47c392fce9b4379ee287f94ee13add91}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!set\+Icon\+Folder@{set\+Icon\+Folder}}
+\index{set\+Icon\+Folder@{set\+Icon\+Folder}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{set\+Icon\+Folder}{setIconFolder} (\begin{DoxyParamCaption}\item[{Q\+String}]{path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSettingDialog_a3d2a5649a7c33127df571fef48c68744}\label{classSettingDialog_a3d2a5649a7c33127df571fef48c68744}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!set\+Params\+To\+All@{set\+Params\+To\+All}}
+\index{set\+Params\+To\+All@{set\+Params\+To\+All}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{set\+Params\+To\+All}{setParamsToAll} (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Byte\+Array}]{h\+Param\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classSettingDialog_a43114394546e14f2a5c140591708b53d}\label{classSettingDialog_a43114394546e14f2a5c140591708b53d}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!set\+Registers@{set\+Registers}}
+\index{set\+Registers@{set\+Registers}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{set\+Registers}{setRegisters} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRegister}{Register}} $\ast$}]{reg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSettingDialog_aaed08f2ad87702c7d6ff0a4a5df7e1e7}\label{classSettingDialog_aaed08f2ad87702c7d6ff0a4a5df7e1e7}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{show\+Event}{showEvent} (\begin{DoxyParamCaption}\item[{Q\+Show\+Event $\ast$}]{ev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+\mbox{\Hypertarget{classSettingDialog_a1e0138fa136b0723568b8ebed97fc6f6}\label{classSettingDialog_a1e0138fa136b0723568b8ebed97fc6f6}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!tab\+Widget\+\_\+current\+Changed@{tab\+Widget\+\_\+current\+Changed}}
+\index{tab\+Widget\+\_\+current\+Changed@{tab\+Widget\+\_\+current\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{tab\+Widget\+\_\+current\+Changed}{tabWidget\_currentChanged} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classSettingDialog_a14896cba93080b0784380651579d809c}\label{classSettingDialog_a14896cba93080b0784380651579d809c}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!temperature\+Sensore\+Changed@{temperature\+Sensore\+Changed}}
+\index{temperature\+Sensore\+Changed@{temperature\+Sensore\+Changed}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily void Setting\+Dialog\+::\texorpdfstring{temperature\+Sensore\+Changed}{temperatureSensoreChanged} (\begin{DoxyParamCaption}\item[{bool}]{temp\+Sens }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSettingDialog_a5091b6757e8f987f4bdf5de856b694f6}\label{classSettingDialog_a5091b6757e8f987f4bdf5de856b694f6}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!accept\+Enable@{accept\+Enable}}
+\index{accept\+Enable@{accept\+Enable}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily bool Setting\+Dialog\+::\texorpdfstring{accept\+Enable}{acceptEnable}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettingDialog_a76fcfae71a48ee3d0ab4d7a28f850d1a}\label{classSettingDialog_a76fcfae71a48ee3d0ab4d7a28f850d1a}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}}
+\index{accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily bool Setting\+Dialog\+::\texorpdfstring{accept\+On\+Deactilation\+En}{acceptOnDeactilationEn}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettingDialog_ae53d3ff786571f3291668e3d90ad16cb}\label{classSettingDialog_ae53d3ff786571f3291668e3d90ad16cb}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!head\+Settings@{head\+Settings}}
+\index{head\+Settings@{head\+Settings}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadSetting}{Head\+Setting}} Setting\+Dialog\+::\texorpdfstring{head\+Settings}{headSettings}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettingDialog_a293670a08207442bb9ab04a734b70d33}\label{classSettingDialog_a293670a08207442bb9ab04a734b70d33}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!index@{index}}
+\index{index@{index}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily int Setting\+Dialog\+::\texorpdfstring{index}{index}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettingDialog_a66c450ef93bc3346d5b2fa08eb58d48f}\label{classSettingDialog_a66c450ef93bc3346d5b2fa08eb58d48f}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!registers@{registers}}
+\index{registers@{registers}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRegister}{Register}}$\ast$ Setting\+Dialog\+::\texorpdfstring{registers}{registers}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\mbox{\Hypertarget{classSettingDialog_a92ac83de20616f1f67f369dec0afe5f0}\label{classSettingDialog_a92ac83de20616f1f67f369dec0afe5f0}} 
+\index{Setting\+Dialog@{Setting\+Dialog}!with\+Temperature\+Sensor@{with\+Temperature\+Sensor}}
+\index{with\+Temperature\+Sensor@{with\+Temperature\+Sensor}!Setting\+Dialog@{Setting\+Dialog}}
+{\footnotesize\ttfamily bool Setting\+Dialog\+::\texorpdfstring{with\+Temperature\+Sensor}{withTemperatureSensor}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{headsettingdialog_8h}{headsettingdialog.\+h}}\item 
+\mbox{\hyperlink{headsettingdialog_8cpp}{headsettingdialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

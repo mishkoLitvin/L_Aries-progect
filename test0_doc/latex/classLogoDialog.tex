@@ -1,0 +1,89 @@
+\hypertarget{classLogoDialog}{}\subsection{Logo\+Dialog Class Reference}
+\label{classLogoDialog}\index{Logo\+Dialog@{Logo\+Dialog}}
+
+
+{\ttfamily \#include $<$logodialog.\+h$>$}
+
+Inheritance diagram for Logo\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLogoDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLogoDialog_a9457ef5a8c6428bebfa1c56f2d8c9fd1}{Logo\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classLogoDialog_a956fbb52cdf488707c5f5a1877727c27}{$\sim$\+Logo\+Dialog}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classLogoDialog_a3c16eea6dbd9e8c50c23444377a9ed12}{show\+Event}} (Q\+Show\+Event $\ast$ev)
+\item 
+void \mbox{\hyperlink{classLogoDialog_a5d44bdd4d14eed3468e422187ea49a3e}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classLogoDialog_a7e819a837c81cadaf3cf016b6638b253}{timer\+Time\+Out}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Logo\+Dialog $\ast$ \mbox{\hyperlink{classLogoDialog_a4454a373a68ba6473a55dfd404b52e78}{ui}}
+\item 
+Q\+Timer $\ast$ \mbox{\hyperlink{classLogoDialog_a0f26a533559a0c055ac7ce2ec9d85273}{timer}}
+\item 
+Q\+Movie $\ast$ \mbox{\hyperlink{classLogoDialog_a45504b8a8b3fc44056859fcb708c2313}{movie}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLogoDialog_a9457ef5a8c6428bebfa1c56f2d8c9fd1}\label{classLogoDialog_a9457ef5a8c6428bebfa1c56f2d8c9fd1}} 
+\index{Logo\+Dialog@{Logo\+Dialog}!Logo\+Dialog@{Logo\+Dialog}}
+\index{Logo\+Dialog@{Logo\+Dialog}!Logo\+Dialog@{Logo\+Dialog}}
+{\footnotesize\ttfamily Logo\+Dialog\+::\texorpdfstring{Logo\+Dialog()}{LogoDialog()} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - standard dialog constructor. At constructor is loading \textit{gif} animation to  \hyperlink{classLogoDialog_a45504b8a8b3fc44056859fcb708c2313}{movie} and creates \hyperlink{classLogoDialog_a0f26a533559a0c055ac7ce2ec9d85273}{timer} which is connected to \hyperlink{classLogoDialog_a7e819a837c81cadaf3cf016b6638b253}{timer\+Time\+Out}(...) function.
+
+\mbox{\Hypertarget{classLogoDialog_a956fbb52cdf488707c5f5a1877727c27}\label{classLogoDialog_a956fbb52cdf488707c5f5a1877727c27}} 
+\index{Logo\+Dialog@{Logo\+Dialog}!````~Logo\+Dialog@{$\sim$\+Logo\+Dialog}}
+\index{````~Logo\+Dialog@{$\sim$\+Logo\+Dialog}!Logo\+Dialog@{Logo\+Dialog}}
+{\footnotesize\ttfamily Logo\+Dialog\+::\texorpdfstring{$\sim$\+Logo\+Dialog()}{~LogoDialog()} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard Q\+Dialog destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLogoDialog_a5d44bdd4d14eed3468e422187ea49a3e}\label{classLogoDialog_a5d44bdd4d14eed3468e422187ea49a3e}} 
+\index{Logo\+Dialog@{Logo\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Logo\+Dialog@{Logo\+Dialog}}
+{\footnotesize\ttfamily void Logo\+Dialog\+::\texorpdfstring{change\+Event()}{changeEvent()} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} - reimplementation of default event for QWidget to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classLogoDialog_a3c16eea6dbd9e8c50c23444377a9ed12}\label{classLogoDialog_a3c16eea6dbd9e8c50c23444377a9ed12}} 
+\index{Logo\+Dialog@{Logo\+Dialog}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!Logo\+Dialog@{Logo\+Dialog}}
+{\footnotesize\ttfamily void Logo\+Dialog\+::\texorpdfstring{show\+Event()}{showEvent()} (\begin{DoxyParamCaption}\item[{Q\+Show\+Event $\ast$}]{ev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} - reimplementation of standard Q\+Dialog function. Used to start playing \hyperlink{classLogoDialog_a45504b8a8b3fc44056859fcb708c2313}{movie} and start \hyperlink{classLogoDialog_a0f26a533559a0c055ac7ce2ec9d85273}{timer}.
+
+\mbox{\Hypertarget{classLogoDialog_a7e819a837c81cadaf3cf016b6638b253}\label{classLogoDialog_a7e819a837c81cadaf3cf016b6638b253}} 
+\index{Logo\+Dialog@{Logo\+Dialog}!timer\+Time\+Out@{timer\+Time\+Out}}
+\index{timer\+Time\+Out@{timer\+Time\+Out}!Logo\+Dialog@{Logo\+Dialog}}
+{\footnotesize\ttfamily void Logo\+Dialog\+::\texorpdfstring{timer\+Time\+Out}{timerTimeOut} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to close dialog after some count of function calling.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLogoDialog_a45504b8a8b3fc44056859fcb708c2313}\label{classLogoDialog_a45504b8a8b3fc44056859fcb708c2313}} 
+\index{Logo\+Dialog@{Logo\+Dialog}!movie@{movie}}
+\index{movie@{movie}!Logo\+Dialog@{Logo\+Dialog}}
+{\footnotesize\ttfamily Q\+Movie$\ast$ Logo\+Dialog\+::\texorpdfstring{movie}{movie}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classLogoDialog_a0f26a533559a0c055ac7ce2ec9d85273}\label{classLogoDialog_a0f26a533559a0c055ac7ce2ec9d85273}} 
+\index{Logo\+Dialog@{Logo\+Dialog}!timer@{timer}}
+\index{timer@{timer}!Logo\+Dialog@{Logo\+Dialog}}
+{\footnotesize\ttfamily Q\+Timer$\ast$ Logo\+Dialog\+::\texorpdfstring{timer}{timer}\hspace{0.3cm}{\ttfamily [private]}}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{logodialog_8h}{logodialog.\+h}}\item 
+\mbox{\hyperlink{logodialog_8cpp}{logodialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

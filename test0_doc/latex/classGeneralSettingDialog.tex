@@ -1,0 +1,444 @@
+\hypertarget{classGeneralSettingDialog}{}\subsection{General\+Setting\+Dialog Class Reference}
+\label{classGeneralSettingDialog}\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+
+
+{\ttfamily \#include $<$generalsettingdialog.\+h$>$}
+
+Inheritance diagram for General\+Setting\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classGeneralSettingDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a825854c03817dfdb5b7c6185008ab620}{email\+Settings\+Changed}} (\mbox{\hyperlink{structEmailSettings}{Email\+Settings}})
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a02019fb6d81fc0e83ed6ae0ef7ef68b4}{machine\+Param\+Changed}} (Q\+Byte\+Array machine\+Pararm\+Arr)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_aef493e3f166d3bd7cb982f854f29617e}{serial\+Port\+Settings\+Dialog\+Requested}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_ab651d47f726e1049c0bf34e6ebcb8cf1}{style\+Changed\+Index}} (int index)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_aa0b2ee80957f63f302aa9a6ac6e13f5d}{icons\+Changed\+Index}} (int index)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_ac3d2f3477274bedf08848cc24eaece06}{lang\+Changed\+Index}} (int index)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a8ac7f5a379cd6ec270bc98050e4c7765}{service\+Setting\+Request}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a386763acc4545a1c03542ef71601c23c}{head\+Activation\+Request}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a9bc417a43ff037b30e281e38fbc98744}{users\+Setting\+Request}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_aa4bc1d43246c829906a530b5a127a417}{direction\+Changed}} (int dir)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a3ec05b9d5bf741008ba575d408af6c04}{unload\+State\+Changed}} (bool state)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_aa381596bc44cfcaeb85a8d906b877b86}{send\+Command}} (Q\+Byte\+Array command)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a1c6ff8e8d7b1ad5f4399942ea48dc9d8}{image\+Request}} (bool enable, bool req=false)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGeneralSettingDialog_a04717ff5a0b42fb1ebeb5dcfc934cd83}{General\+Setting\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classGeneralSettingDialog_a6e45c39d066344fdc3fd8556bed18cd3}{$\sim$\+General\+Setting\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_ab9ca0f722e745c5cbf9d35c0307a2740}{set\+Icon\+Folder}} (Q\+String path)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a418a131dbac78536218003bafc7988ae}{set\+Email\+Settings}} (\mbox{\hyperlink{structEmailSettings}{Email\+Settings}} email\+Sett)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a62392d2454fdaf652f789792b50f9c6c}{set\+Machine\+Setting}} (\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters}} machine\+Param)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a43d51bbc0d1681b933c9c630c08e88fa}{set\+Focus\+Loss\+Accept}} (bool flag)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a73e0c08d830948be4ec0f8d3d155c5ca}{set\+Passwords}} (\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} serial\+Pass, \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} mail\+Pass, \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} user\+Pass)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a1746ad8d326d2adff1e8297f48119835}{set\+Style}} (Q\+String\+List st\+List, int cur\+Select, Q\+String\+List icon\+List, int icon\+Sel, bool back\+Gr\+En)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a6ba230057e081886f781539e4464ba99}{set\+Lang\+List}} (Q\+String\+List lang\+List, int cur\+Select)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a947b14b03ff390dc93d9d3d5cc8ef962}{show\+Port\+Info}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} com\+Sett)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classGeneralSettingDialog_ab8a8c443ea722ca23024025efbcfa768}{event}} (Q\+Event $\ast$e)
+\item 
+bool \mbox{\hyperlink{classGeneralSettingDialog_a2e5fc0aa0ac5f04fcfb032d65c1893a4}{event\+Filter}} (Q\+Object $\ast$watched, Q\+Event $\ast$\mbox{\hyperlink{classGeneralSettingDialog_ab8a8c443ea722ca23024025efbcfa768}{event}})
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a023c0f13fee36afb784b0ac7507f0fd2}{show\+Event}} (Q\+Show\+Event $\ast$ev)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_aecac66d55350cfbe21c6bac6f5476099}{change\+Event}} (Q\+Event $\ast$\mbox{\hyperlink{classGeneralSettingDialog_ab8a8c443ea722ca23024025efbcfa768}{event}})
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a8f189ce9494b6c5488f8a2be4c792f6a}{accept}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a2f4495a0f2911e41d3eaeec00949bde8}{reject}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a53e28908636048d815628b85dcaaca4c}{lock\+Unlock\+Email}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a15e7d8a20dbb83ea3ee46dd57446ec36}{hide\+Show\+Password}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_aafd1047488eb1f024f0b572a95c454ad}{event\+Filter\+Setup}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_afd7ce89c9dde6f411472da4e413475ec}{change\+Serial\+Port\+Settings\+Clicked}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_ad5275b9ede5252e57d4b6a44eb771a04}{change\+Service\+State\+Clicked}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_abfa33957c880ab0172b2ee30e848f6bd}{user\+Setting\+Clicked}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_ac250bc3aba6c2e247d26f5ece4b32af7}{style\+Changed}} (int index)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a6907e319fa3cedb66f4645cd0f3ad676}{icon\+Changed}} (int index)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a80bce87bcafdf14692465fc5ae181a4c}{lang\+Changed}} (int index)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a67274a86c828985ee88c055de4d2bce5}{change\+Direction}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_aada0bfc2b43de3d88d705194362a769d}{change\+Cycles\+State}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_acfb5eb53ac65d1aa5f037e88d91fa7e8}{use\+Unload\+State\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_ab986e75742799d02b8268d9743a422d6}{head\+Count\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a30243bd5ab4a0e2016b8a481504ccb62}{machine\+Type\+Changet}} (int index)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a9b1d7ada4c3dccc4c3a516b69dd714b9}{warning\+Time\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a8b72a332c8c98096b1f15cf1fd6b01be}{on\+\_\+p\+Button\+Heads\+Activation\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a2fbe72c63737ff21b4780013a0cbe35a}{on\+\_\+check\+Box\+Use\+Backgr\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classGeneralSettingDialog_a28115db3d9b5197703e789ac6cac8c9a}{on\+\_\+p\+Button\+Select\+Img\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+General\+Setting\+Dialog $\ast$ \mbox{\hyperlink{classGeneralSettingDialog_a2985b76397645d9f6d0cd00bccb337dc}{ui}}
+\item 
+\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters}} \mbox{\hyperlink{classGeneralSettingDialog_a61add6dfb9616d6309206cda8af09899}{machine\+Param\+Gl}}
+\item 
+bool \mbox{\hyperlink{classGeneralSettingDialog_a73bdef0f355634453cce0f75ccf0c173}{accept\+On\+Deactilation\+En}}
+\item 
+bool \mbox{\hyperlink{classGeneralSettingDialog_a63cb4068f4e5f307a5c09bc0806d0345}{accept\+Enable}}
+\item 
+bool \mbox{\hyperlink{classGeneralSettingDialog_acc7b6201adba8b9e35dc675d212047cc}{loged\+In\+Serial}}
+\item 
+bool \mbox{\hyperlink{classGeneralSettingDialog_aed1425f6474086f9fc89cbe24e6f3409}{loged\+In\+Mail}}
+\item 
+bool \mbox{\hyperlink{classGeneralSettingDialog_a21fbb6d0ad1c22a90032d3fed66a247f}{loged\+In\+User\+Sett}}
+\item 
+\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classGeneralSettingDialog_abaef63e383cc4c45581e16f85fd88a77}{serial\+Password}}
+\item 
+\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classGeneralSettingDialog_a214b0ddac5d79aee98e6c6e81fb45380}{mail\+Password}}
+\item 
+\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classGeneralSettingDialog_a365c466e185f88bad08aeb6ff036c403}{users\+Password}}
+\item 
+Q\+Icon \mbox{\hyperlink{classGeneralSettingDialog_ab4b216b0182add4c144d933694556f40}{direction\+Icon}}
+\item 
+Q\+String \mbox{\hyperlink{classGeneralSettingDialog_a17784de076ae5cfae6e150736d81a9a6}{path\+Icon}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGeneralSettingDialog_a04717ff5a0b42fb1ebeb5dcfc934cd83}\label{classGeneralSettingDialog_a04717ff5a0b42fb1ebeb5dcfc934cd83}} \index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!General\+Setting\+Dialog@{General\+Setting\+Dialog}} \index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily General\+Setting\+Dialog\+::\texorpdfstring{General\+Setting\+Dialog()}{GeneralSettingDialog()} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}{\ttfamily [explicit]} - constructor of class. Connect signals to clots, fill combo\+Boxes with data and initialize variables to zero values.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a6e45c39d066344fdc3fd8556bed18cd3}\label{classGeneralSettingDialog_a6e45c39d066344fdc3fd8556bed18cd3}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!````~General\+Setting\+Dialog@{$\sim$\+General\+Setting\+Dialog}}
+\index{````~General\+Setting\+Dialog@{$\sim$\+General\+Setting\+Dialog}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+\paragraph{\texorpdfstring{$\sim$\+General\+Setting\+Dialog()}{~GeneralSettingDialog()}}
+{\footnotesize\ttfamily General\+Setting\+Dialog\+::$\sim$\+General\+Setting\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard destructor function.
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGeneralSettingDialog_a8f189ce9494b6c5488f8a2be4c792f6a}\label{classGeneralSettingDialog_a8f189ce9494b6c5488f8a2be4c792f6a}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!accept@{accept}}
+\index{accept@{accept}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{accept}{accept} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - gather \hyperlink{structEmailSettings}{Email\+Settings} and \hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters} to appropriate structures. After that function generate signals \hyperlink{classGeneralSettingDialog_a825854c03817dfdb5b7c6185008ab620}{email\+Settings\+Changed}(...) and \hyperlink{classGeneralSettingDialog_a02019fb6d81fc0e83ed6ae0ef7ef68b4}{machine\+Param\+Changed}(...) which are call appropriate function in parent object (\hyperlink{classMainWindow_a5782e86aacd3c157412821fae13c85fb}{get\+Email\+Settings}(...) and \hyperlink{classMainWindow_a2dc63192aa7ff54dfc64e8308712c287}{get\+Machine\+Param}(...)).
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aada0bfc2b43de3d88d705194362a769d}\label{classGeneralSettingDialog_aada0bfc2b43de3d88d705194362a769d}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!change\+Cycles\+State@{change\+Cycles\+State}}
+\index{change\+Cycles\+State@{change\+Cycles\+State}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{change\+Cycles\+State}{changeCyclesState} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - send command with \hyperlink{classGeneralSettingDialog_aa381596bc44cfcaeb85a8d906b877b86}{send\+Command}(...) function to turn on/off revolver function of machine and show/hide button "Cycles" on main interface (That button call \hyperlink{classCyclesDialog}{Cycles\+Dialog} class object).
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a67274a86c828985ee88c055de4d2bce5}\label{classGeneralSettingDialog_a67274a86c828985ee88c055de4d2bce5}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!change\+Direction@{change\+Direction}}
+\index{change\+Direction@{change\+Direction}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{change\+Direction}{changeDirection} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - send command with \hyperlink{classGeneralSettingDialog_aa381596bc44cfcaeb85a8d906b877b86}{send\+Command}(...) function to change rotate direction. Also function generate signal \hyperlink{classGeneralSettingDialog_aa4bc1d43246c829906a530b5a127a417}{direction\+Changed}(...).
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aecac66d55350cfbe21c6bac6f5476099}\label{classGeneralSettingDialog_aecac66d55350cfbe21c6bac6f5476099}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - Reimplementation of default event for QDialog to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_afd7ce89c9dde6f411472da4e413475ec}\label{classGeneralSettingDialog_afd7ce89c9dde6f411472da4e413475ec}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!change\+Serial\+Port\+Settings\+Clicked@{change\+Serial\+Port\+Settings\+Clicked}}
+\index{change\+Serial\+Port\+Settings\+Clicked@{change\+Serial\+Port\+Settings\+Clicked}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{change\+Serial\+Port\+Settings\+Clicked}{changeSerialPortSettingsClicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to call \hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog} class object to setup serial port. Function ask password to call setting dialog.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ad5275b9ede5252e57d4b6a44eb771a04}\label{classGeneralSettingDialog_ad5275b9ede5252e57d4b6a44eb771a04}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!change\+Service\+State\+Clicked@{change\+Service\+State\+Clicked}}
+\index{change\+Service\+State\+Clicked@{change\+Service\+State\+Clicked}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{change\+Service\+State\+Clicked}{changeServiceStateClicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to generate signal which are call appropriate function in parent object (\hyperlink{classMainWindow_a6390c39f77f17e86c59a4c8f8bf0e607}{service\+State\+Change}(...)).
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aa4bc1d43246c829906a530b5a127a417}\label{classGeneralSettingDialog_aa4bc1d43246c829906a530b5a127a417}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!direction\+Changed@{direction\+Changed}}
+\index{direction\+Changed@{direction\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{direction\+Changed}{directionChanged} (\begin{DoxyParamCaption}\item[{int}]{dir }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal what are generated by \hyperlink{classGeneralSettingDialog_a67274a86c828985ee88c055de4d2bce5}{change\+Direction}(...) and call appropriate function (\hyperlink{classMainWindow_a98097440e933cbc9a5080320e230c124}{get\+Direction}(...)) in parent object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a825854c03817dfdb5b7c6185008ab620}\label{classGeneralSettingDialog_a825854c03817dfdb5b7c6185008ab620}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!email\+Settings\+Changed@{email\+Settings\+Changed}}
+\index{email\+Settings\+Changed@{email\+Settings\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{email\+Settings\+Changed}{emailSettingsChanged} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structEmailSettings}{Email\+Settings}}}]{ }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal what are generated by \hyperlink{classGeneralSettingDialog_a8f189ce9494b6c5488f8a2be4c792f6a}{accept}(...) and call appropriate function (\hyperlink{classMainWindow_a5782e86aacd3c157412821fae13c85fb}{get\+Email\+Settings}(...)) in parent object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ab8a8c443ea722ca23024025efbcfa768}\label{classGeneralSettingDialog_ab8a8c443ea722ca23024025efbcfa768}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!event@{event}}
+\index{event@{event}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool General\+Setting\+Dialog\+::\texorpdfstring{event()}{event()} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{e }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of standard function to handle \textit{QEvent::WindowDeactivate} or \textit{QEvent::Leave} for automatic invoke of \hyperlink{classGeneralSettingDialog_a8f189ce9494b6c5488f8a2be4c792f6a}{accept}(...) function on window deactivation.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a2e5fc0aa0ac5f04fcfb032d65c1893a4}\label{classGeneralSettingDialog_a2e5fc0aa0ac5f04fcfb032d65c1893a4}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!event\+Filter@{event\+Filter}}
+\index{event\+Filter@{event\+Filter}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool General\+Setting\+Dialog\+::\texorpdfstring{event\+Filter()}{eventFilter()} (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{watched,  }\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of standard function to handle \textit{QEvent:: MouseButtonDblClick} or \textit{QEvent::MouseButtonRelease} events to call \hyperlink{classNumpadDialog}{Numpad\+Dialog} or \hyperlink{classKeyboardDialog}{Keyboard\+Dialog} to enter data to appropriate widgets. Widgets which will call this function are defined in \hyperlink{classGeneralSettingDialog_aafd1047488eb1f024f0b572a95c454ad}{event\+Filter\+Setup}(...) function. In this function checked is {Q\+Object $\ast$} watched object of Q\+Line\+Edit class or Q\+Double\+Spin\+Box class and call appropriate dialog to enter data.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aafd1047488eb1f024f0b572a95c454ad}\label{classGeneralSettingDialog_aafd1047488eb1f024f0b572a95c454ad}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!event\+Filter\+Setup@{event\+Filter\+Setup}}
+\index{event\+Filter\+Setup@{event\+Filter\+Setup}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{event\+Filter\+Setup}{eventFilterSetup} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to configure widgets on dialog to use \hyperlink{classGeneralSettingDialog_a2e5fc0aa0ac5f04fcfb032d65c1893a4}{event\+Filter} (...).  
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a386763acc4545a1c03542ef71601c23c}\label{classGeneralSettingDialog_a386763acc4545a1c03542ef71601c23c}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!head\+Activation\+Request@{head\+Activation\+Request}}
+\index{head\+Activation\+Request@{head\+Activation\+Request}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{head\+Activation\+Request}{headActivationRequest} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal what are generated by \hyperlink{classGeneralSettingDialog_a8b72a332c8c98096b1f15cf1fd6b01be}{on\+\_\+p\+Button\+Heads\+Activation\+\_\+clicked}(...) and call \hyperlink{classHeadActivationDialog}{Head\+Activation\+Dialog} class object. Connection is made in parent class.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ab986e75742799d02b8268d9743a422d6}\label{classGeneralSettingDialog_ab986e75742799d02b8268d9743a422d6}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!head\+Count\+Changed@{head\+Count\+Changed}}
+\index{head\+Count\+Changed@{head\+Count\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{head\+Count\+Changed}{headCountChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to set up heads count on machine. Send appropriate data to master board with \hyperlink{classGeneralSettingDialog_aa381596bc44cfcaeb85a8d906b877b86}{send\+Command}(...) function.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a15e7d8a20dbb83ea3ee46dd57446ec36}\label{classGeneralSettingDialog_a15e7d8a20dbb83ea3ee46dd57446ec36}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!hide\+Show\+Password@{hide\+Show\+Password}}
+\index{hide\+Show\+Password@{hide\+Show\+Password}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{hide\+Show\+Password}{hideShowPassword} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to show or hide symbols line edit for sender password on mail setup tab.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a6907e319fa3cedb66f4645cd0f3ad676}\label{classGeneralSettingDialog_a6907e319fa3cedb66f4645cd0f3ad676}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!icon\+Changed@{icon\+Changed}}
+\index{icon\+Changed@{icon\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{icon\+Changed}{iconChanged} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function invoked by Q\+List\+View widget on changing selected item and emit signal \hyperlink{classGeneralSettingDialog_aa0b2ee80957f63f302aa9a6ac6e13f5d}{icons\+Changed\+Index}(...) to call appropriate function in parent object (\hyperlink{classMainWindow_a1c07847e8f3adb976aa52cea3f032d7d}{set\+Icon\+Folder}(...)) to load other icons to interface.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aa0b2ee80957f63f302aa9a6ac6e13f5d}\label{classGeneralSettingDialog_aa0b2ee80957f63f302aa9a6ac6e13f5d}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!icons\+Changed\+Index@{icons\+Changed\+Index}}
+\index{icons\+Changed\+Index@{icons\+Changed\+Index}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{icons\+Changed\+Index}{iconsChangedIndex} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which are invoked by \hyperlink{classGeneralSettingDialog_a6907e319fa3cedb66f4645cd0f3ad676}{icon\+Changed}(...) function to call appropriate function in parent object (\hyperlink{classMainWindow_a1c07847e8f3adb976aa52cea3f032d7d}{set\+Icon\+Folder}(...)) to load other icons to interface.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a1c6ff8e8d7b1ad5f4399942ea48dc9d8}\label{classGeneralSettingDialog_a1c6ff8e8d7b1ad5f4399942ea48dc9d8}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!image\+Request@{image\+Request}}
+\index{image\+Request@{image\+Request}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{image\+Request}{imageRequest} (\begin{DoxyParamCaption}\item[{bool}]{enable,  }\item[{bool}]{req = {\ttfamily false} }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal what can be generated by \textit{check\+Box\+Use\+Backgr} and \textit{p\+Button\+Select\+Img}. Parameter \textit{bool enable} used to enable or disable background on a main interface, and parameter \textit{bool req} used to invoke (or not if \textit{false}) Q\+File\+Dialog to get background image file name. Handled in parent object with \hyperlink{classMainWindow_aa08c1cb3f9e678d6af8f79dc2cc486d5}{set\+Back\+Ground}(...) function.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a80bce87bcafdf14692465fc5ae181a4c}\label{classGeneralSettingDialog_a80bce87bcafdf14692465fc5ae181a4c}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!lang\+Changed@{lang\+Changed}}
+\index{lang\+Changed@{lang\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{lang\+Changed}{langChanged} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}  - function invoked by Q\+List\+View widget on changing selected item and emit signal \hyperlink{classGeneralSettingDialog_ac3d2f3477274bedf08848cc24eaece06}{lang\+Changed\+Index}(...) to call appropriate function in parent object (\hyperlink{classMainWindow_a96b56bd09db03ada451752dbbf993f12}{get\+Lang\+File}(...)) to change interface language.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ac3d2f3477274bedf08848cc24eaece06}\label{classGeneralSettingDialog_ac3d2f3477274bedf08848cc24eaece06}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!lang\+Changed\+Index@{lang\+Changed\+Index}}
+\index{lang\+Changed\+Index@{lang\+Changed\+Index}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{lang\+Changed\+Index}{langChangedIndex} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which invoked by \hyperlink{classGeneralSettingDialog_a80bce87bcafdf14692465fc5ae181a4c}{lang\+Changed}(...) function to call appropriate function in parent object (\hyperlink{classMainWindow_a96b56bd09db03ada451752dbbf993f12}{get\+Lang\+File}(...)) to change interface language.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a53e28908636048d815628b85dcaaca4c}\label{classGeneralSettingDialog_a53e28908636048d815628b85dcaaca4c}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!lock\+Unlock\+Email@{lock\+Unlock\+Email}}
+\index{lock\+Unlock\+Email@{lock\+Unlock\+Email}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{lock\+Unlock\+Email}{lockUnlockEmail} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function called by Q\+Push\+Button on mail setting tab and used to unlock (or lock) mail settings.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a02019fb6d81fc0e83ed6ae0ef7ef68b4}\label{classGeneralSettingDialog_a02019fb6d81fc0e83ed6ae0ef7ef68b4}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!machine\+Param\+Changed@{machine\+Param\+Changed}}
+\index{machine\+Param\+Changed@{machine\+Param\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{machine\+Param\+Changed}{machineParamChanged} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{machine\+Pararm\+Arr }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which is emitted by function \hyperlink{classGeneralSettingDialog_a8f189ce9494b6c5488f8a2be4c792f6a}{accept}(...) and handle by \hyperlink{classMainWindow_a2dc63192aa7ff54dfc64e8308712c287}{get\+Machine\+Param}(...) in parent object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a30243bd5ab4a0e2016b8a481504ccb62}\label{classGeneralSettingDialog_a30243bd5ab4a0e2016b8a481504ccb62}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!machine\+Type\+Changet@{machine\+Type\+Changet}}
+\index{machine\+Type\+Changet@{machine\+Type\+Changet}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{machine\+Type\+Changet}{machineTypeChanget} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - empty function. 
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a2fbe72c63737ff21b4780013a0cbe35a}\label{classGeneralSettingDialog_a2fbe72c63737ff21b4780013a0cbe35a}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!on\+\_\+check\+Box\+Use\+Backgr\+\_\+clicked@{on\+\_\+check\+Box\+Use\+Backgr\+\_\+clicked}}
+\index{on\+\_\+check\+Box\+Use\+Backgr\+\_\+clicked@{on\+\_\+check\+Box\+Use\+Backgr\+\_\+clicked}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{on\+\_\+check\+Box\+Use\+Backgr\+\_\+clicked}{on\_checkBoxUseBackgr\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function connected to \textit{cliced()} signal of check box to send signal \hyperlink{classGeneralSettingDialog_a1c6ff8e8d7b1ad5f4399942ea48dc9d8}{image\+Request}(...) with appropriate parameters.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a8b72a332c8c98096b1f15cf1fd6b01be}\label{classGeneralSettingDialog_a8b72a332c8c98096b1f15cf1fd6b01be}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!on\+\_\+p\+Button\+Heads\+Activation\+\_\+clicked@{on\+\_\+p\+Button\+Heads\+Activation\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Heads\+Activation\+\_\+clicked@{on\+\_\+p\+Button\+Heads\+Activation\+\_\+clicked}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Heads\+Activation\+\_\+clicked}{on\_pButtonHeadsActivation\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to emit signal \hyperlink{classGeneralSettingDialog_a386763acc4545a1c03542ef71601c23c}{head\+Activation\+Request}(...) which handle in parent object and call \hyperlink{classHeadActivationDialog}{Head\+Activation\+Dialog} class object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a28115db3d9b5197703e789ac6cac8c9a}\label{classGeneralSettingDialog_a28115db3d9b5197703e789ac6cac8c9a}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!on\+\_\+p\+Button\+Select\+Img\+\_\+clicked@{on\+\_\+p\+Button\+Select\+Img\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Select\+Img\+\_\+clicked@{on\+\_\+p\+Button\+Select\+Img\+\_\+clicked}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Select\+Img\+\_\+clicked}{on\_pButtonSelectImg\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function connected to \textit{cliced()} signal of button to send signal \hyperlink{classGeneralSettingDialog_a1c6ff8e8d7b1ad5f4399942ea48dc9d8}{image\+Request}(...) with appropriate parameters.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a2f4495a0f2911e41d3eaeec00949bde8}\label{classGeneralSettingDialog_a2f4495a0f2911e41d3eaeec00949bde8}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!reject@{reject}}
+\index{reject@{reject}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{reject}{reject} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to hide dialog without saving settings. Invoked by \textit{Cancel} button.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aa381596bc44cfcaeb85a8d906b877b86}\label{classGeneralSettingDialog_aa381596bc44cfcaeb85a8d906b877b86}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!send\+Command@{send\+Command}}
+\index{send\+Command@{send\+Command}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{send\+Command}{sendCommand} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{command }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal to send data in \textit{Q\+Byte\+Array} format to handle in parent object and send it to serial port.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aef493e3f166d3bd7cb982f854f29617e}\label{classGeneralSettingDialog_aef493e3f166d3bd7cb982f854f29617e}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!serial\+Port\+Settings\+Dialog\+Requested@{serial\+Port\+Settings\+Dialog\+Requested}}
+\index{serial\+Port\+Settings\+Dialog\+Requested@{serial\+Port\+Settings\+Dialog\+Requested}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{serial\+Port\+Settings\+Dialog\+Requested}{serialPortSettingsDialogRequested} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which handle in parent object and call \hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog} class object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a8ac7f5a379cd6ec270bc98050e4c7765}\label{classGeneralSettingDialog_a8ac7f5a379cd6ec270bc98050e4c7765}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!service\+Setting\+Request@{service\+Setting\+Request}}
+\index{service\+Setting\+Request@{service\+Setting\+Request}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{service\+Setting\+Request}{serviceSettingRequest} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal emit by \hyperlink{classGeneralSettingDialog_ad5275b9ede5252e57d4b6a44eb771a04}{change\+Service\+State\+Clicked}(...) function and handle in parent object (\hyperlink{classMainWindow_a6390c39f77f17e86c59a4c8f8bf0e607}{service\+State\+Change}(...)).
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a418a131dbac78536218003bafc7988ae}\label{classGeneralSettingDialog_a418a131dbac78536218003bafc7988ae}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!set\+Email\+Settings@{set\+Email\+Settings}}
+\index{set\+Email\+Settings@{set\+Email\+Settings}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{set\+Email\+Settings()}{setEmailSettings()} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structEmailSettings}{Email\+Settings}}}]{email\+Sett }\end{DoxyParamCaption})} - function to set mail parameters and fill appropriate field at dialog.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a43d51bbc0d1681b933c9c630c08e88fa}\label{classGeneralSettingDialog_a43d51bbc0d1681b933c9c630c08e88fa}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!set\+Focus\+Loss\+Accept@{set\+Focus\+Loss\+Accept}}
+\index{set\+Focus\+Loss\+Accept@{set\+Focus\+Loss\+Accept}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{set\+Focus\+Loss\+Accept()}{setFocusLossAccept()} (\begin{DoxyParamCaption}\item[{bool}]{flag }\end{DoxyParamCaption})} - function to enable (or disable) hiding widget when user click beside widget.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ab9ca0f722e745c5cbf9d35c0307a2740}\label{classGeneralSettingDialog_ab9ca0f722e745c5cbf9d35c0307a2740}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!set\+Icon\+Folder@{set\+Icon\+Folder}}
+\index{set\+Icon\+Folder@{set\+Icon\+Folder}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{set\+Icon\+Folder()}{setIconFolder()} (\begin{DoxyParamCaption}\item[{Q\+String}]{path }\end{DoxyParamCaption})} - function set folder with icons to change icons theme of current dialog.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a6ba230057e081886f781539e4464ba99}\label{classGeneralSettingDialog_a6ba230057e081886f781539e4464ba99}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!set\+Lang\+List@{set\+Lang\+List}}
+\index{set\+Lang\+List@{set\+Lang\+List}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{set\+Lang\+List()}{setLangList()} (\begin{DoxyParamCaption}\item[{Q\+String\+List}]{lang\+List,  }\item[{int}]{cur\+Select }\end{DoxyParamCaption})} - function to set language list to appropriate field (Q\+List\+View) and select item which are used in present moment.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a62392d2454fdaf652f789792b50f9c6c}\label{classGeneralSettingDialog_a62392d2454fdaf652f789792b50f9c6c}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!set\+Machine\+Setting@{set\+Machine\+Setting}}
+\index{set\+Machine\+Setting@{set\+Machine\+Setting}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{set\+Machine\+Setting()}{setMachineSetting()} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters}}}]{machine\+Param }\end{DoxyParamCaption})} - function to set machine parameters to appropriate fields and set two-state buttons to appropriate state which are used in present moment.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a73e0c08d830948be4ec0f8d3d155c5ca}\label{classGeneralSettingDialog_a73e0c08d830948be4ec0f8d3d155c5ca}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!set\+Passwords@{set\+Passwords}}
+\index{set\+Passwords@{set\+Passwords}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{set\+Passwords()}{setPasswords()} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{serial\+Pass,  }\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{mail\+Pass,  }\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{user\+Pass }\end{DoxyParamCaption})} - function to set system passwords to private variables, which are used to confirm password what user enter to access to some specific functions. 
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a1746ad8d326d2adff1e8297f48119835}\label{classGeneralSettingDialog_a1746ad8d326d2adff1e8297f48119835}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!set\+Style@{set\+Style}}
+\index{set\+Style@{set\+Style}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{set\+Style()}{setStyle()} (\begin{DoxyParamCaption}\item[{Q\+String\+List}]{st\+List,  }\item[{int}]{cur\+Select,  }\item[{Q\+String\+List}]{icon\+List,  }\item[{int}]{icon\+Sel,  }\item[{bool}]{back\+Gr\+En }\end{DoxyParamCaption})}  - function to fill widgets for selecting icons and style (Q\+List\+View) and select item which are used in present moment.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a023c0f13fee36afb784b0ac7507f0fd2}\label{classGeneralSettingDialog_a023c0f13fee36afb784b0ac7507f0fd2}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{show\+Event()}{showEvent()} (\begin{DoxyParamCaption}\item[{Q\+Show\+Event $\ast$}]{ev }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of standard function. Used to hide or show some widgets which are not available for user.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a947b14b03ff390dc93d9d3d5cc8ef962}\label{classGeneralSettingDialog_a947b14b03ff390dc93d9d3d5cc8ef962}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!show\+Port\+Info@{show\+Port\+Info}}
+\index{show\+Port\+Info@{show\+Port\+Info}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{show\+Port\+Info()}{showPortInfo()} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{com\+Sett }\end{DoxyParamCaption})} - function to set serial port parameters to appropriate fields at Serial Port tab.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ac250bc3aba6c2e247d26f5ece4b32af7}\label{classGeneralSettingDialog_ac250bc3aba6c2e247d26f5ece4b32af7}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!style\+Changed@{style\+Changed}}
+\index{style\+Changed@{style\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{style\+Changed}{styleChanged} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function which are called by Q\+List\+View \textit{currentRowChanged(int)} signal and emit \hyperlink{classGeneralSettingDialog_ab651d47f726e1049c0bf34e6ebcb8cf1}{style\+Changed\+Index}(...) signal.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ab651d47f726e1049c0bf34e6ebcb8cf1}\label{classGeneralSettingDialog_ab651d47f726e1049c0bf34e6ebcb8cf1}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!style\+Changed\+Index@{style\+Changed\+Index}}
+\index{style\+Changed\+Index@{style\+Changed\+Index}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{style\+Changed\+Index}{styleChangedIndex} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [signal]}}  - signal which invoked by \hyperlink{classGeneralSettingDialog_ac250bc3aba6c2e247d26f5ece4b32af7}{style\+Changed}(...) function to call appropriate function in parent object (\hyperlink{classMainWindow_ace96362adad45fba8ba98fa834ddb7f2}{get\+Veiw\+Settings}(...)) to change interface colors and style.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a3ec05b9d5bf741008ba575d408af6c04}\label{classGeneralSettingDialog_a3ec05b9d5bf741008ba575d408af6c04}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!unload\+State\+Changed@{unload\+State\+Changed}}
+\index{unload\+State\+Changed@{unload\+State\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{unload\+State\+Changed}{unloadStateChanged} (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal emitted by \hyperlink{classGeneralSettingDialog_acfb5eb53ac65d1aa5f037e88d91fa7e8}{use\+Unload\+State\+Changed}(...) function and handle in parent object by \hyperlink{classMainWindow_a7c2d999fc817728b31dccaaa1e72bd43}{get\+Load\+State}(...) function.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_abfa33957c880ab0172b2ee30e848f6bd}\label{classGeneralSettingDialog_abfa33957c880ab0172b2ee30e848f6bd}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!user\+Setting\+Clicked@{user\+Setting\+Clicked}}
+\index{user\+Setting\+Clicked@{user\+Setting\+Clicked}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{user\+Setting\+Clicked}{userSettingClicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to emit \hyperlink{classGeneralSettingDialog_a9bc417a43ff037b30e281e38fbc98744}{users\+Setting\+Request}(...) signal which are handle in parent object to show \hyperlink{classUserSettingDialog}{User\+Setting\+Dialog} class object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a9bc417a43ff037b30e281e38fbc98744}\label{classGeneralSettingDialog_a9bc417a43ff037b30e281e38fbc98744}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!users\+Setting\+Request@{users\+Setting\+Request}}
+\index{users\+Setting\+Request@{users\+Setting\+Request}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{users\+Setting\+Request}{usersSettingRequest} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal invoked by \hyperlink{classGeneralSettingDialog_acfb5eb53ac65d1aa5f037e88d91fa7e8}{use\+Unload\+State\+Changed}(...) function which are handle in parent object to show \hyperlink{classUserSettingDialog}{User\+Setting\+Dialog} class object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_acfb5eb53ac65d1aa5f037e88d91fa7e8}\label{classGeneralSettingDialog_acfb5eb53ac65d1aa5f037e88d91fa7e8}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!use\+Unload\+State\+Changed@{use\+Unload\+State\+Changed}}
+\index{use\+Unload\+State\+Changed@{use\+Unload\+State\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{use\+Unload\+State\+Changed}{useUnloadStateChanged} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to emit \hyperlink{classGeneralSettingDialog_a3ec05b9d5bf741008ba575d408af6c04}{unload\+State\+Changed}(...) signal which are handle in parent object.
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a9b1d7ada4c3dccc4c3a516b69dd714b9}\label{classGeneralSettingDialog_a9b1d7ada4c3dccc4c3a516b69dd714b9}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!warning\+Time\+Changed@{warning\+Time\+Changed}}
+\index{warning\+Time\+Changed@{warning\+Time\+Changed}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily void General\+Setting\+Dialog\+::\texorpdfstring{warning\+Time\+Changed}{warningTimeChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to send warning time to machine using \hyperlink{classGeneralSettingDialog_a02019fb6d81fc0e83ed6ae0ef7ef68b4}{machine\+Param\+Changed}(...) function.
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classGeneralSettingDialog_a63cb4068f4e5f307a5c09bc0806d0345}\label{classGeneralSettingDialog_a63cb4068f4e5f307a5c09bc0806d0345}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!accept\+Enable@{accept\+Enable}}
+\index{accept\+Enable@{accept\+Enable}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool General\+Setting\+Dialog\+::\texorpdfstring{accept\+Enable}{acceptEnable}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a73bdef0f355634453cce0f75ccf0c173}\label{classGeneralSettingDialog_a73bdef0f355634453cce0f75ccf0c173}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}}
+\index{accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool General\+Setting\+Dialog\+::\texorpdfstring{accept\+On\+Deactilation\+En}{acceptOnDeactilationEn}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_ab4b216b0182add4c144d933694556f40}\label{classGeneralSettingDialog_ab4b216b0182add4c144d933694556f40}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!direction\+Icon@{direction\+Icon}}
+\index{direction\+Icon@{direction\+Icon}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily Q\+Icon General\+Setting\+Dialog\+::\texorpdfstring{direction\+Icon}{directionIcon}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_aed1425f6474086f9fc89cbe24e6f3409}\label{classGeneralSettingDialog_aed1425f6474086f9fc89cbe24e6f3409}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!loged\+In\+Mail@{loged\+In\+Mail}}
+\index{loged\+In\+Mail@{loged\+In\+Mail}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool General\+Setting\+Dialog\+::\texorpdfstring{loged\+In\+Mail}{logedInMail}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_acc7b6201adba8b9e35dc675d212047cc}\label{classGeneralSettingDialog_acc7b6201adba8b9e35dc675d212047cc}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!loged\+In\+Serial@{loged\+In\+Serial}}
+\index{loged\+In\+Serial@{loged\+In\+Serial}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool General\+Setting\+Dialog\+::\texorpdfstring{loged\+In\+Serial}{logedInSerial}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a21fbb6d0ad1c22a90032d3fed66a247f}\label{classGeneralSettingDialog_a21fbb6d0ad1c22a90032d3fed66a247f}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!loged\+In\+User\+Sett@{loged\+In\+User\+Sett}}
+\index{loged\+In\+User\+Sett@{loged\+In\+User\+Sett}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool General\+Setting\+Dialog\+::\texorpdfstring{loged\+In\+User\+Sett}{logedInUserSett}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a61add6dfb9616d6309206cda8af09899}\label{classGeneralSettingDialog_a61add6dfb9616d6309206cda8af09899}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!machine\+Param\+Gl@{machine\+Param\+Gl}}
+\index{machine\+Param\+Gl@{machine\+Param\+Gl}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters}} General\+Setting\+Dialog\+::\texorpdfstring{machine\+Param\+Gl}{machineParamGl}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a214b0ddac5d79aee98e6c6e81fb45380}\label{classGeneralSettingDialog_a214b0ddac5d79aee98e6c6e81fb45380}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!mail\+Password@{mail\+Password}}
+\index{mail\+Password@{mail\+Password}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} General\+Setting\+Dialog\+::\texorpdfstring{mail\+Password}{mailPassword}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a17784de076ae5cfae6e150736d81a9a6}\label{classGeneralSettingDialog_a17784de076ae5cfae6e150736d81a9a6}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!path\+Icon@{path\+Icon}}
+\index{path\+Icon@{path\+Icon}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily Q\+String General\+Setting\+Dialog\+::\texorpdfstring{path\+Icon}{pathIcon}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_abaef63e383cc4c45581e16f85fd88a77}\label{classGeneralSettingDialog_abaef63e383cc4c45581e16f85fd88a77}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!serial\+Password@{serial\+Password}}
+\index{serial\+Password@{serial\+Password}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} General\+Setting\+Dialog\+::\texorpdfstring{serial\+Password}{serialPassword}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classGeneralSettingDialog_a365c466e185f88bad08aeb6ff036c403}\label{classGeneralSettingDialog_a365c466e185f88bad08aeb6ff036c403}} 
+\index{General\+Setting\+Dialog@{General\+Setting\+Dialog}!users\+Password@{users\+Password}}
+\index{users\+Password@{users\+Password}!General\+Setting\+Dialog@{General\+Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} General\+Setting\+Dialog\+::\texorpdfstring{users\+Password}{usersPassword}{\ttfamily [private]}}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalsettingdialog_8h}{generalsettingdialog.\+h}}\item 
+\mbox{\hyperlink{generalsettingdialog_8cpp}{generalsettingdialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

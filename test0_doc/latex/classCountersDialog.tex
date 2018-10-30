@@ -1,0 +1,179 @@
+\hypertarget{classCountersDialog}{}\subsection{Counters\+Dialog Class Reference}
+\label{classCountersDialog}\index{Counters\+Dialog@{Counters\+Dialog}}
+
+
+{\ttfamily \#include $<$countersdialog.\+h$>$}
+
+Inheritance diagram for Counters\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCountersDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCountersDialog_a721b63086592a577a17fada2c35fa8fa}{reset\+Skipped} ()
+\item 
+void \hyperlink{classCountersDialog_ad1642b578abe20a5a2bcb0ab8ecbd1cb}{reset\+Remaining} ()
+\item 
+void \hyperlink{classCountersDialog_a95672788db9b68ef07b0c251d6c1f0c8}{remaining\+Val\+Changed} (int val)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCountersDialog_a92f8263f1080effc36182051fdd06b72}{Counters\+Dialog} (Q\+Widget $\ast$parent=0)
+\item 
+\hyperlink{classCountersDialog_ab32b098f7b560b2fa550f51e0bba5863}{$\sim$\+Counters\+Dialog} ()
+\item 
+void \hyperlink{classCountersDialog_a40b2c28d1a33c2818ec9dea7063d0319}{set\+Remaining} (int val)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classCountersDialog_a4b3aca52961cf93da2b17a3266b27a12}{event} (Q\+Event $\ast$e)
+\item 
+void \hyperlink{classCountersDialog_af1e07b5f6ecf796c44a88cf3f58698e4}{show\+Event} (Q\+Show\+Event $\ast$ev)
+\item 
+bool \hyperlink{classCountersDialog_a93cf3132061916efd64757d22d4298a8}{event\+Filter} (Q\+Object $\ast$watched, Q\+Event $\ast$\hyperlink{classCountersDialog_a4b3aca52961cf93da2b17a3266b27a12}{event})
+\item 
+void \hyperlink{classCountersDialog_acc7e903ec5ff5b25631c7b1c810a123b}{change\+Event} (Q\+Event $\ast$\hyperlink{classCountersDialog_a4b3aca52961cf93da2b17a3266b27a12}{event})
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCountersDialog_a8e6ebaa6a437926644028d4fbf255a2d}{on\+\_\+push\+Button\+Remain\+Reset\+\_\+clicked} ()
+\item 
+void \hyperlink{classCountersDialog_aaa042f36e6a251055f135e67cfe711d6}{on\+\_\+push\+Button\+Skipped\+Reset\+\_\+clicked} ()
+\item 
+void \hyperlink{classCountersDialog_ac5e601c868667428b7cea2b53bfd674a}{on\+\_\+push\+Button\+Hide\+\_\+clicked} ()
+\item 
+void \hyperlink{classCountersDialog_ac3004e3c734190e156718361cf848394}{double\+Spin\+Box\+Remain\+\_\+value\+Changed} (double arg1)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Counters\+Dialog $\ast$ \hyperlink{classCountersDialog_a6ca843a970b365e531602347eb2e231f}{ui}
+\item 
+bool \hyperlink{classCountersDialog_ad08acae2aa8655ed9956795b54f3b862}{accept\+On\+Deactilation\+En}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{Counters\+Dialog@{Counters\+Dialog}!Counters\+Dialog@{Counters\+Dialog}}
+\index{Counters\+Dialog@{Counters\+Dialog}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{Counters\+Dialog(\+Q\+Widget $\ast$parent=0)}{CountersDialog(QWidget *parent=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Counters\+Dialog\+::\+Counters\+Dialog (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classCountersDialog_a92f8263f1080effc36182051fdd06b72}{}\label{classCountersDialog_a92f8263f1080effc36182051fdd06b72}
+\index{Counters\+Dialog@{Counters\+Dialog}!````~Counters\+Dialog@{$\sim$\+Counters\+Dialog}}
+\index{````~Counters\+Dialog@{$\sim$\+Counters\+Dialog}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{$\sim$\+Counters\+Dialog()}{~CountersDialog()}}]{\setlength{\rightskip}{0pt plus 5cm}Counters\+Dialog\+::$\sim$\+Counters\+Dialog (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCountersDialog_ab32b098f7b560b2fa550f51e0bba5863}{}\label{classCountersDialog_ab32b098f7b560b2fa550f51e0bba5863}
+
+
+\subsubsection{Member Function Documentation}
+\index{Counters\+Dialog@{Counters\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{change\+Event(\+Q\+Event $\ast$event)}{changeEvent(QEvent *event)}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::change\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classCountersDialog_acc7e903ec5ff5b25631c7b1c810a123b}{}\label{classCountersDialog_acc7e903ec5ff5b25631c7b1c810a123b}
+\index{Counters\+Dialog@{Counters\+Dialog}!double\+Spin\+Box\+Remain\+\_\+value\+Changed@{double\+Spin\+Box\+Remain\+\_\+value\+Changed}}
+\index{double\+Spin\+Box\+Remain\+\_\+value\+Changed@{double\+Spin\+Box\+Remain\+\_\+value\+Changed}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{double\+Spin\+Box\+Remain\+\_\+value\+Changed}{doubleSpinBoxRemain_valueChanged}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::double\+Spin\+Box\+Remain\+\_\+value\+Changed (
+\begin{DoxyParamCaption}
+\item[{double}]{arg1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\hypertarget{classCountersDialog_ac3004e3c734190e156718361cf848394}{}\label{classCountersDialog_ac3004e3c734190e156718361cf848394}
+\index{Counters\+Dialog@{Counters\+Dialog}!event@{event}}
+\index{event@{event}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{event(\+Q\+Event $\ast$e)}{event(QEvent *e)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Counters\+Dialog\+::event (
+\begin{DoxyParamCaption}
+\item[{Q\+Event $\ast$}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classCountersDialog_a4b3aca52961cf93da2b17a3266b27a12}{}\label{classCountersDialog_a4b3aca52961cf93da2b17a3266b27a12}
+\index{Counters\+Dialog@{Counters\+Dialog}!event\+Filter@{event\+Filter}}
+\index{event\+Filter@{event\+Filter}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{event\+Filter(\+Q\+Object $\ast$watched, Q\+Event $\ast$event)}{eventFilter(QObject *watched, QEvent *event)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Counters\+Dialog\+::event\+Filter (
+\begin{DoxyParamCaption}
+\item[{Q\+Object $\ast$}]{watched, }
+\item[{Q\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classCountersDialog_a93cf3132061916efd64757d22d4298a8}{}\label{classCountersDialog_a93cf3132061916efd64757d22d4298a8}
+\index{Counters\+Dialog@{Counters\+Dialog}!on\+\_\+push\+Button\+Hide\+\_\+clicked@{on\+\_\+push\+Button\+Hide\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Hide\+\_\+clicked@{on\+\_\+push\+Button\+Hide\+\_\+clicked}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{on\+\_\+push\+Button\+Hide\+\_\+clicked}{on_pushButtonHide_clicked}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::on\+\_\+push\+Button\+Hide\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\hypertarget{classCountersDialog_ac5e601c868667428b7cea2b53bfd674a}{}\label{classCountersDialog_ac5e601c868667428b7cea2b53bfd674a}
+\index{Counters\+Dialog@{Counters\+Dialog}!on\+\_\+push\+Button\+Remain\+Reset\+\_\+clicked@{on\+\_\+push\+Button\+Remain\+Reset\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Remain\+Reset\+\_\+clicked@{on\+\_\+push\+Button\+Remain\+Reset\+\_\+clicked}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{on\+\_\+push\+Button\+Remain\+Reset\+\_\+clicked}{on_pushButtonRemainReset_clicked}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::on\+\_\+push\+Button\+Remain\+Reset\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\hypertarget{classCountersDialog_a8e6ebaa6a437926644028d4fbf255a2d}{}\label{classCountersDialog_a8e6ebaa6a437926644028d4fbf255a2d}
+\index{Counters\+Dialog@{Counters\+Dialog}!on\+\_\+push\+Button\+Skipped\+Reset\+\_\+clicked@{on\+\_\+push\+Button\+Skipped\+Reset\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+Skipped\+Reset\+\_\+clicked@{on\+\_\+push\+Button\+Skipped\+Reset\+\_\+clicked}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{on\+\_\+push\+Button\+Skipped\+Reset\+\_\+clicked}{on_pushButtonSkippedReset_clicked}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::on\+\_\+push\+Button\+Skipped\+Reset\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\hypertarget{classCountersDialog_aaa042f36e6a251055f135e67cfe711d6}{}\label{classCountersDialog_aaa042f36e6a251055f135e67cfe711d6}
+\index{Counters\+Dialog@{Counters\+Dialog}!remaining\+Val\+Changed@{remaining\+Val\+Changed}}
+\index{remaining\+Val\+Changed@{remaining\+Val\+Changed}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{remaining\+Val\+Changed}{remainingValChanged}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::remaining\+Val\+Changed (
+\begin{DoxyParamCaption}
+\item[{int}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classCountersDialog_a95672788db9b68ef07b0c251d6c1f0c8}{}\label{classCountersDialog_a95672788db9b68ef07b0c251d6c1f0c8}
+\index{Counters\+Dialog@{Counters\+Dialog}!reset\+Remaining@{reset\+Remaining}}
+\index{reset\+Remaining@{reset\+Remaining}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{reset\+Remaining}{resetRemaining}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::reset\+Remaining (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classCountersDialog_ad1642b578abe20a5a2bcb0ab8ecbd1cb}{}\label{classCountersDialog_ad1642b578abe20a5a2bcb0ab8ecbd1cb}
+\index{Counters\+Dialog@{Counters\+Dialog}!reset\+Skipped@{reset\+Skipped}}
+\index{reset\+Skipped@{reset\+Skipped}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{reset\+Skipped}{resetSkipped}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::reset\+Skipped (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classCountersDialog_a721b63086592a577a17fada2c35fa8fa}{}\label{classCountersDialog_a721b63086592a577a17fada2c35fa8fa}
+\index{Counters\+Dialog@{Counters\+Dialog}!set\+Remaining@{set\+Remaining}}
+\index{set\+Remaining@{set\+Remaining}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{set\+Remaining(int val)}{setRemaining(int val)}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::set\+Remaining (
+\begin{DoxyParamCaption}
+\item[{int}]{val}
+\end{DoxyParamCaption}
+)}\hypertarget{classCountersDialog_a40b2c28d1a33c2818ec9dea7063d0319}{}\label{classCountersDialog_a40b2c28d1a33c2818ec9dea7063d0319}
+\index{Counters\+Dialog@{Counters\+Dialog}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{show\+Event(\+Q\+Show\+Event $\ast$ev)}{showEvent(QShowEvent *ev)}}]{\setlength{\rightskip}{0pt plus 5cm}void Counters\+Dialog\+::show\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Show\+Event $\ast$}]{ev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classCountersDialog_af1e07b5f6ecf796c44a88cf3f58698e4}{}\label{classCountersDialog_af1e07b5f6ecf796c44a88cf3f58698e4}
+
+
+\subsubsection{Member Data Documentation}
+\index{Counters\+Dialog@{Counters\+Dialog}!accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}}
+\index{accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{accept\+On\+Deactilation\+En}{acceptOnDeactilationEn}}]{\setlength{\rightskip}{0pt plus 5cm}bool Counters\+Dialog\+::accept\+On\+Deactilation\+En\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCountersDialog_ad08acae2aa8655ed9956795b54f3b862}{}\label{classCountersDialog_ad08acae2aa8655ed9956795b54f3b862}
+\index{Counters\+Dialog@{Counters\+Dialog}!ui@{ui}}
+\index{ui@{ui}!Counters\+Dialog@{Counters\+Dialog}}
+\paragraph[{\texorpdfstring{ui}{ui}}]{\setlength{\rightskip}{0pt plus 5cm}Ui\+::\+Counters\+Dialog$\ast$ Counters\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCountersDialog_a6ca843a970b365e531602347eb2e231f}{}\label{classCountersDialog_a6ca843a970b365e531602347eb2e231f}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{countersdialog_8h}{countersdialog.\+h}\item 
+\hyperlink{countersdialog_8cpp}{countersdialog.\+cpp}\end{DoxyCompactItemize}

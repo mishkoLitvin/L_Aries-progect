@@ -1,0 +1,153 @@
+\hypertarget{classNumpadDialog}{}\subsection{Numpad\+Dialog Class Reference}
+\label{classNumpadDialog}\index{Numpad\+Dialog@{Numpad\+Dialog}}
+
+
+{\ttfamily \#include $<$numpaddialog.\+h$>$}
+
+Inheritance diagram for Numpad\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classNumpadDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classNumpadDialog_ada306195f37d11153dba09bbfa35ac84}{value\+Submited}} (Q\+String \mbox{\hyperlink{classNumpadDialog_ad5046b269957f80f82d36b7ab800fc5d}{value}})
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNumpadDialog_aa6757d0d987f0be6acffbc4b64551252}{Numpad\+Dialog}} (Q\+Widget $\ast$parent=0, Q\+String window\+Title=\char`\"{}Numpad\char`\"{})
+\item 
+\mbox{\hyperlink{classNumpadDialog_a1aaf28df454bd5bbf2ab3829df0fcd8f}{$\sim$\+Numpad\+Dialog}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classNumpadDialog_a0da4d8e9b7a4c80663421109e6bb68d0}{get\+Value}} (Q\+Widget $\ast$parent=0, Q\+String window\+Title=\char`\"{}Numpad\char`\"{})
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classNumpadDialog_a73f71a3f983e17628468bf843643542e}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classNumpadDialog_a717c92c0ce30150bcb0d8bb963ba4b9a}{append\+To\+Line\+Edit}} (int number)
+\item 
+void \mbox{\hyperlink{classNumpadDialog_a09ad5d99606896df04a2e769595d7c7c}{submit\+Value}} ()
+\item 
+void \mbox{\hyperlink{classNumpadDialog_a588795ce96e78c629ac1825b9f3ab21d}{change\+Sign}} ()
+\item 
+void \mbox{\hyperlink{classNumpadDialog_a195579dcc41869beef3b584451614013}{append\+Zero}} ()
+\item 
+void \mbox{\hyperlink{classNumpadDialog_aeceb302071f824e0e725867eb8be11b5}{add\+Dot}} ()
+\item 
+void \mbox{\hyperlink{classNumpadDialog_ac0f1db7275e66501c52a5c1b9348ebd6}{backspace}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Numpad\+Dialog $\ast$ \mbox{\hyperlink{classNumpadDialog_a56da5fc9be6f1c34951959598cbdd187}{ui}}
+\item 
+\mbox{\hyperlink{classNumpadButton}{Numpad\+Button}} $\ast$ \mbox{\hyperlink{classNumpadDialog_a3b2f37aea17608ca6040eb8efa6c4cf9}{buttons}} \mbox{[}10\mbox{]}
+\item 
+const Q\+String \mbox{\hyperlink{classNumpadDialog_a28b20ba1a580943985c1791dde15bcb3}{st\+Sheet}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{classNumpadDialog_ae45e9a3690fa153aa637027397db1671}{action\+Submit}}
+\item 
+double \mbox{\hyperlink{classNumpadDialog_ad5046b269957f80f82d36b7ab800fc5d}{value}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNumpadDialog_aa6757d0d987f0be6acffbc4b64551252}\label{classNumpadDialog_aa6757d0d987f0be6acffbc4b64551252}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!Numpad\+Dialog@{Numpad\+Dialog}}
+\index{Numpad\+Dialog@{Numpad\+Dialog}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily Numpad\+Dialog\+::\texorpdfstring{Numpad\+Dialog}{NumpadDialog} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0},  }\item[{Q\+String}]{window\+Title = {\ttfamily \char`\"{}Numpad\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - standard Q\+Dialog constructor.
+
+\mbox{\Hypertarget{classNumpadDialog_a1aaf28df454bd5bbf2ab3829df0fcd8f}\label{classNumpadDialog_a1aaf28df454bd5bbf2ab3829df0fcd8f}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!````~Numpad\+Dialog@{$\sim$\+Numpad\+Dialog}}
+\index{````~Numpad\+Dialog@{$\sim$\+Numpad\+Dialog}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily Numpad\+Dialog\+::\texorpdfstring{$\sim$\+Numpad\+Dialog}{~NumpadDialog}(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard Q\+Dialog destructor. 
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNumpadDialog_aeceb302071f824e0e725867eb8be11b5}\label{classNumpadDialog_aeceb302071f824e0e725867eb8be11b5}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!add\+Dot@{add\+Dot}}
+\index{add\+Dot@{add\+Dot}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{add\+Dot}{addDot} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to add dot to text field.
+
+\mbox{\Hypertarget{classNumpadDialog_a717c92c0ce30150bcb0d8bb963ba4b9a}\label{classNumpadDialog_a717c92c0ce30150bcb0d8bb963ba4b9a}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!append\+To\+Line\+Edit@{append\+To\+Line\+Edit}}
+\index{append\+To\+Line\+Edit@{append\+To\+Line\+Edit}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{append\+To\+Line\+Edit}{appendToLineEdit} (\begin{DoxyParamCaption}\item[{int}]{number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function which used to add number to text field. Function called by 1..9 button from \hyperlink{classNumpadDialog_a3b2f37aea17608ca6040eb8efa6c4cf9}{buttons} array.
+
+\mbox{\Hypertarget{classNumpadDialog_a195579dcc41869beef3b584451614013}\label{classNumpadDialog_a195579dcc41869beef3b584451614013}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!append\+Zero@{append\+Zero}}
+\index{append\+Zero@{append\+Zero}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{append\+Zero}{appendZero} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function which used to add zero to text field. Function called by 0 button from \hyperlink{classNumpadDialog_a3b2f37aea17608ca6040eb8efa6c4cf9}{buttons} array.
+
+\mbox{\Hypertarget{classNumpadDialog_ac0f1db7275e66501c52a5c1b9348ebd6}\label{classNumpadDialog_ac0f1db7275e66501c52a5c1b9348ebd6}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!backspace@{backspace}}
+\index{backspace@{backspace}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{backspace}{backspace} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to remove last symbol from text field.
+
+\mbox{\Hypertarget{classNumpadDialog_a73f71a3f983e17628468bf843643542e}\label{classNumpadDialog_a73f71a3f983e17628468bf843643542e}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} - reimplementation of default event of Q\+Widget to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classNumpadDialog_a588795ce96e78c629ac1825b9f3ab21d}\label{classNumpadDialog_a588795ce96e78c629ac1825b9f3ab21d}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!change\+Sign@{change\+Sign}}
+\index{change\+Sign@{change\+Sign}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{change\+Sign}{changeSign} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to change sign of number which is st text field. 
+
+\mbox{\Hypertarget{classNumpadDialog_a0da4d8e9b7a4c80663421109e6bb68d0}\label{classNumpadDialog_a0da4d8e9b7a4c80663421109e6bb68d0}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!get\+Value@{get\+Value}}
+\index{get\+Value@{get\+Value}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily double Numpad\+Dialog\+::\texorpdfstring{get\+Value}{getValue} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0},  }\item[{Q\+String}]{window\+Title = {\ttfamily \char`\"{}Numpad\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}} - static function of class used to show dialog and get \textit{double} value.
+
+\mbox{\Hypertarget{classNumpadDialog_a09ad5d99606896df04a2e769595d7c7c}\label{classNumpadDialog_a09ad5d99606896df04a2e769595d7c7c}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!submit\+Value@{submit\+Value}}
+\index{submit\+Value@{submit\+Value}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{submit\+Value}{submitValue} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to transform text at text field to \textit{double} number and put it to \hyperlink{classNumpadDialog_ad5046b269957f80f82d36b7ab800fc5d}{value} variable.
+
+\mbox{\Hypertarget{classNumpadDialog_ada306195f37d11153dba09bbfa35ac84}\label{classNumpadDialog_ada306195f37d11153dba09bbfa35ac84}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!value\+Submited@{value\+Submited}}
+\index{value\+Submited@{value\+Submited}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily void Numpad\+Dialog\+::\texorpdfstring{value\+Submited}{valueSubmited} (\begin{DoxyParamCaption}\item[{Q\+String}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - unused.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classNumpadDialog_ae45e9a3690fa153aa637027397db1671}\label{classNumpadDialog_ae45e9a3690fa153aa637027397db1671}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!action\+Submit@{action\+Submit}}
+\index{action\+Submit@{action\+Submit}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Numpad\+Dialog\+::\texorpdfstring{action\+Submit}{actionSubmit}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNumpadDialog_a3b2f37aea17608ca6040eb8efa6c4cf9}\label{classNumpadDialog_a3b2f37aea17608ca6040eb8efa6c4cf9}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!buttons@{buttons}}
+\index{buttons@{buttons}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNumpadButton}{Numpad\+Button}}$\ast$ Numpad\+Dialog\+::\texorpdfstring{buttons}{buttons}\mbox{[}10\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNumpadDialog_a28b20ba1a580943985c1791dde15bcb3}\label{classNumpadDialog_a28b20ba1a580943985c1791dde15bcb3}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!st\+Sheet@{st\+Sheet}}
+\index{st\+Sheet@{st\+Sheet}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily const Q\+String Numpad\+Dialog\+::\texorpdfstring{st\+Sheet}{stSheet}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNumpadDialog_ad5046b269957f80f82d36b7ab800fc5d}\label{classNumpadDialog_ad5046b269957f80f82d36b7ab800fc5d}} 
+\index{Numpad\+Dialog@{Numpad\+Dialog}!value@{value}}
+\index{value@{value}!Numpad\+Dialog@{Numpad\+Dialog}}
+{\footnotesize\ttfamily double Numpad\+Dialog\+::\texorpdfstring{value}{value}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{numpaddialog_8h}{numpaddialog.\+h}}\item 
+\mbox{\hyperlink{numpaddialog_8cpp}{numpaddialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

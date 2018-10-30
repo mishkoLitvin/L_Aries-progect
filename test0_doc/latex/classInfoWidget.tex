@@ -1,0 +1,190 @@
+\hypertarget{classInfoWidget}{}\subsection{Info\+Widget Class Reference}
+\label{classInfoWidget}\index{Info\+Widget@{Info\+Widget}}
+
+
+{\ttfamily \#include $<$infowidget.\+h$>$}
+
+Inheritance diagram for Info\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classInfoWidget}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classInfoWidget_a19f07d861d22be4881361a5a32e86451}{Info\+Widget}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classInfoWidget_aefa39a20c91f6dbc8cbc0b6d9bf7623e}{$\sim$\+Info\+Widget}} ()
+\item 
+void \mbox{\hyperlink{classInfoWidget_a36d29faf6a45282ca2b46ca53de0be19}{set\+Register\+Pointer}} (\mbox{\hyperlink{classRegister}{Register}} $\ast$reg\+Ptr)
+\item 
+void \mbox{\hyperlink{classInfoWidget_a8a4f1e9fea6f1a9794dffbb264fa7455}{set\+Printed}} (int val)
+\item 
+void \mbox{\hyperlink{classInfoWidget_a550b6f54475eb5adfba33b4b5f69c6bb}{set\+Total}} (int val)
+\item 
+void \mbox{\hyperlink{classInfoWidget_a3ff137f58223343fa7ae5b09218a0185}{set\+Icon\+Folder}} (Q\+String path)
+\item 
+void \mbox{\hyperlink{classInfoWidget_a78af7f055dbb07026ecf1c820b0381bb}{set\+Indicator\+State}} (u\+\_\+int16\+\_\+t state)
+\item 
+void \mbox{\hyperlink{classInfoWidget_ab17f6cd1820b6946d72c6a42ea3f914b}{set\+Error\+Text}} (\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters}} machine\+Parameters, \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} val)
+\item 
+void \mbox{\hyperlink{classInfoWidget_a1131ca67076ad6951cd2636a7e4e1c7e}{set\+Text}} (Q\+String text)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classInfoWidget_ab9215d8a0db2c91c669dba5e67e27f54}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Info\+Widget $\ast$ \mbox{\hyperlink{classInfoWidget_aac7bf6194c8940ae8bfe6c58ac8a0a43}{ui}}
+\item 
+Q\+Image \mbox{\hyperlink{classInfoWidget_a0d4c516216ba3df3003c72eec8bf929b}{image\+Home}}
+\item 
+Q\+Image \mbox{\hyperlink{classInfoWidget_acc842dfe6d29575f2ddbd89cb48f3853}{image\+Lock}}
+\item 
+Q\+Image \mbox{\hyperlink{classInfoWidget_aff1ea16a7e3fffe12b6bf53ab8ab2df6}{image\+Up}}
+\item 
+Q\+Image \mbox{\hyperlink{classInfoWidget_a8958069e6c72dde19d74070b0b565d4c}{image\+Arrows}}
+\item 
+Q\+Image \mbox{\hyperlink{classInfoWidget_a6ca240f5f640fd0ea85e47e9e5d75803}{image\+Emerg}}
+\item 
+Q\+Image \mbox{\hyperlink{classInfoWidget_abaf1390d58dee5c66125dc58e2aee303}{image\+Warning}}
+\item 
+Q\+Image \mbox{\hyperlink{classInfoWidget_a0e0b5db9d429867826f370f2a24144da}{image\+Stop\+Hand}}
+\item 
+Q\+String \mbox{\hyperlink{classInfoWidget_ae0bf133d0a2f93b0536a47fcdad1fbe7}{path\+Icon}}
+\item 
+Q\+Time \mbox{\hyperlink{classInfoWidget_a2caf54e74e7a24fc5c51ba9c233bce2a}{last\+Time}}
+\item 
+Q\+Graphics\+Opacity\+Effect $\ast$ \mbox{\hyperlink{classInfoWidget_a08d17f18fb1e38dcf3fe8d8c4974dd22}{effect}} \mbox{[}7\mbox{]}
+\item 
+\mbox{\hyperlink{classRegister}{Register}} $\ast$ \mbox{\hyperlink{classInfoWidget_a410514814006364f1abb4ce70e15ea90}{local\+Registers}}
+\item 
+Q\+Settings $\ast$ \mbox{\hyperlink{classInfoWidget_a823b30e65e7e903ad07ae4decc13330d}{err\+Masages}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classInfoWidget_a19f07d861d22be4881361a5a32e86451}\label{classInfoWidget_a19f07d861d22be4881361a5a32e86451}} 
+\index{Info\+Widget@{Info\+Widget}!Info\+Widget@{Info\+Widget}}
+\index{Info\+Widget@{Info\+Widget}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Info\+Widget\+::\texorpdfstring{Info\+Widget}{InfoWidget} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption}){\ttfamily [explicit]}} - standard class constructor. Function initialize Q\+Images and load pictures into them, create Q\+Graphics\+Opacity\+Effects and set it to appropriate images, load error messages file to Q\+Settings class object. 
+
+\mbox{\Hypertarget{classInfoWidget_aefa39a20c91f6dbc8cbc0b6d9bf7623e}\label{classInfoWidget_aefa39a20c91f6dbc8cbc0b6d9bf7623e}} 
+\index{Info\+Widget@{Info\+Widget}!````~Info\+Widget@{$\sim$\+Info\+Widget}}
+\index{````~Info\+Widget@{$\sim$\+Info\+Widget}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Info\+Widget\+::\texorpdfstring{$\sim$\+Info\+Widget}{~InfoWidget} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard class destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classInfoWidget_ab9215d8a0db2c91c669dba5e67e27f54}\label{classInfoWidget_ab9215d8a0db2c91c669dba5e67e27f54}} 
+\index{Info\+Widget@{Info\+Widget}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of default event for QWidget to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classInfoWidget_ab17f6cd1820b6946d72c6a42ea3f914b}\label{classInfoWidget_ab17f6cd1820b6946d72c6a42ea3f914b}} 
+\index{Info\+Widget@{Info\+Widget}!set\+Error\+Text@{set\+Error\+Text}}
+\index{set\+Error\+Text@{set\+Error\+Text}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{set\+Error\+Text}{setErrorText} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMachineSettings_a87879e13793dbc7c10d4fa18e1236751}{Machine\+Settings\+::\+Machine\+Parameters}}}]{machine\+Parameters,  }\item[{\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}}}]{val }\end{DoxyParamCaption})} - function to display error message at \textit{labelInfo}. Parameter \textit{machine\+Parameters} used to select text from \hyperlink{classInfoWidget_a823b30e65e7e903ad07ae4decc13330d}{err\+Masages} object. Parameter \textit{val} is unused. Error code, device and other info takes from \hyperlink{classInfoWidget_a410514814006364f1abb4ce70e15ea90}{local\+Registers} :: \hyperlink{classRegister_a109eaf7556eeb67fb1266f2c4be4477ea9bc9f7f42bfc308c9d4d852c34f88266}{master\+Reg\+\_\+\+D\+E\+V\+E\+RR}, \hyperlink{classRegister_a109eaf7556eeb67fb1266f2c4be4477ea8fe2c7e24469c241f73e0e8c4479df5f}{master\+Reg\+\_\+\+E\+RR}, \hyperlink{classRegister_a109eaf7556eeb67fb1266f2c4be4477ea24c2d649cc95e68e1469708ca96ba048}{master\+Reg\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+S\+S\+A\+GE} data at function invoke.
+
+\mbox{\Hypertarget{classInfoWidget_a3ff137f58223343fa7ae5b09218a0185}\label{classInfoWidget_a3ff137f58223343fa7ae5b09218a0185}} 
+\index{Info\+Widget@{Info\+Widget}!set\+Icon\+Folder@{set\+Icon\+Folder}}
+\index{set\+Icon\+Folder@{set\+Icon\+Folder}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{set\+Icon\+Folder}{setIconFolder} (\begin{DoxyParamCaption}\item[{Q\+String}]{path }\end{DoxyParamCaption})} - function to change folder with icons which used on view and update icons. Icon path written to \hyperlink{classInfoWidget_ae0bf133d0a2f93b0536a47fcdad1fbe7}{path\+Icon} variable.
+
+\mbox{\Hypertarget{classInfoWidget_a78af7f055dbb07026ecf1c820b0381bb}\label{classInfoWidget_a78af7f055dbb07026ecf1c820b0381bb}} 
+\index{Info\+Widget@{Info\+Widget}!set\+Indicator\+State@{set\+Indicator\+State}}
+\index{set\+Indicator\+State@{set\+Indicator\+State}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{set\+Indicator\+State}{setIndicatorState} (\begin{DoxyParamCaption}\item[{u\+\_\+int16\+\_\+t}]{state }\end{DoxyParamCaption})} - function to set state of indicators on widget. State describe which indicators will be visible or hidden. State sets by master board of machine, when \hyperlink{structRegister_1_1MasterReg___1_1reg}{Register\+::\+Master\+Reg\+\_\+\+::reg} field \hyperlink{structRegister_1_1MasterReg___1_1reg_aa5111a7f8eddbd8f8d6c92e23f326946}{master\+Reg\+\_\+\+E\+KR} updates its value.
+
+\mbox{\Hypertarget{classInfoWidget_a8a4f1e9fea6f1a9794dffbb264fa7455}\label{classInfoWidget_a8a4f1e9fea6f1a9794dffbb264fa7455}} 
+\index{Info\+Widget@{Info\+Widget}!set\+Printed@{set\+Printed}}
+\index{set\+Printed@{set\+Printed}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{set\+Printed()}{setPrinted()} (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})} - function to update values on \textit{label\+Printed} and on \textit{label\+DZH}. Value \textit{label\+DZH} updates automatically by time delay calculation between invokes of function.
+
+\mbox{\Hypertarget{classInfoWidget_a36d29faf6a45282ca2b46ca53de0be19}\label{classInfoWidget_a36d29faf6a45282ca2b46ca53de0be19}} 
+\index{Info\+Widget@{Info\+Widget}!set\+Register\+Pointer@{set\+Register\+Pointer}}
+\index{set\+Register\+Pointer@{set\+Register\+Pointer}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{set\+Register\+Pointer}{setRegisterPointer} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRegister}{Register}} $\ast$}]{reg\+Ptr }\end{DoxyParamCaption})}  - function to set pointer to \hyperlink{classRegister}{Register} class object. In a whole program used only one sample of class and pointer (\hyperlink{classMainWindow_aead190b1b4ca3ce95076274ab2ae6f84}{registers}) set from parent object. 
+
+\mbox{\Hypertarget{classInfoWidget_a1131ca67076ad6951cd2636a7e4e1c7e}\label{classInfoWidget_a1131ca67076ad6951cd2636a7e4e1c7e}} 
+\index{Info\+Widget@{Info\+Widget}!set\+Text@{set\+Text}}
+\index{set\+Text@{set\+Text}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{set\+Text}{setText} (\begin{DoxyParamCaption}\item[{Q\+String}]{text }\end{DoxyParamCaption})} - function to set custom text on \textit{label\+Info}.
+
+\mbox{\Hypertarget{classInfoWidget_a550b6f54475eb5adfba33b4b5f69c6bb}\label{classInfoWidget_a550b6f54475eb5adfba33b4b5f69c6bb}} 
+\index{Info\+Widget@{Info\+Widget}!set\+Total@{set\+Total}}
+\index{set\+Total@{set\+Total}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily void Info\+Widget\+::\texorpdfstring{set\+Total}{setTotal} (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})}  - function to update values on \textit{label\+Total}.
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classInfoWidget_a08d17f18fb1e38dcf3fe8d8c4974dd22}\label{classInfoWidget_a08d17f18fb1e38dcf3fe8d8c4974dd22}} 
+\index{Info\+Widget@{Info\+Widget}!effect@{effect}}
+\index{effect@{effect}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Graphics\+Opacity\+Effect$\ast$ Info\+Widget\+::\texorpdfstring{effect}{effect}\mbox{[}7\mbox{]}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_a823b30e65e7e903ad07ae4decc13330d}\label{classInfoWidget_a823b30e65e7e903ad07ae4decc13330d}} 
+\index{Info\+Widget@{Info\+Widget}!err\+Masages@{err\+Masages}}
+\index{err\+Masages@{err\+Masages}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Settings$\ast$ Info\+Widget\+::\texorpdfstring{err\+Masages}{errMasages}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_a8958069e6c72dde19d74070b0b565d4c}\label{classInfoWidget_a8958069e6c72dde19d74070b0b565d4c}} 
+\index{Info\+Widget@{Info\+Widget}!image\+Arrows@{image\+Arrows}}
+\index{image\+Arrows@{image\+Arrows}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Image Info\+Widget\+::\texorpdfstring{image\+Arrows}{imageArrows}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_a6ca240f5f640fd0ea85e47e9e5d75803}\label{classInfoWidget_a6ca240f5f640fd0ea85e47e9e5d75803}} 
+\index{Info\+Widget@{Info\+Widget}!image\+Emerg@{image\+Emerg}}
+\index{image\+Emerg@{image\+Emerg}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Image Info\+Widget\+::\texorpdfstring{image\+Emerg}{imageEmerg}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_a0d4c516216ba3df3003c72eec8bf929b}\label{classInfoWidget_a0d4c516216ba3df3003c72eec8bf929b}} 
+\index{Info\+Widget@{Info\+Widget}!image\+Home@{image\+Home}}
+\index{image\+Home@{image\+Home}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Image Info\+Widget\+::\texorpdfstring{image\+Home}{imageHome}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_acc842dfe6d29575f2ddbd89cb48f3853}\label{classInfoWidget_acc842dfe6d29575f2ddbd89cb48f3853}} 
+\index{Info\+Widget@{Info\+Widget}!image\+Lock@{image\+Lock}}
+\index{image\+Lock@{image\+Lock}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Image Info\+Widget\+::\texorpdfstring{image\+Lock}{imageLock}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_a0e0b5db9d429867826f370f2a24144da}\label{classInfoWidget_a0e0b5db9d429867826f370f2a24144da}} 
+\index{Info\+Widget@{Info\+Widget}!image\+Stop\+Hand@{image\+Stop\+Hand}}
+\index{image\+Stop\+Hand@{image\+Stop\+Hand}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Image Info\+Widget\+::\texorpdfstring{image\+Stop\+Hand}{imageStopHand}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_aff1ea16a7e3fffe12b6bf53ab8ab2df6}\label{classInfoWidget_aff1ea16a7e3fffe12b6bf53ab8ab2df6}} 
+\index{Info\+Widget@{Info\+Widget}!image\+Up@{image\+Up}}
+\index{image\+Up@{image\+Up}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Image Info\+Widget\+::\texorpdfstring{image\+Up}{imageUp}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_abaf1390d58dee5c66125dc58e2aee303}\label{classInfoWidget_abaf1390d58dee5c66125dc58e2aee303}} 
+\index{Info\+Widget@{Info\+Widget}!image\+Warning@{image\+Warning}}
+\index{image\+Warning@{image\+Warning}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Image Info\+Widget\+::\texorpdfstring{image\+Warning}{imageWarning}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_a2caf54e74e7a24fc5c51ba9c233bce2a}\label{classInfoWidget_a2caf54e74e7a24fc5c51ba9c233bce2a}} 
+\index{Info\+Widget@{Info\+Widget}!last\+Time@{last\+Time}}
+\index{last\+Time@{last\+Time}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+Time Info\+Widget\+::\texorpdfstring{last\+Time}{lastTime}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_a410514814006364f1abb4ce70e15ea90}\label{classInfoWidget_a410514814006364f1abb4ce70e15ea90}} 
+\index{Info\+Widget@{Info\+Widget}!local\+Registers@{local\+Registers}}
+\index{local\+Registers@{local\+Registers}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRegister}{Register}}$\ast$ Info\+Widget\+::\texorpdfstring{local\+Registers}{localRegisters}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classInfoWidget_ae0bf133d0a2f93b0536a47fcdad1fbe7}\label{classInfoWidget_ae0bf133d0a2f93b0536a47fcdad1fbe7}} 
+\index{Info\+Widget@{Info\+Widget}!path\+Icon@{path\+Icon}}
+\index{path\+Icon@{path\+Icon}!Info\+Widget@{Info\+Widget}}
+{\footnotesize\ttfamily Q\+String Info\+Widget\+::\texorpdfstring{path\+Icon}{pathIcon}{\ttfamily [private]}}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{infowidget_8h}{infowidget.\+h}}\item 
+\mbox{\hyperlink{infowidget_8cpp}{infowidget.\+cpp}}\end{DoxyCompactItemize}
+\newpage

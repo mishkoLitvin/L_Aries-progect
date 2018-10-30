@@ -1,0 +1,144 @@
+\hypertarget{classMailSender}{}\subsection{Mail\+Sender Class Reference}
+\label{classMailSender}\index{Mail\+Sender@{Mail\+Sender}}
+
+
+{\ttfamily \#include $<$mailsender.\+h$>$}
+
+Inheritance diagram for Mail\+Sender\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMailSender}
+\end{center}
+\end{figure}
+\subsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMailSender_ab2086805ee1168d42959ddbe7231bf5f}{set\+Recipient\+Mail\+Adress}} (Q\+String mail=\char`\"{}mishko.\+litvin@gmail.\+com\char`\"{})
+\item 
+void \mbox{\hyperlink{classMailSender_a9e5b40867b2bc78a71d4e91afabbefc6}{set\+Email\+Subject}} (Q\+String subject=\char`\"{}Li\+Qt Machine interface autosend message\char`\"{})
+\item 
+void \mbox{\hyperlink{classMailSender_aba231256948b0abb340452b8f902955d}{set\+Recipient\+Name}} (Q\+String name=\char`\"{}Customer\char`\"{})
+\item 
+void \mbox{\hyperlink{classMailSender_a3da1ed689ff76134c9ba5704ae724951}{set\+Sender\+Mail\+Adress}} (Q\+String mail=\char`\"{}Liqt.\+autosend@gmail.\+com\char`\"{})
+\item 
+void \mbox{\hyperlink{classMailSender_a3d97c584ca24948d320d31d10cc74089}{set\+Sender\+Password}} (Q\+String pswd=\char`\"{}D7\+C5cq\+Az\char`\"{})
+\item 
+void \mbox{\hyperlink{classMailSender_a23f9bd461f1f7583e7669430b4f01b59}{set\+Sender\+Name}} (Q\+String name=\char`\"{}Li\+Qt Interface\char`\"{})
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMailSender_afad3d5334eb2ce670dd351d6e4578170}{Mail\+Sender}} (Q\+Object $\ast$parent=0)
+\item 
+int \mbox{\hyperlink{classMailSender_a57749e1c2f79dfe8d3c0dbb0e984f9b9}{send\+Message}} (Q\+String message\+Str, Q\+String subject, bool clear=true)
+\item 
+int \mbox{\hyperlink{classMailSender_afcfdcae3a5ffb196d8357866a9d19020}{send\+Message}} (Q\+String \mbox{\hyperlink{classMailSender_aacde6999850036655c9a4a5e99a4bead}{message}}, bool clear=true)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Smtp\+Client $\ast$ \mbox{\hyperlink{classMailSender_af89aab8c2f9788360352e89e3434988d}{smtp}}
+\item 
+Mime\+Message $\ast$ \mbox{\hyperlink{classMailSender_aacde6999850036655c9a4a5e99a4bead}{message}}
+\item 
+Email\+Address $\ast$ \mbox{\hyperlink{classMailSender_a07af5d8ff3491cc11187f28bfbac85d8}{sender\+Addr}}
+\item 
+Email\+Address $\ast$ \mbox{\hyperlink{classMailSender_a9979dc95139744a95d5814b2ea03174e}{recipient\+Addr}}
+\item 
+Mime\+Text $\ast$ \mbox{\hyperlink{classMailSender_a39b44ca80550570dfc8ae847038f271c}{message\+Text}}
+\item 
+Q\+String \mbox{\hyperlink{classMailSender_ab289a6d7038218f62211335320971427}{message\+Subject}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMailSender_afad3d5334eb2ce670dd351d6e4578170}\label{classMailSender_afad3d5334eb2ce670dd351d6e4578170}} 
+\index{Mail\+Sender@{Mail\+Sender}!Mail\+Sender@{Mail\+Sender}}
+\index{Mail\+Sender@{Mail\+Sender}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily Mail\+Sender\+::\texorpdfstring{Mail\+Sender()}{MailSender} (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - standard class constructor. Initialize mail sender class with standard parameters.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMailSender_a57749e1c2f79dfe8d3c0dbb0e984f9b9}\label{classMailSender_a57749e1c2f79dfe8d3c0dbb0e984f9b9}} 
+\index{Mail\+Sender@{Mail\+Sender}!send\+Message@{send\+Message}}
+\index{send\+Message@{send\+Message}!Mail\+Sender@{Mail\+Sender}}	
+{\footnotesize\ttfamily int Mail\+Sender\+::\texorpdfstring{send\+Message}{sendMessage}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{Q\+String}]{message\+Str,  }\item[{Q\+String}]{subject,  }\item[{bool}]{clear = {\ttfamily true} }\end{DoxyParamCaption})} - function to send message with \textit{message\+Str} and \textit{subject} by e-mail. 
+
+\mbox{\Hypertarget{classMailSender_afcfdcae3a5ffb196d8357866a9d19020}\label{classMailSender_afcfdcae3a5ffb196d8357866a9d19020}} 
+\index{Mail\+Sender@{Mail\+Sender}!send\+Message@{send\+Message}}
+\index{send\+Message@{send\+Message}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily int Mail\+Sender\+::\texorpdfstring{send\+Message}{sendMessage}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{Q\+String}]{message,  }\item[{bool}]{clear = {\ttfamily true} }\end{DoxyParamCaption})} - function to send message with \textit{message\+Str} and  subject recorded by \mbox{\hyperlink{classMailSender_a9e5b40867b2bc78a71d4e91afabbefc6}{set\+Email\+Subject}}(...) function with e-mail. \\
+
+\begin{center}	\line(1,0){450} \end{center}
+Block of function which used for setup parameters of e-mail messages. 
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classMailSender_a9e5b40867b2bc78a71d4e91afabbefc6}\label{classMailSender_a9e5b40867b2bc78a71d4e91afabbefc6}} 
+\index{Mail\+Sender@{Mail\+Sender}!set\+Email\+Subject@{set\+Email\+Subject}}
+\index{set\+Email\+Subject@{set\+Email\+Subject}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily void Mail\+Sender\+::\texorpdfstring{set\+Email\+Subject}{setEmailSubject} (\begin{DoxyParamCaption}\item[{Q\+String}]{subject = {\ttfamily \char`\"{}LiQt~Machine~interface~autosend~{message}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} 
+
+\item\mbox{\Hypertarget{classMailSender_ab2086805ee1168d42959ddbe7231bf5f}\label{classMailSender_ab2086805ee1168d42959ddbe7231bf5f}} 
+\index{Mail\+Sender@{Mail\+Sender}!set\+Recipient\+Mail\+Adress@{set\+Recipient\+Mail\+Adress}}
+\index{set\+Recipient\+Mail\+Adress@{set\+Recipient\+Mail\+Adress}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily void Mail\+Sender\+::\texorpdfstring{set\+Recipient\+Mail\+Adress}{setRecipientMailAdress} (\begin{DoxyParamCaption}\item[{Q\+String}]{mail = {\ttfamily \char`\"{}mishko.litvin@gmail.com\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classMailSender_aba231256948b0abb340452b8f902955d}\label{classMailSender_aba231256948b0abb340452b8f902955d}} 
+\index{Mail\+Sender@{Mail\+Sender}!set\+Recipient\+Name@{set\+Recipient\+Name}}
+\index{set\+Recipient\+Name@{set\+Recipient\+Name}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily void Mail\+Sender\+::\texorpdfstring{set\+Recipient\+Name}{setRecipientName} (\begin{DoxyParamCaption}\item[{Q\+String}]{name = {\ttfamily \char`\"{}Customer\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classMailSender_a3da1ed689ff76134c9ba5704ae724951}\label{classMailSender_a3da1ed689ff76134c9ba5704ae724951}} 
+\index{Mail\+Sender@{Mail\+Sender}!set\+Sender\+Mail\+Adress@{set\+Sender\+Mail\+Adress}}
+\index{set\+Sender\+Mail\+Adress@{set\+Sender\+Mail\+Adress}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily void Mail\+Sender\+::\texorpdfstring{set\+Sender\+Mail\+Adress}{setSenderMailAdress} (\begin{DoxyParamCaption}\item[{Q\+String}]{mail = {\ttfamily \char`\"{}Liqt.autosend@gmail.com\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classMailSender_a23f9bd461f1f7583e7669430b4f01b59}\label{classMailSender_a23f9bd461f1f7583e7669430b4f01b59}} 
+\index{Mail\+Sender@{Mail\+Sender}!set\+Sender\+Name@{set\+Sender\+Name}}
+\index{set\+Sender\+Name@{set\+Sender\+Name}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily void Mail\+Sender\+::\texorpdfstring{set\+Sender\+Name}{setSenderName} (\begin{DoxyParamCaption}\item[{Q\+String}]{name = {\ttfamily \char`\"{}LiQt~Interface\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classMailSender_a3d97c584ca24948d320d31d10cc74089}\label{classMailSender_a3d97c584ca24948d320d31d10cc74089}} 
+\index{Mail\+Sender@{Mail\+Sender}!set\+Sender\+Password@{set\+Sender\+Password}}
+\index{set\+Sender\+Password@{set\+Sender\+Password}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily void Mail\+Sender\+::\texorpdfstring{set\+Sender\+Password}{setSenderPassword} (\begin{DoxyParamCaption}\item[{Q\+String}]{pswd = {\ttfamily \char`\"{}D7C5cqAz\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+\end{DoxyCompactItemize}
+\begin{center}	\line(1,0){450} \end{center}
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMailSender_aacde6999850036655c9a4a5e99a4bead}\label{classMailSender_aacde6999850036655c9a4a5e99a4bead}} 
+\index{Mail\+Sender@{Mail\+Sender}!message@{message}}
+\index{message@{message}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily Mime\+Message$\ast$ Mail\+Sender\+::\texorpdfstring{message}{message}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMailSender_ab289a6d7038218f62211335320971427}\label{classMailSender_ab289a6d7038218f62211335320971427}} 
+\index{Mail\+Sender@{Mail\+Sender}!message\+Subject@{message\+Subject}}
+\index{message\+Subject@{message\+Subject}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily Q\+String Mail\+Sender\+::\texorpdfstring{message\+Subject}{messageSubject}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMailSender_a39b44ca80550570dfc8ae847038f271c}\label{classMailSender_a39b44ca80550570dfc8ae847038f271c}} 
+\index{Mail\+Sender@{Mail\+Sender}!message\+Text@{message\+Text}}
+\index{message\+Text@{message\+Text}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily Mime\+Text$\ast$ Mail\+Sender\+::\texorpdfstring{message\+Text}{messageText}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMailSender_a9979dc95139744a95d5814b2ea03174e}\label{classMailSender_a9979dc95139744a95d5814b2ea03174e}} 
+\index{Mail\+Sender@{Mail\+Sender}!recipient\+Addr@{recipient\+Addr}}
+\index{recipient\+Addr@{recipient\+Addr}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily Email\+Address$\ast$ Mail\+Sender\+::\texorpdfstring{recipient\+Addr}{recipientAddr}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMailSender_a07af5d8ff3491cc11187f28bfbac85d8}\label{classMailSender_a07af5d8ff3491cc11187f28bfbac85d8}} 
+\index{Mail\+Sender@{Mail\+Sender}!sender\+Addr@{sender\+Addr}}
+\index{sender\+Addr@{sender\+Addr}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily Email\+Address$\ast$ Mail\+Sender\+::\texorpdfstring{sender\+Addr}{senderAddr}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMailSender_af89aab8c2f9788360352e89e3434988d}\label{classMailSender_af89aab8c2f9788360352e89e3434988d}} 
+\index{Mail\+Sender@{Mail\+Sender}!smtp@{smtp}}
+\index{smtp@{smtp}!Mail\+Sender@{Mail\+Sender}}
+{\footnotesize\ttfamily Smtp\+Client$\ast$ Mail\+Sender\+::\texorpdfstring{smtp}{smtp}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mailsender_8h}{mailsender.\+h}}\item 
+\mbox{\hyperlink{mailsender_8cpp}{mailsender.\+cpp}}\end{DoxyCompactItemize}
+\newpage

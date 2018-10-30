@@ -1,0 +1,356 @@
+\hypertarget{classIndexerSettingDialog}{}\subsection{Indexer\+Setting\+Dialog Class Reference}
+\label{classIndexerSettingDialog}\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+
+
+{\ttfamily \#include $<$indexersettingdialog.\+h$>$}
+
+Inheritance diagram for Indexer\+Setting\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIndexerSettingDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a231edf60936e09b15972951f8a7751e7}{indexer\+Param\+Changed}} (Q\+Byte\+Array index\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a40d9bb1a05d0afb9bb8a0191f611d78c}{lift\+Param\+Changed}} (Q\+Byte\+Array lift\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_adbccfa0b79b30c4a5373e183f7828524}{send\+Command}} (Q\+Byte\+Array command)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a8d5a19a8948b46f84de79d40775f05c5}{lift\+Distance\+Changed}} (float distance)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classIndexerSettingDialog_ad2c64f92d2d17bc3d8045dd84eeb71e8}{Indexer\+Setting\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classIndexerSettingDialog_a87b6ba4152cb2b6a02a93e502d7b64ff}{$\sim$\+Indexer\+Setting\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a2b0fb04ec9698b7bc82a69ae3d379a1b}{set\+Registers}} (\mbox{\hyperlink{classRegister}{Register}} $\ast$reg)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a3b3ff00a9731a94931be5f2c9590fa37}{set\+Indexer\+Setting}} (bool disconnect=true)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_ae98cd594c5da327549e306a2ec09718e}{set\+Lift\+Setting}} (bool disconnect=true)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_aea4b170b962c7e2e319565f3fde73b14}{set\+Indexer\+Setting}} (\mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Indexer\+Lift\+Settings\+::\+Index\+Parameters}} index\+Param, bool disconnect=true)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_aa8ef316cb26c8c1c2149581679ca9646}{set\+Lift\+Setting}} (\mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Indexer\+Lift\+Settings\+::\+Lift\+Parameters}} lift\+Param, bool disconnect=true)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a12036cd566ddbb3581bf7a526bf0d18f}{set\+Lift\+Distance}} (float distance, int \mbox{\hyperlink{classIndexerSettingDialog_a9dfafe2970aeba611a1736a3797cc3f3}{lift\+Gear\+Ratio}})
+\item 
+float \mbox{\hyperlink{classIndexerSettingDialog_a436f30e8ab3af6ea4b3a2389c6711fd4}{get\+Lift\+Distance}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a3b2f9533b1c72aecd3d36bb4d175859f}{set\+Lift\+Gear\+Ratio}} (\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} \mbox{\hyperlink{classIndexerSettingDialog_a9dfafe2970aeba611a1736a3797cc3f3}{lift\+Gear\+Ratio}})
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classIndexerSettingDialog_a20a34151fec7c14426e8ff8b210d1cc9}{event}} (Q\+Event $\ast$e)
+\item 
+bool \mbox{\hyperlink{classIndexerSettingDialog_af096cfd78afd37d27487dd383ed30188}{event\+Filter}} (Q\+Object $\ast$watched, Q\+Event $\ast$\mbox{\hyperlink{classIndexerSettingDialog_a20a34151fec7c14426e8ff8b210d1cc9}{event}})
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a04091d56225031b1ca05b769f2bba105}{show\+Event}} (Q\+Show\+Event $\ast$ev)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a2140c46d3d12396442388a3c42ba8e83}{change\+Event}} (Q\+Event $\ast$\mbox{\hyperlink{classIndexerSettingDialog_a20a34151fec7c14426e8ff8b210d1cc9}{event}})
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a4d7f2f508e87ac980d21557f5a18a216}{connect\+All}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a1a3a501889727528a4f432b233556760}{disconnect\+All}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a32e867b5d070ed40929837ebc4b45a78}{accept}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a36fd628fd129e8fab31e7876085d1a71}{reject}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a1843f10a012a547c32953866ecece54b}{event\+Filter\+Setup}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_af2f32d79f004b22b713fa30fa0952364}{d\+Spin\+Box\+Index\+Distance\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a589985949822923031a396092d4f24c0}{spin\+Box\+Index\+Home\+Offset\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_ae65f25d6b260c3534ef2e03745e54a07}{spin\+Box\+Index\+Distance\+Offcet\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a52510947409dd78b5262bfc320ce85d0}{spin\+Box\+Index\+Speed\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a89996434374b3f24dd26ebf9aae81de4}{d\+Spin\+Box\+Index\+Accel\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a077a9cde82a08f7ae66654cf26a452bd}{spin\+Boxindex\+Speed\+Ret\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a7084aa1c59b526f1e3ea07b2e9a23b56}{d\+Spin\+Box\+Index\+Accel\+Ret\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a02d9d9a3c2b76d6576334a48752be9d7}{d\+Spin\+Box\+Lift\+Down\+Delay\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a596e2bdb49c0681bd06d847497d20cad}{d\+Spin\+Box\+Lift\+Up\+Delay\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a4cc32d94f2a3d8ed8cf99665f3d95d99}{d\+Spin\+Box\+Lift\+Distance\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a84a27fcd118a8208944a216cd88022c9}{spin\+Box\+Lift\+Home\+Offset\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a3632876be4c809b96b93d402044b3716}{spin\+Box\+Lift\+Speed\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a6a2a10523b6a1611763249e16bd65100}{d\+Spin\+Box\+Lift\+Accel\+\_\+value\+Changed}} (double arg1)
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_ac0ae2808aaa375d27ca2caafe47c2c35}{on\+\_\+p\+Button\+Lift\+Move\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a1dcf2f19ff38e28177ecad8f430af3c6}{on\+\_\+p\+Button\+Lift\+Home\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a30f8761c69279bed9085dce50ec83422}{on\+\_\+p\+Button\+Index\+Move\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classIndexerSettingDialog_a0d983ff2b43c6ad2d501a0c4e00d88e5}{on\+\_\+p\+Button\+Index\+Home\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Indexer\+Setting\+Dialog $\ast$ \mbox{\hyperlink{classIndexerSettingDialog_ad5a0497f91a33e699cdbd912a6089776}{ui}}
+\item 
+bool \mbox{\hyperlink{classIndexerSettingDialog_aa781b93909330f9c60b4494555b39b4b}{accept\+On\+Deactilation\+En}}
+\item 
+bool \mbox{\hyperlink{classIndexerSettingDialog_a14a7ea545fca4efbe05799efe767f678}{accept\+Enable}}
+\item 
+\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} \mbox{\hyperlink{classIndexerSettingDialog_a9dfafe2970aeba611a1736a3797cc3f3}{lift\+Gear\+Ratio}}
+\item 
+\mbox{\hyperlink{classRegister}{Register}} $\ast$ \mbox{\hyperlink{classIndexerSettingDialog_ab2298cdfcfc00f6472544041947209c3}{registers}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIndexerSettingDialog_ad2c64f92d2d17bc3d8045dd84eeb71e8}\label{classIndexerSettingDialog_ad2c64f92d2d17bc3d8045dd84eeb71e8}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily Indexer\+Setting\+Dialog\+::\+\texorpdfstring{Indexer\+Setting\+Dialog}{IndexerSettingDialog} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption}){\ttfamily [explicit]}} - standard Q\+Widget constructor.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a87b6ba4152cb2b6a02a93e502d7b64ff}\label{classIndexerSettingDialog_a87b6ba4152cb2b6a02a93e502d7b64ff}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!````~Indexer\+Setting\+Dialog@{$\sim$\+Indexer\+Setting\+Dialog}}
+\index{````~Indexer\+Setting\+Dialog@{$\sim$\+Indexer\+Setting\+Dialog}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily Indexer\+Setting\+Dialog\+::\texorpdfstring{$\sim$\+Indexer\+Setting\+Dialog}{~IndexerSettingDialog} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard Q\+Widget destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classIndexerSettingDialog_a32e867b5d070ed40929837ebc4b45a78}\label{classIndexerSettingDialog_a32e867b5d070ed40929837ebc4b45a78}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!accept@{accept}}
+\index{accept@{accept}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{accept}{accept} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to collect all data from Q\+Spin\+Boxes to save it at hard drive. Function emit two signals with data \hyperlink{classIndexerSettingDialog_a231edf60936e09b15972951f8a7751e7}{indexer\+Param\+Changed}(...) and \hyperlink{classIndexerSettingDialog_a40d9bb1a05d0afb9bb8a0191f611d78c}{lift\+Param\+Changed}(...) which are handle in parent object. Function invoke by \textit{OK} button and from \hyperlink{classIndexerSettingDialog_a20a34151fec7c14426e8ff8b210d1cc9}{event} (...) when window lost focus or deactivated. 
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a2140c46d3d12396442388a3c42ba8e83}\label{classIndexerSettingDialog_a2140c46d3d12396442388a3c42ba8e83}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}}- Reimplementation of default event for Q\+Widget to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a4d7f2f508e87ac980d21557f5a18a216}\label{classIndexerSettingDialog_a4d7f2f508e87ac980d21557f5a18a216}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!connect\+All@{connect\+All}}
+\index{connect\+All@{connect\+All}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{connect\+All}{connectAll} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function what is used to connect all widgets signals to appropriate functions.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a1a3a501889727528a4f432b233556760}\label{classIndexerSettingDialog_a1a3a501889727528a4f432b233556760}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!disconnect\+All@{disconnect\+All}}
+\index{disconnect\+All@{disconnect\+All}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{disconnect\+All}{disconnectAll} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function what is used to disconnect all widgets signals to appropriate functions.
+\begin{center}	\line(1,0){450} \end{center}
+All functions in next block used to send parameters to master PCB to configure machine. Method of data packing described in \hyperlink{classRegister}{Register} class reference. 
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a89996434374b3f24dd26ebf9aae81de4}\label{classIndexerSettingDialog_a89996434374b3f24dd26ebf9aae81de4}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!d\+Spin\+Box\+Index\+Accel\+\_\+value\+Changed@{d\+Spin\+Box\+Index\+Accel\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Index\+Accel\+\_\+value\+Changed@{d\+Spin\+Box\+Index\+Accel\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Index\+Accel\+\_\+value\+Changed}{dSpinBoxIndexAccel\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a7084aa1c59b526f1e3ea07b2e9a23b56}\label{classIndexerSettingDialog_a7084aa1c59b526f1e3ea07b2e9a23b56}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!d\+Spin\+Box\+Index\+Accel\+Ret\+\_\+value\+Changed@{d\+Spin\+Box\+Index\+Accel\+Ret\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Index\+Accel\+Ret\+\_\+value\+Changed@{d\+Spin\+Box\+Index\+Accel\+Ret\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Index\+Accel\+Ret\+\_\+value\+Changed}{dSpinBoxIndexAccelRet\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_af2f32d79f004b22b713fa30fa0952364}\label{classIndexerSettingDialog_af2f32d79f004b22b713fa30fa0952364}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!d\+Spin\+Box\+Index\+Distance\+\_\+value\+Changed@{d\+Spin\+Box\+Index\+Distance\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Index\+Distance\+\_\+value\+Changed@{d\+Spin\+Box\+Index\+Distance\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Index\+Distance\+\_\+value\+Changed}{dSpinBoxIndexDistance\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a6a2a10523b6a1611763249e16bd65100}\label{classIndexerSettingDialog_a6a2a10523b6a1611763249e16bd65100}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!d\+Spin\+Box\+Lift\+Accel\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Accel\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Lift\+Accel\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Accel\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Lift\+Accel\+\_\+value\+Changed}{dSpinBoxLiftAccel\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a4cc32d94f2a3d8ed8cf99665f3d95d99}\label{classIndexerSettingDialog_a4cc32d94f2a3d8ed8cf99665f3d95d99}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!d\+Spin\+Box\+Lift\+Distance\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Distance\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Lift\+Distance\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Distance\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Lift\+Distance\+\_\+value\+Changed}{dSpinBoxLiftDistance\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a02d9d9a3c2b76d6576334a48752be9d7}\label{classIndexerSettingDialog_a02d9d9a3c2b76d6576334a48752be9d7}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!d\+Spin\+Box\+Lift\+Down\+Delay\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Down\+Delay\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Lift\+Down\+Delay\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Down\+Delay\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Lift\+Down\+Delay\+\_\+value\+Changed}{dSpinBoxLiftDownDelay\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a596e2bdb49c0681bd06d847497d20cad}\label{classIndexerSettingDialog_a596e2bdb49c0681bd06d847497d20cad}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!d\+Spin\+Box\+Lift\+Up\+Delay\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Up\+Delay\+\_\+value\+Changed}}
+\index{d\+Spin\+Box\+Lift\+Up\+Delay\+\_\+value\+Changed@{d\+Spin\+Box\+Lift\+Up\+Delay\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{d\+Spin\+Box\+Lift\+Up\+Delay\+\_\+value\+Changed}{dSpinBoxLiftUpDelay\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_ae65f25d6b260c3534ef2e03745e54a07}\label{classIndexerSettingDialog_ae65f25d6b260c3534ef2e03745e54a07}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!spin\+Box\+Index\+Distance\+Offcet\+\_\+value\+Changed@{spin\+Box\+Index\+Distance\+Offcet\+\_\+value\+Changed}}
+\index{spin\+Box\+Index\+Distance\+Offcet\+\_\+value\+Changed@{spin\+Box\+Index\+Distance\+Offcet\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Index\+Distance\+Offcet\+\_\+value\+Changed}{spinBoxIndexDistanceOffcet\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a589985949822923031a396092d4f24c0}\label{classIndexerSettingDialog_a589985949822923031a396092d4f24c0}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!spin\+Box\+Index\+Home\+Offset\+\_\+value\+Changed@{spin\+Box\+Index\+Home\+Offset\+\_\+value\+Changed}}
+\index{spin\+Box\+Index\+Home\+Offset\+\_\+value\+Changed@{spin\+Box\+Index\+Home\+Offset\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Index\+Home\+Offset\+\_\+value\+Changed}{spinBoxIndexHomeOffset\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a52510947409dd78b5262bfc320ce85d0}\label{classIndexerSettingDialog_a52510947409dd78b5262bfc320ce85d0}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!spin\+Box\+Index\+Speed\+\_\+value\+Changed@{spin\+Box\+Index\+Speed\+\_\+value\+Changed}}
+\index{spin\+Box\+Index\+Speed\+\_\+value\+Changed@{spin\+Box\+Index\+Speed\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Index\+Speed\+\_\+value\+Changed}{spinBoxIndexSpeed\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a077a9cde82a08f7ae66654cf26a452bd}\label{classIndexerSettingDialog_a077a9cde82a08f7ae66654cf26a452bd}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!spin\+Boxindex\+Speed\+Ret\+\_\+value\+Changed@{spin\+Boxindex\+Speed\+Ret\+\_\+value\+Changed}}
+\index{spin\+Boxindex\+Speed\+Ret\+\_\+value\+Changed@{spin\+Boxindex\+Speed\+Ret\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{spin\+Boxindex\+Speed\+Ret\+\_\+value\+Changed}{spinBoxindexSpeedRet\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a84a27fcd118a8208944a216cd88022c9}\label{classIndexerSettingDialog_a84a27fcd118a8208944a216cd88022c9}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!spin\+Box\+Lift\+Home\+Offset\+\_\+value\+Changed@{spin\+Box\+Lift\+Home\+Offset\+\_\+value\+Changed}}
+\index{spin\+Box\+Lift\+Home\+Offset\+\_\+value\+Changed@{spin\+Box\+Lift\+Home\+Offset\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Lift\+Home\+Offset\+\_\+value\+Changed}{spinBoxLiftHomeOffset\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a3632876be4c809b96b93d402044b3716}\label{classIndexerSettingDialog_a3632876be4c809b96b93d402044b3716}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!spin\+Box\+Lift\+Speed\+\_\+value\+Changed@{spin\+Box\+Lift\+Speed\+\_\+value\+Changed}}
+\index{spin\+Box\+Lift\+Speed\+\_\+value\+Changed@{spin\+Box\+Lift\+Speed\+\_\+value\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{spin\+Box\+Lift\+Speed\+\_\+value\+Changed}{spinBoxLiftSpeed\_valueChanged} (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\end{DoxyCompactItemize}
+\begin{center}	\line(1,0){450} \end{center}
+\mbox{\Hypertarget{classIndexerSettingDialog_a20a34151fec7c14426e8ff8b210d1cc9}\label{classIndexerSettingDialog_a20a34151fec7c14426e8ff8b210d1cc9}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!event@{event}}
+\index{event@{event}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool Indexer\+Setting\+Dialog\+::\texorpdfstring{event}{event} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{e }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of standard function to handle \textit{QEvent::WindowDeactivate} or \textit{QEvent::Leave} for automatic invoke of \hyperlink{classIndexerSettingDialog_a32e867b5d070ed40929837ebc4b45a78}{accept}(...) function on window deactivation.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_af096cfd78afd37d27487dd383ed30188}\label{classIndexerSettingDialog_af096cfd78afd37d27487dd383ed30188}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!event\+Filter@{event\+Filter}}
+\index{event\+Filter@{event\+Filter}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool Indexer\+Setting\+Dialog\+::\texorpdfstring{event\+Filter}{eventFilter} (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{watched,  }\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of standard function to handle \textit{QEvent:: MouseButtonDblClick} or \textit{QEvent::MouseButtonRelease} events to call \hyperlink{classNumpadDialog}{Numpad\+Dialog} or \hyperlink{classKeyboardDialog}{Keyboard\+Dialog} to enter data to appropriate widgets. Widgets which will call this function are defined in \hyperlink{classIndexerSettingDialog_a1843f10a012a547c32953866ecece54b}{event\+Filter\+Setup}(...) function. 
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a1843f10a012a547c32953866ecece54b}\label{classIndexerSettingDialog_a1843f10a012a547c32953866ecece54b}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!event\+Filter\+Setup@{event\+Filter\+Setup}}
+\index{event\+Filter\+Setup@{event\+Filter\+Setup}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{event\+Filter\+Setup}{eventFilterSetup} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to configure widgets on dialog to use \hyperlink{classIndexerSettingDialog_af096cfd78afd37d27487dd383ed30188}{event\+Filter} (...).
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a436f30e8ab3af6ea4b3a2389c6711fd4}\label{classIndexerSettingDialog_a436f30e8ab3af6ea4b3a2389c6711fd4}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!get\+Lift\+Distance@{get\+Lift\+Distance}}
+\index{get\+Lift\+Distance@{get\+Lift\+Distance}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily float Indexer\+Setting\+Dialog\+::\texorpdfstring{get\+Lift\+Distance}{getLiftDistance} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function to get lift distance parameter. Used in parent object.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a231edf60936e09b15972951f8a7751e7}\label{classIndexerSettingDialog_a231edf60936e09b15972951f8a7751e7}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!indexer\+Param\+Changed@{indexer\+Param\+Changed}}
+\index{indexer\+Param\+Changed@{indexer\+Param\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{indexer\+Param\+Changed}{indexerParamChanged} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{index\+Param\+Arr }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which is emitted by function \hyperlink{classIndexerSettingDialog_a32e867b5d070ed40929837ebc4b45a78}{accept}(...) and handle by \hyperlink{classMainWindow_a5c6f8757a262535d243b6f481ceb570b}{get\+Indexer\+Param}(...) in parent object.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a8d5a19a8948b46f84de79d40775f05c5}\label{classIndexerSettingDialog_a8d5a19a8948b46f84de79d40775f05c5}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!lift\+Distance\+Changed@{lift\+Distance\+Changed}}
+\index{lift\+Distance\+Changed@{lift\+Distance\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{lift\+Distance\+Changed}{liftDistanceChanged} (\begin{DoxyParamCaption}\item[{float}]{distance }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which is emitted by function \hyperlink{classIndexerSettingDialog_a4cc32d94f2a3d8ed8cf99665f3d95d99}{d\+Spin\+Box\+Lift\+Distance\+\_\+value\+Changed}(...) and handle by \hyperlink{classMainWindow_a11a73a8f479b8952951f29df988ff2c3}{get\+Lift\+Distance}(...) in parent object to update value at pallet distance spin\+Box.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a40d9bb1a05d0afb9bb8a0191f611d78c}\label{classIndexerSettingDialog_a40d9bb1a05d0afb9bb8a0191f611d78c}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!lift\+Param\+Changed@{lift\+Param\+Changed}}
+\index{lift\+Param\+Changed@{lift\+Param\+Changed}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{lift\+Param\+Changed}{liftParamChanged} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{lift\+Param\+Arr }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which is emitted by function \hyperlink{classIndexerSettingDialog_a32e867b5d070ed40929837ebc4b45a78}{accept}(...) and handle by \hyperlink{classMainWindow_a65683f9a3748cd4f783daf2f57b4f318}{get\+Lift\+Param}(...) in parent object.
+\begin{center}	\line(1,0){450} \end{center}
+Functions in next block used to send commands to master PCB to move parst of machine. Method of commands data packing described in \hyperlink{classRegister}{Register} class reference. 
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a0d983ff2b43c6ad2d501a0c4e00d88e5}\label{classIndexerSettingDialog_a0d983ff2b43c6ad2d501a0c4e00d88e5}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!on\+\_\+p\+Button\+Index\+Home\+\_\+clicked@{on\+\_\+p\+Button\+Index\+Home\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Index\+Home\+\_\+clicked@{on\+\_\+p\+Button\+Index\+Home\+\_\+clicked}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Index\+Home\+\_\+clicked}{on\_pButtonIndexHome\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a30f8761c69279bed9085dce50ec83422}\label{classIndexerSettingDialog_a30f8761c69279bed9085dce50ec83422}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!on\+\_\+p\+Button\+Index\+Move\+\_\+clicked@{on\+\_\+p\+Button\+Index\+Move\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Index\+Move\+\_\+clicked@{on\+\_\+p\+Button\+Index\+Move\+\_\+clicked}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Index\+Move\+\_\+clicked}{on\_pButtonIndexMove\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_a1dcf2f19ff38e28177ecad8f430af3c6}\label{classIndexerSettingDialog_a1dcf2f19ff38e28177ecad8f430af3c6}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!on\+\_\+p\+Button\+Lift\+Home\+\_\+clicked@{on\+\_\+p\+Button\+Lift\+Home\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Lift\+Home\+\_\+clicked@{on\+\_\+p\+Button\+Lift\+Home\+\_\+clicked}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Lift\+Home\+\_\+clicked}{on\_pButtonLiftHome\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+
+\item\mbox{\Hypertarget{classIndexerSettingDialog_ac0ae2808aaa375d27ca2caafe47c2c35}\label{classIndexerSettingDialog_ac0ae2808aaa375d27ca2caafe47c2c35}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!on\+\_\+p\+Button\+Lift\+Move\+\_\+clicked@{on\+\_\+p\+Button\+Lift\+Move\+\_\+clicked}}
+\index{on\+\_\+p\+Button\+Lift\+Move\+\_\+clicked@{on\+\_\+p\+Button\+Lift\+Move\+\_\+clicked}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{on\+\_\+p\+Button\+Lift\+Move\+\_\+clicked}{on\_pButtonLiftMove\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}}
+\end{DoxyCompactItemize}
+	\begin{center}	\line(1,0){450} \end{center}
+\mbox{\Hypertarget{classIndexerSettingDialog_a36fd628fd129e8fab31e7876085d1a71}\label{classIndexerSettingDialog_a36fd628fd129e8fab31e7876085d1a71}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!reject@{reject}}
+\index{reject@{reject}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{reject}{reject} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to hide dialog without data saving. 
+
+\mbox{\Hypertarget{classIndexerSettingDialog_adbccfa0b79b30c4a5373e183f7828524}\label{classIndexerSettingDialog_adbccfa0b79b30c4a5373e183f7828524}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!send\+Command@{send\+Command}}
+\index{send\+Command@{send\+Command}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{send\+Command}{sendCommand} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{command }\end{DoxyParamCaption}){\ttfamily [signal]}}- signal to send data in QByteArray format to handle in parent object and send it to serial port.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a3b3ff00a9731a94931be5f2c9590fa37}\label{classIndexerSettingDialog_a3b3ff00a9731a94931be5f2c9590fa37}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!set\+Indexer\+Setting@{set\+Indexer\+Setting}}
+\index{set\+Indexer\+Setting@{set\+Indexer\+Setting}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{set\+Indexer\+Setting}{setIndexerSetting}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{bool}]{disconnect = {\ttfamily true} }\end{DoxyParamCaption})} - polymorphic function to set(or update) spin\+Box values on indexer tab of dialog . In this variant of function data will take from \hyperlink{structRegister_1_1IndexerReg___1_1reg}{Register\+::\+Indexer\+Reg\+\_\+\+::reg} and set to appropriate widgets at dialog. Boolean variable \textit{disconnect} describe does program must call \hyperlink{classIndexerSettingDialog_a1a3a501889727528a4f432b233556760}{disconnect\+All}(...) function or not.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_aea4b170b962c7e2e319565f3fde73b14}\label{classIndexerSettingDialog_aea4b170b962c7e2e319565f3fde73b14}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!set\+Indexer\+Setting@{set\+Indexer\+Setting}}
+\index{set\+Indexer\+Setting@{set\+Indexer\+Setting}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{set\+Indexer\+Setting()}{setIndexerSetting()}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classIndexerLiftSettings_a6b75f15b6abc72b9070642cb8b5408ca}{Indexer\+Lift\+Settings\+::\+Index\+Parameters}}}]{index\+Param,  }\item[{bool}]{disconnect = {\ttfamily true} }\end{DoxyParamCaption})} - polymorphic function to set(or update)  spin\+Box values on indexer tab of dialog. In this variant of function data will take from \textit{indexParam} variable, given in parameters. Boolean variable \textit{disconnect} describe does program must call \hyperlink{classIndexerSettingDialog_a1a3a501889727528a4f432b233556760}{disconnect\+All}(...) function or not.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a12036cd566ddbb3581bf7a526bf0d18f}\label{classIndexerSettingDialog_a12036cd566ddbb3581bf7a526bf0d18f}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!set\+Lift\+Distance@{set\+Lift\+Distance}}
+\index{set\+Lift\+Distance@{set\+Lift\+Distance}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{set\+Lift\+Distance()}{setLiftDistance()} (\begin{DoxyParamCaption}\item[{float}]{distance,  }\item[{int}]{lift\+Gear\+Ratio }\end{DoxyParamCaption})} - function to update \textit{lift distance} parameter with \textit{distance} parameter.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a3b2f9533b1c72aecd3d36bb4d175859f}\label{classIndexerSettingDialog_a3b2f9533b1c72aecd3d36bb4d175859f}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!set\+Lift\+Gear\+Ratio@{set\+Lift\+Gear\+Ratio}}
+\index{set\+Lift\+Gear\+Ratio@{set\+Lift\+Gear\+Ratio}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{set\+Lift\+Gear\+Ratio}{setLiftGearRatio} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}}}]{lift\+Gear\+Ratio }\end{DoxyParamCaption})} - function to set value of \hyperlink{classIndexerSettingDialog_a9dfafe2970aeba611a1736a3797cc3f3}{lift\+Gear\+Ratio} variable. 
+
+\mbox{\Hypertarget{classIndexerSettingDialog_ae98cd594c5da327549e306a2ec09718e}\label{classIndexerSettingDialog_ae98cd594c5da327549e306a2ec09718e}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!set\+Lift\+Setting@{set\+Lift\+Setting}}
+\index{set\+Lift\+Setting@{set\+Lift\+Setting}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{set\+Lift\+Setting}{setLiftSetting}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{bool}]{disconnect = {\ttfamily true} }\end{DoxyParamCaption})} - polymorphic function to set(or update) spin\+Box values on lift tab of dialog . In this variant of function data will take from \hyperlink{structRegister_1_1LiftReg___1_1reg}{Register\+::\+Lift\+Reg\+\_\+\+::reg} and set to appropriate widgets at dialog. Boolean variable \textit{disconnect} describe does program must call \hyperlink{classIndexerSettingDialog_a1a3a501889727528a4f432b233556760}{disconnect\+All}(...) function or not.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_aa8ef316cb26c8c1c2149581679ca9646}\label{classIndexerSettingDialog_aa8ef316cb26c8c1c2149581679ca9646}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!set\+Lift\+Setting@{set\+Lift\+Setting}}
+\index{set\+Lift\+Setting@{set\+Lift\+Setting}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{set\+Lift\+Setting}{setLiftSetting}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classIndexerLiftSettings_a83fd6fc58021bc526b681c1ce840f686}{Indexer\+Lift\+Settings\+::\+Lift\+Parameters}}}]{lift\+Param,  }\item[{bool}]{disconnect = {\ttfamily true} }\end{DoxyParamCaption})} - polymorphic function to set(or update)  spin\+Box values on indexer tab of dialog. In this variant of function data will take from \textit{liftParam} variable, given in parameters. Boolean variable \textit{disconnect} describe does program must call \hyperlink{classIndexerSettingDialog_a1a3a501889727528a4f432b233556760}{disconnect\+All}(...) function or not.
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a2b0fb04ec9698b7bc82a69ae3d379a1b}\label{classIndexerSettingDialog_a2b0fb04ec9698b7bc82a69ae3d379a1b}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!set\+Registers@{set\+Registers}}
+\index{set\+Registers@{set\+Registers}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{set\+Registers}{setRegisters} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRegister}{Register}} $\ast$}]{reg }\end{DoxyParamCaption})} - function to set pointer to \hyperlink{classRegister}{Register} class object. In a whole program used only one sample of class and pointer (\hyperlink{classMainWindow_aead190b1b4ca3ce95076274ab2ae6f84}{registers}) set from parent object. 
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a04091d56225031b1ca05b769f2bba105}\label{classIndexerSettingDialog_a04091d56225031b1ca05b769f2bba105}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily void Indexer\+Setting\+Dialog\+::\texorpdfstring{show\+Event}{showEvent} (\begin{DoxyParamCaption}\item[{Q\+Show\+Event $\ast$}]{ev }\end{DoxyParamCaption}){\ttfamily [protected]}}- reimplementation of standard function. Used to hide or show some widgets which are not available for user.
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classIndexerSettingDialog_a14a7ea545fca4efbe05799efe767f678}\label{classIndexerSettingDialog_a14a7ea545fca4efbe05799efe767f678}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!accept\+Enable@{accept\+Enable}}
+\index{accept\+Enable@{accept\+Enable}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool Indexer\+Setting\+Dialog\+::\texorpdfstring{accept\+Enable}{acceptEnable}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIndexerSettingDialog_aa781b93909330f9c60b4494555b39b4b}\label{classIndexerSettingDialog_aa781b93909330f9c60b4494555b39b4b}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}}
+\index{accept\+On\+Deactilation\+En@{accept\+On\+Deactilation\+En}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily bool Indexer\+Setting\+Dialog\+::\texorpdfstring{accept\+On\+Deactilation\+En}{acceptOnDeactilationEn}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIndexerSettingDialog_a9dfafe2970aeba611a1736a3797cc3f3}\label{classIndexerSettingDialog_a9dfafe2970aeba611a1736a3797cc3f3}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!lift\+Gear\+Ratio@{lift\+Gear\+Ratio}}
+\index{lift\+Gear\+Ratio@{lift\+Gear\+Ratio}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} Indexer\+Setting\+Dialog\+::\texorpdfstring{lift\+Gear\+Ratio}{liftGearRatio}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIndexerSettingDialog_ab2298cdfcfc00f6472544041947209c3}\label{classIndexerSettingDialog_ab2298cdfcfc00f6472544041947209c3}} 
+\index{Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}!registers@{registers}}
+\index{registers@{registers}!Indexer\+Setting\+Dialog@{Indexer\+Setting\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRegister}{Register}}$\ast$ Indexer\+Setting\+Dialog\+::\texorpdfstring{registers}{registers}{\ttfamily [private]}}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{indexersettingdialog_8h}{indexersettingdialog.\+h}}\item 
+\mbox{\hyperlink{indexersettingdialog_8cpp}{indexersettingdialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

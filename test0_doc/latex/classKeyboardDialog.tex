@@ -1,0 +1,228 @@
+\hypertarget{classKeyboardDialog}{}\subsection{Keyboard\+Dialog Class Reference}
+\label{classKeyboardDialog}\index{Keyboard\+Dialog@{Keyboard\+Dialog}}
+
+
+{\ttfamily \#include $<$keyboarddialog.\+h$>$}
+
+Inheritance diagram for Keyboard\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classKeyboardDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70}{Keyboard\+Position\+\_\+}} \{ \mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70a39f2161b184336fbdea336949a1c432b}{Bottom}}, 
+\mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70ae3f3821683c5ddc59b87508d3f67d6eb}{Custom}}
+ \}
+\item 
+typedef enum \mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70}{Keyboard\+Dialog\+::\+Keyboard\+Position\+\_\+}} \mbox{\hyperlink{classKeyboardDialog_a15d9e75dad34470ec9872ca45b63e510}{Keyboard\+Position}}
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_a60a486df4f0be9c78a1ac6615aea3d9e}{key\+Clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classKeyboardDialog_afb05238e8046e60d2c25e022c810f665}{Keyboard\+Dialog}} (Q\+Widget $\ast$parent=0, Q\+String window\+Title=\char`\"{}Keyboard\char`\"{})
+\item 
+\mbox{\hyperlink{classKeyboardDialog_aa430c1c9aaa94d79e8d83aec7753c21a}{$\sim$\+Keyboard\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_a7a276672e902fa810e3c06047992fd69}{buttons\+To\+Upper}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_af8f1934505c0f78ad6b2a1e6aeb4cb2e}{buttons\+To\+Lower}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Q\+String \mbox{\hyperlink{classKeyboardDialog_ab76b5389fc4f4628b2fa6897da0efa28}{get\+Text}} (Q\+Widget $\ast$parent=0, Q\+String window\+Title=\char`\"{}Keyboard\char`\"{}, Keyboard\+Position position=\mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70ae3f3821683c5ddc59b87508d3f67d6eb}{Custom}})
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_a0c118ece8b936e3393bb3124415dde6b}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_ae6dc8c69ff16942b5185fa97423b9cc0}{append\+To\+Line\+Edit}} (Q\+String str)
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_a471f014a3c1a8ba612fce0ef2bc135a4}{backspace}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_ab5b4e6cdc245ddd1709a9bff9767c1c7}{submit\+Text}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_a991a2385014b01ad257f07092cf98b11}{shift}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_a666a29c8db901ad52b14c5b40e333608}{deshift}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_a0baaa948c0434c2f1fe6056319fcc4e2}{caps\+Lock}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_ab13992b7c1c3025bb96826d4da17b931}{some\+Key\+Clicked}} ()
+\item 
+void \mbox{\hyperlink{classKeyboardDialog_add2f730a4a7439b88b98140fbc7d09f9}{dash\+Underscore\+Switch}} (bool shifted=false)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String\+List \mbox{\hyperlink{classKeyboardDialog_a6a084cc6108c5fc50c05f567d241af8b}{characters}}
+\item 
+Ui\+::\+Keyboard\+Dialog $\ast$ \mbox{\hyperlink{classKeyboardDialog_a6264cc8da370d38ab8a4b7a8a6539b0f}{ui}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classKeyboardButton}{Keyboard\+Button}} $\ast$ $>$ \mbox{\hyperlink{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}{buttons}}
+\item 
+\mbox{\hyperlink{classKeyboardButton}{Keyboard\+Button}} $\ast$ \mbox{\hyperlink{classKeyboardDialog_a9cbeeb36e8ca22c07310316f67a95832}{dash\+Underscore\+Button}}
+\item 
+Q\+String \mbox{\hyperlink{classKeyboardDialog_a840896bed408c1e8cdb44e27dee9d195}{text}}
+\item 
+bool \mbox{\hyperlink{classKeyboardDialog_ac42a101f1ede0b3565cbc7d87bff20b4}{caps\+Lock\+Flag}}
+\item 
+bool \mbox{\hyperlink{classKeyboardDialog_aad63f68247d9c00db715a2afb1bf9bc3}{shift\+Flag}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classKeyboardDialog_a15d9e75dad34470ec9872ca45b63e510}\label{classKeyboardDialog_a15d9e75dad34470ec9872ca45b63e510}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!Keyboard\+Position@{Keyboard\+Position}}
+\index{Keyboard\+Position@{Keyboard\+Position}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70}{Keyboard\+Dialog\+::\+Keyboard\+Position\+\_\+}} \mbox{\hyperlink{classKeyboardDialog_a15d9e75dad34470ec9872ca45b63e510}{Keyboard\+Dialog\+::\texorpdfstring{Keyboard\+Position}{KeyboardPosition}}}}
+
+
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70}\label{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!Keyboard\+Position\+\_\+@{Keyboard\+Position\+\_\+}}
+\index{Keyboard\+Position\+\_\+@{Keyboard\+Position\+\_\+}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70}{Keyboard\+Dialog\+::\texorpdfstring{Keyboard\+Position\+\_\+}{KeyboardPosition\_}}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Bottom@{Bottom}!Keyboard\+Dialog@{Keyboard\+Dialog}}\index{Keyboard\+Dialog@{Keyboard\+Dialog}!Bottom@{Bottom}}}\mbox{\Hypertarget{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70a39f2161b184336fbdea336949a1c432b}\label{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70a39f2161b184336fbdea336949a1c432b}} 
+Bottom&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Custom@{Custom}!Keyboard\+Dialog@{Keyboard\+Dialog}}\index{Keyboard\+Dialog@{Keyboard\+Dialog}!Custom@{Custom}}}\mbox{\Hypertarget{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70ae3f3821683c5ddc59b87508d3f67d6eb}\label{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70ae3f3821683c5ddc59b87508d3f67d6eb}} 
+Custom&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classKeyboardDialog_afb05238e8046e60d2c25e022c810f665}\label{classKeyboardDialog_afb05238e8046e60d2c25e022c810f665}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily Keyboard\+Dialog\+::\texorpdfstring{Keyboard\+Dialog}{KeyboardDialog} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0},  }\item[{Q\+String}]{window\+Title = {\ttfamily \char`\"{}Keyboard\char`\"{}} }\end{DoxyParamCaption}){\ttfamily [explicit]}} - constructor of class. In function fill \hyperlink{classKeyboardDialog_a6a084cc6108c5fc50c05f567d241af8b}{characters} and \hyperlink{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}{buttons} lists, create connection for functional buttons, and make layout of that widget on window. Parameter \textit{windowTitle} used to put it on window top panel.
+
+\mbox{\Hypertarget{classKeyboardDialog_aa430c1c9aaa94d79e8d83aec7753c21a}\label{classKeyboardDialog_aa430c1c9aaa94d79e8d83aec7753c21a}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!````~Keyboard\+Dialog@{$\sim$\+Keyboard\+Dialog}}
+\index{````~Keyboard\+Dialog@{$\sim$\+Keyboard\+Dialog}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily Keyboard\+Dialog\+::\texorpdfstring{$\sim$\+Keyboard\+Dialog}{~KeyboardDialog} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard Q\+Dialog destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classKeyboardDialog_ae6dc8c69ff16942b5185fa97423b9cc0}\label{classKeyboardDialog_ae6dc8c69ff16942b5185fa97423b9cc0}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!append\+To\+Line\+Edit@{append\+To\+Line\+Edit}}
+\index{append\+To\+Line\+Edit@{append\+To\+Line\+Edit}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{append\+To\+Line\+Edit}{appendToLineEdit} (\begin{DoxyParamCaption}\item[{Q\+String}]{str }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function which is connected to every object in \hyperlink{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}{buttons} list and put appropriate symbol at last position at \textit{line\+Edit}. Symbol contains in parameter \textit{str}.
+
+\mbox{\Hypertarget{classKeyboardDialog_a471f014a3c1a8ba612fce0ef2bc135a4}\label{classKeyboardDialog_a471f014a3c1a8ba612fce0ef2bc135a4}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!backspace@{backspace}}
+\index{backspace@{backspace}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{backspace}{backspace} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function for removing last symbol at \textit{line\+Edit}. invoked by \textit{pb\+Backspace}.
+
+\mbox{\Hypertarget{classKeyboardDialog_af8f1934505c0f78ad6b2a1e6aeb4cb2e}\label{classKeyboardDialog_af8f1934505c0f78ad6b2a1e6aeb4cb2e}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!buttons\+To\+Lower@{buttons\+To\+Lower}}
+\index{buttons\+To\+Lower@{buttons\+To\+Lower}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{buttons\+To\+Lower}{buttonsToLower} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function to change text on keyboard and symbol to lower register.
+
+\mbox{\Hypertarget{classKeyboardDialog_a7a276672e902fa810e3c06047992fd69}\label{classKeyboardDialog_a7a276672e902fa810e3c06047992fd69}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!buttons\+To\+Upper@{buttons\+To\+Upper}}
+\index{buttons\+To\+Upper@{buttons\+To\+Upper}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{buttons\+To\+Upper}{buttonsToUpper} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function to change text on keyboard and symbol to higher register.
+
+\mbox{\Hypertarget{classKeyboardDialog_a0baaa948c0434c2f1fe6056319fcc4e2}\label{classKeyboardDialog_a0baaa948c0434c2f1fe6056319fcc4e2}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!caps\+Lock@{caps\+Lock}}
+\index{caps\+Lock@{caps\+Lock}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{caps\+Lock}{capsLock} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to call \hyperlink{classKeyboardDialog_a7a276672e902fa810e3c06047992fd69}{buttons\+To\+Upper}(...) or \hyperlink{classKeyboardDialog_af8f1934505c0f78ad6b2a1e6aeb4cb2e}{buttons\+To\+Lower}(...) function appropriate to state of \hyperlink{classKeyboardDialog_ac42a101f1ede0b3565cbc7d87bff20b4}{caps\+Lock\+Flag} and invert \hyperlink{classKeyboardDialog_ac42a101f1ede0b3565cbc7d87bff20b4}{caps\+Lock\+Flag} value.
+
+\mbox{\Hypertarget{classKeyboardDialog_a0c118ece8b936e3393bb3124415dde6b}\label{classKeyboardDialog_a0c118ece8b936e3393bb3124415dde6b}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of default event for QWidget to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classKeyboardDialog_add2f730a4a7439b88b98140fbc7d09f9}\label{classKeyboardDialog_add2f730a4a7439b88b98140fbc7d09f9}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!dash\+Underscore\+Switch@{dash\+Underscore\+Switch}}
+\index{dash\+Underscore\+Switch@{dash\+Underscore\+Switch}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{dash\+Underscore\+Switch}{dashUnderscoreSwitch} (\begin{DoxyParamCaption}\item[{bool}]{shifted = {\ttfamily false} }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function to change \hyperlink{classKeyboardDialog_a9cbeeb36e8ca22c07310316f67a95832}{dash\+Underscore\+Button} text and character.
+
+\mbox{\Hypertarget{classKeyboardDialog_a666a29c8db901ad52b14c5b40e333608}\label{classKeyboardDialog_a666a29c8db901ad52b14c5b40e333608}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!deshift@{deshift}}
+\index{deshift@{deshift}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{deshift}{deshift} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function for set \hyperlink{classKeyboardDialog_aad63f68247d9c00db715a2afb1bf9bc3}{shift\+Flag} value to false (disable "Shift" on keyboard), and set text on buttons to appropriate state
+
+\mbox{\Hypertarget{classKeyboardDialog_ab76b5389fc4f4628b2fa6897da0efa28}\label{classKeyboardDialog_ab76b5389fc4f4628b2fa6897da0efa28}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!get\+Text@{get\+Text}}
+\index{get\+Text@{get\+Text}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily Q\+String Keyboard\+Dialog\+::\texorpdfstring{get\+Text}{getText} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0},  }\item[{Q\+String}]{window\+Title = {\ttfamily \char`\"{}Keyboard\char`\"{}},  }\item[{\mbox{\hyperlink{classKeyboardDialog_a15d9e75dad34470ec9872ca45b63e510}{Keyboard\+Position}}}]{position = {\ttfamily \mbox{\hyperlink{classKeyboardDialog_a7151e64aa0ea07c96bcb582722f39b70ae3f3821683c5ddc59b87508d3f67d6eb}{Custom}}} }\end{DoxyParamCaption}){\ttfamily [static]}} - static function of \hyperlink{classKeyboardDialog}{Keyboard\+Dialog} class. Used to get \textit{Q\+String} text value without visible object creation. Return text which was putted with \hyperlink{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}{buttons} to \textit{Q\+Line\+Edit} after call \hyperlink{classKeyboardDialog_ab5b4e6cdc245ddd1709a9bff9767c1c7}{submit\+Text}(...) function.
+
+\mbox{\Hypertarget{classKeyboardDialog_a60a486df4f0be9c78a1ac6615aea3d9e}\label{classKeyboardDialog_a60a486df4f0be9c78a1ac6615aea3d9e}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!key\+Clicked@{key\+Clicked}}
+\index{key\+Clicked@{key\+Clicked}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{key\+Clicked}{keyClicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal which emitted at clicking of any object from \hyperlink{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}{buttons} list.
+
+\mbox{\Hypertarget{classKeyboardDialog_a991a2385014b01ad257f07092cf98b11}\label{classKeyboardDialog_a991a2385014b01ad257f07092cf98b11}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!shift@{shift}}
+\index{shift@{shift}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{shift}{shift} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function for set \hyperlink{classKeyboardDialog_aad63f68247d9c00db715a2afb1bf9bc3}{shift\+Flag} value to true (enable "Shift" on keyboard), and set text on buttons to appropriate state.
+
+\mbox{\Hypertarget{classKeyboardDialog_ab13992b7c1c3025bb96826d4da17b931}\label{classKeyboardDialog_ab13992b7c1c3025bb96826d4da17b931}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!some\+Key\+Clicked@{some\+Key\+Clicked}}
+\index{some\+Key\+Clicked@{some\+Key\+Clicked}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{some\+Key\+Clicked}{someKeyClicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function which called by any object from \hyperlink{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}{buttons} list. Emit \hyperlink{classKeyboardDialog_a60a486df4f0be9c78a1ac6615aea3d9e}{key\+Clicked} (...) signal.
+
+\mbox{\Hypertarget{classKeyboardDialog_ab5b4e6cdc245ddd1709a9bff9767c1c7}\label{classKeyboardDialog_ab5b4e6cdc245ddd1709a9bff9767c1c7}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!submit\+Text@{submit\+Text}}
+\index{submit\+Text@{submit\+Text}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily void Keyboard\+Dialog\+::\texorpdfstring{submit\+Text}{submitText} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function which invoked by \textit{click()} signal from \textit{pb\+Enter}. Used to copy text to \hyperlink{classKeyboardDialog_a840896bed408c1e8cdb44e27dee9d195}{text} variable and call standard \textit{Q\+Dialog::accept()} function to exit from keyboard dialog.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}\label{classKeyboardDialog_a334172863bd0cdc1fd2792b935c3dc3e}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!buttons@{buttons}}
+\index{buttons@{buttons}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classKeyboardButton}{Keyboard\+Button}}$\ast$$>$ Keyboard\+Dialog\+::\texorpdfstring{buttons}{buttons}{\ttfamily [private]}} - array of \hyperlink{classKeyboardButton}{Keyboard\+Button} class objects. Used to add keyboard buttons to dialog interface.
+
+\mbox{\Hypertarget{classKeyboardDialog_ac42a101f1ede0b3565cbc7d87bff20b4}\label{classKeyboardDialog_ac42a101f1ede0b3565cbc7d87bff20b4}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!caps\+Lock\+Flag@{caps\+Lock\+Flag}}
+\index{caps\+Lock\+Flag@{caps\+Lock\+Flag}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily bool Keyboard\+Dialog\+::\texorpdfstring{caps\+Lock\+Flag}{capsLockFlag}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classKeyboardDialog_a6a084cc6108c5fc50c05f567d241af8b}\label{classKeyboardDialog_a6a084cc6108c5fc50c05f567d241af8b}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!characters@{characters}}
+\index{characters@{characters}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily Q\+String\+List Keyboard\+Dialog\+::\texorpdfstring{characters}{characters}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classKeyboardDialog_a9cbeeb36e8ca22c07310316f67a95832}\label{classKeyboardDialog_a9cbeeb36e8ca22c07310316f67a95832}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!dash\+Underscore\+Button@{dash\+Underscore\+Button}}
+\index{dash\+Underscore\+Button@{dash\+Underscore\+Button}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classKeyboardButton}{Keyboard\+Button}}$\ast$ Keyboard\+Dialog\+::\texorpdfstring{dash\+Underscore\+Button}{dashUnderscoreButton}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classKeyboardDialog_aad63f68247d9c00db715a2afb1bf9bc3}\label{classKeyboardDialog_aad63f68247d9c00db715a2afb1bf9bc3}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!shift\+Flag@{shift\+Flag}}
+\index{shift\+Flag@{shift\+Flag}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily bool Keyboard\+Dialog\+::\texorpdfstring{shift\+Flag}{shiftFlag}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classKeyboardDialog_a840896bed408c1e8cdb44e27dee9d195}\label{classKeyboardDialog_a840896bed408c1e8cdb44e27dee9d195}} 
+\index{Keyboard\+Dialog@{Keyboard\+Dialog}!text@{text}}
+\index{text@{text}!Keyboard\+Dialog@{Keyboard\+Dialog}}
+{\footnotesize\ttfamily Q\+String Keyboard\+Dialog\+::\texorpdfstring{text}{text}{\ttfamily [private]}} - variable for containing text from \textit{line\+Edit}. Used in \hyperlink{classKeyboardDialog_ab76b5389fc4f4628b2fa6897da0efa28}{get\+Text}(...) functions.
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{keyboarddialog_8h}{keyboarddialog.\+h}}\item 
+\mbox{\hyperlink{keyboarddialog_8cpp}{keyboarddialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

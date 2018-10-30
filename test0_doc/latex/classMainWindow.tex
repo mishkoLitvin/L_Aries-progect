@@ -1,0 +1,842 @@
+\hypertarget{classMainWindow}{}\subsection{Main\+Window Class Reference}
+\label{classMainWindow}\index{Main\+Window@{Main\+Window}}
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+Inheritance diagram for Main\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMainWindow}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}{Main\+Window}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}{$\sim$\+Main\+Window}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a960f1895aaeb4e7a6828a5eeb70b5cf1}{master\+Code\+Check}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a339962b149079e9cdb8928c5528113ea}{user\+Login}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Dialog\+::\+Exit\+Code}} \mbox{\hyperlink{classMainWindow_a40a55ca38922e5e3c0f3ee92584b72f1}{exit\+Code}}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classMainWindow_af925e4c05190e6672fbc4a171b0016b8}{resize\+Event}} (Q\+Resize\+Event $\ast$e)
+\item 
+void \mbox{\hyperlink{classMainWindow_a332a98884795104796ad57e49943134c}{show\+Event}} (Q\+Show\+Event $\ast$ev)
+\item 
+bool \mbox{\hyperlink{classMainWindow_a53b218282f3d113b2aec441a3313f472}{event\+Filter}} (Q\+Object $\ast$obj, Q\+Event $\ast$ev)
+\item 
+void \mbox{\hyperlink{classMainWindow_ac7c881667b4ba4986b5a0030452ee3f0}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMainWindow_a9fc9d44f9d830e8f49d7052a88483d01}{zero\+Start}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_ac9861b0745a5505aaa5a6005a940e763}{heads\+Init}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a5e694c3f8a020709ebd7e7e244655960}{watch\+Dog\+Timeout}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_ae823008e53cce4636c1776d86c946cf5}{head\+Setting\+Request}} (int index)
+\item 
+void \mbox{\hyperlink{classMainWindow_a867f15b0c134336e5477e80673f1903d}{indexer\+Lift\+Setting\+Request}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a12f17b40fbfc42aa601dbfc583ea93dd}{general\+Setting\+Dialog\+Request}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a2b45d2c72983565a0e0036054db498ce}{change\+Head\+No}} (int index)
+\item 
+void \mbox{\hyperlink{classMainWindow_a2d957a5c154ebce97484e8aa7fa2abb3}{reset\+Machine}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a98db3a076389e7afc0f51bf980566851}{get\+Serial\+Data}} (\mbox{\hyperlink{serialport_8h_a2331c0232719069f0bce03c249d2eec6}{Mod\+Data}} mod\+Data)
+\item 
+void \mbox{\hyperlink{classMainWindow_ae1cb8ad1d2de77b497e219ce293cb053}{get\+Udp\+Data}} (Q\+Byte\+Array data)
+\item 
+void \mbox{\hyperlink{classMainWindow_a58b01de5b75f610847c9ad2b1c58165b}{get\+Head\+Color}} (int index, Q\+Color color)
+\item 
+void \mbox{\hyperlink{classMainWindow_ab019f061b5bdeba9339746d5092107ac}{get\+Head\+Param}} (int index, Q\+Byte\+Array h\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a10d8d19caf33169392e8f4e8373fbb73}{get\+All\+Head\+Param}} (int index, Q\+Byte\+Array h\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_aa4e6c4af31a8f3189e2f6d6b945796b8}{get\+Head\+Command}} (int index, Q\+Byte\+Array command\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_ad5c320ccd4b6df9c8b4aec7914803b82}{get\+Head\+Activ\+Command}} (Q\+Byte\+Array command\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a7f0e94461843c006389d792048c6b2d1}{get\+Cycles\+Command}} (Q\+Byte\+Array command\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a7c2d999fc817728b31dccaaa1e72bd43}{get\+Load\+State}} (int index, \mbox{\hyperlink{headform_8h_a56d194976643934b3332b3f99d82490d}{Load\+State}} state)
+\item 
+void \mbox{\hyperlink{classMainWindow_a5c6f8757a262535d243b6f481ceb570b}{get\+Indexer\+Param}} (Q\+Byte\+Array indexer\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a2dc63192aa7ff54dfc64e8308712c287}{get\+Machine\+Param}} (Q\+Byte\+Array machine\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a1da3e0b195babf250e071baca42b16b3}{get\+Step\+Delay\+Time}} (double arg1)
+\item 
+void \mbox{\hyperlink{classMainWindow_a98097440e933cbc9a5080320e230c124}{get\+Direction}} (int direction)
+\item 
+void \mbox{\hyperlink{classMainWindow_aeee3b80eb69746981c80032d8992ed46}{set\+Unload\+State}} (bool state)
+\item 
+void \mbox{\hyperlink{classMainWindow_a65683f9a3748cd4f783daf2f57b4f318}{get\+Lift\+Param}} (Q\+Byte\+Array lift\+Param\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a9da44a03d4e720dba6a3d63f7aa22ea5}{get\+Lift\+Offcet}} (double arg1)
+\item 
+void \mbox{\hyperlink{classMainWindow_a11a73a8f479b8952951f29df988ff2c3}{get\+Lift\+Distance}} (float distance)
+\item 
+void \mbox{\hyperlink{classMainWindow_a4f4ada31d5edeadf6450a1cf952182c0}{get\+Index\+Lift\+Sett\+Comm}} (Q\+Byte\+Array command\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_aefe64936a5d347902ba7d9438294dab8}{get\+Index\+Lift\+Command}} (Q\+Byte\+Array command\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a3dfd3ec74dbf6a8bbef327aab4c88de4}{get\+Machine\+Command}} (Q\+Byte\+Array command\+Arr)
+\item 
+void \mbox{\hyperlink{classMainWindow_a477250c56749d4db7cf5d94ea30145cf}{get\+Serial\+Setting}} (\mbox{\hyperlink{structComSettings}{Com\+Settings}} com\+Sett)
+\item 
+void \mbox{\hyperlink{classMainWindow_a5782e86aacd3c157412821fae13c85fb}{get\+Email\+Settings}} (\mbox{\hyperlink{structEmailSettings}{Email\+Settings}} email\+Sett)
+\item 
+void \mbox{\hyperlink{classMainWindow_ace96362adad45fba8ba98fa834ddb7f2}{get\+Veiw\+Settings}} (int st\+Sheet\+Index)
+\item 
+void \mbox{\hyperlink{classMainWindow_a96b56bd09db03ada451752dbbf993f12}{get\+Lang\+File}} (int lang\+Index)
+\item 
+void \mbox{\hyperlink{classMainWindow_a6390c39f77f17e86c59a4c8f8bf0e607}{service\+State\+Change}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_adb19747ac0579b12b268675c948dadeb}{exit\+Program}} (bool restart=false)
+\item 
+void \mbox{\hyperlink{classMainWindow_ae527207542e0df2d2aaa73d56fff003f}{save\+Job}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_afa9412b024ccb24c4299cc4ce4dd5327}{load\+Job}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a5adab082570604b67b5a36479cc54121}{set\+Heads\+Position}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a9ef526df9f964d8e10d8115a2cd10a28}{indexer\+Step\+Finish}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a18d83d170a660644bb70fda6b28a2bc6}{start\+Print\+Process}} (bool auto\+Print)
+\item 
+void \mbox{\hyperlink{classMainWindow_a80282fbc6eb85c0f6594975e02a150a3}{stop\+Print\+Process}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a5efe485c39e957ff3d4340328e4eb20d}{maintance\+Work\+Slot}} (bool enable)
+\item 
+void \mbox{\hyperlink{classMainWindow_ad8e2a953cbde0cc4ba7bc71567368029}{show\+Maintanance\+Widget}} ()
+\item 
+void \mbox{\hyperlink{classMainWindow_a1c07847e8f3adb976aa52cea3f032d7d}{set\+Icon\+Folder}} (int index)
+\item 
+void \mbox{\hyperlink{classMainWindow_aa08c1cb3f9e678d6af8f79dc2cc486d5}{set\+Back\+Ground}} (bool enable, bool request=false)
+\item 
+void \mbox{\hyperlink{classMainWindow_af9aa632b092ec3f2e86b62ceacc82a62}{update\+Time\+Slot}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Main\+Window $\ast$ \mbox{\hyperlink{classMainWindow_a35466a70ed47252a0191168126a352a5}{ui}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classHeadForm}{Head\+Form}} $\ast$ $>$ \mbox{\hyperlink{classMainWindow_aee1f0ef16a77d46e13672b5219cadef7}{head\+Button}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classHeadSettingButton}{Head\+Setting\+Button}} $\ast$ $>$ \mbox{\hyperlink{classMainWindow_a5fc117f7fb33eaa3bd4a40f63eb1d32c}{head\+Sett\+Button}}
+\item 
+\mbox{\hyperlink{classInfoWidget}{Info\+Widget}} $\ast$ \mbox{\hyperlink{classMainWindow_a1ec5a697ad1c0526e4979dd538d11f20}{info\+Widget}}
+\item 
+Q\+Settings $\ast$ \mbox{\hyperlink{classMainWindow_a4d8dbbb57b71b4fde207e465526a6753}{settings}}
+\item 
+Q\+Settings $\ast$ \mbox{\hyperlink{classMainWindow_a92c60042483f6bcdef44a4b06bec8795}{master\+Codes}}
+\item 
+\mbox{\hyperlink{classHeadSetting}{Head\+Setting}} \mbox{\hyperlink{classMainWindow_abfbbbda04b8875212b6c12d3bf6f94cb}{head\+Settings}}
+\item 
+\mbox{\hyperlink{classIndexerLiftSettings}{Indexer\+Lift\+Settings}} \mbox{\hyperlink{classMainWindow_ab8dfb97cd685ef6fb299506ddc2e6170}{indexer\+Lift\+Settings}}
+\item 
+\mbox{\hyperlink{classMachineSettings}{Machine\+Settings}} \mbox{\hyperlink{classMainWindow_ae8dd8666bcd48aebe9f7a00017dff875}{machine\+Settings}}
+\item 
+\mbox{\hyperlink{classGeneralSettingDialog}{General\+Setting\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_ac52bc1afdcda6200044e85a40de61c52}{general\+Setting\+Dialog}}
+\item 
+\mbox{\hyperlink{classSettingDialog}{Setting\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_ae13512af59f04b0fb3bf6bf3f8d4cca1}{head\+Setting\+Dialog}}
+\item 
+\mbox{\hyperlink{classIndexerSettingDialog}{Indexer\+Setting\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_ab0cf5f0fbfa991a1a6fe78ef34db6ac3}{indexer\+Lift\+Set\+Dialog}}
+\item 
+\mbox{\hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_a5f2e9273d4144c9f5f63b68bbaa6b7b1}{serial\+Settings\+Dialog}}
+\item 
+\mbox{\hyperlink{classIndexerWidget}{Indexer\+Widget}} $\ast$ \mbox{\hyperlink{classMainWindow_a2a9bf85f8e206a2db53a4a01a3531367}{indexer}}
+\item 
+\mbox{\hyperlink{classMailSender}{Mail\+Sender}} $\ast$ \mbox{\hyperlink{classMainWindow_a69258924e6672d7a887839b5c327a0b1}{mail\+Sender}}
+\item 
+\mbox{\hyperlink{classUserSettingDialog}{User\+Setting\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_aac26d8e6ed8e1afe7405cddec279f3ae}{users\+Setting\+Dialog}}
+\item 
+\mbox{\hyperlink{classMaintanceDialog}{Maintance\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_a0a1edb572efa46ec0d2b938ed6ebf876}{maintance\+Dialog}}
+\item 
+\mbox{\hyperlink{classMaintanceWidget}{Maintance\+Widget}} $\ast$ \mbox{\hyperlink{classMainWindow_a932658effa63d92d234d9fe0be097f17}{maintance\+Widget}}
+\item 
+\mbox{\hyperlink{classCyclesDialog}{Cycles\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_ae3d19fe8260d3c71218159a3fbb07247}{cycle\+Dialog}}
+\item 
+\mbox{\hyperlink{classHeadActivationDialog}{Head\+Activation\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_ade9f7ec0590bb905ef05f36b5f1ff375}{head\+Act\+Dialog}}
+\item 
+\mbox{\hyperlink{classReprogramDialog}{Reprogram\+Dialog}} $\ast$ \mbox{\hyperlink{classMainWindow_a70160014215b6053d8bcd08f797c2d99}{reprogram\+Dialog}}
+\item 
+\mbox{\hyperlink{classSerialPort}{Serial\+Port}} $\ast$ \mbox{\hyperlink{classMainWindow_a5ff9608e15352bd8134510f71adec645}{com\+Port}}
+\item 
+\mbox{\hyperlink{classUdpSocket}{Udp\+Socket}} $\ast$ \mbox{\hyperlink{classMainWindow_a02e8becbdef8a4a64947536d83a5a0de}{udp\+Handler}}
+\item 
+Q\+Timer $\ast$ \mbox{\hyperlink{classMainWindow_ace7bf6dfd47ef0be2fd33e7bdfe12f45}{watch\+Dog}}
+\item 
+Q\+Timer $\ast$ \mbox{\hyperlink{classMainWindow_ad1c1f98b63a93fc70964304d1b0006be}{update\+Time}}
+\item 
+Q\+Time \mbox{\hyperlink{classMainWindow_a5c567ee1bf6cac065f7c1217a76dbb79}{time\+Program\+Start}}
+\item 
+Q\+Time \mbox{\hyperlink{classMainWindow_a42fcbf877e14a05140136a65fdfd70a8}{time\+Program\+End}}
+\item 
+Q\+Time \mbox{\hyperlink{classMainWindow_a22176130c60005fad11cbc01de405480}{time\+Working}}
+\item 
+Q\+String \mbox{\hyperlink{classMainWindow_a45573d099a3f1c9292c566b787168aec}{true\+Password}}
+\item 
+bool \mbox{\hyperlink{classMainWindow_aa8aa688516b17c3efab6a28caf771e58}{loged\+In\+Head\+Settings}}
+\item 
+bool \mbox{\hyperlink{classMainWindow_ac21c269cb5cfa4fdd078cb5ff8dc9633}{loged\+In\+Indexer}}
+\item 
+bool \mbox{\hyperlink{classMainWindow_a77f5ccbec73adcd6e9f759728d5b7432}{loged\+In\+General}}
+\item 
+bool \mbox{\hyperlink{classMainWindow_a5baddcb9fe93bad0e0cd3a2272b55209}{loged\+In\+Service}}
+\item 
+\mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} \mbox{\hyperlink{classMainWindow_ac825500f4c4298bc0d7d1dd2a8eeb92b}{heads\+Count}}
+\item 
+bool \mbox{\hyperlink{classMainWindow_a1a1b01298c3c5e551156b42979f1424f}{need\+Complete\+Reset}}
+\item 
+int \mbox{\hyperlink{classMainWindow_ac9a80bbcf3f47b2e943482dcbe2a22b6}{indexer\+Cycles\+Session}}
+\item 
+int \mbox{\hyperlink{classMainWindow_abac49512503987bde5163902aea88ff8}{indexer\+Cycles\+All}}
+\item 
+int \mbox{\hyperlink{classMainWindow_ae9d373f6b3527dd622b61056db5960ca}{rag\+Session\+Count}}
+\item 
+int \mbox{\hyperlink{classMainWindow_a66a1308d51a2a1fb60ab4cdbc35c60f6}{rag\+All\+Count}}
+\item 
+\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} \mbox{\hyperlink{classMainWindow_adc85b6b79621bbed931579da596287ef}{rag\+All\+Count\+Reg}}
+\item 
+int \mbox{\hyperlink{classMainWindow_a29f41984f291911f0bbdd68830b2d9e0}{rag\+At\+Head\+Count}}
+\item 
+bool \mbox{\hyperlink{classMainWindow_ad1264be93d1c2e447f834cd430337f8f}{auto\+Print\+Enabled}}
+\item 
+Q\+String \mbox{\hyperlink{classMainWindow_a898b67827c6cce8017f39157be449a6c}{user\+Name}}
+\item 
+\mbox{\hyperlink{classRegister}{Register}} $\ast$ \mbox{\hyperlink{classMainWindow_aead190b1b4ca3ce95076274ab2ae6f84}{registers}}
+\item 
+Q\+Translator \mbox{\hyperlink{classMainWindow_a8e829b3590ccdeeada42625415afc6f3}{translator}}
+\item 
+Q\+String\+List \mbox{\hyperlink{classMainWindow_aec7acc53aaf3436cc02ed0066a72b5a8}{head\+Styles\+Str}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}\label{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}} 
+\index{Main\+Window@{Main\+Window}!Main\+Window@{Main\+Window}}
+\index{Main\+Window@{Main\+Window}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{Main\+Window()}{MainWindow()}}
+{\footnotesize\ttfamily Main\+Window\+::\+Main\+Window (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}\label{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}} 
+\index{Main\+Window@{Main\+Window}!````~Main\+Window@{$\sim$\+Main\+Window}}
+\index{````~Main\+Window@{$\sim$\+Main\+Window}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{$\sim$\+Main\+Window()}{~MainWindow()}}
+{\footnotesize\ttfamily Main\+Window\+::$\sim$\+Main\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMainWindow_ac7c881667b4ba4986b5a0030452ee3f0}\label{classMainWindow_ac7c881667b4ba4986b5a0030452ee3f0}} 
+\index{Main\+Window@{Main\+Window}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{change\+Event()}{changeEvent()}}
+{\footnotesize\ttfamily void Main\+Window\+::change\+Event (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classMainWindow_a2b45d2c72983565a0e0036054db498ce}\label{classMainWindow_a2b45d2c72983565a0e0036054db498ce}} 
+\index{Main\+Window@{Main\+Window}!change\+Head\+No@{change\+Head\+No}}
+\index{change\+Head\+No@{change\+Head\+No}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{change\+Head\+No}{changeHeadNo}}
+{\footnotesize\ttfamily void Main\+Window\+::change\+Head\+No (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a53b218282f3d113b2aec441a3313f472}\label{classMainWindow_a53b218282f3d113b2aec441a3313f472}} 
+\index{Main\+Window@{Main\+Window}!event\+Filter@{event\+Filter}}
+\index{event\+Filter@{event\+Filter}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{event\+Filter()}{eventFilter()}}
+{\footnotesize\ttfamily bool Main\+Window\+::event\+Filter (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{obj,  }\item[{Q\+Event $\ast$}]{ev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classMainWindow_adb19747ac0579b12b268675c948dadeb}\label{classMainWindow_adb19747ac0579b12b268675c948dadeb}} 
+\index{Main\+Window@{Main\+Window}!exit\+Program@{exit\+Program}}
+\index{exit\+Program@{exit\+Program}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{exit\+Program}{exitProgram}}
+{\footnotesize\ttfamily void Main\+Window\+::exit\+Program (\begin{DoxyParamCaption}\item[{bool}]{restart = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a12f17b40fbfc42aa601dbfc583ea93dd}\label{classMainWindow_a12f17b40fbfc42aa601dbfc583ea93dd}} 
+\index{Main\+Window@{Main\+Window}!general\+Setting\+Dialog\+Request@{general\+Setting\+Dialog\+Request}}
+\index{general\+Setting\+Dialog\+Request@{general\+Setting\+Dialog\+Request}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{general\+Setting\+Dialog\+Request}{generalSettingDialogRequest}}
+{\footnotesize\ttfamily void Main\+Window\+::general\+Setting\+Dialog\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a10d8d19caf33169392e8f4e8373fbb73}\label{classMainWindow_a10d8d19caf33169392e8f4e8373fbb73}} 
+\index{Main\+Window@{Main\+Window}!get\+All\+Head\+Param@{get\+All\+Head\+Param}}
+\index{get\+All\+Head\+Param@{get\+All\+Head\+Param}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+All\+Head\+Param}{getAllHeadParam}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+All\+Head\+Param (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Byte\+Array}]{h\+Param\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a7f0e94461843c006389d792048c6b2d1}\label{classMainWindow_a7f0e94461843c006389d792048c6b2d1}} 
+\index{Main\+Window@{Main\+Window}!get\+Cycles\+Command@{get\+Cycles\+Command}}
+\index{get\+Cycles\+Command@{get\+Cycles\+Command}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Cycles\+Command}{getCyclesCommand}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Cycles\+Command (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{command\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a98097440e933cbc9a5080320e230c124}\label{classMainWindow_a98097440e933cbc9a5080320e230c124}} 
+\index{Main\+Window@{Main\+Window}!get\+Direction@{get\+Direction}}
+\index{get\+Direction@{get\+Direction}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Direction}{getDirection}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Direction (\begin{DoxyParamCaption}\item[{int}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a5782e86aacd3c157412821fae13c85fb}\label{classMainWindow_a5782e86aacd3c157412821fae13c85fb}} 
+\index{Main\+Window@{Main\+Window}!get\+Email\+Settings@{get\+Email\+Settings}}
+\index{get\+Email\+Settings@{get\+Email\+Settings}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Email\+Settings}{getEmailSettings}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Email\+Settings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structEmailSettings}{Email\+Settings}}}]{email\+Sett }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_ad5c320ccd4b6df9c8b4aec7914803b82}\label{classMainWindow_ad5c320ccd4b6df9c8b4aec7914803b82}} 
+\index{Main\+Window@{Main\+Window}!get\+Head\+Activ\+Command@{get\+Head\+Activ\+Command}}
+\index{get\+Head\+Activ\+Command@{get\+Head\+Activ\+Command}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Head\+Activ\+Command}{getHeadActivCommand}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Head\+Activ\+Command (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{command\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a58b01de5b75f610847c9ad2b1c58165b}\label{classMainWindow_a58b01de5b75f610847c9ad2b1c58165b}} 
+\index{Main\+Window@{Main\+Window}!get\+Head\+Color@{get\+Head\+Color}}
+\index{get\+Head\+Color@{get\+Head\+Color}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Head\+Color}{getHeadColor}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Head\+Color (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Color}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_aa4e6c4af31a8f3189e2f6d6b945796b8}\label{classMainWindow_aa4e6c4af31a8f3189e2f6d6b945796b8}} 
+\index{Main\+Window@{Main\+Window}!get\+Head\+Command@{get\+Head\+Command}}
+\index{get\+Head\+Command@{get\+Head\+Command}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Head\+Command}{getHeadCommand}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Head\+Command (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Byte\+Array}]{command\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_ab019f061b5bdeba9339746d5092107ac}\label{classMainWindow_ab019f061b5bdeba9339746d5092107ac}} 
+\index{Main\+Window@{Main\+Window}!get\+Head\+Param@{get\+Head\+Param}}
+\index{get\+Head\+Param@{get\+Head\+Param}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Head\+Param}{getHeadParam}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Head\+Param (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{Q\+Byte\+Array}]{h\+Param\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a5c6f8757a262535d243b6f481ceb570b}\label{classMainWindow_a5c6f8757a262535d243b6f481ceb570b}} 
+\index{Main\+Window@{Main\+Window}!get\+Indexer\+Param@{get\+Indexer\+Param}}
+\index{get\+Indexer\+Param@{get\+Indexer\+Param}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Indexer\+Param}{getIndexerParam}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Indexer\+Param (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{indexer\+Param\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_aefe64936a5d347902ba7d9438294dab8}\label{classMainWindow_aefe64936a5d347902ba7d9438294dab8}} 
+\index{Main\+Window@{Main\+Window}!get\+Index\+Lift\+Command@{get\+Index\+Lift\+Command}}
+\index{get\+Index\+Lift\+Command@{get\+Index\+Lift\+Command}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Index\+Lift\+Command}{getIndexLiftCommand}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Index\+Lift\+Command (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{command\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a4f4ada31d5edeadf6450a1cf952182c0}\label{classMainWindow_a4f4ada31d5edeadf6450a1cf952182c0}} 
+\index{Main\+Window@{Main\+Window}!get\+Index\+Lift\+Sett\+Comm@{get\+Index\+Lift\+Sett\+Comm}}
+\index{get\+Index\+Lift\+Sett\+Comm@{get\+Index\+Lift\+Sett\+Comm}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Index\+Lift\+Sett\+Comm}{getIndexLiftSettComm}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Index\+Lift\+Sett\+Comm (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{command\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a96b56bd09db03ada451752dbbf993f12}\label{classMainWindow_a96b56bd09db03ada451752dbbf993f12}} 
+\index{Main\+Window@{Main\+Window}!get\+Lang\+File@{get\+Lang\+File}}
+\index{get\+Lang\+File@{get\+Lang\+File}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Lang\+File}{getLangFile}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Lang\+File (\begin{DoxyParamCaption}\item[{int}]{lang\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a11a73a8f479b8952951f29df988ff2c3}\label{classMainWindow_a11a73a8f479b8952951f29df988ff2c3}} 
+\index{Main\+Window@{Main\+Window}!get\+Lift\+Distance@{get\+Lift\+Distance}}
+\index{get\+Lift\+Distance@{get\+Lift\+Distance}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Lift\+Distance}{getLiftDistance}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Lift\+Distance (\begin{DoxyParamCaption}\item[{float}]{distance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a9da44a03d4e720dba6a3d63f7aa22ea5}\label{classMainWindow_a9da44a03d4e720dba6a3d63f7aa22ea5}} 
+\index{Main\+Window@{Main\+Window}!get\+Lift\+Offcet@{get\+Lift\+Offcet}}
+\index{get\+Lift\+Offcet@{get\+Lift\+Offcet}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Lift\+Offcet}{getLiftOffcet}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Lift\+Offcet (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a65683f9a3748cd4f783daf2f57b4f318}\label{classMainWindow_a65683f9a3748cd4f783daf2f57b4f318}} 
+\index{Main\+Window@{Main\+Window}!get\+Lift\+Param@{get\+Lift\+Param}}
+\index{get\+Lift\+Param@{get\+Lift\+Param}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Lift\+Param}{getLiftParam}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Lift\+Param (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{lift\+Param\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a7c2d999fc817728b31dccaaa1e72bd43}\label{classMainWindow_a7c2d999fc817728b31dccaaa1e72bd43}} 
+\index{Main\+Window@{Main\+Window}!get\+Load\+State@{get\+Load\+State}}
+\index{get\+Load\+State@{get\+Load\+State}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Load\+State}{getLoadState}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Load\+State (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{headform_8h_a56d194976643934b3332b3f99d82490d}{Load\+State}}}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a3dfd3ec74dbf6a8bbef327aab4c88de4}\label{classMainWindow_a3dfd3ec74dbf6a8bbef327aab4c88de4}} 
+\index{Main\+Window@{Main\+Window}!get\+Machine\+Command@{get\+Machine\+Command}}
+\index{get\+Machine\+Command@{get\+Machine\+Command}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Machine\+Command}{getMachineCommand}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Machine\+Command (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{command\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a2dc63192aa7ff54dfc64e8308712c287}\label{classMainWindow_a2dc63192aa7ff54dfc64e8308712c287}} 
+\index{Main\+Window@{Main\+Window}!get\+Machine\+Param@{get\+Machine\+Param}}
+\index{get\+Machine\+Param@{get\+Machine\+Param}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Machine\+Param}{getMachineParam}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Machine\+Param (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{machine\+Param\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a98db3a076389e7afc0f51bf980566851}\label{classMainWindow_a98db3a076389e7afc0f51bf980566851}} 
+\index{Main\+Window@{Main\+Window}!get\+Serial\+Data@{get\+Serial\+Data}}
+\index{get\+Serial\+Data@{get\+Serial\+Data}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Serial\+Data}{getSerialData}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Serial\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{serialport_8h_a2331c0232719069f0bce03c249d2eec6}{Mod\+Data}}}]{mod\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a477250c56749d4db7cf5d94ea30145cf}\label{classMainWindow_a477250c56749d4db7cf5d94ea30145cf}} 
+\index{Main\+Window@{Main\+Window}!get\+Serial\+Setting@{get\+Serial\+Setting}}
+\index{get\+Serial\+Setting@{get\+Serial\+Setting}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Serial\+Setting}{getSerialSetting}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Serial\+Setting (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structComSettings}{Com\+Settings}}}]{com\+Sett }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a1da3e0b195babf250e071baca42b16b3}\label{classMainWindow_a1da3e0b195babf250e071baca42b16b3}} 
+\index{Main\+Window@{Main\+Window}!get\+Step\+Delay\+Time@{get\+Step\+Delay\+Time}}
+\index{get\+Step\+Delay\+Time@{get\+Step\+Delay\+Time}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Step\+Delay\+Time}{getStepDelayTime}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Step\+Delay\+Time (\begin{DoxyParamCaption}\item[{double}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_ae1cb8ad1d2de77b497e219ce293cb053}\label{classMainWindow_ae1cb8ad1d2de77b497e219ce293cb053}} 
+\index{Main\+Window@{Main\+Window}!get\+Udp\+Data@{get\+Udp\+Data}}
+\index{get\+Udp\+Data@{get\+Udp\+Data}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Udp\+Data}{getUdpData}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Udp\+Data (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_ace96362adad45fba8ba98fa834ddb7f2}\label{classMainWindow_ace96362adad45fba8ba98fa834ddb7f2}} 
+\index{Main\+Window@{Main\+Window}!get\+Veiw\+Settings@{get\+Veiw\+Settings}}
+\index{get\+Veiw\+Settings@{get\+Veiw\+Settings}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{get\+Veiw\+Settings}{getVeiwSettings}}
+{\footnotesize\ttfamily void Main\+Window\+::get\+Veiw\+Settings (\begin{DoxyParamCaption}\item[{int}]{st\+Sheet\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_ae823008e53cce4636c1776d86c946cf5}\label{classMainWindow_ae823008e53cce4636c1776d86c946cf5}} 
+\index{Main\+Window@{Main\+Window}!head\+Setting\+Request@{head\+Setting\+Request}}
+\index{head\+Setting\+Request@{head\+Setting\+Request}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{head\+Setting\+Request}{headSettingRequest}}
+{\footnotesize\ttfamily void Main\+Window\+::head\+Setting\+Request (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_ac9861b0745a5505aaa5a6005a940e763}\label{classMainWindow_ac9861b0745a5505aaa5a6005a940e763}} 
+\index{Main\+Window@{Main\+Window}!heads\+Init@{heads\+Init}}
+\index{heads\+Init@{heads\+Init}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{heads\+Init}{headsInit}}
+{\footnotesize\ttfamily void Main\+Window\+::heads\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a867f15b0c134336e5477e80673f1903d}\label{classMainWindow_a867f15b0c134336e5477e80673f1903d}} 
+\index{Main\+Window@{Main\+Window}!indexer\+Lift\+Setting\+Request@{indexer\+Lift\+Setting\+Request}}
+\index{indexer\+Lift\+Setting\+Request@{indexer\+Lift\+Setting\+Request}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{indexer\+Lift\+Setting\+Request}{indexerLiftSettingRequest}}
+{\footnotesize\ttfamily void Main\+Window\+::indexer\+Lift\+Setting\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a9ef526df9f964d8e10d8115a2cd10a28}\label{classMainWindow_a9ef526df9f964d8e10d8115a2cd10a28}} 
+\index{Main\+Window@{Main\+Window}!indexer\+Step\+Finish@{indexer\+Step\+Finish}}
+\index{indexer\+Step\+Finish@{indexer\+Step\+Finish}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{indexer\+Step\+Finish}{indexerStepFinish}}
+{\footnotesize\ttfamily void Main\+Window\+::indexer\+Step\+Finish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_afa9412b024ccb24c4299cc4ce4dd5327}\label{classMainWindow_afa9412b024ccb24c4299cc4ce4dd5327}} 
+\index{Main\+Window@{Main\+Window}!load\+Job@{load\+Job}}
+\index{load\+Job@{load\+Job}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{load\+Job}{loadJob}}
+{\footnotesize\ttfamily void Main\+Window\+::load\+Job (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a5efe485c39e957ff3d4340328e4eb20d}\label{classMainWindow_a5efe485c39e957ff3d4340328e4eb20d}} 
+\index{Main\+Window@{Main\+Window}!maintance\+Work\+Slot@{maintance\+Work\+Slot}}
+\index{maintance\+Work\+Slot@{maintance\+Work\+Slot}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{maintance\+Work\+Slot}{maintanceWorkSlot}}
+{\footnotesize\ttfamily void Main\+Window\+::maintance\+Work\+Slot (\begin{DoxyParamCaption}\item[{bool}]{enable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a960f1895aaeb4e7a6828a5eeb70b5cf1}\label{classMainWindow_a960f1895aaeb4e7a6828a5eeb70b5cf1}} 
+\index{Main\+Window@{Main\+Window}!master\+Code\+Check@{master\+Code\+Check}}
+\index{master\+Code\+Check@{master\+Code\+Check}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{master\+Code\+Check()}{masterCodeCheck()}}
+{\footnotesize\ttfamily void Main\+Window\+::master\+Code\+Check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMainWindow_a2d957a5c154ebce97484e8aa7fa2abb3}\label{classMainWindow_a2d957a5c154ebce97484e8aa7fa2abb3}} 
+\index{Main\+Window@{Main\+Window}!reset\+Machine@{reset\+Machine}}
+\index{reset\+Machine@{reset\+Machine}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{reset\+Machine}{resetMachine}}
+{\footnotesize\ttfamily void Main\+Window\+::reset\+Machine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_af925e4c05190e6672fbc4a171b0016b8}\label{classMainWindow_af925e4c05190e6672fbc4a171b0016b8}} 
+\index{Main\+Window@{Main\+Window}!resize\+Event@{resize\+Event}}
+\index{resize\+Event@{resize\+Event}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{resize\+Event()}{resizeEvent()}}
+{\footnotesize\ttfamily void Main\+Window\+::resize\+Event (\begin{DoxyParamCaption}\item[{Q\+Resize\+Event $\ast$}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classMainWindow_ae527207542e0df2d2aaa73d56fff003f}\label{classMainWindow_ae527207542e0df2d2aaa73d56fff003f}} 
+\index{Main\+Window@{Main\+Window}!save\+Job@{save\+Job}}
+\index{save\+Job@{save\+Job}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{save\+Job}{saveJob}}
+{\footnotesize\ttfamily void Main\+Window\+::save\+Job (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a6390c39f77f17e86c59a4c8f8bf0e607}\label{classMainWindow_a6390c39f77f17e86c59a4c8f8bf0e607}} 
+\index{Main\+Window@{Main\+Window}!service\+State\+Change@{service\+State\+Change}}
+\index{service\+State\+Change@{service\+State\+Change}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{service\+State\+Change}{serviceStateChange}}
+{\footnotesize\ttfamily void Main\+Window\+::service\+State\+Change (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_aa08c1cb3f9e678d6af8f79dc2cc486d5}\label{classMainWindow_aa08c1cb3f9e678d6af8f79dc2cc486d5}} 
+\index{Main\+Window@{Main\+Window}!set\+Back\+Ground@{set\+Back\+Ground}}
+\index{set\+Back\+Ground@{set\+Back\+Ground}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{set\+Back\+Ground}{setBackGround}}
+{\footnotesize\ttfamily void Main\+Window\+::set\+Back\+Ground (\begin{DoxyParamCaption}\item[{bool}]{enable,  }\item[{bool}]{request = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a5adab082570604b67b5a36479cc54121}\label{classMainWindow_a5adab082570604b67b5a36479cc54121}} 
+\index{Main\+Window@{Main\+Window}!set\+Heads\+Position@{set\+Heads\+Position}}
+\index{set\+Heads\+Position@{set\+Heads\+Position}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{set\+Heads\+Position}{setHeadsPosition}}
+{\footnotesize\ttfamily void Main\+Window\+::set\+Heads\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a1c07847e8f3adb976aa52cea3f032d7d}\label{classMainWindow_a1c07847e8f3adb976aa52cea3f032d7d}} 
+\index{Main\+Window@{Main\+Window}!set\+Icon\+Folder@{set\+Icon\+Folder}}
+\index{set\+Icon\+Folder@{set\+Icon\+Folder}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{set\+Icon\+Folder}{setIconFolder}}
+{\footnotesize\ttfamily void Main\+Window\+::set\+Icon\+Folder (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_aeee3b80eb69746981c80032d8992ed46}\label{classMainWindow_aeee3b80eb69746981c80032d8992ed46}} 
+\index{Main\+Window@{Main\+Window}!set\+Unload\+State@{set\+Unload\+State}}
+\index{set\+Unload\+State@{set\+Unload\+State}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{set\+Unload\+State}{setUnloadState}}
+{\footnotesize\ttfamily void Main\+Window\+::set\+Unload\+State (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a332a98884795104796ad57e49943134c}\label{classMainWindow_a332a98884795104796ad57e49943134c}} 
+\index{Main\+Window@{Main\+Window}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{show\+Event()}{showEvent()}}
+{\footnotesize\ttfamily void Main\+Window\+::show\+Event (\begin{DoxyParamCaption}\item[{Q\+Show\+Event $\ast$}]{ev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classMainWindow_ad8e2a953cbde0cc4ba7bc71567368029}\label{classMainWindow_ad8e2a953cbde0cc4ba7bc71567368029}} 
+\index{Main\+Window@{Main\+Window}!show\+Maintanance\+Widget@{show\+Maintanance\+Widget}}
+\index{show\+Maintanance\+Widget@{show\+Maintanance\+Widget}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{show\+Maintanance\+Widget}{showMaintananceWidget}}
+{\footnotesize\ttfamily void Main\+Window\+::show\+Maintanance\+Widget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a18d83d170a660644bb70fda6b28a2bc6}\label{classMainWindow_a18d83d170a660644bb70fda6b28a2bc6}} 
+\index{Main\+Window@{Main\+Window}!start\+Print\+Process@{start\+Print\+Process}}
+\index{start\+Print\+Process@{start\+Print\+Process}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{start\+Print\+Process}{startPrintProcess}}
+{\footnotesize\ttfamily void Main\+Window\+::start\+Print\+Process (\begin{DoxyParamCaption}\item[{bool}]{auto\+Print }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a80282fbc6eb85c0f6594975e02a150a3}\label{classMainWindow_a80282fbc6eb85c0f6594975e02a150a3}} 
+\index{Main\+Window@{Main\+Window}!stop\+Print\+Process@{stop\+Print\+Process}}
+\index{stop\+Print\+Process@{stop\+Print\+Process}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{stop\+Print\+Process}{stopPrintProcess}}
+{\footnotesize\ttfamily void Main\+Window\+::stop\+Print\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_af9aa632b092ec3f2e86b62ceacc82a62}\label{classMainWindow_af9aa632b092ec3f2e86b62ceacc82a62}} 
+\index{Main\+Window@{Main\+Window}!update\+Time\+Slot@{update\+Time\+Slot}}
+\index{update\+Time\+Slot@{update\+Time\+Slot}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{update\+Time\+Slot}{updateTimeSlot}}
+{\footnotesize\ttfamily void Main\+Window\+::update\+Time\+Slot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a339962b149079e9cdb8928c5528113ea}\label{classMainWindow_a339962b149079e9cdb8928c5528113ea}} 
+\index{Main\+Window@{Main\+Window}!user\+Login@{user\+Login}}
+\index{user\+Login@{user\+Login}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{user\+Login()}{userLogin()}}
+{\footnotesize\ttfamily void Main\+Window\+::user\+Login (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMainWindow_a5e694c3f8a020709ebd7e7e244655960}\label{classMainWindow_a5e694c3f8a020709ebd7e7e244655960}} 
+\index{Main\+Window@{Main\+Window}!watch\+Dog\+Timeout@{watch\+Dog\+Timeout}}
+\index{watch\+Dog\+Timeout@{watch\+Dog\+Timeout}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{watch\+Dog\+Timeout}{watchDogTimeout}}
+{\footnotesize\ttfamily void Main\+Window\+::watch\+Dog\+Timeout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMainWindow_a9fc9d44f9d830e8f49d7052a88483d01}\label{classMainWindow_a9fc9d44f9d830e8f49d7052a88483d01}} 
+\index{Main\+Window@{Main\+Window}!zero\+Start@{zero\+Start}}
+\index{zero\+Start@{zero\+Start}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{zero\+Start}{zeroStart}}
+{\footnotesize\ttfamily void Main\+Window\+::zero\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMainWindow_ad1264be93d1c2e447f834cd430337f8f}\label{classMainWindow_ad1264be93d1c2e447f834cd430337f8f}} 
+\index{Main\+Window@{Main\+Window}!auto\+Print\+Enabled@{auto\+Print\+Enabled}}
+\index{auto\+Print\+Enabled@{auto\+Print\+Enabled}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{auto\+Print\+Enabled}{autoPrintEnabled}}
+{\footnotesize\ttfamily bool Main\+Window\+::auto\+Print\+Enabled\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a5ff9608e15352bd8134510f71adec645}\label{classMainWindow_a5ff9608e15352bd8134510f71adec645}} 
+\index{Main\+Window@{Main\+Window}!com\+Port@{com\+Port}}
+\index{com\+Port@{com\+Port}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{com\+Port}{comPort}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSerialPort}{Serial\+Port}}$\ast$ Main\+Window\+::com\+Port\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ae3d19fe8260d3c71218159a3fbb07247}\label{classMainWindow_ae3d19fe8260d3c71218159a3fbb07247}} 
+\index{Main\+Window@{Main\+Window}!cycle\+Dialog@{cycle\+Dialog}}
+\index{cycle\+Dialog@{cycle\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{cycle\+Dialog}{cycleDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCyclesDialog}{Cycles\+Dialog}}$\ast$ Main\+Window\+::cycle\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a40a55ca38922e5e3c0f3ee92584b72f1}\label{classMainWindow_a40a55ca38922e5e3c0f3ee92584b72f1}} 
+\index{Main\+Window@{Main\+Window}!exit\+Code@{exit\+Code}}
+\index{exit\+Code@{exit\+Code}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{exit\+Code}{exitCode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExitDialog_a750dfbbef3dec32bec821122ee7b910c}{Exit\+Dialog\+::\+Exit\+Code}} Main\+Window\+::exit\+Code}
+
+\mbox{\Hypertarget{classMainWindow_ac52bc1afdcda6200044e85a40de61c52}\label{classMainWindow_ac52bc1afdcda6200044e85a40de61c52}} 
+\index{Main\+Window@{Main\+Window}!general\+Setting\+Dialog@{general\+Setting\+Dialog}}
+\index{general\+Setting\+Dialog@{general\+Setting\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{general\+Setting\+Dialog}{generalSettingDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGeneralSettingDialog}{General\+Setting\+Dialog}}$\ast$ Main\+Window\+::general\+Setting\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ade9f7ec0590bb905ef05f36b5f1ff375}\label{classMainWindow_ade9f7ec0590bb905ef05f36b5f1ff375}} 
+\index{Main\+Window@{Main\+Window}!head\+Act\+Dialog@{head\+Act\+Dialog}}
+\index{head\+Act\+Dialog@{head\+Act\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{head\+Act\+Dialog}{headActDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadActivationDialog}{Head\+Activation\+Dialog}}$\ast$ Main\+Window\+::head\+Act\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_aee1f0ef16a77d46e13672b5219cadef7}\label{classMainWindow_aee1f0ef16a77d46e13672b5219cadef7}} 
+\index{Main\+Window@{Main\+Window}!head\+Button@{head\+Button}}
+\index{head\+Button@{head\+Button}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{head\+Button}{headButton}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classHeadForm}{Head\+Form}}$\ast$$>$ Main\+Window\+::head\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ac825500f4c4298bc0d7d1dd2a8eeb92b}\label{classMainWindow_ac825500f4c4298bc0d7d1dd2a8eeb92b}} 
+\index{Main\+Window@{Main\+Window}!heads\+Count@{heads\+Count}}
+\index{heads\+Count@{heads\+Count}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{heads\+Count}{headsCount}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a017dd44e68049ffdd31500a8cd01ba68}{uint16\+\_\+t}} Main\+Window\+::heads\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a5fc117f7fb33eaa3bd4a40f63eb1d32c}\label{classMainWindow_a5fc117f7fb33eaa3bd4a40f63eb1d32c}} 
+\index{Main\+Window@{Main\+Window}!head\+Sett\+Button@{head\+Sett\+Button}}
+\index{head\+Sett\+Button@{head\+Sett\+Button}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{head\+Sett\+Button}{headSettButton}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classHeadSettingButton}{Head\+Setting\+Button}}$\ast$$>$ Main\+Window\+::head\+Sett\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ae13512af59f04b0fb3bf6bf3f8d4cca1}\label{classMainWindow_ae13512af59f04b0fb3bf6bf3f8d4cca1}} 
+\index{Main\+Window@{Main\+Window}!head\+Setting\+Dialog@{head\+Setting\+Dialog}}
+\index{head\+Setting\+Dialog@{head\+Setting\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{head\+Setting\+Dialog}{headSettingDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSettingDialog}{Setting\+Dialog}}$\ast$ Main\+Window\+::head\+Setting\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_abfbbbda04b8875212b6c12d3bf6f94cb}\label{classMainWindow_abfbbbda04b8875212b6c12d3bf6f94cb}} 
+\index{Main\+Window@{Main\+Window}!head\+Settings@{head\+Settings}}
+\index{head\+Settings@{head\+Settings}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{head\+Settings}{headSettings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadSetting}{Head\+Setting}} Main\+Window\+::head\+Settings\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_aec7acc53aaf3436cc02ed0066a72b5a8}\label{classMainWindow_aec7acc53aaf3436cc02ed0066a72b5a8}} 
+\index{Main\+Window@{Main\+Window}!head\+Styles\+Str@{head\+Styles\+Str}}
+\index{head\+Styles\+Str@{head\+Styles\+Str}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{head\+Styles\+Str}{headStylesStr}}
+{\footnotesize\ttfamily Q\+String\+List Main\+Window\+::head\+Styles\+Str\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a2a9bf85f8e206a2db53a4a01a3531367}\label{classMainWindow_a2a9bf85f8e206a2db53a4a01a3531367}} 
+\index{Main\+Window@{Main\+Window}!indexer@{indexer}}
+\index{indexer@{indexer}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{indexer}{indexer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classIndexerWidget}{Indexer\+Widget}}$\ast$ Main\+Window\+::indexer\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_abac49512503987bde5163902aea88ff8}\label{classMainWindow_abac49512503987bde5163902aea88ff8}} 
+\index{Main\+Window@{Main\+Window}!indexer\+Cycles\+All@{indexer\+Cycles\+All}}
+\index{indexer\+Cycles\+All@{indexer\+Cycles\+All}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{indexer\+Cycles\+All}{indexerCyclesAll}}
+{\footnotesize\ttfamily int Main\+Window\+::indexer\+Cycles\+All\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ac9a80bbcf3f47b2e943482dcbe2a22b6}\label{classMainWindow_ac9a80bbcf3f47b2e943482dcbe2a22b6}} 
+\index{Main\+Window@{Main\+Window}!indexer\+Cycles\+Session@{indexer\+Cycles\+Session}}
+\index{indexer\+Cycles\+Session@{indexer\+Cycles\+Session}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{indexer\+Cycles\+Session}{indexerCyclesSession}}
+{\footnotesize\ttfamily int Main\+Window\+::indexer\+Cycles\+Session\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ab0cf5f0fbfa991a1a6fe78ef34db6ac3}\label{classMainWindow_ab0cf5f0fbfa991a1a6fe78ef34db6ac3}} 
+\index{Main\+Window@{Main\+Window}!indexer\+Lift\+Set\+Dialog@{indexer\+Lift\+Set\+Dialog}}
+\index{indexer\+Lift\+Set\+Dialog@{indexer\+Lift\+Set\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{indexer\+Lift\+Set\+Dialog}{indexerLiftSetDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classIndexerSettingDialog}{Indexer\+Setting\+Dialog}}$\ast$ Main\+Window\+::indexer\+Lift\+Set\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ab8dfb97cd685ef6fb299506ddc2e6170}\label{classMainWindow_ab8dfb97cd685ef6fb299506ddc2e6170}} 
+\index{Main\+Window@{Main\+Window}!indexer\+Lift\+Settings@{indexer\+Lift\+Settings}}
+\index{indexer\+Lift\+Settings@{indexer\+Lift\+Settings}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{indexer\+Lift\+Settings}{indexerLiftSettings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classIndexerLiftSettings}{Indexer\+Lift\+Settings}} Main\+Window\+::indexer\+Lift\+Settings\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a1ec5a697ad1c0526e4979dd538d11f20}\label{classMainWindow_a1ec5a697ad1c0526e4979dd538d11f20}} 
+\index{Main\+Window@{Main\+Window}!info\+Widget@{info\+Widget}}
+\index{info\+Widget@{info\+Widget}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{info\+Widget}{infoWidget}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classInfoWidget}{Info\+Widget}}$\ast$ Main\+Window\+::info\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a77f5ccbec73adcd6e9f759728d5b7432}\label{classMainWindow_a77f5ccbec73adcd6e9f759728d5b7432}} 
+\index{Main\+Window@{Main\+Window}!loged\+In\+General@{loged\+In\+General}}
+\index{loged\+In\+General@{loged\+In\+General}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{loged\+In\+General}{logedInGeneral}}
+{\footnotesize\ttfamily bool Main\+Window\+::loged\+In\+General\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_aa8aa688516b17c3efab6a28caf771e58}\label{classMainWindow_aa8aa688516b17c3efab6a28caf771e58}} 
+\index{Main\+Window@{Main\+Window}!loged\+In\+Head\+Settings@{loged\+In\+Head\+Settings}}
+\index{loged\+In\+Head\+Settings@{loged\+In\+Head\+Settings}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{loged\+In\+Head\+Settings}{logedInHeadSettings}}
+{\footnotesize\ttfamily bool Main\+Window\+::loged\+In\+Head\+Settings\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ac21c269cb5cfa4fdd078cb5ff8dc9633}\label{classMainWindow_ac21c269cb5cfa4fdd078cb5ff8dc9633}} 
+\index{Main\+Window@{Main\+Window}!loged\+In\+Indexer@{loged\+In\+Indexer}}
+\index{loged\+In\+Indexer@{loged\+In\+Indexer}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{loged\+In\+Indexer}{logedInIndexer}}
+{\footnotesize\ttfamily bool Main\+Window\+::loged\+In\+Indexer\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a5baddcb9fe93bad0e0cd3a2272b55209}\label{classMainWindow_a5baddcb9fe93bad0e0cd3a2272b55209}} 
+\index{Main\+Window@{Main\+Window}!loged\+In\+Service@{loged\+In\+Service}}
+\index{loged\+In\+Service@{loged\+In\+Service}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{loged\+In\+Service}{logedInService}}
+{\footnotesize\ttfamily bool Main\+Window\+::loged\+In\+Service\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ae8dd8666bcd48aebe9f7a00017dff875}\label{classMainWindow_ae8dd8666bcd48aebe9f7a00017dff875}} 
+\index{Main\+Window@{Main\+Window}!machine\+Settings@{machine\+Settings}}
+\index{machine\+Settings@{machine\+Settings}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{machine\+Settings}{machineSettings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMachineSettings}{Machine\+Settings}} Main\+Window\+::machine\+Settings\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a69258924e6672d7a887839b5c327a0b1}\label{classMainWindow_a69258924e6672d7a887839b5c327a0b1}} 
+\index{Main\+Window@{Main\+Window}!mail\+Sender@{mail\+Sender}}
+\index{mail\+Sender@{mail\+Sender}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{mail\+Sender}{mailSender}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMailSender}{Mail\+Sender}}$\ast$ Main\+Window\+::mail\+Sender\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a0a1edb572efa46ec0d2b938ed6ebf876}\label{classMainWindow_a0a1edb572efa46ec0d2b938ed6ebf876}} 
+\index{Main\+Window@{Main\+Window}!maintance\+Dialog@{maintance\+Dialog}}
+\index{maintance\+Dialog@{maintance\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{maintance\+Dialog}{maintanceDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMaintanceDialog}{Maintance\+Dialog}}$\ast$ Main\+Window\+::maintance\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a932658effa63d92d234d9fe0be097f17}\label{classMainWindow_a932658effa63d92d234d9fe0be097f17}} 
+\index{Main\+Window@{Main\+Window}!maintance\+Widget@{maintance\+Widget}}
+\index{maintance\+Widget@{maintance\+Widget}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{maintance\+Widget}{maintanceWidget}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMaintanceWidget}{Maintance\+Widget}}$\ast$ Main\+Window\+::maintance\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a92c60042483f6bcdef44a4b06bec8795}\label{classMainWindow_a92c60042483f6bcdef44a4b06bec8795}} 
+\index{Main\+Window@{Main\+Window}!master\+Codes@{master\+Codes}}
+\index{master\+Codes@{master\+Codes}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{master\+Codes}{masterCodes}}
+{\footnotesize\ttfamily Q\+Settings$\ast$ Main\+Window\+::master\+Codes\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a1a1b01298c3c5e551156b42979f1424f}\label{classMainWindow_a1a1b01298c3c5e551156b42979f1424f}} 
+\index{Main\+Window@{Main\+Window}!need\+Complete\+Reset@{need\+Complete\+Reset}}
+\index{need\+Complete\+Reset@{need\+Complete\+Reset}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{need\+Complete\+Reset}{needCompleteReset}}
+{\footnotesize\ttfamily bool Main\+Window\+::need\+Complete\+Reset\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a66a1308d51a2a1fb60ab4cdbc35c60f6}\label{classMainWindow_a66a1308d51a2a1fb60ab4cdbc35c60f6}} 
+\index{Main\+Window@{Main\+Window}!rag\+All\+Count@{rag\+All\+Count}}
+\index{rag\+All\+Count@{rag\+All\+Count}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{rag\+All\+Count}{ragAllCount}}
+{\footnotesize\ttfamily int Main\+Window\+::rag\+All\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_adc85b6b79621bbed931579da596287ef}\label{classMainWindow_adc85b6b79621bbed931579da596287ef}} 
+\index{Main\+Window@{Main\+Window}!rag\+All\+Count\+Reg@{rag\+All\+Count\+Reg}}
+\index{rag\+All\+Count\+Reg@{rag\+All\+Count\+Reg}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{rag\+All\+Count\+Reg}{ragAllCountReg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} Main\+Window\+::rag\+All\+Count\+Reg\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a29f41984f291911f0bbdd68830b2d9e0}\label{classMainWindow_a29f41984f291911f0bbdd68830b2d9e0}} 
+\index{Main\+Window@{Main\+Window}!rag\+At\+Head\+Count@{rag\+At\+Head\+Count}}
+\index{rag\+At\+Head\+Count@{rag\+At\+Head\+Count}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{rag\+At\+Head\+Count}{ragAtHeadCount}}
+{\footnotesize\ttfamily int Main\+Window\+::rag\+At\+Head\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ae9d373f6b3527dd622b61056db5960ca}\label{classMainWindow_ae9d373f6b3527dd622b61056db5960ca}} 
+\index{Main\+Window@{Main\+Window}!rag\+Session\+Count@{rag\+Session\+Count}}
+\index{rag\+Session\+Count@{rag\+Session\+Count}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{rag\+Session\+Count}{ragSessionCount}}
+{\footnotesize\ttfamily int Main\+Window\+::rag\+Session\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_aead190b1b4ca3ce95076274ab2ae6f84}\label{classMainWindow_aead190b1b4ca3ce95076274ab2ae6f84}} 
+\index{Main\+Window@{Main\+Window}!registers@{registers}}
+\index{registers@{registers}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{registers}{registers}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRegister}{Register}}$\ast$ Main\+Window\+::registers\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a70160014215b6053d8bcd08f797c2d99}\label{classMainWindow_a70160014215b6053d8bcd08f797c2d99}} 
+\index{Main\+Window@{Main\+Window}!reprogram\+Dialog@{reprogram\+Dialog}}
+\index{reprogram\+Dialog@{reprogram\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{reprogram\+Dialog}{reprogramDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classReprogramDialog}{Reprogram\+Dialog}}$\ast$ Main\+Window\+::reprogram\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a5f2e9273d4144c9f5f63b68bbaa6b7b1}\label{classMainWindow_a5f2e9273d4144c9f5f63b68bbaa6b7b1}} 
+\index{Main\+Window@{Main\+Window}!serial\+Settings\+Dialog@{serial\+Settings\+Dialog}}
+\index{serial\+Settings\+Dialog@{serial\+Settings\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{serial\+Settings\+Dialog}{serialSettingsDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSerialSettingsDialog}{Serial\+Settings\+Dialog}}$\ast$ Main\+Window\+::serial\+Settings\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a4d8dbbb57b71b4fde207e465526a6753}\label{classMainWindow_a4d8dbbb57b71b4fde207e465526a6753}} 
+\index{Main\+Window@{Main\+Window}!settings@{settings}}
+\index{settings@{settings}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{settings}{settings}}
+{\footnotesize\ttfamily Q\+Settings$\ast$ Main\+Window\+::settings\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a42fcbf877e14a05140136a65fdfd70a8}\label{classMainWindow_a42fcbf877e14a05140136a65fdfd70a8}} 
+\index{Main\+Window@{Main\+Window}!time\+Program\+End@{time\+Program\+End}}
+\index{time\+Program\+End@{time\+Program\+End}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{time\+Program\+End}{timeProgramEnd}}
+{\footnotesize\ttfamily Q\+Time Main\+Window\+::time\+Program\+End\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a5c567ee1bf6cac065f7c1217a76dbb79}\label{classMainWindow_a5c567ee1bf6cac065f7c1217a76dbb79}} 
+\index{Main\+Window@{Main\+Window}!time\+Program\+Start@{time\+Program\+Start}}
+\index{time\+Program\+Start@{time\+Program\+Start}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{time\+Program\+Start}{timeProgramStart}}
+{\footnotesize\ttfamily Q\+Time Main\+Window\+::time\+Program\+Start\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a22176130c60005fad11cbc01de405480}\label{classMainWindow_a22176130c60005fad11cbc01de405480}} 
+\index{Main\+Window@{Main\+Window}!time\+Working@{time\+Working}}
+\index{time\+Working@{time\+Working}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{time\+Working}{timeWorking}}
+{\footnotesize\ttfamily Q\+Time Main\+Window\+::time\+Working\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a8e829b3590ccdeeada42625415afc6f3}\label{classMainWindow_a8e829b3590ccdeeada42625415afc6f3}} 
+\index{Main\+Window@{Main\+Window}!translator@{translator}}
+\index{translator@{translator}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{translator}{translator}}
+{\footnotesize\ttfamily Q\+Translator Main\+Window\+::translator\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a45573d099a3f1c9292c566b787168aec}\label{classMainWindow_a45573d099a3f1c9292c566b787168aec}} 
+\index{Main\+Window@{Main\+Window}!true\+Password@{true\+Password}}
+\index{true\+Password@{true\+Password}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{true\+Password}{truePassword}}
+{\footnotesize\ttfamily Q\+String Main\+Window\+::true\+Password\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a02e8becbdef8a4a64947536d83a5a0de}\label{classMainWindow_a02e8becbdef8a4a64947536d83a5a0de}} 
+\index{Main\+Window@{Main\+Window}!udp\+Handler@{udp\+Handler}}
+\index{udp\+Handler@{udp\+Handler}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{udp\+Handler}{udpHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUdpSocket}{Udp\+Socket}}$\ast$ Main\+Window\+::udp\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a35466a70ed47252a0191168126a352a5}\label{classMainWindow_a35466a70ed47252a0191168126a352a5}} 
+\index{Main\+Window@{Main\+Window}!ui@{ui}}
+\index{ui@{ui}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Main\+Window$\ast$ Main\+Window\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ad1c1f98b63a93fc70964304d1b0006be}\label{classMainWindow_ad1c1f98b63a93fc70964304d1b0006be}} 
+\index{Main\+Window@{Main\+Window}!update\+Time@{update\+Time}}
+\index{update\+Time@{update\+Time}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{update\+Time}{updateTime}}
+{\footnotesize\ttfamily Q\+Timer$\ast$ Main\+Window\+::update\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_a898b67827c6cce8017f39157be449a6c}\label{classMainWindow_a898b67827c6cce8017f39157be449a6c}} 
+\index{Main\+Window@{Main\+Window}!user\+Name@{user\+Name}}
+\index{user\+Name@{user\+Name}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{user\+Name}{userName}}
+{\footnotesize\ttfamily Q\+String Main\+Window\+::user\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_aac26d8e6ed8e1afe7405cddec279f3ae}\label{classMainWindow_aac26d8e6ed8e1afe7405cddec279f3ae}} 
+\index{Main\+Window@{Main\+Window}!users\+Setting\+Dialog@{users\+Setting\+Dialog}}
+\index{users\+Setting\+Dialog@{users\+Setting\+Dialog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{users\+Setting\+Dialog}{usersSettingDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUserSettingDialog}{User\+Setting\+Dialog}}$\ast$ Main\+Window\+::users\+Setting\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMainWindow_ace7bf6dfd47ef0be2fd33e7bdfe12f45}\label{classMainWindow_ace7bf6dfd47ef0be2fd33e7bdfe12f45}} 
+\index{Main\+Window@{Main\+Window}!watch\+Dog@{watch\+Dog}}
+\index{watch\+Dog@{watch\+Dog}!Main\+Window@{Main\+Window}}
+\paragraph{\texorpdfstring{watch\+Dog}{watchDog}}
+{\footnotesize\ttfamily Q\+Timer$\ast$ Main\+Window\+::watch\+Dog\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mainwindow_8h}{mainwindow.\+h}}\item 
+\mbox{\hyperlink{mainwindow_8cpp}{mainwindow.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,68 @@
+\hypertarget{classHeadSettingButton}{}\subsection{Head\+Setting\+Button Class Reference}
+\label{classHeadSettingButton}\index{Head\+Setting\+Button@{Head\+Setting\+Button}}
+Reimplementation of class of Q\+Push\+Button. Added \hyperlink{classHeadSettingButton_ad583fdc744e019c787477694427cdde0}{index} variable and signal \hyperlink{classHeadSettingButton_a9b462518ae3b222488fbec936c39c294}{this\+Clicked}(...)
+
+{\ttfamily \#include $<$headform.\+h$>$}
+
+Inheritance diagram for Head\+Setting\+Button\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHeadSettingButton}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHeadSettingButton_acd459234032c48f57a7a964c214ca0bf}{setting\+Button\+Cliced}} (int \mbox{\hyperlink{classHeadSettingButton_ad583fdc744e019c787477694427cdde0}{index}})
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHeadSettingButton_a098c4f2a77e710e4034b085923b1a556}{Head\+Setting\+Button}} (unsigned int input\+Number, Q\+Widget $\ast$parent=0)
+\item 
+void \mbox{\hyperlink{classHeadSettingButton_a9fe218e02cfc06467659eabbd7f4a794}{set\+Icon\+Path}} (Q\+String path)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHeadSettingButton_a9b462518ae3b222488fbec936c39c294}{this\+Clicked}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{classHeadSettingButton_ad583fdc744e019c787477694427cdde0}{index}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHeadSettingButton_a098c4f2a77e710e4034b085923b1a556}\label{classHeadSettingButton_a098c4f2a77e710e4034b085923b1a556}} 
+\index{Head\+Setting\+Button@{Head\+Setting\+Button}!Head\+Setting\+Button@{Head\+Setting\+Button}}
+\index{Head\+Setting\+Button@{Head\+Setting\+Button}!Head\+Setting\+Button@{Head\+Setting\+Button}}
+{\footnotesize\ttfamily Head\+Setting\+Button\+::\+\texorpdfstring{Head\+Setting\+Button}{HeadSettingButton} (\begin{DoxyParamCaption}\item[{unsigned int}]{input\+Number,  }\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption}){\ttfamily [inline]}} - constructor of class. Create widget and set \hyperlink{classHeadSettingButton_ad583fdc744e019c787477694427cdde0}{index} variable
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHeadSettingButton_a9fe218e02cfc06467659eabbd7f4a794}\label{classHeadSettingButton_a9fe218e02cfc06467659eabbd7f4a794}} 
+\index{Head\+Setting\+Button@{Head\+Setting\+Button}!set\+Icon\+Path@{set\+Icon\+Path}}
+\index{set\+Icon\+Path@{set\+Icon\+Path}!Head\+Setting\+Button@{Head\+Setting\+Button}}
+{\footnotesize\ttfamily void Head\+Setting\+Button\+::\texorpdfstring{set\+Icon\+Path}{setIconPath} (\begin{DoxyParamCaption}\item[{Q\+String}]{path }\end{DoxyParamCaption}){\ttfamily [inline]}} - function to update icon on button.
+
+\mbox{\Hypertarget{classHeadSettingButton_acd459234032c48f57a7a964c214ca0bf}\label{classHeadSettingButton_acd459234032c48f57a7a964c214ca0bf}} 
+\index{Head\+Setting\+Button@{Head\+Setting\+Button}!setting\+Button\+Cliced@{setting\+Button\+Cliced}}
+\index{setting\+Button\+Cliced@{setting\+Button\+Cliced}!Head\+Setting\+Button@{Head\+Setting\+Button}}
+{\footnotesize\ttfamily void Head\+Setting\+Button\+::\texorpdfstring{setting\+Button\+Cliced}{settingButtonCliced} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [signal]}} signal what emitted by \hyperlink{classHeadSettingButton_a9b462518ae3b222488fbec936c39c294}{this\+Clicked} function and handle in parent object by \hyperlink{classMainWindow_ae823008e53cce4636c1776d86c946cf5}{head\+Setting\+Request}(...) function. 
+
+\mbox{\Hypertarget{classHeadSettingButton_a9b462518ae3b222488fbec936c39c294}\label{classHeadSettingButton_a9b462518ae3b222488fbec936c39c294}} 
+\index{Head\+Setting\+Button@{Head\+Setting\+Button}!this\+Clicked@{this\+Clicked}}
+\index{this\+Clicked@{this\+Clicked}!Head\+Setting\+Button@{Head\+Setting\+Button}}
+{\footnotesize\ttfamily void Head\+Setting\+Button\+::\texorpdfstring{this\+Clicked}{thisClicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [slot]}} - function which called by standard \textit{Q\+Push\+Button} clicked() signal. 
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classHeadSettingButton_ad583fdc744e019c787477694427cdde0}\label{classHeadSettingButton_ad583fdc744e019c787477694427cdde0}} 
+\index{Head\+Setting\+Button@{Head\+Setting\+Button}!index@{index}}
+\index{index@{index}!Head\+Setting\+Button@{Head\+Setting\+Button}}
+{\footnotesize\ttfamily unsigned int Head\+Setting\+Button\+::\texorpdfstring{index}{index}{\ttfamily [private]}}
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{headform_8h}{headform.\+h}}\end{DoxyCompactItemize}
+\newpage

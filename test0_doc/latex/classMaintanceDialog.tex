@@ -1,0 +1,291 @@
+\hypertarget{classMaintanceDialog}{}\subsection{Maintance\+Dialog Class Reference}
+\label{classMaintanceDialog}\index{Maintance\+Dialog@{Maintance\+Dialog}}
+
+
+{\ttfamily \#include $<$maintancedialog.\+h$>$}
+
+Inheritance diagram for Maintance\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMaintanceDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Type}} \{ \mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa8fe148a4b5ff71d3568fd6aff35d027e}{Warning}}, 
+\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa56052452a2261539060f7f5433d35d61}{Critical}}
+ \}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_ab97eb55c76459c27bc3ccf5c6a515b1e}{open\+Maintance\+List}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a9abf5dd5b908282f9f81f266708dd456}{open\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a3958b309d854fcd5baf39fc166a6b5f6}{solve\+Item}} (int index)
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_ae2420d128d65322e62fc88044b20f848}{stop\+Request}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_aea9ae7ab9094dfb556fb9ec134b12609}{continue\+Request}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_ada9e582be087bce2dd96a2629f2a417f}{maintance\+Work\+Enable}} (bool enabled)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMaintanceDialog_a3f541a92622740cce0a8f66e5de506fd}{Maintance\+Dialog}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classMaintanceDialog_adce1e1f1bf5989b01784faf777b8a40e}{Maintance\+Dialog}} (\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Type}} m\+Type, Q\+Widget $\ast$parent=0, Q\+String name=\char`\"{}trouble\char`\"{}, Q\+String tr\+Info=\char`\"{}trouble info\char`\"{}, Q\+String mach\+Info=\char`\"{}machine info\char`\"{})
+\item 
+\mbox{\hyperlink{classMaintanceDialog_a96b4b3c7702a5a3fb51c7d5327cb82e1}{$\sim$\+Maintance\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a2f690d0f71452b2471282fdba269928b}{set\+Trable\+Name}} (Q\+String name=\char`\"{}trouble\char`\"{})
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a7f1a8997a72655a25eb57975c5535736}{set\+Trable\+Info}} (Q\+String info=\char`\"{}trouble info\char`\"{})
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a9c71badea52d72c56dee328a7de15005}{set\+Machine\+Info}} (Q\+String info=\char`\"{}machine info\char`\"{})
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a38b7cab71ff559010bef483adec52227}{set\+Maintance\+Type}} (\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Type}} m\+Type=\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa8fe148a4b5ff71d3568fd6aff35d027e}{Warning}})
+\item 
+Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$ \mbox{\hyperlink{classMaintanceDialog_af304179c775853116b308ed635f8d027}{get\+Unsolved\+List}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a0eb162bfea71b4712de3cc63cc6bb0f5}{check}} (int cycles\+Count)
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classMaintanceDialog_adf3b798d56bad8af60553f9e04fad8a4}{execute}} (Q\+Widget $\ast$parent=0, \mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Type}} m\+Type=\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa8fe148a4b5ff71d3568fd6aff35d027e}{Warning}}, Q\+String name=\char`\"{}trouble\char`\"{}, Q\+String tr\+Info=\char`\"{}trouble info\char`\"{}, Q\+String mach\+Info=\char`\"{}machine info\char`\"{})
+\item 
+static bool \mbox{\hyperlink{classMaintanceDialog_a1c21277543efab3d8207b64de9d8ba20}{execute}} (\mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} maintance, Q\+Widget $\ast$parent=0)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a2bd5d68e291648614735e3b62fd61bfc}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_a3453a9ed317177d9bf8fb4be6bfa9de6}{accept\+Slot}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceDialog_aa92ce781e64b49dab9cb362c6521bb17}{reject\+Slot}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Maintance\+Dialog $\ast$ \mbox{\hyperlink{classMaintanceDialog_aee97dd9f83af9508fb0ed3ac2de6ba87}{ui}}
+\item 
+bool \mbox{\hyperlink{classMaintanceDialog_ae23009895f32bfffb43f5ed93188be45}{do\+It\+Now}}
+\item 
+bool \mbox{\hyperlink{classMaintanceDialog_aea111f8bf60829f66b3f93c842512dea}{maintance\+Have\+Work}}
+\item 
+bool \mbox{\hyperlink{classMaintanceDialog_afe855bd63066dc98f09758b7cd6d9b53}{maintance\+Have\+Warning}}
+\item 
+Q\+Settings $\ast$ \mbox{\hyperlink{classMaintanceDialog_ad41c158948e59029193b28d4e3ab309e}{settings}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$ \mbox{\hyperlink{classMaintanceDialog_ac4eade50e2d9071c65adf44a2987fab1}{maintance\+List}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$ \mbox{\hyperlink{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}{unsolved\+List}}
+\item 
+Q\+List$<$ int $>$ \mbox{\hyperlink{classMaintanceDialog_aae5f5335ab6b848ea0ff6254abbcece3}{unsolved\+List\+Index}}
+\item 
+\mbox{\hyperlink{classMaintanceWidget}{Maintance\+Widget}} $\ast$ \mbox{\hyperlink{classMaintanceDialog_a42a95d76614ce637c9b332ff996020e2}{maintance\+Widget}}
+\item 
+bool \mbox{\hyperlink{classMaintanceDialog_a27e8f4e6881da67cec3568a4a4b757a1}{first\+Check}}
+\item 
+int \mbox{\hyperlink{classMaintanceDialog_a615b6ffbbda8324d5225d286570f7f31}{last\+Cycles\+Count}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}\label{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!Maintance\+Type@{Maintance\+Type}}
+\index{Maintance\+Type@{Maintance\+Type}!Maintance\+Dialog@{Maintance\+Dialog}}
+\paragraph{\texorpdfstring{Maintance\+Type}{MaintanceType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Dialog\+::\+Maintance\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Warning@{Warning}!Maintance\+Dialog@{Maintance\+Dialog}}\index{Maintance\+Dialog@{Maintance\+Dialog}!Warning@{Warning}}}\mbox{\Hypertarget{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa8fe148a4b5ff71d3568fd6aff35d027e}\label{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa8fe148a4b5ff71d3568fd6aff35d027e}} 
+Warning&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Critical@{Critical}!Maintance\+Dialog@{Maintance\+Dialog}}\index{Maintance\+Dialog@{Maintance\+Dialog}!Critical@{Critical}}}\mbox{\Hypertarget{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa56052452a2261539060f7f5433d35d61}\label{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa56052452a2261539060f7f5433d35d61}} 
+Critical&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMaintanceDialog_a3f541a92622740cce0a8f66e5de506fd}\label{classMaintanceDialog_a3f541a92622740cce0a8f66e5de506fd}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!Maintance\+Dialog@{Maintance\+Dialog}}
+\index{Maintance\+Dialog@{Maintance\+Dialog}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily \texorpdfstring{Maintance\+Dialog()}{MaintanceDialog()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - standard Q\+Dialog class constructor. Lists \hyperlink{classMaintanceDialog_ac4eade50e2d9071c65adf44a2987fab1}{maintance\+List},  \hyperlink{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}{unsolved\+List} and \hyperlink{classMaintanceDialog_aae5f5335ab6b848ea0ff6254abbcece3}{unsolved\+List\+Index} are fill in constructor. 
+
+\mbox{\Hypertarget{classMaintanceDialog_adce1e1f1bf5989b01784faf777b8a40e}\label{classMaintanceDialog_adce1e1f1bf5989b01784faf777b8a40e}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!Maintance\+Dialog@{Maintance\+Dialog}}
+\index{Maintance\+Dialog@{Maintance\+Dialog}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily \texorpdfstring{Maintance\+Dialog()}{MaintanceDialog()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Dialog\+::\+Maintance\+Type}}}]{m\+Type,  }\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0},  }\item[{Q\+String}]{name = {\ttfamily \char`\"{}trouble\char`\"{}},  }\item[{Q\+String}]{tr\+Info = {\ttfamily \char`\"{}trouble~info\char`\"{}},  }\item[{Q\+String}]{mach\+Info = {\ttfamily \char`\"{}machine~info\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - reimplemented constructor of class. Used to fill appropriated fields on user interface. 
+
+\mbox{\Hypertarget{classMaintanceDialog_a96b4b3c7702a5a3fb51c7d5327cb82e1}\label{classMaintanceDialog_a96b4b3c7702a5a3fb51c7d5327cb82e1}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!````~Maintance\+Dialog@{$\sim$\+Maintance\+Dialog}}
+\index{````~Maintance\+Dialog@{$\sim$\+Maintance\+Dialog}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily \texorpdfstring{$\sim$\+Maintance\+Dialog()}{~MaintanceDialog()} 
+(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard Q\+Dialog class destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMaintanceDialog_a3453a9ed317177d9bf8fb4be6bfa9de6}\label{classMaintanceDialog_a3453a9ed317177d9bf8fb4be6bfa9de6}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!accept\+Slot@{accept\+Slot}}
+\index{accept\+Slot@{accept\+Slot}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{accept\+Slot}{acceptSlot} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function used to set \textit{true} to \hyperlink{classMaintanceDialog_ae23009895f32bfffb43f5ed93188be45}{do\+It\+Now} variable and exit from dialog;
+
+\mbox{\Hypertarget{classMaintanceDialog_a2bd5d68e291648614735e3b62fd61bfc}\label{classMaintanceDialog_a2bd5d68e291648614735e3b62fd61bfc}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{change\+Event}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}- reimplementation of default event for Q\+Dialog to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classMaintanceDialog_a0eb162bfea71b4712de3cc63cc6bb0f5}\label{classMaintanceDialog_a0eb162bfea71b4712de3cc63cc6bb0f5}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!check@{check}}
+\index{check@{check}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{check}{check} (\begin{DoxyParamCaption}\item[{int}]{cycles\+Count }\end{DoxyParamCaption})} - function used to check does machine must stop for maintenance. Function called at every indexer step and check all maintenance items (from \hyperlink{classMaintanceDialog_ac4eade50e2d9071c65adf44a2987fab1}{maintance\+List}). Function emits \hyperlink{classMaintanceDialog_ada9e582be087bce2dd96a2629f2a417f}{maintance\+Work\+Enable}(...) signal with appropriate value.
+
+\mbox{\Hypertarget{classMaintanceDialog_aea9ae7ab9094dfb556fb9ec134b12609}\label{classMaintanceDialog_aea9ae7ab9094dfb556fb9ec134b12609}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!continue\+Request@{continue\+Request}}
+\index{continue\+Request@{continue\+Request}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{continue\+Request}{continueRequest} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - unused.
+
+\mbox{\Hypertarget{classMaintanceDialog_adf3b798d56bad8af60553f9e04fad8a4}\label{classMaintanceDialog_adf3b798d56bad8af60553f9e04fad8a4}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!execute@{execute}}
+\index{execute@{execute}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily bool Maintance\+Dialog\+::\texorpdfstring{execute}{execute}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Dialog\+::\+Maintance\+Type}}}]{m\+Type = {\ttfamily \mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa8fe148a4b5ff71d3568fd6aff35d027e}{Warning}}},  }\item[{Q\+String}]{name = {\ttfamily \char`\"{}trouble\char`\"{}},  }\item[{Q\+String}]{tr\+Info = {\ttfamily \char`\"{}trouble~info\char`\"{}},  }\item[{Q\+String}]{mach\+Info = {\ttfamily \char`\"{}machine~info\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}} - function used to call \hyperlink{classMaintanceDialog_adce1e1f1bf5989b01784faf777b8a40e}{Maintance\+Dialog}(...) constructor with appropriate parameters given in function.
+
+\mbox{\Hypertarget{classMaintanceDialog_a1c21277543efab3d8207b64de9d8ba20}\label{classMaintanceDialog_a1c21277543efab3d8207b64de9d8ba20}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!execute@{execute}}
+\index{execute@{execute}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily bool Maintance\+Dialog\+::\texorpdfstring{execute}{execute}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}}}]{maintance,  }\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}} - function used to call \hyperlink{classMaintanceDialog_adce1e1f1bf5989b01784faf777b8a40e}{Maintance\+Dialog}(...) constructor with parameters taken from \textit{maintance} variable.
+
+\mbox{\Hypertarget{classMaintanceDialog_af304179c775853116b308ed635f8d027}\label{classMaintanceDialog_af304179c775853116b308ed635f8d027}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!get\+Unsolved\+List@{get\+Unsolved\+List}}
+\index{get\+Unsolved\+List@{get\+Unsolved\+List}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$ Maintance\+Dialog\+::\texorpdfstring{get\+Unsolved\+List}{getUnsolvedList} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function used to get \hyperlink{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}{unsolved\+List} variable value.
+
+\mbox{\Hypertarget{classMaintanceDialog_ada9e582be087bce2dd96a2629f2a417f}\label{classMaintanceDialog_ada9e582be087bce2dd96a2629f2a417f}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!maintance\+Work\+Enable@{maintance\+Work\+Enable}}
+\index{maintance\+Work\+Enable@{maintance\+Work\+Enable}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{maintance\+Work\+Enable}{maintanceWorkEnable} (\begin{DoxyParamCaption}\item[{bool}]{enabled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which emitted by \hyperlink{classMaintanceDialog_a0eb162bfea71b4712de3cc63cc6bb0f5}{check}(...) function and handle in parent object. Value which send with signal sets in function.
+
+\mbox{\Hypertarget{classMaintanceDialog_a9abf5dd5b908282f9f81f266708dd456}\label{classMaintanceDialog_a9abf5dd5b908282f9f81f266708dd456}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!open\+Dialog@{open\+Dialog}}
+\index{open\+Dialog@{open\+Dialog}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{open\+Dialog}{openDialog} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function used to open dialogs fo every item in \hyperlink{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}{unsolved\+List}.
+
+\mbox{\Hypertarget{classMaintanceDialog_ab97eb55c76459c27bc3ccf5c6a515b1e}\label{classMaintanceDialog_ab97eb55c76459c27bc3ccf5c6a515b1e}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!open\+Maintance\+List@{open\+Maintance\+List}}
+\index{open\+Maintance\+List@{open\+Maintance\+List}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{open\+Maintance\+List}{openMaintanceList} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_aa92ce781e64b49dab9cb362c6521bb17}\label{classMaintanceDialog_aa92ce781e64b49dab9cb362c6521bb17}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!reject\+Slot@{reject\+Slot}}
+\index{reject\+Slot@{reject\+Slot}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{reject\+Slot}{rejectSlot} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function used to set \textit{false} to \hyperlink{classMaintanceDialog_ae23009895f32bfffb43f5ed93188be45}{do\+It\+Now} variable and exit from dialog;
+
+\begin{center}	\line(1,0){450} \end{center}
+Block of function which used for setup parameters and fill appropriate fields of user interface. 
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classMaintanceDialog_a9c71badea52d72c56dee328a7de15005}\label{classMaintanceDialog_a9c71badea52d72c56dee328a7de15005}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!set\+Machine\+Info@{set\+Machine\+Info}}
+\index{set\+Machine\+Info@{set\+Machine\+Info}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{set\+Machine\+Info()}{setMachineInfo()} (\begin{DoxyParamCaption}\item[{Q\+String}]{info = {\ttfamily \char`\"{}machine~info\char`\"{}} }\end{DoxyParamCaption})} 
+
+\item\mbox{\Hypertarget{classMaintanceDialog_a38b7cab71ff559010bef483adec52227}\label{classMaintanceDialog_a38b7cab71ff559010bef483adec52227}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!set\+Maintance\+Type@{set\+Maintance\+Type}}
+\index{set\+Maintance\+Type@{set\+Maintance\+Type}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{set\+Maintance\+Type()}{setMaintanceType()} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8f}{Maintance\+Dialog\+::\+Maintance\+Type}}}]{m\+Type = {\ttfamily \mbox{\hyperlink{classMaintanceDialog_a0774fde5cbe916c333d8d1dd991a3b8fa8fe148a4b5ff71d3568fd6aff35d027e}{Warning}}} }\end{DoxyParamCaption})}
+
+\item\mbox{\Hypertarget{classMaintanceDialog_a7f1a8997a72655a25eb57975c5535736}\label{classMaintanceDialog_a7f1a8997a72655a25eb57975c5535736}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!set\+Trable\+Info@{set\+Trable\+Info}}
+\index{set\+Trable\+Info@{set\+Trable\+Info}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{set\+Trable\+Info}{setTrableInfo} (\begin{DoxyParamCaption}\item[{Q\+String}]{info = {\ttfamily \char`\"{}trouble~info\char`\"{}} }\end{DoxyParamCaption})}
+
+\item\mbox{\Hypertarget{classMaintanceDialog_a2f690d0f71452b2471282fdba269928b}\label{classMaintanceDialog_a2f690d0f71452b2471282fdba269928b}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!set\+Trable\+Name@{set\+Trable\+Name}}
+\index{set\+Trable\+Name@{set\+Trable\+Name}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{set\+Trable\+Name}{setTrableName} (\begin{DoxyParamCaption}\item[{Q\+String}]{name = {\ttfamily \char`\"{}trouble\char`\"{}} }\end{DoxyParamCaption})}
+\end{DoxyCompactItemize}
+\begin{center}	\line(1,0){450} \end{center}
+
+\mbox{\Hypertarget{classMaintanceDialog_a3958b309d854fcd5baf39fc166a6b5f6}\label{classMaintanceDialog_a3958b309d854fcd5baf39fc166a6b5f6}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!solve\+Item@{solve\+Item}}
+\index{solve\+Item@{solve\+Item}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{solve\+Item}{solveItem} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}} - function used to remove one item (number \textit{index}) from \hyperlink{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}{unsolved\+List} and save \hyperlink{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}{unsolved\+List} and \hyperlink{classMaintanceDialog_aae5f5335ab6b848ea0ff6254abbcece3}{unsolved\+List\+Index} to settings. If \hyperlink{classMaintanceDialog_aae5f5335ab6b848ea0ff6254abbcece3}{unsolved\+List\+Index} length is zero emits \hyperlink{classMaintanceDialog_ada9e582be087bce2dd96a2629f2a417f}{maintance\+Work\+Enable} (...) signal with \textit{false} value.
+
+\mbox{\Hypertarget{classMaintanceDialog_ae2420d128d65322e62fc88044b20f848}\label{classMaintanceDialog_ae2420d128d65322e62fc88044b20f848}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!stop\+Request@{stop\+Request}}
+\index{stop\+Request@{stop\+Request}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily void Maintance\+Dialog\+::\texorpdfstring{stop\+Request}{stopRequest} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - unused.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMaintanceDialog_ae23009895f32bfffb43f5ed93188be45}\label{classMaintanceDialog_ae23009895f32bfffb43f5ed93188be45}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!do\+It\+Now@{do\+It\+Now}}
+\index{do\+It\+Now@{do\+It\+Now}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily bool Maintance\+Dialog\+::\texorpdfstring{do\+It\+Now}{doItNow}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_a27e8f4e6881da67cec3568a4a4b757a1}\label{classMaintanceDialog_a27e8f4e6881da67cec3568a4a4b757a1}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!first\+Check@{first\+Check}}
+\index{first\+Check@{first\+Check}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily bool Maintance\+Dialog\+::\texorpdfstring{first\+Check}{firstCheck}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_a615b6ffbbda8324d5225d286570f7f31}\label{classMaintanceDialog_a615b6ffbbda8324d5225d286570f7f31}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!last\+Cycles\+Count@{last\+Cycles\+Count}}
+\index{last\+Cycles\+Count@{last\+Cycles\+Count}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily int Maintance\+Dialog\+:\texorpdfstring{last\+Cycles\+Count}{lastCyclesCount}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_afe855bd63066dc98f09758b7cd6d9b53}\label{classMaintanceDialog_afe855bd63066dc98f09758b7cd6d9b53}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!maintance\+Have\+Warning@{maintance\+Have\+Warning}}
+\index{maintance\+Have\+Warning@{maintance\+Have\+Warning}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily bool Maintance\+Dialog\+::\texorpdfstring{maintance\+Have\+Warning}{maintanceHaveWarning}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_aea111f8bf60829f66b3f93c842512dea}\label{classMaintanceDialog_aea111f8bf60829f66b3f93c842512dea}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!maintance\+Have\+Work@{maintance\+Have\+Work}}
+\index{maintance\+Have\+Work@{maintance\+Have\+Work}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily bool Maintance\+Dialog\+::\texorpdfstring{maintance\+Have\+Work}{maintanceHaveWork}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_ac4eade50e2d9071c65adf44a2987fab1}\label{classMaintanceDialog_ac4eade50e2d9071c65adf44a2987fab1}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!maintance\+List@{maintance\+List}}
+\index{maintance\+List@{maintance\+List}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}}$>$ Maintance\+Dialog\+::\texorpdfstring{maintance\+List}{maintanceList}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_a42a95d76614ce637c9b332ff996020e2}\label{classMaintanceDialog_a42a95d76614ce637c9b332ff996020e2}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!maintance\+Widget@{maintance\+Widget}}
+\index{maintance\+Widget@{maintance\+Widget}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMaintanceWidget}{Maintance\+Widget}}$\ast$ Maintance\+Dialog\+::\texorpdfstring{maintance\+Widget}{maintanceWidget}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_ad41c158948e59029193b28d4e3ab309e}\label{classMaintanceDialog_ad41c158948e59029193b28d4e3ab309e}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!settings@{settings}}
+\index{settings@{settings}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily Q\+Settings$\ast$ Maintance\+Dialog\+::\texorpdfstring{settings}{settings}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}\label{classMaintanceDialog_a37e3caf05435d01f47ed488c39a91587}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!unsolved\+List@{unsolved\+List}}
+\index{unsolved\+List@{unsolved\+List}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}}$>$ Maintance\+Dialog\+::\texorpdfstring{unsolved\+List}{unsolvedList}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMaintanceDialog_aae5f5335ab6b848ea0ff6254abbcece3}\label{classMaintanceDialog_aae5f5335ab6b848ea0ff6254abbcece3}} 
+\index{Maintance\+Dialog@{Maintance\+Dialog}!unsolved\+List\+Index@{unsolved\+List\+Index}}
+\index{unsolved\+List\+Index@{unsolved\+List\+Index}!Maintance\+Dialog@{Maintance\+Dialog}}
+{\footnotesize\ttfamily Q\+List$<$int$>$ Maintance\+Dialog\+::\texorpdfstring{unsolved\+List\+Index}{unsolvedListIndex}\hspace{0.3cm}{\ttfamily [private]}}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{maintancedialog_8h}{maintancedialog.\+h}}\item 
+\mbox{\hyperlink{maintancedialog_8cpp}{maintancedialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

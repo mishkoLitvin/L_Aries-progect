@@ -1,0 +1,167 @@
+\hypertarget{classUdpSocket}{}\subsection{Udp\+Socket Class Reference}
+\label{classUdpSocket}\index{Udp\+Socket@{Udp\+Socket}}
+
+
+{\ttfamily \#include $<$udpsocket.\+h$>$}
+
+Inheritance diagram for Udp\+Socket\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUdpSocket}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classUdpSocket_a43ebbd10ee3b27bfe0b62b507bf8e2c4}{exit\+Req}} ()
+\item 
+void \mbox{\hyperlink{classUdpSocket_af24c4f2c6b77c9999e8638aead581477}{data\+Ready}} (Q\+Byte\+Array data)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUdpSocket_a25a2f670352d9f600143c370beafd8f6}{Udp\+Socket}} (Q\+Widget $\ast$parent=0)
+\item 
+void \mbox{\hyperlink{classUdpSocket_aca3bb48ba03494ee09ed46a9e6d27ffb}{start\+Udp}} (bool \mbox{\hyperlink{classUdpSocket_aa5132ded0322787b898fa346a42f7dce}{is\+Master}}=true)
+\item 
+void \mbox{\hyperlink{classUdpSocket_a508506f2a8a7bbfa04a010ac491f9fa9}{stop\+Udp}} ()
+\item 
+void \mbox{\hyperlink{classUdpSocket_a1d66f093f85db5ae4df98a57adfeb322}{send\+Data}} (Q\+Byte\+Array b\+Arr)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classUdpSocket_a4c16ef2e336d0504adb9118455fa7154}{connect\+To\+Socket}} ()
+\item 
+void \mbox{\hyperlink{classUdpSocket_a35cee44b0c57e6e5ec24c692d2ef9fb8}{disconnect\+From\+Socket}} ()
+\item 
+void \mbox{\hyperlink{classUdpSocket_a5c7396705869aab2fd14770582aff025}{start\+Transmit}} (Q\+Byte\+Array data)
+\item 
+void \mbox{\hyperlink{classUdpSocket_aa6b5948ab613404d74717eb7d9526dfb}{recive\+Data}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Udp\+Socket $\ast$ \mbox{\hyperlink{classUdpSocket_ac8d766e026e7685c741f631acc64e906}{udp}}
+\item 
+Q\+Host\+Address \mbox{\hyperlink{classUdpSocket_abb938c7331685fd351d93be1cb0d8524}{udp\+Adr}}
+\item 
+quint16 \mbox{\hyperlink{classUdpSocket_a13ad80532191677ae811e88181bed986}{udp\+Port}}
+\item 
+bool \mbox{\hyperlink{classUdpSocket_aeffff5f69078361d1f7c088827cf651d}{search}}
+\item 
+bool \mbox{\hyperlink{classUdpSocket_aa5132ded0322787b898fa346a42f7dce}{is\+Master}}
+\item 
+Q\+Host\+Address \mbox{\hyperlink{classUdpSocket_a784b0938e5af88875f8de414d58e536a}{my\+IP}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classUdpSocket_a25a2f670352d9f600143c370beafd8f6}\label{classUdpSocket_a25a2f670352d9f600143c370beafd8f6}} 
+\index{Udp\+Socket@{Udp\+Socket}!Udp\+Socket@{Udp\+Socket}}
+\index{Udp\+Socket@{Udp\+Socket}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{Udp\+Socket()}{UdpSocket()}}
+{\footnotesize\ttfamily Udp\+Socket\+::\+Udp\+Socket (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUdpSocket_a4c16ef2e336d0504adb9118455fa7154}\label{classUdpSocket_a4c16ef2e336d0504adb9118455fa7154}} 
+\index{Udp\+Socket@{Udp\+Socket}!connect\+To\+Socket@{connect\+To\+Socket}}
+\index{connect\+To\+Socket@{connect\+To\+Socket}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{connect\+To\+Socket}{connectToSocket}}
+{\footnotesize\ttfamily void Udp\+Socket\+::connect\+To\+Socket (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classUdpSocket_af24c4f2c6b77c9999e8638aead581477}\label{classUdpSocket_af24c4f2c6b77c9999e8638aead581477}} 
+\index{Udp\+Socket@{Udp\+Socket}!data\+Ready@{data\+Ready}}
+\index{data\+Ready@{data\+Ready}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{data\+Ready}{dataReady}}
+{\footnotesize\ttfamily void Udp\+Socket\+::data\+Ready (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classUdpSocket_a35cee44b0c57e6e5ec24c692d2ef9fb8}\label{classUdpSocket_a35cee44b0c57e6e5ec24c692d2ef9fb8}} 
+\index{Udp\+Socket@{Udp\+Socket}!disconnect\+From\+Socket@{disconnect\+From\+Socket}}
+\index{disconnect\+From\+Socket@{disconnect\+From\+Socket}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{disconnect\+From\+Socket}{disconnectFromSocket}}
+{\footnotesize\ttfamily void Udp\+Socket\+::disconnect\+From\+Socket (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classUdpSocket_a43ebbd10ee3b27bfe0b62b507bf8e2c4}\label{classUdpSocket_a43ebbd10ee3b27bfe0b62b507bf8e2c4}} 
+\index{Udp\+Socket@{Udp\+Socket}!exit\+Req@{exit\+Req}}
+\index{exit\+Req@{exit\+Req}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{exit\+Req}{exitReq}}
+{\footnotesize\ttfamily void Udp\+Socket\+::exit\+Req (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classUdpSocket_aa6b5948ab613404d74717eb7d9526dfb}\label{classUdpSocket_aa6b5948ab613404d74717eb7d9526dfb}} 
+\index{Udp\+Socket@{Udp\+Socket}!recive\+Data@{recive\+Data}}
+\index{recive\+Data@{recive\+Data}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{recive\+Data}{reciveData}}
+{\footnotesize\ttfamily void Udp\+Socket\+::recive\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classUdpSocket_a1d66f093f85db5ae4df98a57adfeb322}\label{classUdpSocket_a1d66f093f85db5ae4df98a57adfeb322}} 
+\index{Udp\+Socket@{Udp\+Socket}!send\+Data@{send\+Data}}
+\index{send\+Data@{send\+Data}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{send\+Data()}{sendData()}}
+{\footnotesize\ttfamily void Udp\+Socket\+::send\+Data (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{b\+Arr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classUdpSocket_a5c7396705869aab2fd14770582aff025}\label{classUdpSocket_a5c7396705869aab2fd14770582aff025}} 
+\index{Udp\+Socket@{Udp\+Socket}!start\+Transmit@{start\+Transmit}}
+\index{start\+Transmit@{start\+Transmit}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{start\+Transmit}{startTransmit}}
+{\footnotesize\ttfamily void Udp\+Socket\+::start\+Transmit (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classUdpSocket_aca3bb48ba03494ee09ed46a9e6d27ffb}\label{classUdpSocket_aca3bb48ba03494ee09ed46a9e6d27ffb}} 
+\index{Udp\+Socket@{Udp\+Socket}!start\+Udp@{start\+Udp}}
+\index{start\+Udp@{start\+Udp}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{start\+Udp()}{startUdp()}}
+{\footnotesize\ttfamily void Udp\+Socket\+::start\+Udp (\begin{DoxyParamCaption}\item[{bool}]{is\+Master = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classUdpSocket_a508506f2a8a7bbfa04a010ac491f9fa9}\label{classUdpSocket_a508506f2a8a7bbfa04a010ac491f9fa9}} 
+\index{Udp\+Socket@{Udp\+Socket}!stop\+Udp@{stop\+Udp}}
+\index{stop\+Udp@{stop\+Udp}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{stop\+Udp()}{stopUdp()}}
+{\footnotesize\ttfamily void Udp\+Socket\+::stop\+Udp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classUdpSocket_aa5132ded0322787b898fa346a42f7dce}\label{classUdpSocket_aa5132ded0322787b898fa346a42f7dce}} 
+\index{Udp\+Socket@{Udp\+Socket}!is\+Master@{is\+Master}}
+\index{is\+Master@{is\+Master}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{is\+Master}{isMaster}}
+{\footnotesize\ttfamily bool Udp\+Socket\+::is\+Master\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpSocket_a784b0938e5af88875f8de414d58e536a}\label{classUdpSocket_a784b0938e5af88875f8de414d58e536a}} 
+\index{Udp\+Socket@{Udp\+Socket}!my\+IP@{my\+IP}}
+\index{my\+IP@{my\+IP}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{my\+IP}{myIP}}
+{\footnotesize\ttfamily Q\+Host\+Address Udp\+Socket\+::my\+IP\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpSocket_aeffff5f69078361d1f7c088827cf651d}\label{classUdpSocket_aeffff5f69078361d1f7c088827cf651d}} 
+\index{Udp\+Socket@{Udp\+Socket}!search@{search}}
+\index{search@{search}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{search}{search}}
+{\footnotesize\ttfamily bool Udp\+Socket\+::search\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpSocket_ac8d766e026e7685c741f631acc64e906}\label{classUdpSocket_ac8d766e026e7685c741f631acc64e906}} 
+\index{Udp\+Socket@{Udp\+Socket}!udp@{udp}}
+\index{udp@{udp}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{udp}{udp}}
+{\footnotesize\ttfamily Q\+Udp\+Socket$\ast$ Udp\+Socket\+::udp\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpSocket_abb938c7331685fd351d93be1cb0d8524}\label{classUdpSocket_abb938c7331685fd351d93be1cb0d8524}} 
+\index{Udp\+Socket@{Udp\+Socket}!udp\+Adr@{udp\+Adr}}
+\index{udp\+Adr@{udp\+Adr}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{udp\+Adr}{udpAdr}}
+{\footnotesize\ttfamily Q\+Host\+Address Udp\+Socket\+::udp\+Adr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpSocket_a13ad80532191677ae811e88181bed986}\label{classUdpSocket_a13ad80532191677ae811e88181bed986}} 
+\index{Udp\+Socket@{Udp\+Socket}!udp\+Port@{udp\+Port}}
+\index{udp\+Port@{udp\+Port}!Udp\+Socket@{Udp\+Socket}}
+\paragraph{\texorpdfstring{udp\+Port}{udpPort}}
+{\footnotesize\ttfamily quint16 Udp\+Socket\+::udp\+Port\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{udpsocket_8h}{udpsocket.\+h}}\item 
+\mbox{\hyperlink{udpsocket_8cpp}{udpsocket.\+cpp}}\end{DoxyCompactItemize}

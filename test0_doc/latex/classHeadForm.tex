@@ -1,0 +1,402 @@
+\hypertarget{classHeadForm}{}\subsection{Head\+Form Class Reference}
+\label{classHeadForm}\index{Head\+Form@{Head\+Form}}
+
+
+{\ttfamily \#include $<$headform.\+h$>$}
+
+Inheritance diagram for Head\+Form\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHeadForm}
+\end{center}
+\end{figure}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0}{Headform\+Type\+\_\+}} \{ \mbox{\hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0a4652ee386f0507081c73c94e23406355}{Head\+Puting\+On}}, 
+\mbox{\hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0ae0daafb321b4253abd5c15a5bee4073d}{Head\+Removing}}, 
+\mbox{\hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0a1aa31669b6be4f549f4635ab9bedf87c}{Head\+Processing}}
+ \}
+\item 
+enum \mbox{\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8}{Headform\+State\+\_\+}} \{ \mbox{\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8ab400a883c6b3712cb04d90d43fc90574}{shirt\+On}}, 
+\mbox{\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8a4602d887a83fe4055d613fbe3ecb9dbc}{shirt\+Off}}, 
+\mbox{\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8af061092a97b564b96638af440f6c8e3c}{shirt\+Processing}}
+ \}
+\item 
+enum \mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5}{Sett\+Btn\+Pos\+\_\+}} \{ \mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5a8964ad65c812d4a1fdd515a043281dc8}{At\+Left\+Up}}, 
+\mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5ac8f51999e1bc4dc81f2a5362246ab8cb}{At\+Left\+Down}}, 
+\mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5a50f633b215328280784cf90a9d66bf6f}{At\+Right\+Up}}, 
+\mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5ade80fd3660fc8764b6fc9a9d311b3d47}{At\+Right\+Down}}
+ \}
+\item typedef enum \mbox{\hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0}{Head\+Form\+::\+Headform\+Type\+\_\+}} \mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Headform\+Type}}
+\item 
+typedef enum \mbox{\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8}{Head\+Form\+::\+Headform\+State\+\_\+}} \mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State}}
+\item 
+typedef enum \mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5}{Head\+Form\+::\+Sett\+Btn\+Pos\+\_\+}} \mbox{\hyperlink{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}{Sett\+Btn\+Pos}}
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHeadForm_ad5033138e38409217e1ae343c71afc64}{setting\+Button\+Cliced}} (int \mbox{\hyperlink{classHeadForm_a5e01a73f3b47bdc85ea85f5650cdf0d0}{index}})
+\item 
+void \mbox{\hyperlink{classHeadForm_a6e4fb0f70f7571685094e53836bcbe21}{load\+State\+Changed}} (int \mbox{\hyperlink{classHeadForm_a5e01a73f3b47bdc85ea85f5650cdf0d0}{index}}, \mbox{\hyperlink{headform_8h_a56d194976643934b3332b3f99d82490d}{Load\+State}} state)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHeadForm_a9474e3d5af0aad57f847d1a38eba8591}{Head\+Form}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classHeadForm_ac4a0350cd62ed18740505fe61ba75d80}{$\sim$\+Head\+Form}} ()
+\item 
+void \mbox{\hyperlink{classHeadForm_acd6d67e3691918b0e4c6716b079e67d0}{set\+Index}} (int i)
+\item 
+void \mbox{\hyperlink{classHeadForm_af74e0d29b259aa4f2e9529346237207a}{set\+Index\+Label\+Position}} (\mbox{\hyperlink{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}{Sett\+Btn\+Pos}} position)
+\item 
+void \mbox{\hyperlink{classHeadForm_ac2845f30dc7686178380c9c108b4c5bf}{set\+Pixmap}} (\mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State}} state, Q\+String st\+Str)
+\item 
+void \mbox{\hyperlink{classHeadForm_a934e12ca808cb22f74734df9852e7146}{set\+Pixmap}} (\mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State}} state)
+\item 
+void \mbox{\hyperlink{classHeadForm_aaa15b61ff5f3bdbf8c3e7a329fb6b0cb}{set\+Rag\+On}} (bool state)
+\item 
+void \mbox{\hyperlink{classHeadForm_acb2b064f0453aeed4a5bea49cc33be47}{set\+Icon\+Path}} (Q\+String path)
+\item 
+void \mbox{\hyperlink{classHeadForm_a69a9f3ad37ba31a3c1f8a5c491b6272d}{set\+Rag\+Color}} (Q\+Color color)
+\item 
+void \mbox{\hyperlink{classHeadForm_a8e86ad0f2d29ec594c62dbfd253b5fee}{set\+Strok\+Count}} (int val)
+\item 
+void \mbox{\hyperlink{classHeadForm_a6b5082ea42b171300a105d6a35d52c91}{set\+Step\+Bk\+Str\+Cnt}} (int val)
+\item 
+void \mbox{\hyperlink{classHeadForm_afd37ba9a460ed5bf74c5b0b40394feb5}{set\+Dry\+Power}} (int val)
+\item 
+void \mbox{\hyperlink{classHeadForm_a75d114050b779cd5793a4968b06e8178}{set\+Off}} ()
+\item 
+\mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State}} \mbox{\hyperlink{classHeadForm_a35de102780fe0011543c31d62f8bd72e}{get\+Rag\+State}} ()
+\item 
+void \mbox{\hyperlink{classHeadForm_aa61be1b4d88c7afbfff172190d40cc07}{set\+Headform\+Type}} (\mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Headform\+Type}} type)
+\item 
+\mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Headform\+Type}} \mbox{\hyperlink{classHeadForm_a8e521c0edb67751bebcc8f82e9176a16}{get\+Headform\+Type}} ()
+\item 
+Q\+Size \mbox{\hyperlink{classHeadForm_a138f7ab8bf3996a036e587b0ea7f4237}{get\+Label\+Size}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHeadForm_a922c24b7eb4d084712d0ec4e9a084e90}{mouse\+Press\+Event}} (Q\+Mouse\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Head\+Form $\ast$ \mbox{\hyperlink{classHeadForm_afd952edd2f6b6e9ccd02f18ddf694ad1}{ui}}
+\item 
+Q\+Label $\ast$ \mbox{\hyperlink{classHeadForm_adbc068754f789e1a63c113f1ce7caf38}{label\+Index}}
+\item 
+Q\+Label $\ast$ \mbox{\hyperlink{classHeadForm_a591efe6e830fd170cb549bca142d2759}{label\+Strok\+Cnt}}
+\item 
+Q\+Label $\ast$ \mbox{\hyperlink{classHeadForm_a1a7f706cff05b5644d3eae9ab21b2caf}{label\+St\+Bk\+Str}}
+\item 
+Q\+Image \mbox{\hyperlink{classHeadForm_a30f30561d242211ed827ffaf627e0839}{pix\+Shirt\+Show}}
+\item 
+Q\+Image \mbox{\hyperlink{classHeadForm_a54d7609f912aa7b0edd6850e1f57f0a0}{pix\+Shirt\+Hide}}
+\item 
+Q\+Image \mbox{\hyperlink{classHeadForm_aa44a452750fe6db786814ec502f0d655}{pix\+Shirt\+Animate}}
+\item 
+Q\+Graphics\+Colorize\+Effect $\ast$ \mbox{\hyperlink{classHeadForm_a65805e9d52c18a00fd2bece0f560f26a}{graph\+Effect}}
+\item 
+Q\+String \mbox{\hyperlink{classHeadForm_a88124373bcbdb5679ea11608362e485b}{path\+Image}}
+\item 
+int \mbox{\hyperlink{classHeadForm_a5e01a73f3b47bdc85ea85f5650cdf0d0}{index}}
+\item 
+\mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State}} \mbox{\hyperlink{classHeadForm_a0ffd2cf8eea50202d72c4bf286a11916}{headform\+State}}
+\item 
+\mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Headform\+Type}} \mbox{\hyperlink{classHeadForm_a5f448e8b1081f12332f699d029fa8433}{headform\+Type}}
+\item 
+Q\+Graphics\+Scene $\ast$ \mbox{\hyperlink{classHeadForm_ac4615e0489c20f6753a1804bfb9d188a}{gr\+Scene}}
+\item 
+Q\+Graphics\+Pixmap\+Item $\ast$ \mbox{\hyperlink{classHeadForm_a974e25ac4edb0f0a25da108c0b4da4a1}{gr\+Pix\+Logo\+Item}}
+\item 
+Q\+Graphics\+Rect\+Item $\ast$ \mbox{\hyperlink{classHeadForm_acc0cb81dc7cb95b72af6f44ebcc90f4e}{gr\+Rect\+Bkgr\+Item}}
+\item 
+Q\+Rect \mbox{\hyperlink{classHeadForm_a472b95713a709b727b84af2572f0f4f6}{gr\+Size}}
+\item 
+\mbox{\hyperlink{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}{Head\+Form\+::\+Sett\+Btn\+Pos}} \mbox{\hyperlink{classHeadForm_a3f9306937e89ae7a306034c875efc48e}{label\+Pos}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}\label{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}} 
+\index{Head\+Form@{Head\+Form}!Headform\+State@{Headform\+State}}
+\index{Headform\+State@{Headform\+State}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8}{Head\+Form\+::\+Headform\+State\+\_\+}} \mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Head\+Form\+::\+\texorpdfstring{Headform\+State}{HeadformState}}}}
+
+\mbox{\Hypertarget{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}\label{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}} 
+\index{Head\+Form@{Head\+Form}!Headform\+Type@{Headform\+Type}}
+\index{Headform\+Type@{Headform\+Type}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0}{Head\+Form\+::\+Headform\+Type\+\_\+}} \mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Head\+Form\+::\+\texorpdfstring{Headform\+Type}{HeadformType}}}}
+
+\mbox{\Hypertarget{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}\label{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}} 
+\index{Head\+Form@{Head\+Form}!Sett\+Btn\+Pos@{Sett\+Btn\+Pos}}
+\index{Sett\+Btn\+Pos@{Sett\+Btn\+Pos}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5}{Head\+Form\+::\+Sett\+Btn\+Pos\+\_\+}} \mbox{\hyperlink{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}{Head\+Form\+::\+\texorpdfstring{Sett\+Btn\+Pos}{SettBtnPos}}}}
+
+\subsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8}\label{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8}} 
+\index{Head\+Form@{Head\+Form}!Headform\+State\+\_\+@{Headform\+State\+\_\+}}
+\index{Headform\+State\+\_\+@{Headform\+State\+\_\+}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8}{Head\+Form\+::\texorpdfstring{Headform\+State\+\_\+}{HeadformState\_}}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{shirt\+On@{shirt\+On}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!shirt\+On@{shirt\+On}}}\mbox{\Hypertarget{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8ab400a883c6b3712cb04d90d43fc90574}\label{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8ab400a883c6b3712cb04d90d43fc90574}} 
+shirt\+On&show rag image on form.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{shirt\+Off@{shirt\+Off}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!shirt\+Off@{shirt\+Off}}}\mbox{\Hypertarget{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8a4602d887a83fe4055d613fbe3ecb9dbc}\label{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8a4602d887a83fe4055d613fbe3ecb9dbc}} 
+shirt\+Off&hide rag image on form.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{shirt\+Processing@{shirt\+Processing}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!shirt\+Processing@{shirt\+Processing}}}\mbox{\Hypertarget{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8af061092a97b564b96638af440f6c8e3c}\label{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8af061092a97b564b96638af440f6c8e3c}} 
+shirt\+Processing&show rag image animation on form.\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0}\label{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0}} 
+\index{Head\+Form@{Head\+Form}!Headform\+Type\+\_\+@{Headform\+Type\+\_\+}}
+\index{Headform\+Type\+\_\+@{Headform\+Type\+\_\+}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0}{Head\+Form\+::\+\texorpdfstring{Headform\+Type\+\_\+}{HeadformType\_}}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Puting\+On@{Head\+Puting\+On}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!Head\+Puting\+On@{Head\+Puting\+On}}}\mbox{\Hypertarget{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0a4652ee386f0507081c73c94e23406355}\label{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0a4652ee386f0507081c73c94e23406355}} 
+Head\+Puting\+On&paint load pallet to appropriate color.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Removing@{Head\+Removing}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!Head\+Removing@{Head\+Removing}}}\mbox{\Hypertarget{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0ae0daafb321b4253abd5c15a5bee4073d}\label{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0ae0daafb321b4253abd5c15a5bee4073d}} 
+Head\+Removing&paint unload pallet to appropriate color.\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Head\+Processing@{Head\+Processing}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!Head\+Processing@{Head\+Processing}}}\mbox{\Hypertarget{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0a1aa31669b6be4f549f4635ab9bedf87c}\label{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0a1aa31669b6be4f549f4635ab9bedf87c}} 
+Head\+Processing&paint processing pallet to appropriate color.\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5}\label{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5}} 
+\index{Head\+Form@{Head\+Form}!Sett\+Btn\+Pos\+\_\+@{Sett\+Btn\+Pos\+\_\+}}
+\index{Sett\+Btn\+Pos\+\_\+@{Sett\+Btn\+Pos\+\_\+}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5}{Head\+Form\+::\texorpdfstring{Sett\+Btn\+Pos\+\_\+}{SettBtnPos\_}}}} - describe position of \hyperlink{classHeadForm_adbc068754f789e1a63c113f1ce7caf38}{label\+Index}, \hyperlink{classHeadForm_a591efe6e830fd170cb549bca142d2759}{label\+Strok\+Cnt} and \hyperlink{classHeadForm_a1a7f706cff05b5644d3eae9ab21b2caf}{label\+St\+Bk\+Str}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{At\+Left\+Up@{At\+Left\+Up}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!At\+Left\+Up@{At\+Left\+Up}}}\mbox{\Hypertarget{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5a8964ad65c812d4a1fdd515a043281dc8}\label{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5a8964ad65c812d4a1fdd515a043281dc8}} 
+At\+Left\+Up&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{At\+Left\+Down@{At\+Left\+Down}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!At\+Left\+Down@{At\+Left\+Down}}}\mbox{\Hypertarget{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5ac8f51999e1bc4dc81f2a5362246ab8cb}\label{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5ac8f51999e1bc4dc81f2a5362246ab8cb}} 
+At\+Left\+Down&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{At\+Right\+Up@{At\+Right\+Up}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!At\+Right\+Up@{At\+Right\+Up}}}\mbox{\Hypertarget{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5a50f633b215328280784cf90a9d66bf6f}\label{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5a50f633b215328280784cf90a9d66bf6f}} 
+At\+Right\+Up&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{At\+Right\+Down@{At\+Right\+Down}!Head\+Form@{Head\+Form}}\index{Head\+Form@{Head\+Form}!At\+Right\+Down@{At\+Right\+Down}}}\mbox{\Hypertarget{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5ade80fd3660fc8764b6fc9a9d311b3d47}\label{classHeadForm_a26cd2569dd333f30e239f5ce00a267c5ade80fd3660fc8764b6fc9a9d311b3d47}} 
+At\+Right\+Down&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHeadForm_a9474e3d5af0aad57f847d1a38eba8591}\label{classHeadForm_a9474e3d5af0aad57f847d1a38eba8591}} 
+\index{Head\+Form@{Head\+Form}!Head\+Form@{Head\+Form}}
+\index{Head\+Form@{Head\+Form}!Head\+Form@{Head\+Form}}
+\paragraph{\texorpdfstring{Head\+Form()}{HeadForm()}}
+{\footnotesize\ttfamily Head\+Form\+::\+Head\+Form (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})} - constructor of class. Create Q\+Widget class object, initialize Q\+Label 's, Q\+Graphic\+Scene etc.
+
+\mbox{\Hypertarget{classHeadForm_ac4a0350cd62ed18740505fe61ba75d80}\label{classHeadForm_ac4a0350cd62ed18740505fe61ba75d80}} 
+\index{Head\+Form@{Head\+Form}!````~Head\+Form@{$\sim$\+Head\+Form}}
+\index{````~Head\+Form@{$\sim$\+Head\+Form}!Head\+Form@{Head\+Form}}
+\paragraph{\texorpdfstring{$\sim$\+Head\+Form()}{~HeadForm()}}
+{\footnotesize\ttfamily Head\+Form\+::$\sim$\+Head\+Form (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard class destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHeadForm_a8e521c0edb67751bebcc8f82e9176a16}\label{classHeadForm_a8e521c0edb67751bebcc8f82e9176a16}} 
+\index{Head\+Form@{Head\+Form}!get\+Headform\+Type@{get\+Headform\+Type}}
+\index{get\+Headform\+Type@{get\+Headform\+Type}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Head\+Form\+::\+Headform\+Type}} Head\+Form\+::\texorpdfstring{get\+Headform\+Type}{getHeadformType} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function to get head type. Return one of \hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0}{Headform\+Type\+\_\+} values.
+
+\mbox{\Hypertarget{classHeadForm_a138f7ab8bf3996a036e587b0ea7f4237}\label{classHeadForm_a138f7ab8bf3996a036e587b0ea7f4237}} 
+\index{Head\+Form@{Head\+Form}!get\+Label\+Size@{get\+Label\+Size}}
+\index{get\+Label\+Size@{get\+Label\+Size}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Size Head\+Form\+::\texorpdfstring{get\+Label\+Size}{getLabelSize} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - return size of Q\+Graphic\+View object in pixels.
+
+\mbox{\Hypertarget{classHeadForm_a35de102780fe0011543c31d62f8bd72e}\label{classHeadForm_a35de102780fe0011543c31d62f8bd72e}} 
+\index{Head\+Form@{Head\+Form}!get\+Rag\+State@{get\+Rag\+State}}
+\index{get\+Rag\+State@{get\+Rag\+State}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Head\+Form\+::\+Headform\+State}} Head\+Form\+::\texorpdfstring{get\+Rag\+State}{getRagState} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - return state of pallet (\hyperlink{classHeadForm_ad43012a40fdd353f422cc70c37dd61f8}{Headform\+State\+\_\+} value). 
+
+\mbox{\Hypertarget{classHeadForm_a6e4fb0f70f7571685094e53836bcbe21}\label{classHeadForm_a6e4fb0f70f7571685094e53836bcbe21}} 
+\index{Head\+Form@{Head\+Form}!load\+State\+Changed@{load\+State\+Changed}}
+\index{load\+State\+Changed@{load\+State\+Changed}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{load\+State\+Changed}{loadStateChanged} (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{headform_8h_a56d194976643934b3332b3f99d82490d}{Load\+State}}}]{state }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal what emit by \hyperlink{classHeadForm_a922c24b7eb4d084712d0ec4e9a084e90}{mouse\+Press\+Event} function if \hyperlink{classHeadForm_a5f448e8b1081f12332f699d029fa8433}{headform\+Type} is \hyperlink{classHeadForm_ae17d4f6887245f37b3f7c002dd226dd0a1aa31669b6be4f549f4635ab9bedf87c}{Head\+Processing} on mouse click. Signal handle in parent object.
+
+\mbox{\Hypertarget{classHeadForm_a922c24b7eb4d084712d0ec4e9a084e90}\label{classHeadForm_a922c24b7eb4d084712d0ec4e9a084e90}} 
+\index{Head\+Form@{Head\+Form}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{mouse\+Press\+Event}{mousePressEvent} (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of standard mouse event handler. Used to change state of pallet with \hyperlink{classHeadForm_ac2845f30dc7686178380c9c108b4c5bf}{set\+Pixmap}(...) function and emit \hyperlink{classHeadForm_a6e4fb0f70f7571685094e53836bcbe21}{load\+State\+Changed}(...) signal to handle in parent object by \hyperlink{classMainWindow_a7c2d999fc817728b31dccaaa1e72bd43}{get\+Load\+State}(...) function.
+
+\mbox{\Hypertarget{classHeadForm_afd37ba9a460ed5bf74c5b0b40394feb5}\label{classHeadForm_afd37ba9a460ed5bf74c5b0b40394feb5}} 
+\index{Head\+Form@{Head\+Form}!set\+Dry\+Power@{set\+Dry\+Power}}
+\index{set\+Dry\+Power@{set\+Dry\+Power}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Dry\+Power}{setDryPower} (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})} - set text to \textit{labelStrokCnt} to display on screen.
+
+\mbox{\Hypertarget{classHeadForm_aa61be1b4d88c7afbfff172190d40cc07}\label{classHeadForm_aa61be1b4d88c7afbfff172190d40cc07}} 
+\index{Head\+Form@{Head\+Form}!set\+Headform\+Type@{set\+Headform\+Type}}
+\index{set\+Headform\+Type@{set\+Headform\+Type}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Headform\+Type}{setHeadformType} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Head\+Form\+::\+Headform\+Type}}}]{type }\end{DoxyParamCaption})} - set variable \hyperlink{classHeadForm_a5f448e8b1081f12332f699d029fa8433}{headform\+Type} value to paint form to appropriate style and use it in future work.
+
+\mbox{\Hypertarget{classHeadForm_acb2b064f0453aeed4a5bea49cc33be47}\label{classHeadForm_acb2b064f0453aeed4a5bea49cc33be47}} 
+\index{Head\+Form@{Head\+Form}!set\+Icon\+Path@{set\+Icon\+Path}}
+\index{set\+Icon\+Path@{set\+Icon\+Path}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Icon\+Path}{setIconPath} (\begin{DoxyParamCaption}\item[{Q\+String}]{path }\end{DoxyParamCaption})} - function to change folder with icons which used on view and update icons.
+
+\mbox{\Hypertarget{classHeadForm_acd6d67e3691918b0e4c6716b079e67d0}\label{classHeadForm_acd6d67e3691918b0e4c6716b079e67d0}} 
+\index{Head\+Form@{Head\+Form}!set\+Index@{set\+Index}}
+\index{set\+Index@{set\+Index}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Index}{setIndex} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})} - function to set \hyperlink{classHeadForm_a5e01a73f3b47bdc85ea85f5650cdf0d0}{index} value and put number on \hyperlink{classHeadForm_adbc068754f789e1a63c113f1ce7caf38}{label\+Index}. Used in future.
+
+\mbox{\Hypertarget{classHeadForm_af74e0d29b259aa4f2e9529346237207a}\label{classHeadForm_af74e0d29b259aa4f2e9529346237207a}} 
+\index{Head\+Form@{Head\+Form}!set\+Index\+Label\+Position@{set\+Index\+Label\+Position}}
+\index{set\+Index\+Label\+Position@{set\+Index\+Label\+Position}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Index\+Label\+Position}{setIndexLabelPosition} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}{Head\+Form\+::\+Sett\+Btn\+Pos}}}]{position }\end{DoxyParamCaption})} - function to set \hyperlink{classHeadForm_a3f9306937e89ae7a306034c875efc48e}{label\+Pos} and set \hyperlink{classHeadForm_adbc068754f789e1a63c113f1ce7caf38}{label\+Index}, \hyperlink{classHeadForm_a591efe6e830fd170cb549bca142d2759}{label\+Strok\+Cnt} and \hyperlink{classHeadForm_a1a7f706cff05b5644d3eae9ab21b2caf}{label\+St\+Bk\+Str} labels positions.
+
+\mbox{\Hypertarget{classHeadForm_a75d114050b779cd5793a4968b06e8178}\label{classHeadForm_a75d114050b779cd5793a4968b06e8178}} 
+\index{Head\+Form@{Head\+Form}!set\+Off@{set\+Off}}
+\index{set\+Off@{set\+Off}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Off}{setOff} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - print \textit{"OFF"} text on \hyperlink{classHeadForm_a591efe6e830fd170cb549bca142d2759}{label\+Strok\+Cnt} to indicate that head is turned off.
+
+\mbox{\Hypertarget{classHeadForm_ac2845f30dc7686178380c9c108b4c5bf}\label{classHeadForm_ac2845f30dc7686178380c9c108b4c5bf}} 
+\index{Head\+Form@{Head\+Form}!set\+Pixmap@{set\+Pixmap}}
+\index{set\+Pixmap@{set\+Pixmap}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Pixmap()}{setPixmap()}{\footnotesize\ttfamily [1/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State}}}]{state,  }\item[{Q\+String}]{st\+Str }\end{DoxyParamCaption})} - set value \textit{state} to \hyperlink{classHeadForm_a0ffd2cf8eea50202d72c4bf286a11916}{headform\+State} variable and style of widget with \textit{st\+Str}.
+
+\mbox{\Hypertarget{classHeadForm_a934e12ca808cb22f74734df9852e7146}\label{classHeadForm_a934e12ca808cb22f74734df9852e7146}} 
+\index{Head\+Form@{Head\+Form}!set\+Pixmap@{set\+Pixmap}}
+\index{set\+Pixmap@{set\+Pixmap}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Pixmap()}{setPixmap()}{\footnotesize\ttfamily [2/2]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Head\+Form\+::\+Headform\+State}}}]{state }\end{DoxyParamCaption})} - polymorphic function. Call \hyperlink{classHeadForm_ac2845f30dc7686178380c9c108b4c5bf}{set\+Pixmap}(\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State} state, Q\+String st\+Str) with \textit{state} and current style.
+
+\mbox{\Hypertarget{classHeadForm_a69a9f3ad37ba31a3c1f8a5c491b6272d}\label{classHeadForm_a69a9f3ad37ba31a3c1f8a5c491b6272d}} 
+\index{Head\+Form@{Head\+Form}!set\+Rag\+Color@{set\+Rag\+Color}}
+\index{set\+Rag\+Color@{set\+Rag\+Color}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Rag\+Color()}{setRagColor} (\begin{DoxyParamCaption}\item[{Q\+Color}]{color }\end{DoxyParamCaption})} - set Q\+Graphics\+Colorize\+Effect to rag image.
+
+\mbox{\Hypertarget{classHeadForm_aaa15b61ff5f3bdbf8c3e7a329fb6b0cb}\label{classHeadForm_aaa15b61ff5f3bdbf8c3e7a329fb6b0cb}} 
+\index{Head\+Form@{Head\+Form}!set\+Rag\+On@{set\+Rag\+On}}
+\index{set\+Rag\+On@{set\+Rag\+On}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Rag\+On()}{setRagOn} (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption})} - function to set or remove rag image from pallet using \hyperlink{classHeadForm_a934e12ca808cb22f74734df9852e7146}{set\+Pixmap} (...) function.
+
+\mbox{\Hypertarget{classHeadForm_a6b5082ea42b171300a105d6a35d52c91}\label{classHeadForm_a6b5082ea42b171300a105d6a35d52c91}} 
+\index{Head\+Form@{Head\+Form}!set\+Step\+Bk\+Str\+Cnt@{set\+Step\+Bk\+Str\+Cnt}}
+\index{set\+Step\+Bk\+Str\+Cnt@{set\+Step\+Bk\+Str\+Cnt}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Step\+Bk\+Str\+Cnt()}{setStepBkStrCnt} (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})} - function to set text on \hyperlink{classHeadForm_a1a7f706cff05b5644d3eae9ab21b2caf}{label\+St\+Bk\+Str} or hide it if \textit{val} = 0.
+
+\mbox{\Hypertarget{classHeadForm_a8e86ad0f2d29ec594c62dbfd253b5fee}\label{classHeadForm_a8e86ad0f2d29ec594c62dbfd253b5fee}} 
+\index{Head\+Form@{Head\+Form}!set\+Strok\+Count@{set\+Strok\+Count}}
+\index{set\+Strok\+Count@{set\+Strok\+Count}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{set\+Strok\+Count()}{setStrokCount} (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})} - function to set text on \hyperlink{classHeadForm_a591efe6e830fd170cb549bca142d2759}{label\+Strok\+Cnt} or hide it if \textit{val} = 0.
+
+\mbox{\Hypertarget{classHeadForm_ad5033138e38409217e1ae343c71afc64}\label{classHeadForm_ad5033138e38409217e1ae343c71afc64}} 
+\index{Head\+Form@{Head\+Form}!setting\+Button\+Cliced@{setting\+Button\+Cliced}}
+\index{setting\+Button\+Cliced@{setting\+Button\+Cliced}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily void Head\+Form\+::\texorpdfstring{setting\+Button\+Cliced}{settingButtonCliced} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [signal]}} - unused signal.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classHeadForm_a65805e9d52c18a00fd2bece0f560f26a}\label{classHeadForm_a65805e9d52c18a00fd2bece0f560f26a}} 
+\index{Head\+Form@{Head\+Form}!graph\+Effect@{graph\+Effect}}
+\index{graph\+Effect@{graph\+Effect}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Graphics\+Colorize\+Effect$\ast$ Head\+Form\+::\texorpdfstring{graph\+Effect}{graphEffect}{\ttfamily [private]}} - object of Q\+Graphics\+Colorize\+Effect class effect. Allow user to colorize items. Used under \hyperlink{classHeadForm_a974e25ac4edb0f0a25da108c0b4da4a1}{gr\+Pix\+Logo\+Item} object.
+
+\mbox{\Hypertarget{classHeadForm_a974e25ac4edb0f0a25da108c0b4da4a1}\label{classHeadForm_a974e25ac4edb0f0a25da108c0b4da4a1}} 
+\index{Head\+Form@{Head\+Form}!gr\+Pix\+Logo\+Item@{gr\+Pix\+Logo\+Item}}
+\index{gr\+Pix\+Logo\+Item@{gr\+Pix\+Logo\+Item}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Graphics\+Pixmap\+Item$\ast$ Head\+Form\+::\texorpdfstring{gr\+Pix\+Logo\+Item}{grPixLogoItem}{\ttfamily [private]}} - object of Q\+Graphics\+Pixmap\+Item which are used to display image on \hyperlink{classHeadForm_ac4615e0489c20f6753a1804bfb9d188a}{gr\+Scene}.
+
+\mbox{\Hypertarget{classHeadForm_acc0cb81dc7cb95b72af6f44ebcc90f4e}\label{classHeadForm_acc0cb81dc7cb95b72af6f44ebcc90f4e}} 
+\index{Head\+Form@{Head\+Form}!gr\+Rect\+Bkgr\+Item@{gr\+Rect\+Bkgr\+Item}}
+\index{gr\+Rect\+Bkgr\+Item@{gr\+Rect\+Bkgr\+Item}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Graphics\+Rect\+Item$\ast$ Head\+Form\+::\texorpdfstring{gr\+Rect\+Bkgr\+Item}{grRectBkgrItem}{\ttfamily [private]}} - object of Q\+Graphics\+Rect\+Item contained by \hyperlink{classHeadForm_ac4615e0489c20f6753a1804bfb9d188a}{gr\+Scene} to allow put background color (or color gradient) to graphic scene.
+
+\mbox{\Hypertarget{classHeadForm_ac4615e0489c20f6753a1804bfb9d188a}\label{classHeadForm_ac4615e0489c20f6753a1804bfb9d188a}} 
+\index{Head\+Form@{Head\+Form}!gr\+Scene@{gr\+Scene}}
+\index{gr\+Scene@{gr\+Scene}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Graphics\+Scene$\ast$ Head\+Form\+::\texorpdfstring{gr\+Scene}{grScene}{\ttfamily [private]}} - main graphic object on widget contained by graphicsView (graphicsView created in Qt\+Designer). Allow add all graphic object to widget, colorize them and change styles.
+
+\mbox{\Hypertarget{classHeadForm_a472b95713a709b727b84af2572f0f4f6}\label{classHeadForm_a472b95713a709b727b84af2572f0f4f6}} 
+\index{Head\+Form@{Head\+Form}!gr\+Size@{gr\+Size}}
+\index{gr\+Size@{gr\+Size}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Rect Head\+Form\+::\texorpdfstring{gr\+Size}{grSize}{\ttfamily [private]}} - Q\+Rect class object which to create \hyperlink{classHeadForm_acc0cb81dc7cb95b72af6f44ebcc90f4e}{gr\+Rect\+Bkgr\+Item} object in constructor \hyperlink{classHeadForm_a9474e3d5af0aad57f847d1a38eba8591}{Head\+Form}(...)
+
+\mbox{\Hypertarget{classHeadForm_a0ffd2cf8eea50202d72c4bf286a11916}\label{classHeadForm_a0ffd2cf8eea50202d72c4bf286a11916}} 
+\index{Head\+Form@{Head\+Form}!headform\+State@{headform\+State}}
+\index{headform\+State@{headform\+State}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadForm_ae7f8ba0c9db5a5140ac4e3417dc1d9b2}{Headform\+State}} Head\+Form\+::\texorpdfstring{headform\+State}{headformState}{\ttfamily [private]}} - variable to contain state of head\+Form. Sets by \hyperlink{classHeadForm_a934e12ca808cb22f74734df9852e7146}{set\+Pixmap}(...) polymorphic function, get by \hyperlink{classHeadForm_a35de102780fe0011543c31d62f8bd72e}{get\+Rag\+State} function.
+
+\mbox{\Hypertarget{classHeadForm_a5f448e8b1081f12332f699d029fa8433}\label{classHeadForm_a5f448e8b1081f12332f699d029fa8433}} 
+\index{Head\+Form@{Head\+Form}!headform\+Type@{headform\+Type}}
+\index{headform\+Type@{headform\+Type}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadForm_a15bfe98cd74c9677947211a02313f7d1}{Headform\+Type}} Head\+Form\+::\texorpdfstring{headform\+Type}{headformType}{\ttfamily [private]}} - variable to contain type of head\+Form. Sets by \hyperlink{classHeadForm_aa61be1b4d88c7afbfff172190d40cc07}{set\+Headform\+Type}(...) function, get by \hyperlink{classHeadForm_a8e521c0edb67751bebcc8f82e9176a16}{get\+Headform\+Type} function.
+
+\mbox{\Hypertarget{classHeadForm_a5e01a73f3b47bdc85ea85f5650cdf0d0}\label{classHeadForm_a5e01a73f3b47bdc85ea85f5650cdf0d0}} 
+\index{Head\+Form@{Head\+Form}!index@{index}}
+\index{index@{index}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily int Head\+Form\+::\texorpdfstring{index}{index}{\ttfamily [private]}} - variable to contain number of head\+Form. Used in \hyperlink{classHeadForm_a6e4fb0f70f7571685094e53836bcbe21}{load\+State\+Changed} (...) to send it to parent object. Sets by \hyperlink{classHeadForm_acd6d67e3691918b0e4c6716b079e67d0}{set\+Index} function.
+
+\mbox{\Hypertarget{classHeadForm_adbc068754f789e1a63c113f1ce7caf38}\label{classHeadForm_adbc068754f789e1a63c113f1ce7caf38}} 
+\index{Head\+Form@{Head\+Form}!label\+Index@{label\+Index}}
+\index{label\+Index@{label\+Index}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Label$\ast$ Head\+Form\+::\texorpdfstring{label\+Index}{labelIndex}{\ttfamily [private]}} - Q\+Label class object. Used to display number of head\+Form (\hyperlink{classHeadForm_a5e01a73f3b47bdc85ea85f5650cdf0d0}{index} variable).
+
+\mbox{\Hypertarget{classHeadForm_a3f9306937e89ae7a306034c875efc48e}\label{classHeadForm_a3f9306937e89ae7a306034c875efc48e}} 
+\index{Head\+Form@{Head\+Form}!label\+Pos@{label\+Pos}}
+\index{label\+Pos@{label\+Pos}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHeadForm_ae0ae43de172739d43f503ff0a03aad1a}{Head\+Form\+::\+Sett\+Btn\+Pos}} Head\+Form\+::\texorpdfstring{label\+Pos}{labelPos}{\ttfamily [private]}} - variable to contain position of \hyperlink{classHeadForm_adbc068754f789e1a63c113f1ce7caf38}{label\+Index}, \hyperlink{classHeadForm_a591efe6e830fd170cb549bca142d2759}{label\+Strok\+Cnt} and \hyperlink{classHeadForm_a1a7f706cff05b5644d3eae9ab21b2caf}{label\+St\+Bk\+Str} labels positions. Sets by \hyperlink{classHeadForm_af74e0d29b259aa4f2e9529346237207a}{set\+Index\+Label\+Position}(...) function.
+
+\mbox{\Hypertarget{classHeadForm_a1a7f706cff05b5644d3eae9ab21b2caf}\label{classHeadForm_a1a7f706cff05b5644d3eae9ab21b2caf}} 
+\index{Head\+Form@{Head\+Form}!label\+St\+Bk\+Str@{label\+St\+Bk\+Str}}
+\index{label\+St\+Bk\+Str@{label\+St\+Bk\+Str}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Label $\ast$ Head\+Form\+::\texorpdfstring{label\+St\+Bk\+Str}{labelStBkStr}{\ttfamily [private]}} - Q\+Label class object. Used to display strokes count in step back mode for current head. 
+
+\mbox{\Hypertarget{classHeadForm_a591efe6e830fd170cb549bca142d2759}\label{classHeadForm_a591efe6e830fd170cb549bca142d2759}} 
+\index{Head\+Form@{Head\+Form}!label\+Strok\+Cnt@{label\+Strok\+Cnt}}
+\index{label\+Strok\+Cnt@{label\+Strok\+Cnt}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Label $\ast$ Head\+Form\+::\texorpdfstring{label\+Strok\+Cnt}{labelStrokCnt}{\ttfamily [private]}} -  - Q\+Label class object. Used to display strokes count for current head.
+
+\mbox{\Hypertarget{classHeadForm_a88124373bcbdb5679ea11608362e485b}\label{classHeadForm_a88124373bcbdb5679ea11608362e485b}} 
+\index{Head\+Form@{Head\+Form}!path\+Image@{path\+Image}}
+\index{path\+Image@{path\+Image}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+String Head\+Form\+::\texorpdfstring{path\+Image}{pathImage}{\ttfamily [private]}} - variable to contain path to image which are load to \hyperlink{classHeadForm_a30f30561d242211ed827ffaf627e0839}{pix\+Shirt\+Show}, \hyperlink{classHeadForm_a54d7609f912aa7b0edd6850e1f57f0a0}{pix\+Shirt\+Hide} and \hyperlink{classHeadForm_aa44a452750fe6db786814ec502f0d655}{pix\+Shirt\+Animate}. Sets by \hyperlink{classHeadForm_acb2b064f0453aeed4a5bea49cc33be47}{set\+Icon\+Path}(...) function.
+
+\begin{DoxyCompactItemize}
+\item\mbox{\Hypertarget{classHeadForm_aa44a452750fe6db786814ec502f0d655}\label{classHeadForm_aa44a452750fe6db786814ec502f0d655}} 
+\index{Head\+Form@{Head\+Form}!pix\+Shirt\+Animate@{pix\+Shirt\+Animate}}
+\index{pix\+Shirt\+Animate@{pix\+Shirt\+Animate}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Image Head\+Form\+::\texorpdfstring{pix\+Shirt\+Animate}{pixShirtAnimate}{\ttfamily [private]}} 
+
+\item\mbox{\Hypertarget{classHeadForm_a54d7609f912aa7b0edd6850e1f57f0a0}\label{classHeadForm_a54d7609f912aa7b0edd6850e1f57f0a0}} 
+\index{Head\+Form@{Head\+Form}!pix\+Shirt\+Hide@{pix\+Shirt\+Hide}}
+\index{pix\+Shirt\+Hide@{pix\+Shirt\+Hide}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Image Head\+Form\+::\texorpdfstring{pix\+Shirt\+Hide}{pixShirtHide}{\ttfamily [private]}}
+
+\item\mbox{\Hypertarget{classHeadForm_a30f30561d242211ed827ffaf627e0839}\label{classHeadForm_a30f30561d242211ed827ffaf627e0839}} 
+\index{Head\+Form@{Head\+Form}!pix\+Shirt\+Show@{pix\+Shirt\+Show}}
+\index{pix\+Shirt\+Show@{pix\+Shirt\+Show}!Head\+Form@{Head\+Form}}
+{\footnotesize\ttfamily Q\+Image Head\+Form\+::\texorpdfstring{pix\+Shirt\+Show}{pixShirtShow}{\ttfamily [private]}}
+
+Q\+Image objects. Contain images to set it to \hyperlink{classHeadForm_a974e25ac4edb0f0a25da108c0b4da4a1}{gr\+Pix\+Logo\+Item}
+\end{DoxyCompactItemize}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{headform_8h}{headform.\+h}}\item 
+\mbox{\hyperlink{headform_8cpp}{headform.\+cpp}}\end{DoxyCompactItemize}
+\newpage

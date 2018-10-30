@@ -1,0 +1,157 @@
+\hypertarget{classHeadActivationDialog}{}\subsection{Head\+Activation\+Dialog Class Reference}
+\label{classHeadActivationDialog}\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+
+
+{\ttfamily \#include $<$headactivationdialog.\+h$>$}
+
+Inheritance diagram for Head\+Activation\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHeadActivationDialog}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHeadActivationDialog_ae76f8ea5faecab0d161904b14d925bda}{send\+Command}} (Q\+Byte\+Array cmd)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHeadActivationDialog_aa8af7af33f3feac8547580e4c9bac577}{Head\+Activation\+Dialog}} (int \mbox{\hyperlink{classHeadActivationDialog_a0403b31877ebf58f738b9bfa68d31434}{head\+Count}}, Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classHeadActivationDialog_a277a05013a9304f1fc07ea89576e7b3d}{$\sim$\+Head\+Activation\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classHeadActivationDialog_a471339dee05798a94de85a2ee2cd43c4}{set\+Head\+Activ\+State}} (\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} state)
+\item 
+\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} \mbox{\hyperlink{classHeadActivationDialog_aa96f7a5383ade62d5bdf21fd2defac75}{get\+Head\+Activ\+State}} ()
+\item 
+bool \mbox{\hyperlink{classHeadActivationDialog_a1a6004ae7f92565dbf3bc42ff2f8cf5c}{get\+Head\+Activ\+At\+Index}} (int index)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classHeadActivationDialog_aff7339cd3040bfcdc4e86d6e83a2e2da}{event}} (Q\+Event $\ast$e)
+\item 
+void \mbox{\hyperlink{classHeadActivationDialog_ae61da7b66bf8a351a83667e518455a5b}{show\+Event}} (Q\+Show\+Event $\ast$ev)
+\item 
+void \mbox{\hyperlink{classHeadActivationDialog_a7ffe0f22086377330bbea7117ff404e0}{change\+Event}} (Q\+Event $\ast$\mbox{\hyperlink{classHeadActivationDialog_aff7339cd3040bfcdc4e86d6e83a2e2da}{event}})
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHeadActivationDialog_a544834488f3b17daa84f2f126cd405b1}{push\+Button\+O\+K\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classHeadActivationDialog_af75039537fd16f02263e12343f7655c6}{push\+Button\+Cancel\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classHeadActivationDialog_a2a6c18f85c6e70dcd242f29b14b44219}{head\+State\+Changed}} (int index)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Head\+Activation\+Dialog $\ast$ \mbox{\hyperlink{classHeadActivationDialog_a2099e5d65b57cda6318d5d88b06157f6}{ui}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCheckBoxIndexed}{Check\+Box\+Indexed}} $\ast$ $>$ \mbox{\hyperlink{classHeadActivationDialog_ae6fb828d26fda5b86510b5e427f24d06}{check\+Box\+List}}
+\item 
+int \mbox{\hyperlink{classHeadActivationDialog_a0403b31877ebf58f738b9bfa68d31434}{head\+Count}}
+\item 
+\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} \mbox{\hyperlink{classHeadActivationDialog_a720bae08173514106fd2bdfda9a8e902}{head\+Activ\+State}}
+\item 
+bool \mbox{\hyperlink{classHeadActivationDialog_ab86719bd4a08237cba25753be6f831e9}{need\+Send\+Reset}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHeadActivationDialog_aa8af7af33f3feac8547580e4c9bac577}\label{classHeadActivationDialog_aa8af7af33f3feac8547580e4c9bac577}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+\paragraph{\texorpdfstring{Head\+Activation\+Dialog()}{HeadActivationDialog()}}
+{\footnotesize\ttfamily Head\+Activation\+Dialog\+::\+Head\+Activation\+Dialog (\begin{DoxyParamCaption}\item[{int}]{head\+Count,  }\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption}){\ttfamily [explicit]}} - class constructor. Used to create widget with \hyperlink{classHeadActivationDialog_a0403b31877ebf58f738b9bfa68d31434}{head\+Count} Q\+Check\+Box widgets to allow user activate (or deactivate) heads.
+
+\mbox{\Hypertarget{classHeadActivationDialog_a277a05013a9304f1fc07ea89576e7b3d}\label{classHeadActivationDialog_a277a05013a9304f1fc07ea89576e7b3d}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!````~Head\+Activation\+Dialog@{$\sim$\+Head\+Activation\+Dialog}}
+\index{````~Head\+Activation\+Dialog@{$\sim$\+Head\+Activation\+Dialog}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+\paragraph{\texorpdfstring{$\sim$\+Head\+Activation\+Dialog()}{~HeadActivationDialog()}}
+{\footnotesize\ttfamily Head\+Activation\+Dialog\+::$\sim$\+Head\+Activation\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard class destructor.
+
+
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHeadActivationDialog_a7ffe0f22086377330bbea7117ff404e0}\label{classHeadActivationDialog_a7ffe0f22086377330bbea7117ff404e0}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily void Head\+Activation\+Dialog\+::\texorpdfstring{change\+Event()}{changeEvent} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of default event for Q\+Dialog to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classHeadActivationDialog_aff7339cd3040bfcdc4e86d6e83a2e2da}\label{classHeadActivationDialog_aff7339cd3040bfcdc4e86d6e83a2e2da}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!event@{event}}
+\index{event@{event}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily bool Head\+Activation\+Dialog\+::\texorpdfstring{event()}{event} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{e }\end{DoxyParamCaption}){\ttfamily [protected]}}- reimplementation of standard function to handle QEvent::WindowDeactivate or QEvent::Leave for automatic invoke \hyperlink{classHeadActivationDialog_a544834488f3b17daa84f2f126cd405b1}{push\+Button\+O\+K\+\_\+clicked}(...) function on window deactivation.
+
+\mbox{\Hypertarget{classHeadActivationDialog_a1a6004ae7f92565dbf3bc42ff2f8cf5c}\label{classHeadActivationDialog_a1a6004ae7f92565dbf3bc42ff2f8cf5c}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!get\+Head\+Activ\+At\+Index@{get\+Head\+Activ\+At\+Index}}
+\index{get\+Head\+Activ\+At\+Index@{get\+Head\+Activ\+At\+Index}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily bool Head\+Activation\+Dialog\+::\texorpdfstring{get\+Head\+Activ\+At\+Index()}{getHeadActivAtIndex} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})} - function to get state of head according to given index. Return \textit{bool} value: \textit{true} if head active and \textit{false} if it is not.
+
+\mbox{\Hypertarget{classHeadActivationDialog_aa96f7a5383ade62d5bdf21fd2defac75}\label{classHeadActivationDialog_aa96f7a5383ade62d5bdf21fd2defac75}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!get\+Head\+Activ\+State@{get\+Head\+Activ\+State}}
+\index{get\+Head\+Activ\+State@{get\+Head\+Activ\+State}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} Head\+Activation\+Dialog\+::\texorpdfstring{get\+Head\+Activ\+State()}{getHeadActivState}(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function return state of heads in 32-bit variable. Position of bit describe head number.
+
+\mbox{\Hypertarget{classHeadActivationDialog_a2a6c18f85c6e70dcd242f29b14b44219}\label{classHeadActivationDialog_a2a6c18f85c6e70dcd242f29b14b44219}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!head\+State\+Changed@{head\+State\+Changed}}
+\index{head\+State\+Changed@{head\+State\+Changed}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily void Head\+Activation\+Dialog\+::\texorpdfstring{head\+State\+Changed}{headStateChanged} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function which called by check\+Boxes on window (from \hyperlink{classHeadActivationDialog_ae6fb828d26fda5b86510b5e427f24d06}{check\+Box\+List}). Function update \hyperlink{classHeadActivationDialog_a720bae08173514106fd2bdfda9a8e902}{head\+Activ\+State} value and send command to activate (or deactivate) heads to master board with \hyperlink{classHeadActivationDialog_ae76f8ea5faecab0d161904b14d925bda}{send\+Command} (Q\+Byte\+Array cmd) signal. 
+
+\mbox{\Hypertarget{classHeadActivationDialog_af75039537fd16f02263e12343f7655c6}\label{classHeadActivationDialog_af75039537fd16f02263e12343f7655c6}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!push\+Button\+Cancel\+\_\+clicked@{push\+Button\+Cancel\+\_\+clicked}}
+\index{push\+Button\+Cancel\+\_\+clicked@{push\+Button\+Cancel\+\_\+clicked}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily void Head\+Activation\+Dialog\+::\texorpdfstring{push\+Button\+Cancel\+\_\+clicked}{pushButtonCancel\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function call by \textit{'Cancel'} button and used to hide window. Button, which call function, can be disabled if user must apply changes in settings.
+
+\mbox{\Hypertarget{classHeadActivationDialog_a544834488f3b17daa84f2f126cd405b1}\label{classHeadActivationDialog_a544834488f3b17daa84f2f126cd405b1}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!push\+Button\+O\+K\+\_\+clicked@{push\+Button\+O\+K\+\_\+clicked}}
+\index{push\+Button\+O\+K\+\_\+clicked@{push\+Button\+O\+K\+\_\+clicked}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily void Head\+Activation\+Dialog\+::\texorpdfstring{push\+Button\+O\+K\+\_\+clicked}{pushButtonOK\_clicked} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}){\ttfamily [private]}, {\ttfamily [slot]}} - function call by \textit{'OK'} button and used to gather data and hide window.
+
+\mbox{\Hypertarget{classHeadActivationDialog_ae76f8ea5faecab0d161904b14d925bda}\label{classHeadActivationDialog_ae76f8ea5faecab0d161904b14d925bda}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!send\+Command@{send\+Command}}
+\index{send\+Command@{send\+Command}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily void Head\+Activation\+Dialog\+::\texorpdfstring{send\+Command}{sendCommand} (\begin{DoxyParamCaption}\item[{Q\+Byte\+Array}]{cmd }\end{DoxyParamCaption}){\ttfamily [signal]}} - signal to send data in \textit{Q\+Byte\+Array} format to handle in parent object and send it to serial port.
+
+\mbox{\Hypertarget{classHeadActivationDialog_a471339dee05798a94de85a2ee2cd43c4}\label{classHeadActivationDialog_a471339dee05798a94de85a2ee2cd43c4}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!set\+Head\+Activ\+State@{set\+Head\+Activ\+State}}
+\index{set\+Head\+Activ\+State@{set\+Head\+Activ\+State}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily void Head\+Activation\+Dialog\+::\texorpdfstring{set\+Head\+Activ\+State()}{setHeadActivState()} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}}}]{state }\end{DoxyParamCaption})} - function to set \hyperlink{classHeadActivationDialog_a720bae08173514106fd2bdfda9a8e902}{head\+Activ\+State} value and set check\+Boxes on window (from \hyperlink{classHeadActivationDialog_ae6fb828d26fda5b86510b5e427f24d06}{check\+Box\+List}) to appropriate state.
+
+\mbox{\Hypertarget{classHeadActivationDialog_ae61da7b66bf8a351a83667e518455a5b}\label{classHeadActivationDialog_ae61da7b66bf8a351a83667e518455a5b}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!show\+Event@{show\+Event}}
+\index{show\+Event@{show\+Event}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily void Head\+Activation\+Dialog\+::\texorpdfstring{show\+Event()}{showEvent} (\begin{DoxyParamCaption}\item[{Q\+Show\+Event $\ast$}]{ev }\end{DoxyParamCaption}){\ttfamily [protected]}} - reimplementation of standard event handler; used for update state of \hyperlink{classHeadActivationDialog_ae6fb828d26fda5b86510b5e427f24d06}{check\+Box\+List} items.
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classHeadActivationDialog_ae6fb828d26fda5b86510b5e427f24d06}\label{classHeadActivationDialog_ae6fb828d26fda5b86510b5e427f24d06}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!check\+Box\+List@{check\+Box\+List}}
+\index{check\+Box\+List@{check\+Box\+List}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classCheckBoxIndexed}{Check\+Box\+Indexed}}$\ast$$>$ Head\+Activation\+Dialog\+::\texorpdfstring{check\+Box\+List}{checkBoxList}{\ttfamily [private]}} - list of redefined Q\+Check\+Box class objects. All list items are showed on dialog and used to activate (or deactivate) heads. 
+
+\mbox{\Hypertarget{classHeadActivationDialog_a720bae08173514106fd2bdfda9a8e902}\label{classHeadActivationDialog_a720bae08173514106fd2bdfda9a8e902}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!head\+Activ\+State@{head\+Activ\+State}}
+\index{head\+Activ\+State@{head\+Activ\+State}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a4196118492a3b1493c81f250e90af775}{uint32\+\_\+t}} Head\+Activation\+Dialog\+::\texorpdfstring{head\+Activ\+State}{headActivState}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classHeadActivationDialog_a0403b31877ebf58f738b9bfa68d31434}\label{classHeadActivationDialog_a0403b31877ebf58f738b9bfa68d31434}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!head\+Count@{head\+Count}}
+\index{head\+Count@{head\+Count}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily int Head\+Activation\+Dialog\+::\texorpdfstring{head\+Count}{headCount}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classHeadActivationDialog_ab86719bd4a08237cba25753be6f831e9}\label{classHeadActivationDialog_ab86719bd4a08237cba25753be6f831e9}} 
+\index{Head\+Activation\+Dialog@{Head\+Activation\+Dialog}!need\+Send\+Reset@{need\+Send\+Reset}}
+\index{need\+Send\+Reset@{need\+Send\+Reset}!Head\+Activation\+Dialog@{Head\+Activation\+Dialog}}
+{\footnotesize\ttfamily bool Head\+Activation\+Dialog\+::\texorpdfstring{need\+Send\+Reset}{needSendReset}{\ttfamily [private]}}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{headactivationdialog_8h}{headactivationdialog.\+h}}\item 
+\mbox{\hyperlink{headactivationdialog_8cpp}{headactivationdialog.\+cpp}}\end{DoxyCompactItemize}
+\newpage

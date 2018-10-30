@@ -1,0 +1,126 @@
+\hypertarget{classMaintanceWidget}{}\subsection{Maintance\+Widget Class Reference}
+\label{classMaintanceWidget}\index{Maintance\+Widget@{Maintance\+Widget}}
+
+
+{\ttfamily \#include $<$maintancewidget.\+h$>$}
+
+Inheritance diagram for Maintance\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMaintanceWidget}
+\end{center}
+\end{figure}
+\subsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_a311671167a33d7d84a105c5b68c3c783}{trouble\+Solved}} (int trouble\+Index)
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_a016a9e2ad10ba518b29ac0bf336d8b97}{maintance\+Closed}} (Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$ elem\+List)
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_a94a81d4c917de6cc0dba1135ab3be43e}{tutorial\+Request}} (int trouble\+Index)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMaintanceWidget_a8e8a76199a50d91c200eb1d7dcc66a14}{Maintance\+Widget}} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\hyperlink{classMaintanceWidget_ad824060037187de4a61a24ce2e393ca0}{$\sim$\+Maintance\+Widget}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_a46dbe90c80f405b594f2998a10a548db}{clear\+Text}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_a32f98e1e9388b400f9b04e2fa94e8ef8}{set\+Elemets}} (Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$ elem\+List)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_ac88ccb3da3c15f85575eb5d973004827}{change\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\subsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_ae0e57574f94ec4b744247d15ff8a4891}{solved}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_a239e4ddf537bfc43124ba4688fe285d0}{close\+Window}} ()
+\item 
+void \mbox{\hyperlink{classMaintanceWidget_adc20de8af45f910289c60d1f6656e783}{call\+Tutorial}} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Maintance\+Widget $\ast$ \mbox{\hyperlink{classMaintanceWidget_a6a78c78ed723107e438c0919d1feae00}{ui}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$ \mbox{\hyperlink{classMaintanceWidget_a9c9003f07e28f258c99b996c3c02da45}{maintance\+List}}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMaintanceWidget_a8e8a76199a50d91c200eb1d7dcc66a14}\label{classMaintanceWidget_a8e8a76199a50d91c200eb1d7dcc66a14}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!Maintance\+Widget@{Maintance\+Widget}}
+\index{Maintance\+Widget@{Maintance\+Widget}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily Maintance\+Widget\+::\texorpdfstring{Maintance\+Widget}{MaintanceWidget} (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}} - standard Q\+Widget constructor. Used to create connections from buttons to functions.
+
+\mbox{\Hypertarget{classMaintanceWidget_ad824060037187de4a61a24ce2e393ca0}\label{classMaintanceWidget_ad824060037187de4a61a24ce2e393ca0}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!````~Maintance\+Widget@{$\sim$\+Maintance\+Widget}}
+\index{````~Maintance\+Widget@{$\sim$\+Maintance\+Widget}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily Maintance\+Widget\+::\texorpdfstring{$\sim$\+Maintance\+Widget}{~MaintanceWidget} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - standard Q\+Widget destructor.
+
+\subsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMaintanceWidget_adc20de8af45f910289c60d1f6656e783}\label{classMaintanceWidget_adc20de8af45f910289c60d1f6656e783}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!call\+Tutorial@{call\+Tutorial}}
+\index{call\+Tutorial@{call\+Tutorial}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{call\+Tutorial}{callTutorial} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function created show (in some way) tutorial how to made maintenance for machine. It is not finished.
+
+\mbox{\Hypertarget{classMaintanceWidget_ac88ccb3da3c15f85575eb5d973004827}\label{classMaintanceWidget_ac88ccb3da3c15f85575eb5d973004827}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!change\+Event@{change\+Event}}
+\index{change\+Event@{change\+Event}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{change\+Event}{\texorpdfstring{change\+Event}{changeEvent}} (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}} - reimplementation of default event for Q\+Dialog to enable user interface translation. Function called automatically.
+
+\mbox{\Hypertarget{classMaintanceWidget_a46dbe90c80f405b594f2998a10a548db}\label{classMaintanceWidget_a46dbe90c80f405b594f2998a10a548db}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!clear\+Text@{clear\+Text}}
+\index{clear\+Text@{clear\+Text}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{clear\+Text}{clearText} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})} - function used to  Q\+List\+Widget (remove all items).
+
+\mbox{\Hypertarget{classMaintanceWidget_a239e4ddf537bfc43124ba4688fe285d0}\label{classMaintanceWidget_a239e4ddf537bfc43124ba4688fe285d0}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!close\+Window@{close\+Window}}
+\index{close\+Window@{close\+Window}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{close\+Window}{closeWindow} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - used to hide Q\+Dialog.
+
+\mbox{\Hypertarget{classMaintanceWidget_a016a9e2ad10ba518b29ac0bf336d8b97}\label{classMaintanceWidget_a016a9e2ad10ba518b29ac0bf336d8b97}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!maintance\+Closed@{maintance\+Closed}}
+\index{maintance\+Closed@{maintance\+Closed}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{maintance\+Closed}{maintanceClosed} (\begin{DoxyParamCaption}\item[{Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$}]{elem\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal what emits on window hide. Parameter send \hyperlink{classMaintanceWidget_a9c9003f07e28f258c99b996c3c02da45}{maintance\+List} to signal handler.
+
+\mbox{\Hypertarget{classMaintanceWidget_a32f98e1e9388b400f9b04e2fa94e8ef8}\label{classMaintanceWidget_a32f98e1e9388b400f9b04e2fa94e8ef8}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!set\+Elemets@{set\+Elemets}}
+\index{set\+Elemets@{set\+Elemets}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{set\+Elemets}{setElemets} (\begin{DoxyParamCaption}\item[{Q\+List$<$ \mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}} $>$}]{elem\+List }\end{DoxyParamCaption})} - function which used to fill list\+Widget with maintenance elements and append \textit{elem\+List} to \hyperlink{classMaintanceWidget_a9c9003f07e28f258c99b996c3c02da45}{maintance\+List}. 
+
+\mbox{\Hypertarget{classMaintanceWidget_ae0e57574f94ec4b744247d15ff8a4891}\label{classMaintanceWidget_ae0e57574f94ec4b744247d15ff8a4891}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!solved@{solved}}
+\index{solved@{solved}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{solved}{solved} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}} - function to remove selected at \textit{list\+Widget} item from \hyperlink{classMaintanceWidget_a9c9003f07e28f258c99b996c3c02da45}{maintance\+List} and from \textit{list\+Widget}. Also this function emit \hyperlink{classMaintanceWidget_a311671167a33d7d84a105c5b68c3c783}{trouble\+Solved}(...) signal with index at list to handle at parent object.
+
+\mbox{\Hypertarget{classMaintanceWidget_a311671167a33d7d84a105c5b68c3c783}\label{classMaintanceWidget_a311671167a33d7d84a105c5b68c3c783}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!trouble\+Solved@{trouble\+Solved}}
+\index{trouble\+Solved@{trouble\+Solved}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{trouble\+Solved}{troubleSolved} (\begin{DoxyParamCaption}\item[{int}]{trouble\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which handle at parent object (request redirected to \hyperlink{classMaintanceDialog_a3958b309d854fcd5baf39fc166a6b5f6}{solve\+Item}(...)) to change list of maintenance items at file system.
+
+\mbox{\Hypertarget{classMaintanceWidget_a94a81d4c917de6cc0dba1135ab3be43e}\label{classMaintanceWidget_a94a81d4c917de6cc0dba1135ab3be43e}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!tutorial\+Request@{tutorial\+Request}}
+\index{tutorial\+Request@{tutorial\+Request}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily void Maintance\+Widget\+::\texorpdfstring{tutorial\+Request}{tutorialRequest} (\begin{DoxyParamCaption}\item[{int}]{trouble\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}} - signal which emitted by \hyperlink{classMaintanceWidget_adc20de8af45f910289c60d1f6656e783}{call\+Tutorial}(...) function. Handled in parent object (handler is not created at present moment).
+
+
+
+\subsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMaintanceWidget_a9c9003f07e28f258c99b996c3c02da45}\label{classMaintanceWidget_a9c9003f07e28f258c99b996c3c02da45}} 
+\index{Maintance\+Widget@{Maintance\+Widget}!maintance\+List@{maintance\+List}}
+\index{maintance\+List@{maintance\+List}!Maintance\+Widget@{Maintance\+Widget}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classMaintanceElement}{Maintance\+Element}}$>$ Maintance\+Widget\+::\texorpdfstring{maintance\+List}{maintanceList}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{maintancewidget_8h}{maintancewidget.\+h}}\item 
+\mbox{\hyperlink{maintancewidget_8cpp}{maintancewidget.\+cpp}}\end{DoxyCompactItemize}
+\newpage
