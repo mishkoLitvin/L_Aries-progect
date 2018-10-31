@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.31)  31 OCT 2018 16:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.31)  31 OCT 2018 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1223,11 +1223,11 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 130.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 131.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 12.9599pt on input line 130.
+(Font)              scaled to size 12.9599pt on input line 131.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 12.9599pt on input line 130.
+(Font)              scaled to size 12.9599pt on input line 131.
  (./refman.toc
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 1.
@@ -1242,9 +1242,9 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 \tf@toc=\write6
 \openout6 = `refman.toc'.
 
-Package hyperref Info: Option `pageanchor' set `true' on input line 132.
+Package hyperref Info: Option `pageanchor' set `true' on input line 133.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 6.29996pt on input line 135.
+(Font)              scaled to size 6.29996pt on input line 136.
  (./md__home_mishko_Temp_test0_README.tex
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 1.
@@ -2330,11 +2330,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--8
 
 ) [164]
 No file refman.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 267.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 267.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 268.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 268.
 (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 267.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 267.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 268.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 268.
 Package rerunfilecheck Info: File `refman.out' has not changed.
 (rerunfilecheck)             Checksum: BFCD3ACC479D9347C1B8A9C384085793;68245.
 
@@ -2474,7 +2474,7 @@ exlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/h
 elvetic/uhvro8a.pfb>
-Output written on refman.pdf (173 pages, 708975 bytes).
+Output written on refman.pdf (173 pages, 708972 bytes).
 PDF statistics:
  8039 PDF objects out of 8907 (max. 8388607)
  7713 compressed objects within 78 object streams
