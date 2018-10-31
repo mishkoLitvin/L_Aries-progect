@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.31)  19 OCT 2018 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.31)  31 OCT 2018 16:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1297,25 +1297,29 @@ File: classCountersDialog.pdf Graphic file (type pdf)
 <use classCountersDialog.pdf>
 Package pdftex.def Info: classCountersDialog.pdf used on input line 10.
 (pdftex.def)             Requested size: 76.10506pt x 56.9055pt.
-LaTeX Font Info:    Font shape `T1/phv/bc/it' in size <10> not available
-(Font)              Font shape `T1/phv/bc/sl' tried instead on input line 69.
-LaTeX Font Info:    Font shape `T1/phv/bc/sl' will be
-(Font)              scaled to size 8.99994pt on input line 69.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 67.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.99994pt on input line 67.
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 67.
 
+Overfull \hbox (33.32452pt too wide) in paragraph at lines 102--108
+|  \T1/phv/m/n/10 Q[]Event $\OMS/cmsy/m/n/10 ^^C$ \T1/phv/m/sl/10 e  \T1/phv/m/
+n/10 ) \T1/pcr/m/n/10 [protected][] \T1/phv/m/n/10 - reim-ple-men-ta-tion of st
+an-dard func-tion to han-dle QEvent::WindowDeactivate
+ []
 
-LaTeX Font Warning: Font shape `T1/pcr/bc/it' undefined
-(Font)              using `T1/pcr/m/n' instead on input line 69.
+[10 <./classCountersDialog.pdf>] [11]) (./classCrcCalc.tex
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 7.19995pt on input line 24.
 
 
 LaTeX Font Warning: Font shape `T1/pcr/bc/n' undefined
-(Font)              using `T1/pcr/m/n' instead on input line 69.
+(Font)              using `T1/pcr/m/n' instead on input line 24.
 
-[10 <./classCountersDialog.pdf>]) (./classCrcCalc.tex [11]
-LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 7.19995pt on input line 24.
- [12])
-(./classCyclesDialog.tex
-<classCyclesDialog.pdf, id=1960, 501.875pt x 422.62892pt>
+[12]) (./classCyclesDialog.tex
+<classCyclesDialog.pdf, id=1945, 501.875pt x 422.62892pt>
 File: classCyclesDialog.pdf Graphic file (type pdf)
 
 <use classCyclesDialog.pdf>
@@ -1353,10 +1357,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 206--208
 
  []
 
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 209.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 209.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 216.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
@@ -1392,7 +1392,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--40
  []
 
 [18]) (./classExitDialog.tex
-<classExitDialog.pdf, id=2130, 501.875pt x 528.2937pt>
+<classExitDialog.pdf, id=2114, 501.875pt x 528.2937pt>
 File: classExitDialog.pdf Graphic file (type pdf)
 
 <use classExitDialog.pdf>
@@ -1404,7 +1404,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 134--135
  []
 
 [20] [21]) (./classGeneralSettingDialog.tex
-<classGeneralSettingDialog.pdf, id=2237, 501.875pt x 288.84912pt>
+<classGeneralSettingDialog.pdf, id=2221, 501.875pt x 288.84912pt>
 File: classGeneralSettingDialog.pdf Graphic file (type pdf)
 
 <use classGeneralSettingDialog.pdf>
@@ -1424,7 +1424,7 @@ han-dle \T1/phv/m/sl/10 QEvent::WindowDeactivate
  []
 
 [24] [25] [26] [27]) (./classHeadActivationDialog.tex
-<classHeadActivationDialog.pdf, id=2494, 501.875pt x 282.74634pt>
+<classHeadActivationDialog.pdf, id=2478, 501.875pt x 282.74634pt>
 File: classHeadActivationDialog.pdf Graphic file (type pdf)
 
 <use classHeadActivationDialog.pdf>
@@ -1438,7 +1438,7 @@ an-dle QEvent::WindowDeactivate
  []
 
 [29] [30]) (./structHeadSetting_1_1HeadComands__.tex [31]) (./classHeadForm.tex
-<classHeadForm.pdf, id=2588, 501.875pt x 508.22873pt>
+<classHeadForm.pdf, id=2572, 501.875pt x 508.22873pt>
 File: classHeadForm.pdf Graphic file (type pdf)
  <use classHeadForm.pdf>
 Package pdftex.def Info: classHeadForm.pdf used on input line 10.
@@ -1456,7 +1456,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [43]
 [44]) (./classHeadSettingButton.tex
-<classHeadSettingButton.pdf, id=3190, 501.875pt x 326.41951pt>
+<classHeadSettingButton.pdf, id=3174, 501.875pt x 326.41951pt>
 File: classHeadSettingButton.pdf Graphic file (type pdf)
 
 <use classHeadSettingButton.pdf>
@@ -1465,7 +1465,7 @@ Package pdftex.def Info: classHeadSettingButton.pdf used on input line 10.
  [45 <./classHeadSettingButton.pdf>])
 (./classIndexerLiftSettings.tex [46] [47] [48] [49])
 (./unionRegister_1_1IndexerReg__.tex [50]) (./classIndexerSettingDialog.tex
-<classIndexerSettingDialog.pdf, id=3396, 501.875pt x 295.22295pt>
+<classIndexerSettingDialog.pdf, id=3380, 501.875pt x 295.22295pt>
 File: classIndexerSettingDialog.pdf Graphic file (type pdf)
 
 <use classIndexerSettingDialog.pdf>
@@ -1480,7 +1480,7 @@ han-dle \T1/phv/m/sl/10 QEvent::WindowDeactivate
  []
 
 [53] [54] [55]) (./classIndexerWidget.tex
-<classIndexerWidget.pdf, id=3569, 501.875pt x 401.5pt>
+<classIndexerWidget.pdf, id=3553, 501.875pt x 401.5pt>
 File: classIndexerWidget.pdf Graphic file (type pdf)
 
 <use classIndexerWidget.pdf>
@@ -1492,7 +1492,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 127--128
  []
 
 [57] [58]) (./structIndexerLiftSettings_1_1IndexParameters__.tex [59])
-(./classInfoWidget.tex <classInfoWidget.pdf, id=3723, 501.875pt x 508.22873pt>
+(./classInfoWidget.tex <classInfoWidget.pdf, id=3707, 501.875pt x 508.22873pt>
 File: classInfoWidget.pdf Graphic file (type pdf)
 
 <use classInfoWidget.pdf>
@@ -1500,7 +1500,7 @@ Package pdftex.def Info: classInfoWidget.pdf used on input line 10.
 (pdftex.def)             Requested size: 56.18663pt x 56.9055pt.
  [60 <./classInfoWidget.pdf>] [61])
 (./classKeyboardButton.tex
-<classKeyboardButton.pdf, id=3814, 501.875pt x 365.00366pt>
+<classKeyboardButton.pdf, id=3798, 501.875pt x 365.00366pt>
 File: classKeyboardButton.pdf Graphic file (type pdf)
 
 <use classKeyboardButton.pdf>
@@ -1508,7 +1508,7 @@ Package pdftex.def Info: classKeyboardButton.pdf used on input line 10.
 (pdftex.def)             Requested size: 78.24164pt x 56.9055pt.
  [62 <./classKeyboardButton.pdf>])
 (./classKeyboardDialog.tex
-<classKeyboardDialog.pdf, id=3851, 501.875pt x 361.71133pt>
+<classKeyboardDialog.pdf, id=3834, 501.875pt x 361.71133pt>
 File: classKeyboardDialog.pdf Graphic file (type pdf)
 
 <use classKeyboardDialog.pdf>
@@ -1530,7 +1530,7 @@ atic func-tion of [][]Keyboard[]Dialog[][] class.
 [65]) (./unionMachineSettings_1_1LastRevolverWarm__.tex [66])
 (./structIndexerLiftSettings_1_1LiftParameters__.tex [67])
 (./unionRegister_1_1LiftReg__.tex [68]) (./classLoginDialog.tex
-<classLoginDialog.pdf, id=4051, 501.875pt x 461.49413pt>
+<classLoginDialog.pdf, id=4034, 501.875pt x 461.49413pt>
 File: classLoginDialog.pdf Graphic file (type pdf)
 
 <use classLoginDialog.pdf>
@@ -1544,7 +1544,7 @@ n to han-dle Q[]
  []
 
 [69 <./classLoginDialog.pdf>] [70]) (./classLogoDialog.tex
-<classLogoDialog.pdf, id=4098, 501.875pt x 477.97571pt>
+<classLogoDialog.pdf, id=4082, 501.875pt x 477.97571pt>
 File: classLogoDialog.pdf Graphic file (type pdf)
 
 <use classLogoDialog.pdf>
@@ -1560,7 +1560,7 @@ Underfull \hbox (badness 2293) in paragraph at lines 150--154
  []
 
 [77] [78] [79] [80]) (./unionMachineSettings_1_1MachineState__.tex [81])
-(./classMailSender.tex <classMailSender.pdf, id=4541, 501.875pt x 472.3547pt>
+(./classMailSender.tex <classMailSender.pdf, id=4524, 501.875pt x 472.3547pt>
 File: classMailSender.pdf Graphic file (type pdf)
 
 <use classMailSender.pdf>
@@ -1572,7 +1572,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--72
  []
 
 [82 <./classMailSender.pdf>] [83]) (./classMaintanceDialog.tex
-<classMaintanceDialog.pdf, id=4594, 501.875pt x 349.13435pt>
+<classMaintanceDialog.pdf, id=4578, 501.875pt x 349.13435pt>
 File: classMaintanceDialog.pdf Graphic file (type pdf)
 
 <use classMaintanceDialog.pdf>
@@ -1591,14 +1591,14 @@ bc/n/8 ) [explicit] \T1/phv/m/n/10 - reim-ple-mented con-struc-tor of class.
  []
 
 [85] [86] [87]) (./classMaintanceElement.tex [88]) (./classMaintanceWidget.tex
-<classMaintanceWidget.pdf, id=4765, 501.875pt x 343.16205pt>
+<classMaintanceWidget.pdf, id=4749, 501.875pt x 343.16205pt>
 File: classMaintanceWidget.pdf Graphic file (type pdf)
 
 <use classMaintanceWidget.pdf>
 Package pdftex.def Info: classMaintanceWidget.pdf used on input line 10.
 (pdftex.def)             Requested size: 83.21933pt x 56.9055pt.
  [89 <./classMaintanceWidget.pdf>] [90])
-(./classMainWindow.tex <classMainWindow.pdf, id=4825, 501.875pt x 393.6306pt>
+(./classMainWindow.tex <classMainWindow.pdf, id=4809, 501.875pt x 393.6306pt>
 File: classMainWindow.pdf Graphic file (type pdf)
 
 <use classMainWindow.pdf>
@@ -1608,7 +1608,7 @@ Package pdftex.def Info: classMainWindow.pdf used on input line 10.
 [96] [97] [98] [99] [100] [101] [102] [103] [104])
 (./unionRegister_1_1MasterReg__.tex [105] [106]) (./unionModData__.tex [107])
 (./classNumpadButton.tex
-<classNumpadButton.pdf, id=5308, 501.875pt x 397.52516pt>
+<classNumpadButton.pdf, id=5292, 501.875pt x 397.52516pt>
 File: classNumpadButton.pdf Graphic file (type pdf)
 
 <use classNumpadButton.pdf>
@@ -1621,7 +1621,7 @@ ivate], [slot] \T1/phv/m/n/10 - func-tion called by Q[]Push[]
  []
 
 [108 <./classNumpadButton.pdf>]) (./classNumpadDialog.tex
-<classNumpadDialog.pdf, id=5340, 501.875pt x 393.6306pt>
+<classNumpadDialog.pdf, id=5323, 501.875pt x 393.6306pt>
 File: classNumpadDialog.pdf Graphic file (type pdf)
 
 <use classNumpadDialog.pdf>
@@ -1663,7 +1663,7 @@ g[][] with parameters given in
  []
 
 [130]) (./classReprogramDialog.tex
-<classReprogramDialog.pdf, id=6555, 501.875pt x 340.25119pt>
+<classReprogramDialog.pdf, id=6539, 501.875pt x 340.25119pt>
 File: classReprogramDialog.pdf Graphic file (type pdf)
 
 <use classReprogramDialog.pdf>
@@ -1715,7 +1715,7 @@ nal] - signal which emitted by [][]on[]_[]push[]Button[]Erase[]_[]
  []
 
 [132]) (./classSerialPort.tex
-<classSerialPort.pdf, id=6628, 501.875pt x 528.2937pt>
+<classSerialPort.pdf, id=6612, 501.875pt x 528.2937pt>
 File: classSerialPort.pdf Graphic file (type pdf)
 
 <use classSerialPort.pdf>
@@ -1864,7 +1864,7 @@ ata[][](...) function execute specific code, and after that variable
  []
 
 [135]) (./classSerialSettingsDialog.tex
-<classSerialSettingsDialog.pdf, id=6769, 501.875pt x 301.8778pt>
+<classSerialSettingsDialog.pdf, id=6753, 501.875pt x 301.8778pt>
 File: classSerialSettingsDialog.pdf Graphic file (type pdf)
 
 <use classSerialSettingsDialog.pdf>
@@ -1872,7 +1872,7 @@ Package pdftex.def Info: classSerialSettingsDialog.pdf used on input line 11.
 (pdftex.def)             Requested size: 94.59909pt x 56.9055pt.
  [136 <./classSerialSettingsDialog.pdf>]
 [137]) (./classSettingDialog.tex
-<classSettingDialog.pdf, id=6840, 501.875pt x 427.12573pt>
+<classSettingDialog.pdf, id=6823, 501.875pt x 427.12573pt>
 File: classSettingDialog.pdf Graphic file (type pdf)
 
 <use classSettingDialog.pdf>
@@ -1994,33 +1994,193 @@ Underfull \hbox (badness 10000) in paragraph at lines 355--359
 tion collect parameters and send data in
  []
 
-[140] [141]) (./classUdpSocket.tex
-<classUdpSocket.pdf, id=7056, 501.875pt x 501.875pt>
+[140]
+Underfull \hbox (badness 10000) in paragraph at lines 472--476
+[][] [][] \T1/pcr/bc/n/8 void Setting[]Dialog[]::r[]Button[]Time1[]_[]clicked (
+ ) [private], [slot] - function to change selected
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 482--486
+|  \T1/pcr/bc/n/8 Q[]Byte[]Array \T1/pcr/m/sl/8 command \T1/pcr/bc/n/8 ) [signa
+l] - signal emitted by every parameter setup function.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 487--491
+|  \T1/pcr/bc/n/8 bool \T1/pcr/m/sl/8 disconnect = true \T1/pcr/bc/n/8 ) - func
+tion which used to fill appropriate fields of head
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--496
+|  \T1/pcr/bc/n/8 bool \T1/pcr/m/sl/8 disconnect = true \T1/pcr/bc/n/8 ) - func
+tion which used to fill appropriate fields of head
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--501
+|  \T1/pcr/bc/n/8 Q[]String \T1/pcr/m/sl/8 path \T1/pcr/bc/n/8 ) - function to 
+set icon folder and update icons on tool[]Buttons at
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 502--506
+|  \T1/pcr/bc/n/8 Q[]Byte[]Array \T1/pcr/m/sl/8 h[]Param[]Arr \T1/pcr/bc/n/8 ) 
+[signal] - signal which emitted by [][]on[]_[]push[]Button[]Copy[]To[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 512--516
+|  \T1/pcr/bc/n/8 Q[]Show[]Event $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/sl/8 ev \T1/pc
+r/bc/n/8 ) [protected]- reimplementation of standard function. Used to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 518--522
+|  \T1/pcr/bc/n/8 int \T1/pcr/m/sl/8 index \T1/pcr/bc/n/8 ) [private], [slot] -
+ function to send type of head. Using of this
+ []
+
+[141] [142]) (./classUdpSocket.tex
+<classUdpSocket.pdf, id=7048, 501.875pt x 501.875pt>
 File: classUdpSocket.pdf Graphic file (type pdf)
  <use classUdpSocket.pdf>
-Package pdftex.def Info: classUdpSocket.pdf used on input line 10.
+Package pdftex.def Info: classUdpSocket.pdf used on input line 11.
 (pdftex.def)             Requested size: 56.89883pt x 56.9055pt.
 
-[142 <./classUdpSocket.pdf>] [143]) (./classUserSettingDialog.tex
-<classUserSettingDialog.pdf, id=7121, 501.875pt x 334.57997pt>
+[143 <./classUdpSocket.pdf>] [144]) (./classUserSettingDialog.tex
+<classUserSettingDialog.pdf, id=7102, 501.875pt x 334.57997pt>
 File: classUserSettingDialog.pdf Graphic file (type pdf)
 
 <use classUserSettingDialog.pdf>
 Package pdftex.def Info: classUserSettingDialog.pdf used on input line 10.
 (pdftex.def)             Requested size: 85.3559pt x 56.9055pt.
- [144 <./classUserSettingDialog.pdf>] [145]
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--68
+|  \T1/pcr/bc/n/8 Q[]Widget $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/sl/8 parent = 0 \T1
+/pcr/bc/n/8 ) [explicit] - standard dialog constructor. At function
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--81
+[] [][] \T1/pcr/bc/n/8 void User[]Setting[]Dialog[]::accept[]Slot ( ) [private]
+, [slot] - function called by \T1/pcr/m/sl/8 pButtonOK \T1/pcr/bc/n/8 uad
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--86
+[][] [][] \T1/pcr/bc/n/8 void User[]Setting[]Dialog[]::add[]User ( ) [private],
+ [slot] - function which used to add field to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--91
+|  \T1/pcr/bc/n/8 Q[]Event $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/sl/8 event \T1/pcr/b
+c/n/8 ) [protected] - Reimplementation of default event for QWidget to
+ []
+
+
+Overfull \hbox (15.15619pt too wide) in paragraph at lines 96--97
+\T1/pcr/bc/n/8 bool User[]Setting[]Dialog[]::get[]Login[]Window[]Enable ( ) - f
+unction to get state of \T1/pcr/m/sl/8 checkBoxLoginDialogEn\T1/pcr/bc/n/8 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--102
+[][] [][] \T1/pcr/bc/n/8 Q[]String[]List User[]Setting[]Dialog[]::get[]User[]Na
+mes ( ) - function used to take \T1/pcr/m/sl/8 QStringList \T1/pcr/bc/n/8 with
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--112
+[][] [][] \T1/pcr/bc/n/8 void User[]Setting[]Dialog[]::login[]Dialog[]Enable ( 
+) [private], [slot] - function to get field
+ []
+
+[145 <./classUserSettingDialog.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 113--117
+[][] [][] \T1/pcr/bc/n/8 void User[]Setting[]Dialog[]::reject[]Slot ( ) [privat
+e], [slot] - function which used to close
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--127
+[][] [][] \T1/pcr/bc/n/8 void User[]Setting[]Dialog[]::remove[]Users ( ) [priva
+te], [slot] - function to remove selected row
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--132
+|  \T1/pcr/bc/n/8 Q[]Show[]Event $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/sl/8 ev \T1/pc
+r/bc/n/8 ) [protected] - reimplementation of standard function. Used to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 133--137
+|  \T1/pcr/bc/n/8 int \T1/pcr/m/sl/8 col \T1/pcr/bc/n/8 ) [private], [slot] - f
+unction called by \T1/pcr/m/sl/8 cellClicked\T1/pcr/bc/n/8 (...) signal. Used
+ []
+
 [146]) (./classWarmingWidget.tex
 
 pdfTeX warning: /usr/bin/pdflatex (file ./classWarmingWidget.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<classWarmingWidget.pdf, id=7203, 501.875pt x 375.23184pt>
+<classWarmingWidget.pdf, id=7164, 501.875pt x 375.23184pt>
 File: classWarmingWidget.pdf Graphic file (type pdf)
 
 <use classWarmingWidget.pdf>
 Package pdftex.def Info: classWarmingWidget.pdf used on input line 10.
 (pdftex.def)             Requested size: 76.10506pt x 56.9055pt.
- [147 <./classWarmingWidget.pdf>])
-(./countersdialog_8cpp.tex) (./countersdialog_8h.tex [148]
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--85
+|  \T1/pcr/bc/n/8 double \T1/pcr/m/sl/8 arg1  \T1/pcr/bc/n/8 ) [private], [slot
+][][] - function to send count of cycles which work
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--94
+|  \T1/pcr/bc/n/8 double \T1/pcr/m/sl/8 arg1  \T1/pcr/bc/n/8 ) [private], [slot
+][][] - function set temperature of pallets in warming
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--103
+|  \T1/pcr/bc/n/8 double \T1/pcr/m/sl/8 arg1  \T1/pcr/bc/n/8 ) [private], [slot
+][][] - function to set time of work of flash in one
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--112
+[]\T1/pcr/bc/n/8 void Warming[]Widget[]::on[]_[]tool[]Button[]_[]clicked (    )
+ [private], [slot][][] - function to send signal
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 125--130
+|  \T1/pcr/bc/n/8 Q[]Byte[]Array   ) [signal][][] - signal emitted by every par
+ameter setup function. Used
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 134--139
+|  \T1/pcr/bc/n/8 Q[]String \T1/pcr/m/sl/8 path  \T1/pcr/bc/n/8 )[][]- function
+ to set icon folder and update icons on toolButtons at
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--148
+|  \T1/phv/b/n/8 Reg-is-ter $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/sl/8 reg  \T1/pcr/b
+c/n/8 )[][] - function to set pointer to Register class object. In a whole
+ []
+
+[147 <./classWarmingWidget.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 152--157
+|  \T1/pcr/bc/n/8 Q[]Show[]Event $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/sl/8 ev  \T1/p
+cr/bc/n/8 ) [protected][][] - reimplementation of standard function. Used
+ []
+
+[148]) (./countersdialog_8cpp.tex) (./countersdialog_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--6
 
  []
@@ -2191,16 +2351,22 @@ LaTeX Warning: There were undefined references.
 ### simple group (level 1) entered at line 229 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 20339 strings out of 493029
- 428017 string characters out of 6136234
- 604203 words of memory out of 5000000
- 20916 multiletter control sequences out of 15000+600000
- 56712 words of font info for 81 fonts, out of 8000000 for 9000
+ 20269 strings out of 493029
+ 426674 string characters out of 6136234
+ 604053 words of memory out of 5000000
+ 20910 multiletter control sequences out of 15000+600000
+ 54592 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  53i,16n,92p,2296b,798s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{classSettingDialog_a445c68adc5c9f92
-0537e4637f9c7e55b} has been referenced but does not exist, replaced by a fixed 
+pdfTeX warning (dest): name{classWarmingWidget_ae2dad8434667ce8
+a34454989548084b2} has been referenced but does not exist, replaced by a fixed 
 one
+
+pdfTeX warning (dest): name{classUserSettingDialog_a915e2e661a7fe6fd265ec878f74
+9cc82} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{classSettingDialog_a445c68adc5c9f920537e4637f9c7e55
+b} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{classSerialSettingsDialog_afc0d38e2824ab62ed7de597c
 97d012f7} has been referenced but does not exist, replaced by a fixed one
@@ -2249,6 +2415,9 @@ pdfTeX warning (dest): name{classCyclesDialog_a40d0b1d840144ae10ec8269fafc77ea1
 
 pdfTeX warning (dest): name{classCrcCalc_a9e3d8fbe834f69aeb8a21a16e26bfa1f} has
  been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{classCountersDialog_a6ca843a970b365e531602347eb2e23
+1f} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{structComSettings_ad276c73c919360c5bc5ff7996a2b6424
 } has been referenced but does not exist, replaced by a fixed one
@@ -2303,13 +2472,12 @@ m/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/helvetic/uhvbo8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
-/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uh
-vro8a.pfb>
-Output written on refman.pdf (173 pages, 714825 bytes).
+/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/h
+elvetic/uhvro8a.pfb>
+Output written on refman.pdf (173 pages, 708975 bytes).
 PDF statistics:
- 8111 PDF objects out of 8907 (max. 8388607)
- 7784 compressed objects within 78 object streams
- 2453 named destinations out of 2487 (max. 500000)
+ 8039 PDF objects out of 8907 (max. 8388607)
+ 7713 compressed objects within 78 object streams
+ 2390 named destinations out of 2487 (max. 500000)
  2301 words of extra memory for PDF output out of 10000 (max. 10000000)
 
